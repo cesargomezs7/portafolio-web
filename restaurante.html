@@ -1,0 +1,2101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>La Fogata - Sabores de Colombia</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    /* ==============================
+       RESET & BASE
+    ============================== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --red:     #8b1a1a;
+      --orange:  #e8531a;
+      --gold:    #d4a017;
+      --cream:   #fdf6e3;
+      --dark:    #2c2c2c;
+      --green:   #2d6a2d;
+      --red-light: #b02020;
+      --orange-light: #ff6a30;
+      --shadow:  0 8px 32px rgba(139,26,26,0.18);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Lato', sans-serif;
+      color: var(--dark);
+      background: var(--cream);
+      overflow-x: hidden;
+    }
+
+    h1,h2,h3,h4,h5 { font-family: 'Playfair Display', serif; }
+
+    a { text-decoration: none; color: inherit; }
+
+    img { max-width: 100%; }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    section { padding: 90px 0; }
+
+    .section-tag {
+      display: inline-block;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      color: var(--dark);
+      margin-bottom: 18px;
+      line-height: 1.2;
+    }
+
+    .section-title span { color: var(--red); }
+
+    .section-sub {
+      font-size: 1.05rem;
+      color: #555;
+      max-width: 600px;
+      line-height: 1.75;
+    }
+
+    /* ==============================
+       SCROLL REVEAL
+    ============================== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-left {
+      opacity: 0;
+      transform: translateX(-40px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal-left.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    .reveal-right {
+      opacity: 0;
+      transform: translateX(40px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal-right.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    /* ==============================
+       NAVBAR
+    ============================== */
+    #navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      padding: 18px 0;
+      transition: background 0.4s ease, padding 0.4s ease, box-shadow 0.4s ease;
+      background: rgba(20, 8, 8, 0.15);
+      backdrop-filter: blur(4px);
+    }
+    #navbar.scrolled {
+      background: rgba(20, 8, 8, 0.96);
+      padding: 12px 0;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.4);
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #fff;
+    }
+    .nav-logo .logo-icon {
+      width: 44px; height: 44px;
+      background: linear-gradient(135deg, var(--red), var(--orange));
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem;
+      box-shadow: 0 4px 12px rgba(232,83,26,0.45);
+    }
+    .nav-logo .logo-text { line-height: 1.1; }
+    .nav-logo .logo-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      display: block;
+    }
+    .nav-logo .logo-sub {
+      font-size: 0.68rem;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--gold);
+      display: block;
+    }
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+    .nav-links a {
+      color: rgba(255,255,255,0.88);
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      position: relative;
+      transition: color 0.3s;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px; left: 0;
+      width: 0; height: 2px;
+      background: var(--gold);
+      transition: width 0.3s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-cta {
+      background: linear-gradient(135deg, var(--red), var(--orange));
+      color: #fff !important;
+      padding: 9px 22px;
+      border-radius: 30px;
+      font-weight: 700 !important;
+      box-shadow: 0 4px 14px rgba(232,83,26,0.4);
+      transition: transform 0.2s, box-shadow 0.2s !important;
+    }
+    .nav-cta::after { display: none !important; }
+    .nav-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 7px 20px rgba(232,83,26,0.5) !important;
+      color: #fff !important;
+    }
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .hamburger span {
+      width: 26px; height: 2.5px;
+      background: #fff;
+      border-radius: 4px;
+      transition: all 0.3s;
+    }
+
+    /* ==============================
+       HERO
+    ============================== */
+    #hero {
+      min-height: 100vh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      background: #1a0505;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 20% 50%, rgba(139,26,26,0.55) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 20%, rgba(232,83,26,0.35) 0%, transparent 50%),
+        radial-gradient(ellipse at 60% 80%, rgba(212,160,23,0.2) 0%, transparent 50%),
+        linear-gradient(135deg, #1a0505 0%, #2c0a0a 40%, #1c0a02 70%, #0d1a0d 100%);
+    }
+    .hero-pattern {
+      position: absolute;
+      inset: 0;
+      background-image:
+        repeating-linear-gradient(
+          45deg,
+          transparent,
+          transparent 30px,
+          rgba(212,160,23,0.04) 30px,
+          rgba(212,160,23,0.04) 31px
+        );
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 760px;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(212,160,23,0.15);
+      border: 1px solid rgba(212,160,23,0.4);
+      color: var(--gold);
+      padding: 8px 18px;
+      border-radius: 30px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 28px;
+    }
+    .hero-badge .pulse-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: #4caf50;
+      animation: pulseDot 1.8s ease-in-out infinite;
+    }
+    @keyframes pulseDot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: 0.5; transform: scale(1.6); }
+    }
+    .hero-title {
+      font-size: clamp(2.6rem, 6vw, 4.2rem);
+      color: #fff;
+      line-height: 1.15;
+      margin-bottom: 22px;
+      font-weight: 800;
+    }
+    .hero-title em {
+      font-style: italic;
+      color: var(--gold);
+    }
+    .hero-sub {
+      font-size: 1.15rem;
+      color: rgba(255,255,255,0.75);
+      line-height: 1.8;
+      margin-bottom: 40px;
+      max-width: 580px;
+    }
+    .hero-btns {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 56px;
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      background: linear-gradient(135deg, var(--red), var(--orange));
+      color: #fff;
+      padding: 16px 32px;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 1rem;
+      box-shadow: 0 8px 28px rgba(232,83,26,0.45);
+      transition: transform 0.25s, box-shadow 0.25s;
+      border: none;
+      cursor: pointer;
+    }
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 14px 36px rgba(232,83,26,0.55);
+    }
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      background: transparent;
+      color: #fff;
+      padding: 15px 32px;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 1rem;
+      border: 2px solid rgba(255,255,255,0.4);
+      transition: all 0.25s;
+      cursor: pointer;
+    }
+    .btn-secondary:hover {
+      background: rgba(255,255,255,0.1);
+      border-color: var(--gold);
+      color: var(--gold);
+      transform: translateY(-3px);
+    }
+    .hero-stats {
+      display: flex;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+    .hero-stat { color: rgba(255,255,255,0.85); }
+    .hero-stat .stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--gold);
+      display: block;
+      line-height: 1;
+    }
+    .hero-stat .stat-label {
+      font-size: 0.82rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.55);
+    }
+    /* Floating decorative elements */
+    .float-el {
+      position: absolute;
+      z-index: 1;
+      font-size: 3rem;
+      opacity: 0.12;
+      animation: floatAnim 6s ease-in-out infinite;
+      pointer-events: none;
+    }
+    .float-el:nth-child(1) { top: 15%; right: 8%;  animation-delay: 0s;   font-size: 5rem; opacity: 0.08; }
+    .float-el:nth-child(2) { top: 55%; right: 14%; animation-delay: 2s;   font-size: 2.5rem; }
+    .float-el:nth-child(3) { bottom: 20%; right: 5%; animation-delay: 1s; font-size: 4rem; opacity: 0.1; }
+    .float-el:nth-child(4) { top: 30%; right: 30%; animation-delay: 3s;  font-size: 2rem; }
+    @keyframes floatAnim {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50%       { transform: translateY(-22px) rotate(8deg); }
+    }
+    .hero-scroll {
+      position: absolute;
+      bottom: 36px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: rgba(255,255,255,0.5);
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      animation: bounceDown 2s ease-in-out infinite;
+    }
+    @keyframes bounceDown {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50%       { transform: translateX(-50%) translateY(8px); }
+    }
+
+    /* ==============================
+       FEATURE BAR
+    ============================== */
+    #feature-bar {
+      background: linear-gradient(135deg, var(--red) 0%, #6a0f0f 100%);
+      padding: 0;
+      position: relative;
+      overflow: hidden;
+    }
+    #feature-bar::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 100px,
+        rgba(255,255,255,0.04) 100px,
+        rgba(255,255,255,0.04) 101px
+      );
+    }
+    .feature-bar-inner {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      position: relative;
+    }
+    .feature-item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 28px 32px;
+      border-right: 1px solid rgba(255,255,255,0.12);
+      transition: background 0.3s;
+    }
+    .feature-item:last-child { border-right: none; }
+    .feature-item:hover { background: rgba(255,255,255,0.07); }
+    .feature-icon {
+      width: 50px; height: 50px;
+      background: rgba(255,255,255,0.15);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.35rem;
+      color: var(--gold);
+      flex-shrink: 0;
+    }
+    .feature-text strong {
+      display: block;
+      color: #fff;
+      font-size: 0.92rem;
+      font-weight: 700;
+    }
+    .feature-text span {
+      color: rgba(255,255,255,0.62);
+      font-size: 0.78rem;
+    }
+
+    /* ==============================
+       NUESTRA HISTORIA
+    ============================== */
+    #historia {
+      background: var(--cream);
+    }
+    .historia-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 70px;
+      align-items: center;
+    }
+    .historia-visual {
+      position: relative;
+    }
+    .historia-img-main {
+      width: 100%;
+      aspect-ratio: 4/5;
+      border-radius: 20px;
+      background: linear-gradient(145deg, #8b1a1a, #e8531a, #d4a017);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 7rem;
+      box-shadow: 0 24px 60px rgba(139,26,26,0.3);
+      overflow: hidden;
+      position: relative;
+    }
+    .historia-img-main::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, transparent 40%, rgba(20,5,5,0.5));
+    }
+    .historia-img-badge {
+      position: absolute;
+      bottom: -20px;
+      right: -20px;
+      background: var(--gold);
+      color: var(--dark);
+      width: 110px; height: 110px;
+      border-radius: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Playfair Display', serif;
+      box-shadow: 0 8px 24px rgba(212,160,23,0.45);
+      z-index: 2;
+    }
+    .historia-img-badge .badge-num {
+      font-size: 2rem;
+      font-weight: 800;
+      line-height: 1;
+    }
+    .historia-img-badge .badge-label {
+      font-size: 0.65rem;
+      font-weight: 700;
+      text-align: center;
+      line-height: 1.2;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .historia-img-small {
+      position: absolute;
+      top: -20px;
+      left: -20px;
+      width: 130px; height: 130px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, var(--green), #1a4a1a);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 3.5rem;
+      box-shadow: 0 12px 30px rgba(45,106,45,0.4);
+      border: 4px solid var(--cream);
+    }
+    .historia-features {
+      list-style: none;
+      margin: 28px 0 36px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .historia-features li {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.95rem;
+      color: #444;
+    }
+    .historia-features li i {
+      color: var(--green);
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      background: transparent;
+      color: var(--red);
+      padding: 14px 30px;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      border: 2px solid var(--red);
+      transition: all 0.25s;
+      cursor: pointer;
+    }
+    .btn-outline:hover {
+      background: var(--red);
+      color: #fff;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(139,26,26,0.3);
+    }
+
+    /* ==============================
+       MENÚ DESTACADO
+    ============================== */
+    #menu {
+      background: #f7ede0;
+      position: relative;
+      overflow: hidden;
+    }
+    #menu::before {
+      content: '';
+      position: absolute;
+      top: -80px; right: -80px;
+      width: 400px; height: 400px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(212,160,23,0.1), transparent 70%);
+      pointer-events: none;
+    }
+    .menu-header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+    .menu-header .section-sub { margin: 0 auto; }
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+    .menu-card {
+      background: #fff;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+      transition: transform 0.35s cubic-bezier(.23,1,.32,1), box-shadow 0.35s;
+      cursor: pointer;
+      position: relative;
+    }
+    .menu-card:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 20px 50px rgba(139,26,26,0.2);
+    }
+    .menu-card-img {
+      height: 150px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4rem;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.4s;
+    }
+    .menu-card:hover .menu-card-img { transform: scale(1.05); }
+    .menu-card:nth-child(1) .menu-card-img { background: linear-gradient(135deg, #8b1a1a, #c0392b); }
+    .menu-card:nth-child(2) .menu-card-img { background: linear-gradient(135deg, #2d6a2d, #27ae60); }
+    .menu-card:nth-child(3) .menu-card-img { background: linear-gradient(135deg, #e8531a, #c0392b); }
+    .menu-card:nth-child(4) .menu-card-img { background: linear-gradient(135deg, #d4a017, #e8531a); }
+    .menu-card:nth-child(5) .menu-card-img { background: linear-gradient(135deg, #1a4a6b, #2980b9); }
+    .menu-card:nth-child(6) .menu-card-img { background: linear-gradient(135deg, #8b5e1a, #d4a017); }
+    .menu-card:nth-child(7) .menu-card-img { background: linear-gradient(135deg, #d4a017, #2d6a2d); }
+    .menu-card:nth-child(8) .menu-card-img { background: linear-gradient(135deg, #8b1a5a, #c0392b); }
+    .menu-card-tag {
+      position: absolute;
+      top: 10px; right: 10px;
+      background: rgba(255,255,255,0.9);
+      color: var(--red);
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 20px;
+    }
+    .menu-card-body {
+      padding: 18px 20px 22px;
+    }
+    .menu-card-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 6px;
+    }
+    .menu-card-desc {
+      font-size: 0.8rem;
+      color: #777;
+      line-height: 1.5;
+      margin-bottom: 14px;
+    }
+    .menu-card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .menu-card-price {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--red);
+    }
+    .menu-card-btn {
+      background: linear-gradient(135deg, var(--red), var(--orange));
+      color: #fff;
+      border: none;
+      width: 34px; height: 34px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 0.85rem;
+      display: flex; align-items: center; justify-content: center;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .menu-card-btn:hover {
+      transform: scale(1.15);
+      box-shadow: 0 4px 12px rgba(232,83,26,0.4);
+    }
+    .menu-more {
+      text-align: center;
+      margin-top: 48px;
+    }
+
+    /* ==============================
+       POR QUÉ VISITARNOS
+    ============================== */
+    #beneficios {
+      background: var(--cream);
+    }
+    .beneficios-header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+    .beneficios-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 28px;
+    }
+    .beneficio-card {
+      background: #fff;
+      border-radius: 20px;
+      padding: 36px 28px;
+      text-align: center;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+      transition: transform 0.3s, box-shadow 0.3s;
+      border-bottom: 3px solid transparent;
+      position: relative;
+      overflow: hidden;
+    }
+    .beneficio-card::before {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--red), var(--orange));
+      transform: scaleX(0);
+      transition: transform 0.35s;
+    }
+    .beneficio-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 16px 40px rgba(139,26,26,0.15);
+    }
+    .beneficio-card:hover::before { transform: scaleX(1); }
+    .beneficio-icon {
+      width: 72px; height: 72px;
+      margin: 0 auto 20px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.8rem;
+    }
+    .bi-1 { background: rgba(139,26,26,0.1); color: var(--red); }
+    .bi-2 { background: rgba(45,106,45,0.1); color: var(--green); }
+    .bi-3 { background: rgba(212,160,23,0.15); color: var(--gold); }
+    .bi-4 { background: rgba(232,83,26,0.1); color: var(--orange); }
+    .beneficio-card h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 12px;
+    }
+    .beneficio-card p {
+      font-size: 0.88rem;
+      color: #666;
+      line-height: 1.6;
+    }
+
+    /* ==============================
+       RESERVA
+    ============================== */
+    #reserva {
+      background: linear-gradient(135deg, #1a0505 0%, #2c0a0a 50%, #1c0a02 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    #reserva::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 0% 50%, rgba(139,26,26,0.4) 0%, transparent 50%),
+        radial-gradient(ellipse at 100% 50%, rgba(232,83,26,0.25) 0%, transparent 50%);
+    }
+    .reserva-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 70px;
+      align-items: center;
+      position: relative;
+    }
+    .reserva-info .section-title { color: #fff; }
+    .reserva-info .section-sub  { color: rgba(255,255,255,0.65); }
+    .reserva-perks {
+      list-style: none;
+      margin: 32px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .reserva-perks li {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: rgba(255,255,255,0.8);
+      font-size: 0.95rem;
+    }
+    .reserva-perks li i {
+      color: var(--gold);
+      font-size: 1rem;
+    }
+    .reserva-whatsapp {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: #25d366;
+      color: #fff;
+      padding: 14px 28px;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      transition: transform 0.25s, box-shadow 0.25s;
+      margin-top: 10px;
+    }
+    .reserva-whatsapp:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(37,211,102,0.4);
+    }
+    .reserva-form {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 24px;
+      padding: 44px 40px;
+      backdrop-filter: blur(10px);
+    }
+    .reserva-form h3 {
+      font-size: 1.5rem;
+      color: #fff;
+      margin-bottom: 28px;
+      font-style: italic;
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .form-group {
+      margin-bottom: 18px;
+    }
+    .form-group label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.6);
+      margin-bottom: 8px;
+    }
+    .form-group input,
+    .form-group select {
+      width: 100%;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 10px;
+      padding: 13px 16px;
+      color: #fff;
+      font-size: 0.92rem;
+      font-family: 'Lato', sans-serif;
+      transition: border-color 0.3s, background 0.3s;
+      outline: none;
+      -webkit-appearance: none;
+    }
+    .form-group input::placeholder { color: rgba(255,255,255,0.35); }
+    .form-group input:focus,
+    .form-group select:focus {
+      border-color: var(--gold);
+      background: rgba(255,255,255,0.12);
+    }
+    .form-group select option { background: #2c0a0a; color: #fff; }
+    .btn-reserva {
+      width: 100%;
+      background: linear-gradient(135deg, var(--gold), #b8860b);
+      color: var(--dark);
+      border: none;
+      padding: 16px;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-weight: 900;
+      font-family: 'Lato', sans-serif;
+      cursor: pointer;
+      transition: transform 0.25s, box-shadow 0.25s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 6px;
+      letter-spacing: 0.5px;
+    }
+    .btn-reserva:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 28px rgba(212,160,23,0.4);
+    }
+
+    /* ==============================
+       TESTIMONIOS
+    ============================== */
+    #testimonios {
+      background: #f2e8d5;
+      position: relative;
+    }
+    .testimonios-header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+    .testimonios-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+    .testimonio-card {
+      background: #fff;
+      border-radius: 20px;
+      padding: 36px 32px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+      position: relative;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .testimonio-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 16px 40px rgba(139,26,26,0.13);
+    }
+    .testimonio-card::before {
+      content: '\201C';
+      position: absolute;
+      top: 16px; left: 28px;
+      font-family: 'Playfair Display', serif;
+      font-size: 5rem;
+      color: var(--red);
+      opacity: 0.15;
+      line-height: 1;
+    }
+    .testimonio-stars {
+      color: var(--gold);
+      font-size: 0.95rem;
+      margin-bottom: 16px;
+    }
+    .testimonio-text {
+      font-size: 0.95rem;
+      color: #555;
+      line-height: 1.75;
+      margin-bottom: 24px;
+      font-style: italic;
+    }
+    .testimonio-author {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .author-avatar {
+      width: 46px; height: 46px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #fff;
+      flex-shrink: 0;
+    }
+    .av-1 { background: linear-gradient(135deg, var(--red), var(--orange)); }
+    .av-2 { background: linear-gradient(135deg, var(--green), #27ae60); }
+    .av-3 { background: linear-gradient(135deg, var(--gold), #e8531a); }
+    .author-info strong {
+      display: block;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--dark);
+    }
+    .author-info span {
+      font-size: 0.78rem;
+      color: #888;
+    }
+
+    /* ==============================
+       GALERÍA
+    ============================== */
+    #galeria {
+      background: var(--cream);
+    }
+    .galeria-header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+    .galeria-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(2, 240px);
+      gap: 16px;
+    }
+    .galeria-item {
+      border-radius: 16px;
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+    }
+    .galeria-item:nth-child(1) { grid-row: span 2; }
+    .galeria-bg {
+      width: 100%; height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4.5rem;
+      transition: transform 0.5s cubic-bezier(.23,1,.32,1);
+      position: relative;
+    }
+    .galeria-item:nth-child(1) .galeria-bg { background: linear-gradient(145deg, #8b1a1a, #c0392b, #e8531a); font-size: 7rem; }
+    .galeria-item:nth-child(2) .galeria-bg { background: linear-gradient(145deg, #2d6a2d, #27ae60); }
+    .galeria-item:nth-child(3) .galeria-bg { background: linear-gradient(145deg, #d4a017, #e8531a); }
+    .galeria-item:nth-child(4) .galeria-bg { background: linear-gradient(145deg, #1a4a6b, #2980b9); }
+    .galeria-item:nth-child(5) .galeria-bg { background: linear-gradient(145deg, #8b5e1a, #d4a017); }
+    .galeria-item:nth-child(6) .galeria-bg { background: linear-gradient(145deg, #6a1a6a, #c0392b); }
+    .galeria-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(20,5,5,0);
+      display: flex;
+      align-items: flex-end;
+      padding: 20px;
+      transition: background 0.4s;
+    }
+    .galeria-item:hover .galeria-overlay { background: rgba(20,5,5,0.55); }
+    .galeria-caption {
+      color: #fff;
+      transform: translateY(20px);
+      opacity: 0;
+      transition: all 0.35s;
+    }
+    .galeria-item:hover .galeria-caption {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    .galeria-caption strong {
+      display: block;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+    }
+    .galeria-caption span {
+      font-size: 0.78rem;
+      opacity: 0.8;
+    }
+    .galeria-item:hover .galeria-bg { transform: scale(1.07); }
+
+    /* ==============================
+       CTA FINAL
+    ============================== */
+    #cta-final {
+      background: linear-gradient(135deg, #1a0505 0%, #2c0a0a 40%, #8b1a1a 100%);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    #cta-final::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at center, rgba(232,83,26,0.25) 0%, transparent 65%);
+    }
+    .cta-content { position: relative; max-width: 720px; margin: 0 auto; }
+    .cta-icon {
+      font-size: 3.5rem;
+      margin-bottom: 20px;
+      display: block;
+      animation: floatAnim 4s ease-in-out infinite;
+    }
+    .cta-content h2 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      color: #fff;
+      margin-bottom: 18px;
+      line-height: 1.2;
+    }
+    .cta-content h2 span { color: var(--gold); }
+    .cta-content p {
+      color: rgba(255,255,255,0.7);
+      font-size: 1.05rem;
+      line-height: 1.75;
+      margin-bottom: 44px;
+    }
+    .cta-btns {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .btn-whatsapp-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: #25d366;
+      color: #fff;
+      padding: 16px 32px;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 1rem;
+      box-shadow: 0 8px 28px rgba(37,211,102,0.35);
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+    .btn-whatsapp-cta:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 14px 36px rgba(37,211,102,0.5);
+    }
+    .btn-phone-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(255,255,255,0.12);
+      color: #fff;
+      padding: 15px 32px;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 1rem;
+      border: 2px solid rgba(255,255,255,0.3);
+      transition: all 0.25s;
+    }
+    .btn-phone-cta:hover {
+      background: rgba(255,255,255,0.2);
+      border-color: var(--gold);
+      color: var(--gold);
+      transform: translateY(-3px);
+    }
+
+    /* ==============================
+       FOOTER
+    ============================== */
+    footer {
+      background: #0f0303;
+      color: rgba(255,255,255,0.7);
+      padding: 70px 0 28px;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 48px;
+    }
+    .footer-brand .nav-logo { margin-bottom: 18px; }
+    .footer-brand p {
+      font-size: 0.88rem;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 22px;
+    }
+    .footer-socials {
+      display: flex;
+      gap: 12px;
+    }
+    .footer-social-btn {
+      width: 38px; height: 38px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.08);
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(255,255,255,0.6);
+      font-size: 0.9rem;
+      transition: all 0.3s;
+    }
+    .footer-social-btn:hover {
+      background: var(--red);
+      color: #fff;
+      transform: translateY(-3px);
+    }
+    .footer-col h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .footer-links a {
+      font-size: 0.87rem;
+      color: rgba(255,255,255,0.5);
+      transition: color 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+    .footer-links a:hover { color: var(--gold); }
+    .footer-links a i { font-size: 0.75rem; }
+    .footer-contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 14px;
+      font-size: 0.87rem;
+      color: rgba(255,255,255,0.5);
+    }
+    .footer-contact-item i {
+      color: var(--gold);
+      margin-top: 2px;
+      flex-shrink: 0;
+    }
+    .footer-hours {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .footer-hours li {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.5);
+      padding-bottom: 8px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .footer-hours li:last-child { border-bottom: none; }
+    .footer-hours li strong { color: rgba(255,255,255,0.75); }
+    .footer-hours .open-tag {
+      background: rgba(45,106,45,0.3);
+      color: #5dbe5d;
+      font-size: 0.68rem;
+      padding: 2px 8px;
+      border-radius: 10px;
+      font-weight: 700;
+    }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding-top: 26px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .footer-bottom p { font-size: 0.8rem; color: rgba(255,255,255,0.35); }
+    .footer-bottom span { color: var(--red); }
+
+    /* ==============================
+       WHATSAPP FLOTANTE
+    ============================== */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 32px;
+      right: 32px;
+      z-index: 999;
+      width: 58px; height: 58px;
+      background: #25d366;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: #fff;
+      font-size: 1.6rem;
+      box-shadow: 0 8px 24px rgba(37,211,102,0.45);
+      animation: floatWA 3s ease-in-out infinite;
+      transition: transform 0.2s;
+    }
+    .whatsapp-float:hover {
+      transform: scale(1.12);
+      animation-play-state: paused;
+    }
+    .whatsapp-float::before {
+      content: '';
+      position: absolute;
+      inset: -4px;
+      border-radius: 50%;
+      background: rgba(37,211,102,0.3);
+      animation: rippleWA 2.4s ease-out infinite;
+    }
+    @keyframes rippleWA {
+      0%   { transform: scale(1); opacity: 0.8; }
+      100% { transform: scale(1.7); opacity: 0; }
+    }
+    @keyframes floatWA {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-6px); }
+    }
+
+    /* ==============================
+       NOTIFICATION / TOAST
+    ============================== */
+    .toast {
+      position: fixed;
+      bottom: 100px; right: 32px;
+      background: #fff;
+      border-left: 4px solid var(--green);
+      border-radius: 10px;
+      padding: 16px 20px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+      z-index: 1100;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--dark);
+      transform: translateX(200px);
+      opacity: 0;
+      transition: all 0.4s cubic-bezier(.23,1,.32,1);
+    }
+    .toast.show { transform: translateX(0); opacity: 1; }
+    .toast i { color: var(--green); font-size: 1.2rem; }
+
+    /* ==============================
+       RESPONSIVE
+    ============================== */
+    @media (max-width: 1100px) {
+      .menu-grid { grid-template-columns: repeat(2, 1fr); }
+      .beneficios-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 900px) {
+      .historia-grid { grid-template-columns: 1fr; gap: 40px; }
+      .historia-visual { max-width: 420px; margin: 0 auto; }
+      .reserva-grid { grid-template-columns: 1fr; gap: 40px; }
+      .testimonios-grid { grid-template-columns: 1fr; }
+      .galeria-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+      .galeria-item:nth-child(1) { grid-row: span 1; }
+      .feature-bar-inner { grid-template-columns: repeat(2, 1fr); }
+      .feature-item:nth-child(2) { border-right: none; }
+      .feature-item:nth-child(3) { border-right: 1px solid rgba(255,255,255,0.12); }
+    }
+
+    @media (max-width: 700px) {
+      section { padding: 64px 0; }
+      .nav-links { display: none; flex-direction: column; gap: 0; }
+      .nav-links.open {
+        display: flex;
+        position: absolute;
+        top: 100%; left: 0; right: 0;
+        background: rgba(15,3,3,0.97);
+        padding: 16px 0;
+        border-top: 1px solid rgba(255,255,255,0.1);
+      }
+      .nav-links.open li a {
+        display: block;
+        padding: 13px 28px;
+        border-bottom: 1px solid rgba(255,255,255,0.06);
+      }
+      .hamburger { display: flex; }
+      .menu-grid { grid-template-columns: 1fr; }
+      .beneficios-grid { grid-template-columns: 1fr; }
+      .galeria-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+      .hero-stats { gap: 24px; }
+      .form-row { grid-template-columns: 1fr; }
+      .feature-bar-inner { grid-template-columns: 1fr; }
+      .feature-item { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.1); }
+      .reserva-form { padding: 32px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===================== NAVBAR ===================== -->
+  <nav id="navbar">
+    <div class="container nav-inner">
+      <a href="#" class="nav-logo">
+        <div class="logo-icon">
+          <i class="fa-solid fa-fire-flame-curved"></i>
+        </div>
+        <div class="logo-text">
+          <span class="logo-name">La Fogata</span>
+          <span class="logo-sub">Sabores de Colombia</span>
+        </div>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#hero">Inicio</a></li>
+        <li><a href="#menu">Menú</a></li>
+        <li><a href="#historia">Nosotros</a></li>
+        <li><a href="#reserva">Reservas</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+        <li><a href="#reserva" class="nav-cta"><i class="fa-solid fa-calendar-check"></i> Reservar</a></li>
+      </ul>
+      <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===================== HERO ===================== -->
+  <section id="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-pattern"></div>
+    <!-- Floating decorative elements -->
+    <div class="float-el">🍖</div>
+    <div class="float-el">🌿</div>
+    <div class="float-el">🔥</div>
+    <div class="float-el">🌶️</div>
+
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span class="pulse-dot"></span>
+          Abierto hoy · Lun–Sáb 12pm–10pm
+        </div>
+        <h1 class="hero-title">
+          Sabores que <em>enamoran</em>,<br>
+          tradición que perdura
+        </h1>
+        <p class="hero-sub">
+          Bienvenido a La Fogata, donde cada plato es una celebración de la cocina colombiana auténtica. Ingredientes frescos de fincas locales, recetas heredadas con amor y un ambiente que te hace sentir en casa.
+        </p>
+        <div class="hero-btns">
+          <a href="#reserva" class="btn-primary">
+            <i class="fa-solid fa-calendar-check"></i> Reservar mesa
+          </a>
+          <a href="#menu" class="btn-secondary">
+            <i class="fa-solid fa-utensils"></i> Ver menú
+          </a>
+        </div>
+        <div class="hero-stats">
+          <div class="hero-stat">
+            <span class="stat-num">20+</span>
+            <span class="stat-label">Años de tradición</span>
+          </div>
+          <div class="hero-stat">
+            <span class="stat-num">50+</span>
+            <span class="stat-label">Platos auténticos</span>
+          </div>
+          <div class="hero-stat">
+            <span class="stat-num">98%</span>
+            <span class="stat-label">Clientes felices</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-scroll">
+      <span>Descubre más</span>
+      <i class="fa-solid fa-chevron-down"></i>
+    </div>
+  </section>
+
+  <!-- ===================== FEATURE BAR ===================== -->
+  <div id="feature-bar">
+    <div class="container">
+      <div class="feature-bar-inner">
+        <div class="feature-item reveal">
+          <div class="feature-icon"><i class="fa-solid fa-seedling"></i></div>
+          <div class="feature-text">
+            <strong>Ingredientes frescos</strong>
+            <span>Directo de fincas locales</span>
+          </div>
+        </div>
+        <div class="feature-item reveal">
+          <div class="feature-icon"><i class="fa-solid fa-book-open"></i></div>
+          <div class="feature-text">
+            <strong>Recetas tradicionales</strong>
+            <span>Herencia de generaciones</span>
+          </div>
+        </div>
+        <div class="feature-item reveal">
+          <div class="feature-icon"><i class="fa-solid fa-hat-chef"></i></div>
+          <div class="feature-text">
+            <strong>Chef certificado</strong>
+            <span>20 años de experiencia</span>
+          </div>
+        </div>
+        <div class="feature-item reveal">
+          <div class="feature-icon"><i class="fa-solid fa-heart"></i></div>
+          <div class="feature-text">
+            <strong>Ambiente acogedor</strong>
+            <span>Familiar y memorable</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== NUESTRA HISTORIA ===================== -->
+  <section id="historia">
+    <div class="container">
+      <div class="historia-grid">
+        <div class="historia-visual reveal-left">
+          <div class="historia-img-main">🍽️</div>
+          <div class="historia-img-small">🌿</div>
+          <div class="historia-img-badge">
+            <span class="badge-num">20</span>
+            <span class="badge-label">años de<br>sabor</span>
+          </div>
+        </div>
+        <div class="historia-text reveal-right">
+          <span class="section-tag"><i class="fa-solid fa-fire-flame-curved"></i> &nbsp;Nuestra historia</span>
+          <h2 class="section-title">Cocina colombiana con<br><span>alma y corazón</span></h2>
+          <p class="section-sub" style="margin-bottom:18px;">
+            La Fogata nació hace más de veinte años del sueño de una familia colombiana apasionada por transmitir los sabores de su tierra. Cada receta cuenta una historia, cada aroma evoca una región y cada bocado es un viaje por la diversidad culinaria de Colombia.
+          </p>
+          <p style="font-size:0.95rem; color:#666; line-height:1.75; margin-bottom:6px;">
+            Trabajamos con fincas y productores locales para garantizar ingredientes de la más alta calidad. Desde las selvas del Pacífico hasta los Llanos Orientales, nuestro menú honra cada rincón del país.
+          </p>
+          <ul class="historia-features">
+            <li><i class="fa-solid fa-circle-check"></i> Ingredientes 100% colombianos y de temporada</li>
+            <li><i class="fa-solid fa-circle-check"></i> Recetas auténticas sin atajos ni artificios</li>
+            <li><i class="fa-solid fa-circle-check"></i> Cocina abierta donde ves cómo se prepara tu plato</li>
+            <li><i class="fa-solid fa-circle-check"></i> Maridajes con bebidas típicas colombianas</li>
+            <li><i class="fa-solid fa-circle-check"></i> Menú especial para niños con platos nutritivos</li>
+          </ul>
+          <a href="#reserva" class="btn-outline">
+            <i class="fa-solid fa-arrow-right"></i> Conoce más sobre nosotros
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== MENÚ DESTACADO ===================== -->
+  <section id="menu">
+    <div class="container">
+      <div class="menu-header reveal">
+        <span class="section-tag"><i class="fa-solid fa-utensils"></i> &nbsp;Nuestros platos</span>
+        <h2 class="section-title">Menú <span>destacado</span></h2>
+        <p class="section-sub">Una selección de nuestros platos más queridos, preparados con ingredientes frescos y recetas auténticas que llevan décadas deleitando a nuestros comensales.</p>
+      </div>
+      <div class="menu-grid">
+        <div class="menu-card reveal">
+          <div class="menu-card-img">
+            🫘
+            <span class="menu-card-tag">Clásico</span>
+          </div>
+          <div class="menu-card-body">
+            <div class="menu-card-name">Bandeja Paisa</div>
+            <div class="menu-card-desc">Frijoles, arroz, chicharrón, huevo, aguacate, chorizo y hogao. La reina de la cocina antioqueña.</div>
+            <div class="menu-card-footer">
+              <span class="menu-card-price">$28,000</span>
+              <button class="menu-card-btn" aria-label="Ver plato"><i class="fa-solid fa-plus"></i></button>
+            </div>
+          </div>
+        </div>
+        <div class="menu-card reveal">
+          <div class="menu-card-img">
+            🥣
+            <span class="menu-card-tag">Bogotano</span>
+          </div>
+          <div class="menu-card-body">
+            <div class="menu-card-name">Ajiaco Bogotano</div>
+            <div class="menu-card-desc">Sopa de tres papas, pollo desmenuzado, guascas y crema de leche. Tradición capitalina en cada cucharada.</div>
+            <div class="menu-card-footer">
+              <span class="menu-card-price">$22,000</span>
+              <button class="menu-card-btn" aria-label="Ver plato"><i class="fa-solid fa-plus"></i></button>
+            </div>
+          </div>
+        </div>
+        <div class="menu-card reveal">
+          <div class="menu-card-img">
+            🍲
+            <span class="menu-card-tag">Especial</span>
+          </div>
+          <div class="menu-card-body">
+            <div class="menu-card-name">Sancocho de Gallina</div>
+            <div class="menu-card-desc">Caldo de gallina criolla con papa, yuca, plátano y cilantro. Reconfortante y lleno de sabor campesino.</div>
+            <div class="menu-card-footer">
+              <span class="menu-card-price">$24,000</span>
+              <button class="menu-card-btn" aria-label="Ver plato"><i class="fa-solid fa-plus"></i></button>
+            </div>
+          </div>
+        </div>
+        <div class="menu-card reveal">
+          <div class="menu-card-img">
+            🥩
+            <span class="menu-card-tag">Para compartir</span>
+          </div>
+          <div class="menu-card-body">
+            <div class="menu-card-name">Fritanga</div>
+            <div class="menu-card-desc">Combinado de costilla, chorizo, chicharrón, rellena y morcilla con papas y hogao. ¡Para compartir!</div>
+            <div class="menu-card-footer">
+              <span class="menu-card-price">$35,000</span>
+              <button class="menu-card-btn" aria-label="Ver plato"><i class="fa-solid fa-plus"></i></button>
+            </div>
+          </div>
+        </div>
+        <div class="menu-card reveal">
+          <div class="menu-card-img">
+            🐟
+            <span class="menu-card-tag">Del río</span>
+          </div>
+          <div class="menu-card-body">
+            <div class="menu-card-name">Trucha al Ajillo</div>
+            <div class="menu-card-desc">Trucha arco iris frita con mantequilla de ajo, perejil, papas criollas y ensalada. Fresca y deliciosa.</div>
+            <div class="menu-card-footer">
+              <span class="menu-card-price">$32,000</span>
+              <button class="menu-card-btn" aria-label="Ver plato"><i class="fa-solid fa-plus"></i></button>
+            </div>
+          </div>
+        </div>
+        <div class="menu-card reveal">
+          <div class="menu-card-img">
+            🍌
+            <span class="menu-card-tag">Entrada</span>
+          </div>
+          <div class="menu-card-body">
+            <div class="menu-card-name">Patacones con Hogao</div>
+            <div class="menu-card-desc">Tostones de plátano verde crujientes con salsa de tomate y cebolla caramelizada. Perfecto para comenzar.</div>
+            <div class="menu-card-footer">
+              <span class="menu-card-price">$12,000</span>
+              <button class="menu-card-btn" aria-label="Ver plato"><i class="fa-solid fa-plus"></i></button>
+            </div>
+          </div>
+        </div>
+        <div class="menu-card reveal">
+          <div class="menu-card-img">
+            🍛
+            <span class="menu-card-tag">Favorito</span>
+          </div>
+          <div class="menu-card-body">
+            <div class="menu-card-name">Arroz con Pollo</div>
+            <div class="menu-card-desc">Arroz amarillo con pollo desmechado, vegetales y ensalada. Sabor casero que reconforta el alma.</div>
+            <div class="menu-card-footer">
+              <span class="menu-card-price">$20,000</span>
+              <button class="menu-card-btn" aria-label="Ver plato"><i class="fa-solid fa-plus"></i></button>
+            </div>
+          </div>
+        </div>
+        <div class="menu-card reveal">
+          <div class="menu-card-img">
+            🍮
+            <span class="menu-card-tag">Postre</span>
+          </div>
+          <div class="menu-card-body">
+            <div class="menu-card-name">Postre Tres Leches</div>
+            <div class="menu-card-desc">Esponjoso bizcocho empapado en tres tipos de leche, cubierto con crema suave y canela. Un lujo cremoso.</div>
+            <div class="menu-card-footer">
+              <span class="menu-card-price">$10,000</span>
+              <button class="menu-card-btn" aria-label="Ver plato"><i class="fa-solid fa-plus"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="menu-more reveal">
+        <p style="color:#777; margin-bottom:18px; font-size:0.9rem;">¿Quieres ver nuestra carta completa con más de 50 platos?</p>
+        <a href="#reserva" class="btn-primary" style="display:inline-flex;">
+          <i class="fa-solid fa-book-open"></i> Menú completo
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== POR QUÉ VISITARNOS ===================== -->
+  <section id="beneficios">
+    <div class="container">
+      <div class="beneficios-header reveal">
+        <span class="section-tag"><i class="fa-solid fa-star"></i> &nbsp;Nuestras virtudes</span>
+        <h2 class="section-title">¿Por qué <span>visitarnos</span>?</h2>
+        <p class="section-sub" style="margin:0 auto;">Más que un restaurante, somos una experiencia gastronómica que apela a todos los sentidos y te conecta con la esencia colombiana.</p>
+      </div>
+      <div class="beneficios-grid">
+        <div class="beneficio-card reveal">
+          <div class="beneficio-icon bi-1">
+            <i class="fa-solid fa-hat-chef"></i>
+          </div>
+          <h3>Chef con 20 años de experiencia</h3>
+          <p>Nuestro chef ejecutivo ha perfeccionado durante dos décadas las recetas más emblemáticas de la gastronomía colombiana, formado en las mejores escuelas culinarias del país.</p>
+        </div>
+        <div class="beneficio-card reveal">
+          <div class="beneficio-icon bi-2">
+            <i class="fa-solid fa-tractor"></i>
+          </div>
+          <h3>Ingredientes de fincas locales</h3>
+          <p>Trabajamos directamente con agricultores y productores de la región. Ingredientes frescos, sin intermediarios, que llegan a tu plato en su punto máximo de sabor y nutrientes.</p>
+        </div>
+        <div class="beneficio-card reveal">
+          <div class="beneficio-icon bi-3">
+            <i class="fa-solid fa-people-roof"></i>
+          </div>
+          <h3>Ambiente familiar y acogedor</h3>
+          <p>Diseñado para que toda la familia disfrute. Espacios cómodos, decoración cálida inspirada en las casas colombianas de antaño y un servicio que te hace sentir especial.</p>
+        </div>
+        <div class="beneficio-card reveal">
+          <div class="beneficio-icon bi-4">
+            <i class="fa-solid fa-music"></i>
+          </div>
+          <h3>Música en vivo los fines de semana</h3>
+          <p>Los viernes y sábados en la noche, artistas locales ambientan la velada con vallenato, cumbia y música colombiana. La mejor excusa para extender la sobremesa.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== RESERVA ===================== -->
+  <section id="reserva">
+    <div class="container">
+      <div class="reserva-grid">
+        <div class="reserva-info reveal-left">
+          <span class="section-tag" style="color:#d4a017;"><i class="fa-solid fa-calendar-heart"></i> &nbsp;Haz tu reservación</span>
+          <h2 class="section-title" style="color:#fff;">Reserva tu <span style="color:var(--gold)">mesa</span> ahora</h2>
+          <p class="section-sub">Asegura tu lugar en La Fogata y disfruta de una experiencia gastronómica sin igual. Recuerda que los fines de semana se agotan rápido.</p>
+          <ul class="reserva-perks">
+            <li><i class="fa-solid fa-circle-check"></i> Confirmación inmediata por WhatsApp</li>
+            <li><i class="fa-solid fa-circle-check"></i> Sin cargos por reservación</li>
+            <li><i class="fa-solid fa-circle-check"></i> Modificación o cancelación gratuita</li>
+            <li><i class="fa-solid fa-circle-check"></i> Menú especial para eventos y celebraciones</li>
+            <li><i class="fa-solid fa-circle-check"></i> Atendemos grupos de hasta 40 personas</li>
+          </ul>
+          <p style="color:rgba(255,255,255,0.55); font-size:0.85rem; margin-bottom:14px;">También puedes reservar directamente por WhatsApp:</p>
+          <a href="https://wa.me/573001234567" target="_blank" class="reserva-whatsapp">
+            <i class="fa-brands fa-whatsapp"></i> Reservar por WhatsApp
+          </a>
+        </div>
+        <div class="reserva-form reveal-right">
+          <h3>¡Reserva tu mesa!</h3>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="r-nombre"><i class="fa-solid fa-user"></i> Nombre completo</label>
+              <input type="text" id="r-nombre" placeholder="Tu nombre" />
+            </div>
+            <div class="form-group">
+              <label for="r-tel"><i class="fa-solid fa-phone"></i> Teléfono</label>
+              <input type="tel" id="r-tel" placeholder="+57 300..." />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="r-fecha"><i class="fa-solid fa-calendar"></i> Fecha</label>
+              <input type="date" id="r-fecha" />
+            </div>
+            <div class="form-group">
+              <label for="r-hora"><i class="fa-solid fa-clock"></i> Hora</label>
+              <select id="r-hora">
+                <option value="">Seleccionar hora</option>
+                <option>12:00 pm</option>
+                <option>12:30 pm</option>
+                <option>1:00 pm</option>
+                <option>1:30 pm</option>
+                <option>2:00 pm</option>
+                <option>7:00 pm</option>
+                <option>7:30 pm</option>
+                <option>8:00 pm</option>
+                <option>8:30 pm</option>
+                <option>9:00 pm</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="r-personas"><i class="fa-solid fa-users"></i> Número de personas</label>
+            <select id="r-personas">
+              <option value="">¿Cuántos son?</option>
+              <option>1 persona</option>
+              <option>2 personas</option>
+              <option>3 personas</option>
+              <option>4 personas</option>
+              <option>5 personas</option>
+              <option>6 personas</option>
+              <option>7–10 personas</option>
+              <option>Más de 10 personas</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="r-nota"><i class="fa-solid fa-note-sticky"></i> Nota especial (opcional)</label>
+            <input type="text" id="r-nota" placeholder="Alergias, celebración, silla alta..." />
+          </div>
+          <button class="btn-reserva" onclick="submitReserva()">
+            <i class="fa-solid fa-calendar-check"></i> Confirmar reservación
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== TESTIMONIOS ===================== -->
+  <section id="testimonios">
+    <div class="container">
+      <div class="testimonios-header reveal">
+        <span class="section-tag"><i class="fa-solid fa-comments"></i> &nbsp;Lo que dicen nuestros clientes</span>
+        <h2 class="section-title">Palabras que nos <span>llenan el corazón</span></h2>
+        <p class="section-sub" style="margin:0 auto;">Más de 10,000 comensales satisfechos no pueden estar equivocados. Lee lo que piensan quienes ya vivieron La Fogata.</p>
+      </div>
+      <div class="testimonios-grid">
+        <div class="testimonio-card reveal">
+          <div class="testimonio-stars">
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+          </div>
+          <p class="testimonio-text">"La Bandeja Paisa fue una revelación total. Ingredientes fresquísimos, porciones generosas y un sabor que me transportó a Medellín. ¡Sin duda el mejor restaurante colombiano de la ciudad! Ya reservé para el próximo mes."</p>
+          <div class="testimonio-author">
+            <div class="author-avatar av-1">M</div>
+            <div class="author-info">
+              <strong>María Fernanda Ríos</strong>
+              <span>Bogotá, Colombia &nbsp;·&nbsp; Cliente frecuente</span>
+            </div>
+          </div>
+        </div>
+        <div class="testimonio-card reveal">
+          <div class="testimonio-stars">
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+          </div>
+          <p class="testimonio-text">"Vinimos a celebrar nuestro aniversario y fue mágico. El Sancocho de Gallina tenía el sabor de las recetas de mi abuela. El servicio fue impecable y la música en vivo los sábados es un toque especial que no tienen en otros sitios."</p>
+          <div class="testimonio-author">
+            <div class="author-avatar av-2">C</div>
+            <div class="author-info">
+              <strong>Carlos Andrés Gómez</strong>
+              <span>Cali, Colombia &nbsp;·&nbsp; Reseña verificada</span>
+            </div>
+          </div>
+        </div>
+        <div class="testimonio-card reveal">
+          <div class="testimonio-stars">
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star-half-stroke"></i>
+          </div>
+          <p class="testimonio-text">"Llevé a mis clientes internacionales aquí para mostrarles la gastronomía colombiana y quedaron absolutamente enamorados. La Fritanga para compartir fue el éxito de la noche. La presentación, el sabor y la calidez del lugar son insuperables."</p>
+          <div class="testimonio-author">
+            <div class="author-avatar av-3">L</div>
+            <div class="author-info">
+              <strong>Laura Catalina Mora</strong>
+              <span>Medellín, Colombia &nbsp;·&nbsp; Visita de negocios</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== GALERÍA ===================== -->
+  <section id="galeria">
+    <div class="container">
+      <div class="galeria-header reveal">
+        <span class="section-tag"><i class="fa-solid fa-images"></i> &nbsp;Nuestra galería</span>
+        <h2 class="section-title">Una mirada a nuestra <span>cocina</span></h2>
+        <p class="section-sub" style="margin:0 auto;">Cada imagen cuenta una historia de sabor, tradición y dedicación. Así lucen nuestros platos antes de llegar a tu mesa.</p>
+      </div>
+      <div class="galeria-grid">
+        <div class="galeria-item reveal">
+          <div class="galeria-bg">🍽️</div>
+          <div class="galeria-overlay">
+            <div class="galeria-caption">
+              <strong>Bandeja Paisa completa</strong>
+              <span>El plato más emblemático de Colombia</span>
+            </div>
+          </div>
+        </div>
+        <div class="galeria-item reveal">
+          <div class="galeria-bg">🌿</div>
+          <div class="galeria-overlay">
+            <div class="galeria-caption">
+              <strong>Hierbas y especias frescas</strong>
+              <span>De la finca directamente a tu plato</span>
+            </div>
+          </div>
+        </div>
+        <div class="galeria-item reveal">
+          <div class="galeria-bg">🔥</div>
+          <div class="galeria-overlay">
+            <div class="galeria-caption">
+              <strong>Cocina a fuego vivo</strong>
+              <span>La fogata que da nombre al restaurante</span>
+            </div>
+          </div>
+        </div>
+        <div class="galeria-item reveal">
+          <div class="galeria-bg">🐟</div>
+          <div class="galeria-overlay">
+            <div class="galeria-caption">
+              <strong>Trucha al Ajillo</strong>
+              <span>Fresca del río a tu mesa</span>
+            </div>
+          </div>
+        </div>
+        <div class="galeria-item reveal">
+          <div class="galeria-bg">🌶️</div>
+          <div class="galeria-overlay">
+            <div class="galeria-caption">
+              <strong>Ají y salsas artesanales</strong>
+              <span>Elaboradas cada mañana</span>
+            </div>
+          </div>
+        </div>
+        <div class="galeria-item reveal">
+          <div class="galeria-bg">🍮</div>
+          <div class="galeria-overlay">
+            <div class="galeria-caption">
+              <strong>Postres irresistibles</strong>
+              <span>El dulce final que mereces</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== CTA FINAL ===================== -->
+  <section id="cta-final">
+    <div class="container">
+      <div class="cta-content reveal">
+        <span class="cta-icon">🔥</span>
+        <h2>¿Listo para una <span>experiencia gastronómica</span> inolvidable?</h2>
+        <p>La Fogata te espera con los brazos abiertos y los fogones encendidos. Ven a disfrutar de los sabores más auténticos de Colombia con tu familia, amigos o pareja.</p>
+        <div class="cta-btns">
+          <a href="https://wa.me/573001234567" target="_blank" class="btn-whatsapp-cta">
+            <i class="fa-brands fa-whatsapp"></i> Escríbenos al WhatsApp
+          </a>
+          <a href="tel:+573001234567" class="btn-phone-cta">
+            <i class="fa-solid fa-phone"></i> Llámanos ahora
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer id="contacto">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="#" class="nav-logo" style="margin-bottom:18px; display:flex;">
+            <div class="logo-icon" style="background:linear-gradient(135deg,var(--red),var(--orange));">
+              <i class="fa-solid fa-fire-flame-curved"></i>
+            </div>
+            <div class="logo-text">
+              <span class="logo-name" style="color:#fff;">La Fogata</span>
+              <span class="logo-sub">Sabores de Colombia</span>
+            </div>
+          </a>
+          <p>Desde hace más de veinte años, llevamos a tu mesa lo mejor de la gastronomía colombiana con ingredientes frescos, recetas auténticas y el calor de nuestra gente.</p>
+          <div class="footer-socials">
+            <a href="#" class="footer-social-btn" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" class="footer-social-btn" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#" class="footer-social-btn" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+            <a href="#" class="footer-social-btn" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Navegación</h4>
+          <ul class="footer-links">
+            <li><a href="#hero"><i class="fa-solid fa-angle-right"></i> Inicio</a></li>
+            <li><a href="#historia"><i class="fa-solid fa-angle-right"></i> Nuestra historia</a></li>
+            <li><a href="#menu"><i class="fa-solid fa-angle-right"></i> Menú</a></li>
+            <li><a href="#beneficios"><i class="fa-solid fa-angle-right"></i> ¿Por qué elegirnos?</a></li>
+            <li><a href="#reserva"><i class="fa-solid fa-angle-right"></i> Reservaciones</a></li>
+            <li><a href="#testimonios"><i class="fa-solid fa-angle-right"></i> Testimonios</a></li>
+            <li><a href="#galeria"><i class="fa-solid fa-angle-right"></i> Galería</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Horarios</h4>
+          <ul class="footer-hours">
+            <li>
+              <strong>Lunes – Viernes</strong>
+              <span>12pm – 10pm</span>
+            </li>
+            <li>
+              <strong>Sábados</strong>
+              <span>12pm – 11pm</span>
+            </li>
+            <li>
+              <strong>Domingos</strong>
+              <span>12pm – 8pm</span>
+            </li>
+            <li>
+              <strong>Hoy (Mar–Sáb)</strong>
+              <span class="open-tag">Abierto</span>
+            </li>
+          </ul>
+          <p style="font-size:0.78rem; color:rgba(255,255,255,0.4); margin-top:12px;">
+            <i class="fa-solid fa-music" style="color:var(--gold);"></i> &nbsp;Música en vivo: Vie y Sáb 7pm
+          </p>
+        </div>
+        <div class="footer-col">
+          <h4>Contacto</h4>
+          <div class="footer-contact-item">
+            <i class="fa-solid fa-location-dot"></i>
+            <span>Calle 45 # 12–34, Barrio La Candelaria<br>Bogotá, Colombia</span>
+          </div>
+          <div class="footer-contact-item">
+            <i class="fa-solid fa-phone"></i>
+            <span>+57 (300) 123–4567</span>
+          </div>
+          <div class="footer-contact-item">
+            <i class="fa-solid fa-envelope"></i>
+            <span>hola@lafogata.com.co</span>
+          </div>
+          <div class="footer-contact-item">
+            <i class="fa-brands fa-whatsapp"></i>
+            <span>+57 (300) 123–4567</span>
+          </div>
+          <div class="footer-contact-item">
+            <i class="fa-solid fa-map"></i>
+            <span>
+              <a href="#" style="color:var(--gold); transition:opacity 0.2s;" onmouseover="this.style.opacity='.7'" onmouseout="this.style.opacity='1'">
+                Ver en Google Maps
+              </a>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2024 La Fogata – Sabores de Colombia. Todos los derechos reservados. Hecho con <span>❤️</span> en Colombia.</p>
+        <p>
+          <a href="#" style="color:rgba(255,255,255,0.35); font-size:0.8rem; margin:0 10px; transition:color .3s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='rgba(255,255,255,0.35)'">Política de privacidad</a>
+          <a href="#" style="color:rgba(255,255,255,0.35); font-size:0.8rem; margin:0 10px; transition:color .3s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='rgba(255,255,255,0.35)'">Términos y condiciones</a>
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===================== WHATSAPP FLOTANTE ===================== -->
+  <a href="https://wa.me/573001234567" target="_blank" class="whatsapp-float" aria-label="Chatear por WhatsApp">
+    <i class="fa-brands fa-whatsapp"></i>
+  </a>
+
+  <!-- ===================== TOAST ===================== -->
+  <div class="toast" id="toast">
+    <i class="fa-solid fa-circle-check"></i>
+    <span id="toast-msg">¡Reservación enviada con éxito!</span>
+  </div>
+
+  <!-- ===================== SCRIPTS ===================== -->
+  <script>
+    /* ---------- Navbar scroll effect ---------- */
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 60);
+    });
+
+    /* ---------- Mobile menu ---------- */
+    function toggleMenu() {
+      document.getElementById('navLinks').classList.toggle('open');
+    }
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        document.getElementById('navLinks').classList.remove('open');
+      });
+    });
+
+    /* ---------- Scroll reveal ---------- */
+    const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            entry.target.classList.add('visible');
+          }, 80 * (entry.target.dataset.delay || 0));
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    revealEls.forEach((el, i) => {
+      el.dataset.delay = i % 4;
+      observer.observe(el);
+    });
+
+    /* ---------- Stagger menu cards ---------- */
+    document.querySelectorAll('.menu-card').forEach((card, i) => {
+      card.style.transitionDelay = (i * 0.05) + 's';
+    });
+
+    /* ---------- Toast notification ---------- */
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      document.getElementById('toast-msg').textContent = msg;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 3500);
+    }
+
+    /* ---------- Form submission ---------- */
+    function submitReserva() {
+      const nombre   = document.getElementById('r-nombre').value.trim();
+      const fecha    = document.getElementById('r-fecha').value;
+      const hora     = document.getElementById('r-hora').value;
+      const personas = document.getElementById('r-personas').value;
+
+      if (!nombre || !fecha || !hora || !personas) {
+        showToast('Por favor completa todos los campos requeridos.');
+        const toast = document.getElementById('toast');
+        toast.style.borderLeftColor = '#e74c3c';
+        document.querySelector('#toast i').style.color = '#e74c3c';
+        setTimeout(() => {
+          toast.style.borderLeftColor = 'var(--green)';
+          document.querySelector('#toast i').style.color = 'var(--green)';
+        }, 3600);
+        return;
+      }
+
+      showToast(`¡Reserva confirmada para ${nombre}! Te contactaremos pronto.`);
+      // Reset
+      ['r-nombre','r-fecha','r-hora','r-personas','r-nota','r-tel'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.value = '';
+      });
+    }
+
+    /* ---------- Menu card hover toast ---------- */
+    document.querySelectorAll('.menu-card-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const card = e.target.closest('.menu-card');
+        const name = card.querySelector('.menu-card-name').textContent;
+        showToast(`¡${name} agregado! Reserva tu mesa para disfrutarlo.`);
+      });
+    });
+
+    /* ---------- Set min date for reservation ---------- */
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById('r-fecha').setAttribute('min', today);
+
+    /* ---------- Smooth active section highlight ---------- */
+    const sections = document.querySelectorAll('section[id], footer[id]');
+    const navAs = document.querySelectorAll('.nav-links a');
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(section => {
+        if (window.scrollY >= section.offsetTop - 120) {
+          current = section.getAttribute('id');
+        }
+      });
+      navAs.forEach(a => {
+        a.style.color = '';
+        if (a.getAttribute('href') === '#' + current) {
+          a.style.color = 'var(--gold)';
+        }
+      });
+    });
+  </script>
+</body>
+</html>
