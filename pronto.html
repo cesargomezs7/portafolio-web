@@ -3,30 +3,35 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pronto — Páginas web que consiguen clientes</title>
+  <title>Pronto — Páginas web que consiguen clientes para tu negocio</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg: #04040F;
-      --surface: #0A0A1E;
-      --surface2: #0F0F2A;
-      --border: rgba(99,102,241,.12);
-      --border-glow: rgba(99,102,241,.35);
+      --bg: #050510;
+      --surface: #08081A;
+      --surface2: #0D0D24;
+      --border: rgba(99,102,241,.1);
+      --border-hover: rgba(99,102,241,.3);
       --indigo: #6366F1;
+      --indigo-light: #818CF8;
       --cyan: #22D3EE;
       --emerald: #10B981;
       --pink: #EC4899;
+      --amber: #F59E0B;
       --text: #F1F5F9;
       --muted: #64748B;
       --muted2: #94A3B8;
-      --grad: linear-gradient(135deg, #6366F1, #22D3EE);
-      --grad2: linear-gradient(135deg, #EC4899, #6366F1);
+      --grad: linear-gradient(135deg, #6366F1 0%, #22D3EE 100%);
+      --grad2: linear-gradient(135deg, #EC4899 0%, #6366F1 100%);
+      --grad3: linear-gradient(135deg, #10B981 0%, #22D3EE 100%);
       --font-head: 'Space Grotesk', sans-serif;
       --font-body: 'Inter', sans-serif;
+      --radius: 16px;
+      --radius-sm: 10px;
     }
 
     html { scroll-behavior: smooth; }
@@ -39,45 +44,31 @@
       line-height: 1.6;
     }
 
-    /* ─── NOISE TEXTURE OVERLAY ─── */
+    /* ── SCROLLBAR ── */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--indigo); border-radius: 2px; }
+
+    /* ── NOISE ── */
     body::before {
       content: '';
       position: fixed;
       inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
-      pointer-events: none;
-      z-index: 0;
-      opacity: .4;
-    }
-
-    /* ─── GLOW BLOBS ─── */
-    .blob {
-      position: fixed;
-      border-radius: 50%;
-      filter: blur(120px);
-      opacity: .12;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
       pointer-events: none;
       z-index: 0;
     }
-    .blob-1 { width: 600px; height: 600px; background: #6366F1; top: -200px; left: -100px; animation: blobFloat 12s ease-in-out infinite alternate; }
-    .blob-2 { width: 500px; height: 500px; background: #22D3EE; bottom: 10%; right: -150px; animation: blobFloat 15s ease-in-out infinite alternate-reverse; }
-    .blob-3 { width: 400px; height: 400px; background: #EC4899; top: 50%; left: 50%; transform: translate(-50%,-50%); animation: blobFloat 18s ease-in-out infinite alternate; }
 
-    @keyframes blobFloat {
-      from { transform: translate(0,0) scale(1); }
-      to   { transform: translate(30px,40px) scale(1.1); }
-    }
-
-    /* ─── NAV ─── */
+    /* ── NAV ── */
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
       z-index: 100;
+      padding: 18px 40px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 1.2rem 4rem;
-      background: rgba(4,4,15,.7);
+      background: rgba(5,5,16,.8);
       backdrop-filter: blur(20px);
       border-bottom: 1px solid var(--border);
       transition: all .3s;
@@ -85,16 +76,20 @@
 
     .nav-logo {
       font-family: var(--font-head);
-      font-size: 1.5rem;
-      font-weight: 700;
+      font-weight: 800;
+      font-size: 1.4rem;
       background: var(--grad);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      text-decoration: none;
-      letter-spacing: -0.02em;
+      letter-spacing: -0.5px;
     }
 
-    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
     .nav-links a {
       color: var(--muted2);
       text-decoration: none;
@@ -102,923 +97,1235 @@
       font-weight: 500;
       transition: color .2s;
     }
+
     .nav-links a:hover { color: var(--text); }
 
     .nav-cta {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: .5rem;
-      padding: .7rem 1.5rem;
-      border-radius: 8px;
-      font-family: var(--font-head);
-      font-weight: 600;
-      font-size: .9rem;
-      text-decoration: none;
-      cursor: pointer;
-      border: none;
-      transition: all .2s;
-    }
-
-    .btn-ghost {
-      background: transparent;
-      color: var(--muted2);
-      border: 1px solid var(--border);
-    }
-    .btn-ghost:hover { border-color: var(--indigo); color: var(--text); }
-
-    .btn-primary {
       background: var(--grad);
+      border: none;
       color: #fff;
-      box-shadow: 0 0 20px rgba(99,102,241,.3);
-    }
-    .btn-primary:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 0 30px rgba(99,102,241,.5);
-    }
-
-    .btn-outline {
-      background: transparent;
-      color: var(--text);
-      border: 1px solid var(--border-glow);
-    }
-    .btn-outline:hover {
-      background: rgba(99,102,241,.1);
-      border-color: var(--indigo);
+      padding: 10px 22px;
+      border-radius: 50px;
+      font-size: .9rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: opacity .2s, transform .2s;
+      font-family: var(--font-body);
     }
 
-    /* ─── HERO ─── */
+    .nav-cta:hover { opacity: .9; transform: translateY(-1px); }
+
+    /* ── HERO ── */
     .hero {
-      position: relative;
-      z-index: 1;
       min-height: 100vh;
       display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding: 10rem 2rem 6rem;
+      padding: 120px 24px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-glow {
+      position: absolute;
+      width: 700px;
+      height: 700px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(99,102,241,.15) 0%, transparent 70%);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+
+    .hero-glow-2 {
+      position: absolute;
+      width: 400px;
+      height: 400px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(34,211,238,.08) 0%, transparent 70%);
+      top: 30%;
+      right: 10%;
+      pointer-events: none;
     }
 
     .hero-badge {
       display: inline-flex;
       align-items: center;
-      gap: .5rem;
-      padding: .4rem 1rem;
+      gap: 8px;
       background: rgba(99,102,241,.1);
       border: 1px solid rgba(99,102,241,.25);
-      border-radius: 100px;
+      border-radius: 50px;
+      padding: 8px 18px;
       font-size: .8rem;
-      font-weight: 500;
-      color: #A5B4FC;
-      margin-bottom: 2rem;
-      animation: fadeInUp .6s ease both;
+      font-weight: 600;
+      color: var(--indigo-light);
+      margin-bottom: 28px;
+      letter-spacing: .5px;
+      text-transform: uppercase;
+      animation: fadeUp .6s ease both;
     }
 
-    .hero-badge .dot {
-      width: 6px; height: 6px;
+    .hero-badge-dot {
+      width: 6px;
+      height: 6px;
       background: var(--emerald);
       border-radius: 50%;
       animation: pulse 2s infinite;
     }
 
     @keyframes pulse {
-      0%, 100% { box-shadow: 0 0 0 0 rgba(16,185,129,.5); }
-      50% { box-shadow: 0 0 0 6px rgba(16,185,129,0); }
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: .6; transform: scale(.8); }
     }
+
+    .hero-content { position: relative; z-index: 1; max-width: 800px; }
 
     .hero h1 {
       font-family: var(--font-head);
-      font-size: clamp(3rem, 7vw, 6rem);
-      font-weight: 700;
+      font-size: clamp(2.8rem, 7vw, 5.5rem);
+      font-weight: 800;
       line-height: 1.05;
-      letter-spacing: -0.03em;
-      max-width: 900px;
-      margin-bottom: 1.5rem;
-      animation: fadeInUp .6s ease .1s both;
+      letter-spacing: -2px;
+      margin-bottom: 24px;
+      animation: fadeUp .7s ease .1s both;
     }
 
-    .grad-text {
+    .hero h1 .grad-text {
       background: var(--grad);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
     .hero p {
-      font-size: clamp(1rem, 2vw, 1.25rem);
+      font-size: 1.2rem;
       color: var(--muted2);
-      max-width: 580px;
-      margin-bottom: 2.5rem;
-      animation: fadeInUp .6s ease .2s both;
+      max-width: 560px;
+      margin: 0 auto 40px;
+      line-height: 1.7;
+      animation: fadeUp .7s ease .2s both;
     }
 
-    .hero-ctas {
+    .hero-actions {
       display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
+      gap: 16px;
       justify-content: center;
-      animation: fadeInUp .6s ease .3s both;
+      flex-wrap: wrap;
+      animation: fadeUp .7s ease .3s both;
     }
 
-    .btn-hero-primary {
-      padding: 1rem 2rem;
-      font-size: 1rem;
-      border-radius: 10px;
+    .btn-primary {
       background: var(--grad);
       color: #fff;
-      border: none;
-      font-family: var(--font-head);
-      font-weight: 600;
-      cursor: pointer;
+      padding: 16px 36px;
+      border-radius: 50px;
+      font-size: 1rem;
+      font-weight: 700;
       text-decoration: none;
+      transition: all .25s;
+      border: none;
+      cursor: pointer;
+      font-family: var(--font-body);
       display: inline-flex;
       align-items: center;
-      gap: .5rem;
-      box-shadow: 0 0 40px rgba(99,102,241,.35);
-      transition: all .2s;
-    }
-    .btn-hero-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 0 60px rgba(99,102,241,.5);
+      gap: 8px;
     }
 
-    .btn-hero-secondary {
-      padding: 1rem 2rem;
-      font-size: 1rem;
-      border-radius: 10px;
-      background: rgba(255,255,255,.05);
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(99,102,241,.4); }
+
+    .btn-secondary {
+      background: transparent;
       color: var(--text);
-      border: 1px solid var(--border);
-      font-family: var(--font-head);
+      padding: 16px 36px;
+      border-radius: 50px;
+      font-size: 1rem;
       font-weight: 600;
-      cursor: pointer;
       text-decoration: none;
+      border: 1px solid var(--border-hover);
+      transition: all .25s;
       display: inline-flex;
       align-items: center;
-      gap: .5rem;
-      transition: all .2s;
+      gap: 8px;
     }
-    .btn-hero-secondary:hover {
-      background: rgba(255,255,255,.08);
-      border-color: var(--indigo);
-    }
+
+    .btn-secondary:hover { border-color: var(--indigo); color: var(--indigo-light); background: rgba(99,102,241,.05); }
 
     .hero-stats {
       display: flex;
-      gap: 4rem;
-      margin-top: 5rem;
-      animation: fadeInUp .6s ease .4s both;
+      gap: 48px;
+      justify-content: center;
+      margin-top: 72px;
+      padding-top: 48px;
+      border-top: 1px solid var(--border);
+      animation: fadeUp .7s ease .4s both;
+      flex-wrap: wrap;
     }
 
-    .stat {
-      text-align: center;
-    }
+    .stat { text-align: center; }
+
     .stat-num {
       font-family: var(--font-head);
       font-size: 2.2rem;
-      font-weight: 700;
+      font-weight: 800;
       background: var(--grad);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+      line-height: 1;
+      margin-bottom: 6px;
     }
+
     .stat-label {
       font-size: .8rem;
       color: var(--muted);
       text-transform: uppercase;
-      letter-spacing: .08em;
-      margin-top: .2rem;
+      letter-spacing: .8px;
+      font-weight: 500;
     }
 
-    /* ─── MARQUEE ─── */
-    .marquee-section {
-      position: relative;
-      z-index: 1;
-      padding: 3rem 0;
-      overflow: hidden;
+    /* ── LOGOS (social proof) ── */
+    .logos-section {
+      padding: 40px 40px;
       border-top: 1px solid var(--border);
       border-bottom: 1px solid var(--border);
+      background: var(--surface);
+      overflow: hidden;
     }
 
-    .marquee-track {
+    .logos-label {
+      text-align: center;
+      font-size: .75rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--muted);
+      margin-bottom: 28px;
+      font-weight: 600;
+    }
+
+    .logos-track {
       display: flex;
-      gap: 4rem;
-      animation: marquee 25s linear infinite;
+      gap: 60px;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .logo-item {
+      color: var(--muted);
+      font-family: var(--font-head);
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: -0.5px;
+      opacity: .5;
+      transition: opacity .2s;
       white-space: nowrap;
     }
 
-    .marquee-item {
-      display: flex;
-      align-items: center;
-      gap: .8rem;
-      color: var(--muted);
-      font-size: .9rem;
-      font-weight: 500;
-      flex-shrink: 0;
-    }
+    .logo-item:hover { opacity: .9; }
 
-    .marquee-item svg { opacity: .5; }
+    /* ── SECTIONS ── */
+    section { padding: 100px 24px; }
 
-    @keyframes marquee {
-      from { transform: translateX(0); }
-      to { transform: translateX(-50%); }
-    }
-
-    /* ─── SECTIONS ─── */
-    section {
-      position: relative;
-      z-index: 1;
-    }
-
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 2rem;
-    }
+    .container { max-width: 1100px; margin: 0 auto; }
 
     .section-label {
       display: inline-flex;
       align-items: center;
-      gap: .5rem;
+      gap: 8px;
       font-size: .75rem;
-      font-weight: 600;
+      font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: .12em;
-      color: var(--indigo);
-      margin-bottom: 1rem;
+      letter-spacing: 1.5px;
+      color: var(--indigo-light);
+      margin-bottom: 16px;
+    }
+
+    .section-label::before {
+      content: '';
+      width: 20px;
+      height: 2px;
+      background: var(--grad);
+      border-radius: 2px;
     }
 
     .section-title {
       font-family: var(--font-head);
-      font-size: clamp(2rem, 4vw, 3.2rem);
-      font-weight: 700;
-      letter-spacing: -0.02em;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+      letter-spacing: -1.5px;
       line-height: 1.1;
-      margin-bottom: 1.2rem;
+      margin-bottom: 16px;
     }
 
     .section-sub {
-      font-size: 1.1rem;
       color: var(--muted2);
-      max-width: 580px;
+      font-size: 1.1rem;
+      max-width: 520px;
       line-height: 1.7;
     }
 
-    /* ─── PROBLEMA ─── */
-    .problema {
-      padding: 8rem 0;
+    /* ── BEFORE/AFTER ── */
+    .ba-section { background: var(--surface); }
+
+    .ba-header { text-align: center; margin-bottom: 64px; }
+    .ba-header .section-sub { margin: 0 auto; }
+
+    .ba-wrapper {
+      position: relative;
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border);
+      user-select: none;
+      max-width: 900px;
+      margin: 0 auto;
+      cursor: ew-resize;
     }
 
-    .problema-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 3rem;
-      margin-top: 4rem;
+    .ba-after { width: 100%; display: block; }
+
+    .ba-before-container {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      width: 45%;
+      transition: width 0s;
     }
 
-    .problema-col {
-      padding: 2.5rem;
-      border-radius: 16px;
+    .ba-before-container img {
+      width: 900px;
+      max-width: none;
+      display: block;
+      height: 100%;
+      object-fit: cover;
+      object-position: left top;
     }
 
-    .problema-col.bad {
-      background: rgba(239,68,68,.05);
-      border: 1px solid rgba(239,68,68,.15);
+    .ba-divider {
+      position: absolute;
+      top: 0; bottom: 0;
+      left: 45%;
+      width: 2px;
+      background: #fff;
+      transform: translateX(-50%);
+      z-index: 10;
     }
 
-    .problema-col.good {
-      background: rgba(99,102,241,.05);
-      border: 1px solid rgba(99,102,241,.2);
-    }
-
-    .col-header {
-      display: flex;
-      align-items: center;
-      gap: .8rem;
-      margin-bottom: 1.5rem;
-      font-family: var(--font-head);
-      font-weight: 600;
-      font-size: 1.1rem;
-    }
-
-    .col-icon {
-      width: 36px; height: 36px;
-      border-radius: 8px;
+    .ba-handle {
+      position: absolute;
+      top: 50%;
+      left: 45%;
+      transform: translate(-50%, -50%);
+      width: 44px;
+      height: 44px;
+      background: #fff;
+      border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
+      box-shadow: 0 4px 20px rgba(0,0,0,.4);
+      z-index: 11;
       font-size: 1rem;
+      color: #333;
+      font-weight: bold;
     }
 
-    .bad .col-icon { background: rgba(239,68,68,.15); }
-    .good .col-icon { background: rgba(99,102,241,.15); }
-
-    .problema-list {
-      list-style: none;
+    .ba-labels {
+      position: absolute;
+      top: 20px;
+      left: 0; right: 0;
       display: flex;
-      flex-direction: column;
-      gap: .8rem;
+      justify-content: space-between;
+      padding: 0 24px;
+      z-index: 12;
+      pointer-events: none;
     }
 
-    .problema-list li {
+    .ba-label {
+      font-size: .75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 6px 14px;
+      border-radius: 50px;
+    }
+
+    .ba-label.before { background: rgba(0,0,0,.7); color: #fff; }
+    .ba-label.after { background: var(--grad); color: #fff; }
+
+    .ba-note {
+      text-align: center;
+      margin-top: 24px;
+      color: var(--muted);
+      font-size: .85rem;
+    }
+
+    /* FAKE BEFORE/AFTER with CSS screenshots */
+    .fake-browser {
+      background: #1a1a2e;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,.08);
+    }
+
+    .fake-browser-bar {
+      background: #12122a;
+      padding: 10px 16px;
       display: flex;
-      align-items: flex-start;
-      gap: .8rem;
-      font-size: .95rem;
-      color: var(--muted2);
-      line-height: 1.5;
+      align-items: center;
+      gap: 8px;
+      border-bottom: 1px solid rgba(255,255,255,.06);
     }
 
-    .bad .problema-list li::before { content: '✕'; color: #EF4444; font-weight: 700; flex-shrink: 0; margin-top: .1rem; }
-    .good .problema-list li::before { content: '✓'; color: var(--indigo); font-weight: 700; flex-shrink: 0; margin-top: .1rem; }
+    .dot-r { width: 10px; height: 10px; border-radius: 50%; background: #FF5F57; }
+    .dot-y { width: 10px; height: 10px; border-radius: 50%; background: #FEBC2E; }
+    .dot-g { width: 10px; height: 10px; border-radius: 50%; background: #28C840; }
 
-    /* ─── HOW IT WORKS ─── */
-    .how {
-      padding: 8rem 0;
-      background: linear-gradient(180deg, transparent, rgba(99,102,241,.03), transparent);
+    .url-bar {
+      flex: 1;
+      background: rgba(255,255,255,.06);
+      border-radius: 6px;
+      padding: 4px 12px;
+      font-size: .72rem;
+      color: var(--muted);
+      margin-left: 8px;
+      font-family: monospace;
     }
 
-    .how-steps {
+    .ba-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2rem;
-      margin-top: 4rem;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      max-width: 1000px;
+      margin: 0 auto;
+      align-items: start;
+    }
+
+    .ba-card { position: relative; }
+
+    .ba-card-label {
+      font-size: .75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      padding: 8px 16px;
+      border-radius: 50px;
+      display: inline-block;
+      margin-bottom: 16px;
+    }
+
+    .ba-card-label.before {
+      background: rgba(239,68,68,.15);
+      color: #F87171;
+      border: 1px solid rgba(239,68,68,.3);
+    }
+
+    .ba-card-label.after {
+      background: rgba(99,102,241,.15);
+      color: var(--indigo-light);
+      border: 1px solid rgba(99,102,241,.3);
+    }
+
+    .before-content {
+      padding: 32px 24px;
+      background: #f5f5f0;
+      min-height: 380px;
       position: relative;
     }
 
-    .how-steps::before {
-      content: '';
-      position: absolute;
-      top: 2.5rem;
-      left: calc(16.6% + 1.5rem);
-      right: calc(16.6% + 1.5rem);
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--indigo), transparent);
-      opacity: .3;
+    .before-header-bar {
+      background: #2c5282;
+      padding: 12px 16px;
+      margin: -32px -24px 20px;
+      display: flex;
+      gap: 16px;
+      align-items: center;
     }
 
-    .step {
-      text-align: center;
-      padding: 2.5rem 2rem;
+    .before-nav-item {
+      font-size: .65rem;
+      color: rgba(255,255,255,.7);
+      font-weight: 500;
     }
 
-    .step-number {
-      width: 3rem; height: 3rem;
-      border-radius: 12px;
-      background: var(--grad);
-      color: #fff;
-      font-family: var(--font-head);
-      font-weight: 700;
-      font-size: 1.1rem;
+    .before-hero-img {
+      background: linear-gradient(180deg, #e8e8e0 0%, #d5d5cb 100%);
+      height: 120px;
+      margin-bottom: 16px;
+      border-radius: 4px;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin: 0 auto 1.5rem;
-      box-shadow: 0 0 20px rgba(99,102,241,.3);
+      position: relative;
+      overflow: hidden;
     }
 
-    .step h3 {
+    .before-hero-img::before {
+      content: '📸 Foto genérica';
+      font-size: .7rem;
+      color: #999;
+    }
+
+    .before-title-old {
+      font-size: .85rem;
+      font-weight: bold;
+      color: #1a1a1a;
+      margin-bottom: 8px;
+      font-family: Georgia, serif;
+    }
+
+    .before-text-lines {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 16px;
+    }
+
+    .text-line {
+      height: 8px;
+      background: #ddd;
+      border-radius: 4px;
+    }
+
+    .text-line.w-full { width: 100%; }
+    .text-line.w-75 { width: 75%; }
+    .text-line.w-60 { width: 60%; }
+
+    .before-btn-old {
+      background: #2c5282;
+      color: #fff;
+      padding: 8px 16px;
+      font-size: .7rem;
+      display: inline-block;
+      border-radius: 2px;
+    }
+
+    .before-issues {
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .issue-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: .8rem;
+      color: #EF4444;
+      font-weight: 500;
+    }
+
+    .issue-icon { font-size: .9rem; }
+
+    /* AFTER CARD */
+    .after-content {
+      padding: 0;
+      background: #04040F;
+      min-height: 380px;
+      border-radius: 0 0 12px 12px;
+      overflow: hidden;
+    }
+
+    .after-hero-section {
+      background: linear-gradient(135deg, #04040F 0%, #0D0D24 100%);
+      padding: 24px 20px;
+      border-bottom: 1px solid rgba(99,102,241,.15);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .after-hero-section::before {
+      content: '';
+      position: absolute;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(99,102,241,.2) 0%, transparent 70%);
+      top: -50px;
+      right: -50px;
+    }
+
+    .after-badge-sm {
+      display: inline-block;
+      background: rgba(16,185,129,.15);
+      border: 1px solid rgba(16,185,129,.3);
+      color: #10B981;
+      font-size: .62rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 50px;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+      margin-bottom: 12px;
+    }
+
+    .after-title-new {
       font-family: var(--font-head);
-      font-size: 1.15rem;
-      font-weight: 600;
-      margin-bottom: .7rem;
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.2;
+      margin-bottom: 10px;
     }
 
-    .step p {
-      font-size: .9rem;
+    .after-title-new span {
+      background: var(--grad);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .after-desc {
+      font-size: .72rem;
+      color: rgba(241,245,249,.6);
+      line-height: 1.5;
+      margin-bottom: 14px;
+    }
+
+    .after-btn-new {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: linear-gradient(135deg, #6366F1, #22D3EE);
+      color: #fff;
+      padding: 8px 16px;
+      border-radius: 50px;
+      font-size: .7rem;
+      font-weight: 700;
+    }
+
+    .after-services {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      padding: 16px 20px;
+    }
+
+    .after-service-card {
+      background: rgba(99,102,241,.08);
+      border: 1px solid rgba(99,102,241,.15);
+      border-radius: 8px;
+      padding: 10px;
+    }
+
+    .service-icon-sm { font-size: .9rem; margin-bottom: 4px; }
+
+    .service-name-sm {
+      font-size: .65rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 2px;
+    }
+
+    .service-desc-sm {
+      font-size: .58rem;
+      color: rgba(241,245,249,.4);
+    }
+
+    .after-wins {
+      padding: 0 20px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .win-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: .78rem;
+      color: var(--emerald);
+      font-weight: 500;
+    }
+
+    .win-icon { font-size: .85rem; }
+
+    .ba-arrow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      color: var(--indigo-light);
+      align-self: center;
+    }
+
+    /* ── PROCESS ── */
+    .process-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 24px;
+      margin-top: 64px;
+    }
+
+    .process-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 32px 28px;
+      position: relative;
+      overflow: hidden;
+      transition: border-color .25s, transform .25s;
+    }
+
+    .process-card:hover { border-color: var(--border-hover); transform: translateY(-4px); }
+
+    .process-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(99,102,241,.05) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .process-num {
+      font-family: var(--font-head);
+      font-size: 3rem;
+      font-weight: 800;
+      background: var(--grad);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      line-height: 1;
+      margin-bottom: 16px;
+      opacity: .4;
+    }
+
+    .process-icon { font-size: 1.8rem; margin-bottom: 12px; }
+
+    .process-title {
+      font-family: var(--font-head);
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--text);
+    }
+
+    .process-desc {
+      font-size: .88rem;
       color: var(--muted2);
       line-height: 1.6;
     }
 
-    /* ─── PORTFOLIO ─── */
-    .portfolio {
-      padding: 8rem 0;
+    .process-time {
+      display: inline-block;
+      margin-top: 16px;
+      font-size: .72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .8px;
+      color: var(--emerald);
+      background: rgba(16,185,129,.1);
+      padding: 4px 10px;
+      border-radius: 50px;
     }
 
-    .portfolio-header {
+    /* ── DEMOS ── */
+    .demos-section { background: var(--surface); }
+
+    .demos-header {
       display: flex;
-      justify-content: space-between;
       align-items: flex-end;
-      margin-bottom: 3rem;
+      justify-content: space-between;
+      margin-bottom: 48px;
       flex-wrap: wrap;
-      gap: 2rem;
+      gap: 24px;
     }
 
-    .portfolio-grid {
+    .demos-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 28px;
     }
 
-    .portfolio-card {
-      border-radius: 16px;
-      overflow: hidden;
-      background: var(--surface);
+    .demo-card {
+      background: var(--surface2);
       border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
       transition: all .3s;
+      cursor: pointer;
       text-decoration: none;
       color: inherit;
       display: block;
     }
 
-    .portfolio-card:hover {
-      border-color: var(--border-glow);
-      transform: translateY(-4px);
-      box-shadow: 0 20px 60px rgba(99,102,241,.15);
-    }
+    .demo-card:hover { border-color: var(--border-hover); transform: translateY(-6px); box-shadow: 0 24px 60px rgba(0,0,0,.4); }
 
-    .portfolio-preview {
-      height: 220px;
+    .demo-preview {
+      aspect-ratio: 16/10;
       position: relative;
       overflow: hidden;
     }
 
-    .portfolio-preview iframe {
-      width: 200%;
-      height: 200%;
-      transform: scale(.5) translate(-50%, -50%);
-      transform-origin: top left;
-      pointer-events: none;
-      border: none;
+    .demo-preview-dental { background: linear-gradient(135deg, #0a0a1e 0%, #1a1a3e 50%, #0d192a 100%); }
+    .demo-preview-medica { background: linear-gradient(135deg, #0a1a0a 0%, #0d2d1a 50%, #0a1a0e 100%); }
+    .demo-preview-resto { background: linear-gradient(135deg, #1a0a0a 0%, #2d1a0a 50%, #1a0d0a 100%); }
+
+    .demo-mockup {
+      position: absolute;
+      bottom: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 90%;
+      background: rgba(255,255,255,.05);
+      border-radius: 8px 8px 0 0;
+      border: 1px solid rgba(255,255,255,.08);
+      border-bottom: none;
+      padding: 16px;
     }
 
-    .portfolio-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to bottom, transparent 50%, var(--surface));
+    .demo-mockup-bar {
+      display: flex;
+      gap: 5px;
+      margin-bottom: 12px;
     }
 
-    .portfolio-tag {
+    .dm-dot { width: 7px; height: 7px; border-radius: 50%; }
+    .dm-dot.r { background: rgba(255,95,87,.6); }
+    .dm-dot.y { background: rgba(254,188,46,.6); }
+    .dm-dot.g { background: rgba(40,200,64,.6); }
+
+    .demo-mockup-content {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .dm-line { height: 6px; border-radius: 3px; opacity: .5; }
+    .dm-line.title { height: 12px; width: 70%; }
+    .dm-line.sub { width: 50%; }
+    .dm-line.btn { height: 22px; width: 100px; border-radius: 50px; }
+    .dm-line.dental { background: var(--cyan); }
+    .dm-line.medica { background: var(--emerald); }
+    .dm-line.resto { background: var(--amber); }
+
+    .demo-tag {
       position: absolute;
-      top: 1rem;
-      left: 1rem;
-      padding: .3rem .8rem;
-      background: rgba(99,102,241,.2);
-      border: 1px solid rgba(99,102,241,.3);
-      border-radius: 100px;
+      top: 16px;
+      right: 16px;
       font-size: .7rem;
-      font-weight: 600;
-      color: #A5B4FC;
-      backdrop-filter: blur(8px);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .8px;
+      padding: 5px 12px;
+      border-radius: 50px;
     }
 
-    .portfolio-info {
-      padding: 1.5rem;
-    }
+    .tag-dental { background: rgba(34,211,238,.15); color: var(--cyan); border: 1px solid rgba(34,211,238,.3); }
+    .tag-medica { background: rgba(16,185,129,.15); color: var(--emerald); border: 1px solid rgba(16,185,129,.3); }
+    .tag-resto { background: rgba(245,158,11,.15); color: var(--amber); border: 1px solid rgba(245,158,11,.3); }
 
-    .portfolio-info h3 {
+    .demo-info { padding: 24px; }
+
+    .demo-title {
       font-family: var(--font-head);
-      font-size: 1.05rem;
-      font-weight: 600;
-      margin-bottom: .4rem;
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 6px;
     }
 
-    .portfolio-info p {
+    .demo-desc {
       font-size: .85rem;
       color: var(--muted2);
+      margin-bottom: 16px;
+      line-height: 1.5;
     }
 
-    .portfolio-arrow {
-      margin-top: 1rem;
+    .demo-footer {
       display: flex;
       align-items: center;
-      gap: .4rem;
-      font-size: .85rem;
-      color: var(--indigo);
-      font-weight: 500;
+      justify-content: space-between;
     }
 
-    /* ─── PRICING ─── */
-    .pricing {
-      padding: 8rem 0;
-      background: linear-gradient(180deg, transparent, rgba(99,102,241,.03), transparent);
+    .demo-tech {
+      display: flex;
+      gap: 6px;
     }
+
+    .tech-badge {
+      font-size: .65rem;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 4px;
+      background: rgba(99,102,241,.1);
+      color: var(--indigo-light);
+      border: 1px solid rgba(99,102,241,.2);
+    }
+
+    .demo-link {
+      font-size: .8rem;
+      color: var(--indigo-light);
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    /* ── PRICING ── */
+    .pricing-section { position: relative; }
 
     .pricing-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
-      margin-top: 4rem;
+      gap: 24px;
+      margin-top: 64px;
+      align-items: start;
+    }
+
+    @media (max-width: 800px) {
+      .pricing-grid { grid-template-columns: 1fr; max-width: 400px; margin-left: auto; margin-right: auto; }
+      .ba-grid { grid-template-columns: 1fr; }
+      .ba-arrow { display: none; }
     }
 
     .pricing-card {
-      padding: 2.5rem;
-      border-radius: 20px;
       background: var(--surface);
       border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 36px 32px;
       position: relative;
       transition: all .3s;
     }
 
-    .pricing-card:hover {
-      border-color: var(--border-glow);
-      transform: translateY(-4px);
-    }
+    .pricing-card:hover { transform: translateY(-4px); }
 
     .pricing-card.featured {
-      background: linear-gradient(135deg, rgba(99,102,241,.12), rgba(34,211,238,.08));
-      border-color: rgba(99,102,241,.4);
-      box-shadow: 0 0 60px rgba(99,102,241,.12);
+      border-color: var(--indigo);
+      background: linear-gradient(135deg, rgba(99,102,241,.08) 0%, var(--surface) 100%);
+      transform: scale(1.04);
     }
 
-    .pricing-badge {
+    .pricing-card.featured:hover { transform: scale(1.04) translateY(-4px); }
+
+    .pricing-popular {
       position: absolute;
       top: -12px;
       left: 50%;
       transform: translateX(-50%);
-      padding: .3rem 1rem;
       background: var(--grad);
-      border-radius: 100px;
+      color: #fff;
       font-size: .7rem;
       font-weight: 700;
-      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: .8px;
+      padding: 5px 16px;
+      border-radius: 50px;
       white-space: nowrap;
     }
 
     .pricing-name {
       font-family: var(--font-head);
       font-size: 1rem;
-      font-weight: 600;
+      font-weight: 700;
       color: var(--muted2);
-      margin-bottom: .5rem;
       text-transform: uppercase;
-      letter-spacing: .08em;
+      letter-spacing: 1px;
+      margin-bottom: 20px;
     }
 
     .pricing-price {
       font-family: var(--font-head);
       font-size: 3rem;
-      font-weight: 700;
-      letter-spacing: -0.03em;
+      font-weight: 800;
+      letter-spacing: -2px;
       line-height: 1;
-      margin-bottom: .3rem;
+      margin-bottom: 4px;
+      color: var(--text);
     }
 
-    .pricing-price span {
-      font-size: 1.2rem;
-      font-weight: 500;
-      color: var(--muted2);
+    .pricing-price sup {
+      font-size: 1.4rem;
+      font-weight: 600;
+      letter-spacing: 0;
+      vertical-align: super;
     }
 
-    .pricing-desc {
-      font-size: .85rem;
+    .pricing-period {
+      font-size: .82rem;
       color: var(--muted);
-      margin-bottom: 2rem;
+      margin-bottom: 24px;
+    }
+
+    .pricing-delivery {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: .75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .8px;
+      color: var(--emerald);
+      background: rgba(16,185,129,.1);
+      padding: 5px 12px;
+      border-radius: 50px;
+      margin-bottom: 28px;
+      border: 1px solid rgba(16,185,129,.2);
     }
 
     .pricing-divider {
       height: 1px;
       background: var(--border);
-      margin-bottom: 1.5rem;
+      margin-bottom: 28px;
     }
 
     .pricing-features {
       list-style: none;
       display: flex;
       flex-direction: column;
-      gap: .8rem;
-      margin-bottom: 2rem;
+      gap: 12px;
+      margin-bottom: 32px;
     }
 
     .pricing-features li {
       display: flex;
-      align-items: center;
-      gap: .75rem;
-      font-size: .9rem;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: .88rem;
       color: var(--muted2);
+      line-height: 1.4;
     }
 
     .pricing-features li .check {
-      width: 18px; height: 18px;
-      border-radius: 50%;
-      background: rgba(99,102,241,.15);
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      color: var(--emerald);
+      font-size: .9rem;
       flex-shrink: 0;
-      font-size: .7rem;
-      color: var(--indigo);
+      margin-top: 2px;
     }
+
+    .pricing-features li.highlight { color: var(--text); font-weight: 500; }
 
     .pricing-cta {
-      width: 100%;
-      padding: .9rem;
-      border-radius: 10px;
-      font-family: var(--font-head);
-      font-weight: 600;
-      font-size: .95rem;
-      cursor: pointer;
-      border: none;
-      text-decoration: none;
       display: block;
       text-align: center;
-      transition: all .2s;
+      padding: 14px;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: .95rem;
+      text-decoration: none;
+      transition: all .25s;
     }
 
-    .pricing-cta.secondary {
-      background: rgba(255,255,255,.06);
+    .pricing-cta.outlined {
+      border: 1px solid var(--border-hover);
       color: var(--text);
-      border: 1px solid var(--border);
     }
-    .pricing-cta.secondary:hover { background: rgba(255,255,255,.1); border-color: var(--indigo); }
 
-    .pricing-cta.primary {
+    .pricing-cta.outlined:hover { border-color: var(--indigo); background: rgba(99,102,241,.05); }
+
+    .pricing-cta.filled {
       background: var(--grad);
       color: #fff;
-      box-shadow: 0 0 20px rgba(99,102,241,.25);
-    }
-    .pricing-cta.primary:hover { box-shadow: 0 0 35px rgba(99,102,241,.45); transform: translateY(-1px); }
-
-    /* ─── WHY ─── */
-    .why {
-      padding: 8rem 0;
     }
 
-    .why-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1.5rem;
-      margin-top: 4rem;
-    }
+    .pricing-cta.filled:hover { box-shadow: 0 8px 30px rgba(99,102,241,.4); transform: translateY(-1px); }
 
-    .why-card {
-      padding: 2rem;
-      border-radius: 16px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      transition: all .3s;
-    }
-
-    .why-card:hover {
-      border-color: var(--border-glow);
-      background: var(--surface2);
-    }
-
-    .why-icon {
-      font-size: 2rem;
-      margin-bottom: 1rem;
-    }
-
-    .why-card h3 {
-      font-family: var(--font-head);
-      font-size: 1.1rem;
-      font-weight: 600;
-      margin-bottom: .5rem;
-    }
-
-    .why-card p {
-      font-size: .9rem;
-      color: var(--muted2);
-      line-height: 1.6;
-    }
-
-    /* ─── TESTIMONIALS ─── */
-    .testimonials {
-      padding: 8rem 0;
-      background: linear-gradient(180deg, transparent, rgba(99,102,241,.03), transparent);
-    }
+    /* ── TESTIMONIALS ── */
+    .testimonials-section { background: var(--surface); }
 
     .testimonials-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
-      margin-top: 4rem;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+      margin-top: 56px;
     }
 
     .testimonial-card {
-      padding: 2rem;
-      border-radius: 16px;
-      background: var(--surface);
+      background: var(--surface2);
       border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 32px;
+      transition: border-color .25s, transform .25s;
     }
 
-    .stars {
-      color: #FBBF24;
-      margin-bottom: 1rem;
+    .testimonial-card:hover { border-color: var(--border-hover); transform: translateY(-4px); }
+
+    .testimonial-stars {
+      display: flex;
+      gap: 4px;
+      margin-bottom: 16px;
+      color: var(--amber);
       font-size: .9rem;
-      letter-spacing: .1em;
     }
 
     .testimonial-text {
       font-size: .95rem;
       color: var(--muted2);
       line-height: 1.7;
-      margin-bottom: 1.5rem;
+      margin-bottom: 24px;
       font-style: italic;
     }
+
+    .testimonial-text strong { color: var(--text); font-style: normal; }
 
     .testimonial-author {
       display: flex;
       align-items: center;
-      gap: .8rem;
+      gap: 14px;
     }
 
     .author-avatar {
-      width: 40px; height: 40px;
+      width: 44px;
+      height: 44px;
       border-radius: 50%;
-      background: var(--grad);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-family: var(--font-head);
+      font-size: 1.1rem;
       font-weight: 700;
-      font-size: .9rem;
-      color: #fff;
       flex-shrink: 0;
+      font-family: var(--font-head);
     }
+
+    .av-1 { background: linear-gradient(135deg, #6366F1, #22D3EE); color: #fff; }
+    .av-2 { background: linear-gradient(135deg, #10B981, #22D3EE); color: #fff; }
+    .av-3 { background: linear-gradient(135deg, #EC4899, #6366F1); color: #fff; }
 
     .author-name {
-      font-weight: 600;
+      font-weight: 700;
       font-size: .9rem;
+      margin-bottom: 2px;
+      font-family: var(--font-head);
     }
 
-    .author-role {
-      font-size: .8rem;
-      color: var(--muted);
+    .author-role { font-size: .78rem; color: var(--muted); }
+
+    .result-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: .72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+      background: rgba(16,185,129,.1);
+      color: var(--emerald);
+      border: 1px solid rgba(16,185,129,.2);
+      padding: 5px 12px;
+      border-radius: 50px;
+      margin-top: 16px;
     }
 
-    /* ─── FAQ ─── */
-    .faq {
-      padding: 8rem 0;
+    /* ── FAQ ── */
+    .faq-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      margin-top: 56px;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
     }
 
-    .faq-list {
-      margin-top: 3rem;
-      max-width: 760px;
-    }
+    @media (max-width: 700px) { .faq-grid { grid-template-columns: 1fr; } }
 
     .faq-item {
+      padding: 28px 32px;
       border-bottom: 1px solid var(--border);
+      border-right: 1px solid var(--border);
     }
 
-    .faq-question {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-      padding: 1.5rem 0;
-      cursor: pointer;
+    .faq-item:nth-child(even) { border-right: none; }
+
+    .faq-q {
       font-family: var(--font-head);
-      font-weight: 600;
       font-size: 1rem;
-      transition: color .2s;
-      list-style: none;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: var(--text);
     }
 
-    .faq-question:hover { color: #A5B4FC; }
-
-    .faq-toggle {
-      width: 28px; height: 28px;
-      border-radius: 50%;
-      background: rgba(99,102,241,.1);
-      border: 1px solid rgba(99,102,241,.2);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      font-size: 1.2rem;
-      color: var(--indigo);
-      transition: all .2s;
-    }
-
-    .faq-item.open .faq-toggle { transform: rotate(45deg); background: rgba(99,102,241,.2); }
-
-    .faq-answer {
-      font-size: .95rem;
+    .faq-a {
+      font-size: .88rem;
       color: var(--muted2);
-      line-height: 1.7;
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height .3s ease, padding .3s ease;
+      line-height: 1.65;
     }
 
-    .faq-item.open .faq-answer {
-      max-height: 300px;
-      padding-bottom: 1.5rem;
-    }
-
-    /* ─── CTA SECTION ─── */
+    /* ── CTA FINAL ── */
     .cta-section {
-      padding: 8rem 0;
-    }
-
-    .cta-box {
-      background: linear-gradient(135deg, rgba(99,102,241,.15), rgba(34,211,238,.08));
-      border: 1px solid rgba(99,102,241,.3);
-      border-radius: 24px;
-      padding: 5rem 3rem;
       text-align: center;
+      padding: 120px 24px;
       position: relative;
       overflow: hidden;
     }
 
-    .cta-box::before {
-      content: '';
+    .cta-glow {
       position: absolute;
-      top: -50%;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 600px;
-      height: 400px;
-      background: radial-gradient(ellipse, rgba(99,102,241,.15), transparent);
+      inset: 0;
+      background: radial-gradient(ellipse at center, rgba(99,102,241,.12) 0%, transparent 70%);
       pointer-events: none;
     }
 
-    .cta-box h2 {
+    .cta-content { position: relative; z-index: 1; max-width: 640px; margin: 0 auto; }
+
+    .cta-section h2 {
       font-family: var(--font-head);
-      font-size: clamp(2rem, 4vw, 3.5rem);
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      margin-bottom: 1rem;
-      position: relative;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 800;
+      letter-spacing: -1.5px;
+      line-height: 1.1;
+      margin-bottom: 20px;
     }
 
-    .cta-box p {
-      font-size: 1.1rem;
+    .cta-section p {
       color: var(--muted2);
-      max-width: 480px;
-      margin: 0 auto 2.5rem;
-      position: relative;
+      font-size: 1.1rem;
+      margin-bottom: 40px;
+      line-height: 1.7;
     }
 
-    .cta-buttons {
+    .cta-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+    .cta-note {
+      margin-top: 24px;
+      font-size: .82rem;
+      color: var(--muted);
       display: flex;
-      gap: 1rem;
+      align-items: center;
       justify-content: center;
-      flex-wrap: wrap;
-      position: relative;
+      gap: 6px;
     }
 
-    .btn-wa {
-      display: inline-flex;
-      align-items: center;
-      gap: .5rem;
-      padding: 1rem 2rem;
-      background: #25D366;
-      color: #fff;
-      border-radius: 10px;
-      font-family: var(--font-head);
-      font-weight: 600;
-      font-size: 1rem;
-      text-decoration: none;
-      transition: all .2s;
-      box-shadow: 0 0 20px rgba(37,211,102,.25);
-    }
-    .btn-wa:hover { background: #22C55E; transform: translateY(-2px); box-shadow: 0 0 35px rgba(37,211,102,.4); }
-
-    /* ─── FOOTER ─── */
+    /* ── FOOTER ── */
     footer {
-      position: relative;
-      z-index: 1;
       border-top: 1px solid var(--border);
-      padding: 3rem 0 2rem;
-    }
-
-    .footer-inner {
+      padding: 48px 40px;
       display: flex;
-      justify-content: space-between;
       align-items: center;
+      justify-content: space-between;
       flex-wrap: wrap;
-      gap: 2rem;
+      gap: 24px;
     }
 
     .footer-logo {
       font-family: var(--font-head);
+      font-weight: 800;
       font-size: 1.3rem;
-      font-weight: 700;
       background: var(--grad);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
-    .footer-copy {
-      font-size: .85rem;
-      color: var(--muted);
-    }
-
     .footer-links {
       display: flex;
-      gap: 1.5rem;
+      gap: 28px;
       list-style: none;
     }
+
     .footer-links a {
-      font-size: .85rem;
       color: var(--muted);
       text-decoration: none;
+      font-size: .85rem;
       transition: color .2s;
     }
+
     .footer-links a:hover { color: var(--text); }
 
-    /* ─── WHATSAPP FLOAT ─── */
+    .footer-copy { font-size: .8rem; color: var(--muted); }
+
+    /* ── WHATSAPP FLOAT ── */
     .wa-float {
       position: fixed;
-      bottom: 2rem;
-      right: 2rem;
-      z-index: 99;
+      bottom: 28px;
+      right: 28px;
+      z-index: 200;
       width: 56px;
       height: 56px;
       background: #25D366;
@@ -1027,24 +1334,17 @@
       align-items: center;
       justify-content: center;
       box-shadow: 0 4px 20px rgba(37,211,102,.4);
-      cursor: pointer;
       text-decoration: none;
-      transition: all .2s;
-      animation: waFloat 3s ease-in-out infinite;
-    }
-    .wa-float:hover { transform: scale(1.1); box-shadow: 0 4px 30px rgba(37,211,102,.6); }
-
-    @keyframes waFloat {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-5px); }
+      font-size: 1.5rem;
+      transition: transform .25s, box-shadow .25s;
     }
 
-    .wa-float svg { fill: #fff; width: 28px; height: 28px; }
+    .wa-float:hover { transform: scale(1.1); box-shadow: 0 8px 30px rgba(37,211,102,.5); }
 
-    /* ─── ANIMATIONS ─── */
-    @keyframes fadeInUp {
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
       from { opacity: 0; transform: translateY(24px); }
-      to   { opacity: 1; transform: translateY(0); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     .reveal {
@@ -1058,598 +1358,327 @@
       transform: translateY(0);
     }
 
-    /* ─── ANTES/DESPUÉS ─── */
-    .antesdespues { padding: 8rem 0; }
-
-    .ad-wrapper { margin-top: 4rem; }
-
-    .ad-slider {
-      position: relative;
-      height: 500px;
-      border-radius: 20px;
-      overflow: hidden;
-      border: 1px solid var(--border);
-      cursor: col-resize;
-      user-select: none;
-      box-shadow: 0 30px 80px rgba(0,0,0,.4);
-    }
-
-    .ad-side {
-      position: absolute;
-      top: 0; bottom: 0;
-      overflow: hidden;
-    }
-
-    .ad-before {
-      left: 0;
-      width: 50%;
-      border-right: none;
-      transition: width 0s;
-    }
-
-    .ad-after {
-      right: 0;
-      width: 50%;
-      transition: width 0s;
-    }
-
-    .ad-side iframe {
-      position: absolute;
-      top: 0; left: 0;
-      width: 1440px;
-      height: 900px;
-      transform-origin: top left;
-      transform: scale(0.555);
-      pointer-events: none;
-      border: none;
-      background: #fff;
-    }
-
-    .ad-after iframe { left: auto; right: 0; transform-origin: top right; }
-
-    /* Mockup estático para el ANTES */
-    .before-mockup {
-      position: absolute;
-      inset: 0;
-      background: #f5f5f5;
-      font-family: Arial, sans-serif;
-      overflow: hidden;
-    }
-
-    .bm-nav {
-      background: #003366;
-      padding: 8px 16px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .bm-nav-logo { color: #fff; font-size: 11px; font-weight: bold; }
-    .bm-nav-links { display: flex; gap: 10px; }
-    .bm-nav-links span { color: #aac4e8; font-size: 9px; }
-
-    .bm-hero {
-      background: linear-gradient(180deg, #1a4a8a, #0d2d5e);
-      padding: 24px 16px;
-      text-align: left;
-      position: relative;
-      overflow: hidden;
-    }
-    .bm-hero::after {
-      content: '';
-      position: absolute;
-      right: -20px; top: 0; bottom: 0;
-      width: 45%;
-      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='150'%3E%3Crect width='200' height='150' fill='%230d2d5e' opacity='.5'/%3E%3C/svg%3E");
-    }
-    .bm-hero h1 { color: #fff; font-size: 13px; font-weight: bold; line-height: 1.4; max-width: 55%; }
-    .bm-hero p { color: #aac4e8; font-size: 8px; margin-top: 6px; max-width: 50%; line-height: 1.5; }
-    .bm-hero-btn {
-      display: inline-block;
-      margin-top: 10px;
-      background: #ff9900;
-      color: #fff;
-      font-size: 8px;
-      padding: 5px 12px;
-      border-radius: 2px;
-      font-weight: bold;
-    }
-
-    .bm-body { padding: 16px; }
-    .bm-title { font-size: 11px; font-weight: bold; color: #003366; border-bottom: 2px solid #003366; padding-bottom: 4px; margin-bottom: 10px; }
-
-    .bm-services { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; }
-    .bm-service {
-      background: #fff;
-      border: 1px solid #ddd;
-      padding: 8px;
-      text-align: center;
-      border-radius: 2px;
-    }
-    .bm-service-icon { font-size: 16px; }
-    .bm-service h4 { font-size: 7px; font-weight: bold; color: #003366; margin: 4px 0 2px; }
-    .bm-service p { font-size: 6px; color: #666; line-height: 1.4; }
-
-    .bm-info { display: grid; grid-template-columns: 2fr 1fr; gap: 10px; margin-top: 12px; }
-    .bm-text-block p { font-size: 7px; color: #444; line-height: 1.6; }
-    .bm-sidebar { background: #003366; padding: 8px; border-radius: 2px; }
-    .bm-sidebar h4 { color: #fff; font-size: 8px; font-weight: bold; margin-bottom: 6px; }
-    .bm-sidebar p { color: #aac4e8; font-size: 7px; line-height: 1.5; }
-    .bm-sidebar-btn {
-      display: block;
-      margin-top: 8px;
-      background: #ff9900;
-      color: #fff;
-      font-size: 7px;
-      padding: 4px 8px;
-      text-align: center;
-      border-radius: 2px;
-    }
-
-    .bm-footer {
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      background: #003366;
-      padding: 6px 16px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .bm-footer span { color: #aac4e8; font-size: 6px; }
-
-    .ad-vignette {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to bottom, transparent 60%, rgba(4,4,15,.6));
-      pointer-events: none;
-    }
-
-    .ad-before .ad-vignette {
-      background: linear-gradient(to bottom, transparent 60%, rgba(4,4,15,.6)),
-                  linear-gradient(to right, transparent 85%, rgba(4,4,15,.3));
-    }
-
-    .ad-label {
-      position: absolute;
-      bottom: 1.2rem;
-      padding: .4rem 1rem;
-      border-radius: 100px;
-      font-family: var(--font-head);
-      font-size: .75rem;
-      font-weight: 700;
-      letter-spacing: .1em;
-      z-index: 3;
-      backdrop-filter: blur(8px);
-    }
-
-    .ad-label-before {
-      left: 1rem;
-      background: rgba(239,68,68,.2);
-      border: 1px solid rgba(239,68,68,.4);
-      color: #FCA5A5;
-    }
-
-    .ad-label-after {
-      right: 1rem;
-      background: rgba(99,102,241,.2);
-      border: 1px solid rgba(99,102,241,.4);
-      color: #A5B4FC;
-    }
-
-    .ad-divider {
-      position: absolute;
-      top: 0; bottom: 0;
-      left: 50%;
-      width: 3px;
-      background: var(--grad);
-      transform: translateX(-50%);
-      z-index: 10;
-      cursor: col-resize;
-      box-shadow: 0 0 20px rgba(99,102,241,.5);
-    }
-
-    .ad-handle {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%,-50%);
-      width: 44px; height: 44px;
-      background: var(--grad);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 0 20px rgba(99,102,241,.5);
-      cursor: col-resize;
-    }
-
-    .ad-cards {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1rem;
-      margin-top: 1.5rem;
-    }
-
-    .ad-card {
-      padding: 1.5rem;
-      border-radius: 14px;
-    }
-
-    .ad-card-bad {
-      background: rgba(239,68,68,.05);
-      border: 1px solid rgba(239,68,68,.15);
-    }
-
-    .ad-card-good {
-      background: rgba(99,102,241,.07);
-      border: 1px solid rgba(99,102,241,.2);
-    }
-
-    .ad-card-header {
-      display: flex;
-      align-items: center;
-      gap: .6rem;
-      font-family: var(--font-head);
-      font-size: .9rem;
-      margin-bottom: 1rem;
-    }
-
-    .ad-dot {
-      width: 8px; height: 8px;
-      border-radius: 50%;
-      flex-shrink: 0;
-    }
-    .ad-dot-red { background: #EF4444; }
-    .ad-dot-green { background: var(--indigo); }
-
-    .ad-card ul {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: .5rem;
-    }
-
-    .ad-card-bad ul li::before { content: '✕ '; color: #EF4444; font-weight: 700; font-size: .8rem; }
-    .ad-card-good ul li::before { content: '✓ '; color: var(--indigo); font-weight: 700; font-size: .8rem; }
-
-    .ad-card ul li {
-      font-size: .85rem;
-      color: var(--muted2);
-    }
-
-    /* ─── RESPONSIVE ─── */
-    @media (max-width: 900px) {
-      nav { padding: 1rem 1.5rem; }
+    /* ── MOBILE ── */
+    @media (max-width: 768px) {
+      nav { padding: 16px 20px; }
       .nav-links { display: none; }
-      .hero-stats { gap: 2rem; }
-      .problema-grid,
-      .pricing-grid,
-      .portfolio-grid,
-      .testimonials-grid { grid-template-columns: 1fr; }
-      .how-steps { grid-template-columns: 1fr; }
-      .how-steps::before { display: none; }
-      .why-grid { grid-template-columns: 1fr; }
-      .footer-inner { flex-direction: column; align-items: flex-start; }
+      section { padding: 70px 20px; }
+      .hero-stats { gap: 28px; }
+      .demos-header { flex-direction: column; align-items: flex-start; }
+      .pricing-card.featured { transform: scale(1); }
+      footer { flex-direction: column; text-align: center; }
     }
   </style>
 </head>
 <body>
 
-<!-- BLOBS -->
-<div class="blob blob-1"></div>
-<div class="blob blob-2"></div>
-<div class="blob blob-3"></div>
-
 <!-- NAV -->
 <nav>
-  <a href="#" class="nav-logo">Pronto</a>
+  <div class="nav-logo">Pronto</div>
   <ul class="nav-links">
-    <li><a href="#como-funciona">Cómo funciona</a></li>
-    <li><a href="#portafolio">Portafolio</a></li>
+    <li><a href="#proceso">Proceso</a></li>
+    <li><a href="#demos">Demos</a></li>
     <li><a href="#precios">Precios</a></li>
-    <li><a href="#faq">FAQ</a></li>
+    <li><a href="#testimonios">Clientes</a></li>
   </ul>
-  <div class="nav-cta">
-    <a href="#portafolio" class="btn btn-ghost">Ver demos</a>
-    <a href="https://calendly.com/cesargomezs711/30min" target="_blank" class="btn btn-primary">
-      Agendar llamada →
-    </a>
-  </div>
+  <a href="https://calendly.com/cesargomezs711/30min" target="_blank" class="nav-cta">Agendar llamada →</a>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-badge">
-    <span class="dot"></span>
-    Disponible para nuevos proyectos · Colombia &amp; LATAM
-  </div>
-
-  <h1>
-    Tu negocio merece una web<br/>
-    que <span class="grad-text">consigue clientes</span>
-  </h1>
-
-  <p>
-    Diseñamos páginas web profesionales en 48–72 horas usando inteligencia artificial.
-    Más pacientes, más reservas, más ventas — sin complicaciones.
-  </p>
-
-  <div class="hero-ctas">
-    <a href="#portafolio" class="btn-hero-primary">
-      Ver ejemplos reales
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-    </a>
-    <a href="https://calendly.com/cesargomezs711/30min" target="_blank" class="btn-hero-secondary">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
-      Llamada gratis 15 min
-    </a>
-  </div>
-
-  <div class="hero-stats">
-    <div class="stat">
-      <div class="stat-num">48h</div>
-      <div class="stat-label">Entrega promedio</div>
+  <div class="hero-glow"></div>
+  <div class="hero-glow-2"></div>
+  <div class="hero-content">
+    <div class="hero-badge">
+      <span class="hero-badge-dot"></span>
+      Entregamos en 48 horas · 100% con IA
     </div>
-    <div class="stat">
-      <div class="stat-num">3x</div>
-      <div class="stat-label">Más consultas</div>
+    <h1>Tu negocio merece<br>una web que<br><span class="grad-text">consiga clientes</span></h1>
+    <p>Diseñamos páginas web profesionales para cualquier negocio en 48–72 horas. Sin complicaciones, sin meses de espera.</p>
+    <div class="hero-actions">
+      <a href="https://calendly.com/cesargomezs711/30min" target="_blank" class="btn-primary">
+        Ver cómo funciona →
+      </a>
+      <a href="#demos" class="btn-secondary">
+        Ver ejemplos
+      </a>
     </div>
-    <div class="stat">
-      <div class="stat-num">$0</div>
-      <div class="stat-label">Para empezar</div>
-    </div>
-    <div class="stat">
-      <div class="stat-num">100%</div>
-      <div class="stat-label">A tu medida</div>
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-num">48h</div>
+        <div class="stat-label">Tiempo de entrega</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">3x</div>
+        <div class="stat-label">Más clientes</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">$0</div>
+        <div class="stat-label">Costo del demo</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">100%</div>
+        <div class="stat-label">Satisfacción garantizada</div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- MARQUEE -->
-<div class="marquee-section">
-  <div class="marquee-track">
-    <!-- 2x for seamless loop -->
-    <span class="marquee-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L9.1 9H2l5.6 4.1L5.2 20 12 15.9 18.8 20l-2.4-6.9L22 9h-7.1z"/></svg>Clínicas Dentales</span>
-    <span class="marquee-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L9.1 9H2l5.6 4.1L5.2 20 12 15.9 18.8 20l-2.4-6.9L22 9h-7.1z"/></svg>Centros Médicos</span>
-    <span class="marquee-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L9.1 9H2l5.6 4.1L5.2 20 12 15.9 18.8 20l-2.4-6.9L22 9h-7.1z"/></svg>Restaurantes</span>
-    <span class="marquee-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L9.1 9H2l5.6 4.1L5.2 20 12 15.9 18.8 20l-2.4-6.9L22 9h-7.1z"/></svg>Salones de Belleza</span>
-    <span class="marquee-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L9.1 9H2l5.6 4.1L5.2 20 12 15.9 18.8 20l-2.4-6.9L22 9h-7.1z"/></svg>Consultorios Jurídicos</span>
-    <span class="marquee-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L9.1 9H2l5.6 4.1L5.2 20 12 15.9 18.8 20l-2.4-6.9L22 9h-7.1z"/></svg>Gimnasios</span>
-    <span class="marquee-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L9.1 9H2l5.6 4.1L5.2 20 12 15.9 18.8 20l-2.4-6.9L22 9h-7.1z"/></svg>Hoteles y Hospedajes</span>
-    <span class="marquee-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L9.1 9H2l5.6 4.1L5.2 20 12 15.9 18.8 20l-2.4-6.9L22 9h-7.1z"/></svg>Clínicas Dentales</span>
-    <span class="marquee-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L9.1 9H2l5.6 4.1L5.2 20 12 15.9 18.8 20l-2.4-6.9L22 9h-7.1z"/></svg>Centros Médicos</span>
-    <span class="marquee-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L9.1 9H2l5.6 4.1L5.2 20 12 15.9 18.8 20l-2.4-6.9L22 9h-7.1z"/></svg>Restaurantes</span>
-    <span class="marquee-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L9.1 9H2l5.6 4.1L5.2 20 12 15.9 18.8 20l-2.4-6.9L22 9h-7.1z"/></svg>Salones de Belleza</span>
-    <span class="marquee-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L9.1 9H2l5.6 4.1L5.2 20 12 15.9 18.8 20l-2.4-6.9L22 9h-7.1z"/></svg>Consultorios Jurídicos</span>
-    <span class="marquee-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L9.1 9H2l5.6 4.1L5.2 20 12 15.9 18.8 20l-2.4-6.9L22 9h-7.1z"/></svg>Gimnasios</span>
-    <span class="marquee-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L9.1 9H2l5.6 4.1L5.2 20 12 15.9 18.8 20l-2.4-6.9L22 9h-7.1z"/></svg>Hoteles y Hospedajes</span>
+<!-- LOGOS -->
+<div class="logos-section">
+  <div class="logos-label">Sectores que atendemos</div>
+  <div class="logos-track">
+    <div class="logo-item">🦷 Odontología</div>
+    <div class="logo-item">🏥 Salud</div>
+    <div class="logo-item">💆 Estética</div>
+    <div class="logo-item">🍽️ Restaurantes</div>
+    <div class="logo-item">⚖️ Abogados</div>
+    <div class="logo-item">🏋️ Gimnasios</div>
+    <div class="logo-item">🏠 Inmobiliarias</div>
+    <div class="logo-item">📸 Fotógrafos</div>
+    <div class="logo-item">🎓 Educación</div>
+    <div class="logo-item">🛒 E-commerce</div>
   </div>
 </div>
 
-<!-- PROBLEMA -->
-<section class="problema">
+<!-- ANTES / DESPUÉS -->
+<section class="ba-section" id="comparacion">
+  <div class="container">
+    <div class="ba-header reveal">
+      <div class="section-label">Antes vs Después</div>
+      <h2 class="section-title">La diferencia es<br>inmediata y obvia</h2>
+      <p class="section-sub">Así luce una web típica vs. lo que entregamos. El mismo negocio, otra percepción, más clientes.</p>
+    </div>
+
+    <div class="ba-grid reveal">
+      <!-- BEFORE -->
+      <div class="ba-card">
+        <div class="ba-card-label before">✕ Antes — Web típica</div>
+        <div class="fake-browser">
+          <div class="fake-browser-bar">
+            <div class="dot-r"></div><div class="dot-y"></div><div class="dot-g"></div>
+            <div class="url-bar">clinica-ejemplo.com</div>
+          </div>
+          <div class="before-content">
+            <div class="before-header-bar">
+              <span class="before-nav-item">INICIO</span>
+              <span class="before-nav-item">SERVICIOS</span>
+              <span class="before-nav-item">NOSOTROS</span>
+              <span class="before-nav-item">CONTACTO</span>
+            </div>
+            <div class="before-hero-img"></div>
+            <div class="before-title-old">Bienvenidos a nuestra clínica dental</div>
+            <div class="before-text-lines">
+              <div class="text-line w-full"></div>
+              <div class="text-line w-75"></div>
+              <div class="text-line w-60"></div>
+            </div>
+            <div class="before-btn-old">Contáctenos</div>
+          </div>
+        </div>
+        <div class="before-issues">
+          <div class="issue-item"><span class="issue-icon">✕</span>Diseño de hace 10 años</div>
+          <div class="issue-item"><span class="issue-icon">✕</span>No funciona en celular</div>
+          <div class="issue-item"><span class="issue-icon">✕</span>Sin botón de WhatsApp</div>
+          <div class="issue-item"><span class="issue-icon">✕</span>No aparece en Google</div>
+          <div class="issue-item"><span class="issue-icon">✕</span>Genera desconfianza</div>
+        </div>
+      </div>
+
+      <!-- ARROW -->
+      <div class="ba-arrow">→</div>
+
+      <!-- AFTER -->
+      <div class="ba-card">
+        <div class="ba-card-label after">✓ Después — Web Pronto</div>
+        <div class="fake-browser">
+          <div class="fake-browser-bar">
+            <div class="dot-r"></div><div class="dot-y"></div><div class="dot-g"></div>
+            <div class="url-bar">tuclínica.com</div>
+          </div>
+          <div class="after-content">
+            <div class="after-hero-section">
+              <div class="after-badge-sm">✓ Abierto · Citas disponibles hoy</div>
+              <div class="after-title-new">Tu sonrisa perfecta<br>en manos de <span>expertos</span></div>
+              <div class="after-desc">Más de 12 años transformando sonrisas en Bogotá. Primera consulta sin costo.</div>
+              <div class="after-btn-new">Agendar cita →</div>
+            </div>
+            <div class="after-services">
+              <div class="after-service-card">
+                <div class="service-icon-sm">🦷</div>
+                <div class="service-name-sm">Ortodoncia</div>
+                <div class="service-desc-sm">Desde $450.000</div>
+              </div>
+              <div class="after-service-card">
+                <div class="service-icon-sm">✨</div>
+                <div class="service-name-sm">Blanqueamiento</div>
+                <div class="service-desc-sm">Desde $280.000</div>
+              </div>
+              <div class="after-service-card">
+                <div class="service-icon-sm">🔧</div>
+                <div class="service-name-sm">Implantes</div>
+                <div class="service-desc-sm">Desde $1.800.000</div>
+              </div>
+              <div class="after-service-card">
+                <div class="service-icon-sm">🩺</div>
+                <div class="service-name-sm">Cirugía Oral</div>
+                <div class="service-desc-sm">Desde $350.000</div>
+              </div>
+            </div>
+            <div class="after-wins">
+              <div class="win-item"><span class="win-icon">✓</span>WhatsApp integrado</div>
+              <div class="win-item"><span class="win-icon">✓</span>Reserva online</div>
+              <div class="win-item"><span class="win-icon">✓</span>Optimizada para Google</div>
+            </div>
+          </div>
+        </div>
+        <div class="before-issues" style="margin-top:12px">
+          <div class="win-item"><span class="win-icon">✓</span>Diseño moderno y profesional</div>
+          <div class="win-item"><span class="win-icon">✓</span>100% responsive en celular</div>
+          <div class="win-item"><span class="win-icon">✓</span>WhatsApp y agenda integrados</div>
+          <div class="win-item"><span class="win-icon">✓</span>SEO para aparecer en Google</div>
+          <div class="win-item"><span class="win-icon">✓</span>Genera confianza y más citas</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESO -->
+<section id="proceso">
   <div class="container">
     <div class="reveal">
-      <div class="section-label">⚡ El problema</div>
-      <h2 class="section-title">La diferencia entre<br/><span class="grad-text">perder o ganar clientes</span></h2>
-      <p class="section-sub">El 75% de los usuarios juzga la credibilidad de un negocio por su sitio web. Una mala página cuesta más de lo que crees.</p>
+      <div class="section-label">Cómo funciona</div>
+      <h2 class="section-title">De cero a publicada<br>en 48 horas</h2>
+      <p class="section-sub">Un proceso simple y claro. Sin reuniones interminables, sin burocracia. Solo resultados para tu negocio.</p>
     </div>
-
-    <div class="problema-grid reveal">
-      <div class="problema-col bad">
-        <div class="col-header">
-          <div class="col-icon">😓</div>
-          Sin Pronto
-        </div>
-        <ul class="problema-list">
-          <li>Página desactualizada que espanta a los clientes</li>
-          <li>No apareces en Google cuando te buscan</li>
-          <li>Difícil de usar en celular y carga lento</li>
-          <li>Sin botón de WhatsApp ni formulario de contacto</li>
-          <li>Competidores con mejor presencia se llevan tus clientes</li>
-          <li>Tardaste meses en hacerla y aun así no convierte</li>
-        </ul>
+    <div class="process-grid">
+      <div class="process-card reveal">
+        <div class="process-num">01</div>
+        <div class="process-icon">📞</div>
+        <div class="process-title">Llamada de 15 min</div>
+        <div class="process-desc">Cuéntanos sobre tu negocio, tus servicios y qué tipo de clientes quieres atraer. Sin tecnicismos.</div>
+        <span class="process-time">⏱ 15 minutos</span>
       </div>
-
-      <div class="problema-col good">
-        <div class="col-header">
-          <div class="col-icon">🚀</div>
-          Con Pronto
-        </div>
-        <ul class="problema-list">
-          <li>Diseño moderno y profesional que genera confianza</li>
-          <li>Optimizada para Google desde el primer día</li>
-          <li>Perfecta en celular, tablet y computador</li>
-          <li>Integración directa con WhatsApp y Calendly</li>
-          <li>Posicionada para atraer más clientes que la competencia</li>
-          <li>Lista en 48–72 horas, no en semanas</li>
-        </ul>
+      <div class="process-card reveal">
+        <div class="process-num">02</div>
+        <div class="process-icon">🎨</div>
+        <div class="process-title">Diseñamos tu web</div>
+        <div class="process-desc">Nuestro equipo con IA construye tu página con tu marca, colores, servicios y fotos reales.</div>
+        <span class="process-time">⏱ 24–48 horas</span>
+      </div>
+      <div class="process-card reveal">
+        <div class="process-num">03</div>
+        <div class="process-icon">✅</div>
+        <div class="process-title">Revisas y apruebas</div>
+        <div class="process-desc">Te mostramos el resultado. Si algo no te gusta, lo cambiamos hasta que quede perfecto.</div>
+        <span class="process-time">⏱ 1 ronda de cambios</span>
+      </div>
+      <div class="process-card reveal">
+        <div class="process-num">04</div>
+        <div class="process-icon">🚀</div>
+        <div class="process-title">La publicamos</div>
+        <div class="process-desc">Tu web queda activa con tu dominio, lista para recibir pacientes y aparecer en Google.</div>
+        <span class="process-time">⏱ El mismo día</span>
       </div>
     </div>
   </div>
 </section>
 
-<!-- HOW IT WORKS -->
-<section class="how" id="como-funciona">
+<!-- DEMOS -->
+<section class="demos-section" id="demos">
   <div class="container">
-    <div class="reveal" style="text-align:center">
-      <div class="section-label">📋 El proceso</div>
-      <h2 class="section-title">Así de simple</h2>
-      <p class="section-sub" style="margin: 0 auto">Sin tecnicismos, sin complicaciones. Tú te enfocas en tu negocio, nosotros en tu web.</p>
-    </div>
-
-    <div class="how-steps">
-      <div class="step reveal">
-        <div class="step-number">1</div>
-        <h3>Cuéntanos tu negocio</h3>
-        <p>Agendas una llamada de 15 minutos. Nos cuentas qué haces, a quién le vendes y qué quieres lograr con tu web.</p>
-      </div>
-      <div class="step reveal">
-        <div class="step-number">2</div>
-        <h3>Nosotros diseñamos y construimos</h3>
-        <p>Con IA y nuestro equipo creamos tu sitio en tiempo récord. Tú ves el avance en tiempo real y nos dices si cambiar algo.</p>
-      </div>
-      <div class="step reveal">
-        <div class="step-number">3</div>
-        <h3>Tu web empieza a trabajar</h3>
-        <p>La publicamos, la conectamos a WhatsApp y Google, y empiezas a recibir clientes. Nosotros nos encargamos de todo.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ANTES / DESPUÉS -->
-<section class="antesdespues" id="antes-despues">
-  <div class="container">
-    <div class="reveal" style="text-align:center">
-      <div class="section-label">🔄 Transformación real</div>
-      <h2 class="section-title">Antes vs <span class="grad-text">Después</span></h2>
-      <p class="section-sub" style="margin:0 auto">La misma clínica. La misma información. Una presencia completamente diferente.</p>
-    </div>
-
-    <div class="ad-wrapper reveal">
-      <!-- SLIDER CONTAINER -->
-      <div class="ad-slider" id="adSlider">
-        <div class="ad-side ad-before">
-          <div class="ad-label ad-label-before">ANTES</div>
-          <!-- Mockup del sitio original -->
-          <div class="before-mockup">
-            <div class="bm-nav">
-              <span class="bm-nav-logo">🦷 14-85 DENTAL SPA</span>
-              <div class="bm-nav-links">
-                <span>Inicio</span><span>Tratamientos</span><span>Nosotros</span><span>Contacto</span>
-              </div>
-            </div>
-            <div class="bm-hero">
-              <h1>Tratamientos Odontológicos Especializados</h1>
-              <p>Contamos con los mejores profesionales y tecnología de punta para cuidar tu salud bucal.</p>
-              <span class="bm-hero-btn">VER TRATAMIENTOS</span>
-            </div>
-            <div class="bm-body">
-              <div class="bm-title">NUESTROS SERVICIOS</div>
-              <div class="bm-services">
-                <div class="bm-service"><div class="bm-service-icon">🦷</div><h4>Cirugía Oral</h4><p>Extracciones y cirugías especializadas</p></div>
-                <div class="bm-service"><div class="bm-service-icon">✨</div><h4>Blanqueamiento</h4><p>Sonrisa blanca y luminosa</p></div>
-                <div class="bm-service"><div class="bm-service-icon">🔬</div><h4>Implantes</h4><p>Implantes dentales de calidad</p></div>
-              </div>
-              <div class="bm-info">
-                <div class="bm-text-block">
-                  <p>En 14-85 Dental Spa nos especializamos en brindar la mejor atención odontológica con equipos de última generación y un equipo de profesionales altamente calificados para atender todas tus necesidades dentales con el mayor cuidado y profesionalismo.</p>
-                </div>
-                <div class="bm-sidebar">
-                  <h4>📞 Contáctenos</h4>
-                  <p>Tel: (604) 555-1234<br/>Lun-Vie: 8am - 6pm<br/>Sábados: 9am - 1pm</p>
-                  <span class="bm-sidebar-btn">PEDIR CITA</span>
-                </div>
-              </div>
-            </div>
-            <div class="bm-footer">
-              <span>© 2018 14-85 Dental Spa. Todos los derechos reservados.</span>
-              <span>Medellín, Colombia</span>
-            </div>
-          </div>
-          <div class="ad-vignette"></div>
-        </div>
-        <div class="ad-side ad-after">
-          <div class="ad-label ad-label-after">DESPUÉS</div>
-          <iframe src="https://cesargomezs7.github.io/portafolio-web/cirugia-oral.html" scrolling="no" tabindex="-1" title="Después"></iframe>
-          <div class="ad-vignette"></div>
-        </div>
-        <div class="ad-divider" id="adDivider">
-          <div class="ad-handle">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M8 3L3 8l5 5M16 3l5 5-5 5"/><line x1="3" y1="8" x2="21" y2="8"/></svg>
-          </div>
-        </div>
-      </div>
-
-      <!-- PROBLEMS / SOLUTIONS -->
-      <div class="ad-cards">
-        <div class="ad-card ad-card-bad">
-          <div class="ad-card-header">
-            <span class="ad-dot ad-dot-red"></span>
-            <strong>Página original</strong>
-          </div>
-          <ul>
-            <li>Diseño del año 2015</li>
-            <li>No carga bien en celular</li>
-            <li>Sin llamadas a la acción claras</li>
-            <li>Texto difícil de leer</li>
-            <li>Sin estadísticas de credibilidad</li>
-          </ul>
-        </div>
-        <div class="ad-card ad-card-good">
-          <div class="ad-card-header">
-            <span class="ad-dot ad-dot-green"></span>
-            <strong>Con Pronto</strong>
-          </div>
-          <ul>
-            <li>Diseño moderno y profesional</li>
-            <li>Perfecta en móvil y desktop</li>
-            <li>CTAs claros: Agendar + WhatsApp</li>
-            <li>Tipografía legible y jerarquía visual</li>
-            <li>+5,000 pacientes · 15 años · 98% satisfacción</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- PORTFOLIO -->
-<section class="portfolio" id="portafolio">
-  <div class="container">
-    <div class="portfolio-header reveal">
+    <div class="demos-header reveal">
       <div>
-        <div class="section-label">🎨 Portafolio</div>
-        <h2 class="section-title">Trabajo real,<br/><span class="grad-text">resultados reales</span></h2>
+        <div class="section-label">Portafolio</div>
+        <h2 class="section-title">Ejemplos reales<br>que hemos creado</h2>
       </div>
-      <a href="#precios" class="btn btn-outline">Ver planes →</a>
+      <a href="https://calendly.com/cesargomezs711/30min" target="_blank" class="btn-primary">Ver mi demo gratis →</a>
     </div>
-
-    <div class="portfolio-grid">
-      <a href="https://cesargomezs7.github.io/portafolio-web/cirugia-oral.html" target="_blank" class="portfolio-card reveal">
-        <div class="portfolio-preview">
-          <iframe src="https://cesargomezs7.github.io/portafolio-web/cirugia-oral.html" scrolling="no" tabindex="-1"></iframe>
-          <div class="portfolio-overlay"></div>
-          <span class="portfolio-tag">🦷 Dental</span>
+    <div class="demos-grid">
+      <a href="cirugia-oral.html" target="_blank" class="demo-card reveal">
+        <div class="demo-preview demo-preview-dental">
+          <span class="demo-tag tag-dental">Odontología</span>
+          <div class="demo-mockup">
+            <div class="demo-mockup-bar">
+              <div class="dm-dot r"></div><div class="dm-dot y"></div><div class="dm-dot g"></div>
+            </div>
+            <div class="demo-mockup-content">
+              <div class="dm-line title dental"></div>
+              <div class="dm-line sub dental"></div>
+              <div style="height:8px"></div>
+              <div class="dm-line btn dental"></div>
+            </div>
+          </div>
         </div>
-        <div class="portfolio-info">
-          <h3>14-85 Dental Spa</h3>
-          <p>Página de cirugía oral con diseño premium, estadísticas de credibilidad y CTA de agendamiento.</p>
-          <div class="portfolio-arrow">
-            Ver demo completa
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        <div class="demo-info">
+          <div class="demo-title">Clínica Dental Premium</div>
+          <div class="demo-desc">Página de cirugía oral con diseño oscuro y elegante, enfocada en generar confianza y agendar citas.</div>
+          <div class="demo-footer">
+            <div class="demo-tech">
+              <span class="tech-badge">HTML</span>
+              <span class="tech-badge">CSS</span>
+              <span class="tech-badge">SEO</span>
+            </div>
+            <span class="demo-link">Ver demo →</span>
           </div>
         </div>
       </a>
 
-      <a href="https://cesargomezs7.github.io/portafolio-web/clinica-medica.html" target="_blank" class="portfolio-card reveal">
-        <div class="portfolio-preview">
-          <iframe src="https://cesargomezs7.github.io/portafolio-web/clinica-medica.html" scrolling="no" tabindex="-1"></iframe>
-          <div class="portfolio-overlay"></div>
-          <span class="portfolio-tag">🏥 Médico</span>
+      <a href="clinica-medica.html" target="_blank" class="demo-card reveal">
+        <div class="demo-preview demo-preview-medica">
+          <span class="demo-tag tag-medica">Medicina</span>
+          <div class="demo-mockup">
+            <div class="demo-mockup-bar">
+              <div class="dm-dot r"></div><div class="dm-dot y"></div><div class="dm-dot g"></div>
+            </div>
+            <div class="demo-mockup-content">
+              <div class="dm-line title medica"></div>
+              <div class="dm-line sub medica"></div>
+              <div style="height:8px"></div>
+              <div class="dm-line btn medica"></div>
+            </div>
+          </div>
         </div>
-        <div class="portfolio-info">
-          <h3>MediCare Centro Médico</h3>
-          <p>Clínica médica con sección de especialistas, servicios y sistema de citas integrado.</p>
-          <div class="portfolio-arrow">
-            Ver demo completa
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        <div class="demo-info">
+          <div class="demo-title">Centro Médico Integral</div>
+          <div class="demo-desc">Clínica de medicina general con múltiples especialidades, formulario de citas y sección de doctores.</div>
+          <div class="demo-footer">
+            <div class="demo-tech">
+              <span class="tech-badge">HTML</span>
+              <span class="tech-badge">CSS</span>
+              <span class="tech-badge">WhatsApp</span>
+            </div>
+            <span class="demo-link">Ver demo →</span>
           </div>
         </div>
       </a>
 
-      <a href="https://cesargomezs7.github.io/portafolio-web/restaurante.html" target="_blank" class="portfolio-card reveal">
-        <div class="portfolio-preview">
-          <iframe src="https://cesargomezs7.github.io/portafolio-web/restaurante.html" scrolling="no" tabindex="-1"></iframe>
-          <div class="portfolio-overlay"></div>
-          <span class="portfolio-tag">🍽️ Restaurante</span>
+      <a href="restaurante.html" target="_blank" class="demo-card reveal">
+        <div class="demo-preview demo-preview-resto">
+          <span class="demo-tag tag-resto">Restaurante</span>
+          <div class="demo-mockup">
+            <div class="demo-mockup-bar">
+              <div class="dm-dot r"></div><div class="dm-dot y"></div><div class="dm-dot g"></div>
+            </div>
+            <div class="demo-mockup-content">
+              <div class="dm-line title resto"></div>
+              <div class="dm-line sub resto"></div>
+              <div style="height:8px"></div>
+              <div class="dm-line btn resto"></div>
+            </div>
+          </div>
         </div>
-        <div class="portfolio-info">
-          <h3>La Fogata</h3>
-          <p>Restaurante con menú visual, galería apetitosa y reservas por WhatsApp integradas.</p>
-          <div class="portfolio-arrow">
-            Ver demo completa
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        <div class="demo-info">
+          <div class="demo-title">Restaurante Colombiano</div>
+          <div class="demo-desc">Landing page de restaurante con menú destacado, reservas online y sección de ubicación integrada.</div>
+          <div class="demo-footer">
+            <div class="demo-tech">
+              <span class="tech-badge">HTML</span>
+              <span class="tech-badge">CSS</span>
+              <span class="tech-badge">Maps</span>
+            </div>
+            <span class="demo-link">Ver demo →</span>
           </div>
         </div>
       </a>
@@ -1658,227 +1687,163 @@
 </section>
 
 <!-- PRICING -->
-<section class="pricing" id="precios">
+<section class="pricing-section" id="precios">
   <div class="container">
-    <div class="reveal" style="text-align:center">
-      <div class="section-label">💎 Precios</div>
-      <h2 class="section-title">Inversión clara,<br/><span class="grad-text">retorno garantizado</span></h2>
-      <p class="section-sub" style="margin: 0 auto">Un solo cliente nuevo ya paga el costo de tu web. Sin sorpresas, sin letra pequeña.</p>
+    <div class="reveal" style="text-align:center; max-width:600px; margin:0 auto 64px;">
+      <div class="section-label">Precios claros</div>
+      <h2 class="section-title">Sin sorpresas.<br>Sin letras pequeñas.</h2>
+      <p class="section-sub">Elige el plan ideal para tu negocio. Puedes empezar pequeño y crecer cuando veas los resultados.</p>
     </div>
+    <div class="pricing-grid reveal">
 
-    <div class="pricing-grid">
-      <!-- Starter -->
-      <div class="pricing-card reveal">
+      <!-- STARTER -->
+      <div class="pricing-card">
         <div class="pricing-name">Starter</div>
-        <div class="pricing-price">$350 <span>USD</span></div>
-        <div class="pricing-desc">Para negocios que quieren empezar rápido</div>
+        <div class="pricing-price"><sup>$</sup>350 <span style="font-size:1rem;color:var(--muted);font-weight:500">USD</span></div>
+        <div class="pricing-period">pago único</div>
+        <div class="pricing-delivery">⚡ Entrega en 48–72 horas</div>
         <div class="pricing-divider"></div>
         <ul class="pricing-features">
-          <li><span class="check">✓</span> 1 página profesional completa</li>
-          <li><span class="check">✓</span> Diseño responsivo (móvil + desktop)</li>
-          <li><span class="check">✓</span> Botón WhatsApp integrado</li>
-          <li><span class="check">✓</span> Formulario de contacto</li>
-          <li><span class="check">✓</span> Entrega en 48–72 horas</li>
-          <li><span class="check">✓</span> 1 revisión incluida</li>
+          <li class="highlight"><span class="check">✓</span>1 página de servicio completa</li>
+          <li><span class="check">✓</span>Diseño moderno y responsivo</li>
+          <li><span class="check">✓</span>Botón de WhatsApp directo</li>
+          <li><span class="check">✓</span>Formulario de contacto</li>
+          <li><span class="check">✓</span>Optimizado para celular</li>
+          <li><span class="check">✓</span>1 ronda de revisiones</li>
+          <li><span class="check">✓</span>Entrega del código fuente</li>
         </ul>
-        <a href="https://calendly.com/cesargomezs711/30min" target="_blank" class="pricing-cta secondary">Empezar →</a>
+        <a href="https://calendly.com/cesargomezs711/30min" target="_blank" class="pricing-cta outlined">Empezar →</a>
       </div>
 
-      <!-- Pro -->
-      <div class="pricing-card featured reveal">
-        <div class="pricing-badge">⭐ Más popular</div>
+      <!-- PRO -->
+      <div class="pricing-card featured">
+        <div class="pricing-popular">⭐ Más popular</div>
         <div class="pricing-name">Pro</div>
-        <div class="pricing-price">$900 <span>USD</span></div>
-        <div class="pricing-desc">Para negocios que quieren crecer en serio</div>
+        <div class="pricing-price"><sup>$</sup>900 <span style="font-size:1rem;color:var(--muted);font-weight:500">USD</span></div>
+        <div class="pricing-period">pago único</div>
+        <div class="pricing-delivery">⚡ Entrega en 5–7 días</div>
         <div class="pricing-divider"></div>
         <ul class="pricing-features">
-          <li><span class="check">✓</span> Sitio completo (5 páginas)</li>
-          <li><span class="check">✓</span> SEO básico configurado</li>
-          <li><span class="check">✓</span> Google Maps integrado</li>
-          <li><span class="check">✓</span> WhatsApp + Calendly</li>
-          <li><span class="check">✓</span> Galería de fotos/servicios</li>
-          <li><span class="check">✓</span> 1 mes de soporte</li>
-          <li><span class="check">✓</span> Entrega en 5–7 días</li>
-          <li><span class="check">✓</span> 3 revisiones incluidas</li>
+          <li class="highlight"><span class="check">✓</span>Sitio completo (5 páginas)</li>
+          <li class="highlight"><span class="check">✓</span>SEO básico configurado</li>
+          <li><span class="check">✓</span>Google Maps integrado</li>
+          <li><span class="check">✓</span>Sección de testimonios</li>
+          <li><span class="check">✓</span>Galería de fotos</li>
+          <li><span class="check">✓</span>1 mes de soporte incluido</li>
+          <li><span class="check">✓</span>Dominio + hosting 1 año</li>
+          <li><span class="check">✓</span>3 rondas de revisiones</li>
         </ul>
-        <a href="https://calendly.com/cesargomezs711/30min" target="_blank" class="pricing-cta primary">Quiero este plan →</a>
+        <a href="https://calendly.com/cesargomezs711/30min" target="_blank" class="pricing-cta filled">Quiero el Pro →</a>
       </div>
 
-      <!-- Premium -->
-      <div class="pricing-card reveal">
+      <!-- PREMIUM -->
+      <div class="pricing-card">
         <div class="pricing-name">Premium</div>
-        <div class="pricing-price">$2,200 <span>USD</span></div>
-        <div class="pricing-desc">Para líderes que quieren dominar su mercado</div>
+        <div class="pricing-price"><sup>$</sup>2,200 <span style="font-size:1rem;color:var(--muted);font-weight:500">USD</span></div>
+        <div class="pricing-period">pago único</div>
+        <div class="pricing-delivery">⚡ Entrega en 10–14 días</div>
         <div class="pricing-divider"></div>
         <ul class="pricing-features">
-          <li><span class="check">✓</span> Todo lo del plan Pro</li>
-          <li><span class="check">✓</span> Blog + landing pages</li>
-          <li><span class="check">✓</span> Chatbot con IA 24/7</li>
-          <li><span class="check">✓</span> Automatización de citas</li>
-          <li><span class="check">✓</span> SEO avanzado</li>
-          <li><span class="check">✓</span> Reporte mensual automático</li>
-          <li><span class="check">✓</span> 3 meses de soporte</li>
-          <li><span class="check">✓</span> Revisiones ilimitadas</li>
+          <li class="highlight"><span class="check">✓</span>Todo lo del plan Pro</li>
+          <li class="highlight"><span class="check">✓</span>Chatbot IA 24/7 en tu web</li>
+          <li><span class="check">✓</span>Blog con 5 artículos SEO</li>
+          <li><span class="check">✓</span>Automatización de reseñas</li>
+          <li><span class="check">✓</span>Reportes mensuales auto.</li>
+          <li><span class="check">✓</span>Agendamiento automático</li>
+          <li><span class="check">✓</span>3 meses de mantenimiento</li>
+          <li><span class="check">✓</span>Revisiones ilimitadas</li>
         </ul>
-        <a href="https://calendly.com/cesargomezs711/30min" target="_blank" class="pricing-cta secondary">Hablar con César →</a>
+        <a href="https://calendly.com/cesargomezs711/30min" target="_blank" class="pricing-cta outlined">Quiero Premium →</a>
       </div>
-    </div>
 
-    <p style="text-align:center; margin-top:2rem; font-size:.85rem; color:var(--muted)">
-      ¿Necesitas mantenimiento mensual? Planes desde <strong style="color:var(--muted2)">$80 USD/mes</strong> · Pagos en COP disponibles
+    </div>
+    <p style="text-align:center;margin-top:36px;font-size:.85rem;color:var(--muted)">
+      ¿No sabes cuál elegir? <a href="https://calendly.com/cesargomezs711/30min" target="_blank" style="color:var(--indigo-light);text-decoration:none;font-weight:600">Agenda una llamada gratis →</a> te recomendamos el ideal para tu negocio.
     </p>
   </div>
 </section>
 
-<!-- WHY -->
-<section class="why">
-  <div class="container">
-    <div class="reveal">
-      <div class="section-label">🏆 Por qué Pronto</div>
-      <h2 class="section-title">No somos otro<br/><span class="grad-text">diseñador web</span></h2>
-      <p class="section-sub">Usamos IA para entregar en horas lo que otros tardan semanas — sin sacrificar calidad.</p>
-    </div>
-
-    <div class="why-grid">
-      <div class="why-card reveal">
-        <div class="why-icon">⚡</div>
-        <h3>Velocidad sin precedentes</h3>
-        <p>Usamos inteligencia artificial para construir páginas de calidad premium en 48–72 horas. Mientras otros tardan semanas, tú ya estás generando clientes.</p>
-      </div>
-      <div class="why-card reveal">
-        <div class="why-icon">🎯</div>
-        <h3>Orientados a resultados</h3>
-        <p>No hacemos páginas bonitas que nadie visita. Cada elemento está diseñado para convertir visitantes en clientes reales para tu negocio.</p>
-      </div>
-      <div class="why-card reveal">
-        <div class="why-icon">🤖</div>
-        <h3>IA a tu favor</h3>
-        <p>Desde el copy hasta el diseño, usamos las mejores herramientas de IA para crear algo único para tu negocio — no plantillas genéricas de $50.</p>
-      </div>
-      <div class="why-card reveal">
-        <div class="why-icon">🇨🇴</div>
-        <h3>100% latinoamericano</h3>
-        <p>Entendemos cómo piensan tus clientes. Sabemos qué funciona en Colombia y LATAM. No necesitas explicarle a nadie cómo es tu mercado.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- TESTIMONIALS -->
-<section class="testimonials">
+<section class="testimonials-section" id="testimonios">
   <div class="container">
-    <div class="reveal" style="text-align:center">
-      <div class="section-label">💬 Testimonios</div>
-      <h2 class="section-title">Lo que dicen<br/><span class="grad-text">nuestros clientes</span></h2>
+    <div class="reveal" style="text-align:center;max-width:560px;margin:0 auto 16px;">
+      <div class="section-label">Testimonios</div>
+      <h2 class="section-title">Lo que dicen<br>nuestros clientes</h2>
     </div>
-
     <div class="testimonials-grid">
       <div class="testimonial-card reveal">
-        <div class="stars">★★★★★</div>
-        <p class="testimonial-text">"En menos de 3 días tuve una página que me hace ver como la clínica más profesional de la zona. Ya recibo consultas directamente por WhatsApp."</p>
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">"No creía que una página web pudiera hacer tanta diferencia. En el primer mes ya teníamos <strong>12 clientes nuevos</strong> que llegaron directamente desde Google. El diseño quedó increíble."</p>
         <div class="testimonial-author">
-          <div class="author-avatar">DR</div>
+          <div class="author-avatar av-1">DM</div>
           <div>
-            <div class="author-name">Dra. Rodríguez</div>
+            <div class="author-name">Dra. María Ospina</div>
             <div class="author-role">Odontóloga · Medellín</div>
           </div>
         </div>
+        <div class="result-badge">📈 +12 clientes el primer mes</div>
       </div>
 
       <div class="testimonial-card reveal">
-        <div class="stars">★★★★★</div>
-        <p class="testimonial-text">"Pensé que era caro pero el primer mes ya recuperé la inversión. Los clientes me dicen que nos encontraron en Google y que la página les dio mucha confianza."</p>
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">"Tenía una web horrible desde 2015. En 48 horas Pronto me entregó algo que me da pena mostrarle a mis colegas porque <strong>se ven muy mal en comparación</strong>. Excelente servicio."</p>
         <div class="testimonial-author">
-          <div class="author-avatar">CM</div>
+          <div class="author-avatar av-2">JR</div>
           <div>
-            <div class="author-name">Carlos M.</div>
+            <div class="author-name">Jorge Restrepo</div>
             <div class="author-role">Restaurante · Bogotá</div>
           </div>
         </div>
+        <div class="result-badge">⏱ Lista en 48 horas exactas</div>
       </div>
 
       <div class="testimonial-card reveal">
-        <div class="stars">★★★★★</div>
-        <p class="testimonial-text">"Lo mejor fue la velocidad. En 48 horas tenía mi web lista. Antes tenía una página horrible que no mostraba lo que realmente hacemos."</p>
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">"El chatbot IA del plan Premium fue la mejor inversión. <strong>Responde a los pacientes a las 2am</strong> cuando nosotros dormimos y agenda las citas solo. Increíble."</p>
         <div class="testimonial-author">
-          <div class="author-avatar">LP</div>
+          <div class="author-avatar av-3">AC</div>
           <div>
-            <div class="author-name">Dra. López</div>
-            <div class="author-role">Centro Médico · Cali</div>
+            <div class="author-name">Ana Cardona</div>
+            <div class="author-role">Clínica Estética · Cali</div>
           </div>
         </div>
+        <div class="result-badge">🤖 Chatbot agenda 24/7</div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- FAQ -->
-<section class="faq" id="faq">
+<section id="faq">
   <div class="container">
-    <div class="reveal">
-      <div class="section-label">❓ Preguntas frecuentes</div>
-      <h2 class="section-title">Todo lo que<br/><span class="grad-text">necesitas saber</span></h2>
+    <div class="reveal" style="text-align:center;max-width:560px;margin:0 auto;">
+      <div class="section-label">Preguntas frecuentes</div>
+      <h2 class="section-title">Todo lo que<br>necesitas saber</h2>
     </div>
-
-    <div class="faq-list reveal">
+    <div class="faq-grid reveal">
       <div class="faq-item">
-        <div class="faq-question" onclick="toggleFaq(this)">
-          ¿Realmente entregan en 48 horas?
-          <span class="faq-toggle">+</span>
-        </div>
-        <div class="faq-answer">
-          Sí. El plan Starter se entrega en 48–72 horas desde que aprobamos el proyecto. El plan Pro tarda 5–7 días porque incluye más páginas y revisiones. Todo depende de qué tan rápido nos envíes tu información (logo, textos, fotos).
-        </div>
+        <div class="faq-q">¿En verdad entregan en 48 horas?</div>
+        <div class="faq-a">Sí. Una vez confirmamos los detalles y el pago, el plan Starter se entrega en 48–72 horas. El plan Pro en 5–7 días y el Premium en 10–14 días.</div>
       </div>
-
       <div class="faq-item">
-        <div class="faq-question" onclick="toggleFaq(this)">
-          ¿Necesito saber de tecnología para manejar mi web?
-          <span class="faq-toggle">+</span>
-        </div>
-        <div class="faq-answer">
-          No. Nosotros nos encargamos de todo: diseño, publicación, configuración de WhatsApp y Google. Tú solo recibes los resultados. Si quieres cambiar algo en el futuro, nos escribes y lo hacemos.
-        </div>
+        <div class="faq-q">¿Qué necesito para empezar?</div>
+        <div class="faq-a">Solo necesitas tu logo (o lo creamos), fotos de tu negocio o equipo, y contarnos tus servicios. Con eso construimos todo.</div>
       </div>
-
       <div class="faq-item">
-        <div class="faq-question" onclick="toggleFaq(this)">
-          ¿Puedo pagar en pesos colombianos?
-          <span class="faq-toggle">+</span>
-        </div>
-        <div class="faq-answer">
-          Sí. Aceptamos pagos en COP mediante Nequi, Bancolombia y transferencia bancaria. El precio en pesos se calcula con la TRM del día del pago. También aceptamos USD por Stripe para clientes internacionales.
-        </div>
+        <div class="faq-q">¿Puedo ver un demo antes de pagar?</div>
+        <div class="faq-a">Absolutamente. Agenda una llamada y te mostramos un demo personalizado con el nombre de tu negocio — completamente gratis y sin compromiso.</div>
       </div>
-
       <div class="faq-item">
-        <div class="faq-question" onclick="toggleFaq(this)">
-          ¿Qué pasa si no me gusta cómo quedó?
-          <span class="faq-toggle">+</span>
-        </div>
-        <div class="faq-answer">
-          Cada plan incluye rondas de revisión. En Starter tienes 1 revisión completa, en Pro 3 y en Premium son ilimitadas. Trabajamos hasta que quedes 100% satisfecho con el resultado.
-        </div>
+        <div class="faq-q">¿Qué pasa si no me gusta el diseño?</div>
+        <div class="faq-a">Hacemos todos los cambios necesarios hasta que quedes satisfecho. El plan Pro incluye 3 rondas de revisiones y el Premium es ilimitado.</div>
       </div>
-
       <div class="faq-item">
-        <div class="faq-question" onclick="toggleFaq(this)">
-          ¿Mi web va a aparecer en Google?
-          <span class="faq-toggle">+</span>
-        </div>
-        <div class="faq-answer">
-          Desde el plan Pro incluimos configuración básica de SEO: títulos, descripciones, velocidad de carga y sitemap. El plan Premium incluye SEO avanzado. Aparecer en los primeros resultados toma tiempo (1–3 meses), pero tu web estará perfectamente preparada para lograrlo.
-        </div>
+        <div class="faq-q">¿Puedo editar la web después yo solo?</div>
+        <div class="faq-a">Sí. Te entregamos el código fuente y te enseñamos a hacer cambios básicos. Si prefieres que lo hagamos nosotros, tenemos planes de mantenimiento.</div>
       </div>
-
       <div class="faq-item">
-        <div class="faq-question" onclick="toggleFaq(this)">
-          ¿Cuánto cuesta el hosting (mantener la web online)?
-          <span class="faq-toggle">+</span>
-        </div>
-        <div class="faq-answer">
-          El hosting no está incluido pero te ayudamos a configurarlo. Opciones económicas desde $3–10 USD/mes. Si prefieres, puedes contratar nuestro plan de mantenimiento mensual ($80–150 USD/mes) que incluye hosting, actualizaciones y soporte.
-        </div>
+        <div class="faq-q">¿Cómo funciona el chatbot IA del Premium?</div>
+        <div class="faq-a">Es un asistente inteligente que aparece en tu web, responde preguntas de los pacientes las 24 horas y agenda citas directamente en tu calendario.</div>
       </div>
     </div>
   </div>
@@ -1886,55 +1851,46 @@
 
 <!-- CTA FINAL -->
 <section class="cta-section">
-  <div class="container">
-    <div class="cta-box reveal">
-      <h2>¿Listo para tener<br/><span class="grad-text">la mejor web de tu sector?</span></h2>
-      <p>Agenda una llamada gratuita de 15 minutos. Te mostramos exactamente cómo quedaría tu página antes de comprometerte con nada.</p>
-      <div class="cta-buttons">
-        <a href="https://calendly.com/cesargomezs711/30min" target="_blank" class="btn-hero-primary">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
-          Agendar llamada gratis
-        </a>
-        <a href="https://wa.me/573001234567" target="_blank" class="btn-wa">
-          <svg viewBox="0 0 24 24" width="18" height="18"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-          Escribir por WhatsApp
-        </a>
-      </div>
+  <div class="cta-glow"></div>
+  <div class="cta-content">
+    <div class="hero-badge" style="margin-bottom:28px">
+      <span class="hero-badge-dot"></span>
+      Demo gratuito · Sin compromiso
+    </div>
+    <h2>¿Listo para tener<br>una web que <span style="background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent">trabaje por ti</span>?</h2>
+    <p>Agenda una llamada de 15 minutos. Te mostramos en vivo cómo quedaría la web de tu negocio — gratis, sin compromiso.</p>
+    <div class="cta-actions">
+      <a href="https://calendly.com/cesargomezs711/30min" target="_blank" class="btn-primary" style="font-size:1.05rem;padding:18px 40px">
+        Agendar llamada gratis →
+      </a>
+      <a href="https://wa.me/573000000000" target="_blank" class="btn-secondary">
+        💬 Escribir por WhatsApp
+      </a>
+    </div>
+    <div class="cta-note">
+      <span>🔒</span> Tu información es privada · Respuesta en menos de 24h
     </div>
   </div>
 </section>
 
 <!-- FOOTER -->
 <footer>
-  <div class="container">
-    <div class="footer-inner">
-      <div class="footer-logo">Pronto</div>
-      <ul class="footer-links">
-        <li><a href="#como-funciona">Cómo funciona</a></li>
-        <li><a href="#portafolio">Portafolio</a></li>
-        <li><a href="#precios">Precios</a></li>
-        <li><a href="https://calendly.com/cesargomezs711/30min" target="_blank">Agendar llamada</a></li>
-      </ul>
-      <p class="footer-copy">© 2025 Pronto · Hecho con IA en Colombia 🇨🇴</p>
-    </div>
-  </div>
+  <div class="footer-logo">Pronto</div>
+  <ul class="footer-links">
+    <li><a href="#proceso">Proceso</a></li>
+    <li><a href="#demos">Demos</a></li>
+    <li><a href="#precios">Precios</a></li>
+    <li><a href="#testimonios">Clientes</a></li>
+  </ul>
+  <div class="footer-copy">© 2026 Pronto · Diseño web con IA</div>
 </footer>
 
 <!-- WHATSAPP FLOAT -->
-<a href="https://wa.me/573001234567" target="_blank" class="wa-float" title="Escribir por WhatsApp">
-  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-</a>
+<a href="https://wa.me/573000000000" target="_blank" class="wa-float" title="Escríbenos por WhatsApp">💬</a>
 
 <script>
-  // FAQ Toggle
-  function toggleFaq(el) {
-    const item = el.parentElement;
-    const isOpen = item.classList.contains('open');
-    document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
-    if (!isOpen) item.classList.add('open');
-  }
-
-  // Scroll reveal
+  // Reveal on scroll
+  const reveals = document.querySelectorAll('.reveal');
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry, i) => {
       if (entry.isIntersecting) {
@@ -1943,69 +1899,7 @@
       }
     });
   }, { threshold: 0.1 });
-
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-  // Counter animation
-  function animateCounter(el, target, suffix = '') {
-    let start = 0;
-    const duration = 1500;
-    const step = (timestamp) => {
-      if (!start) start = timestamp;
-      const progress = Math.min((timestamp - start) / duration, 1);
-      const value = Math.floor(progress * target);
-      el.textContent = value + suffix;
-      if (progress < 1) requestAnimationFrame(step);
-    };
-    requestAnimationFrame(step);
-  }
-
-  // Antes/Después slider
-  const slider = document.getElementById('adSlider');
-  const divider = document.getElementById('adDivider');
-  const before = slider?.querySelector('.ad-before');
-  const after = slider?.querySelector('.ad-after');
-
-  if (slider && divider) {
-    let dragging = false;
-
-    function setPosition(x) {
-      const rect = slider.getBoundingClientRect();
-      let pct = ((x - rect.left) / rect.width) * 100;
-      pct = Math.max(10, Math.min(90, pct));
-      before.style.width = pct + '%';
-      after.style.width = (100 - pct) + '%';
-      divider.style.left = pct + '%';
-    }
-
-    divider.addEventListener('mousedown', e => { dragging = true; e.preventDefault(); });
-    divider.addEventListener('touchstart', e => { dragging = true; }, { passive: true });
-    window.addEventListener('mousemove', e => { if (dragging) setPosition(e.clientX); });
-    window.addEventListener('touchmove', e => { if (dragging) setPosition(e.touches[0].clientX); }, { passive: true });
-    window.addEventListener('mouseup', () => dragging = false);
-    window.addEventListener('touchend', () => dragging = false);
-    slider.addEventListener('click', e => setPosition(e.clientX));
-
-    // Auto-animate on load
-    setTimeout(() => {
-      let pct = 50, dir = -1;
-      const intro = setInterval(() => {
-        pct += dir * 0.5;
-        if (pct <= 25 || pct >= 50) dir *= -1;
-        if (pct <= 25) { clearInterval(intro); return; }
-        setPosition(slider.getBoundingClientRect().left + (slider.offsetWidth * pct / 100));
-      }, 16);
-    }, 1200);
-  }
-
-  // Nav scroll effect
-  window.addEventListener('scroll', () => {
-    const nav = document.querySelector('nav');
-    nav.style.background = window.scrollY > 50
-      ? 'rgba(4,4,15,.95)'
-      : 'rgba(4,4,15,.7)';
-  });
+  reveals.forEach(el => observer.observe(el));
 </script>
-
 </body>
 </html>
