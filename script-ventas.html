@@ -1,0 +1,1190 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Pronto — Script de Ventas</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0f1117;
+    --surface: #1a1d27;
+    --surface2: #22263a;
+    --border: #2e3348;
+    --primary: #198882;
+    --primary-light: #1fb5ad;
+    --accent: #f59e0b;
+    --green: #22c55e;
+    --red: #ef4444;
+    --blue: #3b82f6;
+    --purple: #a855f7;
+    --text: #e2e8f0;
+    --text-muted: #8892a4;
+    --text-dim: #4b5568;
+    --radius: 10px;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    background: linear-gradient(135deg, #0d3d3a, #198882);
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.5);
+  }
+  .header-left { display: flex; align-items: center; gap: 12px; }
+  .logo { font-size: 20px; font-weight: 900; color: white; letter-spacing: -0.5px; }
+  .logo span { opacity: 0.7; font-weight: 400; font-size: 13px; margin-left: 6px; }
+  .quick-pills { display: flex; gap: 8px; flex-wrap: wrap; }
+  .pill {
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .pill.green { background: rgba(34,197,94,0.2); border-color: rgba(34,197,94,0.4); }
+  .pill.amber { background: rgba(245,158,11,0.2); border-color: rgba(245,158,11,0.4); }
+
+  /* ── TABS ── */
+  .tabs-wrapper {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 0 20px;
+    position: sticky;
+    top: 57px;
+    z-index: 99;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .tabs-wrapper::-webkit-scrollbar { display: none; }
+  .tabs {
+    display: flex;
+    gap: 0;
+    min-width: max-content;
+  }
+  .tab {
+    padding: 14px 22px;
+    cursor: pointer;
+    color: var(--text-muted);
+    font-weight: 600;
+    font-size: 13px;
+    border-bottom: 3px solid transparent;
+    transition: all 0.2s;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    user-select: none;
+  }
+  .tab:hover { color: var(--text); }
+  .tab.active { color: var(--primary-light); border-bottom-color: var(--primary-light); }
+  .tab-icon { font-size: 16px; }
+  .tab-badge {
+    background: var(--primary);
+    color: white;
+    font-size: 10px;
+    padding: 1px 6px;
+    border-radius: 10px;
+    font-weight: 700;
+  }
+
+  /* ── CONTENT ── */
+  .content { display: none; padding: 20px; max-width: 1400px; margin: 0 auto; }
+  .content.active { display: block; }
+
+  /* ── GRID ── */
+  .grid { display: grid; gap: 16px; }
+  .grid-2 { grid-template-columns: repeat(2, 1fr); }
+  .grid-3 { grid-template-columns: repeat(3, 1fr); }
+  @media (max-width: 900px) {
+    .grid-2, .grid-3 { grid-template-columns: 1fr; }
+  }
+
+  /* ── SECTION TITLE ── */
+  .section-label {
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-bottom: 12px;
+    margin-top: 4px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* ── MESSAGE CARD ── */
+  .msg-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .msg-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 14px;
+    background: var(--surface2);
+    border-bottom: 1px solid var(--border);
+  }
+  .msg-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .msg-label.a { color: var(--green); }
+  .msg-label.b { color: var(--blue); }
+  .msg-label.c { color: var(--purple); }
+  .msg-label.tip { color: var(--accent); }
+  .msg-label.warning { color: var(--red); }
+
+  .copy-btn {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 4px 12px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+    white-space: nowrap;
+  }
+  .copy-btn:hover { background: var(--primary-light); transform: scale(1.05); }
+  .copy-btn.copied { background: var(--green); }
+
+  .msg-body {
+    padding: 14px;
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--text);
+    white-space: pre-wrap;
+    font-family: inherit;
+  }
+  .msg-body .placeholder {
+    background: rgba(245,158,11,0.2);
+    color: var(--accent);
+    padding: 1px 5px;
+    border-radius: 4px;
+    font-weight: 600;
+  }
+
+  /* ── TIP BOX ── */
+  .tip-box {
+    background: rgba(245,158,11,0.07);
+    border: 1px solid rgba(245,158,11,0.25);
+    border-radius: var(--radius);
+    padding: 12px 16px;
+    font-size: 13px;
+    color: #fbbf24;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+  .tip-box .tip-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+  .tip-box.red { background: rgba(239,68,68,0.07); border-color: rgba(239,68,68,0.25); color: #f87171; }
+  .tip-box.green { background: rgba(34,197,94,0.07); border-color: rgba(34,197,94,0.25); color: #4ade80; }
+  .tip-box.blue { background: rgba(59,130,246,0.07); border-color: rgba(59,130,246,0.25); color: #93c5fd; }
+
+  /* ── STEP CARD (Llamada) ── */
+  .step-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .step-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    background: var(--surface2);
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    user-select: none;
+  }
+  .step-header:hover { background: #272b40; }
+  .step-num {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: white;
+    font-weight: 800;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .step-title { font-weight: 700; font-size: 14px; flex: 1; }
+  .step-time {
+    font-size: 11px;
+    color: var(--text-muted);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 2px 8px;
+    border-radius: 6px;
+    white-space: nowrap;
+  }
+  .step-chevron { color: var(--text-muted); transition: transform 0.2s; }
+  .step-body { padding: 16px; display: none; }
+  .step-body.open { display: block; }
+
+  /* ── SCRIPT LINE ── */
+  .script-line { margin-bottom: 10px; }
+  .script-you {
+    background: rgba(25,136,130,0.15);
+    border-left: 3px solid var(--primary);
+    padding: 8px 12px;
+    border-radius: 0 6px 6px 0;
+    color: #a7f3d0;
+    font-size: 13.5px;
+    line-height: 1.6;
+    font-style: italic;
+  }
+  .script-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-bottom: 4px;
+  }
+  .script-tip {
+    font-size: 12px;
+    color: var(--accent);
+    margin-top: 6px;
+    padding-left: 4px;
+  }
+
+  /* ── PRICE TABLE ── */
+  .price-table { width: 100%; border-collapse: collapse; }
+  .price-table th {
+    background: var(--surface2);
+    padding: 10px 14px;
+    text-align: left;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--text-muted);
+    border-bottom: 1px solid var(--border);
+  }
+  .price-table td {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+  }
+  .price-table tr:last-child td { border-bottom: none; }
+  .price-table tr:hover td { background: var(--surface2); }
+  .badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+  .badge.star { background: rgba(245,158,11,0.2); color: var(--accent); }
+  .badge.rec { background: rgba(34,197,94,0.2); color: var(--green); }
+
+  /* ── HORA BADGE ── */
+  .hora-grid { display: flex; gap: 10px; flex-wrap: wrap; }
+  .hora-item {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 16px;
+    text-align: center;
+    flex: 1;
+    min-width: 140px;
+  }
+  .hora-item.good { border-color: rgba(34,197,94,0.4); }
+  .hora-item.bad { border-color: rgba(239,68,68,0.3); }
+  .hora-time { font-size: 16px; font-weight: 800; color: var(--text); }
+  .hora-label { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+  .hora-icon { font-size: 18px; margin-bottom: 4px; }
+
+  /* ── SEGUIMIENTO TIMELINE ── */
+  .timeline { position: relative; padding-left: 20px; }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 5px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--border);
+  }
+  .timeline-item {
+    position: relative;
+    margin-bottom: 16px;
+  }
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -17px;
+    top: 6px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--primary);
+    border: 2px solid var(--bg);
+  }
+  .timeline-day {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--primary-light);
+    margin-bottom: 6px;
+  }
+
+  /* ── PAGO SECTION ── */
+  .pago-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px;
+  }
+  .pago-method {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .pago-method:last-of-type { border-bottom: none; }
+  .pago-icon { font-size: 22px; }
+  .pago-name { font-weight: 700; font-size: 14px; }
+  .pago-num { font-size: 13px; color: var(--primary-light); font-family: monospace; font-weight: 600; }
+  .pago-owner { font-size: 12px; color: var(--text-muted); }
+
+  /* ── VARIANT TOGGLE ── */
+  .variant-tabs { display: flex; gap: 6px; margin-bottom: 12px; }
+  .variant-btn {
+    padding: 5px 14px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text-muted);
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .variant-btn.active-a { background: rgba(34,197,94,0.15); border-color: var(--green); color: var(--green); }
+  .variant-btn.active-b { background: rgba(59,130,246,0.15); border-color: var(--blue); color: var(--blue); }
+
+  /* ── COPY NOTIFICATION ── */
+  .copy-notif {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%) translateY(60px);
+    background: var(--green);
+    color: white;
+    padding: 10px 24px;
+    border-radius: 30px;
+    font-weight: 700;
+    font-size: 14px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+    transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1);
+    z-index: 999;
+    pointer-events: none;
+  }
+  .copy-notif.show { transform: translateX(-50%) translateY(0); }
+
+  /* ── SCROLLBAR ── */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+</style>
+</head>
+<body>
+
+<!-- COPY NOTIFICATION -->
+<div class="copy-notif" id="copyNotif">✓ Copiado al portapapeles</div>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-left">
+    <div class="logo">Pronto <span>Script de Ventas</span></div>
+    <div class="quick-pills">
+      <div class="pill green">✅ Mar-Jue 9–11 AM</div>
+      <div class="pill amber">📅 calendly.com/cesargomezs711/30min</div>
+      <div class="pill">📱 Nequi: 312 637 9735</div>
+    </div>
+  </div>
+</div>
+
+<!-- TABS -->
+<div class="tabs-wrapper">
+  <div class="tabs">
+    <div class="tab active" onclick="showTab('bot')">
+      <span class="tab-icon">🤖</span> Bot
+    </div>
+    <div class="tab" onclick="showTab('recepcionista')">
+      <span class="tab-icon">👩‍💼</span> Recepcionista
+    </div>
+    <div class="tab" onclick="showTab('dueno')">
+      <span class="tab-icon">👔</span> Dueño / Encargado
+    </div>
+    <div class="tab" onclick="showTab('llamada')">
+      <span class="tab-icon">📞</span> Llamada <span class="tab-badge">30 min</span>
+    </div>
+    <div class="tab" onclick="showTab('seguimiento')">
+      <span class="tab-icon">🔁</span> Seguimiento
+    </div>
+    <div class="tab" onclick="showTab('pagos')">
+      <span class="tab-icon">💳</span> Pagos y Cierre
+    </div>
+    <div class="tab" onclick="showTab('precios')">
+      <span class="tab-icon">💰</span> Precios
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════ -->
+<!-- TAB: BOT                           -->
+<!-- ═══════════════════════════════════ -->
+<div class="content active" id="tab-bot">
+
+  <div class="tip-box" style="margin-bottom: 20px;">
+    <div class="tip-icon">⚠️</div>
+    <div><strong>Situación:</strong> Mandaste un mensaje y te respondió un bot automático de WhatsApp. NUNCA mandes el mensaje de ventas al bot. Primero activa al humano.</div>
+  </div>
+
+  <div class="section-label">¿Qué dices para activar al humano?</div>
+  <div class="grid grid-2">
+
+    <div class="msg-card">
+      <div class="msg-card-header">
+        <span class="msg-label a">▲ Variante A — Más simple</span>
+        <button class="copy-btn" onclick="copyMsg(this, 'bot-a')">Copiar</button>
+      </div>
+      <div class="msg-body" id="bot-a">Hola! quisiera hablar con alguien del equipo, me pueden ayudar?</div>
+    </div>
+
+    <div class="msg-card">
+      <div class="msg-card-header">
+        <span class="msg-label b">▲ Variante B — Con más contexto</span>
+        <button class="copy-btn" onclick="copyMsg(this, 'bot-b')">Copiar</button>
+      </div>
+      <div class="msg-body" id="bot-b">Hola! soy César, tengo algo que quiero mostrarle al equipo de <span class="placeholder">[Negocio]</span> — me pueden comunicar con alguien?</div>
+    </div>
+
+  </div>
+
+  <div class="tip-box green" style="margin-top: 16px;">
+    <div class="tip-icon">✅</div>
+    <div>Cuando responda el humano, <strong>ve directo al tab de Recepcionista.</strong> No vendas nada todavía.</div>
+  </div>
+
+</div>
+
+
+<!-- ═══════════════════════════════════ -->
+<!-- TAB: RECEPCIONISTA                 -->
+<!-- ═══════════════════════════════════ -->
+<div class="content" id="tab-recepcionista">
+
+  <div class="tip-box" style="margin-bottom: 20px;">
+    <div class="tip-icon">💡</div>
+    <div><strong>Objetivo:</strong> Que te pase con el dueño o encargado. NO vendas nada aquí. La recepcionista no toma decisiones — solo despierta curiosidad para que transfieran.</div>
+  </div>
+
+  <div class="section-label">Primer mensaje a la recepcionista</div>
+  <div class="grid grid-2">
+
+    <div class="msg-card">
+      <div class="msg-card-header">
+        <span class="msg-label a">▲ Variante A — Directo</span>
+        <button class="copy-btn" onclick="copyMsg(this, 'recep-1a')">Copiar</button>
+      </div>
+      <div class="msg-body" id="recep-1a">Hola! buenos días. Me puede comunicar con el/la dueño/a o la persona encargada de la imagen del negocio? tengo algo que quiero mostrarle sobre <span class="placeholder">[Nombre del negocio]</span> — es rápido y creo que le va a interesar</div>
+    </div>
+
+    <div class="msg-card">
+      <div class="msg-card-header">
+        <span class="msg-label b">▲ Variante B — Más casual</span>
+        <button class="copy-btn" onclick="copyMsg(this, 'recep-1b')">Copiar</button>
+      </div>
+      <div class="msg-body" id="recep-1b">Buenas! me podría ayudar a contactar a quien maneja la parte digital o de imagen del negocio? tengo algo concreto para mostrarle, tarda 2 minutos verlo</div>
+    </div>
+
+  </div>
+
+  <div class="section-label" style="margin-top: 20px;">Si pregunta "¿de qué se trata?"</div>
+  <div class="grid grid-2">
+
+    <div class="msg-card">
+      <div class="msg-card-header">
+        <span class="msg-label a">▲ Variante A</span>
+        <button class="copy-btn" onclick="copyMsg(this, 'recep-2a')">Copiar</button>
+      </div>
+      <div class="msg-body" id="recep-2a">Hice un ejemplo de cómo podría verse la web de <span class="placeholder">[negocio]</span> mejorada. Prefiero mostrárselo directamente a quien toma decisiones porque solo tarda 2 minutos verlo. Es algo visual, se entiende mejor así</div>
+    </div>
+
+    <div class="msg-card">
+      <div class="msg-card-header">
+        <span class="msg-label b">▲ Variante B — Más corto</span>
+        <button class="copy-btn" onclick="copyMsg(this, 'recep-2b')">Copiar</button>
+      </div>
+      <div class="msg-body" id="recep-2b">Es algo que preparé específicamente para su negocio — es visual, se lo muestro en 2 min. Por eso prefiero que lo vea quien decide directamente</div>
+    </div>
+
+  </div>
+
+  <div class="section-label" style="margin-top: 20px;">Si dice que el dueño no está / está ocupado</div>
+  <div class="grid grid-2">
+
+    <div class="msg-card">
+      <div class="msg-card-header">
+        <span class="msg-label a">▲ Respuesta</span>
+        <button class="copy-btn" onclick="copyMsg(this, 'recep-3a')">Copiar</button>
+      </div>
+      <div class="msg-body" id="recep-3a">No hay problema! ¿A qué hora suele estar disponible? así lo busco en ese momento</div>
+    </div>
+
+    <div class="msg-card">
+      <div class="msg-card-header">
+        <span class="msg-label b">▲ Si prefiere dejar mensaje</span>
+        <button class="copy-btn" onclick="copyMsg(this, 'recep-3b')">Copiar</button>
+      </div>
+      <div class="msg-body" id="recep-3b">Listo, sin problema. ¿Le puede decir que le escribió César de Pronto y que tengo algo preparado para mostrarle sobre su negocio? Le agradezco 🙏</div>
+    </div>
+
+  </div>
+
+  <div class="tip-box red" style="margin-top: 16px;">
+    <div class="tip-icon">🚫</div>
+    <div>Nunca presiones ni seas insistente con la recepcionista. Esa persona puede bloquearte antes de que llegues al dueño.</div>
+  </div>
+
+</div>
+
+
+<!-- ═══════════════════════════════════ -->
+<!-- TAB: DUEÑO / ENCARGADO            -->
+<!-- ═══════════════════════════════════ -->
+<div class="content" id="tab-dueno">
+
+  <div class="tip-box" style="margin-bottom: 20px;">
+    <div class="tip-icon">🎯</div>
+    <div><strong>Objetivo:</strong> Que agenden una llamada de 20 min contigo. El demo personalizado es tu arma más fuerte — mandarlo cambia todo.</div>
+  </div>
+
+  <div class="section-label">Primer mensaje al dueño — CON demo personalizado</div>
+  <div class="grid grid-2">
+
+    <div class="msg-card">
+      <div class="msg-card-header">
+        <span class="msg-label a">▲ Variante A — Con demo</span>
+        <button class="copy-btn" onclick="copyMsg(this, 'dueno-1a')">Copiar</button>
+      </div>
+      <div class="msg-body" id="dueno-1a">Hola <span class="placeholder">[Nombre]</span>! le preparé este ejemplo de cómo podría verse la web de <span class="placeholder">[negocio]</span> con una imagen más profesional 👇
+
+<span class="placeholder">[link del demo]</span>
+
+Es su mismo negocio pero mejorado — tardé un rato en hacerlo personalizado para que pudiera verlo concreto. Si le interesa, le explico todo en 20 minutos. ¿Cuándo tiene un espacio esta semana?</div>
+    </div>
+
+    <div class="msg-card">
+      <div class="msg-card-header">
+        <span class="msg-label b">▲ Variante B — Más corto</span>
+        <button class="copy-btn" onclick="copyMsg(this, 'dueno-1b')">Copiar</button>
+      </div>
+      <div class="msg-body" id="dueno-1b">Hola <span class="placeholder">[Nombre]</span>! soy César. Hice esto para usted 👇
+
+<span class="placeholder">[link del demo]</span>
+
+Así podría verse la web de <span class="placeholder">[negocio]</span>. Le toma 2 min verlo. Si le gusta algo, me cuenta y hablamos</div>
+    </div>
+
+  </div>
+
+  <div class="section-label" style="margin-top: 20px;">Si pregunta "¿cuánto vale?"</div>
+  <div class="grid grid-2">
+
+    <div class="msg-card">
+      <div class="msg-card-header">
+        <span class="msg-label a">▲ Variante A</span>
+        <button class="copy-btn" onclick="copyMsg(this, 'dueno-precio-a')">Copiar</button>
+      </div>
+      <div class="msg-body" id="dueno-precio-a">Depende de lo que necesite — hay opciones desde $350 USD. Pero mejor se lo explico en 10 minutos y ve si le sirve. ¿Agendamos una llamada rápida?</div>
+    </div>
+
+    <div class="msg-card">
+      <div class="msg-card-header">
+        <span class="msg-label b">▲ Variante B — Con rango</span>
+        <button class="copy-btn" onclick="copyMsg(this, 'dueno-precio-b')">Copiar</button>
+      </div>
+      <div class="msg-body" id="dueno-precio-b">Los precios van de $350 a $900 USD según lo que necesite. Pero para recomendarle el correcto necesito entender mejor su caso — ¿le parece si hablamos 20 min?</div>
+    </div>
+
+  </div>
+
+  <div class="section-label" style="margin-top: 20px;">Si dice "sí me interesa / cuéntame más"</div>
+  <div class="grid grid-2">
+
+    <div class="msg-card">
+      <div class="msg-card-header">
+        <span class="msg-label a">▲ Respuesta</span>
+        <button class="copy-btn" onclick="copyMsg(this, 'dueno-si-a')">Copiar</button>
+      </div>
+      <div class="msg-body" id="dueno-si-a">Perfecto! mejor se lo muestro en vivo que explicarlo por acá — en 20 minutos ve exactamente cómo quedaría. ¿Cuándo tiene un momento esta semana?
+
+Acá puede escoger la hora que le quede mejor 👉 calendly.com/cesargomezs711/30min</div>
+    </div>
+
+    <div class="msg-card">
+      <div class="msg-card-header">
+        <span class="msg-label b">▲ Variante B — Si prefiere hablar por WhatsApp</span>
+        <button class="copy-btn" onclick="copyMsg(this, 'dueno-si-b')">Copiar</button>
+      </div>
+      <div class="msg-body" id="dueno-si-b">Le puedo contar más! aunque lo ideal sería verlo en pantalla porque es visual — puedo compartirle la pantalla en una llamada corta de 15-20 min. ¿Le parece bien mañana en la mañana?</div>
+    </div>
+
+  </div>
+
+  <div class="section-label" style="margin-top: 20px;">Si dice "no tengo tiempo" o "después"</div>
+  <div class="grid grid-2">
+
+    <div class="msg-card">
+      <div class="msg-card-header">
+        <span class="msg-label a">▲ Respuesta</span>
+        <button class="copy-btn" onclick="copyMsg(this, 'dueno-no-a')">Copiar</button>
+      </div>
+      <div class="msg-body" id="dueno-no-a">Sin problema! ¿le puedo escribir la próxima semana cuando tenga más calma?</div>
+    </div>
+
+    <div class="msg-card">
+      <div class="msg-card-header">
+        <span class="msg-label b">▲ Variante B</span>
+        <button class="copy-btn" onclick="copyMsg(this, 'dueno-no-b')">Copiar</button>
+      </div>
+      <div class="msg-body" id="dueno-no-b">Entendido, no hay afán. El demo queda ahí por si quiere revisarlo con calma 🙌 le escribo en unos días</div>
+    </div>
+
+  </div>
+
+  <div class="section-label" style="margin-top: 20px;">Confirmación de llamada (antes del día)</div>
+  <div class="msg-card">
+    <div class="msg-card-header">
+      <span class="msg-label a">▲ Mensaje de confirmación</span>
+      <button class="copy-btn" onclick="copyMsg(this, 'dueno-confirm')">Copiar</button>
+    </div>
+    <div class="msg-body" id="dueno-confirm">Hola <span class="placeholder">[Nombre]</span>! le confirmo nuestra llamada para <span class="placeholder">[día]</span> a las <span class="placeholder">[hora]</span> 👍 nos conectamos por Google Meet, le llegó el link al correo. Si prefiere por WhatsApp video me avisa y lo cuadramos así</div>
+  </div>
+
+</div>
+
+
+<!-- ═══════════════════════════════════ -->
+<!-- TAB: LLAMADA                       -->
+<!-- ═══════════════════════════════════ -->
+<div class="content" id="tab-llamada">
+
+  <div class="grid grid-2" style="margin-bottom: 20px;">
+    <div class="tip-box blue">
+      <div class="tip-icon">📋</div>
+      <div><strong>Antes de la llamada:</strong> Busca el negocio en Google. Anota qué le ves malo (web lenta, sin fotos, sin contacto, etc.). Ten el demo listo en otra pestaña.</div>
+    </div>
+    <div class="tip-box green">
+      <div class="tip-icon">🎯</div>
+      <div><strong>Objetivo de la llamada:</strong> Cobrar el anticipo hoy mismo. Termina siempre con un paso concreto — nunca quedes en el aire.</div>
+    </div>
+  </div>
+
+  <!-- PASO 1 -->
+  <div class="step-card" style="margin-bottom: 10px;">
+    <div class="step-header" onclick="toggleStep(this)">
+      <div class="step-num">1</div>
+      <div class="step-title">Saludo y contexto</div>
+      <div class="step-time">⏱ 0 – 2 min</div>
+      <div class="step-chevron">▼</div>
+    </div>
+    <div class="step-body open">
+      <div class="script-line">
+        <div class="script-label">Tú dices:</div>
+        <div class="script-you">Hola <span class="placeholder">[Nombre]</span>, ¿cómo estás? Gracias por el tiempo. Te cuento rapidito de qué va esto y luego te hago unas preguntas para mostrarte algo concreto de tu negocio.</div>
+      </div>
+      <div class="script-tip">💡 Sonríe. Habla despacio. Los nervios aceleran la voz.</div>
+    </div>
+  </div>
+
+  <!-- PASO 2 -->
+  <div class="step-card" style="margin-bottom: 10px;">
+    <div class="step-header" onclick="toggleStep(this)">
+      <div class="step-num">2</div>
+      <div class="step-title">Preguntas — deja que hablen</div>
+      <div class="step-time">⏱ 2 – 8 min</div>
+      <div class="step-chevron">▼</div>
+    </div>
+    <div class="step-body open">
+      <div class="script-tip" style="margin-bottom: 12px;">🎯 Haz estas preguntas en orden. Toma notas mientras responden.</div>
+      <div class="script-line">
+        <div class="script-label">Pregunta 1</div>
+        <div class="script-you">¿Hace cuánto tienes el negocio?</div>
+      </div>
+      <div class="script-line">
+        <div class="script-label">Pregunta 2</div>
+        <div class="script-you">¿Cómo consigues clientes hoy en día — por referidos, redes sociales, Google?</div>
+      </div>
+      <div class="script-line">
+        <div class="script-label">Pregunta 3</div>
+        <div class="script-you">¿Tienes web o redes sociales actualmente?</div>
+      </div>
+      <div class="script-line">
+        <div class="script-label">Pregunta 4 (la más importante)</div>
+        <div class="script-you">¿Qué es lo que más quisieras que hiciera una web por ti — que te llamen, que agenden, que encuentren información?</div>
+      </div>
+      <div class="script-tip">💡 Escucha más de lo que hablas. Lo que dicen aquí lo usas en el paso 4 para personalizar el pitch.</div>
+    </div>
+  </div>
+
+  <!-- PASO 3 -->
+  <div class="step-card" style="margin-bottom: 10px;">
+    <div class="step-header" onclick="toggleStep(this)">
+      <div class="step-num">3</div>
+      <div class="step-title">Mostrar el demo</div>
+      <div class="step-time">⏱ 8 – 15 min</div>
+      <div class="step-chevron">▼</div>
+    </div>
+    <div class="step-body open">
+      <div class="script-line">
+        <div class="script-label">Compartir pantalla → abre el demo del cliente</div>
+        <div class="script-you">Mira, esto es lo que hice para ti. Imagínate esto con tu logo, tus fotos y tu información real.</div>
+      </div>
+      <div class="script-tip" style="margin-top: 8px;">💡 Ciérrrate y deja que reaccione. No expliques todo de golpe. Pregunta: <em>"¿Qué te parece hasta ahora?"</em></div>
+      <div class="script-tip">💡 Si dice algo positivo de alguna sección → amplíala. Si pregunta algo → responde y sigue avanzando.</div>
+    </div>
+  </div>
+
+  <!-- PASO 4 -->
+  <div class="step-card" style="margin-bottom: 10px;">
+    <div class="step-header" onclick="toggleStep(this)">
+      <div class="step-num">4</div>
+      <div class="step-title">Recomendar el plan correcto</div>
+      <div class="step-time">⏱ 15 – 20 min</div>
+      <div class="step-chevron">▼</div>
+    </div>
+    <div class="step-body open">
+      <div class="script-line">
+        <div class="script-label">NO presentes los 3 planes. Recomienda UNO basado en lo que dijeron.</div>
+        <div class="script-you">Basado en lo que me contaste, yo te recomendaría el plan <span class="placeholder">[Starter/Pro/Premium]</span> porque <span class="placeholder">[razón concreta de lo que dijeron en paso 2]</span>.</div>
+      </div>
+      <div class="tip-box" style="margin-top: 12px; font-size: 12px;">
+        <div class="tip-icon">💡</div>
+        <div>
+          <strong>Guía rápida para recomendar:</strong><br>
+          • Solo quieren presencia básica → <strong>Starter ($350)</strong><br>
+          • Quieren agendar citas + verse profesionales → <strong>Pro ($900) ⭐</strong><br>
+          • Quieren automatización / chatbot → <strong>Premium ($2,200)</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PASO 5 -->
+  <div class="step-card" style="margin-bottom: 10px;">
+    <div class="step-header" onclick="toggleStep(this)">
+      <div class="step-num">5</div>
+      <div class="step-title">El precio y el cierre</div>
+      <div class="step-time">⏱ 20 – 25 min</div>
+      <div class="step-chevron">▼</div>
+    </div>
+    <div class="step-body open">
+      <div class="script-line">
+        <div class="script-label">Di el precio y cállate</div>
+        <div class="script-you">El valor es <span class="placeholder">[precio]</span>. Trabajamos con 50% de anticipo para arrancar y 50% cuando te entrego todo terminado. El tiempo de entrega es <span class="placeholder">[5-7 días]</span>.</div>
+      </div>
+      <div class="tip-box red" style="margin-top: 10px; font-size: 12px;">
+        <div class="tip-icon">🔇</div>
+        <div><strong>Después de decir el precio → SILENCIO.</strong> El primero que habla después del precio, pierde. Espera.</div>
+      </div>
+      <div class="script-line" style="margin-top: 12px;">
+        <div class="script-label">Si piden descuento</div>
+        <div class="script-you">Estoy dando un precio especial a los primeros clientes porque quiero construir portafolio en Colombia. Te puedo hacer <span class="placeholder">[precio con 10-15% off]</span> y a cambio me dejas usar tu web como ejemplo. ¿Lo hacemos?</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PASO 6 -->
+  <div class="step-card" style="margin-bottom: 10px;">
+    <div class="step-header" onclick="toggleStep(this)">
+      <div class="step-num">6</div>
+      <div class="step-title">Siguiente paso concreto</div>
+      <div class="step-time">⏱ 25 – 30 min</div>
+      <div class="step-chevron">▼</div>
+    </div>
+    <div class="step-body open">
+      <div class="script-line">
+        <div class="script-label">Si dijo SÍ</div>
+        <div class="script-you">Perfecto! entonces te mando los datos para el anticipo y arrancamos. ¿Te los mando por WhatsApp ahora mismo?</div>
+      </div>
+      <div class="script-line" style="margin-top: 10px;">
+        <div class="script-label">Si dice "lo pienso"</div>
+        <div class="script-you">Sin problema. ¿Cuándo crees que me puedes dar una respuesta? Para yo tener el espacio apartado para ti.</div>
+      </div>
+      <div class="script-tip">💡 Nunca termines la llamada sin un <strong>día y hora concretos</strong> para el siguiente contacto.</div>
+    </div>
+  </div>
+
+  <div class="tip-box green" style="margin-top: 16px;">
+    <div class="tip-icon">🎬</div>
+    <div><strong>Cómo verte:</strong> Habitación ordenada, buena luz de frente, camisa/camiseta limpia, cámara a altura de ojos. Sin ruido. Videollamada siempre que puedas — transmite más profesionalismo.</div>
+  </div>
+
+</div>
+
+
+<!-- ═══════════════════════════════════ -->
+<!-- TAB: SEGUIMIENTO                   -->
+<!-- ═══════════════════════════════════ -->
+<div class="content" id="tab-seguimiento">
+
+  <div class="tip-box" style="margin-bottom: 20px;">
+    <div class="tip-icon">🔁</div>
+    <div><strong>Regla de oro:</strong> Máximo 3 seguimientos. Si no responde después del tercero → lo dejas. No insistas más, solo daña tu imagen.</div>
+  </div>
+
+  <div class="section-label">Después de la llamada — dijeron "lo pienso"</div>
+
+  <div class="timeline">
+
+    <div class="timeline-item">
+      <div class="timeline-day">Día siguiente</div>
+      <div class="grid grid-2">
+        <div class="msg-card">
+          <div class="msg-card-header">
+            <span class="msg-label a">▲ Variante A</span>
+            <button class="copy-btn" onclick="copyMsg(this, 'seg-1a')">Copiar</button>
+          </div>
+          <div class="msg-body" id="seg-1a">Hola <span class="placeholder">[Nombre]</span>! quedé pensando en lo que me contaste de <span class="placeholder">[detalle específico que mencionaron]</span>. Creo que con la web podríamos resolver justo eso. ¿Seguiste pensando?</div>
+        </div>
+        <div class="msg-card">
+          <div class="msg-card-header">
+            <span class="msg-label b">▲ Variante B</span>
+            <button class="copy-btn" onclick="copyMsg(this, 'seg-1b')">Copiar</button>
+          </div>
+          <div class="msg-body" id="seg-1b">Hola <span class="placeholder">[Nombre]</span>! qué tal. Quedé pensando en lo que hablamos — ¿ya pudiste revisar el demo con calma?</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-day">A los 3 días (sin respuesta)</div>
+      <div class="grid grid-2">
+        <div class="msg-card">
+          <div class="msg-card-header">
+            <span class="msg-label a">▲ Variante A</span>
+            <button class="copy-btn" onclick="copyMsg(this, 'seg-2a')">Copiar</button>
+          </div>
+          <div class="msg-body" id="seg-2a"><span class="placeholder">[Nombre]</span>, ¿pudiste pensar en lo de la web? El espacio que tenía apartado para ti sigue disponible por ahora</div>
+        </div>
+        <div class="msg-card">
+          <div class="msg-card-header">
+            <span class="msg-label b">▲ Variante B</span>
+            <button class="copy-btn" onclick="copyMsg(this, 'seg-2b')">Copiar</button>
+          </div>
+          <div class="msg-body" id="seg-2b">Hola <span class="placeholder">[Nombre]</span>! le escribo para saber si tuvo la oportunidad de revisar el demo. Si tiene alguna duda con gusto le explico 😊</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-day">A los 7 días — último intento</div>
+      <div class="grid grid-2">
+        <div class="msg-card">
+          <div class="msg-card-header">
+            <span class="msg-label a">▲ Variante A — Cierre suave</span>
+            <button class="copy-btn" onclick="copyMsg(this, 'seg-3a')">Copiar</button>
+          </div>
+          <div class="msg-body" id="seg-3a"><span class="placeholder">[Nombre]</span>, le escribo por última vez para no molestarle. Si en algún momento quiere retomar el tema, acá estoy. Que le vaya muy bien! 🙌</div>
+        </div>
+        <div class="msg-card">
+          <div class="msg-card-header">
+            <span class="msg-label b">▲ Variante B</span>
+            <button class="copy-btn" onclick="copyMsg(this, 'seg-3b')">Copiar</button>
+          </div>
+          <div class="msg-body" id="seg-3b">Hola <span class="placeholder">[Nombre]</span>. No quiero ser molesto así que este es mi último mensaje. Si en algún momento cambia de opinión o quiere que le muestre el demo de nuevo, con gusto lo hacemos 😊</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="tip-box red" style="margin-top: 8px;">
+    <div class="tip-icon">🛑</div>
+    <div>Después del tercer mensaje sin respuesta → lo marcas como "Sin respuesta" en Notion y pasas al siguiente. No más.</div>
+  </div>
+
+  <div class="section-label" style="margin-top: 24px;">Si nunca llegaron a la llamada — perdiste el contacto</div>
+  <div class="grid grid-2">
+    <div class="msg-card">
+      <div class="msg-card-header">
+        <span class="msg-label a">▲ Reactivación fría</span>
+        <button class="copy-btn" onclick="copyMsg(this, 'seg-reactiva')">Copiar</button>
+      </div>
+      <div class="msg-body" id="seg-reactiva">Hola <span class="placeholder">[Nombre]</span>! soy César, le escribí hace unas semanas sobre la web de <span class="placeholder">[negocio]</span>. Actualicé el demo con algunas mejoras — ¿le puedo mostrar cómo quedó?</div>
+    </div>
+    <div class="tip-box" style="align-self: center;">
+      <div class="tip-icon">💡</div>
+      <div>Usa "actualicé el demo" como excusa para retomar. Aunque no lo hayas actualizado, suena a que tienes algo nuevo para mostrar.</div>
+    </div>
+  </div>
+
+</div>
+
+
+<!-- ═══════════════════════════════════ -->
+<!-- TAB: PAGOS Y CIERRE                -->
+<!-- ═══════════════════════════════════ -->
+<div class="content" id="tab-pagos">
+
+  <div class="section-label">Mensaje de anticipo (50%) — cuando dicen SÍ</div>
+  <div class="msg-card" style="margin-bottom: 20px;">
+    <div class="msg-card-header">
+      <span class="msg-label a">▲ Mensaje de pago anticipo</span>
+      <button class="copy-btn" onclick="copyMsg(this, 'pago-anticipo')">Copiar</button>
+    </div>
+    <div class="msg-body" id="pago-anticipo">Perfecto, arrancamos! Para empezar necesito el 50% de anticipo:
+
+💚 Nequi: 312 637 9735 (César Gomez)
+🏦 Bancolombia ahorros: 197 239 340 21 (César Augusto Gomez Soto)
+
+Cuando hagas el pago me mandas el comprobante por acá y arrancamos de inmediato 🚀</div>
+  </div>
+
+  <div class="section-label">Mensaje de pago final (50%) — cuando la web está lista</div>
+  <div class="msg-card" style="margin-bottom: 20px;">
+    <div class="msg-card-header">
+      <span class="msg-label a">▲ Mensaje de pago final</span>
+      <button class="copy-btn" onclick="copyMsg(this, 'pago-final')">Copiar</button>
+    </div>
+    <div class="msg-body" id="pago-final">Tu web está lista! 🎉 Antes de entregarte los accesos y archivos, queda el pago final:
+
+💚 Nequi: 312 637 9735 (César Gomez)
+🏦 Bancolombia ahorros: 197 239 340 21 (César Augusto Gomez Soto)
+
+En cuanto reciba el comprobante te entrego todo: dominio, archivos y accesos. ¿Lo hacemos?</div>
+  </div>
+
+  <div class="section-label">Datos de pago (referencia rápida)</div>
+  <div class="grid grid-2">
+    <div class="pago-card">
+      <div class="pago-method">
+        <div class="pago-icon">💚</div>
+        <div>
+          <div class="pago-name">Nequi</div>
+          <div class="pago-num">312 637 9735</div>
+          <div class="pago-owner">César Gomez</div>
+        </div>
+      </div>
+      <div class="pago-method">
+        <div class="pago-icon">🏦</div>
+        <div>
+          <div class="pago-name">Bancolombia — Cuenta Ahorros</div>
+          <div class="pago-num">197 239 340 21</div>
+          <div class="pago-owner">César Augusto Gomez Soto</div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="tip-box green" style="margin-bottom: 10px;">
+        <div class="tip-icon">⚡</div>
+        <div>Cuando te manden el comprobante → confirma de inmediato por WhatsApp. "Recibido! Arrancamos hoy." Eso da confianza.</div>
+      </div>
+      <div class="tip-box blue">
+        <div class="tip-icon">📋</div>
+        <div>Actualiza Notion: cambia Estado a "En progreso" y anota la fecha del pago en Notas.</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+<!-- ═══════════════════════════════════ -->
+<!-- TAB: PRECIOS                       -->
+<!-- ═══════════════════════════════════ -->
+<div class="content" id="tab-precios">
+
+  <div class="tip-box" style="margin-bottom: 20px;">
+    <div class="tip-icon">💡</div>
+    <div><strong>Estrategia:</strong> No presentes los 3 planes a la vez. Recomienda UNO basado en lo que el cliente dijo en la llamada. Eso facilita la decisión.</div>
+  </div>
+
+  <div class="msg-card" style="margin-bottom: 20px;">
+    <div class="msg-card-header"><span class="msg-label a">Tabla de precios</span></div>
+    <table class="price-table">
+      <thead>
+        <tr>
+          <th>Plan</th>
+          <th>Precio</th>
+          <th>Qué incluye</th>
+          <th>Para quién</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Starter</strong></td>
+          <td><strong>$350 USD</strong></td>
+          <td>1 página, entrega 48-72h</td>
+          <td>Solo quieren presencia básica</td>
+        </tr>
+        <tr>
+          <td><strong>Pro</strong> <span class="badge star">⭐ Más vendido</span></td>
+          <td><strong>$900 USD</strong></td>
+          <td>5 páginas, diseño completo</td>
+          <td>Quieren verse profesionales y recibir citas</td>
+        </tr>
+        <tr>
+          <td><strong>Premium</strong></td>
+          <td><strong>$2,200 USD</strong></td>
+          <td>Web + blog + chatbot IA + automatización</td>
+          <td>Quieren automatizar y crecer</td>
+        </tr>
+        <tr>
+          <td><strong>Mantenimiento</strong></td>
+          <td><strong>$80–150 USD/mes</strong></td>
+          <td>Actualizaciones, soporte</td>
+          <td>Clientes activos — ingreso recurrente</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section-label">Horarios para contactar</div>
+  <div class="hora-grid" style="margin-bottom: 20px;">
+    <div class="hora-item good">
+      <div class="hora-icon">✅</div>
+      <div class="hora-time">9 – 11:30 AM</div>
+      <div class="hora-label">Mañana — Mejor franja</div>
+    </div>
+    <div class="hora-item good">
+      <div class="hora-icon">✅</div>
+      <div class="hora-time">2 – 5 PM</div>
+      <div class="hora-label">Tarde — Segunda opción</div>
+    </div>
+    <div class="hora-item" style="border-color: rgba(245,158,11,0.4);">
+      <div class="hora-icon">⭐</div>
+      <div class="hora-time">Mar, Mié, Jue</div>
+      <div class="hora-label">Mejor día de la semana</div>
+    </div>
+    <div class="hora-item bad">
+      <div class="hora-icon">🚫</div>
+      <div class="hora-time">Antes 8 AM<br>Después 7 PM</div>
+      <div class="hora-label">Nunca enviar</div>
+    </div>
+    <div class="hora-item bad">
+      <div class="hora-icon">🚫</div>
+      <div class="hora-time">Domingos<br>Festivos</div>
+      <div class="hora-label">Tratar como domingo</div>
+    </div>
+  </div>
+
+  <div class="section-label">Links importantes</div>
+  <div class="grid grid-3">
+    <div class="msg-card">
+      <div class="msg-card-header">
+        <span class="msg-label a">Calendly</span>
+        <button class="copy-btn" onclick="copyText(this, 'calendly.com/cesargomezs711/30min')">Copiar link</button>
+      </div>
+      <div class="msg-body" style="font-family: monospace; font-size: 13px;">calendly.com/cesargomezs711/30min</div>
+    </div>
+    <div class="msg-card">
+      <div class="msg-card-header">
+        <span class="msg-label b">Email</span>
+        <button class="copy-btn" onclick="copyText(this, 'cesargomezs711@gmail.com')">Copiar</button>
+      </div>
+      <div class="msg-body" style="font-family: monospace; font-size: 13px;">cesargomezs711@gmail.com</div>
+    </div>
+    <div class="msg-card">
+      <div class="msg-card-header">
+        <span class="msg-label tip">Portafolio demos</span>
+        <button class="copy-btn" onclick="copyText(this, 'https://cesargomezs7.github.io/portafolio-web/demos/')">Copiar</button>
+      </div>
+      <div class="msg-body" style="font-family: monospace; font-size: 11px;">cesargomezs7.github.io/portafolio-web/demos/</div>
+    </div>
+  </div>
+
+</div>
+
+
+<!-- ═══════════════════════════════════ -->
+<!-- JAVASCRIPT                         -->
+<!-- ═══════════════════════════════════ -->
+<script>
+  function showTab(name) {
+    document.querySelectorAll('.content').forEach(c => c.classList.remove('active'));
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.getElementById('tab-' + name).classList.add('active');
+    event.currentTarget.classList.add('active');
+  }
+
+  function copyMsg(btn, id) {
+    const el = document.getElementById(id);
+    const text = el.innerText;
+    navigator.clipboard.writeText(text).then(() => showCopied(btn));
+  }
+
+  function copyText(btn, text) {
+    navigator.clipboard.writeText(text).then(() => showCopied(btn));
+  }
+
+  function showCopied(btn) {
+    const orig = btn.textContent;
+    btn.textContent = '✓ Listo';
+    btn.classList.add('copied');
+    const notif = document.getElementById('copyNotif');
+    notif.classList.add('show');
+    setTimeout(() => {
+      btn.textContent = orig;
+      btn.classList.remove('copied');
+      notif.classList.remove('show');
+    }, 1800);
+  }
+
+  function toggleStep(header) {
+    const body = header.nextElementSibling;
+    const chevron = header.querySelector('.step-chevron');
+    const isOpen = body.classList.contains('open');
+    body.classList.toggle('open', !isOpen);
+    chevron.textContent = isOpen ? '▶' : '▼';
+  }
+</script>
+</body>
+</html>
