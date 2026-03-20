@@ -588,6 +588,67 @@
     <div>Nunca presiones ni seas insistente con la recepcionista. Esa persona puede bloquearte antes de que llegues al dueño.</div>
   </div>
 
+  <div class="section-label" style="margin-top: 24px;">No te respondió, seguimiento</div>
+  <div class="tip-box blue" style="margin-bottom: 14px;">
+    <div class="tip-icon">ℹ️</div>
+    <div>Máximo 3 intentos. Si después del tercero no hay respuesta, lo marcas en Notion y sigues con el siguiente contacto.</div>
+  </div>
+
+  <div class="timeline">
+
+    <div class="timeline-item">
+      <div class="timeline-day">Al día siguiente</div>
+      <div class="grid grid-2">
+        <div class="msg-card">
+          <div class="msg-card-header">
+            <span class="msg-label a">▲ Variante A</span>
+            <button class="copy-btn" onclick="copyMsg(this, 'recep-seg-1a')">Copiar</button>
+          </div>
+          <div class="msg-body" id="recep-seg-1a">Hola! buenos días, le escribí ayer para hablar con el/la encargado/a del negocio. Me podría ayudar</div>
+        </div>
+        <div class="msg-card">
+          <div class="msg-card-header">
+            <span class="msg-label b">▲ Variante B</span>
+            <button class="copy-btn" onclick="copyMsg(this, 'recep-seg-1b')">Copiar</button>
+          </div>
+          <div class="msg-body" id="recep-seg-1b">Buenas! intenté comunicarme ayer. Quedé pendiente de hablar con el/la dueño/a, me puede ayudar con eso</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-day">A los 3 días sin respuesta</div>
+      <div class="grid grid-2">
+        <div class="msg-card">
+          <div class="msg-card-header">
+            <span class="msg-label a">▲ Variante A</span>
+            <button class="copy-btn" onclick="copyMsg(this, 'recep-seg-2a')">Copiar</button>
+          </div>
+          <div class="msg-body" id="recep-seg-2a">Hola! soy César, le he escrito un par de veces. Tengo algo preparado para mostrarle al encargado de <span class="placeholder">[negocio]</span>. Hay alguna manera de contactarlo directamente</div>
+        </div>
+        <div class="msg-card">
+          <div class="msg-card-header">
+            <span class="msg-label b">▲ Variante B, pide número</span>
+            <button class="copy-btn" onclick="copyMsg(this, 'recep-seg-2b')">Copiar</button>
+          </div>
+          <div class="msg-body" id="recep-seg-2b">Hola! disculpe la insistencia. Tiene algún número directo del dueño o encargado para escribirle por ahí</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-day">A los 7 días, último intento</div>
+      <div class="msg-card">
+        <div class="msg-card-header">
+          <span class="msg-label a">▲ Mensaje de cierre</span>
+          <button class="copy-btn" onclick="copyMsg(this, 'recep-seg-3')">Copiar</button>
+        </div>
+        <div class="msg-body" id="recep-seg-3">Hola, le escribo por última vez para no molestar. Si en algún momento quieren ver lo que preparé para <span class="placeholder">[negocio]</span>, con gusto se los muestro. Que les vaya muy bien 🙏</div>
+      </div>
+    </div>
+
+  </div>
+
 </div>
 
 
@@ -702,6 +763,76 @@ Acá puede escoger la hora que le quede mejor 👉 calendly.com/cesargomezs711/3
       <button class="copy-btn" onclick="copyMsg(this, 'dueno-confirm')">Copiar</button>
     </div>
     <div class="msg-body" id="dueno-confirm">Hola <span class="placeholder">[Nombre]</span>! le confirmo nuestra llamada para <span class="placeholder">[día]</span> a las <span class="placeholder">[hora]</span> 👍 nos conectamos por Google Meet, le llegó el link al correo. Si prefiere por WhatsApp video me avisa y lo cuadramos así</div>
+  </div>
+
+  <div class="section-label" style="margin-top: 24px;">Mandaste el demo y no te respondió, seguimiento</div>
+  <div class="tip-box blue" style="margin-bottom: 14px;">
+    <div class="tip-icon">ℹ️</div>
+    <div>Máximo 3 intentos. Tono relajado, nunca insistente. Si no responde al tercero, lo dejas y pasas al siguiente.</div>
+  </div>
+
+  <div class="timeline">
+
+    <div class="timeline-item">
+      <div class="timeline-day">Al día siguiente</div>
+      <div class="grid grid-2">
+        <div class="msg-card">
+          <div class="msg-card-header">
+            <span class="msg-label a">▲ Variante A</span>
+            <button class="copy-btn" onclick="copyMsg(this, 'dueno-seg-1a')">Copiar</button>
+          </div>
+          <div class="msg-body" id="dueno-seg-1a">Hola <span class="placeholder">[Nombre]</span>! le escribí ayer y le mandé el demo de <span class="placeholder">[negocio]</span>. Pudo verlo</div>
+        </div>
+        <div class="msg-card">
+          <div class="msg-card-header">
+            <span class="msg-label b">▲ Variante B, más suave</span>
+            <button class="copy-btn" onclick="copyMsg(this, 'dueno-seg-1b')">Copiar</button>
+          </div>
+          <div class="msg-body" id="dueno-seg-1b">Hola <span class="placeholder">[Nombre]</span>! solo quería saber si tuvo chance de ver el demo que le mandé. Cualquier pregunta con gusto</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-day">A los 3 días sin respuesta</div>
+      <div class="grid grid-2">
+        <div class="msg-card">
+          <div class="msg-card-header">
+            <span class="msg-label a">▲ Variante A, con gancho</span>
+            <button class="copy-btn" onclick="copyMsg(this, 'dueno-seg-2a')">Copiar</button>
+          </div>
+          <div class="msg-body" id="dueno-seg-2a"><span class="placeholder">[Nombre]</span>, le hice un par de ajustes al demo de <span class="placeholder">[negocio]</span> desde la última vez. Si quiere le muestro cómo quedó, son 10 minutos</div>
+        </div>
+        <div class="msg-card">
+          <div class="msg-card-header">
+            <span class="msg-label b">▲ Variante B, directo</span>
+            <button class="copy-btn" onclick="copyMsg(this, 'dueno-seg-2b')">Copiar</button>
+          </div>
+          <div class="msg-body" id="dueno-seg-2b">Hola <span class="placeholder">[Nombre]</span>! el espacio que tenía para trabajar en su web todavía está disponible. Le parece si hablamos esta semana</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-day">A los 7 días, último intento</div>
+      <div class="grid grid-2">
+        <div class="msg-card">
+          <div class="msg-card-header">
+            <span class="msg-label a">▲ Variante A</span>
+            <button class="copy-btn" onclick="copyMsg(this, 'dueno-seg-3a')">Copiar</button>
+          </div>
+          <div class="msg-body" id="dueno-seg-3a"><span class="placeholder">[Nombre]</span> le escribo por última vez para no molestar. El demo de <span class="placeholder">[negocio]</span> queda guardado, si en algún momento quiere retomarlo acá estoy 🙌</div>
+        </div>
+        <div class="msg-card">
+          <div class="msg-card-header">
+            <span class="msg-label b">▲ Variante B</span>
+            <button class="copy-btn" onclick="copyMsg(this, 'dueno-seg-3b')">Copiar</button>
+          </div>
+          <div class="msg-body" id="dueno-seg-3b">Hola <span class="placeholder">[Nombre]</span>. No quiero ser molesto así que este es mi último mensaje. Si en algún momento cambia de opinión, con gusto lo retomamos. Que le vaya muy bien!</div>
+        </div>
+      </div>
+    </div>
+
   </div>
 
 </div>
