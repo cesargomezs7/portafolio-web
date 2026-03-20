@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Pronto — Script de Ventas</title>
+<title>Pronto, Script de Ventas</title>
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -32,6 +32,7 @@
     min-height: 100vh;
     font-size: 14px;
     line-height: 1.5;
+    padding-bottom: 60px;
   }
 
   /* ── HEADER ── */
@@ -67,31 +68,28 @@
   .tabs-wrapper {
     background: var(--surface);
     border-bottom: 1px solid var(--border);
-    padding: 0 20px;
+    padding: 0 12px;
     position: sticky;
     top: 57px;
     z-index: 99;
-    overflow-x: auto;
-    scrollbar-width: none;
   }
-  .tabs-wrapper::-webkit-scrollbar { display: none; }
   .tabs {
     display: flex;
+    flex-wrap: wrap;
     gap: 0;
-    min-width: max-content;
   }
   .tab {
-    padding: 14px 22px;
+    padding: 10px 14px;
     cursor: pointer;
     color: var(--text-muted);
     font-weight: 600;
-    font-size: 13px;
+    font-size: 12px;
     border-bottom: 3px solid transparent;
     transition: all 0.2s;
     white-space: nowrap;
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
     user-select: none;
   }
   .tab:hover { color: var(--text); }
@@ -441,7 +439,6 @@
     <div class="quick-pills">
       <div class="pill green">✅ Mar-Jue 9–11 AM</div>
       <div class="pill amber">📅 calendly.com/cesargomezs711/30min</div>
-      <div class="pill">📱 Nequi: 312 637 9735</div>
     </div>
   </div>
 </div>
@@ -450,25 +447,25 @@
 <div class="tabs-wrapper">
   <div class="tabs">
     <div class="tab active" onclick="showTab('bot')">
-      <span class="tab-icon">🤖</span> Bot
+      Bot
     </div>
     <div class="tab" onclick="showTab('recepcionista')">
-      <span class="tab-icon">👩‍💼</span> Recepcionista
+      Recepc.
     </div>
     <div class="tab" onclick="showTab('dueno')">
-      <span class="tab-icon">👔</span> Dueño / Encargado
+      Dueño
     </div>
     <div class="tab" onclick="showTab('llamada')">
-      <span class="tab-icon">📞</span> Llamada <span class="tab-badge">30 min</span>
+      Llamada <span class="tab-badge">30 min</span>
     </div>
     <div class="tab" onclick="showTab('seguimiento')">
-      <span class="tab-icon">🔁</span> Seguimiento
+      Seguim.
     </div>
     <div class="tab" onclick="showTab('pagos')">
-      <span class="tab-icon">💳</span> Pagos y Cierre
+      Pagos
     </div>
     <div class="tab" onclick="showTab('precios')">
-      <span class="tab-icon">💰</span> Precios
+      Precios
     </div>
   </div>
 </div>
@@ -489,7 +486,7 @@
 
     <div class="msg-card">
       <div class="msg-card-header">
-        <span class="msg-label a">▲ Variante A — Más simple</span>
+        <span class="msg-label a">▲ Variante A, Más simple</span>
         <button class="copy-btn" onclick="copyMsg(this, 'bot-a')">Copiar</button>
       </div>
       <div class="msg-body" id="bot-a">Hola! quisiera hablar con alguien del equipo, me pueden ayudar?</div>
@@ -497,10 +494,10 @@
 
     <div class="msg-card">
       <div class="msg-card-header">
-        <span class="msg-label b">▲ Variante B — Con más contexto</span>
+        <span class="msg-label b">▲ Variante B, Con más contexto</span>
         <button class="copy-btn" onclick="copyMsg(this, 'bot-b')">Copiar</button>
       </div>
-      <div class="msg-body" id="bot-b">Hola! soy César, tengo algo que quiero mostrarle al equipo de <span class="placeholder">[Negocio]</span> — me pueden comunicar con alguien?</div>
+      <div class="msg-body" id="bot-b">Hola! soy César, tengo algo que quiero mostrarle al equipo de <span class="placeholder">[Negocio]</span>, me pueden comunicar con alguien?</div>
     </div>
 
   </div>
@@ -520,7 +517,7 @@
 
   <div class="tip-box" style="margin-bottom: 20px;">
     <div class="tip-icon">💡</div>
-    <div><strong>Objetivo:</strong> Que te pase con el dueño o encargado. NO vendas nada aquí. La recepcionista no toma decisiones — solo despierta curiosidad para que transfieran.</div>
+    <div><strong>Objetivo:</strong> Que te pase con el dueño o encargado. NO vendas nada aquí. La recepcionista no toma decisiones, solo despierta curiosidad para que transfieran.</div>
   </div>
 
   <div class="section-label">Primer mensaje a la recepcionista</div>
@@ -528,15 +525,15 @@
 
     <div class="msg-card">
       <div class="msg-card-header">
-        <span class="msg-label a">▲ Variante A — Directo</span>
+        <span class="msg-label a">▲ Variante A, Directo</span>
         <button class="copy-btn" onclick="copyMsg(this, 'recep-1a')">Copiar</button>
       </div>
-      <div class="msg-body" id="recep-1a">Hola! buenos días. Me puede comunicar con el/la dueño/a o la persona encargada de la imagen del negocio? tengo algo que quiero mostrarle sobre <span class="placeholder">[Nombre del negocio]</span> — es rápido y creo que le va a interesar</div>
+      <div class="msg-body" id="recep-1a">Hola! buenos días. Me puede comunicar con el/la dueño/a o la persona encargada de la imagen del negocio? tengo algo que quiero mostrarle sobre <span class="placeholder">[Nombre del negocio]</span>, es rápido y creo que le va a interesar</div>
     </div>
 
     <div class="msg-card">
       <div class="msg-card-header">
-        <span class="msg-label b">▲ Variante B — Más casual</span>
+        <span class="msg-label b">▲ Variante B, Más casual</span>
         <button class="copy-btn" onclick="copyMsg(this, 'recep-1b')">Copiar</button>
       </div>
       <div class="msg-body" id="recep-1b">Buenas! me podría ayudar a contactar a quien maneja la parte digital o de imagen del negocio? tengo algo concreto para mostrarle, tarda 2 minutos verlo</div>
@@ -557,10 +554,10 @@
 
     <div class="msg-card">
       <div class="msg-card-header">
-        <span class="msg-label b">▲ Variante B — Más corto</span>
+        <span class="msg-label b">▲ Variante B, Más corto</span>
         <button class="copy-btn" onclick="copyMsg(this, 'recep-2b')">Copiar</button>
       </div>
-      <div class="msg-body" id="recep-2b">Es algo que preparé específicamente para su negocio — es visual, se lo muestro en 2 min. Por eso prefiero que lo vea quien decide directamente</div>
+      <div class="msg-body" id="recep-2b">Es algo que preparé específicamente para su negocio, es visual, se lo muestro en 2 min. Por eso prefiero que lo vea quien decide directamente</div>
     </div>
 
   </div>
@@ -573,7 +570,7 @@
         <span class="msg-label a">▲ Respuesta</span>
         <button class="copy-btn" onclick="copyMsg(this, 'recep-3a')">Copiar</button>
       </div>
-      <div class="msg-body" id="recep-3a">No hay problema! ¿A qué hora suele estar disponible? así lo busco en ese momento</div>
+      <div class="msg-body" id="recep-3a">No hay problema! A qué hora suele estar disponible así lo busco en ese momento</div>
     </div>
 
     <div class="msg-card">
@@ -581,7 +578,7 @@
         <span class="msg-label b">▲ Si prefiere dejar mensaje</span>
         <button class="copy-btn" onclick="copyMsg(this, 'recep-3b')">Copiar</button>
       </div>
-      <div class="msg-body" id="recep-3b">Listo, sin problema. ¿Le puede decir que le escribió César de Pronto y que tengo algo preparado para mostrarle sobre su negocio? Le agradezco 🙏</div>
+      <div class="msg-body" id="recep-3b">Listo, sin problema. Le puede decir que le escribió César de Pronto y que tengo algo preparado para mostrarle sobre su negocio? Le agradezco 🙏</div>
     </div>
 
   </div>
@@ -601,27 +598,27 @@
 
   <div class="tip-box" style="margin-bottom: 20px;">
     <div class="tip-icon">🎯</div>
-    <div><strong>Objetivo:</strong> Que agenden una llamada de 20 min contigo. El demo personalizado es tu arma más fuerte — mandarlo cambia todo.</div>
+    <div><strong>Objetivo:</strong> Que agenden una llamada de 20 min contigo. El demo personalizado es tu arma más fuerte, mandarlo cambia todo.</div>
   </div>
 
-  <div class="section-label">Primer mensaje al dueño — CON demo personalizado</div>
+  <div class="section-label">Primer mensaje al dueño, CON demo personalizado</div>
   <div class="grid grid-2">
 
     <div class="msg-card">
       <div class="msg-card-header">
-        <span class="msg-label a">▲ Variante A — Con demo</span>
+        <span class="msg-label a">▲ Variante A, Con demo</span>
         <button class="copy-btn" onclick="copyMsg(this, 'dueno-1a')">Copiar</button>
       </div>
       <div class="msg-body" id="dueno-1a">Hola <span class="placeholder">[Nombre]</span>! le preparé este ejemplo de cómo podría verse la web de <span class="placeholder">[negocio]</span> con una imagen más profesional 👇
 
 <span class="placeholder">[link del demo]</span>
 
-Es su mismo negocio pero mejorado — tardé un rato en hacerlo personalizado para que pudiera verlo concreto. Si le interesa, le explico todo en 20 minutos. ¿Cuándo tiene un espacio esta semana?</div>
+Es su mismo negocio pero mejorado, tardé un rato en hacerlo personalizado para que pudiera verlo concreto. Si le interesa, le explico todo en 20 minutos. Cuándo tiene un espacio esta semana</div>
     </div>
 
     <div class="msg-card">
       <div class="msg-card-header">
-        <span class="msg-label b">▲ Variante B — Más corto</span>
+        <span class="msg-label b">▲ Variante B, Más corto</span>
         <button class="copy-btn" onclick="copyMsg(this, 'dueno-1b')">Copiar</button>
       </div>
       <div class="msg-body" id="dueno-1b">Hola <span class="placeholder">[Nombre]</span>! soy César. Hice esto para usted 👇
@@ -641,15 +638,15 @@ Así podría verse la web de <span class="placeholder">[negocio]</span>. Le toma
         <span class="msg-label a">▲ Variante A</span>
         <button class="copy-btn" onclick="copyMsg(this, 'dueno-precio-a')">Copiar</button>
       </div>
-      <div class="msg-body" id="dueno-precio-a">Depende de lo que necesite — hay opciones desde $350 USD. Pero mejor se lo explico en 10 minutos y ve si le sirve. ¿Agendamos una llamada rápida?</div>
+      <div class="msg-body" id="dueno-precio-a">Depende de lo que necesite, hay opciones desde $350 USD. Pero mejor se lo explico en 10 minutos y ve si le sirve. Agendamos una llamada rápida</div>
     </div>
 
     <div class="msg-card">
       <div class="msg-card-header">
-        <span class="msg-label b">▲ Variante B — Con rango</span>
+        <span class="msg-label b">▲ Variante B, Con rango</span>
         <button class="copy-btn" onclick="copyMsg(this, 'dueno-precio-b')">Copiar</button>
       </div>
-      <div class="msg-body" id="dueno-precio-b">Los precios van de $350 a $900 USD según lo que necesite. Pero para recomendarle el correcto necesito entender mejor su caso — ¿le parece si hablamos 20 min?</div>
+      <div class="msg-body" id="dueno-precio-b">Los precios van de $350 a $900 USD según lo que necesite. Pero para recomendarle el correcto necesito entender mejor su caso, le parece si hablamos 20 min</div>
     </div>
 
   </div>
@@ -662,17 +659,17 @@ Así podría verse la web de <span class="placeholder">[negocio]</span>. Le toma
         <span class="msg-label a">▲ Respuesta</span>
         <button class="copy-btn" onclick="copyMsg(this, 'dueno-si-a')">Copiar</button>
       </div>
-      <div class="msg-body" id="dueno-si-a">Perfecto! mejor se lo muestro en vivo que explicarlo por acá — en 20 minutos ve exactamente cómo quedaría. ¿Cuándo tiene un momento esta semana?
+      <div class="msg-body" id="dueno-si-a">Perfecto! mejor se lo muestro en vivo que explicarlo por acá, en 20 minutos ve exactamente cómo quedaría. Cuándo tiene un momento esta semana
 
 Acá puede escoger la hora que le quede mejor 👉 calendly.com/cesargomezs711/30min</div>
     </div>
 
     <div class="msg-card">
       <div class="msg-card-header">
-        <span class="msg-label b">▲ Variante B — Si prefiere hablar por WhatsApp</span>
+        <span class="msg-label b">▲ Variante B, Si prefiere hablar por WhatsApp</span>
         <button class="copy-btn" onclick="copyMsg(this, 'dueno-si-b')">Copiar</button>
       </div>
-      <div class="msg-body" id="dueno-si-b">Le puedo contar más! aunque lo ideal sería verlo en pantalla porque es visual — puedo compartirle la pantalla en una llamada corta de 15-20 min. ¿Le parece bien mañana en la mañana?</div>
+      <div class="msg-body" id="dueno-si-b">Le puedo contar más! aunque lo ideal sería verlo en pantalla porque es visual, puedo compartirle la pantalla en una llamada corta de 15-20 min. Le parece bien mañana en la mañana</div>
     </div>
 
   </div>
@@ -685,7 +682,7 @@ Acá puede escoger la hora que le quede mejor 👉 calendly.com/cesargomezs711/3
         <span class="msg-label a">▲ Respuesta</span>
         <button class="copy-btn" onclick="copyMsg(this, 'dueno-no-a')">Copiar</button>
       </div>
-      <div class="msg-body" id="dueno-no-a">Sin problema! ¿le puedo escribir la próxima semana cuando tenga más calma?</div>
+      <div class="msg-body" id="dueno-no-a">Sin problema! le puedo escribir la próxima semana cuando tenga más calma</div>
     </div>
 
     <div class="msg-card">
@@ -722,7 +719,7 @@ Acá puede escoger la hora que le quede mejor 👉 calendly.com/cesargomezs711/3
     </div>
     <div class="tip-box green">
       <div class="tip-icon">🎯</div>
-      <div><strong>Objetivo de la llamada:</strong> Cobrar el anticipo hoy mismo. Termina siempre con un paso concreto — nunca quedes en el aire.</div>
+      <div><strong>Objetivo de la llamada:</strong> Cobrar el anticipo hoy mismo. Termina siempre con un paso concreto, nunca quedes en el aire.</div>
     </div>
   </div>
 
@@ -737,7 +734,7 @@ Acá puede escoger la hora que le quede mejor 👉 calendly.com/cesargomezs711/3
     <div class="step-body open">
       <div class="script-line">
         <div class="script-label">Tú dices:</div>
-        <div class="script-you">Hola <span class="placeholder">[Nombre]</span>, ¿cómo estás? Gracias por el tiempo. Te cuento rapidito de qué va esto y luego te hago unas preguntas para mostrarte algo concreto de tu negocio.</div>
+        <div class="script-you">Hola <span class="placeholder">[Nombre]</span>, cómo estás Gracias por el tiempo. Te cuento rapidito de qué va esto y luego te hago unas preguntas para mostrarte algo concreto de tu negocio.</div>
       </div>
       <div class="script-tip">💡 Sonríe. Habla despacio. Los nervios aceleran la voz.</div>
     </div>
@@ -747,7 +744,7 @@ Acá puede escoger la hora que le quede mejor 👉 calendly.com/cesargomezs711/3
   <div class="step-card" style="margin-bottom: 10px;">
     <div class="step-header" onclick="toggleStep(this)">
       <div class="step-num">2</div>
-      <div class="step-title">Preguntas — deja que hablen</div>
+      <div class="step-title">Preguntas, deja que hablen</div>
       <div class="step-time">⏱ 2 – 8 min</div>
       <div class="step-chevron">▼</div>
     </div>
@@ -755,19 +752,19 @@ Acá puede escoger la hora que le quede mejor 👉 calendly.com/cesargomezs711/3
       <div class="script-tip" style="margin-bottom: 12px;">🎯 Haz estas preguntas en orden. Toma notas mientras responden.</div>
       <div class="script-line">
         <div class="script-label">Pregunta 1</div>
-        <div class="script-you">¿Hace cuánto tienes el negocio?</div>
+        <div class="script-you">Hace cuánto tienes el negocio</div>
       </div>
       <div class="script-line">
         <div class="script-label">Pregunta 2</div>
-        <div class="script-you">¿Cómo consigues clientes hoy en día — por referidos, redes sociales, Google?</div>
+        <div class="script-you">Cómo consigues clientes hoy, por referidos, redes sociales, Google</div>
       </div>
       <div class="script-line">
         <div class="script-label">Pregunta 3</div>
-        <div class="script-you">¿Tienes web o redes sociales actualmente?</div>
+        <div class="script-you">Tienes web o redes sociales actualmente</div>
       </div>
       <div class="script-line">
         <div class="script-label">Pregunta 4 (la más importante)</div>
-        <div class="script-you">¿Qué es lo que más quisieras que hiciera una web por ti — que te llamen, que agenden, que encuentren información?</div>
+        <div class="script-you">Qué es lo que más quisieras que hiciera la web, que te llamen, que agenden, que encuentren información</div>
       </div>
       <div class="script-tip">💡 Escucha más de lo que hablas. Lo que dicen aquí lo usas en el paso 4 para personalizar el pitch.</div>
     </div>
@@ -786,7 +783,7 @@ Acá puede escoger la hora que le quede mejor 👉 calendly.com/cesargomezs711/3
         <div class="script-label">Compartir pantalla → abre el demo del cliente</div>
         <div class="script-you">Mira, esto es lo que hice para ti. Imagínate esto con tu logo, tus fotos y tu información real.</div>
       </div>
-      <div class="script-tip" style="margin-top: 8px;">💡 Ciérrrate y deja que reaccione. No expliques todo de golpe. Pregunta: <em>"¿Qué te parece hasta ahora?"</em></div>
+      <div class="script-tip" style="margin-top: 8px;">💡 Ciérrrate y deja que reaccione. No expliques todo de golpe. Pregunta: <em>"Qué te parece hasta ahora"</em></div>
       <div class="script-tip">💡 Si dice algo positivo de alguna sección → amplíala. Si pregunta algo → responde y sigue avanzando.</div>
     </div>
   </div>
@@ -835,7 +832,7 @@ Acá puede escoger la hora que le quede mejor 👉 calendly.com/cesargomezs711/3
       </div>
       <div class="script-line" style="margin-top: 12px;">
         <div class="script-label">Si piden descuento</div>
-        <div class="script-you">Estoy dando un precio especial a los primeros clientes porque quiero construir portafolio en Colombia. Te puedo hacer <span class="placeholder">[precio con 10-15% off]</span> y a cambio me dejas usar tu web como ejemplo. ¿Lo hacemos?</div>
+        <div class="script-you">Estoy dando un precio especial a los primeros clientes porque quiero construir portafolio en Colombia. Te puedo hacer <span class="placeholder">[precio con 10-15% off]</span> y a cambio me dejas usar tu web como ejemplo. Lo hacemos</div>
       </div>
     </div>
   </div>
@@ -851,11 +848,11 @@ Acá puede escoger la hora que le quede mejor 👉 calendly.com/cesargomezs711/3
     <div class="step-body open">
       <div class="script-line">
         <div class="script-label">Si dijo SÍ</div>
-        <div class="script-you">Perfecto! entonces te mando los datos para el anticipo y arrancamos. ¿Te los mando por WhatsApp ahora mismo?</div>
+        <div class="script-you">Perfecto! entonces te mando los datos para el anticipo y arrancamos. Te los mando por WhatsApp ahora mismo</div>
       </div>
       <div class="script-line" style="margin-top: 10px;">
         <div class="script-label">Si dice "lo pienso"</div>
-        <div class="script-you">Sin problema. ¿Cuándo crees que me puedes dar una respuesta? Para yo tener el espacio apartado para ti.</div>
+        <div class="script-you">Sin problema. Cuándo crees que me puedes dar una respuesta Para yo tener el espacio apartado para ti.</div>
       </div>
       <div class="script-tip">💡 Nunca termines la llamada sin un <strong>día y hora concretos</strong> para el siguiente contacto.</div>
     </div>
@@ -863,7 +860,7 @@ Acá puede escoger la hora que le quede mejor 👉 calendly.com/cesargomezs711/3
 
   <div class="tip-box green" style="margin-top: 16px;">
     <div class="tip-icon">🎬</div>
-    <div><strong>Cómo verte:</strong> Habitación ordenada, buena luz de frente, camisa/camiseta limpia, cámara a altura de ojos. Sin ruido. Videollamada siempre que puedas — transmite más profesionalismo.</div>
+    <div><strong>Cómo verte:</strong> Habitación ordenada, buena luz de frente, camisa/camiseta limpia, cámara a altura de ojos. Sin ruido. Videollamada siempre que puedas, transmite más profesionalismo.</div>
   </div>
 
 </div>
@@ -879,7 +876,7 @@ Acá puede escoger la hora que le quede mejor 👉 calendly.com/cesargomezs711/3
     <div><strong>Regla de oro:</strong> Máximo 3 seguimientos. Si no responde después del tercero → lo dejas. No insistas más, solo daña tu imagen.</div>
   </div>
 
-  <div class="section-label">Después de la llamada — dijeron "lo pienso"</div>
+  <div class="section-label">Después de la llamada, dijeron "lo pienso"</div>
 
   <div class="timeline">
 
@@ -891,14 +888,14 @@ Acá puede escoger la hora que le quede mejor 👉 calendly.com/cesargomezs711/3
             <span class="msg-label a">▲ Variante A</span>
             <button class="copy-btn" onclick="copyMsg(this, 'seg-1a')">Copiar</button>
           </div>
-          <div class="msg-body" id="seg-1a">Hola <span class="placeholder">[Nombre]</span>! quedé pensando en lo que me contaste de <span class="placeholder">[detalle específico que mencionaron]</span>. Creo que con la web podríamos resolver justo eso. ¿Seguiste pensando?</div>
+          <div class="msg-body" id="seg-1a">Hola <span class="placeholder">[Nombre]</span>! quedé pensando en lo que me contaste de <span class="placeholder">[detalle específico que mencionaron]</span>. Creo que con la web podríamos resolver justo eso. Seguiste pensando</div>
         </div>
         <div class="msg-card">
           <div class="msg-card-header">
             <span class="msg-label b">▲ Variante B</span>
             <button class="copy-btn" onclick="copyMsg(this, 'seg-1b')">Copiar</button>
           </div>
-          <div class="msg-body" id="seg-1b">Hola <span class="placeholder">[Nombre]</span>! qué tal. Quedé pensando en lo que hablamos — ¿ya pudiste revisar el demo con calma?</div>
+          <div class="msg-body" id="seg-1b">Hola <span class="placeholder">[Nombre]</span>! qué tal. Quedé pensando en lo que hablamos, ya pudiste revisar el demo con calma</div>
         </div>
       </div>
     </div>
@@ -911,7 +908,7 @@ Acá puede escoger la hora que le quede mejor 👉 calendly.com/cesargomezs711/3
             <span class="msg-label a">▲ Variante A</span>
             <button class="copy-btn" onclick="copyMsg(this, 'seg-2a')">Copiar</button>
           </div>
-          <div class="msg-body" id="seg-2a"><span class="placeholder">[Nombre]</span>, ¿pudiste pensar en lo de la web? El espacio que tenía apartado para ti sigue disponible por ahora</div>
+          <div class="msg-body" id="seg-2a"><span class="placeholder">[Nombre]</span>, pudiste pensar en lo de la web El espacio que tenía apartado para ti sigue disponible por ahora</div>
         </div>
         <div class="msg-card">
           <div class="msg-card-header">
@@ -924,11 +921,11 @@ Acá puede escoger la hora que le quede mejor 👉 calendly.com/cesargomezs711/3
     </div>
 
     <div class="timeline-item">
-      <div class="timeline-day">A los 7 días — último intento</div>
+      <div class="timeline-day">A los 7 días, último intento</div>
       <div class="grid grid-2">
         <div class="msg-card">
           <div class="msg-card-header">
-            <span class="msg-label a">▲ Variante A — Cierre suave</span>
+            <span class="msg-label a">▲ Variante A, Cierre suave</span>
             <button class="copy-btn" onclick="copyMsg(this, 'seg-3a')">Copiar</button>
           </div>
           <div class="msg-body" id="seg-3a"><span class="placeholder">[Nombre]</span>, le escribo por última vez para no molestarle. Si en algún momento quiere retomar el tema, acá estoy. Que le vaya muy bien! 🙌</div>
@@ -950,14 +947,14 @@ Acá puede escoger la hora que le quede mejor 👉 calendly.com/cesargomezs711/3
     <div>Después del tercer mensaje sin respuesta → lo marcas como "Sin respuesta" en Notion y pasas al siguiente. No más.</div>
   </div>
 
-  <div class="section-label" style="margin-top: 24px;">Si nunca llegaron a la llamada — perdiste el contacto</div>
+  <div class="section-label" style="margin-top: 24px;">Si nunca llegaron a la llamada, perdiste el contacto</div>
   <div class="grid grid-2">
     <div class="msg-card">
       <div class="msg-card-header">
         <span class="msg-label a">▲ Reactivación fría</span>
         <button class="copy-btn" onclick="copyMsg(this, 'seg-reactiva')">Copiar</button>
       </div>
-      <div class="msg-body" id="seg-reactiva">Hola <span class="placeholder">[Nombre]</span>! soy César, le escribí hace unas semanas sobre la web de <span class="placeholder">[negocio]</span>. Actualicé el demo con algunas mejoras — ¿le puedo mostrar cómo quedó?</div>
+      <div class="msg-body" id="seg-reactiva">Hola <span class="placeholder">[Nombre]</span>! soy César, le escribí hace unas semanas sobre la web de <span class="placeholder">[negocio]</span>. Actualicé el demo con algunas mejoras, le puedo mostrar cómo quedó</div>
     </div>
     <div class="tip-box" style="align-self: center;">
       <div class="tip-icon">💡</div>
@@ -973,7 +970,7 @@ Acá puede escoger la hora que le quede mejor 👉 calendly.com/cesargomezs711/3
 <!-- ═══════════════════════════════════ -->
 <div class="content" id="tab-pagos">
 
-  <div class="section-label">Mensaje de anticipo (50%) — cuando dicen SÍ</div>
+  <div class="section-label">Mensaje de anticipo (50%), cuando dicen SÍ</div>
   <div class="msg-card" style="margin-bottom: 20px;">
     <div class="msg-card-header">
       <span class="msg-label a">▲ Mensaje de pago anticipo</span>
@@ -987,7 +984,7 @@ Acá puede escoger la hora que le quede mejor 👉 calendly.com/cesargomezs711/3
 Cuando hagas el pago me mandas el comprobante por acá y arrancamos de inmediato 🚀</div>
   </div>
 
-  <div class="section-label">Mensaje de pago final (50%) — cuando la web está lista</div>
+  <div class="section-label">Mensaje de pago final (50%), cuando la web está lista</div>
   <div class="msg-card" style="margin-bottom: 20px;">
     <div class="msg-card-header">
       <span class="msg-label a">▲ Mensaje de pago final</span>
@@ -998,7 +995,7 @@ Cuando hagas el pago me mandas el comprobante por acá y arrancamos de inmediato
 💚 Nequi: 312 637 9735 (César Gomez)
 🏦 Bancolombia ahorros: 197 239 340 21 (César Augusto Gomez Soto)
 
-En cuanto reciba el comprobante te entrego todo: dominio, archivos y accesos. ¿Lo hacemos?</div>
+En cuanto reciba el comprobante te entrego todo: dominio, archivos y accesos. Lo hacemos</div>
   </div>
 
   <div class="section-label">Datos de pago (referencia rápida)</div>
@@ -1015,7 +1012,7 @@ En cuanto reciba el comprobante te entrego todo: dominio, archivos y accesos. ¿
       <div class="pago-method">
         <div class="pago-icon">🏦</div>
         <div>
-          <div class="pago-name">Bancolombia — Cuenta Ahorros</div>
+          <div class="pago-name">Bancolombia, Cuenta Ahorros</div>
           <div class="pago-num">197 239 340 21</div>
           <div class="pago-owner">César Augusto Gomez Soto</div>
         </div>
@@ -1081,7 +1078,7 @@ En cuanto reciba el comprobante te entrego todo: dominio, archivos y accesos. ¿
           <td><strong>Mantenimiento</strong></td>
           <td><strong>$80–150 USD/mes</strong></td>
           <td>Actualizaciones, soporte</td>
-          <td>Clientes activos — ingreso recurrente</td>
+          <td>Clientes activos, ingreso recurrente</td>
         </tr>
       </tbody>
     </table>
@@ -1092,12 +1089,12 @@ En cuanto reciba el comprobante te entrego todo: dominio, archivos y accesos. ¿
     <div class="hora-item good">
       <div class="hora-icon">✅</div>
       <div class="hora-time">9 – 11:30 AM</div>
-      <div class="hora-label">Mañana — Mejor franja</div>
+      <div class="hora-label">Mañana, Mejor franja</div>
     </div>
     <div class="hora-item good">
       <div class="hora-icon">✅</div>
       <div class="hora-time">2 – 5 PM</div>
-      <div class="hora-label">Tarde — Segunda opción</div>
+      <div class="hora-label">Tarde, Segunda opción</div>
     </div>
     <div class="hora-item" style="border-color: rgba(245,158,11,0.4);">
       <div class="hora-icon">⭐</div>
