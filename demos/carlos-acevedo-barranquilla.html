@@ -1,0 +1,1132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Odontología | Carlos Acevedo Odontología</title>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --primary:   #198882;
+      --primary-dark: #126660;
+      --secondary: #00BAB9;
+      --accent:    #CCBBA2;
+      --white:     #ffffff;
+      --gray-light: #f5f7f7;
+      --gray-mid:  #e8ecec;
+      --text-dark: #1e2d2d;
+      --text-mid:  #445555;
+      --text-light: #7a9090;
+      --shadow-sm: 0 2px 12px rgba(25,136,130,0.08);
+      --shadow-md: 0 8px 32px rgba(25,136,130,0.14);
+      --shadow-lg: 0 20px 60px rgba(25,136,130,0.18);
+      --radius-sm: 8px;
+      --radius-md: 16px;
+      --radius-lg: 24px;
+      --radius-xl: 40px;
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Open Sans', sans-serif;
+      color: var(--text-dark);
+      background: var(--white);
+      overflow-x: hidden;
+    }
+
+    /* ─── NAVBAR ─────────────────────────────────────────────── */
+    .navbar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      background: rgba(255,255,255,0.97);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--gray-mid);
+      padding: 0 5%;
+      height: 74px;
+      display: flex; align-items: center; justify-content: space-between;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.06);
+      transition: var(--transition);
+    }
+
+    .navbar.scrolled { height: 62px; box-shadow: var(--shadow-md); }
+
+    .nav-logo {
+      display: flex; align-items: center; gap: 10px;
+      text-decoration: none;
+      min-width: 0; flex-shrink: 1; max-width: 240px;
+    }
+    .nav-logo-icon {
+      width: 44px; height: 44px; background: var(--primary);
+      border-radius: 12px; display: flex; align-items: center; justify-content: center;
+      font-size: 20px; color: white;
+    }
+    .nav-logo-text { line-height: 1.2; min-width: 0; overflow: hidden; }
+    .nav-logo-text strong { display: block; font-size: 15px; font-weight: 800; color: var(--primary); letter-spacing: -.3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; }
+    .nav-logo-text span { font-size: 11px; color: var(--text-light); font-weight: 500; letter-spacing: .5px; text-transform: uppercase; white-space: nowrap; }
+
+    .nav-links {
+      display: flex; align-items: center; gap: 8px;
+      list-style: none;
+    }
+    .nav-links a {
+      text-decoration: none; color: var(--text-mid); font-size: 13.5px; font-weight: 600;
+      padding: 8px 14px; border-radius: var(--radius-sm);
+      transition: var(--transition); letter-spacing: .2px;
+      white-space: nowrap;
+    }
+    .nav-links a:hover { color: var(--primary); background: rgba(25,136,130,0.07); }
+    .nav-links a.active { color: var(--primary); background: rgba(25,136,130,0.1); }
+
+    .nav-cta {
+      background: var(--primary); color: white !important;
+      border-radius: 50px !important; padding: 10px 22px !important;
+      white-space: nowrap !important;
+    }
+    .nav-cta:hover { background: var(--primary-dark) !important; color: white !important; transform: translateY(-1px); box-shadow: var(--shadow-md); }
+
+    .nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 8px; }
+    .nav-hamburger span { width: 24px; height: 2px; background: var(--primary); border-radius: 2px; transition: var(--transition); display: block; }
+
+    /* ─── HERO ───────────────────────────────────────────────── */
+    .hero {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #0d4f4c 0%, #198882 45%, #00BAB9 100%);
+      position: relative; overflow: hidden;
+      display: flex; align-items: center;
+      padding-top: 74px;
+    }
+
+    .hero-bg-pattern {
+      position: absolute; inset: 0; opacity: .06;
+      background-image: radial-gradient(circle at 25% 25%, white 2px, transparent 2px),
+                        radial-gradient(circle at 75% 75%, white 2px, transparent 2px);
+      background-size: 60px 60px;
+    }
+
+    .hero-glow {
+      position: absolute; width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(0,186,185,0.3) 0%, transparent 70%);
+      top: -100px; right: -100px; border-radius: 50%;
+      animation: pulse-glow 6s ease-in-out infinite;
+    }
+
+    @keyframes pulse-glow {
+      0%, 100% { transform: scale(1); opacity: .3; }
+      50% { transform: scale(1.15); opacity: .5; }
+    }
+
+    .hero-content {
+      position: relative; z-index: 2;
+      max-width: 1200px; margin: 0 auto; padding: 80px 5%;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+    }
+
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(255,255,255,0.15); backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 50px; padding: 8px 18px; margin-bottom: 24px;
+      color: white; font-size: 13px; font-weight: 600; letter-spacing: .5px;
+    }
+    .hero-badge i { color: var(--accent); }
+
+    .hero-text h1 {
+      font-size: clamp(2.2rem, 4vw, 3.4rem);
+      font-weight: 800; color: white; line-height: 1.15;
+      letter-spacing: -1px; margin-bottom: 20px;
+    }
+    .hero-text h1 span { color: var(--accent); }
+
+    .hero-text p {
+      font-size: 17px; color: rgba(255,255,255,0.82);
+      line-height: 1.7; margin-bottom: 36px; font-weight: 400;
+    }
+
+    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: white; color: var(--primary);
+      padding: 15px 30px; border-radius: 50px;
+      font-size: 15px; font-weight: 700; text-decoration: none;
+      transition: var(--transition); box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+      border: none; cursor: pointer;
+    }
+    .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(0,0,0,0.2); }
+
+    .btn-outline {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: transparent; color: white;
+      padding: 15px 30px; border-radius: 50px;
+      font-size: 15px; font-weight: 600; text-decoration: none;
+      border: 2px solid rgba(255,255,255,0.5);
+      transition: var(--transition); cursor: pointer;
+    }
+    .btn-outline:hover { background: rgba(255,255,255,0.15); border-color: white; }
+
+    .hero-stats {
+      display: flex; gap: 32px; margin-top: 48px; padding-top: 36px;
+      border-top: 1px solid rgba(255,255,255,0.2);
+    }
+    .stat { color: white; }
+    .stat strong { display: block; font-size: 2rem; font-weight: 800; letter-spacing: -1px; }
+    .stat span { font-size: 13px; color: rgba(255,255,255,0.7); font-weight: 500; }
+
+    .hero-visual {
+      display: flex; flex-direction: column; gap: 16px;
+    }
+
+    .hero-card {
+      background: rgba(255,255,255,0.12); backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: var(--radius-lg); padding: 22px 26px;
+      display: flex; align-items: center; gap: 18px;
+      transition: var(--transition);
+      animation: float-in 0.8s ease forwards;
+      opacity: 0; transform: translateX(30px);
+    }
+    .hero-card:nth-child(1) { animation-delay: 0.2s; }
+    .hero-card:nth-child(2) { animation-delay: 0.4s; }
+    .hero-card:nth-child(3) { animation-delay: 0.6s; }
+    .hero-card:hover { background: rgba(255,255,255,0.2); transform: translateX(-4px) !important; }
+
+    @keyframes float-in {
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    .hero-card-icon {
+      width: 52px; height: 52px; min-width: 52px;
+      background: rgba(255,255,255,0.2);
+      border-radius: 14px; display: flex; align-items: center; justify-content: center;
+      font-size: 22px; color: var(--accent);
+    }
+    .hero-card-info strong { display: block; color: white; font-size: 15px; font-weight: 700; }
+    .hero-card-info span { color: rgba(255,255,255,0.7); font-size: 13px; }
+
+    /* ─── TRUST BAR ──────────────────────────────────────────── */
+    .trust-bar {
+      background: var(--primary);
+      padding: 22px 5%;
+    }
+    .trust-bar-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-around; gap: 20px;
+      flex-wrap: wrap;
+    }
+    .trust-item {
+      display: flex; align-items: center; gap: 10px; color: white;
+    }
+    .trust-item i { font-size: 18px; color: var(--accent); }
+    .trust-item span { font-size: 14px; font-weight: 600; }
+
+    /* ─── SECTION COMMON ─────────────────────────────────────── */
+    .section { padding: 90px 5%; }
+    .section-alt { background: var(--gray-light); }
+
+    .section-header { text-align: center; margin-bottom: 64px; }
+    .section-tag {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(25,136,130,0.1); color: var(--primary);
+      border-radius: 50px; padding: 6px 18px; font-size: 12px;
+      font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .section-tag::before {
+      content: ''; width: 6px; height: 6px;
+      background: var(--primary); border-radius: 50%;
+    }
+
+    .section-header h2 {
+      font-size: clamp(1.8rem, 3vw, 2.8rem);
+      font-weight: 800; color: var(--text-dark); line-height: 1.2;
+      letter-spacing: -0.8px; margin-bottom: 16px;
+    }
+    .section-header h2 span { color: var(--primary); }
+    .section-header p {
+      font-size: 17px; color: var(--text-mid); line-height: 1.7;
+      max-width: 620px; margin: 0 auto; font-weight: 400;
+    }
+
+    /* ─── INTRO ──────────────────────────────────────────────── */
+    .intro-grid {
+      max-width: 1200px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center;
+    }
+
+    .intro-image-wrap {
+      position: relative;
+    }
+    .intro-image-main {
+      width: 100%; border-radius: var(--radius-xl);
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      height: 460px; display: flex; align-items: center; justify-content: center;
+      font-size: 100px; position: relative; overflow: hidden;
+    }
+    .intro-image-main::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(135deg, transparent 40%, rgba(0,0,0,0.15));
+    }
+
+    .intro-badge-float {
+      position: absolute; bottom: -20px; right: -20px;
+      background: white; border-radius: var(--radius-md);
+      padding: 18px 22px; box-shadow: var(--shadow-lg);
+      display: flex; align-items: center; gap: 14px;
+    }
+    .intro-badge-float .number { font-size: 2rem; font-weight: 800; color: var(--primary); line-height: 1; }
+    .intro-badge-float .label { font-size: 12px; color: var(--text-mid); font-weight: 600; line-height: 1.4; }
+
+    .intro-text .section-tag { display: inline-flex; }
+    .intro-text h2 {
+      font-size: clamp(1.8rem, 2.8vw, 2.4rem); font-weight: 800;
+      color: var(--text-dark); line-height: 1.2; letter-spacing: -.6px;
+      margin-bottom: 20px;
+    }
+    .intro-text h2 span { color: var(--primary); }
+    .intro-text p { font-size: 16px; color: var(--text-mid); line-height: 1.8; margin-bottom: 16px; }
+
+    .intro-list { list-style: none; margin: 28px 0 36px; display: flex; flex-direction: column; gap: 14px; }
+    .intro-list li {
+      display: flex; align-items: flex-start; gap: 12px;
+      font-size: 15px; color: var(--text-mid); line-height: 1.5;
+    }
+    .intro-list li i { color: var(--primary); font-size: 16px; margin-top: 2px; flex-shrink: 0; }
+
+    /* ─── SERVICES ───────────────────────────────────────────── */
+    .services-grid {
+      max-width: 1200px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 28px;
+    }
+
+    .service-card {
+      background: white; border-radius: var(--radius-lg);
+      padding: 36px 32px; border: 1.5px solid var(--gray-mid);
+      transition: var(--transition); position: relative; overflow: hidden;
+      cursor: pointer;
+    }
+    .service-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      transform: scaleX(0); transform-origin: left; transition: var(--transition);
+    }
+    .service-card:hover {
+      border-color: var(--primary);
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-lg);
+    }
+    .service-card:hover::before { transform: scaleX(1); }
+
+    .service-icon {
+      width: 64px; height: 64px;
+      background: rgba(25,136,130,0.1); border-radius: var(--radius-md);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 28px; color: var(--primary); margin-bottom: 22px;
+      transition: var(--transition);
+    }
+    .service-card:hover .service-icon {
+      background: var(--primary); color: white; transform: scale(1.08);
+    }
+
+    .service-card h3 {
+      font-size: 18px; font-weight: 700; color: var(--text-dark);
+      margin-bottom: 12px; line-height: 1.3;
+    }
+    .service-card p {
+      font-size: 14.5px; color: var(--text-mid); line-height: 1.7;
+      margin-bottom: 20px;
+    }
+    .service-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      color: var(--primary); font-size: 13.5px; font-weight: 700;
+      text-decoration: none; letter-spacing: .3px;
+      transition: var(--transition);
+    }
+    .service-link:hover { gap: 10px; }
+    .service-link i { font-size: 12px; }
+
+    /* ─── WHY US ──────────────────────────────────────────────── */
+    .why-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+    }
+
+    .why-image {
+      background: linear-gradient(145deg, var(--gray-light) 0%, var(--gray-mid) 100%);
+      border-radius: var(--radius-xl); height: 520px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 90px; position: relative; overflow: hidden;
+    }
+
+    .why-features { display: flex; flex-direction: column; gap: 28px; }
+
+    .why-item {
+      display: flex; gap: 20px; align-items: flex-start;
+      padding: 24px; border-radius: var(--radius-md);
+      transition: var(--transition); border: 1.5px solid transparent;
+    }
+    .why-item:hover { background: white; border-color: var(--gray-mid); box-shadow: var(--shadow-sm); }
+
+    .why-item-icon {
+      width: 52px; height: 52px; min-width: 52px;
+      border-radius: 14px; display: flex; align-items: center; justify-content: center;
+      font-size: 22px;
+    }
+    .why-item-icon.teal { background: rgba(25,136,130,0.12); color: var(--primary); }
+    .why-item-icon.gold { background: rgba(204,187,162,0.25); color: #a08060; }
+    .why-item-icon.blue { background: rgba(0,186,185,0.12); color: var(--secondary); }
+    .why-item-icon.green { background: rgba(46,160,100,0.1); color: #2ea064; }
+
+    .why-item-text strong { display: block; font-size: 16px; font-weight: 700; color: var(--text-dark); margin-bottom: 6px; }
+    .why-item-text p { font-size: 14px; color: var(--text-mid); line-height: 1.65; }
+
+    /* ─── PROCESS ────────────────────────────────────────────── */
+    .process-steps {
+      max-width: 900px; margin: 0 auto;
+      display: flex; flex-direction: column; gap: 0;
+      position: relative;
+    }
+    .process-steps::before {
+      content: ''; position: absolute; left: 35px; top: 60px; bottom: 60px;
+      width: 2px; background: linear-gradient(to bottom, var(--primary), var(--secondary));
+    }
+
+    .process-step {
+      display: flex; gap: 28px; align-items: flex-start;
+      padding: 28px 0;
+    }
+
+    .step-number {
+      width: 72px; height: 72px; min-width: 72px;
+      background: white; border: 3px solid var(--primary);
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      font-size: 22px; font-weight: 800; color: var(--primary);
+      z-index: 1; transition: var(--transition);
+      box-shadow: 0 0 0 6px var(--gray-light);
+    }
+    .process-step:hover .step-number { background: var(--primary); color: white; }
+
+    .step-content {
+      background: white; border-radius: var(--radius-md);
+      padding: 24px 28px; flex: 1;
+      border: 1.5px solid var(--gray-mid);
+      transition: var(--transition);
+    }
+    .process-step:hover .step-content { border-color: var(--primary); box-shadow: var(--shadow-sm); }
+
+    .step-content h3 { font-size: 17px; font-weight: 700; color: var(--text-dark); margin-bottom: 8px; }
+    .step-content p { font-size: 14.5px; color: var(--text-mid); line-height: 1.65; }
+
+    /* ─── FAQ ────────────────────────────────────────────────── */
+    .faq-wrap {
+      max-width: 800px; margin: 0 auto;
+      display: flex; flex-direction: column; gap: 12px;
+    }
+
+    .faq-item {
+      background: white; border-radius: var(--radius-md);
+      border: 1.5px solid var(--gray-mid); overflow: hidden;
+      transition: var(--transition);
+    }
+    .faq-item.open { border-color: var(--primary); box-shadow: var(--shadow-sm); }
+
+    .faq-question {
+      width: 100%; padding: 22px 26px;
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+      background: none; border: none; cursor: pointer;
+      text-align: left;
+    }
+    .faq-question span {
+      font-size: 15.5px; font-weight: 600; color: var(--text-dark);
+      line-height: 1.4;
+    }
+    .faq-icon {
+      width: 32px; height: 32px; min-width: 32px;
+      border-radius: 50%; border: 2px solid var(--gray-mid);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--primary); font-size: 14px; transition: var(--transition);
+    }
+    .faq-item.open .faq-icon { background: var(--primary); color: white; border-color: var(--primary); transform: rotate(45deg); }
+
+    .faq-answer {
+      max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.3s ease;
+      padding: 0 26px;
+    }
+    .faq-answer p {
+      font-size: 14.5px; color: var(--text-mid); line-height: 1.75;
+      padding-bottom: 22px;
+    }
+    .faq-item.open .faq-answer { max-height: 300px; }
+
+    /* ─── CTA BANNER ──────────────────────────────────────────── */
+    .cta-section {
+      background: linear-gradient(135deg, #0d4f4c 0%, #198882 50%, #00BAB9 100%);
+      padding: 80px 5%; position: relative; overflow: hidden;
+    }
+    .cta-section::before {
+      content: ''; position: absolute; inset: 0; opacity: .05;
+      background-image: radial-gradient(circle at 20% 50%, white 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+    .cta-inner {
+      max-width: 900px; margin: 0 auto; text-align: center; position: relative; z-index: 1;
+    }
+    .cta-inner h2 {
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 800;
+      color: white; line-height: 1.2; margin-bottom: 16px; letter-spacing: -.6px;
+    }
+    .cta-inner p {
+      font-size: 17px; color: rgba(255,255,255,0.8); line-height: 1.7; margin-bottom: 40px;
+    }
+    .cta-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+    .btn-whatsapp {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: #25D366; color: white;
+      padding: 16px 32px; border-radius: 50px;
+      font-size: 15px; font-weight: 700; text-decoration: none;
+      transition: var(--transition); box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+    }
+    .btn-whatsapp:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(37,211,102,0.5); background: #20c35e; }
+
+    .btn-tel {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: rgba(255,255,255,0.15); color: white;
+      padding: 16px 32px; border-radius: 50px;
+      font-size: 15px; font-weight: 700; text-decoration: none;
+      border: 2px solid rgba(255,255,255,0.4);
+      transition: var(--transition);
+    }
+    .btn-tel:hover { background: rgba(255,255,255,0.25); border-color: white; transform: translateY(-3px); }
+
+    /* ─── TESTIMONIALS ───────────────────────────────────────── */
+    .testimonials-grid {
+      max-width: 1100px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px;
+    }
+
+    .testimonial-card {
+      background: white; border-radius: var(--radius-lg);
+      padding: 30px 28px; border: 1.5px solid var(--gray-mid);
+      transition: var(--transition);
+    }
+    .testimonial-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: var(--primary); }
+
+    .stars { color: #f5a623; font-size: 15px; margin-bottom: 16px; letter-spacing: 2px; }
+    .testimonial-text {
+      font-size: 14.5px; color: var(--text-mid); line-height: 1.75;
+      font-style: italic; margin-bottom: 22px;
+    }
+    .testimonial-author { display: flex; align-items: center; gap: 14px; }
+    .author-avatar {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; color: white; font-weight: 700; flex-shrink: 0;
+    }
+    .author-name { font-size: 14px; font-weight: 700; color: var(--text-dark); }
+    .author-label { font-size: 12px; color: var(--text-light); }
+
+    /* ─── FOOTER ─────────────────────────────────────────────── */
+    footer {
+      background: var(--text-dark); color: rgba(255,255,255,0.75);
+      padding: 64px 5% 32px;
+    }
+    .footer-grid {
+      max-width: 1200px; margin: 0 auto;
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr; gap: 48px;
+      padding-bottom: 48px; border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .footer-brand strong { display: block; font-size: 20px; font-weight: 800; color: white; margin-bottom: 4px; }
+    .footer-brand .tagline { font-size: 12px; color: var(--secondary); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 16px; }
+    .footer-brand p { font-size: 13.5px; line-height: 1.7; max-width: 280px; }
+
+    .footer-col h4 { font-size: 13px; font-weight: 700; color: white; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 18px; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-col ul li a { color: rgba(255,255,255,0.65); text-decoration: none; font-size: 13.5px; transition: var(--transition); }
+    .footer-col ul li a:hover { color: var(--secondary); padding-left: 4px; }
+
+    .footer-contact { display: flex; flex-direction: column; gap: 14px; }
+    .contact-line { display: flex; align-items: flex-start; gap: 12px; font-size: 13.5px; }
+    .contact-line i { color: var(--secondary); font-size: 15px; margin-top: 2px; flex-shrink: 0; }
+
+    .footer-socials { display: flex; gap: 10px; margin-top: 20px; }
+    .social-btn {
+      width: 38px; height: 38px; border-radius: 10px;
+      background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.7);
+      display: flex; align-items: center; justify-content: center;
+      text-decoration: none; font-size: 15px; transition: var(--transition);
+    }
+    .social-btn:hover { background: var(--primary); color: white; transform: translateY(-2px); }
+
+    .footer-bottom {
+      max-width: 1200px; margin: 0 auto; padding-top: 28px;
+      display: flex; align-items: center; justify-content: space-between;
+      font-size: 12.5px; color: rgba(255,255,255,0.4); flex-wrap: wrap; gap: 12px;
+    }
+    .footer-bottom span { color: var(--accent); }
+
+    /* ─── WHATSAPP FLOAT ─────────────────────────────────────── */
+    .whatsapp-float {
+      position: fixed; bottom: 28px; right: 28px; z-index: 999;
+      width: 60px; height: 60px; border-radius: 50%;
+      background: #25D366; color: white;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 26px; text-decoration: none;
+      box-shadow: 0 4px 20px rgba(37,211,102,0.5);
+      transition: var(--transition);
+      animation: whatsapp-pulse 2.5s infinite;
+    }
+    @keyframes whatsapp-pulse {
+      0%, 100% { box-shadow: 0 4px 20px rgba(37,211,102,0.5); }
+      50% { box-shadow: 0 4px 40px rgba(37,211,102,0.75); }
+    }
+    .whatsapp-float:hover { transform: scale(1.12); }
+
+    /* ─── SCROLL REVEAL ──────────────────────────────────────── */
+    .reveal {
+      opacity: 0; transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ─── RESPONSIVE ─────────────────────────────────────────── */
+    @media (max-width: 1024px) {
+      .hero-content { grid-template-columns: 1fr; gap: 40px; }
+      .hero-visual { display: grid; grid-template-columns: 1fr 1fr; }
+      .intro-grid, .why-inner { grid-template-columns: 1fr; gap: 40px; }
+      .intro-image-wrap { display: none; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links, .nav-cta { display: none; }
+      .nav-hamburger { display: flex; }
+      .section { padding: 64px 5%; }
+      .hero-content { padding: 40px 5%; }
+      .hero-visual { grid-template-columns: 1fr; }
+      .hero-stats { gap: 20px; }
+      .stat strong { font-size: 1.6rem; }
+      .process-steps::before { display: none; }
+      .footer-grid { grid-template-columns: 1fr; gap: 36px; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+<!-- DEMO BANNER — PRONTO -->
+<div style="position:fixed;top:0;left:0;right:0;z-index:9999;background:linear-gradient(90deg,#198882,#00BAB9);color:white;text-align:center;padding:10px 20px;font-size:14px;font-weight:600;letter-spacing:0.5px;box-shadow:0 2px 12px rgba(0,0,0,0.2);">
+  ✨ Vista previa — así podría verse la web de <span style="text-decoration:underline">Carlos Acevedo Odontología</span>
+  &nbsp;·&nbsp; Creada por <strong>Pronto</strong>
+  &nbsp;·&nbsp; <a href="https://calendly.com/cesargomezs711/30min" target="_blank" style="color:white;text-decoration:underline;">Agendar llamada</a>
+</div>
+<style>
+  body { padding-top: 44px !important; }
+  .navbar { top: 44px !important; }
+</style>
+
+<!-- ─── NAVBAR ──────────────────────────────────────────────── -->
+<nav class="navbar" id="navbar">
+  <a href="#" class="nav-logo">
+    <div class="nav-logo-icon"><i class="fa-solid fa-tooth"></i></div>
+    <div class="nav-logo-text">
+      <strong>Carlos Acevedo</strong>
+      <span>Odontología especializada</span>
+    </div>
+  </a>
+
+  <ul class="nav-links">
+    <li><a href="#">Inicio</a></li>
+    <li><a href="#servicios" class="active">Odontología</a></li>
+    <li><a href="#">Tratamientos</a></li>
+    <li><a href="#">Nosotros</a></li>
+    <li><a href="#">Blog</a></li>
+    <li><a href="#contacto" class="nav-cta">Agendar cita</a></li>
+  </ul>
+
+  <div class="nav-hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- ─── HERO ───────────────────────────────────────────────── -->
+<section class="hero">
+  <div class="hero-bg-pattern"></div>
+  <div class="hero-glow"></div>
+
+  <div class="hero-content">
+    <div class="hero-text">
+      <div class="hero-badge">
+        <i class="fa-solid fa-shield-heart"></i>
+        Clínica dental de confianza en Barranquilla
+      </div>
+      <h1>Odontología de calidad <span>con la confianza de Carlos Acevedo</span></h1>
+      <p>Contamos con la tecnología más avanzada y un equipo de cirujanos maxilofaciales especializados para brindarte el tratamiento que necesitas con el mayor confort y seguridad.</p>
+
+      <div class="hero-actions">
+        <a href="#contacto" class="btn-primary">
+          <i class="fa-solid fa-calendar-check"></i> Agendar mi consulta
+        </a>
+        <a href="#servicios" class="btn-outline">
+          <i class="fa-solid fa-list-ul"></i> Ver servicios
+        </a>
+      </div>
+
+      <div class="hero-stats">
+        <div class="stat"><strong>+5,000</strong><span>Pacientes atendidos</span></div>
+        <div class="stat"><strong>15+</strong><span>Años de experiencia</span></div>
+        <div class="stat"><strong>98%</strong><span>Satisfacción</span></div>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="hero-card">
+        <div class="hero-card-icon"><i class="fa-solid fa-tooth"></i></div>
+        <div class="hero-card-info">
+          <strong>Extracción de muelas del juicio</strong>
+          <span>Procedimiento rápido y seguro</span>
+        </div>
+      </div>
+      <div class="hero-card">
+        <div class="hero-card-icon"><i class="fa-solid fa-screwdriver-wrench"></i></div>
+        <div class="hero-card-info">
+          <strong>Implantes dentales</strong>
+          <span>Tecnología de última generación</span>
+        </div>
+      </div>
+      <div class="hero-card">
+        <div class="hero-card-icon"><i class="fa-solid fa-syringe"></i></div>
+        <div class="hero-card-info">
+          <strong>Anestesia y sedación</strong>
+          <span>Procedimientos completamente indoloros</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── TRUST BAR ─────────────────────────────────────────── -->
+<div class="trust-bar">
+  <div class="trust-bar-inner">
+    <div class="trust-item"><i class="fa-solid fa-certificate"></i><span>Cirujanos certificados</span></div>
+    <div class="trust-item"><i class="fa-solid fa-microscope"></i><span>Tecnología digital 3D</span></div>
+    <div class="trust-item"><i class="fa-solid fa-clock"></i><span>Atención mismo día</span></div>
+    <div class="trust-item"><i class="fa-solid fa-shield-halved"></i><span>Protocolos de esterilización</span></div>
+    <div class="trust-item"><i class="fa-solid fa-star"></i><span>5 estrellas en Google</span></div>
+  </div>
+</div>
+
+<!-- ─── INTRO ─────────────────────────────────────────────── -->
+<section class="section">
+  <div class="intro-grid">
+    <div class="intro-image-wrap">
+      <div class="intro-image-main">🦷</div>
+      <div class="intro-badge-float">
+        <div class="number">+15</div>
+        <div class="label">Años de<br>experiencia</div>
+      </div>
+    </div>
+    <div class="intro-text reveal">
+      <div class="section-tag">¿Qué es?</div>
+      <h2>Cirugía oral de <span>alto nivel</span> para tu salud dental</h2>
+      <p>La cirugía oral es la especialidad odontológica encargada del diagnóstico y tratamiento quirúrgico de enfermedades, defectos e injurias de los tejidos blandos y duros de la cavidad oral.</p>
+      <p>En Carlos Acevedo Odontología contamos con un equipo de especialistas en cirugía oral y maxilofacial que aplican las técnicas más modernas para garantizar tu bienestar antes, durante y después del procedimiento.</p>
+      <ul class="intro-list">
+        <li><i class="fa-solid fa-circle-check"></i>Evaluación diagnóstica con radiografías digitales y tomografía 3D</li>
+        <li><i class="fa-solid fa-circle-check"></i>Anestesia local y sedación consciente para mayor comodidad</li>
+        <li><i class="fa-solid fa-circle-check"></i>Seguimiento postoperatorio personalizado</li>
+        <li><i class="fa-solid fa-circle-check"></i>Protocolos certificados de esterilización y bioseguridad</li>
+      </ul>
+      <a href="#contacto" class="btn-primary">Consulta gratuita <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── SERVICIOS ──────────────────────────────────────────── -->
+<section class="section section-alt" id="servicios">
+  <div class="section-header reveal">
+    <div class="section-tag">Nuestros servicios</div>
+    <h2>Nuestros <span>Tratamientos</span></h2>
+    <p>En Carlos Acevedo Odontología contamos con especialistas certificados y tecnología de última generación.</p>
+  </div>
+
+  <div class="services-grid">
+    <div class="service-card reveal">
+      <div class="service-icon"><i class="fa-solid fa-tooth"></i></div>
+      <h3>Odontología General</h3>
+      <p>Revisiones, limpiezas y tratamientos preventivos para toda la familia.</p>
+      <a href="#contacto" class="service-link">Saber más <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+
+    <div class="service-card reveal">
+      <div class="service-icon"><i class="fa-solid fa-wand-sparkles"></i></div>
+      <h3>Diseño de Sonrisa</h3>
+      <p>Creamos tu sonrisa perfecta con planificación digital y técnicas estéticas.</p>
+      <a href="#contacto" class="service-link">Saber más <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+
+    <div class="service-card reveal">
+      <div class="service-icon"><i class="fa-solid fa-rotate"></i></div>
+      <h3>Implantes Dentales</h3>
+      <p>Implantes de titanio para recuperar dientes perdidos de forma permanente.</p>
+      <a href="#contacto" class="service-link">Saber más <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+
+    <div class="service-card reveal">
+      <div class="service-icon"><i class="fa-solid fa-teeth"></i></div>
+      <h3>Ortodoncia</h3>
+      <p>Brackets e invisalign para corregir la alineación de tu mordida.</p>
+      <a href="#contacto" class="service-link">Saber más <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+
+    <div class="service-card reveal">
+      <div class="service-icon"><i class="fa-solid fa-sun"></i></div>
+      <h3>Blanqueamiento Dental</h3>
+      <p>Blanqueamiento profesional para una sonrisa más blanca y luminosa.</p>
+      <a href="#contacto" class="service-link">Saber más <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+
+    <div class="service-card reveal">
+      <div class="service-icon"><i class="fa-solid fa-shield-heart"></i></div>
+      <h3>Endodoncia</h3>
+      <p>Conductos radiculares precisos y sin dolor para salvar tus dientes.</p>
+      <a href="#contacto" class="service-link">Saber más <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── POR QUÉ ELEGIRNOS ──────────────────────────────────── -->
+<section class="section">
+  <div class="why-inner">
+    <div class="why-image reveal">🏥</div>
+    <div>
+      <div class="section-header" style="text-align:left; margin-bottom:40px;">
+        <div class="section-tag">¿Por qué elegirnos?</div>
+        <h2>Tu salud bucal en las <span>mejores manos</span></h2>
+        <p>Combinamos experiencia, tecnología y calidez humana para ofrecerte la mejor atención en Carlos Acevedo Odontología.</p>
+      </div>
+
+      <div class="why-features">
+        <div class="why-item reveal">
+          <div class="why-item-icon teal"><i class="fa-solid fa-user-doctor"></i></div>
+          <div class="why-item-text">
+            <strong>Especialistas certificados</strong>
+            <p>Nuestro equipo cuenta con formación de posgrado y años de práctica clínica especializada en Carlos Acevedo Odontología.</p>
+          </div>
+        </div>
+        <div class="why-item reveal">
+          <div class="why-item-icon gold"><i class="fa-solid fa-cube"></i></div>
+          <div class="why-item-text">
+            <strong>Tecnología 3D de diagnóstico</strong>
+            <p>Tomografía computarizada cone beam para una planificación quirúrgica exacta, minimizando riesgos y optimizando resultados.</p>
+          </div>
+        </div>
+        <div class="why-item reveal">
+          <div class="why-item-icon blue"><i class="fa-solid fa-face-smile-beam"></i></div>
+          <div class="why-item-text">
+            <strong>Máximo confort y mínimo dolor</strong>
+            <p>Técnicas de anestesia y sedación avanzadas para que tu experiencia sea totalmente cómoda. Tu bienestar es nuestra prioridad.</p>
+          </div>
+        </div>
+        <div class="why-item reveal">
+          <div class="why-item-icon green"><i class="fa-solid fa-hand-holding-heart"></i></div>
+          <div class="why-item-text">
+            <strong>Seguimiento postoperatorio</strong>
+            <p>Acompañamiento continuo tras tu procedimiento. Disponibles por WhatsApp para resolver cualquier duda durante tu recuperación.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── PROCESO ────────────────────────────────────────────── -->
+<section class="section section-alt">
+  <div class="section-header reveal">
+    <div class="section-tag">Cómo funciona</div>
+    <h2>Tu proceso en <span>4 pasos simples</span></h2>
+    <p>Diseñamos cada etapa para que tu experiencia sea tranquila, informada y completamente personalizada.</p>
+  </div>
+
+  <div class="process-steps">
+    <div class="process-step reveal">
+      <div class="step-number">1</div>
+      <div class="step-content">
+        <h3>Consulta y diagnóstico</h3>
+        <p>Tu cita inicia con una evaluación clínica completa. Tomamos radiografías digitales o tomografía 3D para analizar con precisión tu caso y definir el mejor tratamiento.</p>
+      </div>
+    </div>
+    <div class="process-step reveal">
+      <div class="step-number">2</div>
+      <div class="step-content">
+        <h3>Plan de tratamiento personalizado</h3>
+        <p>El especialista te explica detalladamente el procedimiento, opciones de anestesia, tiempo estimado, cuidados postoperatorios y costos, sin letra pequeña.</p>
+      </div>
+    </div>
+    <div class="process-step reveal">
+      <div class="step-number">3</div>
+      <div class="step-content">
+        <h3>Procedimiento quirúrgico</h3>
+        <p>Realizamos la cirugía con instrumentos esterilizados y tecnología de vanguardia. Priorizamos tu comodidad en todo momento con protocolos de anestesia probados.</p>
+      </div>
+    </div>
+    <div class="process-step reveal">
+      <div class="step-number">4</div>
+      <div class="step-content">
+        <h3>Seguimiento y recuperación</h3>
+        <p>Recibirás indicaciones claras de cuidados en casa y control postoperatorio. Estamos disponibles por WhatsApp ante cualquier inquietud durante tu recuperación.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── TESTIMONIOS ────────────────────────────────────────── -->
+<section class="section">
+  <div class="section-header reveal">
+    <div class="section-tag">Testimonios</div>
+    <h2>Lo que dicen <span>nuestros pacientes</span></h2>
+    <p>La confianza de nuestros pacientes es nuestro mayor logro. Lee sus experiencias reales.</p>
+  </div>
+
+  <div class="testimonials-grid">
+    <div class="testimonial-card reveal">
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-text">"Me extraje las cuatro muelas del juicio en una sola sesión. El doctor fue muy profesional, me explicó todo y el dolor postoperatorio fue mínimo. ¡Totalmente recomendado!"</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">A</div>
+        <div>
+          <div class="author-name">Andrea Morales</div>
+          <div class="author-label">Extracción de terceros molares</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="testimonial-card reveal">
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-text">"Me puse dos implantes dentales y quedé encantado con el resultado. El equipo es muy dedicado, las instalaciones modernas y el trato es excelente. Volveré sin duda."</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">C</div>
+        <div>
+          <div class="author-name">Carlos Restrepo</div>
+          <div class="author-label">Implantes dentales</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="testimonial-card reveal">
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-text">"Tenía mucho miedo de la cirugía de encías, pero el equipo me tranquilizó desde el inicio. No sentí nada y la recuperación fue muy rápida. Gracias por el seguimiento tan personal."</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">L</div>
+        <div>
+          <div class="author-name">Laura Gómez</div>
+          <div class="author-label">Cirugía periodontal</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FAQ ────────────────────────────────────────────────── -->
+<section class="section section-alt">
+  <div class="section-header reveal">
+    <div class="section-tag">Preguntas frecuentes</div>
+    <h2>Resolvemos tus <span>dudas</span></h2>
+    <p>Encuentra respuestas a las preguntas más comunes sobre nuestros procedimientos de cirugía oral.</p>
+  </div>
+
+  <div class="faq-wrap">
+    <div class="faq-item reveal">
+      <button class="faq-question" onclick="toggleFAQ(this)">
+        <span>¿Es dolorosa la cirugía oral?</span>
+        <div class="faq-icon"><i class="fa-solid fa-plus"></i></div>
+      </button>
+      <div class="faq-answer">
+        <p>No. Durante el procedimiento se aplica anestesia local o sedación consciente, por lo que no sentirás dolor. Después de la cirugía puede haber molestias leves que se controlan fácilmente con analgésicos recetados por tu especialista. Nuestro objetivo es que tu experiencia sea lo más cómoda posible.</p>
+      </div>
+    </div>
+
+    <div class="faq-item reveal">
+      <button class="faq-question" onclick="toggleFAQ(this)">
+        <span>¿Cuánto tiempo dura la recuperación?</span>
+        <div class="faq-icon"><i class="fa-solid fa-plus"></i></div>
+      </button>
+      <div class="faq-answer">
+        <p>Depende del tipo de procedimiento. Una extracción simple puede tener recuperación de 1-2 días. La extracción de muelas del juicio impactadas puede requerir 3-5 días. Los implantes dentales tienen un periodo de osteointegración de 3-6 meses, aunque puedes realizar actividades normales desde el día siguiente al procedimiento.</p>
+      </div>
+    </div>
+
+    <div class="faq-item reveal">
+      <button class="faq-question" onclick="toggleFAQ(this)">
+        <span>¿Cuándo debo extraer las muelas del juicio?</span>
+        <div class="faq-icon"><i class="fa-solid fa-plus"></i></div>
+      </button>
+      <div class="faq-answer">
+        <p>Se recomienda extracción cuando producen dolor, infección, quistes, daño a los dientes vecinos o están completamente impactadas. Lo ideal es consultar entre los 17 y 25 años, cuando las raíces no están completamente formadas y la recuperación es más rápida. Un diagnóstico con radiografía o tomografía 3D determinará si la extracción es necesaria en tu caso.</p>
+      </div>
+    </div>
+
+    <div class="faq-item reveal">
+      <button class="faq-question" onclick="toggleFAQ(this)">
+        <span>¿Los implantes dentales duran toda la vida?</span>
+        <div class="faq-icon"><i class="fa-solid fa-plus"></i></div>
+      </button>
+      <div class="faq-answer">
+        <p>Con el cuidado adecuado, los implantes dentales pueden durar toda la vida. La corona (parte visible) puede necesitar reemplazo a los 15-20 años por desgaste normal. La clave es mantener una buena higiene oral, visitas regulares al dentista y evitar hábitos como rechinar los dientes o morder objetos duros.</p>
+      </div>
+    </div>
+
+    <div class="faq-item reveal">
+      <button class="faq-question" onclick="toggleFAQ(this)">
+        <span>¿Ofrecen facilidades de pago?</span>
+        <div class="faq-icon"><i class="fa-solid fa-plus"></i></div>
+      </button>
+      <div class="faq-answer">
+        <p>Sí. En Carlos Acevedo Odontología contamos con opciones de financiamiento y planes de pago para que el costo no sea una barrera para tu salud. Puedes consultar las opciones disponibles directamente con nuestro equipo de atención al paciente. Aceptamos tarjetas de crédito y débito.</p>
+      </div>
+    </div>
+
+    <div class="faq-item reveal">
+      <button class="faq-question" onclick="toggleFAQ(this)">
+        <span>¿Cuáles son los cuidados después de una extracción?</span>
+        <div class="faq-icon"><i class="fa-solid fa-plus"></i></div>
+      </button>
+      <div class="faq-answer">
+        <p>Los principales cuidados incluyen: mantener la gasa en el lugar de extracción por 30-45 min, no enjuagarse vigorosamente las primeras 24h, no fumar, evitar alimentos duros o muy calientes, tomar los medicamentos recetados y aplicar hielo externo las primeras horas para reducir la inflamación. Te entregaremos un instructivo detallado.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CTA ────────────────────────────────────────────────── -->
+<section class="cta-section" id="contacto">
+  <div class="cta-inner reveal">
+    <h2>¿Listo para recuperar tu salud bucal?</h2>
+    <p>Agenda tu consulta hoy. Nuestro equipo está disponible para atenderte y orientarte sobre el mejor tratamiento para tu caso particular.</p>
+    <div class="cta-buttons">
+      <a href="https://wa.me/573012388108" class="btn-whatsapp" target="_blank">
+        <i class="fa-brands fa-whatsapp"></i> Escribir por WhatsApp
+      </a>
+      <a href="tel:+573012388108" class="btn-tel">
+        <i class="fa-solid fa-phone"></i> Llamar ahora
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ────────────────────────────────────────────── -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <strong>Carlos Acevedo</strong>
+      <div class="tagline">Odontología especializada</div>
+      <p>Somos un centro dental de alta complejidad comprometido con la salud bucal y el bienestar integral de nuestros pacientes.</p>
+      <div class="footer-socials">
+        <a href="#" class="social-btn"><i class="fa-brands fa-instagram"></i></a>
+        <a href="#" class="social-btn"><i class="fa-brands fa-facebook-f"></i></a>
+        <a href="#" class="social-btn"><i class="fa-brands fa-tiktok"></i></a>
+        <a href="#" class="social-btn"><i class="fa-brands fa-youtube"></i></a>
+      </div>
+    </div>
+
+    <div class="footer-col">
+      <h4>Tratamientos</h4>
+      <ul>
+        <li><a href="#">Cirugía Oral</a></li>
+        <li><a href="#">Implantes</a></li>
+        <li><a href="#">Ortodoncia</a></li>
+        <li><a href="#">Estética Dental</a></li>
+        <li><a href="#">Endodoncia</a></li>
+        <li><a href="#">Periodoncia</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Información</h4>
+      <ul>
+        <li><a href="#">Quiénes somos</a></li>
+        <li><a href="#">Nuestro equipo</a></li>
+        <li><a href="#">Blog dental</a></li>
+        <li><a href="#">Preguntas frecuentes</a></li>
+        <li><a href="#">Trabaja con nosotros</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Contacto</h4>
+      <div class="footer-contact">
+        <div class="contact-line">
+          <i class="fa-solid fa-location-dot"></i>
+          <span>Calle 106, Barranquilla, Atlántico</span>
+        </div>
+        <div class="contact-line">
+          <i class="fa-solid fa-phone"></i>
+          <span>+57 (XXX) XXX-XXXX</span>
+        </div>
+        <div class="contact-line">
+          <i class="fa-brands fa-whatsapp"></i>
+          <span>WhatsApp disponible</span>
+        </div>
+        <div class="contact-line">
+          <i class="fa-solid fa-clock"></i>
+          <span>Lun–Vie: 8am–6pm<br>Sáb: 8am–2pm</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>© 2025 <span>Carlos Acevedo Odontología</span>. Todos los derechos reservados.</p>
+    <p>Diseño mejorado con ♡ · Política de privacidad · Términos</p>
+  </div>
+</footer>
+
+<!-- ─── WHATSAPP FLOAT ────────────────────────────────────── -->
+<a href="https://wa.me/573012388108" class="whatsapp-float" target="_blank" title="Escríbenos por WhatsApp">
+  <i class="fa-brands fa-whatsapp"></i>
+</a>
+
+<!-- ─── SCRIPTS ───────────────────────────────────────────── -->
+<script>
+  // Navbar scroll effect
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  reveals.forEach(el => observer.observe(el));
+
+  // FAQ accordion
+  function toggleFAQ(btn) {
+    const item = btn.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
+
+  // Mobile menu
+  function toggleMenu() {
+    const links = document.querySelector('.nav-links');
+    if (links) {
+      const isVisible = links.style.display === 'flex';
+      links.style.cssText = isVisible
+        ? ''
+        : 'display:flex;flex-direction:column;position:absolute;top:74px;left:0;right:0;background:white;padding:20px 5%;box-shadow:0 10px 30px rgba(0,0,0,0.1);gap:4px;';
+    }
+  }
+</script>
+</body>
+</html>
