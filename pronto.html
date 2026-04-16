@@ -99,7 +99,7 @@
 <style>
   :root {
     --bg: #08091A;
-    --bg-subtle: rgba(255,255,255,0.03);
+    --bg-subtle: rgba(255,255,255,0.02);
     --bg-card: rgba(255,255,255,0.04);
     --text: #E6E8F0;
     --text-muted: #B0B6CC;
@@ -131,7 +131,7 @@
   a { color: inherit; text-decoration: none; }
   img { max-width: 100%; display: block; }
   .container { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
-  section { padding: 80px 0; }
+  section { padding: 80px 0; background: var(--bg); }
   h1, h2, h3 { font-family: var(--font-heading); line-height: 1.15; font-weight: 700; letter-spacing: -0.02em; }
   h1 { font-size: clamp(2.2rem, 5vw, 3.6rem); }
   h2 { font-size: clamp(1.6rem, 3.5vw, 2.4rem); margin-bottom: 24px; }
@@ -444,16 +444,25 @@
     max-width: 320px;
     text-align: center;
     position: relative;
-    padding: 0 20px;
+    padding: 24px 20px 28px;
+    border-radius: var(--radius-lg);
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    margin: 0 12px;
+    transition: transform 0.3s, border-color 0.3s;
+  }
+  .timeline-step:hover {
+    transform: translateY(-6px);
+    border-color: var(--border-blue);
   }
   .timeline-number {
-    width: 56px;
-    height: 56px;
+    width: 64px;
+    height: 64px;
     border-radius: 50%;
     background: var(--gradient);
     color: var(--bg);
     font-family: var(--font-heading);
-    font-size: 1.3rem;
+    font-size: 1.4rem;
     font-weight: 800;
     display: flex;
     align-items: center;
@@ -461,24 +470,36 @@
     margin: 0 auto 20px;
     position: relative;
     z-index: 2;
+    box-shadow: 0 4px 20px rgba(79,142,247,0.3);
   }
-  .timeline-step h3 { color: var(--text); margin-bottom: 8px; }
+  .timeline-step h3 { color: var(--text); margin-bottom: 8px; font-size: 1.1rem; }
   .timeline-step p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; }
-  .timeline-line {
-    position: absolute;
-    top: 28px;
-    left: calc(50% + 28px);
-    right: calc(-50% + 28px);
-    height: 2px;
-    background: var(--gradient);
-    z-index: 1;
-    opacity: 0.4;
+  .timeline-icon {
+    font-size: 1.5rem;
+    margin-bottom: 8px;
+    display: block;
   }
-  .timeline-step:last-child .timeline-line { display: none; }
+  .timeline-connector {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 50%;
+    right: -24px;
+    transform: translateY(-50%);
+    z-index: 3;
+    color: var(--accent-cyan);
+    font-size: 1.2rem;
+    opacity: 0.5;
+  }
+  .timeline-step:last-child .timeline-connector { display: none; }
   @media (max-width: 768px) {
-    .timeline { flex-direction: column; align-items: center; gap: 40px; }
-    .timeline-line {
-      display: none;
+    .timeline { flex-direction: column; align-items: center; gap: 16px; }
+    .timeline-step { margin: 0; max-width: 400px; width: 100%; }
+    .timeline-connector {
+      position: static;
+      transform: none;
+      margin: -8px 0;
     }
   }
 
@@ -708,11 +729,16 @@
     box-shadow: 0 20px 60px rgba(0,0,0,0.4);
     aspect-ratio: 16 / 9;
     background: var(--bg);
+    position: relative;
   }
   .live-demo-container iframe {
-    width: 100%;
-    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1440px;
+    height: 810px;
     border: none;
+    transform-origin: top left;
   }
 
   /* ── PHONES ROW (side by side) ── */
@@ -762,7 +788,7 @@
     width: 375px;
     height: 812px;
     border: none;
-    pointer-events: none;
+    pointer-events: auto;
     transform-origin: top left;
   }
   .device-phone-notch {
@@ -1262,20 +1288,23 @@
     <h2 style="text-align:center">Cómo funciona</h2>
     <div class="timeline">
       <div class="timeline-step">
-        <div class="timeline-line"></div>
         <div class="timeline-number">1</div>
-        <h3>Elija su plan</h3>
-        <p>Esencial o Completo. Primer mes gratis. Solo necesita WhatsApp.</p>
+        <span class="timeline-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>
+        <h3>Escríbanos por WhatsApp</h3>
+        <p>Elija Esencial o Completo. Primer mes gratis. Solo necesita WhatsApp.</p>
+        <div class="timeline-connector">→</div>
       </div>
       <div class="timeline-step">
-        <div class="timeline-line"></div>
         <div class="timeline-number">2</div>
+        <span class="timeline-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></span>
         <h3>Nos envía su información</h3>
         <p>Nombre, dirección, servicios, fotos. 10 minutos por WhatsApp.</p>
+        <div class="timeline-connector">→</div>
       </div>
       <div class="timeline-step">
         <div class="timeline-number">3</div>
-        <h3>Su web está lista en 48 horas</h3>
+        <span class="timeline-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></span>
+        <h3>Su web lista en 48 horas</h3>
         <p>Publicada con dominio propio, Google Maps y botón WhatsApp.</p>
       </div>
     </div>
@@ -1842,16 +1871,17 @@
 
   window.addEventListener('resize', scaleBAIframes);
 
-  // ── SCALE DEVICE IFRAMES TO FIT CONTAINERS ──
-  function scaleDeviceIframes() {
-    // Laptop iframes
-    var laptops = document.querySelectorAll('.device-laptop-screen');
-    laptops.forEach(function(screen) {
-      var iframe = screen.querySelector('iframe');
-      if (!iframe) return;
-      var scale = screen.offsetWidth / 1440;
-      iframe.style.transform = 'scale(' + scale + ')';
-    });
+  // ── SCALE ALL IFRAMES TO FIT CONTAINERS ──
+  function scaleAllIframes() {
+    // Live demo horizontal iframe
+    var liveDemo = document.querySelector('.live-demo-container');
+    if (liveDemo) {
+      var demoIframe = liveDemo.querySelector('iframe');
+      if (demoIframe) {
+        var scale = liveDemo.offsetWidth / 1440;
+        demoIframe.style.transform = 'scale(' + scale + ')';
+      }
+    }
     // Phone iframes
     var phones = document.querySelectorAll('.device-phone-screen');
     phones.forEach(function(screen) {
@@ -1862,10 +1892,10 @@
     });
   }
 
-  window.addEventListener('resize', scaleDeviceIframes);
+  window.addEventListener('resize', scaleAllIframes);
   window.addEventListener('load', function() {
     scaleBAIframes();
-    scaleDeviceIframes();
+    scaleAllIframes();
     updateProgress();
   });
 
