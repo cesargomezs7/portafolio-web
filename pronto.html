@@ -243,20 +243,25 @@
     justify-content: center;
     text-align: center;
     padding: 120px 0 60px;
-    background: radial-gradient(ellipse at 50% 30%, rgba(79,142,247,0.12), transparent 60%);
+    background:
+      radial-gradient(ellipse at 50% 20%, rgba(79,142,247,0.18), transparent 50%),
+      radial-gradient(ellipse at 20% 80%, rgba(56,189,248,0.08), transparent 50%),
+      radial-gradient(ellipse at 80% 60%, rgba(34,197,94,0.06), transparent 50%);
     position: relative;
   }
   .hero-badge {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    padding: 8px 18px;
+    gap: 10px;
+    padding: 12px 24px;
     border-radius: 999px;
-    background: rgba(34,197,94,0.1);
-    border: 1px solid rgba(34,197,94,0.3);
-    font-size: 0.9rem;
+    background: rgba(34,197,94,0.15);
+    border: 1px solid rgba(34,197,94,0.4);
+    font-size: 1.05rem;
+    font-weight: 600;
     color: var(--accent-green);
     margin-bottom: 24px;
+    box-shadow: 0 0 20px rgba(34,197,94,0.15);
   }
   .hero-badge .pulse-dot {
     width: 8px;
@@ -522,23 +527,8 @@
     margin-bottom: 8px;
     color: var(--text);
   }
-  .roi-field input[type="number"],
   .roi-field input[type="range"] {
     width: 100%;
-    padding: 12px 16px;
-    border-radius: 8px;
-    border: 1px solid var(--border);
-    background: rgba(255,255,255,0.05);
-    color: var(--text);
-    font-family: var(--font-body);
-    font-size: 1rem;
-    outline: none;
-    transition: border-color 0.2s;
-  }
-  .roi-field input[type="number"]:focus {
-    border-color: var(--accent-blue);
-  }
-  .roi-field input[type="range"] {
     padding: 0;
     height: 6px;
     -webkit-appearance: none;
@@ -547,6 +537,47 @@
     border: none;
     border-radius: 3px;
     cursor: pointer;
+  }
+  .roi-input-group {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+  .roi-btn {
+    width: 56px;
+    height: 52px;
+    border: none;
+    background: rgba(79,142,247,0.15);
+    color: var(--accent-cyan);
+    font-size: 1.4rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s;
+    font-family: var(--font-body);
+    flex-shrink: 0;
+  }
+  .roi-btn:hover {
+    background: rgba(79,142,247,0.3);
+  }
+  .roi-btn:active {
+    background: rgba(79,142,247,0.5);
+  }
+  .roi-input-group input {
+    flex: 1;
+    text-align: center;
+    border: none;
+    border-left: 1px solid var(--border);
+    border-right: 1px solid var(--border);
+    background: rgba(255,255,255,0.05);
+    color: var(--text);
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    font-weight: 700;
+    padding: 12px;
+    outline: none;
   }
   .roi-field input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none;
@@ -753,7 +784,7 @@
   }
   @media (max-width: 480px) {
     .phones-row { gap: 16px; }
-    .device-phone { width: 140px; }
+    .device-phone { width: 150px; }
   }
 
   /* ── DEVICE LABELS ── */
@@ -768,14 +799,15 @@
   }
   /* Phone mockup */
   .device-phone {
-    width: 160px;
-    background: #111225;
-    border-radius: 24px;
-    padding: 10px 8px;
-    box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+    width: 200px;
+    background: #0a0b18;
+    border-radius: 28px;
+    padding: 12px 10px;
+    border: 2px solid rgba(255,255,255,0.15);
+    box-shadow: 0 16px 50px rgba(0,0,0,0.5);
   }
   .device-phone-screen {
-    border-radius: 16px;
+    border-radius: 20px;
     overflow: hidden;
     aspect-ratio: 9 / 19.5;
     background: var(--bg);
@@ -792,21 +824,21 @@
     transform-origin: top left;
   }
   .device-phone-notch {
-    width: 50px;
-    height: 5px;
+    width: 60px;
+    height: 6px;
     background: #2a2b3e;
     border-radius: 3px;
     margin: 0 auto 8px;
   }
   .device-phone-home {
-    width: 36px;
+    width: 44px;
     height: 4px;
     background: #2a2b3e;
     border-radius: 2px;
-    margin: 8px auto 0;
+    margin: 10px auto 0;
   }
   @media (max-width: 768px) {
-    .device-phone { width: 140px; }
+    .device-phone { width: 160px; }
   }
 
   /* ── PLANES ── */
@@ -1146,6 +1178,34 @@
     .popup { padding: 32px 24px; }
     .ba-container { aspect-ratio: 4/3; }
   }
+
+  /* ── SECTION ALT SMOOTH GRADIENTS ── */
+  .section-alt {
+    background: var(--bg-subtle);
+    position: relative;
+  }
+  .section-alt::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background: linear-gradient(to bottom, var(--bg), transparent);
+    pointer-events: none;
+    z-index: 1;
+  }
+  .section-alt::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background: linear-gradient(to top, var(--bg), transparent);
+    pointer-events: none;
+    z-index: 1;
+  }
 </style>
 </head>
 <body>
@@ -1177,7 +1237,14 @@
       Disponible &middot; Primer mes gratis
     </div>
     <h1>Presencia web para<br><span class="brand-gradient">su clínica dental</span></h1>
-    <p class="sub">Suscripción mensual con todo incluido. Su clínica visible en Google, con WhatsApp directo y lista en 48 horas. Sin contratos, sin sorpresas.</p>
+    <p class="sub">Suscripción mensual con todo incluido. Su clínica visible en Google, con WhatsApp directo y lista en 48 horas. Sin contratos, sin sorpresas. Ya tenemos una demo personalizada de su clínica lista para mostrarle.</p>
+    <p style="font-size:1.3rem; font-weight:700; color:var(--accent-green); margin-bottom:24px;">Su primer mes es gratis. Cero riesgo.</p>
+    <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:12px; margin-bottom:28px;">
+      <span style="display:inline-flex; align-items:center; gap:6px; padding:8px 16px; border-radius:999px; background:rgba(255,255,255,0.05); border:1px solid var(--border); font-size:0.85rem; color:var(--text-muted); font-weight:500;">&#10003; Primer mes gratis</span>
+      <span style="display:inline-flex; align-items:center; gap:6px; padding:8px 16px; border-radius:999px; background:rgba(255,255,255,0.05); border:1px solid var(--border); font-size:0.85rem; color:var(--text-muted); font-weight:500;">&#10003; Web en 48 horas</span>
+      <span style="display:inline-flex; align-items:center; gap:6px; padding:8px 16px; border-radius:999px; background:rgba(255,255,255,0.05); border:1px solid var(--border); font-size:0.85rem; color:var(--text-muted); font-weight:500;">&#10003; $0 de setup</span>
+      <span style="display:inline-flex; align-items:center; gap:6px; padding:8px 16px; border-radius:999px; background:rgba(255,255,255,0.05); border:1px solid var(--border); font-size:0.85rem; color:var(--text-muted); font-weight:500;">&#10003; Sin contratos</span>
+    </div>
     <div class="hero-buttons">
       <a class="cta-primary" href="https://wa.me/573124672674?text=Hola%2C%20vengo%20de%20prontoweb.co%20y%20quiero%20saber%20m%C3%A1s" data-umami-event="click-hero-cta">Hablar con Cesar ahora</a>
       <a class="cta-secondary" href="#portafolio">Ver ejemplos</a>
@@ -1220,6 +1287,21 @@
     <span class="ticker-item">Clínicas en Cartagena</span><span class="ticker-star">&starf;</span>
   </div>
 </div>
+
+<!-- DEMOS PERSONALIZADAS -->
+<section class="reveal" id="demos-personalizadas">
+  <div class="container" style="text-align:center; max-width:700px;">
+    <p class="section-label">Su clínica ya tiene demo</p>
+    <h2>Ya le hicimos una muestra de cómo se vería su página web</h2>
+    <p style="color:var(--text-muted); font-size:1.05rem; line-height:1.7; margin-bottom:32px;">
+      Tenemos más de 950 demos personalizadas listas para clínicas dentales en Colombia.
+      Escríbanos el nombre de su clínica y le enviamos la suya en menos de 5 minutos.
+    </p>
+    <a class="cta-primary" href="https://wa.me/573124672674?text=Hola%2C%20quiero%20ver%20la%20demo%20de%20mi%20cl%C3%ADnica" data-umami-event="click-demo-personalizada">
+      Ver la demo de mi clínica →
+    </a>
+  </div>
+</section>
 
 <!-- SIN WEB VS CON PRONTO -->
 <section class="reveal" id="comparacion">
@@ -1282,7 +1364,7 @@
 </section>
 
 <!-- PROCESS TIMELINE -->
-<section class="reveal" id="como-funciona" style="background: var(--bg-subtle);">
+<section class="reveal section-alt" id="como-funciona">
   <div class="container">
     <p class="section-label">Así de simple</p>
     <h2 style="text-align:center">Cómo funciona</h2>
@@ -1324,7 +1406,11 @@
       </div>
       <div class="roi-field">
         <label for="roi-ticket">Ticket promedio por consulta (COP)</label>
-        <input type="number" id="roi-ticket" value="150000" min="50000" max="1000000" step="10000">
+        <div class="roi-input-group">
+          <button class="roi-btn" id="roi-ticket-minus">&minus;</button>
+          <input type="text" id="roi-ticket" value="150.000" inputmode="numeric" readonly>
+          <button class="roi-btn" id="roi-ticket-plus">+</button>
+        </div>
       </div>
       <div class="roi-results" id="roi-results">
         <div class="roi-line">
@@ -1352,7 +1438,7 @@
 </section>
 
 <!-- BEFORE / AFTER SLIDER -->
-<section class="reveal" id="antes-despues" style="background: var(--bg-subtle);">
+<section class="reveal section-alt" id="antes-despues">
   <div class="container">
     <p class="section-label">El cambio</p>
     <h2 style="text-align:center">La diferencia que hace Pronto</h2>
@@ -1414,7 +1500,7 @@
 </section>
 
 <!-- EN SU CELULAR TAMBIÉN FUNCIONA -->
-<section class="reveal" id="celular" style="background: var(--bg-subtle);">
+<section class="reveal section-alt" id="celular">
   <div class="container">
     <p class="section-label">Responsive</p>
     <h2 style="text-align:center">En su celular también funciona</h2>
@@ -1493,7 +1579,7 @@
 </section>
 
 <!-- POR QUE PRONTO -->
-<section id="porque" class="reveal" style="background: var(--bg-subtle);">
+<section id="porque" class="reveal section-alt">
   <div class="container">
     <p class="section-label">Ventajas</p>
     <h2 style="text-align:center">Por qué Pronto</h2>
@@ -1724,16 +1810,26 @@
   // ── ROI CALCULATOR ──
   var roiPatients = document.getElementById('roi-patients');
   var roiTicket = document.getElementById('roi-ticket');
+  var roiTicketMinus = document.getElementById('roi-ticket-minus');
+  var roiTicketPlus = document.getElementById('roi-ticket-plus');
   var roiPatientsVal = document.getElementById('roi-patients-val');
   var roiLost = document.getElementById('roi-lost');
   var roiRevenue = document.getElementById('roi-revenue');
   var roiValue = document.getElementById('roi-value');
 
+  var ticketValue = 150000;
+  var ticketMin = 50000;
+  var ticketMax = 1000000;
+  var ticketStep = 10000;
+
+  function updateTicketDisplay() {
+    roiTicket.value = formatNumber(ticketValue);
+  }
+
   function calculateROI() {
     var patients = parseInt(roiPatients.value) || 200;
-    var ticket = parseInt(roiTicket.value) || 150000;
     var lostPatients = Math.round(patients * 0.15);
-    var lostRevenue = lostPatients * ticket;
+    var lostRevenue = lostPatients * ticketValue;
     var roi = Math.round(lostRevenue / 199900);
 
     roiPatientsVal.textContent = patients;
@@ -1744,7 +1840,24 @@
 
   if (roiPatients) {
     roiPatients.addEventListener('input', calculateROI);
-    roiTicket.addEventListener('input', calculateROI);
+
+    roiTicketMinus.addEventListener('click', function() {
+      if (ticketValue > ticketMin) {
+        ticketValue -= ticketStep;
+        updateTicketDisplay();
+        calculateROI();
+      }
+    });
+
+    roiTicketPlus.addEventListener('click', function() {
+      if (ticketValue < ticketMax) {
+        ticketValue += ticketStep;
+        updateTicketDisplay();
+        calculateROI();
+      }
+    });
+
+    updateTicketDisplay();
     calculateROI();
   }
 
