@@ -775,17 +775,16 @@
     position: absolute;
     top: 0;
     left: 0;
-    width: 1280px;
-    height: 800px;
+    width: 1440px;
+    height: 900px;
     border: none;
     transform-origin: top left;
-    transform: scale(0.28);
     pointer-events: none;
   }
   .showcase-thumb .showcase-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(180deg, transparent 50%, rgba(8,9,26,0.85) 100%);
+    background: linear-gradient(180deg, transparent 40%, rgba(8,9,26,0.9) 100%);
     z-index: 2;
   }
   .showcase-body { padding: 16px 20px 20px; }
@@ -1866,8 +1865,23 @@
   }
 
   window.addEventListener('resize', scaleBAIframes);
+
+  // ── SCALE SHOWCASE IFRAMES TO FIT CONTAINER ──
+  function scaleShowcaseIframes() {
+    var thumbs = document.querySelectorAll('.showcase-thumb');
+    thumbs.forEach(function(thumb) {
+      var iframe = thumb.querySelector('iframe');
+      if (!iframe) return;
+      var thumbWidth = thumb.offsetWidth;
+      var scale = thumbWidth / 1440;
+      iframe.style.transform = 'scale(' + scale + ')';
+    });
+  }
+
+  window.addEventListener('resize', scaleShowcaseIframes);
   window.addEventListener('load', function() {
     scaleBAIframes();
+    scaleShowcaseIframes();
     updateProgress();
   });
 
