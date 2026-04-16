@@ -782,7 +782,7 @@
   }
   /* Laptop mockup */
   .device-laptop {
-    width: 520px;
+    width: 580px;
     background: #111225;
     border-radius: 12px 12px 0 0;
     padding: 8px 8px 0;
@@ -793,17 +793,21 @@
     overflow: hidden;
     aspect-ratio: 16 / 10;
     background: var(--bg);
+    position: relative;
   }
   .device-laptop-screen iframe {
-    width: 100%;
-    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1440px;
+    height: 900px;
     border: none;
     pointer-events: none;
+    transform-origin: top left;
   }
   .device-laptop-base {
-    height: 12px;
+    height: 14px;
     background: #1a1b2e;
-    border-radius: 0 0 6px 6px;
     position: relative;
     margin: 0 -8px;
     border-radius: 0 0 12px 12px;
@@ -811,7 +815,7 @@
   .device-laptop-base::before {
     content: '';
     position: absolute;
-    top: 4px;
+    top: 5px;
     left: 50%;
     transform: translateX(-50%);
     width: 60px;
@@ -821,31 +825,42 @@
   }
   /* Phone mockup */
   .device-phone {
-    width: 140px;
+    width: 160px;
     background: #111225;
-    border-radius: 20px;
-    padding: 8px 6px;
+    border-radius: 24px;
+    padding: 10px 8px;
     box-shadow: 0 12px 40px rgba(0,0,0,0.4);
   }
   .device-phone-screen {
-    border-radius: 14px;
+    border-radius: 16px;
     overflow: hidden;
-    aspect-ratio: 9 / 16;
+    aspect-ratio: 9 / 19.5;
     background: var(--bg);
+    position: relative;
   }
   .device-phone-screen iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 375px;
-    height: 667px;
+    height: 812px;
     border: none;
     pointer-events: none;
     transform-origin: top left;
   }
   .device-phone-notch {
-    width: 40px;
+    width: 50px;
+    height: 5px;
+    background: #2a2b3e;
+    border-radius: 3px;
+    margin: 0 auto 8px;
+  }
+  .device-phone-home {
+    width: 36px;
     height: 4px;
     background: #2a2b3e;
     border-radius: 2px;
-    margin: 0 auto 6px;
+    margin: 8px auto 0;
   }
   @media (max-width: 768px) {
     .showcase-devices { flex-direction: column; align-items: center; gap: 24px; }
@@ -1484,6 +1499,7 @@
             <div class="device-phone-screen">
               <iframe src="https://sonrisabogota.prontoweb.co" loading="lazy" title="Sonrisa Bogotá — Celular"></iframe>
             </div>
+            <div class="device-phone-home"></div>
           </div>
           <div class="device-label">Celular</div>
         </div>
@@ -1514,6 +1530,7 @@
             <div class="device-phone-screen">
               <iframe src="https://sonrisapremium.prontoweb.co" loading="lazy" title="Sonrisa Premium — Celular"></iframe>
             </div>
+            <div class="device-phone-home"></div>
           </div>
           <div class="device-label">Celular</div>
         </div>
@@ -1948,22 +1965,30 @@
 
   window.addEventListener('resize', scaleBAIframes);
 
-  // ── SCALE PHONE IFRAMES TO FIT CONTAINER ──
-  function scalePhoneIframes() {
+  // ── SCALE DEVICE IFRAMES TO FIT CONTAINERS ──
+  function scaleDeviceIframes() {
+    // Laptop iframes
+    var laptops = document.querySelectorAll('.device-laptop-screen');
+    laptops.forEach(function(screen) {
+      var iframe = screen.querySelector('iframe');
+      if (!iframe) return;
+      var scale = screen.offsetWidth / 1440;
+      iframe.style.transform = 'scale(' + scale + ')';
+    });
+    // Phone iframes
     var phones = document.querySelectorAll('.device-phone-screen');
     phones.forEach(function(screen) {
       var iframe = screen.querySelector('iframe');
       if (!iframe) return;
-      var screenWidth = screen.offsetWidth;
-      var scale = screenWidth / 375;
+      var scale = screen.offsetWidth / 375;
       iframe.style.transform = 'scale(' + scale + ')';
     });
   }
 
-  window.addEventListener('resize', scalePhoneIframes);
+  window.addEventListener('resize', scaleDeviceIframes);
   window.addEventListener('load', function() {
     scaleBAIframes();
-    scalePhoneIframes();
+    scaleDeviceIframes();
     updateProgress();
   });
 
