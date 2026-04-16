@@ -3,337 +3,1541 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pronto — Presencia web para clínicas dentales</title>
-<meta name="description" content="Pronto — suscripción mensual para clínicas dentales en Colombia. Primer mes gratis, web en 48 horas, dominio a nombre de la clínica, cancele cuando quiera.">
+<title>Pronto — Presencia web para clinicas dentales en Colombia</title>
+<meta name="description" content="Pronto — suscripcion mensual para clinicas dentales en Colombia. Primer mes gratis, web en 48 horas, dominio a nombre de la clinica, cancele cuando quiera. Desde $199.900 COP/mes.">
 
 <!-- Open Graph / WhatsApp share -->
 <meta property="og:type" content="website">
-<meta property="og:title" content="Pronto — Presencia web para clínicas dentales">
-<meta property="og:description" content="Suscripción mensual. Primer mes gratis. Web en 48 horas. Sin contratos.">
-<meta property="og:url" content="https://cesargomezs7.github.io/portafolio-web/pronto.html">
+<meta property="og:title" content="Pronto — Presencia web para clinicas dentales">
+<meta property="og:description" content="Suscripcion mensual. Primer mes gratis. Web en 48 horas. Sin contratos. Desde $199.900 COP/mes.">
+<meta property="og:url" content="https://prontoweb.co">
 <meta property="og:site_name" content="Pronto">
 <meta property="og:locale" content="es_CO">
 
-<!-- Umami Cloud analytics — Website ID de "Pronto — Landing" -->
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+<!-- Umami Cloud analytics -->
 <script defer src="https://cloud.umami.is/script.js" data-website-id="93f65a5e-8bfd-4ba9-8748-835c72cf8e28"></script>
 
+<!-- FAQ Schema JSON-LD -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Puedo cancelar cuando quiera?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Si, en cualquier momento, sin penalidad. Solo nos avisa por WhatsApp y procesamos la baja."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Cobran setup o matricula?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. $0 de setup permanente. Lo unico que paga es la mensualidad despues del primer mes gratis."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "A nombre de quien queda el dominio?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Siempre a nombre de su clinica. Si algun dia decide cambiar de proveedor, el dominio se va con usted."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Que pasa si cancelo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Conserva el dominio, le enviamos por email el codigo y los archivos, y puede llevarlo a otro proveedor o dejarlo parqueado."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Hablan espanol?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Somos un equipo colombiano. Soporte, onboarding y cambios en espanol de Colombia."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Cuanto tarda la entrega inicial?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "48 horas desde que recibimos los datos basicos. La optimizacion de Google Maps puede tomar entre 1 y 14 dias dependiendo de la verificacion de Google."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Optimizan Google Maps?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Si, en ambos planes. En Esencial hacemos la optimizacion inicial. En Completo, ademas, publicamos 1 novedad cada mes."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Tienen soporte?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Si, por WhatsApp de lunes a viernes, 8 AM a 6 PM hora Colombia. Respuesta en 48 horas habiles en Esencial y en 24 horas en Completo."
+      }
+    }
+  ]
+}
+</script>
+
 <style>
+  :root {
+    --bg: #08091A;
+    --bg-subtle: rgba(255,255,255,0.03);
+    --bg-card: rgba(255,255,255,0.04);
+    --text: #E6E8F0;
+    --text-muted: #B0B6CC;
+    --text-dim: #8088A6;
+    --accent-blue: #4F8EF7;
+    --accent-cyan: #38BDF8;
+    --accent-green: #22C55E;
+    --accent-red: #EF4444;
+    --border: rgba(255,255,255,0.08);
+    --border-blue: rgba(79,142,247,0.3);
+    --gradient: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
+    --font-heading: 'Space Grotesk', sans-serif;
+    --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --radius: 12px;
+    --radius-lg: 16px;
+    --wa-link: https://wa.me/573124672674?text=Hola%2C%20vengo%20de%20prontoweb.co%20y%20quiero%20saber%20más;
+  }
+
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
   body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    color: #E6E8F0;
-    background: #08091A;
+    font-family: var(--font-body);
+    color: var(--text);
+    background: var(--bg);
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
   }
   a { color: inherit; text-decoration: none; }
   img { max-width: 100%; display: block; }
   .container { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
   section { padding: 80px 0; }
-  h1, h2, h3 { line-height: 1.2; font-weight: 700; letter-spacing: -0.02em; }
-  h1 { font-size: clamp(2rem, 5vw, 3.5rem); }
+  h1, h2, h3 { font-family: var(--font-heading); line-height: 1.15; font-weight: 700; letter-spacing: -0.02em; }
+  h1 { font-size: clamp(2.2rem, 5vw, 3.6rem); }
   h2 { font-size: clamp(1.6rem, 3.5vw, 2.4rem); margin-bottom: 24px; }
   h3 { font-size: 1.25rem; margin-bottom: 12px; }
 
   .brand-gradient {
-    background: linear-gradient(135deg, #2B6BFF 0%, #00D4FF 100%);
+    background: var(--gradient);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
 
-  /* Hero */
-  .hero {
-    padding: 80px 0 60px;
+  .section-label {
     text-align: center;
-    background: radial-gradient(ellipse at top, rgba(43,107,255,0.15), transparent 60%);
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--accent-cyan);
+    margin-bottom: 12px;
   }
-  .hero p.sub { font-size: 1.15rem; color: #B0B6CC; margin: 16px auto 28px; max-width: 620px; }
-  .badges { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin: 32px 0 40px; }
-  .badge {
-    padding: 8px 16px; border-radius: 999px;
-    background: rgba(43,107,255,0.12); border: 1px solid rgba(43,107,255,0.3);
-    font-size: 0.9rem; color: #A0C4FF;
-  }
-  .cta-primary {
-    display: inline-block; padding: 16px 32px; border-radius: 12px;
-    background: linear-gradient(135deg, #2B6BFF, #00D4FF);
-    color: #08091A; font-weight: 700; font-size: 1rem;
-    transition: transform 0.2s;
-  }
-  .cta-primary:hover { transform: translateY(-2px); }
 
-  /* Planes */
-  .planes-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; margin-top: 40px; }
-  .plan {
-    padding: 32px 28px; border-radius: 16px;
-    background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08);
+  /* Reveal animations */
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── READING PROGRESS BAR ── */
+  #progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    width: 0%;
+    background: var(--gradient);
+    z-index: 200;
+    transition: width 0.1s linear;
+  }
+
+  /* ── NAVBAR ── */
+  .navbar {
+    position: fixed;
+    top: 3px;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    padding: 12px 0;
+    background: rgba(8,9,26,0.7);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    transition: background 0.3s;
+  }
+  .navbar .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .navbar-logo {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: 800;
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .navbar-links {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    list-style: none;
+  }
+  .navbar-links a {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    transition: color 0.2s;
+  }
+  .navbar-links a:hover { color: var(--text); }
+  .navbar-cta {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 10px;
+    background: var(--gradient);
+    color: var(--bg);
+    font-weight: 700;
+    font-size: 0.85rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .navbar-cta:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 20px rgba(79,142,247,0.3);
+  }
+  @media (max-width: 768px) {
+    .navbar-links li:not(.nav-cta) { display: none; }
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 120px 0 60px;
+    background: radial-gradient(ellipse at 50% 30%, rgba(79,142,247,0.12), transparent 60%);
     position: relative;
   }
-  .plan.destacado { border-color: #2B6BFF; box-shadow: 0 0 0 2px rgba(43,107,255,0.2); }
-  .plan .ribbon {
-    position: absolute; top: -12px; right: 24px;
-    background: linear-gradient(135deg, #2B6BFF, #00D4FF);
-    color: #08091A; padding: 4px 12px; border-radius: 999px;
-    font-size: 0.75rem; font-weight: 700;
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 18px;
+    border-radius: 999px;
+    background: rgba(34,197,94,0.1);
+    border: 1px solid rgba(34,197,94,0.3);
+    font-size: 0.9rem;
+    color: var(--accent-green);
+    margin-bottom: 24px;
   }
-  .plan-name { font-size: 1.4rem; font-weight: 700; }
-  .plan-price { font-size: 2.2rem; font-weight: 800; margin: 8px 0 4px; }
-  .plan-price small { font-size: 1rem; font-weight: 500; color: #B0B6CC; }
-  .plan-cop { font-size: 0.9rem; color: #8088A6; margin-bottom: 24px; }
-  .plan ul { list-style: none; padding: 0; }
-  .plan ul li {
-    padding: 10px 0; padding-left: 28px; position: relative;
-    border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 0.95rem;
+  .hero-badge .pulse-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--accent-green);
+    border-radius: 50%;
+    animation: pulse-dot 2s ease-in-out infinite;
   }
-  .plan ul li:last-child { border-bottom: none; }
-  .plan ul li::before {
-    content: "✓"; position: absolute; left: 0; top: 10px;
-    color: #00D4FF; font-weight: 700;
+  @keyframes pulse-dot {
+    0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(34,197,94,0.4); }
+    50% { opacity: 0.7; box-shadow: 0 0 0 8px rgba(34,197,94,0); }
   }
-  .plan-note { margin-top: 16px; font-size: 0.85rem; color: #8088A6; font-style: italic; }
+  .hero h1 { margin-bottom: 20px; }
+  .hero .sub {
+    font-size: 1.15rem;
+    color: var(--text-muted);
+    margin: 0 auto 32px;
+    max-width: 560px;
+    line-height: 1.7;
+  }
+  .hero-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 48px;
+  }
+  .cta-primary {
+    display: inline-block;
+    padding: 16px 32px;
+    border-radius: var(--radius);
+    background: var(--gradient);
+    color: var(--bg);
+    font-weight: 700;
+    font-size: 1rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .cta-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(79,142,247,0.3);
+  }
+  .cta-secondary {
+    display: inline-block;
+    padding: 16px 32px;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-weight: 600;
+    font-size: 1rem;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .cta-secondary:hover {
+    border-color: var(--accent-blue);
+    background: rgba(79,142,247,0.05);
+  }
 
-  /* Showcases */
-  .showcases { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-top: 32px; }
-  .showcase {
-    border-radius: 12px; overflow: hidden;
-    background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08);
-    transition: transform 0.2s;
+  /* Hero Stats */
+  .hero-stats {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 32px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+    max-width: 700px;
+    margin: 0 auto;
   }
-  .showcase:hover { transform: translateY(-4px); }
+  .hero-stat {
+    text-align: center;
+    min-width: 100px;
+  }
+  .hero-stat .stat-number {
+    font-family: var(--font-heading);
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--text);
+  }
+  .hero-stat .stat-label {
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    margin-top: 2px;
+  }
+
+  /* ── TICKER / MARQUEE ── */
+  .ticker {
+    overflow: hidden;
+    background: rgba(79,142,247,0.06);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 0;
+    white-space: nowrap;
+  }
+  .ticker:hover .ticker-track { animation-play-state: paused; }
+  .ticker-track {
+    display: inline-flex;
+    animation: ticker-scroll 30s linear infinite;
+  }
+  .ticker-item {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    padding: 0 24px;
+    font-weight: 500;
+  }
+  .ticker-star { color: var(--accent-blue); padding: 0 8px; }
+  @keyframes ticker-scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* ── SIN WEB VS CON PRONTO ── */
+  .comparison-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 40px;
+  }
+  @media (max-width: 768px) {
+    .comparison-grid { grid-template-columns: 1fr; }
+  }
+  .comp-card {
+    padding: 32px 28px;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+  }
+  .comp-card.pain {
+    background: rgba(239,68,68,0.04);
+    border-color: rgba(239,68,68,0.15);
+  }
+  .comp-card.gain {
+    background: rgba(79,142,247,0.04);
+    border-color: rgba(79,142,247,0.15);
+  }
+  .comp-card h3 {
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+  }
+  .comp-card.pain h3 { color: var(--accent-red); }
+  .comp-card.gain h3 { color: var(--accent-cyan); }
+  .comp-card ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .comp-card li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+  .comp-icon {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 700;
+    margin-top: 1px;
+  }
+  .comp-card.pain .comp-icon {
+    background: rgba(239,68,68,0.15);
+    color: var(--accent-red);
+  }
+  .comp-card.gain .comp-icon {
+    background: rgba(56,189,248,0.15);
+    color: var(--accent-cyan);
+  }
+
+  /* ── PROCESS TIMELINE ── */
+  .timeline {
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    margin-top: 48px;
+    position: relative;
+  }
+  .timeline-step {
+    flex: 1;
+    max-width: 320px;
+    text-align: center;
+    position: relative;
+    padding: 0 20px;
+  }
+  .timeline-number {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--gradient);
+    color: var(--bg);
+    font-family: var(--font-heading);
+    font-size: 1.3rem;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    position: relative;
+    z-index: 2;
+  }
+  .timeline-step h3 { color: var(--text); margin-bottom: 8px; }
+  .timeline-step p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; }
+  .timeline-line {
+    position: absolute;
+    top: 28px;
+    left: calc(50% + 28px);
+    right: calc(-50% + 28px);
+    height: 2px;
+    background: var(--gradient);
+    z-index: 1;
+    opacity: 0.4;
+  }
+  .timeline-step:last-child .timeline-line { display: none; }
+  @media (max-width: 768px) {
+    .timeline { flex-direction: column; align-items: center; gap: 40px; }
+    .timeline-line {
+      display: none;
+    }
+  }
+
+  /* ── ROI CALCULATOR ── */
+  .roi-calc {
+    max-width: 600px;
+    margin: 40px auto 0;
+    padding: 36px 32px;
+    border-radius: var(--radius-lg);
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+  }
+  .roi-field {
+    margin-bottom: 24px;
+  }
+  .roi-field label {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--text);
+  }
+  .roi-field input[type="number"],
+  .roi-field input[type="range"] {
+    width: 100%;
+    padding: 12px 16px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: rgba(255,255,255,0.05);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .roi-field input[type="number"]:focus {
+    border-color: var(--accent-blue);
+  }
+  .roi-field input[type="range"] {
+    padding: 0;
+    height: 6px;
+    -webkit-appearance: none;
+    appearance: none;
+    background: rgba(255,255,255,0.1);
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+  .roi-field input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--accent-blue);
+    cursor: pointer;
+  }
+  .roi-field .range-value {
+    text-align: center;
+    font-family: var(--font-heading);
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-top: 8px;
+    color: var(--text);
+  }
+  .roi-results {
+    margin-top: 24px;
+    padding: 24px;
+    border-radius: var(--radius);
+    background: rgba(79,142,247,0.05);
+    border: 1px solid rgba(79,142,247,0.2);
+  }
+  .roi-results .roi-line {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+  .roi-results .roi-line:last-child { border-bottom: none; }
+  .roi-results .roi-line strong { color: var(--text); }
+  .roi-highlight {
+    margin-top: 16px;
+    padding: 20px;
+    border-radius: var(--radius);
+    background: var(--gradient);
+    text-align: center;
+  }
+  .roi-highlight .roi-big {
+    font-family: var(--font-heading);
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: var(--bg);
+  }
+  .roi-highlight .roi-label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: rgba(8,9,26,0.7);
+  }
+
+  /* ── BEFORE / AFTER SLIDER ── */
+  .ba-container {
+    max-width: 900px;
+    margin: 40px auto 0;
+    position: relative;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    border: 1px solid var(--border);
+    aspect-ratio: 16 / 9;
+    cursor: ew-resize;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: none;
+  }
+  .ba-side {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    overflow: hidden;
+  }
+  .ba-before {
+    left: 0;
+    width: 50%;
+    z-index: 2;
+  }
+  .ba-after {
+    left: 0;
+    width: 100%;
+    z-index: 1;
+  }
+  .ba-side iframe {
+    width: 900px;
+    height: 562px;
+    border: none;
+    pointer-events: none;
+    transform-origin: top left;
+  }
+  .ba-divider {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 4px;
+    background: var(--text);
+    z-index: 3;
+    transform: translateX(-50%);
+  }
+  .ba-divider::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--text);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+  }
+  .ba-divider::before {
+    content: '\2194';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 4;
+    font-size: 1.2rem;
+    color: var(--bg);
+    font-weight: 700;
+  }
+  .ba-label {
+    position: absolute;
+    bottom: 16px;
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    z-index: 5;
+  }
+  .ba-label-before {
+    left: 16px;
+    background: rgba(239,68,68,0.8);
+    color: #fff;
+  }
+  .ba-label-after {
+    right: 16px;
+    background: var(--gradient);
+    color: var(--bg);
+  }
+
+  /* ── INTERACTIVE DEMO ── */
+  .demo-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin: 32px 0 24px;
+  }
+  .demo-tab {
+    padding: 10px 24px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text-muted);
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .demo-tab.active {
+    background: var(--gradient);
+    border-color: transparent;
+    color: var(--bg);
+  }
+  .demo-tab:hover:not(.active) {
+    border-color: var(--accent-blue);
+    color: var(--text);
+  }
+  .demo-laptop {
+    max-width: 900px;
+    margin: 0 auto;
+    background: #111225;
+    border-radius: 16px 16px 0 0;
+    padding: 12px 12px 0;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+  }
+  .demo-screen {
+    border-radius: 8px 8px 0 0;
+    overflow: hidden;
+    aspect-ratio: 16 / 9;
+    background: #0a0b1a;
+  }
+  .demo-screen iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+  .demo-base {
+    max-width: 960px;
+    margin: 0 auto;
+    height: 16px;
+    background: #1a1b2e;
+    border-radius: 0 0 8px 8px;
+    position: relative;
+  }
+  .demo-base::before {
+    content: '';
+    position: absolute;
+    top: 4px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background: #2a2b3e;
+    border-radius: 2px;
+  }
+  @media (max-width: 768px) {
+    .demo-laptop {
+      border-radius: 24px;
+      padding: 8px;
+      max-width: 340px;
+    }
+    .demo-screen { border-radius: 20px; aspect-ratio: 9/16; }
+    .demo-base { display: none; }
+  }
+
+  /* ── SHOWCASES ── */
+  .showcases {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+    margin-top: 32px;
+  }
+  .showcase {
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .showcase:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+  }
   .showcase-thumb {
-    aspect-ratio: 16 / 10; background: linear-gradient(135deg, #1a2040, #0c1430);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 3rem; color: #3a4a7a;
+    aspect-ratio: 16 / 10;
+    background: linear-gradient(135deg, #1a2040, #0c1430);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    color: #3a4a7a;
   }
   .showcase-body { padding: 16px 20px 20px; }
   .showcase h3 { margin-bottom: 6px; }
-  .showcase-link { display: inline-block; margin-top: 12px; color: #00D4FF; font-size: 0.9rem; }
-  .showcase small { display: block; color: #8088A6; font-size: 0.75rem; font-style: italic; margin-top: 8px; }
+  .showcase-link {
+    display: inline-block;
+    margin-top: 12px;
+    color: var(--accent-cyan);
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+  .showcase-link:hover { color: var(--accent-blue); }
+  .showcase small {
+    display: block;
+    color: var(--text-dim);
+    font-size: 0.75rem;
+    font-style: italic;
+    margin-top: 8px;
+  }
 
-  /* Por qué */
-  .porque { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 32px; margin-top: 32px; }
-  .porque-item { padding: 24px; text-align: center; }
+  /* ── PLANES ── */
+  .planes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 24px;
+    margin-top: 40px;
+  }
+  .plan {
+    padding: 32px 28px;
+    border-radius: var(--radius-lg);
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    position: relative;
+    transition: transform 0.2s;
+  }
+  .plan:hover { transform: translateY(-4px); }
+  .plan.destacado {
+    border-color: var(--accent-blue);
+    box-shadow: 0 0 0 2px rgba(79,142,247,0.15), 0 8px 30px rgba(79,142,247,0.1);
+  }
+  .plan .ribbon {
+    position: absolute;
+    top: -12px;
+    right: 24px;
+    background: var(--gradient);
+    color: var(--bg);
+    padding: 4px 14px;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 700;
+  }
+  .plan-name {
+    font-family: var(--font-heading);
+    font-size: 1.4rem;
+    font-weight: 700;
+  }
+  .plan-price {
+    font-family: var(--font-heading);
+    font-size: 2.2rem;
+    font-weight: 800;
+    margin: 8px 0 4px;
+  }
+  .plan-price small {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text-muted);
+  }
+  .plan-cop {
+    font-size: 0.9rem;
+    color: var(--text-dim);
+    margin-bottom: 24px;
+  }
+  .plan ul { list-style: none; padding: 0; }
+  .plan ul li {
+    padding: 10px 0;
+    padding-left: 28px;
+    position: relative;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    font-size: 0.95rem;
+  }
+  .plan ul li:last-child { border-bottom: none; }
+  .plan ul li::before {
+    content: "\2713";
+    position: absolute;
+    left: 0;
+    top: 10px;
+    color: var(--accent-cyan);
+    font-weight: 700;
+  }
+  .plan-note {
+    margin-top: 16px;
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    font-style: italic;
+  }
+  .plan-cta {
+    display: block;
+    text-align: center;
+    margin-top: 24px;
+    padding: 14px 24px;
+    border-radius: var(--radius);
+    font-weight: 700;
+    font-size: 0.95rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .plan .plan-cta {
+    background: var(--gradient);
+    color: var(--bg);
+  }
+  .plan .plan-cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(79,142,247,0.3);
+  }
+
+  /* ── POR QUE ── */
+  .porque {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 32px;
+    margin-top: 32px;
+  }
+  .porque-item {
+    padding: 28px;
+    text-align: center;
+    border-radius: var(--radius-lg);
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    transition: transform 0.2s;
+  }
+  .porque-item:hover { transform: translateY(-4px); }
   .porque-item .icon {
-    width: 56px; height: 56px; margin: 0 auto 16px;
-    background: linear-gradient(135deg, rgba(43,107,255,0.2), rgba(0,212,255,0.2));
-    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    width: 56px;
+    height: 56px;
+    margin: 0 auto 16px;
+    background: linear-gradient(135deg, rgba(79,142,247,0.15), rgba(56,189,248,0.15));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-size: 1.5rem;
   }
   .porque-item h3 { margin-bottom: 8px; }
-  .porque-item p { color: #B0B6CC; font-size: 0.95rem; }
+  .porque-item p { color: var(--text-muted); font-size: 0.95rem; }
 
-  /* FAQs */
-  .faqs { max-width: 760px; margin: 32px auto 0; }
-  .faq {
-    background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 12px; margin-bottom: 12px; overflow: hidden;
+  /* ── FAQs ── */
+  .faqs {
+    max-width: 760px;
+    margin: 32px auto 0;
   }
+  .faq {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    margin-bottom: 12px;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+  .faq[open] { border-color: rgba(79,142,247,0.2); }
   .faq summary {
-    cursor: pointer; padding: 18px 24px; list-style: none;
-    font-weight: 600; display: flex; justify-content: space-between; align-items: center;
+    cursor: pointer;
+    padding: 18px 24px;
+    list-style: none;
+    font-weight: 600;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: color 0.2s;
   }
   .faq summary::-webkit-details-marker { display: none; }
-  .faq summary::after { content: "+"; color: #00D4FF; font-size: 1.4rem; transition: transform 0.2s; }
+  .faq summary::after {
+    content: "+";
+    color: var(--accent-cyan);
+    font-size: 1.4rem;
+    transition: transform 0.3s;
+    flex-shrink: 0;
+    margin-left: 16px;
+  }
   .faq[open] summary::after { transform: rotate(45deg); }
-  .faq-body { padding: 0 24px 20px; color: #B0B6CC; font-size: 0.95rem; }
+  .faq-body {
+    padding: 0 24px 20px;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    line-height: 1.7;
+  }
 
-  /* CTA final */
+  /* ── CTA FINAL ── */
   .cta-final {
     text-align: center;
     padding: 100px 24px;
-    background: radial-gradient(ellipse at center, rgba(0,212,255,0.12), transparent 70%);
+    background: radial-gradient(ellipse at center, rgba(56,189,248,0.1), transparent 70%);
   }
   .cta-final h2 { margin-bottom: 16px; }
-  .cta-final p { color: #B0B6CC; margin-bottom: 32px; max-width: 500px; margin-left: auto; margin-right: auto; }
+  .cta-final p {
+    color: var(--text-muted);
+    margin-bottom: 32px;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.7;
+  }
 
-  /* Footer */
+  /* ── FOOTER ── */
   footer {
     padding: 48px 24px 32px;
-    border-top: 1px solid rgba(255,255,255,0.08);
-    color: #8088A6; font-size: 0.85rem;
+    border-top: 1px solid var(--border);
+    color: var(--text-dim);
+    font-size: 0.85rem;
     text-align: center;
   }
-  footer a { color: #A0C4FF; }
+  footer a { color: var(--accent-cyan); transition: color 0.2s; }
+  footer a:hover { color: var(--accent-blue); }
   footer .footer-grid {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 24px; margin-bottom: 24px; max-width: 800px;
-    margin-left: auto; margin-right: auto; text-align: left;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 24px;
+    margin-bottom: 24px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
   }
-  footer .footer-grid h4 { color: #E6E8F0; margin-bottom: 8px; font-size: 0.95rem; }
-  footer .footer-bottom { padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.05); }
+  footer .footer-grid h4 {
+    font-family: var(--font-heading);
+    color: var(--text);
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+  }
+  footer .footer-bottom {
+    padding-top: 24px;
+    border-top: 1px solid rgba(255,255,255,0.05);
+  }
 
+  /* ── WHATSAPP FLOATING BUTTON ── */
+  .wa-float {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: #25D366;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+    z-index: 90;
+    transition: transform 0.2s;
+  }
+  .wa-float:hover { transform: scale(1.1); }
+  .wa-float svg { width: 32px; height: 32px; fill: #fff; }
+  @media (max-width: 768px) {
+    .wa-float { bottom: 80px; }
+  }
+
+  /* ── STICKY CTA MOBILE ── */
+  .sticky-cta-mobile {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 150;
+    background: var(--bg);
+    border-top: 1px solid var(--border);
+    padding: 12px 16px;
+    box-shadow: 0 -4px 20px rgba(0,0,0,0.3);
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+  }
+  .sticky-cta-mobile.show { transform: translateY(0); }
+  .sticky-cta-mobile a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 14px;
+    border-radius: var(--radius);
+    background: #25D366;
+    color: #fff;
+    font-weight: 700;
+    font-size: 0.95rem;
+  }
+  .sticky-cta-mobile svg { width: 22px; height: 22px; fill: #fff; }
+  @media (max-width: 768px) {
+    .sticky-cta-mobile { display: block; }
+  }
+
+  /* ── EXIT INTENT POPUP ── */
+  .popup-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    z-index: 300;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+    padding: 20px;
+  }
+  .popup-overlay.show {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .popup {
+    background: #111225;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 48px 40px;
+    max-width: 440px;
+    text-align: center;
+    position: relative;
+    transform: scale(0.9);
+    transition: transform 0.3s;
+  }
+  .popup-overlay.show .popup { transform: scale(1); }
+  .popup-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 32px;
+    height: 32px;
+    border: none;
+    background: rgba(255,255,255,0.08);
+    border-radius: 50%;
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+  }
+  .popup-close:hover { background: rgba(255,255,255,0.15); }
+  .popup h2 {
+    font-size: 1.6rem;
+    margin-bottom: 12px;
+  }
+  .popup p {
+    color: var(--text-muted);
+    margin-bottom: 28px;
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  /* ── RESPONSIVE ── */
   @media (max-width: 640px) {
     section { padding: 56px 0; }
-    .hero { padding: 56px 0 40px; }
+    .hero { padding: 100px 0 40px; min-height: auto; }
+    .hero-stats { gap: 20px; }
+    .hero-stat .stat-number { font-size: 1.3rem; }
     .plan { padding: 24px 20px; }
+    .roi-calc { padding: 24px 20px; }
+    .popup { padding: 32px 24px; }
+    .ba-container { aspect-ratio: 4/3; }
   }
 </style>
 </head>
 <body>
 
-<!-- HERO -->
-<section class="hero">
+<!-- READING PROGRESS BAR -->
+<div id="progress-bar"></div>
+
+<!-- NAVBAR -->
+<nav class="navbar">
   <div class="container">
-    <h1>Presencia web para <span class="brand-gradient">su clínica dental</span></h1>
-    <p class="sub">Suscripción mensual. Primer mes gratis. Cancele cuando quiera.</p>
-    <div class="badges">
-      <span class="badge">Web en 48 horas</span>
-      <span class="badge">Dominio a su nombre</span>
-      <span class="badge">Sin contratos</span>
+    <a href="#" class="navbar-logo">Pronto</a>
+    <ul class="navbar-links">
+      <li><a href="#como-funciona">Como funciona</a></li>
+      <li><a href="#ejemplos">Ejemplos</a></li>
+      <li><a href="#planes">Precios</a></li>
+      <li><a href="#faqs">FAQ</a></li>
+      <li class="nav-cta">
+        <a class="navbar-cta" href="https://wa.me/573124672674?text=Hola%2C%20vengo%20de%20prontoweb.co%20y%20quiero%20saber%20m%C3%A1s" data-umami-event="click-nav-cta">Hablar con Cesar</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="container">
+    <div class="hero-badge">
+      <span class="pulse-dot"></span>
+      Disponible &middot; Primer mes gratis
     </div>
-    <a class="cta-primary" href="https://wa.me/573124672674?text=Hola%2C%20vengo%20de%20pronto.com%20y%20quiero%20saber%20m%C3%A1s" data-umami-event="click-hero-cta">
-      Hablar con Cesar ahora
-    </a>
+    <h1>Presencia web para<br><span class="brand-gradient">su clinica dental</span></h1>
+    <p class="sub">Suscripcion mensual con todo incluido. Su clinica visible en Google, con WhatsApp directo y lista en 48 horas. Sin contratos, sin sorpresas.</p>
+    <div class="hero-buttons">
+      <a class="cta-primary" href="https://wa.me/573124672674?text=Hola%2C%20vengo%20de%20prontoweb.co%20y%20quiero%20saber%20m%C3%A1s" data-umami-event="click-hero-cta">Hablar con Cesar ahora</a>
+      <a class="cta-secondary" href="#ejemplos">Ver ejemplos</a>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="stat-number" data-target="48" data-suffix="h">0h</div>
+        <div class="stat-label">Entrega</div>
+      </div>
+      <div class="hero-stat">
+        <div class="stat-number" data-target="0" data-prefix="$" data-suffix="">$0</div>
+        <div class="stat-label">Setup</div>
+      </div>
+      <div class="hero-stat">
+        <div class="stat-number" data-target="951" data-suffix="+">0+</div>
+        <div class="stat-label">Clinicas</div>
+      </div>
+      <div class="hero-stat">
+        <div class="stat-number" data-target="199900" data-prefix="$" data-suffix="/mes" data-format="price">$0/mes</div>
+        <div class="stat-label">Desde</div>
+      </div>
+    </div>
   </div>
 </section>
 
-<!-- PLANES -->
-<section id="planes">
+<!-- TICKER / MARQUEE -->
+<div class="ticker">
+  <div class="ticker-track">
+    <span class="ticker-item">Clinicas en Bogota</span><span class="ticker-star">&starf;</span>
+    <span class="ticker-item">Clinicas en Medellin</span><span class="ticker-star">&starf;</span>
+    <span class="ticker-item">Clinicas en Cali</span><span class="ticker-star">&starf;</span>
+    <span class="ticker-item">Clinicas en Barranquilla</span><span class="ticker-star">&starf;</span>
+    <span class="ticker-item">Clinicas en Bucaramanga</span><span class="ticker-star">&starf;</span>
+    <span class="ticker-item">Clinicas en Cartagena</span><span class="ticker-star">&starf;</span>
+    <span class="ticker-item">Clinicas en Bogota</span><span class="ticker-star">&starf;</span>
+    <span class="ticker-item">Clinicas en Medellin</span><span class="ticker-star">&starf;</span>
+    <span class="ticker-item">Clinicas en Cali</span><span class="ticker-star">&starf;</span>
+    <span class="ticker-item">Clinicas en Barranquilla</span><span class="ticker-star">&starf;</span>
+    <span class="ticker-item">Clinicas en Bucaramanga</span><span class="ticker-star">&starf;</span>
+    <span class="ticker-item">Clinicas en Cartagena</span><span class="ticker-star">&starf;</span>
+  </div>
+</div>
+
+<!-- SIN WEB VS CON PRONTO -->
+<section class="reveal" id="comparacion">
   <div class="container">
+    <p class="section-label">La diferencia</p>
+    <h2 style="text-align:center">Sin web vs Con Pronto</h2>
+    <div class="comparison-grid">
+      <div class="comp-card pain">
+        <h3>Sin Pronto</h3>
+        <ul>
+          <li>
+            <span class="comp-icon">&times;</span>
+            <span>Pagina desactualizada que espanta pacientes</span>
+          </li>
+          <li>
+            <span class="comp-icon">&times;</span>
+            <span>No aparece en Google cuando lo buscan</span>
+          </li>
+          <li>
+            <span class="comp-icon">&times;</span>
+            <span>Sin WhatsApp, pacientes se van a la competencia</span>
+          </li>
+          <li>
+            <span class="comp-icon">&times;</span>
+            <span>Pago $2M+ por una web que nunca se actualizo</span>
+          </li>
+          <li>
+            <span class="comp-icon">&times;</span>
+            <span>Sin resenas ni presencia en Google Maps</span>
+          </li>
+        </ul>
+      </div>
+      <div class="comp-card gain">
+        <h3>Con Pronto</h3>
+        <ul>
+          <li>
+            <span class="comp-icon">&check;</span>
+            <span>Web profesional moderna lista en 48 horas</span>
+          </li>
+          <li>
+            <span class="comp-icon">&check;</span>
+            <span>Optimizada para Google desde el primer dia</span>
+          </li>
+          <li>
+            <span class="comp-icon">&check;</span>
+            <span>Boton WhatsApp directo — pacientes escriben con un click</span>
+          </li>
+          <li>
+            <span class="comp-icon">&check;</span>
+            <span>Suscripcion mensual desde $199.900 — cancele cuando quiera</span>
+          </li>
+          <li>
+            <span class="comp-icon">&check;</span>
+            <span>Google Maps optimizado + QR para resenas</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS TIMELINE -->
+<section class="reveal" id="como-funciona" style="background: var(--bg-subtle);">
+  <div class="container">
+    <p class="section-label">Asi de simple</p>
+    <h2 style="text-align:center">Como funciona</h2>
+    <div class="timeline">
+      <div class="timeline-step">
+        <div class="timeline-line"></div>
+        <div class="timeline-number">1</div>
+        <h3>Elige su plan</h3>
+        <p>Esencial o Completo. Primer mes gratis. Solo necesita WhatsApp.</p>
+      </div>
+      <div class="timeline-step">
+        <div class="timeline-line"></div>
+        <div class="timeline-number">2</div>
+        <h3>Nos envia su informacion</h3>
+        <p>Nombre, direccion, servicios, fotos. 10 minutos por WhatsApp.</p>
+      </div>
+      <div class="timeline-step">
+        <div class="timeline-number">3</div>
+        <h3>Su web esta lista en 48 horas</h3>
+        <p>Publicada con dominio propio, Google Maps y boton WhatsApp.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ROI CALCULATOR -->
+<section class="reveal" id="calculadora">
+  <div class="container">
+    <p class="section-label">Haga las cuentas</p>
+    <h2 style="text-align:center">Cuanto le cuesta NO tener web?</h2>
+    <div class="roi-calc">
+      <div class="roi-field">
+        <label for="roi-patients">Pacientes nuevos por mes</label>
+        <input type="range" id="roi-patients" min="20" max="500" value="200" step="10">
+        <div class="range-value" id="roi-patients-val">200</div>
+      </div>
+      <div class="roi-field">
+        <label for="roi-ticket">Ticket promedio por consulta (COP)</label>
+        <input type="number" id="roi-ticket" value="150000" min="50000" max="1000000" step="10000">
+      </div>
+      <div class="roi-results" id="roi-results">
+        <div class="roi-line">
+          <span>Pacientes que pierde sin web (~15%)</span>
+          <strong id="roi-lost">30</strong>
+        </div>
+        <div class="roi-line">
+          <span>Ingresos perdidos al mes</span>
+          <strong id="roi-revenue">$4.500.000</strong>
+        </div>
+        <div class="roi-line">
+          <span>Pronto Esencial cuesta</span>
+          <strong>$199.900/mes</strong>
+        </div>
+        <div class="roi-highlight">
+          <div class="roi-label">Retorno de inversion</div>
+          <div class="roi-big" id="roi-value">22x</div>
+        </div>
+      </div>
+      <div style="text-align:center; margin-top:24px;">
+        <a class="cta-primary" href="https://wa.me/573124672674?text=Hola%2C%20vengo%20de%20prontoweb.co%20y%20quiero%20saber%20m%C3%A1s" data-umami-event="click-roi-cta">Recupere esos pacientes ahora</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BEFORE / AFTER SLIDER -->
+<section class="reveal" id="antes-despues" style="background: var(--bg-subtle);">
+  <div class="container">
+    <p class="section-label">El cambio</p>
+    <h2 style="text-align:center">La diferencia que hace Pronto</h2>
+    <div class="ba-container" id="ba-slider">
+      <div class="ba-side ba-before" id="ba-before">
+        <iframe srcdoc="
+          <html>
+          <body style='margin:0; font-family:Times New Roman,serif; background:#f5f5dc;'>
+            <div style='background:#006400; padding:8px; text-align:center;'>
+              <marquee style='color:yellow; font-size:14px;'>*** BIENVENIDOS A CLINICA DENTAL ***</marquee>
+            </div>
+            <div style='text-align:center; padding:20px;'>
+              <h1 style='color:navy; font-size:28px; text-shadow:2px 2px gray;'>Clinica Dental<br>Dr. Rodriguez</h1>
+              <hr style='border:2px solid red;'>
+              <img src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22120%22><rect fill=%22%23ddd%22 width=%22200%22 height=%22120%22/><text x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22 font-size=%2214%22>imagen-rota.jpg</text></svg>' style='border:3px dashed gray; margin:10px;'>
+              <p style='color:purple; font-size:16px;'><b>SERVICIOS:</b></p>
+              <ul style='text-align:left; display:inline-block; color:navy; list-style:disc;'>
+                <li>Limpieza dental</li>
+                <li>Ortodoncia</li>
+                <li>Blanqueamiento</li>
+              </ul>
+              <p style='color:red; font-size:12px; margin-top:20px;'><blink>LLAMENOS YA!!!</blink> Tel: 601-XXX-XXXX</p>
+              <p style='font-size:10px; color:gray; margin-top:30px;'>Ultima actualizacion: Marzo 2019</p>
+              <div style='background:navy; color:lime; padding:4px; font-size:10px; margin-top:20px;'>Hecho con FrontPage 2003</div>
+            </div>
+          </body>
+          </html>
+        " title="Ejemplo de web dental antigua"></iframe>
+      </div>
+      <div class="ba-side ba-after">
+        <iframe src="https://sonrisabogota.prontoweb.co" title="Ejemplo de web dental con Pronto" loading="lazy"></iframe>
+      </div>
+      <div class="ba-divider" id="ba-divider"></div>
+      <span class="ba-label ba-label-before">ANTES</span>
+      <span class="ba-label ba-label-after">DESPUES</span>
+    </div>
+  </div>
+</section>
+
+<!-- INTERACTIVE DEMO -->
+<section class="reveal" id="demo">
+  <div class="container">
+    <p class="section-label">Vea en vivo</p>
+    <h2 style="text-align:center">Navegue un ejemplo real</h2>
+    <div class="demo-tabs">
+      <button class="demo-tab active" data-url="https://sonrisabogota.prontoweb.co">Plan Esencial</button>
+      <button class="demo-tab" data-url="https://sonrisapremium.prontoweb.co">Plan Completo</button>
+    </div>
+    <div class="demo-laptop">
+      <div class="demo-screen">
+        <iframe id="demo-iframe" src="https://sonrisabogota.prontoweb.co" title="Demo de sitio Pronto" loading="lazy"></iframe>
+      </div>
+    </div>
+    <div class="demo-base"></div>
+  </div>
+</section>
+
+<!-- SHOWCASES -->
+<section id="ejemplos" class="reveal" style="background: var(--bg-subtle);">
+  <div class="container">
+    <p class="section-label">Portafolio</p>
+    <h2 style="text-align:center">Ejemplos de implementacion</h2>
+    <p style="text-align:center; color:var(--text-muted); max-width:600px; margin:0 auto">
+      Vea como se verian estos dos planes aplicados a una clinica ficticia.
+    </p>
+    <div class="showcases">
+      <div class="showcase">
+        <div class="showcase-thumb">&#129463;</div>
+        <div class="showcase-body">
+          <h3>Clinica Dental Sonrisa Bogota</h3>
+          <p style="color:var(--text-muted); font-size:0.9rem">Plan Esencial — web 1-3 paginas, WhatsApp, Google Maps, QR resenas.</p>
+          <a class="showcase-link" href="https://sonrisabogota.prontoweb.co" target="_blank" rel="noopener" data-umami-event="click-showcase-esencial">Ver ejemplo &rarr;</a>
+          <small>Ejemplo de implementacion. Muestra de capacidad.</small>
+        </div>
+      </div>
+      <div class="showcase">
+        <div class="showcase-thumb">&#10024;</div>
+        <div class="showcase-body">
+          <h3>Clinica Sonrisa Premium Medellin</h3>
+          <p style="color:var(--text-muted); font-size:0.9rem">Plan Completo — 5-8 paginas, landings por tratamiento, blog y reportes mensuales.</p>
+          <a class="showcase-link" href="https://sonrisapremium.prontoweb.co" target="_blank" rel="noopener" data-umami-event="click-showcase-completo">Ver ejemplo &rarr;</a>
+          <small>Ejemplo de implementacion. Muestra de capacidad.</small>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PLANES / PRICING -->
+<section id="planes" class="reveal">
+  <div class="container">
+    <p class="section-label">Precios</p>
     <h2 style="text-align:center">Dos planes. Sin sorpresas.</h2>
     <div class="planes-grid">
-
       <div class="plan">
         <div class="plan-name">Pronto Esencial</div>
         <div class="plan-price">$199.900<small> COP/mes</small></div>
         <div class="plan-cop">aproximadamente $47 USD</div>
         <ul>
-          <li>Su propio dominio, a nombre de la clínica</li>
-          <li>Web profesional de 1-3 páginas, lista en 48 horas</li>
-          <li>Botón de WhatsApp directo</li>
-          <li>Formulario con notificación al WhatsApp</li>
+          <li>Su propio dominio, a nombre de la clinica</li>
+          <li>Web profesional de 1-3 paginas, lista en 48 horas</li>
+          <li>Boton de WhatsApp directo</li>
+          <li>Formulario con notificacion al WhatsApp</li>
           <li>Cambios cuando los necesite, entregados los viernes</li>
-          <li>Optimización de su ficha en Google Maps</li>
-          <li>Afiche imprimible con QR para reseñas</li>
+          <li>Optimizacion de su ficha en Google Maps</li>
+          <li>Afiche imprimible con QR para resenas</li>
           <li>Todo incluido: hosting, SSL, dominio, backups</li>
         </ul>
-        <p class="plan-note">Primer mes gratis. Cancela cuando quiera.</p>
+        <p class="plan-note">Primer mes gratis. Cancele cuando quiera.</p>
+        <a class="plan-cta" href="https://wa.me/573124672674?text=Hola%2C%20vengo%20de%20prontoweb.co%20y%20quiero%20saber%20m%C3%A1s" data-umami-event="click-plan-esencial">Empezar gratis</a>
       </div>
-
       <div class="plan destacado">
-        <div class="ribbon">Más elegido</div>
+        <div class="ribbon">Mas elegido</div>
         <div class="plan-name">Pronto Completo</div>
         <div class="plan-price">$399.900<small> COP/mes</small></div>
         <div class="plan-cop">aproximadamente $95 USD</div>
         <ul>
           <li>Todo lo del plan Esencial</li>
-          <li>Sitio más completo de 5-8 páginas</li>
+          <li>Sitio mas completo de 5-8 paginas</li>
           <li>Landing pages por tratamiento</li>
-          <li>1 publicación mensual en Google Maps</li>
-          <li>1 artículo de blog mensual</li>
-          <li>Respuesta a reseñas de Google en su nombre</li>
+          <li>1 publicacion mensual en Google Maps</li>
+          <li>1 articulo de blog mensual</li>
+          <li>Respuesta a resenas de Google en su nombre</li>
           <li>Reporte mensual con pacientes nuevos atribuidos</li>
-          <li>Optimización para ChatGPT y Google AI</li>
+          <li>Optimizacion para ChatGPT y Google AI</li>
           <li>Respuesta prioritaria en menos de 24 horas</li>
         </ul>
-        <p class="plan-note">Primer mes gratis. Cancela cuando quiera.</p>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- SHOWCASES -->
-<section id="ejemplos" style="background: rgba(255,255,255,0.02)">
-  <div class="container">
-    <h2 style="text-align:center">Ejemplos de implementación</h2>
-    <p style="text-align:center; color:#B0B6CC; max-width:600px; margin:0 auto">
-      Vea cómo se verían estos dos planes aplicados a una clínica ficticia.
-    </p>
-    <div class="showcases">
-      <div class="showcase">
-        <div class="showcase-thumb">🦷</div>
-        <div class="showcase-body">
-          <h3>Clínica Dental Sonrisa Bogotá</h3>
-          <p style="color:#B0B6CC; font-size:0.9rem">Plan Esencial — web 1-3 páginas, WhatsApp, Google Maps, QR reseñas.</p>
-          <a class="showcase-link" href="https://sonrisabogota.prontoweb.co" target="_blank" rel="noopener" data-umami-event="click-showcase-esencial">Ver ejemplo →</a>
-          <small>Ejemplo de implementación. Muestra de capacidad.</small>
-        </div>
-      </div>
-
-      <div class="showcase">
-        <div class="showcase-thumb">✨</div>
-        <div class="showcase-body">
-          <h3>Clínica Sonrisa Premium Medellín</h3>
-          <p style="color:#B0B6CC; font-size:0.9rem">Plan Completo — 5-8 páginas, landings por tratamiento, blog y reportes mensuales.</p>
-          <a class="showcase-link" href="https://sonrisapremium.prontoweb.co" target="_blank" rel="noopener" data-umami-event="click-showcase-completo">Ver ejemplo →</a>
-          <small>Ejemplo de implementación. Muestra de capacidad.</small>
-        </div>
+        <p class="plan-note">Primer mes gratis. Cancele cuando quiera.</p>
+        <a class="plan-cta" href="https://wa.me/573124672674?text=Hola%2C%20vengo%20de%20prontoweb.co%20y%20quiero%20saber%20m%C3%A1s" data-umami-event="click-plan-completo">Empezar gratis</a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- POR QUÉ -->
-<section id="porque">
+<!-- POR QUE PRONTO -->
+<section id="porque" class="reveal" style="background: var(--bg-subtle);">
   <div class="container">
-    <h2 style="text-align:center">Por qué Pronto</h2>
+    <p class="section-label">Ventajas</p>
+    <h2 style="text-align:center">Por que Pronto</h2>
     <div class="porque">
       <div class="porque-item">
-        <div class="icon">💳</div>
-        <h3>Suscripción mensual</h3>
-        <p>Sin inversión inicial. Pague mes a mes como cualquier software que ya usa.</p>
+        <div class="icon">&#128179;</div>
+        <h3>Suscripcion mensual</h3>
+        <p>Sin inversion inicial. Pague mes a mes como cualquier software que ya usa.</p>
       </div>
       <div class="porque-item">
-        <div class="icon">⚡</div>
+        <div class="icon">&#9889;</div>
         <h3>Velocidad de 48 horas</h3>
-        <p>Otra agencia tarda 2 a 6 semanas. Nosotros entregamos en 2 días.</p>
+        <p>Otra agencia tarda 2 a 6 semanas. Nosotros entregamos en 2 dias.</p>
       </div>
       <div class="porque-item">
-        <div class="icon">🔓</div>
-        <h3>Cancelación libre</h3>
-        <p>Sin contratos, sin penalidad. Si en algún momento ya no le sirve, se va.</p>
+        <div class="icon">&#128275;</div>
+        <h3>Cancelacion libre</h3>
+        <p>Sin contratos, sin penalidad. Si en algun momento ya no le sirve, se va.</p>
       </div>
     </div>
   </div>
 </section>
 
 <!-- FAQs -->
-<section id="faqs" style="background: rgba(255,255,255,0.02)">
+<section id="faqs" class="reveal">
   <div class="container">
+    <p class="section-label">Dudas</p>
     <h2 style="text-align:center">Preguntas frecuentes</h2>
     <div class="faqs">
 
       <details class="faq">
-        <summary>¿Puedo cancelar cuando quiera?</summary>
-        <div class="faq-body">Sí, en cualquier momento, sin penalidad. Solo nos avisa por WhatsApp y procesamos la baja.</div>
+        <summary>Puedo cancelar cuando quiera?</summary>
+        <div class="faq-body">Si, en cualquier momento, sin penalidad. Solo nos avisa por WhatsApp y procesamos la baja.</div>
       </details>
 
       <details class="faq">
-        <summary>¿Cobran setup o matrícula?</summary>
-        <div class="faq-body">No. $0 de setup permanente. Lo único que paga es la mensualidad después del primer mes gratis.</div>
+        <summary>Cobran setup o matricula?</summary>
+        <div class="faq-body">No. $0 de setup permanente. Lo unico que paga es la mensualidad despues del primer mes gratis.</div>
       </details>
 
       <details class="faq">
-        <summary>¿A nombre de quién queda el dominio?</summary>
-        <div class="faq-body">Siempre a nombre de su clínica. Si algún día decide cambiar de proveedor, el dominio se va con usted.</div>
+        <summary>A nombre de quien queda el dominio?</summary>
+        <div class="faq-body">Siempre a nombre de su clinica. Si algun dia decide cambiar de proveedor, el dominio se va con usted.</div>
       </details>
 
       <details class="faq">
-        <summary>¿Qué pasa si cancelo?</summary>
-        <div class="faq-body">Conserva el dominio, le enviamos por email el código y los archivos, y puede llevarlo a otro proveedor o dejarlo parqueado.</div>
+        <summary>Que pasa si cancelo?</summary>
+        <div class="faq-body">Conserva el dominio, le enviamos por email el codigo y los archivos, y puede llevarlo a otro proveedor o dejarlo parqueado.</div>
       </details>
 
       <details class="faq">
-        <summary>¿Hablan español?</summary>
-        <div class="faq-body">Somos un equipo colombiano. Soporte, onboarding y cambios en español de Colombia.</div>
+        <summary>Hablan espanol?</summary>
+        <div class="faq-body">Somos un equipo colombiano. Soporte, onboarding y cambios en espanol de Colombia.</div>
       </details>
 
       <details class="faq">
-        <summary>¿Cuánto tarda la entrega inicial?</summary>
-        <div class="faq-body">48 horas desde que recibimos los datos básicos. La optimización de Google Maps puede tomar entre 1 y 14 días dependiendo de la verificación de Google.</div>
+        <summary>Cuanto tarda la entrega inicial?</summary>
+        <div class="faq-body">48 horas desde que recibimos los datos basicos. La optimizacion de Google Maps puede tomar entre 1 y 14 dias dependiendo de la verificacion de Google.</div>
       </details>
 
       <details class="faq">
-        <summary>¿Optimizan Google Maps?</summary>
-        <div class="faq-body">Sí, en ambos planes. En Esencial hacemos la optimización inicial. En Completo, además, publicamos 1 novedad cada mes.</div>
+        <summary>Optimizan Google Maps?</summary>
+        <div class="faq-body">Si, en ambos planes. En Esencial hacemos la optimizacion inicial. En Completo, ademas, publicamos 1 novedad cada mes.</div>
       </details>
 
       <details class="faq">
-        <summary>¿Tienen soporte?</summary>
-        <div class="faq-body">Sí, por WhatsApp de lunes a viernes, 8 AM a 6 PM hora Colombia. Respuesta en 48 horas hábiles en Esencial y en 24 horas en Completo.</div>
+        <summary>Tienen soporte?</summary>
+        <div class="faq-body">Si, por WhatsApp de lunes a viernes, 8 AM a 6 PM hora Colombia. Respuesta en 48 horas habiles en Esencial y en 24 horas en Completo.</div>
       </details>
 
     </div>
@@ -341,12 +1545,10 @@
 </section>
 
 <!-- CTA FINAL -->
-<section class="cta-final">
-  <h2>Listo cuando usted esté</h2>
-  <p>Primer mes gratis. Cero compromiso. 5 minutos por WhatsApp y le mandamos una demo personalizada de su clínica.</p>
-  <a class="cta-primary" href="https://wa.me/573124672674?text=Hola%2C%20vengo%20de%20pronto.com%20y%20quiero%20saber%20m%C3%A1s" data-umami-event="click-cta-final">
-    Hablar con Cesar ahora
-  </a>
+<section class="cta-final reveal">
+  <h2>Listo cuando usted este</h2>
+  <p>Primer mes gratis. Cero compromiso. 5 minutos por WhatsApp y le mandamos una demo personalizada de su clinica.</p>
+  <a class="cta-primary" href="https://wa.me/573124672674?text=Hola%2C%20vengo%20de%20prontoweb.co%20y%20quiero%20saber%20m%C3%A1s" data-umami-event="click-cta-final">Hablar con Cesar ahora</a>
 </section>
 
 <!-- FOOTER -->
@@ -359,18 +1561,298 @@
     </div>
     <div>
       <h4>Legal</h4>
-      <p><a href="privacidad.html">Política de privacidad</a></p>
+      <p><a href="privacidad.html">Politica de privacidad</a></p>
       <p>Cumplimiento Ley 1581 de 2012 (Colombia)</p>
     </div>
     <div>
-      <h4>Dirección</h4>
-      <p>Bogotá, Colombia</p>
+      <h4>Direccion</h4>
+      <p>Bogota, Colombia</p>
     </div>
   </div>
   <div class="footer-bottom">
-    © 2026 Pronto — Presencia web para clínicas dentales.
+    &copy; 2026 Pronto — Presencia web para clinicas dentales.
   </div>
 </footer>
+
+<!-- WHATSAPP FLOATING BUTTON -->
+<a class="wa-float" href="https://wa.me/573124672674?text=Hola%2C%20vengo%20de%20prontoweb.co%20y%20quiero%20saber%20m%C3%A1s" target="_blank" rel="noopener" data-umami-event="click-wa-float" aria-label="Escribir por WhatsApp">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<!-- STICKY CTA MOBILE -->
+<div class="sticky-cta-mobile" id="sticky-cta">
+  <a href="https://wa.me/573124672674?text=Hola%2C%20vengo%20de%20prontoweb.co%20y%20quiero%20saber%20m%C3%A1s" data-umami-event="click-sticky-cta">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    Hablar con Cesar
+  </a>
+</div>
+
+<!-- EXIT INTENT POPUP -->
+<div class="popup-overlay" id="exit-popup">
+  <div class="popup">
+    <button class="popup-close" id="popup-close" aria-label="Cerrar">&times;</button>
+    <h2>¡Antes de irse!</h2>
+    <p>Su primer mes es <strong>GRATIS</strong>. Sin compromisos. Sin contratos. Cancele cuando quiera.</p>
+    <a class="cta-primary" href="https://wa.me/573124672674?text=Hola%2C%20vengo%20de%20prontoweb.co%20y%20quiero%20saber%20m%C3%A1s" data-umami-event="click-exit-popup-cta">Hablar con Cesar por WhatsApp</a>
+  </div>
+</div>
+
+<script>
+(function() {
+  'use strict';
+
+  // ── READING PROGRESS BAR ──
+  var progressBar = document.getElementById('progress-bar');
+  function updateProgress() {
+    var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    var progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    progressBar.style.width = progress + '%';
+  }
+  window.addEventListener('scroll', updateProgress, { passive: true });
+
+  // ── SCROLL REVEAL ──
+  var revealElements = document.querySelectorAll('.reveal');
+  var revealObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  revealElements.forEach(function(el) { revealObserver.observe(el); });
+
+  // ── ANIMATED STATS COUNTERS ──
+  var statsAnimated = false;
+  var statElements = document.querySelectorAll('.stat-number[data-target]');
+
+  function formatNumber(num) {
+    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+  }
+
+  function animateCounter(el, delay) {
+    setTimeout(function() {
+      var target = parseInt(el.getAttribute('data-target'));
+      var prefix = el.getAttribute('data-prefix') || '';
+      var suffix = el.getAttribute('data-suffix') || '';
+      var isPrice = el.getAttribute('data-format') === 'price';
+      var duration = 1500;
+      var startTime = null;
+
+      function step(timestamp) {
+        if (!startTime) startTime = timestamp;
+        var progress = Math.min((timestamp - startTime) / duration, 1);
+        var eased = 1 - Math.pow(1 - progress, 3);
+        var current = Math.floor(eased * target);
+
+        if (isPrice) {
+          el.textContent = prefix + formatNumber(current) + suffix;
+        } else {
+          el.textContent = prefix + current + suffix;
+        }
+
+        if (progress < 1) {
+          requestAnimationFrame(step);
+        } else {
+          if (isPrice) {
+            el.textContent = prefix + formatNumber(target) + suffix;
+          } else {
+            el.textContent = prefix + target + suffix;
+          }
+        }
+      }
+      requestAnimationFrame(step);
+    }, delay);
+  }
+
+  var statsObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting && !statsAnimated) {
+        statsAnimated = true;
+        statElements.forEach(function(el, i) {
+          animateCounter(el, i * 100);
+        });
+        statsObserver.disconnect();
+      }
+    });
+  }, { threshold: 0.3 });
+
+  var heroStats = document.querySelector('.hero-stats');
+  if (heroStats) statsObserver.observe(heroStats);
+
+  // ── STICKY CTA MOBILE ──
+  var stickyCta = document.getElementById('sticky-cta');
+  var heroSection = document.getElementById('hero');
+  if (stickyCta && heroSection) {
+    var stickyObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          stickyCta.classList.remove('show');
+        } else {
+          stickyCta.classList.add('show');
+        }
+      });
+    }, { threshold: 0 });
+    stickyObserver.observe(heroSection);
+  }
+
+  // ── ROI CALCULATOR ──
+  var roiPatients = document.getElementById('roi-patients');
+  var roiTicket = document.getElementById('roi-ticket');
+  var roiPatientsVal = document.getElementById('roi-patients-val');
+  var roiLost = document.getElementById('roi-lost');
+  var roiRevenue = document.getElementById('roi-revenue');
+  var roiValue = document.getElementById('roi-value');
+
+  function calculateROI() {
+    var patients = parseInt(roiPatients.value) || 200;
+    var ticket = parseInt(roiTicket.value) || 150000;
+    var lostPatients = Math.round(patients * 0.15);
+    var lostRevenue = lostPatients * ticket;
+    var roi = Math.round(lostRevenue / 199900);
+
+    roiPatientsVal.textContent = patients;
+    roiLost.textContent = lostPatients;
+    roiRevenue.textContent = '$' + formatNumber(lostRevenue);
+    roiValue.textContent = roi + 'x';
+  }
+
+  if (roiPatients) {
+    roiPatients.addEventListener('input', calculateROI);
+    roiTicket.addEventListener('input', calculateROI);
+    calculateROI();
+  }
+
+  // ── BEFORE / AFTER SLIDER ──
+  var baSlider = document.getElementById('ba-slider');
+  var baBefore = document.getElementById('ba-before');
+  var baDivider = document.getElementById('ba-divider');
+
+  if (baSlider && baBefore && baDivider) {
+    var isDragging = false;
+
+    function updateSlider(clientX) {
+      var rect = baSlider.getBoundingClientRect();
+      var x = clientX - rect.left;
+      var percent = Math.max(5, Math.min(95, (x / rect.width) * 100));
+      baBefore.style.width = percent + '%';
+      baDivider.style.left = percent + '%';
+    }
+
+    baSlider.addEventListener('mousedown', function(e) {
+      isDragging = true;
+      updateSlider(e.clientX);
+      e.preventDefault();
+    });
+
+    document.addEventListener('mousemove', function(e) {
+      if (isDragging) {
+        updateSlider(e.clientX);
+        e.preventDefault();
+      }
+    });
+
+    document.addEventListener('mouseup', function() {
+      isDragging = false;
+    });
+
+    baSlider.addEventListener('touchstart', function(e) {
+      isDragging = true;
+      updateSlider(e.touches[0].clientX);
+    }, { passive: true });
+
+    document.addEventListener('touchmove', function(e) {
+      if (isDragging) {
+        updateSlider(e.touches[0].clientX);
+      }
+    }, { passive: true });
+
+    document.addEventListener('touchend', function() {
+      isDragging = false;
+    });
+  }
+
+  // ── DEMO TABS ──
+  var demoTabs = document.querySelectorAll('.demo-tab');
+  var demoIframe = document.getElementById('demo-iframe');
+
+  demoTabs.forEach(function(tab) {
+    tab.addEventListener('click', function() {
+      demoTabs.forEach(function(t) { t.classList.remove('active'); });
+      tab.classList.add('active');
+      if (demoIframe) {
+        demoIframe.src = tab.getAttribute('data-url');
+      }
+    });
+  });
+
+  // ── EXIT INTENT POPUP ──
+  var exitPopup = document.getElementById('exit-popup');
+  var popupClose = document.getElementById('popup-close');
+  var exitShown = false;
+
+  function showExitPopup() {
+    if (exitShown) return;
+    if (localStorage.getItem('pronto-exit-shown')) return;
+    exitPopup.classList.add('show');
+    exitShown = true;
+    localStorage.setItem('pronto-exit-shown', '1');
+  }
+
+  function hideExitPopup() {
+    exitPopup.classList.remove('show');
+  }
+
+  if (exitPopup && popupClose) {
+    document.addEventListener('mouseleave', function(e) {
+      if (e.clientY <= 0) {
+        showExitPopup();
+      }
+    });
+
+    popupClose.addEventListener('click', hideExitPopup);
+
+    exitPopup.addEventListener('click', function(e) {
+      if (e.target === exitPopup) hideExitPopup();
+    });
+  }
+
+  // ── SMOOTH SCROLL FOR NAV LINKS ──
+  document.querySelectorAll('a[href^="#"]').forEach(function(link) {
+    link.addEventListener('click', function(e) {
+      var targetId = this.getAttribute('href');
+      if (targetId === '#') return;
+      var target = document.querySelector(targetId);
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+
+  // ── SCALE IFRAMES IN BEFORE/AFTER ON RESIZE ──
+  function scaleBAIframes() {
+    var container = document.getElementById('ba-slider');
+    if (!container) return;
+    var containerWidth = container.offsetWidth;
+    var scale = containerWidth / 900;
+    var iframes = container.querySelectorAll('iframe');
+    iframes.forEach(function(iframe) {
+      iframe.style.transform = 'scale(' + scale + ')';
+      iframe.style.width = '900px';
+      iframe.style.height = (container.offsetHeight / scale) + 'px';
+    });
+  }
+
+  window.addEventListener('resize', scaleBAIframes);
+  window.addEventListener('load', function() {
+    scaleBAIframes();
+    updateProgress();
+  });
+
+})();
+</script>
 
 </body>
 </html>
