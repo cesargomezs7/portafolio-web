@@ -784,7 +784,7 @@
   }
   @media (max-width: 480px) {
     .phones-row { gap: 16px; }
-    .device-phone { width: 150px; }
+    .device-phone { width: 180px; }
   }
 
   /* ── DEVICE LABELS ── */
@@ -799,12 +799,12 @@
   }
   /* Phone mockup */
   .device-phone {
-    width: 200px;
-    background: #0a0b18;
-    border-radius: 28px;
-    padding: 12px 10px;
-    border: 2px solid rgba(255,255,255,0.15);
-    box-shadow: 0 16px 50px rgba(0,0,0,0.5);
+    width: 280px;
+    background: #050610;
+    border-radius: 36px;
+    padding: 16px 12px;
+    border: 3px solid rgba(255,255,255,0.2);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.6), inset 0 0 0 1px rgba(255,255,255,0.05);
   }
   .device-phone-screen {
     border-radius: 20px;
@@ -824,21 +824,21 @@
     transform-origin: top left;
   }
   .device-phone-notch {
-    width: 60px;
-    height: 6px;
-    background: #2a2b3e;
-    border-radius: 3px;
-    margin: 0 auto 8px;
+    width: 80px;
+    height: 8px;
+    background: #1a1b2e;
+    border-radius: 4px;
+    margin: 0 auto 10px;
   }
   .device-phone-home {
-    width: 44px;
-    height: 4px;
-    background: #2a2b3e;
-    border-radius: 2px;
-    margin: 10px auto 0;
+    width: 50px;
+    height: 5px;
+    background: #1a1b2e;
+    border-radius: 3px;
+    margin: 12px auto 0;
   }
   @media (max-width: 768px) {
-    .device-phone { width: 160px; }
+    .device-phone { width: 200px; }
   }
 
   /* ── PLANES ── */
@@ -1238,7 +1238,6 @@
     </div>
     <h1>Presencia web para<br><span class="brand-gradient">su clínica dental</span></h1>
     <p class="sub">Suscripción mensual con todo incluido. Su clínica visible en Google, con WhatsApp directo y lista en 48 horas. Sin contratos, sin sorpresas. Ya tenemos una demo personalizada de su clínica lista para mostrarle.</p>
-    <p style="font-size:1.3rem; font-weight:700; color:var(--accent-green); margin-bottom:24px;">Su primer mes es gratis. Cero riesgo.</p>
     <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:12px; margin-bottom:28px;">
       <span style="display:inline-flex; align-items:center; gap:6px; padding:8px 16px; border-radius:999px; background:rgba(255,255,255,0.05); border:1px solid var(--border); font-size:0.85rem; color:var(--text-muted); font-weight:500;">&#10003; Primer mes gratis</span>
       <span style="display:inline-flex; align-items:center; gap:6px; padding:8px 16px; border-radius:999px; background:rgba(255,255,255,0.05); border:1px solid var(--border); font-size:0.85rem; color:var(--text-muted); font-weight:500;">&#10003; Web en 48 horas</span>
@@ -1408,7 +1407,7 @@
         <label for="roi-ticket">Ticket promedio por consulta (COP)</label>
         <div class="roi-input-group">
           <button class="roi-btn" id="roi-ticket-minus">&minus;</button>
-          <input type="text" id="roi-ticket" value="150.000" inputmode="numeric" readonly>
+          <input type="text" id="roi-ticket" value="200.000" inputmode="numeric" readonly>
           <button class="roi-btn" id="roi-ticket-plus">+</button>
         </div>
       </div>
@@ -1817,10 +1816,10 @@
   var roiRevenue = document.getElementById('roi-revenue');
   var roiValue = document.getElementById('roi-value');
 
-  var ticketValue = 150000;
+  var ticketValue = 200000;
   var ticketMin = 50000;
-  var ticketMax = 1000000;
-  var ticketStep = 10000;
+  var ticketMax = 4000000;
+  var ticketStep = 50000;
 
   function updateTicketDisplay() {
     roiTicket.value = formatNumber(ticketValue);
