@@ -671,7 +671,7 @@
     color: var(--bg);
   }
 
-  /* ── INTERACTIVE DEMO ── */
+  /* ── LIVE DEMO (horizontal, no frame) ── */
   .demo-tabs {
     display: flex;
     justify-content: center;
@@ -699,78 +699,38 @@
     border-color: var(--accent-blue);
     color: var(--text);
   }
-  .demo-laptop {
-    max-width: 900px;
+  .live-demo-container {
+    max-width: 960px;
     margin: 0 auto;
-    background: #111225;
-    border-radius: 16px 16px 0 0;
-    padding: 12px 12px 0;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.4);
-  }
-  .demo-screen {
-    border-radius: 8px 8px 0 0;
+    border-radius: var(--radius-lg);
     overflow: hidden;
+    border: 1px solid var(--border);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4);
     aspect-ratio: 16 / 9;
-    background: #0a0b1a;
+    background: var(--bg);
   }
-  .demo-screen iframe {
+  .live-demo-container iframe {
     width: 100%;
     height: 100%;
     border: none;
   }
-  .demo-base {
-    max-width: 960px;
-    margin: 0 auto;
-    height: 16px;
-    background: #1a1b2e;
-    border-radius: 0 0 8px 8px;
-    position: relative;
+
+  /* ── PHONES ROW (side by side) ── */
+  .phones-row {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 40px;
   }
-  .demo-base::before {
-    content: '';
-    position: absolute;
-    top: 4px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 80px;
-    height: 4px;
-    background: #2a2b3e;
-    border-radius: 2px;
+  .phone-col {
+    text-align: center;
   }
-  @media (max-width: 768px) {
-    .demo-laptop {
-      border-radius: 24px;
-      padding: 8px;
-      max-width: 340px;
-    }
-    .demo-screen { border-radius: 20px; aspect-ratio: 9/16; }
-    .demo-base { display: none; }
+  @media (max-width: 480px) {
+    .phones-row { gap: 16px; }
+    .device-phone { width: 140px; }
   }
 
-  /* ── SHOWCASES — DEVICE MOCKUPS ── */
-  .showcase-row {
-    margin-top: 48px;
-    padding-bottom: 48px;
-    border-bottom: 1px solid var(--border);
-  }
-  .showcase-row:last-child { border-bottom: none; padding-bottom: 0; }
-  .showcase-header {
-    text-align: center;
-    margin-bottom: 8px;
-  }
-  .showcase-header h3 { font-size: 1.3rem; margin-bottom: 4px; }
-  .showcase-header p { color: var(--text-muted); font-size: 0.9rem; }
-  .showcase-header small { display: block; color: var(--text-dim); font-size: 0.75rem; font-style: italic; margin-top: 4px; }
-  .showcase-header a { color: var(--accent-cyan); font-size: 0.9rem; font-weight: 600; transition: color 0.2s; }
-  .showcase-header a:hover { color: var(--accent-blue); }
-  .showcase-devices {
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    gap: 32px;
-    margin-top: 24px;
-  }
-  .device-frame { position: relative; }
+  /* ── DEVICE LABELS ── */
   .device-label {
     text-align: center;
     margin-top: 12px;
@@ -779,49 +739,6 @@
     color: var(--text-dim);
     text-transform: uppercase;
     letter-spacing: 0.08em;
-  }
-  /* Laptop mockup */
-  .device-laptop {
-    width: 580px;
-    background: #111225;
-    border-radius: 12px 12px 0 0;
-    padding: 8px 8px 0;
-    box-shadow: 0 12px 40px rgba(0,0,0,0.4);
-  }
-  .device-laptop-screen {
-    border-radius: 6px 6px 0 0;
-    overflow: hidden;
-    aspect-ratio: 16 / 10;
-    background: var(--bg);
-    position: relative;
-  }
-  .device-laptop-screen iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 1440px;
-    height: 900px;
-    border: none;
-    pointer-events: none;
-    transform-origin: top left;
-  }
-  .device-laptop-base {
-    height: 14px;
-    background: #1a1b2e;
-    position: relative;
-    margin: 0 -8px;
-    border-radius: 0 0 12px 12px;
-  }
-  .device-laptop-base::before {
-    content: '';
-    position: absolute;
-    top: 5px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 60px;
-    height: 4px;
-    background: #2a2b3e;
-    border-radius: 2px;
   }
   /* Phone mockup */
   .device-phone {
@@ -863,9 +780,7 @@
     margin: 8px auto 0;
   }
   @media (max-width: 768px) {
-    .showcase-devices { flex-direction: column; align-items: center; gap: 24px; }
-    .device-laptop { width: 100%; max-width: 400px; }
-    .device-phone { width: 120px; }
+    .device-phone { width: 140px; }
   }
 
   /* ── PLANES ── */
@@ -1448,95 +1363,57 @@
   </div>
 </section>
 
-<!-- INTERACTIVE DEMO -->
-<section class="reveal" id="demo">
+<!-- VEA LOS SITIOS EN VIVO (horizontal, con tabs) -->
+<section class="reveal" id="portafolio">
   <div class="container">
     <p class="section-label">Vea en vivo</p>
-    <h2 style="text-align:center">Navegue un ejemplo real</h2>
+    <h2 style="text-align:center">Navegue los sitios en vivo</h2>
+    <p style="text-align:center; color:var(--text-muted); max-width:560px; margin:0 auto 0">
+      Haga scroll, haga click, explore. Estos son sitios reales funcionando ahora mismo.
+    </p>
     <div class="demo-tabs">
       <button class="demo-tab active" data-url="https://sonrisabogota.prontoweb.co">Plan Esencial</button>
       <button class="demo-tab" data-url="https://sonrisapremium.prontoweb.co">Plan Completo</button>
     </div>
-    <div class="demo-laptop">
-      <div class="demo-screen">
-        <iframe id="demo-iframe" src="https://sonrisabogota.prontoweb.co" title="Demo de sitio Pronto" loading="lazy"></iframe>
-      </div>
+    <div class="live-demo-container">
+      <iframe id="demo-iframe" src="https://sonrisabogota.prontoweb.co" title="Demo en vivo de sitio Pronto" loading="lazy"></iframe>
     </div>
-    <div class="demo-base"></div>
+    <p style="text-align:center; margin-top:12px;">
+      <small style="color:var(--text-dim); font-style:italic;">Ejemplo de implementación. Muestra de capacidad.</small>
+    </p>
   </div>
 </section>
 
-<!-- SHOWCASES — DEVICE MOCKUPS -->
-<section id="portafolio" class="reveal" style="background: var(--bg-subtle);">
+<!-- EN SU CELULAR TAMBIÉN FUNCIONA -->
+<section class="reveal" id="celular" style="background: var(--bg-subtle);">
   <div class="container">
-    <p class="section-label">Portafolio</p>
-    <h2 style="text-align:center">Así se ve en computador y celular</h2>
-    <p style="text-align:center; color:var(--text-muted); max-width:600px; margin:0 auto">
-      Cada sitio se adapta perfectamente a cualquier dispositivo. Vea los dos planes en acción.
+    <p class="section-label">Responsive</p>
+    <h2 style="text-align:center">En su celular también funciona</h2>
+    <p style="text-align:center; color:var(--text-muted); max-width:560px; margin:0 auto">
+      Sus pacientes buscan desde el celular. Cada sitio se ve perfecto en cualquier pantalla.
     </p>
-
-    <!-- Esencial -->
-    <div class="showcase-row">
-      <div class="showcase-header">
-        <h3>Plan Esencial — Clínica Dental Sonrisa Bogotá</h3>
-        <p>Web 1-3 páginas, WhatsApp, Google Maps, QR reseñas</p>
-        <a href="https://sonrisabogota.prontoweb.co" target="_blank" rel="noopener" data-umami-event="click-showcase-esencial">Ver ejemplo completo &rarr;</a>
-        <small>Ejemplo de implementación. Muestra de capacidad.</small>
+    <div class="phones-row">
+      <div class="phone-col">
+        <div class="device-phone">
+          <div class="device-phone-notch"></div>
+          <div class="device-phone-screen">
+            <iframe src="https://sonrisabogota.prontoweb.co" loading="lazy" title="Sonrisa Bogotá — Celular"></iframe>
+          </div>
+          <div class="device-phone-home"></div>
+        </div>
+        <div class="device-label">Plan Esencial</div>
       </div>
-      <div class="showcase-devices">
-        <div class="device-frame">
-          <div class="device-laptop">
-            <div class="device-laptop-screen">
-              <iframe src="https://sonrisabogota.prontoweb.co" loading="lazy" title="Sonrisa Bogotá — Computador"></iframe>
-            </div>
+      <div class="phone-col">
+        <div class="device-phone">
+          <div class="device-phone-notch"></div>
+          <div class="device-phone-screen">
+            <iframe src="https://sonrisapremium.prontoweb.co" loading="lazy" title="Sonrisa Premium — Celular"></iframe>
           </div>
-          <div class="device-laptop-base"></div>
-          <div class="device-label">Computador</div>
+          <div class="device-phone-home"></div>
         </div>
-        <div class="device-frame">
-          <div class="device-phone">
-            <div class="device-phone-notch"></div>
-            <div class="device-phone-screen">
-              <iframe src="https://sonrisabogota.prontoweb.co" loading="lazy" title="Sonrisa Bogotá — Celular"></iframe>
-            </div>
-            <div class="device-phone-home"></div>
-          </div>
-          <div class="device-label">Celular</div>
-        </div>
+        <div class="device-label">Plan Completo</div>
       </div>
     </div>
-
-    <!-- Completo -->
-    <div class="showcase-row">
-      <div class="showcase-header">
-        <h3>Plan Completo — Clínica Sonrisa Premium Medellín</h3>
-        <p>5-8 páginas, landings por tratamiento, blog y reportes mensuales</p>
-        <a href="https://sonrisapremium.prontoweb.co" target="_blank" rel="noopener" data-umami-event="click-showcase-completo">Ver ejemplo completo &rarr;</a>
-        <small>Ejemplo de implementación. Muestra de capacidad.</small>
-      </div>
-      <div class="showcase-devices">
-        <div class="device-frame">
-          <div class="device-laptop">
-            <div class="device-laptop-screen">
-              <iframe src="https://sonrisapremium.prontoweb.co" loading="lazy" title="Sonrisa Premium — Computador"></iframe>
-            </div>
-          </div>
-          <div class="device-laptop-base"></div>
-          <div class="device-label">Computador</div>
-        </div>
-        <div class="device-frame">
-          <div class="device-phone">
-            <div class="device-phone-notch"></div>
-            <div class="device-phone-screen">
-              <iframe src="https://sonrisapremium.prontoweb.co" loading="lazy" title="Sonrisa Premium — Celular"></iframe>
-            </div>
-            <div class="device-phone-home"></div>
-          </div>
-          <div class="device-label">Celular</div>
-        </div>
-      </div>
-    </div>
-
   </div>
 </section>
 
