@@ -35,10 +35,33 @@
     html { scroll-behavior: smooth; }
 
     body {
-      font-family: 'Open Sans', sans-serif;
+      font-family: 'Inter', 'Open Sans', sans-serif;
       color: var(--text-dark);
       background: var(--white);
       overflow-x: hidden;
+      font-size: 17px;
+      line-height: 1.65;
+      letter-spacing: -0.01em;
+      -webkit-font-smoothing: antialiased;
+    }
+    /* === MICRO-INTERACCIONES PREMIUM === */
+    a, button { transition: all 0.32s cubic-bezier(0.4, 0, 0.2, 1); }
+    .btn-primary, .btn-outline, .btn-whatsapp, .btn-tel {
+      position: relative; overflow: hidden;
+    }
+    .btn-primary:hover { transform: translateY(-3px) !important; box-shadow: 0 18px 48px rgba(30,58,138,0.28) !important; }
+    .btn-outline:hover { transform: translateY(-3px) !important; }
+    .service-card { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important; }
+    .service-card:hover { transform: translateY(-6px) scale(1.01) !important; box-shadow: 0 24px 60px rgba(30,58,138,0.18) !important; }
+    .hero-card:hover { transform: translateX(-6px) !important; background: rgba(255,255,255,0.22) !important; }
+    .why-item { transition: all 0.32s ease; }
+    .why-item:hover { transform: translateX(4px); }
+    .nav-links a:hover { letter-spacing: 0.3px; }
+    /* Loading bar minimalista */
+    .top-bar {
+      position: fixed; top: 0; left: 0; height: 3px; width: 0%;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      z-index: 9999; transition: width 0.3s ease;
     }
 
     /* ─── NAVBAR ─────────────────────────────────────────────── */
@@ -96,7 +119,11 @@
     /* ─── HERO ───────────────────────────────────────────────── */
     .hero {
       min-height: 100vh;
-      background: linear-gradient(135deg, #0f1d52 0%, #1e3a8a 45%, #3b82f6 100%);
+      background:
+        linear-gradient(135deg, rgba(15,29,82,0.82) 0%, rgba(30,58,138,0.78) 50%, rgba(23,37,84,0.86) 100%),
+        url('img/hero-nb2.jpg');
+      background-size: cover;
+      background-position: center;
       position: relative; overflow: hidden;
       display: flex; align-items: center;
       padding-top: 74px;
@@ -123,8 +150,8 @@
 
     .hero-content {
       position: relative; z-index: 2;
-      max-width: 1200px; margin: 0 auto; padding: 80px 5%;
-      display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+      max-width: 1100px; margin: 0 auto; padding: 120px 5%;
+      display: block; text-align: center;
     }
 
     .hero-badge {
@@ -137,18 +164,20 @@
     .hero-badge i { color: var(--accent); }
 
     .hero-text h1 {
-      font-size: clamp(2.2rem, 4vw, 3.4rem);
-      font-weight: 800; color: white; line-height: 1.15;
-      letter-spacing: -1px; margin-bottom: 20px;
+      font-size: clamp(2.8rem, 6vw, 5.2rem);
+      font-weight: 800; color: white; line-height: 1.05;
+      letter-spacing: -2px; margin-bottom: 28px;
+      max-width: 900px; margin-left: auto; margin-right: auto;
     }
-    .hero-text h1 span { color: var(--accent); }
+    .hero-text h1 span { color: var(--accent); display: block; font-weight: 400; font-size: 0.6em; letter-spacing: -0.5px; margin-top: 12px; }
 
     .hero-text p {
-      font-size: 17px; color: rgba(255,255,255,0.82);
-      line-height: 1.7; margin-bottom: 36px; font-weight: 400;
+      font-size: 20px; color: rgba(255,255,255,0.88);
+      line-height: 1.6; margin-bottom: 48px; font-weight: 400;
+      max-width: 640px; margin-left: auto; margin-right: auto;
     }
 
-    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
 
     .btn-primary {
       display: inline-flex; align-items: center; gap: 8px;
@@ -171,8 +200,9 @@
     .btn-outline:hover { background: rgba(255,255,255,0.15); border-color: white; }
 
     .hero-stats {
-      display: flex; gap: 32px; margin-top: 48px; padding-top: 36px;
-      border-top: 1px solid rgba(255,255,255,0.2);
+      display: flex; gap: 56px; margin-top: 72px; padding-top: 36px;
+      border-top: 1px solid rgba(255,255,255,0.18);
+      justify-content: center; max-width: 720px; margin-left: auto; margin-right: auto;
     }
     .stat { color: white; }
     .stat strong { display: block; font-size: 2rem; font-weight: 800; letter-spacing: -1px; }
@@ -226,7 +256,7 @@
     .trust-item span { font-size: 14px; font-weight: 600; }
 
     /* ─── SECTION COMMON ─────────────────────────────────────── */
-    .section { padding: 90px 5%; }
+    .section { padding: 140px 5%; }
     .section-alt { background: var(--gray-light); }
 
     .section-header { text-align: center; margin-bottom: 64px; }
@@ -619,6 +649,7 @@
   </style>
 </head>
 <body>
+<div class="top-bar" id="topBar"></div>
 
 <!-- ─── NAVBAR ──────────────────────────────────────────────── -->
 <nav class="navbar" id="navbar">
@@ -650,65 +681,28 @@
 
   <div class="hero-content">
     <div class="hero-text">
-      <div class="hero-badge">
-        <i class="fa-solid fa-shield-heart"></i>
-        Tu sonrisa, nuestra especialidad en Chapinero
+      <div class="hero-badge" style="margin: 0 auto 32px;">
+        <i class="fa-solid fa-location-dot"></i>
+        Chapinero · Bogotá
       </div>
-      <h1>Odontología Especializada <span>en el corazón de Bogotá</span></h1>
-      <p>En Natural Smile combinamos tecnología 3D, especialistas con más de 15 años de experiencia y un trato cercano y personalizado para cuidar tu sonrisa con seguridad y confort.</p>
+      <h1>Tu sonrisa, <span>nuestra especialidad</span></h1>
+      <p>Odontología integral con tecnología 3D, atención bilingüe y especialistas con 15 años de experiencia. En el corazón de Bogotá.</p>
 
       <div class="hero-actions">
-        <a href="https://wa.me/573155185727?text=Hola%20Natural%20Smile,%20quiero%20agendar%20una%20cita" class="btn-primary" target="_blank">
-          <i class="fa-brands fa-whatsapp"></i> Agendar por WhatsApp
-        </a>
-        <a href="#servicios" class="btn-outline">
-          <i class="fa-solid fa-list-ul"></i> Ver servicios
+        <a href="https://wa.me/573155185727?text=Hola%20Natural%20Smile,%20quiero%20agendar%20una%20cita" class="btn-primary" target="_blank" style="padding: 18px 38px; font-size: 16px;">
+          <i class="fa-brands fa-whatsapp"></i> Agendar mi cita
         </a>
       </div>
 
       <div class="hero-stats">
         <div class="stat"><strong>+500</strong><span>Pacientes felices</span></div>
-        <div class="stat"><strong>15+</strong><span>Años de experiencia</span></div>
-        <div class="stat"><strong>5.0 ★</strong><span>Calificación Google</span></div>
-      </div>
-    </div>
-
-    <div class="hero-visual">
-      <div class="hero-card">
-        <div class="hero-card-icon"><i class="fa-solid fa-wand-sparkles"></i></div>
-        <div class="hero-card-info">
-          <strong>Diseño de Sonrisa</strong>
-          <span>Planificación digital personalizada</span>
-        </div>
-      </div>
-      <div class="hero-card">
-        <div class="hero-card-icon"><i class="fa-solid fa-tooth"></i></div>
-        <div class="hero-card-info">
-          <strong>Implantes Dentales</strong>
-          <span>Recupera tu sonrisa con naturalidad</span>
-        </div>
-      </div>
-      <div class="hero-card">
-        <div class="hero-card-icon"><i class="fa-solid fa-teeth"></i></div>
-        <div class="hero-card-info">
-          <strong>Ortodoncia</strong>
-          <span>Brackets e invisalign</span>
-        </div>
+        <div class="stat"><strong>15+</strong><span>Años</span></div>
+        <div class="stat"><strong>5.0 ★</strong><span>Google</span></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ─── TRUST BAR ─────────────────────────────────────────── -->
-<div class="trust-bar">
-  <div class="trust-bar-inner">
-    <div class="trust-item"><i class="fa-solid fa-user-doctor"></i><span>Especialistas certificados</span></div>
-    <div class="trust-item"><i class="fa-solid fa-cube"></i><span>Tecnología 3D</span></div>
-    <div class="trust-item"><i class="fa-solid fa-language"></i><span>Atención en inglés</span></div>
-    <div class="trust-item"><i class="fa-solid fa-shield-halved"></i><span>Bioseguridad certificada</span></div>
-    <div class="trust-item"><i class="fa-solid fa-star"></i><span>5.0 en Google</span></div>
-  </div>
-</div>
 
 <!-- ─── INTRO ─────────────────────────────────────────────── -->
 <section class="section">
@@ -1104,10 +1098,29 @@
 
 <!-- ─── SCRIPTS ───────────────────────────────────────────── -->
 <script>
+  // Loading bar al inicio
+  const topBar = document.getElementById('topBar');
+  if (topBar) {
+    setTimeout(() => topBar.style.width = '40%', 100);
+    setTimeout(() => topBar.style.width = '70%', 400);
+    window.addEventListener('load', () => {
+      topBar.style.width = '100%';
+      setTimeout(() => topBar.style.opacity = '0', 600);
+    });
+  }
   // Navbar scroll effect
   const navbar = document.getElementById('navbar');
   window.addEventListener('scroll', () => {
     navbar.classList.toggle('scrolled', window.scrollY > 60);
+  });
+  // Scroll progress en topBar después de carga
+  window.addEventListener('scroll', () => {
+    if (!topBar) return;
+    const scrolled = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+    if (window.scrollY > 100) {
+      topBar.style.opacity = '1';
+      topBar.style.width = scrolled + '%';
+    }
   });
 
   // Scroll reveal
