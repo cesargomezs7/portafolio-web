@@ -31,14 +31,6 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "¿Puedo cancelar cuando quiera?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Sí, en cualquier momento, sin penalidad. Solo nos avisa por WhatsApp y procesamos la baja."
-      }
-    },
-    {
-      "@type": "Question",
       "name": "¿Cobran setup o matrícula?",
       "acceptedAnswer": {
         "@type": "Answer",
@@ -47,10 +39,10 @@
     },
     {
       "@type": "Question",
-      "name": "¿A nombre de quién queda el dominio?",
+      "name": "¿Puedo cancelar cuando quiera?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Siempre a nombre de su clínica. Si algún día decide cambiar de proveedor, el dominio se va con usted."
+        "text": "Sí, en cualquier momento, sin penalidad. Solo nos avisa por WhatsApp y procesamos la baja."
       }
     },
     {
@@ -59,6 +51,14 @@
       "acceptedAnswer": {
         "@type": "Answer",
         "text": "48 horas desde que recibimos los datos básicos. La optimización de Google Maps puede tomar entre 1 y 14 días dependiendo de la verificación de Google."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿A nombre de quién queda el dominio?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Siempre a nombre de su clínica. Si algún día decide cambiar de proveedor, el dominio se va con usted."
       }
     },
     {
@@ -1216,7 +1216,7 @@
       Disponible &middot; 3 meses gratis &middot; Programa Primeros 10
     </div>
     <h1>Presencia web profesional para<br><span class="brand-gradient">su clínica dental</span></h1>
-    <p class="sub">Suscripción mensual con todo incluido. Su clínica visible en Google, con WhatsApp directo y lista en 48 horas. Sin contratos, sin sorpresas.</p>
+    <p class="sub">Su clínica visible en Google. Pacientes reservan por WhatsApp. Lista en 48 horas, sin contratos.</p>
     <ul style="list-style:none; padding:0; margin:0 auto 32px; max-width:480px; text-align:left; display:flex; flex-direction:column; gap:10px;">
       <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.95rem; color:var(--text); line-height:1.45;"><span style="color:var(--accent-green); font-weight:700; flex-shrink:0;">&#10003;</span> 3 meses gratis. $0 de setup. Sin tarjeta para empezar.</li>
       <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.95rem; color:var(--text); line-height:1.45;"><span style="color:var(--accent-green); font-weight:700; flex-shrink:0;">&#10003;</span> Sin contratos. Cancele cuando quiera.</li>
@@ -1235,8 +1235,8 @@
         <div class="stat-label">Setup</div>
       </div>
       <div class="hero-stat">
-        <div class="stat-number" data-target="100" data-suffix="%">0%</div>
-        <div class="stat-label">Responsive</div>
+        <div class="stat-number" data-target="8" data-suffix="/10">0/10</div>
+        <div class="stat-label">Cupos fundador</div>
       </div>
       <div class="hero-stat">
         <div class="stat-number" data-target="399900" data-prefix="$" data-suffix="/mes" data-format="price">$0/mes</div>
@@ -1361,15 +1361,31 @@
     <p class="section-label">Precios</p>
     <h2 style="text-align:center">Un plan. Todo incluido.</h2>
 
-    <!-- PROGRAMA PRIMEROS 10 — escasez fundadores -->
-    <div style="max-width:720px; margin:0 auto 40px; padding:24px 28px; border:1px solid var(--border-blue); border-radius:var(--radius-lg); background:linear-gradient(135deg, rgba(79,142,247,0.08), rgba(56,189,248,0.04)); text-align:center;">
-      <div style="display:inline-flex; align-items:center; gap:8px; padding:6px 14px; border-radius:999px; background:rgba(79,142,247,0.15); border:1px solid var(--border-blue); font-size:0.8rem; color:var(--accent-cyan); font-weight:600; margin-bottom:14px;">
-        <span class="pulse-dot"></span>
-        Programa Primeros 10 &mdash; fundadores
+    <!-- PROGRAMA PRIMEROS 10 — escasez fundadores estilo barra progreso -->
+    <div style="max-width:760px; margin:0 auto 40px; padding:26px 30px; border:1px solid var(--border-blue); border-radius:var(--radius-lg); background:linear-gradient(180deg, rgba(79,142,247,0.06), rgba(79,142,247,0.02));">
+      <div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:14px; margin-bottom:16px;">
+        <div style="display:inline-flex; align-items:center; gap:10px;">
+          <span class="pulse-dot"></span>
+          <span style="font-family:var(--font-body); font-size:0.95rem; font-weight:600; color:var(--text); letter-spacing:-0.1px;">Programa Primeros 10 &mdash; fundadores</span>
+        </div>
+        <div style="font-family:'SF Mono', Menlo, Consolas, monospace; font-size:0.78rem; color:var(--accent-blue); padding:5px 12px; background:rgba(79,142,247,0.12); border:1px solid rgba(79,142,247,0.4); border-radius:999px; letter-spacing:0.02em;">
+          8 / 10 cupos disponibles
+        </div>
       </div>
-      <h3 style="font-family:var(--font-heading); font-size:1.6rem; margin:0 0 10px; color:var(--text);">8 de 10 cupos disponibles</h3>
-      <p style="color:var(--text-muted); margin:0 0 10px; line-height:1.5;">Las primeras 10 clínicas tienen <strong style="color:var(--text);">3 meses gratis</strong> (vs el primer mes habitual). A cambio: usan la web, dan feedback semanal de 15 min, graban un video testimonio al mes 3, refieren 2 colegas dentistas y nos dejan usar su caso públicamente.</p>
-      <p style="color:var(--text-dim); margin:0; font-size:0.85rem;">Cuando se llenen los 10 cupos, el plan vuelve a 1 mes gratis y el precio sube progresivamente para los siguientes.</p>
+      <div style="display:flex; gap:5px; margin-bottom:18px;">
+        <div style="flex:1; height:6px; border-radius:999px; background:var(--accent-blue);"></div>
+        <div style="flex:1; height:6px; border-radius:999px; background:var(--accent-blue);"></div>
+        <div style="flex:1; height:6px; border-radius:999px; background:var(--accent-blue);"></div>
+        <div style="flex:1; height:6px; border-radius:999px; background:var(--accent-blue);"></div>
+        <div style="flex:1; height:6px; border-radius:999px; background:var(--accent-blue);"></div>
+        <div style="flex:1; height:6px; border-radius:999px; background:var(--accent-blue);"></div>
+        <div style="flex:1; height:6px; border-radius:999px; background:var(--accent-blue);"></div>
+        <div style="flex:1; height:6px; border-radius:999px; background:var(--accent-blue); opacity:0.4;"></div>
+        <div style="flex:1; height:6px; border-radius:999px; background:rgba(255,255,255,0.12);"></div>
+        <div style="flex:1; height:6px; border-radius:999px; background:rgba(255,255,255,0.12);"></div>
+      </div>
+      <p style="color:var(--text-muted); margin:0 0 10px; line-height:1.55; font-size:0.95rem;"><strong style="color:var(--text);">3 meses gratis</strong> a cambio de feedback semanal de 15 minutos, un video testimonio breve al final, y 2 referidos a otras clínicas. Cero costo. Cero tarjeta.</p>
+      <p style="color:var(--text-dim); margin:0; font-size:0.85rem; line-height:1.5;">Cuando se llenen los 10 cupos, el plan vuelve a 1 mes gratis y el precio sube progresivamente para los siguientes.</p>
     </div>
 
     <div class="planes-grid" style="display:flex; justify-content:center;">
@@ -1410,23 +1426,23 @@
     <div class="faqs">
 
       <details class="faq">
-        <summary>¿Puedo cancelar cuando quiera?</summary>
-        <div class="faq-body">Sí, en cualquier momento, sin penalidad. Solo nos avisa por WhatsApp y procesamos la baja.</div>
-      </details>
-
-      <details class="faq">
         <summary>¿Cobran setup o matrícula?</summary>
         <div class="faq-body">No. $0 de setup permanente. Lo único que paga es la mensualidad después de los 3 meses gratis del Programa Primeros 10.</div>
       </details>
 
       <details class="faq">
-        <summary>¿A nombre de quién queda el dominio?</summary>
-        <div class="faq-body">Siempre a nombre de su clínica. Si algún día decide cambiar de proveedor, el dominio se va con usted.</div>
+        <summary>¿Puedo cancelar cuando quiera?</summary>
+        <div class="faq-body">Sí, en cualquier momento, sin penalidad. Solo nos avisa por WhatsApp y procesamos la baja.</div>
       </details>
 
       <details class="faq">
         <summary>¿Cuánto tarda la entrega inicial?</summary>
         <div class="faq-body">48 horas desde que recibimos los datos básicos. La optimización de Google Maps puede tomar entre 1 y 14 días dependiendo de la verificación de Google.</div>
+      </details>
+
+      <details class="faq">
+        <summary>¿A nombre de quién queda el dominio?</summary>
+        <div class="faq-body">Siempre a nombre de su clínica. Si algún día decide cambiar de proveedor, el dominio se va con usted.</div>
       </details>
 
       <details class="faq">
