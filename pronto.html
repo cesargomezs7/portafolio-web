@@ -289,6 +289,14 @@
     display: block;
     background: transparent;
   }
+  /* Watermark Spline free plan — atenuado (sigue visible/legible, menos prominente) */
+  .hero-spline spline-viewer::part(logo) {
+    opacity: 0.35;
+    transition: opacity 0.3s ease;
+  }
+  .hero-spline spline-viewer::part(logo):hover {
+    opacity: 0.9;
+  }
   /* Vignette para suavizar bordes del Spline y mejorar legibilidad */
   .hero-spline::after {
     content: '';
