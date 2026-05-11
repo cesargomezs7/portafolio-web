@@ -37,6 +37,31 @@
     splineScript.type = 'module';
     splineScript.src = 'https://unpkg.com/@splinetool/viewer@1.9.48/build/spline-viewer.js';
     document.head.appendChild(splineScript);
+
+    // Atenuar el watermark dentro del shadow DOM (sigue visible, legible al hover)
+    window.addEventListener('load', function() {
+      function dimSplineLogo() {
+        var viewers = document.querySelectorAll('spline-viewer');
+        viewers.forEach(function(v) {
+          var sr = v.shadowRoot;
+          if (!sr) return;
+          var logo = sr.querySelector('#logo, .logo, [class*="logo" i], a[href*="spline" i]');
+          if (logo) {
+            logo.style.opacity = '0.18';
+            logo.style.transition = 'opacity 0.3s ease';
+            logo.addEventListener('mouseenter', function() { logo.style.opacity = '0.9'; });
+            logo.addEventListener('mouseleave', function() { logo.style.opacity = '0.18'; });
+          }
+        });
+      }
+      // Reintentos: el viewer puede tardar en montar
+      var tries = 0;
+      var interval = setInterval(function() {
+        tries++;
+        dimSplineLogo();
+        if (tries > 20) clearInterval(interval);
+      }, 500);
+    });
   }
 </script>
 
@@ -289,13 +314,26 @@
     display: block;
     background: transparent;
   }
-  /* Watermark Spline free plan — atenuado (sigue visible/legible, menos prominente) */
+  /* Watermark Spline free plan — atenuado con múltiples vías (sigue visible al pasar mouse) */
   .hero-spline spline-viewer::part(logo) {
-    opacity: 0.35;
+    opacity: 0.18;
     transition: opacity 0.3s ease;
   }
   .hero-spline spline-viewer::part(logo):hover {
     opacity: 0.9;
+  }
+  /* Fallback: overlay gradient sutil en esquina inferior-derecha del hero */
+  /* hace que el watermark se funda con el fondo, sin taparlo completamente */
+  .hero-spline::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 220px;
+    height: 70px;
+    background: radial-gradient(ellipse 100% 100% at 90% 90%, var(--bg) 0%, rgba(0,0,0,0.7) 40%, transparent 100%);
+    z-index: 2;
+    pointer-events: none;
   }
   /* Vignette para suavizar bordes del Spline y mejorar legibilidad */
   .hero-spline::after {
