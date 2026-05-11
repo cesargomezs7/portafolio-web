@@ -20,6 +20,10 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet">
 
+<!-- GSAP — animaciones disparadas por scroll + timeline hero -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+
 <!-- Umami Cloud analytics -->
 <script defer src="https://cloud.umami.is/script.js" data-website-id="93f65a5e-8bfd-4ba9-8748-835c72cf8e28"></script>
 
@@ -305,9 +309,10 @@
     transition: transform 0.2s, box-shadow 0.2s;
   }
   .cta-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 30px rgba(79,142,247,0.3);
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 12px 36px rgba(79,142,247,0.4);
   }
+  .cta-primary:active { transform: translateY(0) scale(0.98); }
   .cta-secondary {
     display: inline-block;
     padding: 16px 32px;
@@ -464,8 +469,9 @@
     transition: transform 0.3s, border-color 0.3s;
   }
   .timeline-step:hover {
-    transform: translateY(-6px);
+    transform: translateY(-6px) scale(1.02);
     border-color: var(--border-blue);
+    box-shadow: 0 12px 32px rgba(79,142,247,0.12);
   }
   .timeline-number {
     width: 64px;
@@ -865,7 +871,7 @@
     position: relative;
     transition: transform 0.2s;
   }
-  .plan:hover { transform: translateY(-4px); }
+  .plan:hover { transform: translateY(-4px) scale(1.01); box-shadow: 0 16px 40px rgba(79,142,247,0.18); }
   .plan.destacado {
     border-color: var(--accent-blue);
     box-shadow: 0 0 0 2px rgba(79,142,247,0.15), 0 8px 30px rgba(79,142,247,0.1);
@@ -1829,6 +1835,83 @@
   });
 
 })();
+</script>
+
+<!-- GSAP animations: hero timeline + scroll-triggered scale-ups -->
+<script>
+window.addEventListener('load', function() {
+  if (typeof gsap === 'undefined') return;
+
+  // Respetar preferencia accesibilidad
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  // ── HERO TIMELINE: fade-in escalonado al cargar ──
+  var heroElems = gsap.utils.toArray('.hero .hero-badge, .hero h1, .hero .sub, .hero ul, .hero .hero-buttons, .hero .hero-stats');
+  if (heroElems.length) {
+    gsap.set(heroElems, { opacity: 0, y: 24 });
+    gsap.to(heroElems, {
+      opacity: 1,
+      y: 0,
+      duration: 0.9,
+      ease: 'power3.out',
+      stagger: 0.12,
+      delay: 0.1
+    });
+  }
+
+  // ── SCROLLTRIGGER: scale-up del iframe principal "Navegue sitios en vivo" ──
+  if (typeof ScrollTrigger !== 'undefined') {
+    gsap.registerPlugin(ScrollTrigger);
+
+    var demoFrame = document.getElementById('demo-iframe');
+    if (demoFrame) {
+      gsap.from(demoFrame, {
+        scale: 0.94,
+        opacity: 0.4,
+        duration: 1,
+        ease: 'power3.out',
+        scrollTrigger: { trigger: demoFrame, start: 'top 80%', once: true }
+      });
+    }
+
+    // ── ScrollTrigger: scale-up + reveal del slider Antes/Después ──
+    var baContainer = document.querySelector('.ba-container');
+    if (baContainer) {
+      gsap.from(baContainer, {
+        scale: 0.96,
+        opacity: 0,
+        duration: 1,
+        ease: 'power3.out',
+        scrollTrigger: { trigger: baContainer, start: 'top 75%', once: true }
+      });
+    }
+
+    // ── ScrollTrigger: slide-in escalonado de los 3 pasos "Cómo funciona" ──
+    var timelineSteps = gsap.utils.toArray('.timeline-step');
+    if (timelineSteps.length) {
+      gsap.from(timelineSteps, {
+        y: 32,
+        opacity: 0,
+        duration: 0.8,
+        ease: 'power3.out',
+        stagger: 0.15,
+        scrollTrigger: { trigger: '.timeline', start: 'top 75%', once: true }
+      });
+    }
+
+    // ── ScrollTrigger: pricing card scale-up + bloque escasez ──
+    var planCard = document.querySelector('.plan.destacado');
+    if (planCard) {
+      gsap.from(planCard, {
+        scale: 0.97,
+        opacity: 0,
+        duration: 0.9,
+        ease: 'power3.out',
+        scrollTrigger: { trigger: planCard, start: 'top 80%', once: true }
+      });
+    }
+  }
+});
 </script>
 
 </body>
