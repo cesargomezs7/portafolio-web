@@ -85,12 +85,12 @@
     --text: #E6E8F0;
     --text-muted: #B0B6CC;
     --text-dim: #8088A6;
-    --accent-blue: #4F8EF7;
-    --accent-cyan: #38BDF8;
+    --accent-blue: #0891b2;
+    --accent-cyan: #22d3ee;
     --accent-green: #22C55E;
     --accent-red: #EF4444;
     --border: rgba(255,255,255,0.08);
-    --border-blue: rgba(79,142,247,0.3);
+    --border-blue: rgba(8,145,178,0.4);
     --gradient: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
     --font-heading: 'Space Grotesk', sans-serif;
     --font-display: 'DM Serif Display', Georgia, serif;
@@ -120,9 +120,9 @@
     pointer-events: none;
     background:
       radial-gradient(45% 45% at 12% 18%, rgba(168,85,247,0.18), transparent 60%),
-      radial-gradient(40% 40% at 88% 12%, rgba(59,142,247,0.22), transparent 60%),
+      radial-gradient(40% 40% at 88% 12%, rgba(8,145,178,0.34), transparent 60%),
       radial-gradient(38% 38% at 8% 72%, rgba(236,72,153,0.12), transparent 60%),
-      radial-gradient(42% 42% at 92% 82%, rgba(20,184,166,0.14), transparent 60%);
+      radial-gradient(42% 42% at 92% 82%, rgba(14,116,144,0.22), transparent 60%);
     filter: blur(40px);
   }
   /* Textura de ruido sutil — rompe los gradients planos */
@@ -239,7 +239,7 @@
   }
   .navbar-cta:hover {
     transform: translateY(-1px);
-    box-shadow: 0 4px 20px rgba(79,142,247,0.3);
+    box-shadow: 0 4px 20px rgba(8,145,178,0.3);
   }
   @media (max-width: 768px) {
     .navbar-links li:not(.nav-cta) { display: none; }
@@ -254,9 +254,52 @@
     text-align: center;
     padding: 120px 0 60px;
     background:
-      radial-gradient(ellipse at 50% 15%, rgba(79,142,247,0.18), transparent 55%);
+      radial-gradient(ellipse at 50% 15%, rgba(8,145,178,0.38), transparent 55%);
     position: relative;
     z-index: 1;
+    overflow: hidden;
+  }
+  /* SVG arcs orbitando el hero — turquesa-cyan, sin librerías */
+  .hero-arcs {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.9;
+  }
+  .hero-arcs svg {
+    width: 160%;
+    height: 160%;
+    max-width: 1600px;
+    max-height: 1600px;
+  }
+  .hero-arcs .arcs-spin-slow {
+    transform-origin: 100px 100px;
+    animation: arcs-rotate 50s linear infinite;
+  }
+  .hero-arcs .arcs-spin-fast {
+    transform-origin: 100px 100px;
+    animation: arcs-rotate-reverse 35s linear infinite;
+  }
+  .hero-arcs .arcs-spin-mid {
+    transform-origin: 100px 100px;
+    animation: arcs-rotate 70s linear infinite;
+  }
+  @keyframes arcs-rotate {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+  }
+  @keyframes arcs-rotate-reverse {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(-360deg); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hero-arcs .arcs-spin-slow,
+    .hero-arcs .arcs-spin-fast,
+    .hero-arcs .arcs-spin-mid { animation: none; }
   }
   .hero-badge {
     display: inline-flex;
@@ -310,7 +353,7 @@
   }
   .cta-primary:hover {
     transform: translateY(-2px) scale(1.02);
-    box-shadow: 0 12px 36px rgba(79,142,247,0.4);
+    box-shadow: 0 12px 36px rgba(8,145,178,0.4);
   }
   .cta-primary:active { transform: translateY(0) scale(0.98); }
   .cta-secondary {
@@ -325,7 +368,7 @@
   }
   .cta-secondary:hover {
     border-color: var(--accent-blue);
-    background: rgba(79,142,247,0.05);
+    background: rgba(8,145,178,0.05);
   }
 
   /* Hero Stats */
@@ -358,7 +401,7 @@
   /* ── TICKER / MARQUEE ── */
   .ticker {
     overflow: hidden;
-    background: rgba(79,142,247,0.06);
+    background: rgba(8,145,178,0.06);
     border-top: 1px solid var(--border);
     border-bottom: 1px solid var(--border);
     padding: 14px 0;
@@ -401,8 +444,8 @@
     border-color: rgba(239,68,68,0.15);
   }
   .comp-card.gain {
-    background: rgba(79,142,247,0.04);
-    border-color: rgba(79,142,247,0.15);
+    background: rgba(8,145,178,0.04);
+    border-color: rgba(8,145,178,0.15);
   }
   .comp-card h3 {
     font-size: 1.3rem;
@@ -442,7 +485,7 @@
     color: var(--accent-red);
   }
   .comp-card.gain .comp-icon {
-    background: rgba(56,189,248,0.15);
+    background: rgba(34,211,238,0.15);
     color: var(--accent-cyan);
   }
 
@@ -471,7 +514,7 @@
   .timeline-step:hover {
     transform: translateY(-6px) scale(1.02);
     border-color: var(--border-blue);
-    box-shadow: 0 12px 32px rgba(79,142,247,0.12);
+    box-shadow: 0 12px 32px rgba(8,145,178,0.12);
   }
   .timeline-number {
     width: 64px;
@@ -488,7 +531,7 @@
     margin: 0 auto 20px;
     position: relative;
     z-index: 2;
-    box-shadow: 0 4px 20px rgba(79,142,247,0.3);
+    box-shadow: 0 4px 20px rgba(8,145,178,0.3);
   }
   .timeline-step h3 { color: var(--text); margin-bottom: 8px; font-size: 1.1rem; }
   .timeline-step p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; }
@@ -563,7 +606,7 @@
     width: 56px;
     height: 52px;
     border: none;
-    background: rgba(79,142,247,0.15);
+    background: rgba(8,145,178,0.15);
     color: var(--accent-cyan);
     font-size: 1.4rem;
     font-weight: 700;
@@ -573,10 +616,10 @@
     flex-shrink: 0;
   }
   .roi-btn:hover {
-    background: rgba(79,142,247,0.3);
+    background: rgba(8,145,178,0.3);
   }
   .roi-btn:active {
-    background: rgba(79,142,247,0.5);
+    background: rgba(8,145,178,0.5);
   }
   .roi-input-group input {
     flex: 1;
@@ -612,8 +655,8 @@
     margin-top: 24px;
     padding: 24px;
     border-radius: var(--radius);
-    background: rgba(79,142,247,0.05);
-    border: 1px solid rgba(79,142,247,0.2);
+    background: rgba(8,145,178,0.05);
+    border: 1px solid rgba(8,145,178,0.2);
   }
   .roi-results .roi-line {
     display: flex;
@@ -871,10 +914,10 @@
     position: relative;
     transition: transform 0.2s;
   }
-  .plan:hover { transform: translateY(-4px) scale(1.01); box-shadow: 0 16px 40px rgba(79,142,247,0.18); }
+  .plan:hover { transform: translateY(-4px) scale(1.01); box-shadow: 0 16px 40px rgba(8,145,178,0.18); }
   .plan.destacado {
     border-color: var(--accent-blue);
-    box-shadow: 0 0 0 2px rgba(79,142,247,0.15), 0 8px 30px rgba(79,142,247,0.1);
+    box-shadow: 0 0 0 2px rgba(8,145,178,0.15), 0 8px 30px rgba(8,145,178,0.1);
   }
   .plan .ribbon {
     position: absolute;
@@ -947,7 +990,7 @@
   }
   .plan .plan-cta:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(79,142,247,0.3);
+    box-shadow: 0 6px 20px rgba(8,145,178,0.3);
   }
 
   /* ── POR QUE ── */
@@ -970,7 +1013,7 @@
     width: 56px;
     height: 56px;
     margin: 0 auto 16px;
-    background: linear-gradient(135deg, rgba(79,142,247,0.15), rgba(56,189,248,0.15));
+    background: linear-gradient(135deg, rgba(8,145,178,0.15), rgba(34,211,238,0.15));
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -995,7 +1038,7 @@
     overflow: hidden;
     transition: border-color 0.2s;
   }
-  .faq[open] { border-color: rgba(79,142,247,0.2); }
+  .faq[open] { border-color: rgba(8,145,178,0.2); }
   .faq summary {
     cursor: pointer;
     padding: 18px 24px;
@@ -1027,7 +1070,7 @@
   .cta-final {
     text-align: center;
     padding: 100px 24px;
-    background: radial-gradient(ellipse at center, rgba(56,189,248,0.1), transparent 70%);
+    background: radial-gradient(ellipse at center, rgba(34,211,238,0.1), transparent 70%);
   }
   .cta-final h2 { margin-bottom: 16px; }
   .cta-final p {
@@ -1248,6 +1291,23 @@
 
 <!-- HERO -->
 <section class="hero" id="hero">
+  <!-- Arcos orbitando turquesa — decoración hero, sin librerías -->
+  <div class="hero-arcs" aria-hidden="true">
+    <svg viewBox="0 0 200 200" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <g class="arcs-spin-slow">
+        <path d="M 30,100 A 70,70 0 0 1 170,100" fill="none" stroke="rgba(34,211,238,0.55)" stroke-width="0.3" stroke-dasharray="50 90" stroke-linecap="round"/>
+        <path d="M 20,100 A 80,80 0 0 1 180,100" fill="none" stroke="rgba(34,211,238,0.35)" stroke-width="0.25" stroke-dasharray="30 70" stroke-linecap="round"/>
+      </g>
+      <g class="arcs-spin-fast">
+        <path d="M 40,100 A 60,60 0 0 1 160,100" fill="none" stroke="rgba(8,145,178,0.5)" stroke-width="0.3" stroke-dasharray="40 80" stroke-linecap="round"/>
+        <path d="M 50,100 A 50,50 0 0 1 150,100" fill="none" stroke="rgba(8,145,178,0.4)" stroke-width="0.25" stroke-dasharray="25 60" stroke-linecap="round"/>
+      </g>
+      <g class="arcs-spin-mid">
+        <path d="M 15,100 A 85,85 0 0 1 185,100" fill="none" stroke="rgba(34,211,238,0.3)" stroke-width="0.2" stroke-dasharray="20 50" stroke-linecap="round"/>
+        <path d="M 10,100 A 90,90 0 0 1 190,100" fill="none" stroke="rgba(8,145,178,0.25)" stroke-width="0.2" stroke-dasharray="35 65" stroke-linecap="round"/>
+      </g>
+    </svg>
+  </div>
   <div class="container">
     <div class="hero-badge">
       <span class="pulse-dot"></span>
@@ -1400,13 +1460,13 @@
     <h2 style="text-align:center">Un plan. Todo incluido.</h2>
 
     <!-- PROGRAMA PRIMEROS 10 — escasez fundadores estilo barra progreso -->
-    <div style="max-width:760px; margin:0 auto 40px; padding:26px 30px; border:1px solid var(--border-blue); border-radius:var(--radius-lg); background:linear-gradient(180deg, rgba(79,142,247,0.06), rgba(79,142,247,0.02));">
+    <div style="max-width:760px; margin:0 auto 40px; padding:26px 30px; border:1px solid var(--border-blue); border-radius:var(--radius-lg); background:linear-gradient(180deg, rgba(8,145,178,0.06), rgba(8,145,178,0.02));">
       <div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:14px; margin-bottom:16px;">
         <div style="display:inline-flex; align-items:center; gap:10px;">
           <span class="pulse-dot"></span>
           <span style="font-family:var(--font-body); font-size:0.95rem; font-weight:600; color:var(--text); letter-spacing:-0.1px;">Programa Primeros 10 &mdash; fundadores</span>
         </div>
-        <div style="font-family:'SF Mono', Menlo, Consolas, monospace; font-size:0.78rem; color:var(--accent-blue); padding:5px 12px; background:rgba(79,142,247,0.12); border:1px solid rgba(79,142,247,0.4); border-radius:999px; letter-spacing:0.02em;">
+        <div style="font-family:'SF Mono', Menlo, Consolas, monospace; font-size:0.78rem; color:var(--accent-blue); padding:5px 12px; background:rgba(8,145,178,0.12); border:1px solid rgba(8,145,178,0.4); border-radius:999px; letter-spacing:0.02em;">
           8 / 10 cupos disponibles
         </div>
       </div>
