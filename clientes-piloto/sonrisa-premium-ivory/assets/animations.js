@@ -33,8 +33,8 @@
     gsap.registerPlugin(ScrollTrigger);
 
     // Defaults globales: trigger ANTES del viewport, duración corta
-    const START_EARLY = 'top bottom+=100'; // 100px ANTES de tocar el viewport (más temprano)
-    const DURATION_FAST = 0.2;
+    const START_EARLY = 'top bottom+=60'; // 60px antes del viewport
+    const DURATION_FAST = 0.28;
 
     // ───────────────────────────────────────────────────
     // HERO · entrada al cargar la página (sin scroll)
@@ -44,24 +44,24 @@
       const heroEls = heroContent.querySelectorAll(
         '.hero-breadcrumb, .hero-tag, h1, .lead, p, .hero-cta-row, .btn-pill, .hero-stats, .hero-stat-big'
       );
-      gsap.set(heroEls, { y: 10, opacity: 0 });
+      gsap.set(heroEls, { y: 14, opacity: 0 });
       gsap.to(heroEls, {
         y: 0,
         opacity: 1,
-        duration: 0.25,
+        duration: 0.35,
         ease: 'power2.out',
-        stagger: 0.025,
-        delay: 0.03,
+        stagger: 0.035,
+        delay: 0.05,
       });
 
       const heroPhoto = document.querySelector('.hero-photo, .hero-photo img, .hero-visual img, .hero-visual-img');
       if (heroPhoto) {
         gsap.from(heroPhoto, {
-          scale: 1.02,
+          scale: 1.025,
           opacity: 0,
-          duration: 0.4,
+          duration: 0.55,
           ease: 'power2.out',
-          delay: 0.05,
+          delay: 0.08,
         });
       }
     }
@@ -72,11 +72,11 @@
     gsap.utils.toArray('.reveal').forEach((el) => {
       gsap.fromTo(
         el,
-        { y: 8, opacity: 0 },
+        { y: 10, opacity: 0 },
         {
           y: 0,
           opacity: 1,
-          duration: 0.2,
+          duration: 0.28,
           ease: 'power2.out',
           scrollTrigger: {
             trigger: el,
@@ -94,15 +94,15 @@
       if (h.classList.contains('reveal')) return;
       gsap.fromTo(
         h,
-        { y: 10, opacity: 0 },
+        { y: 12, opacity: 0 },
         {
           y: 0,
           opacity: 1,
-          duration: 0.25,
+          duration: 0.35,
           ease: 'power3.out',
           scrollTrigger: {
             trigger: h,
-            start: 'top bottom+=150', // 150px ANTES, prioridad máxima
+            start: 'top bottom+=100', // 100px antes
           },
         }
       );
@@ -115,13 +115,13 @@
     if (equipoCards.length) {
       gsap.fromTo(
         equipoCards,
-        { y: 12, opacity: 0 },
+        { y: 16, opacity: 0 },
         {
           y: 0,
           opacity: 1,
           duration: DURATION_FAST,
           ease: 'power2.out',
-          stagger: 0.04,
+          stagger: 0.05,
           scrollTrigger: {
             trigger: '.equipo-grid',
             start: START_EARLY,
@@ -137,13 +137,13 @@
     if (servicioItems.length) {
       gsap.fromTo(
         servicioItems,
-        { x: -8, opacity: 0 },
+        { x: -10, opacity: 0 },
         {
           x: 0,
           opacity: 1,
-          duration: 0.2,
+          duration: 0.28,
           ease: 'power2.out',
-          stagger: 0.03,
+          stagger: 0.04,
           scrollTrigger: {
             trigger: '.servicios-list',
             start: START_EARLY,
@@ -159,13 +159,13 @@
     if (catalogCards.length) {
       gsap.fromTo(
         catalogCards,
-        { y: 10, opacity: 0 },
+        { y: 14, opacity: 0 },
         {
           y: 0,
           opacity: 1,
-          duration: 0.2,
+          duration: 0.28,
           ease: 'power2.out',
-          stagger: 0.035,
+          stagger: 0.045,
           scrollTrigger: {
             trigger: '.catalog-grid',
             start: START_EARLY,
@@ -181,13 +181,13 @@
     if (testimonios.length) {
       gsap.fromTo(
         testimonios,
-        { y: 10, opacity: 0 },
+        { y: 14, opacity: 0 },
         {
           y: 0,
           opacity: 1,
-          duration: 0.2,
+          duration: 0.28,
           ease: 'power2.out',
-          stagger: 0.035,
+          stagger: 0.045,
           scrollTrigger: {
             trigger: testimonios[0],
             start: START_EARLY,
@@ -203,13 +203,13 @@
     if (galeriaCards.length) {
       gsap.fromTo(
         galeriaCards,
-        { scale: 0.98, opacity: 0 },
+        { scale: 0.975, opacity: 0 },
         {
           scale: 1,
           opacity: 1,
-          duration: 0.22,
+          duration: 0.3,
           ease: 'power2.out',
-          stagger: 0.04,
+          stagger: 0.05,
           scrollTrigger: {
             trigger: galeriaCards[0],
             start: START_EARLY,
