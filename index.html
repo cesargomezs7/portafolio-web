@@ -715,8 +715,8 @@
     z-index: 1;
   }
   .ba-side iframe {
-    width: 900px;
-    height: 562px;
+    width: 1440px;
+    height: 810px;
     border: none;
     pointer-events: none;
     transform-origin: top left;
@@ -1885,12 +1885,10 @@
     var container = document.getElementById('ba-slider');
     if (!container) return;
     var containerWidth = container.offsetWidth;
-    var scale = containerWidth / 900;
+    var scale = containerWidth / 1440;
     var iframes = container.querySelectorAll('iframe');
     iframes.forEach(function(iframe) {
       iframe.style.transform = 'scale(' + scale + ')';
-      iframe.style.width = '900px';
-      iframe.style.height = (container.offsetHeight / scale) + 'px';
     });
   }
 
