@@ -28,7 +28,9 @@ html { scroll-behavior: smooth; }
 body {
   font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   color: var(--black);
-  background: var(--white);
+  background: linear-gradient(110deg, #EAEFF5 0%, #F2F5F9 35%, #FAFBFC 70%, #FFFFFF 100%);
+  background-attachment: fixed;
+  min-height: 100vh;
   font-size: 16px;
   line-height: 1.55;
   letter-spacing: -0.011em;
@@ -87,7 +89,7 @@ body {
 /* ─── HERO ────────────────────────────────────────────────── */
 .hero {
   min-height: 100vh;
-  background: linear-gradient(180deg, var(--white) 0%, var(--ice-soft) 70%, var(--ice) 100%);
+  background: transparent;
   padding: 130px 5% 80px;
   position: relative; overflow: hidden;
 }
@@ -167,8 +169,9 @@ body {
 .section {
   padding: 160px 5%;
   position: relative;
+  background: transparent;
 }
-.section-alt { background: var(--ice-soft); }
+.section-alt { background: transparent; }
 .section-dark { background: var(--black); color: var(--white); }
 
 .section-inner { max-width: 1300px; margin: 0 auto; }
