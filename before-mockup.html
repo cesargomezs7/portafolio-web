@@ -11,7 +11,7 @@
   body {
     font-family: Roboto, sans-serif;
     color: #3F3F3F;
-    background: #fff;
+    background: #E5ECF8;
     font-size: 16px;
     line-height: 1.5;
   }
@@ -54,6 +54,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    border-bottom: 1px solid #d6dcea;
   }
   .logo {
     display: flex;
@@ -175,8 +176,10 @@
     grid-template-columns: 280px 1fr;
     gap: 50px;
     padding: 40px 80px;
-    background: #F4F4F8;
+    background: #fff;
     align-items: center;
+    border-top: 1px solid #d6dcea;
+    border-bottom: 1px solid #d6dcea;
   }
   .bio-img {
     width: 280px;
@@ -260,7 +263,7 @@
   .service-card {
     text-align: center;
     padding: 24px 20px;
-    border: 1px solid #e5e5e8;
+    border: 1px solid #d6dcea;
     background: #fff;
     transition: box-shadow 0.2s;
   }
@@ -299,19 +302,242 @@
     font-weight: 600;
   }
 
+  /* ── TESTIMONIOS ── */
+  .testimonios {
+    padding: 50px 80px;
+    background: #fff;
+    border-top: 1px solid #d6dcea;
+  }
+  .testimonios h2.section-title {
+    text-align: center;
+    font-size: 36px;
+    color: #0404E2;
+    font-weight: 500;
+    margin-bottom: 30px;
+    letter-spacing: 2px;
+  }
+  .testimonios-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 26px;
+  }
+  .testimonio-card {
+    background: #F8FAFE;
+    border: 1px solid #d6dcea;
+    padding: 26px 24px;
+    text-align: left;
+    position: relative;
+  }
+  .testimonio-card .stars {
+    color: #FFC107;
+    font-size: 18px;
+    margin-bottom: 12px;
+  }
+  .testimonio-card p {
+    font-size: 14px;
+    color: #555;
+    font-style: italic;
+    margin-bottom: 16px;
+    line-height: 1.6;
+  }
+  .testimonio-card .author {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .testimonio-card .avatar {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 50% 40%, #DDE 0%, #99A 100%);
+  }
+  .testimonio-card .author-info .name {
+    font-weight: 500;
+    font-size: 14px;
+    color: #333;
+  }
+  .testimonio-card .author-info .role {
+    font-size: 12px;
+    color: #888;
+  }
+
+  /* ── UBICACION ── */
+  .ubicacion {
+    padding: 50px 80px;
+    background: #E5ECF8;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: center;
+  }
+  .ubicacion-info h2 {
+    font-size: 36px;
+    color: #0404E2;
+    font-weight: 500;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+  }
+  .ubicacion-info p {
+    font-size: 16px;
+    color: #444;
+    margin-bottom: 10px;
+    line-height: 1.7;
+  }
+  .ubicacion-info strong {
+    color: #0404E2;
+    font-weight: 500;
+  }
+  .map-fake {
+    height: 280px;
+    background:
+      linear-gradient(120deg, rgba(255,255,255,0.4), rgba(255,255,255,0.1)),
+      radial-gradient(circle at 40% 60%, #B5C5E8 0%, #8FA5D0 50%, #6080B8 100%);
+    border: 2px solid #fff;
+    border-radius: 4px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+    position: relative;
+    overflow: hidden;
+  }
+  .map-fake::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(0deg, transparent 49%, rgba(255,255,255,0.3) 49.5%, rgba(255,255,255,0.3) 50.5%, transparent 51%),
+      linear-gradient(90deg, transparent 49%, rgba(255,255,255,0.3) 49.5%, rgba(255,255,255,0.3) 50.5%, transparent 51%),
+      linear-gradient(0deg, transparent 24%, rgba(255,255,255,0.15) 24.5%, rgba(255,255,255,0.15) 25.5%, transparent 26%),
+      linear-gradient(0deg, transparent 74%, rgba(255,255,255,0.15) 74.5%, rgba(255,255,255,0.15) 75.5%, transparent 76%),
+      linear-gradient(90deg, transparent 24%, rgba(255,255,255,0.15) 24.5%, rgba(255,255,255,0.15) 25.5%, transparent 26%),
+      linear-gradient(90deg, transparent 74%, rgba(255,255,255,0.15) 74.5%, rgba(255,255,255,0.15) 75.5%, transparent 76%);
+  }
+  .map-fake .pin {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -90%);
+    width: 30px;
+    height: 30px;
+    background: #FF3030;
+    border: 3px solid #fff;
+    border-radius: 50%;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.3);
+  }
+  .map-fake .pin::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 14px solid #FF3030;
+  }
+  .map-fake .badge {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    background: #fff;
+    color: #444;
+    font-size: 11px;
+    padding: 6px 12px;
+    border-radius: 3px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  }
+
+  /* ── CONTACTO ── */
+  .contacto {
+    padding: 50px 80px;
+    background: #fff;
+    border-top: 1px solid #d6dcea;
+    text-align: center;
+  }
+  .contacto h2 {
+    font-size: 36px;
+    color: #0404E2;
+    font-weight: 500;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+  }
+  .contacto p {
+    font-size: 16px;
+    color: #555;
+    max-width: 600px;
+    margin: 0 auto 30px;
+  }
+  .form-fake {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+  .form-fake input, .form-fake textarea {
+    padding: 14px 18px;
+    border: 1px solid #d6dcea;
+    background: #F8FAFE;
+    font-family: inherit;
+    font-size: 14px;
+    color: #444;
+  }
+  .form-fake textarea {
+    grid-column: 1 / -1;
+    min-height: 100px;
+    resize: vertical;
+  }
+  .form-fake button {
+    grid-column: 1 / -1;
+    background: #0404E2;
+    color: #fff;
+    border: none;
+    padding: 14px 38px;
+    font-size: 14px;
+    cursor: pointer;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 500;
+    justify-self: center;
+    width: auto;
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+
   /* ── FOOTER ── */
   .footer {
     background: #1B1B6B;
     color: #fff;
-    padding: 36px 80px;
-    text-align: center;
+    padding: 40px 80px 24px;
     font-size: 14px;
-    line-height: 2;
+    line-height: 1.8;
   }
-  .footer .small {
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr;
+    gap: 40px;
+    margin-bottom: 30px;
+  }
+  .footer h4 {
+    color: #fff;
+    font-size: 15px;
+    margin-bottom: 14px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .footer-grid p, .footer-grid a {
+    color: rgba(255,255,255,0.75);
+    text-decoration: none;
+    display: block;
+    margin-bottom: 6px;
+    font-size: 13px;
+  }
+  .footer .copyright {
+    border-top: 1px solid rgba(255,255,255,0.15);
+    padding-top: 16px;
+    text-align: center;
     font-size: 12px;
-    color: rgba(255,255,255,0.6);
-    margin-top: 8px;
+    color: rgba(255,255,255,0.5);
   }
 </style>
 </head>
@@ -415,11 +641,105 @@
   </div>
 </div>
 
+<!-- TESTIMONIOS -->
+<div class="testimonios">
+  <h2 class="section-title">LO QUE DICEN NUESTROS PACIENTES</h2>
+  <div class="testimonios-grid">
+    <div class="testimonio-card">
+      <div class="stars">★★★★★</div>
+      <p>"Excelente atención de la Doctora Carolina, muy profesional y atenta. Mi familia y yo nos atendemos con ella desde hace años. La recomiendo 100%."</p>
+      <div class="author">
+        <div class="avatar"></div>
+        <div class="author-info">
+          <div class="name">María Fernanda Castro</div>
+          <div class="role">Paciente desde 2019</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonio-card">
+      <div class="stars">★★★★★</div>
+      <p>"Me hice el diseño de sonrisa con la Dra. Carolina y quedé feliz con el resultado. Trato muy amable y excelentes precios. Súper recomendada."</p>
+      <div class="author">
+        <div class="avatar"></div>
+        <div class="author-info">
+          <div class="name">Juan Carlos Hernández</div>
+          <div class="role">Paciente desde 2021</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonio-card">
+      <div class="stars">★★★★★</div>
+      <p>"Una odontóloga maravillosa, te explica todo paso a paso y se ve que ama lo que hace. El consultorio es muy limpio y moderno. Gracias doctora!"</p>
+      <div class="author">
+        <div class="avatar"></div>
+        <div class="author-info">
+          <div class="name">Ana Lucía Rodríguez</div>
+          <div class="role">Paciente desde 2023</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- UBICACION -->
+<div class="ubicacion">
+  <div class="ubicacion-info">
+    <h2>VISÍTANOS</h2>
+    <p><strong>Dirección:</strong><br>Calle 53 # 22-15, Consultorio 402<br>Edificio Centro Médico, Bogotá</p>
+    <p><strong>Horario:</strong><br>Lunes a Viernes: 8:00 am - 6:00 pm<br>Sábados: 9:00 am - 1:00 pm</p>
+    <p><strong>Teléfono:</strong><br>+57 301 234 5678</p>
+    <p><strong>Email:</strong><br>contacto@clinicacarolinaperez.com</p>
+  </div>
+  <div class="map-fake">
+    <div class="badge">Google Maps</div>
+    <div class="pin"></div>
+  </div>
+</div>
+
+<!-- CONTACTO -->
+<div class="contacto">
+  <h2>AGENDA TU CITA</h2>
+  <p>Déjanos tus datos y te contactaremos para confirmar tu cita. Te atendemos con la mejor calidad y profesionalismo.</p>
+  <div class="form-fake">
+    <input type="text" placeholder="Nombre completo" />
+    <input type="email" placeholder="Correo electrónico" />
+    <input type="tel" placeholder="Teléfono / WhatsApp" />
+    <input type="text" placeholder="Servicio de interés" />
+    <textarea placeholder="Cuéntanos brevemente cómo podemos ayudarte..."></textarea>
+    <button type="button">Enviar Solicitud</button>
+  </div>
+</div>
+
 <!-- FOOTER -->
 <div class="footer">
-  Clínica Dental Dra. Carolina Pérez · Calle 53 # 22-15, Bogotá<br>
-  Tel: +57 301 234 5678 · Lunes a Viernes 8am - 6pm · Sábados 9am - 1pm
-  <div class="small">© 2018 Todos los derechos reservados · Hecho con WordPress + Elementor</div>
+  <div class="footer-grid">
+    <div>
+      <h4>Clínica Dental Carolina Pérez</h4>
+      <p>Estética y Rehabilitación Oral</p>
+      <p>Más de 25 años de experiencia profesional al servicio de su sonrisa.</p>
+    </div>
+    <div>
+      <h4>Contacto</h4>
+      <p>📞 +57 301 234 5678</p>
+      <p>✉ contacto@clinicacarolinaperez.com</p>
+      <p>📍 Calle 53 # 22-15, Bogotá</p>
+    </div>
+    <div>
+      <h4>Horarios</h4>
+      <p>Lun a Vie: 8am - 6pm</p>
+      <p>Sábados: 9am - 1pm</p>
+      <p>Domingos: Cerrado</p>
+    </div>
+    <div>
+      <h4>Síguenos</h4>
+      <p>Instagram @drcarolinaperez</p>
+      <p>Facebook /drcarolinaperez</p>
+      <p>TikTok @drcarolinaperez</p>
+    </div>
+  </div>
+  <div class="copyright">
+    © 2018 Clínica Dental Dra. Carolina Pérez. Todos los derechos reservados. Hecho con WordPress + Elementor.
+  </div>
 </div>
 
 </body>

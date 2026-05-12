@@ -718,7 +718,7 @@
     width: 1440px;
     height: 810px;
     border: none;
-    pointer-events: none;
+    pointer-events: auto;
     transform-origin: top left;
   }
   .ba-divider {
@@ -737,11 +737,12 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 40px;
-    height: 40px;
+    width: 52px;
+    height: 52px;
     border-radius: 50%;
     background: var(--text);
-    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.4), 0 0 0 4px rgba(255,255,255,0.15);
+    cursor: ew-resize;
   }
   .ba-divider::before {
     content: '\2194';
@@ -750,9 +751,11 @@
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 4;
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     color: var(--bg);
     font-weight: 700;
+    cursor: ew-resize;
+    pointer-events: none;
   }
   .ba-label {
     position: absolute;
@@ -774,6 +777,14 @@
     right: 16px;
     background: var(--gradient);
     color: var(--bg);
+  }
+  .ba-hint {
+    text-align: center;
+    margin: 20px auto 0;
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    letter-spacing: 0.3px;
+    max-width: 780px;
   }
 
   /* ── LIVE DEMO (horizontal, no frame) ── */
@@ -1438,6 +1449,7 @@
       <span class="ba-label ba-label-before">ANTES</span>
       <span class="ba-label ba-label-after">DESPUÉS</span>
     </div>
+    <p class="ba-hint">↕ Haga scroll dentro de cada lado para explorar &nbsp;·&nbsp; ↔ Arrastre el círculo central para comparar</p>
   </div>
 </section>
 
