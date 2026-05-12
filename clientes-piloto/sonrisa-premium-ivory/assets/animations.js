@@ -5,6 +5,16 @@
 
 (function () {
   function init() {
+    // Hero video: slow rotation (50% speed)
+    const heroVideo = document.getElementById('heroVideo');
+    if (heroVideo) {
+      heroVideo.playbackRate = 0.5;
+      // Re-aplicar tras carga del video
+      heroVideo.addEventListener('loadedmetadata', () => {
+        heroVideo.playbackRate = 0.5;
+      });
+    }
+
     // Navbar shadow on scroll
     const navbar = document.getElementById('navbar');
     if (navbar) {
