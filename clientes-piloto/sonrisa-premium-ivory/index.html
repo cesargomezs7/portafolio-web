@@ -380,6 +380,101 @@ body.has-banner .navbar { top: 36px; }
 .reveal { opacity: 0; transform: translateY(20px); transition: all 0.8s var(--transition); }
 .reveal.visible { opacity: 1; transform: translateY(0); }
 
+/* ─── HERO 3D · diente centrado al fondo, texto a los lados ────── */
+.hero-3d {
+  min-height: 100vh; position: relative; overflow: hidden;
+  padding: 130px 5% 60px;
+  display: block;
+}
+.hero-3d .hero-content,
+.hero-3d .hero-bottom,
+.hero-3d .hero-number { display: none; }
+
+.hero-3d-bg {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  z-index: 1; pointer-events: none;
+}
+.hero-3d-video {
+  width: 42vw; max-width: 540px; min-width: 320px;
+  height: auto;
+  mix-blend-mode: multiply;
+  filter: drop-shadow(0 30px 80px rgba(0,0,0,0.10));
+}
+
+.hero-3d-line {
+  position: absolute; z-index: 2;
+  max-width: 540px;
+}
+.hero-3d-line h1 {
+  font-size: clamp(2rem, 4.2vw, 4rem);
+  font-weight: 200; line-height: 1.04;
+  letter-spacing: -0.035em;
+  color: var(--black);
+  margin: 0;
+}
+.hero-3d-line .b { font-weight: 500; color: var(--black); }
+.hero-3d-line .light { color: var(--gray); font-weight: 200; }
+
+.hero-3d-line-top { top: 16vh; left: 5%; text-align: left; }
+.hero-3d-line-bottom { bottom: 22vh; right: 5%; text-align: right; }
+
+.hero-3d-cta-wrap {
+  position: absolute; bottom: 28vh; left: 5%;
+  z-index: 3;
+}
+
+.hero-3d-chip {
+  position: absolute; z-index: 3;
+  background: var(--white); border: 1px solid var(--border);
+  padding: 10px 18px; border-radius: 50px;
+  font-size: 12px; font-weight: 500; color: var(--black);
+  display: inline-flex; align-items: center; gap: 8px;
+  box-shadow: 0 8px 32px rgba(33,33,33,0.06);
+}
+.hero-3d-chip-left { top: 42vh; left: 18%; }
+.hero-3d-chip-right { top: 26vh; right: 14%; }
+
+.hero-3d-stat {
+  position: absolute; bottom: 4vh; left: 5%; z-index: 3;
+  max-width: 320px;
+}
+.hero-3d-stat strong {
+  display: block; font-size: clamp(2rem, 3vw, 2.8rem);
+  font-weight: 200; letter-spacing: -0.03em; line-height: 1;
+  color: var(--black);
+}
+.hero-3d-stat strong::after { content: '+'; color: var(--accent); }
+.hero-3d-stat p {
+  font-size: 11px; color: var(--gray); line-height: 1.55;
+  margin-top: 10px; max-width: 280px;
+}
+
+.hero-3d-scroll {
+  position: absolute; bottom: 4vh; right: 5%; z-index: 3;
+  width: 44px; height: 44px; border: 1px solid var(--border); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  text-decoration: none; color: var(--black);
+  transition: all 0.3s var(--transition);
+  background: var(--white);
+}
+.hero-3d-scroll:hover { background: var(--black); border-color: var(--black); color: var(--white); }
+.hero-3d-scroll svg { width: 16px; height: 16px; }
+
+/* Responsive móvil */
+@media (max-width: 768px) {
+  .hero-3d { padding: 110px 5% 40px; }
+  .hero-3d-video { width: 70vw; max-width: 420px; }
+  .hero-3d-line { position: relative; max-width: 100%; top: auto !important; bottom: auto !important; left: 0 !important; right: 0 !important; text-align: center !important; }
+  .hero-3d-line h1 { font-size: clamp(1.6rem, 8vw, 2.5rem); }
+  .hero-3d-line-top { margin-bottom: 50vh; }
+  .hero-3d-line-bottom { margin-top: -20vh; }
+  .hero-3d-cta-wrap { position: relative; bottom: auto; left: 0; text-align: center; margin: 24px 0; }
+  .hero-3d-chip { display: none; }
+  .hero-3d-stat { position: relative; bottom: auto; left: 0; margin-top: 40px; max-width: 100%; }
+  .hero-3d-scroll { display: none; }
+}
+
 /* ─── RESPONSIVE ─────────────────────────────────────────── */
 @media (max-width: 1024px) {
   .hero-content { grid-template-columns: 1fr; gap: 60px; }
@@ -439,43 +534,57 @@ body.has-banner .navbar { top: 36px; }
   </div>
 </nav>
 
-<!-- ─── HERO ───────────────────────────────────────────────── -->
-<section class="hero">
-  <div class="hero-number">
-    <span>01</span>
-    <span>02</span>
-    <span>03</span>
+<!-- ─── HERO 3D (diente centrado + texto envolvente) ──────── -->
+<section class="hero hero-3d">
+  <!-- Video del diente al fondo, centrado -->
+  <div class="hero-3d-bg" aria-hidden="true">
+    <video class="hero-3d-video" id="heroVideo"
+           autoplay loop muted playsinline preload="auto"
+           onloadedmetadata="this.playbackRate=0.5"
+           onplay="this.playbackRate=0.5">
+      <source src="videos/tooth-rotation.mp4" type="video/mp4">
+    </video>
   </div>
 
-  <div class="hero-content">
-    <div class="hero-text">
-      <h1>
-        Odontología <span class="b">premium</span><br>
-        <span class="light">para una</span> sonrisa<br>
-        que dura <span class="b">toda la vida</span>
-      </h1>
-      <a href="https://wa.me/573124672674?text=Hola%20Sonrisa%20Premium,%20quiero%20agendar%20una%20consulta&utm_source=web&utm_medium=hero&utm_campaign=agendar" target="_blank" class="hero-cta">
-        Agendar consulta
-        <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </a>
-    </div>
-
-    <div class="hero-visual">
-      <img src="img/hero-consultorio.jpg" alt="Consultorio Sonrisa Premium" class="hero-visual-img">
-      <div class="hero-float hero-float-1">4.8 ★ · 234 reseñas Google</div>
-      <div class="hero-float hero-float-2">+8 años en Laureles</div>
-    </div>
+  <!-- Texto arriba a la izquierda -->
+  <div class="hero-3d-line hero-3d-line-top">
+    <h1>
+      Odontología <span class="b">premium</span><br>
+      <span class="light">para una</span> sonrisa
+    </h1>
   </div>
 
-  <div class="hero-bottom">
-    <div class="hero-stat-big">
-      <strong>234</strong>
-      <p>Reseñas verificadas en Google con 4.8 estrellas promedio. Pacientes que confiaron en nosotros para ortodoncia, implantes y rehabilitación oral en Laureles, Medellín.</p>
-    </div>
-    <a href="#nosotros" class="hero-scroll">
-      <svg viewBox="0 0 24 24" fill="none"><path d="M12 5v14M6 13l6 6 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  <!-- Texto abajo a la derecha -->
+  <div class="hero-3d-line hero-3d-line-bottom">
+    <h1>
+      que dura<br>
+      <span class="b">toda la vida</span>
+    </h1>
+  </div>
+
+  <!-- CTA abajo izquierda -->
+  <div class="hero-3d-cta-wrap">
+    <a href="https://wa.me/573124672674?text=Hola%20Sonrisa%20Premium,%20quiero%20agendar%20una%20consulta&utm_source=web&utm_medium=hero&utm_campaign=agendar" target="_blank" class="hero-cta">
+      Agendar consulta
+      <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </a>
   </div>
+
+  <!-- Chips flotantes a los lados del diente -->
+  <div class="hero-3d-chip hero-3d-chip-left">
+    <span class="status-dot"></span>4.8 ★ · 234 reseñas
+  </div>
+  <div class="hero-3d-chip hero-3d-chip-right">+8 años en Laureles</div>
+
+  <!-- Stat grande abajo izquierda -->
+  <div class="hero-3d-stat">
+    <strong>234</strong>
+    <p>Reseñas verificadas en Google con 4.8 estrellas promedio. Pacientes que confiaron en nosotros para ortodoncia, implantes y rehabilitación oral en Laureles, Medellín.</p>
+  </div>
+
+  <a href="#nosotros" class="hero-3d-scroll" aria-label="Scroll abajo">
+    <svg viewBox="0 0 24 24" fill="none"><path d="M12 5v14M6 13l6 6 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </a>
 </section>
 
 <!-- ─── NOSOTROS (estilo User Research) ────────────────────── -->
