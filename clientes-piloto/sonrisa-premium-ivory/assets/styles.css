@@ -194,25 +194,38 @@ body {
 
 /* ─── EQUIPO ──────────────────────────────────────────────── */
 .equipo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-.equipo-card { background: var(--ice); border-radius: 24px; padding: 36px; transition: all 0.3s var(--transition); }
-.equipo-card:hover { transform: translateY(-4px); }
-.equipo-card.dark { background: var(--black); color: var(--white); }
-.equipo-card-head { display: flex; align-items: center; gap: 16px; margin-bottom: 32px; }
-.equipo-avatar {
-  width: 56px; height: 56px; border-radius: 50%;
-  background: var(--white); border: 1px solid var(--border);
-  display: flex; align-items: center; justify-content: center;
-  font-weight: 600; font-size: 18px; color: var(--black); flex-shrink: 0;
+.equipo-card {
+  background: var(--ice);
+  border-radius: 24px;
+  padding: 0;
+  overflow: hidden;
+  transition: all 0.3s var(--transition);
+  display: flex; flex-direction: column;
 }
-.equipo-card.dark .equipo-avatar { background: var(--ice); }
-.equipo-card-name strong { display: block; font-size: 18px; font-weight: 600; color: var(--black); margin-bottom: 2px; }
-.equipo-card.dark .equipo-card-name strong { color: var(--white); }
-.equipo-card-name span { font-size: 13px; color: var(--gray); }
-.equipo-card h4 { font-size: 16px; font-weight: 600; margin: 24px 0 10px; color: var(--black); }
+.equipo-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(33,33,33,0.08); }
+.equipo-card.dark { background: var(--black); color: var(--white); }
+.equipo-card-photo {
+  width: 100%;
+  aspect-ratio: 4/5;
+  overflow: hidden;
+  background: var(--ice-soft);
+}
+.equipo-card-photo img {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center 20%;
+  transition: transform 0.6s var(--transition);
+}
+.equipo-card:hover .equipo-card-photo img { transform: scale(1.04); }
+.equipo-card-info { padding: 28px 32px 0; }
+.equipo-card-info strong { display: block; font-size: 20px; font-weight: 600; color: var(--black); margin-bottom: 4px; letter-spacing: -0.015em; }
+.equipo-card.dark .equipo-card-info strong { color: var(--white); }
+.equipo-card-info span { font-size: 13px; color: var(--gray); letter-spacing: 0.02em; }
+.equipo-card h4 { font-size: 14px; font-weight: 600; margin: 24px 32px 8px; color: var(--black); letter-spacing: 0.01em; }
 .equipo-card.dark h4 { color: var(--white); }
-.equipo-card p { font-size: 14px; color: var(--gray); line-height: 1.65; }
+.equipo-card p { font-size: 14px; color: var(--gray); line-height: 1.65; padding: 0 32px; }
 .equipo-card.dark p { color: var(--gray-light); }
-.equipo-card ul { list-style: none; padding: 0; margin-top: 16px; }
+.equipo-card > p:last-child { padding-bottom: 36px; }
+.equipo-card ul { list-style: none; padding: 0 32px; margin-top: 16px; }
 .equipo-card ul li {
   font-size: 14px; line-height: 1.6; color: var(--gray-light); margin-bottom: 14px;
   padding-left: 18px; position: relative;
