@@ -1,5 +1,6 @@
 /* Sonrisa Premium · Ivory · Animaciones GSAP
    Cargar después de gsap.min.js + ScrollTrigger.min.js
+   Tunings: agresivos pero suaves. Si se siente lento, bajar duraciones.
    ───────────────────────────────────────────────────── */
 
 (function () {
@@ -40,25 +41,24 @@
       const heroEls = heroContent.querySelectorAll(
         '.hero-breadcrumb, .hero-tag, h1, .lead, p, .hero-cta-row, .btn-pill, .hero-stats, .hero-stat-big'
       );
-      gsap.set(heroEls, { y: 28, opacity: 0 });
+      gsap.set(heroEls, { y: 20, opacity: 0 });
       gsap.to(heroEls, {
         y: 0,
         opacity: 1,
-        duration: 0.9,
-        ease: 'power3.out',
-        stagger: 0.09,
-        delay: 0.15,
+        duration: 0.55,
+        ease: 'power2.out',
+        stagger: 0.05,
+        delay: 0.08,
       });
 
-      // Foto del hero (si existe) con escala muy sutil
-      const heroPhoto = document.querySelector('.hero-photo, .hero-photo img, .hero-visual img');
+      const heroPhoto = document.querySelector('.hero-photo, .hero-photo img, .hero-visual img, .hero-visual-img');
       if (heroPhoto) {
         gsap.from(heroPhoto, {
-          scale: 1.06,
+          scale: 1.04,
           opacity: 0,
-          duration: 1.4,
+          duration: 0.85,
           ease: 'power2.out',
-          delay: 0.25,
+          delay: 0.12,
         });
       }
     }
@@ -69,15 +69,15 @@
     gsap.utils.toArray('.reveal').forEach((el) => {
       gsap.fromTo(
         el,
-        { y: 36, opacity: 0 },
+        { y: 24, opacity: 0 },
         {
           y: 0,
           opacity: 1,
-          duration: 0.85,
+          duration: 0.5,
           ease: 'power2.out',
           scrollTrigger: {
             trigger: el,
-            start: 'top 88%',
+            start: 'top 92%',
             toggleActions: 'play none none none',
           },
         }
@@ -91,16 +91,16 @@
     if (equipoCards.length) {
       gsap.fromTo(
         equipoCards,
-        { y: 50, opacity: 0 },
+        { y: 32, opacity: 0 },
         {
           y: 0,
           opacity: 1,
-          duration: 0.8,
+          duration: 0.55,
           ease: 'power2.out',
-          stagger: 0.15,
+          stagger: 0.08,
           scrollTrigger: {
             trigger: '.equipo-grid',
-            start: 'top 80%',
+            start: 'top 88%',
           },
         }
       );
@@ -113,16 +113,16 @@
     if (servicioItems.length) {
       gsap.fromTo(
         servicioItems,
-        { x: -28, opacity: 0 },
+        { x: -20, opacity: 0 },
         {
           x: 0,
           opacity: 1,
-          duration: 0.6,
+          duration: 0.4,
           ease: 'power2.out',
-          stagger: 0.08,
+          stagger: 0.05,
           scrollTrigger: {
             trigger: '.servicios-list',
-            start: 'top 80%',
+            start: 'top 88%',
           },
         }
       );
@@ -135,16 +135,16 @@
     if (catalogCards.length) {
       gsap.fromTo(
         catalogCards,
-        { y: 40, opacity: 0 },
+        { y: 28, opacity: 0 },
         {
           y: 0,
           opacity: 1,
-          duration: 0.7,
+          duration: 0.45,
           ease: 'power2.out',
-          stagger: 0.1,
+          stagger: 0.06,
           scrollTrigger: {
             trigger: '.catalog-grid',
-            start: 'top 80%',
+            start: 'top 88%',
           },
         }
       );
@@ -157,16 +157,16 @@
     if (testimonios.length) {
       gsap.fromTo(
         testimonios,
-        { y: 32, opacity: 0 },
+        { y: 24, opacity: 0 },
         {
           y: 0,
           opacity: 1,
-          duration: 0.7,
+          duration: 0.45,
           ease: 'power2.out',
-          stagger: 0.12,
+          stagger: 0.07,
           scrollTrigger: {
             trigger: testimonios[0],
-            start: 'top 85%',
+            start: 'top 90%',
           },
         }
       );
@@ -175,64 +175,62 @@
     // ───────────────────────────────────────────────────
     // GALERÍA pacientes · escalonada
     // ───────────────────────────────────────────────────
-    const galeriaCards = gsap.utils.toArray('.galeria-card');
+    const galeriaCards = gsap.utils.toArray('.galeria-card, .resultado-card');
     if (galeriaCards.length) {
       gsap.fromTo(
         galeriaCards,
-        { scale: 0.94, opacity: 0 },
+        { scale: 0.96, opacity: 0 },
         {
           scale: 1,
           opacity: 1,
-          duration: 0.8,
+          duration: 0.5,
           ease: 'power2.out',
-          stagger: 0.12,
+          stagger: 0.08,
           scrollTrigger: {
             trigger: galeriaCards[0],
-            start: 'top 80%',
+            start: 'top 88%',
           },
         }
       );
     }
 
     // ───────────────────────────────────────────────────
-    // HEADLINES de sección · expo.out reveal
+    // HEADLINES de sección · reveal suave
     // ───────────────────────────────────────────────────
     gsap.utils.toArray('.section-headline').forEach((h) => {
-      // Solo si no tiene ya class reveal (evita doble animación)
       if (h.classList.contains('reveal')) return;
       gsap.fromTo(
         h,
-        { y: 32, opacity: 0 },
+        { y: 24, opacity: 0 },
         {
           y: 0,
           opacity: 1,
-          duration: 1.1,
-          ease: 'expo.out',
+          duration: 0.65,
+          ease: 'power3.out',
           scrollTrigger: {
             trigger: h,
-            start: 'top 85%',
+            start: 'top 90%',
           },
         }
       );
     });
 
     // ───────────────────────────────────────────────────
-    // STATS BIG · número y descripción aparecen juntos
+    // STATS BIG · entran con back ease cuando NO están en hero
     // ───────────────────────────────────────────────────
     const heroStatBig = document.querySelector('.hero-stat-big');
     if (heroStatBig && !heroContent) {
-      // Solo si NO está en el hero (en hero ya se animó)
       gsap.fromTo(
         heroStatBig,
-        { scale: 0.92, opacity: 0 },
+        { scale: 0.94, opacity: 0 },
         {
           scale: 1,
           opacity: 1,
-          duration: 0.9,
+          duration: 0.6,
           ease: 'back.out(1.2)',
           scrollTrigger: {
             trigger: heroStatBig,
-            start: 'top 85%',
+            start: 'top 88%',
           },
         }
       );

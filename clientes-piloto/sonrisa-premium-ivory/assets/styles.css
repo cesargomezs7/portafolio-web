@@ -378,7 +378,9 @@ body {
 .blog-card {
   background: var(--white); border: 1px solid var(--border); border-radius: 20px; overflow: hidden;
   transition: all 0.3s var(--transition); display: flex; flex-direction: column;
+  text-decoration: none; color: var(--black);
 }
+.blog-card * { text-decoration: none; }
 .blog-card.published { background: var(--ice-soft); }
 .blog-card:hover { transform: translateY(-4px); box-shadow: 0 24px 60px rgba(33,33,33,0.08); }
 .blog-card-img { aspect-ratio: 16/10; background: var(--ice); display: flex; align-items: center; justify-content: center; }
