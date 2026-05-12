@@ -920,15 +920,16 @@
     position: absolute;
     top: -1px;
     right: 28px;
-    background: #fcfdff;
-    color: #000;
+    background: var(--accent-blue);
+    color: #fff;
     padding: 6px 14px;
     border-radius: 0 0 8px 8px;
     font-family: var(--font-body);
     font-size: 0.69rem;
-    font-weight: 600;
+    font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.04em;
+    box-shadow: 0 2px 12px rgba(8,145,178,0.35);
   }
   .plan-name {
     font-family: var(--font-display);
@@ -1015,14 +1016,14 @@
     transition: transform 0.2s, box-shadow 0.2s, background 0.16s;
   }
   .plan .plan-cta {
-    background: #fcfdff;
-    color: #000;
-    box-shadow: 0 1px 0 rgba(255,255,255,0.5) inset, 0 12px 32px rgba(252,253,255,0.18);
+    background: var(--gradient);
+    color: #fff;
+    box-shadow: 0 1px 0 rgba(255,255,255,0.18) inset, 0 12px 32px rgba(8,145,178,0.36);
   }
   .plan .plan-cta:hover {
-    background: #f1f7fe;
     transform: translateY(-1px) scale(1.02);
-    box-shadow: 0 1px 0 rgba(255,255,255,0.5) inset, 0 14px 36px rgba(252,253,255,0.28);
+    box-shadow: 0 1px 0 rgba(255,255,255,0.22) inset, 0 16px 40px rgba(8,145,178,0.48);
+    filter: brightness(1.05);
   }
 
   /* ── POR QUE ── */
