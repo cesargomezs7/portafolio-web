@@ -260,8 +260,12 @@ body {
 .btn-pill {
   display: inline-flex; align-items: center; gap: 10px; background: var(--black); color: var(--white);
   text-decoration: none; padding: 14px 28px; border-radius: 50px;
-  font-size: 13.5px; font-weight: 500; transition: all 0.3s var(--transition);
+  font-size: 13.5px; font-weight: 500;
+  transition: transform 0.35s cubic-bezier(0.34, 1.4, 0.64, 1), box-shadow 0.35s ease, background 0.3s ease, color 0.3s ease;
+  box-shadow: 0 4px 16px rgba(33,33,33,0.08);
 }
+.btn-pill:hover { transform: translateY(-2px) scale(1.02); box-shadow: 0 12px 32px rgba(33,33,33,0.18); }
+.btn-pill:active { transform: translateY(0) scale(0.98); transition-duration: 0.1s; }
 .btn-pill:hover { background: var(--accent); color: var(--black); }
 .btn-pill.outline { background: transparent; color: var(--black); border: 1px solid var(--black); }
 .btn-pill.outline:hover { background: var(--black); color: var(--white); }
@@ -485,4 +489,76 @@ body.has-banner .navbar { top: 36px; }
   .footer-grid { grid-template-columns: 1fr; }
   .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
   .proceso-grid { grid-template-columns: 1fr; }
+}
+
+/* ─── ANIMACIONES (GSAP + CSS micro-interacciones) ────────── */
+
+/* Reveal: estado inicial oculto (GSAP lo controla) */
+.reveal { opacity: 0; transform: translateY(20px); will-change: transform, opacity; }
+/* fallback si JS está deshabilitado */
+.no-js .reveal { opacity: 1; transform: none; }
+
+/* Cards hover lift más suave */
+.equipo-card, .catalog-card, .testimonio, .servicio-destacado {
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.4s ease, border-color 0.3s ease;
+  will-change: transform;
+}
+.catalog-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 48px rgba(33,33,33,0.1);
+  border-color: var(--gray-light);
+}
+.testimonio:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 28px rgba(33,33,33,0.08);
+}
+
+/* Servicio item arrow micro-rotación en hover */
+.servicio-item:hover .servicio-arrow svg { transform: translateX(2px); }
+.servicio-arrow svg { transition: transform 0.3s var(--transition); }
+
+/* Punto verde "Disponible / Respuesta en menos de 2 horas" pulse */
+.status-dot {
+  position: relative; display: inline-block;
+  width: 8px; height: 8px; background: #22C55E; border-radius: 50%;
+  flex-shrink: 0;
+}
+.status-dot::before {
+  content: ''; position: absolute; inset: -2px;
+  background: #22C55E; border-radius: 50%; opacity: 0.6;
+  animation: pronto-ring 2.2s ease-out infinite;
+}
+@keyframes pronto-ring {
+  0% { transform: scale(1); opacity: 0.55; }
+  80%, 100% { transform: scale(2.6); opacity: 0; }
+}
+
+/* Iconos sociales del footer + contacto: subida ligera */
+.footer-col a, .contacto-socials a {
+  transition: color 0.2s var(--transition), transform 0.25s var(--transition);
+  display: inline-flex; align-items: center;
+}
+.contacto-socials a { width: 40px; height: 40px; }
+.contacto-socials a:hover { transform: translateY(-3px); }
+
+/* Logo navbar: micro escala en hover */
+.nav-logo { transition: transform 0.3s var(--transition); }
+.nav-logo:hover { transform: scale(1.02); }
+
+/* WhatsApp flotante: pulse muy sutil */
+@keyframes wa-pulse {
+  0%, 100% { box-shadow: 0 8px 24px rgba(34, 197, 94, 0.35); }
+  50% { box-shadow: 0 8px 28px rgba(34, 197, 94, 0.55), 0 0 0 12px rgba(34, 197, 94, 0.08); }
+}
+.wa-float, [class*="wa-float"], a[href*="wa.me"][class*="float"] { animation: wa-pulse 3s ease-in-out infinite; }
+
+/* Respeta usuarios con reducción de movimiento */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .reveal { opacity: 1 !important; transform: none !important; }
+  .status-dot::before { display: none; }
 }
