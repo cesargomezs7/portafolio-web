@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex,nofollow">
+<title>Clínica Dental Dra. Carolina Pérez — Estética y Rehabilitación Oral</title>
+<link href="https://fonts.googleapis.com/css2?family=Allura&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 1440px; min-height: 810px; }
+  body {
+    font-family: Roboto, sans-serif;
+    color: #3F3F3F;
+    background: #fff;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  /* ── TOP BAR AZUL ── */
+  .topbar {
+    background: #0404E2;
+    color: #fff;
+    padding: 10px 80px;
+    display: flex;
+    gap: 50px;
+    align-items: center;
+    font-size: 14px;
+  }
+  .topbar .item {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+  }
+  .topbar .ic {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 1.5px solid #fff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+  }
+  .topbar .social {
+    margin-left: auto;
+    display: flex;
+    gap: 14px;
+  }
+
+  /* ── NAVBAR / LOGO ── */
+  .navbar {
+    background: #fff;
+    padding: 18px 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .logo-icon {
+    width: 46px;
+    height: 46px;
+    background: radial-gradient(circle at 40% 40%, #6B6BFF 0%, #0404E2 60%, #0303A8 100%);
+    border-radius: 50% 50% 8px 50%;
+    transform: rotate(-18deg);
+    box-shadow: inset -3px -3px 8px rgba(0,0,0,0.2);
+  }
+  .logo-text { line-height: 1; }
+  .logo-text .name {
+    font-family: 'Allura', cursive;
+    font-size: 38px;
+    color: #1B1B6B;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+  }
+  .logo-text .sub {
+    font-size: 13px;
+    color: #888;
+    letter-spacing: 1.5px;
+    margin-top: 4px;
+    font-weight: 300;
+  }
+  .menu {
+    display: flex;
+    gap: 36px;
+    align-items: center;
+  }
+  .menu a {
+    color: #333;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 400;
+  }
+  .menu .hamburger {
+    font-size: 24px;
+    color: #555;
+    cursor: pointer;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative;
+    padding: 50px 80px;
+    text-align: center;
+    color: #fff;
+    background:
+      linear-gradient(135deg, rgba(4,4,226,0.55), rgba(4,4,226,0.85)),
+      radial-gradient(circle at 30% 50%, #4040D0 0%, #1010A0 50%, #050560 100%);
+    background-size: cover;
+    min-height: 280px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(120deg, rgba(255,255,255,0.06) 0%, transparent 30%, transparent 70%, rgba(255,255,255,0.04) 100%);
+    pointer-events: none;
+  }
+  .hero h2 {
+    font-size: 26px;
+    font-weight: 400;
+    margin-bottom: 8px;
+    letter-spacing: 0.5px;
+  }
+  .hero h1 {
+    font-family: 'Allura', cursive;
+    font-size: 64px;
+    font-weight: 400;
+    line-height: 1.05;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+  }
+  .hero .cta {
+    margin-top: 18px;
+    display: inline-block;
+    background: #fff;
+    color: #0404E2;
+    padding: 10px 28px;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+  }
+
+  /* ── INTRO ── */
+  .intro {
+    padding: 32px 80px 28px;
+    text-align: center;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .intro h2 {
+    font-size: 24px;
+    font-weight: 400;
+    color: #3F3F3F;
+    margin-bottom: 10px;
+    line-height: 1.4;
+  }
+  .intro .te-esperamos {
+    color: #0404E2;
+    font-weight: 500;
+  }
+
+  /* ── BIO ── */
+  .bio {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 50px;
+    padding: 40px 80px;
+    background: #F4F4F8;
+    align-items: center;
+  }
+  .bio-img {
+    width: 280px;
+    height: 280px;
+    background:
+      radial-gradient(circle at 50% 35%, #E5E5F0 0%, #C5C5D8 50%, #8888AA 100%);
+    border-radius: 50%;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+    position: relative;
+    overflow: hidden;
+  }
+  .bio-img::after {
+    content: 'Dra. Carolina Pérez';
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding-bottom: 40px;
+    color: rgba(255,255,255,0.5);
+    font-size: 13px;
+    font-style: italic;
+  }
+  .bio-content h2 {
+    font-size: 32px;
+    color: #0404E2;
+    margin-bottom: 4px;
+    font-weight: 500;
+  }
+  .bio-content .subtitle {
+    font-size: 18px;
+    color: #666;
+    margin-bottom: 24px;
+    font-style: italic;
+  }
+  .bio-content ul {
+    list-style: none;
+    margin-bottom: 24px;
+  }
+  .bio-content li {
+    padding: 10px 0;
+    font-size: 16px;
+    color: #444;
+    border-bottom: 1px dotted #ddd;
+  }
+  .bio-content li::before {
+    content: '✓ ';
+    color: #0404E2;
+    font-weight: 700;
+    margin-right: 6px;
+  }
+  .btn-azul {
+    background: #0404E2;
+    color: #fff;
+    border: none;
+    padding: 14px 38px;
+    font-size: 14px;
+    cursor: pointer;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  /* ── SERVICIOS ── */
+  .servicios {
+    padding: 30px 80px 50px;
+  }
+  .servicios h2.section-title {
+    text-align: center;
+    font-size: 36px;
+    color: #0404E2;
+    font-weight: 500;
+    margin-bottom: 24px;
+    letter-spacing: 2px;
+  }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+  }
+  .service-card {
+    text-align: center;
+    padding: 24px 20px;
+    border: 1px solid #e5e5e8;
+    background: #fff;
+    transition: box-shadow 0.2s;
+  }
+  .service-icon {
+    width: 70px;
+    height: 70px;
+    background: #0404E2;
+    border-radius: 50%;
+    margin: 0 auto 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 34px;
+  }
+  .service-card h3 {
+    font-size: 22px;
+    color: #0404E2;
+    margin-bottom: 16px;
+    font-weight: 500;
+  }
+  .service-card ul {
+    list-style: none;
+    text-align: left;
+    padding-left: 20px;
+    margin-bottom: 24px;
+  }
+  .service-card li {
+    padding: 5px 0;
+    font-size: 15px;
+    color: #555;
+  }
+  .service-card li::before {
+    content: '– ';
+    color: #0404E2;
+    font-weight: 600;
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    background: #1B1B6B;
+    color: #fff;
+    padding: 36px 80px;
+    text-align: center;
+    font-size: 14px;
+    line-height: 2;
+  }
+  .footer .small {
+    font-size: 12px;
+    color: rgba(255,255,255,0.6);
+    margin-top: 8px;
+  }
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <span class="item">
+    <span class="ic">☎</span> +57 301 234 5678
+  </span>
+  <span class="item">
+    <span class="ic">✉</span> contacto@clinicacarolinaperez.com
+  </span>
+  <span class="social">
+    <span class="ic">IG</span>
+    <span class="ic">f</span>
+  </span>
+</div>
+
+<!-- NAVBAR / LOGO -->
+<div class="navbar">
+  <div class="logo">
+    <div class="logo-icon"></div>
+    <div class="logo-text">
+      <div class="name">Dra. Carolina Pérez</div>
+      <div class="sub">ESTÉTICA Y REHABILITACIÓN ORAL</div>
+    </div>
+  </div>
+  <nav class="menu">
+    <a href="#">Inicio</a>
+    <a href="#">Servicios</a>
+    <a href="#">Contáctanos</a>
+    <span class="hamburger">≡</span>
+  </nav>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <h2>Odontología Especializada</h2>
+  <h1>Dra. Carolina Pérez</h1>
+  <button class="cta">Agendar Cita</button>
+</div>
+
+<!-- INTRO -->
+<div class="intro">
+  <h2>Confía en nuestra experiencia. Estás en las mejores manos.<br>Atención personalizada, cercana y amable.</h2>
+  <h2 class="te-esperamos">¡Te esperamos!</h2>
+</div>
+
+<!-- BIO -->
+<div class="bio">
+  <div class="bio-img"></div>
+  <div class="bio-content">
+    <h2>Dra. Carolina Pérez</h2>
+    <div class="subtitle">Especialista en Estética y Rehabilitación Oral</div>
+    <ul>
+      <li>Odontóloga, Universidad Nacional de Colombia.</li>
+      <li>Más de 25 años de experiencia en Odontología.</li>
+      <li>Práctica profesional privada y exclusiva.</li>
+      <li>Enfocada en Estética Dental y Rehabilitación Oral.</li>
+      <li>Diplomados en Colombia y México.</li>
+    </ul>
+    <button class="btn-azul">Agendar una Cita</button>
+  </div>
+</div>
+
+<!-- SERVICIOS -->
+<div class="servicios">
+  <h2 class="section-title">NUESTROS SERVICIOS</h2>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon">☺</div>
+      <h3>Diseño de Sonrisa</h3>
+      <ul>
+        <li>Carillas dentales</li>
+        <li>Resina y Cerámicas</li>
+        <li>Coronas libres de metal</li>
+      </ul>
+      <button class="btn-azul">Agendar un Cita</button>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">★</div>
+      <h3>Carillas dentales</h3>
+      <ul>
+        <li>Carillas Cerámicas</li>
+        <li>Lumineers</li>
+        <li>Carillas de Resina</li>
+      </ul>
+      <button class="btn-azul">Agendar un Cita</button>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">+</div>
+      <h3>Rehabilitación Oral</h3>
+      <ul>
+        <li>Coronas dentales</li>
+        <li>Puentes</li>
+        <li>Prótesis dentales</li>
+      </ul>
+      <button class="btn-azul">Agendar un Cita</button>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  Clínica Dental Dra. Carolina Pérez · Calle 53 # 22-15, Bogotá<br>
+  Tel: +57 301 234 5678 · Lunes a Viernes 8am - 6pm · Sábados 9am - 1pm
+  <div class="small">© 2018 Todos los derechos reservados · Hecho con WordPress + Elementor</div>
+</div>
+
+</body>
+</html>
