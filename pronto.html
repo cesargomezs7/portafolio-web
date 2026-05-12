@@ -906,12 +906,12 @@
     margin-top: 40px;
   }
   .plan {
-    padding: 32px 28px;
+    padding: 36px;
     border-radius: var(--radius-lg);
     background: rgba(255,255,255,0.04);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    border: 1px solid var(--border);
+    border: 1px solid rgba(255,255,255,0.18);
     position: relative;
     transition: transform 0.2s;
   }
@@ -922,76 +922,111 @@
   }
   .plan .ribbon {
     position: absolute;
-    top: -12px;
-    right: 24px;
-    background: var(--gradient);
-    color: var(--bg);
-    padding: 4px 14px;
-    border-radius: 999px;
-    font-size: 0.75rem;
-    font-weight: 700;
+    top: -1px;
+    right: 28px;
+    background: #fcfdff;
+    color: #000;
+    padding: 6px 14px;
+    border-radius: 0 0 8px 8px;
+    font-family: var(--font-body);
+    font-size: 0.69rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
   }
   .plan-name {
-    font-family: var(--font-heading);
-    font-size: 1.4rem;
-    font-weight: 700;
+    font-family: var(--font-display);
+    font-size: 1.75rem;
+    font-weight: 400;
+    letter-spacing: -0.3px;
+    line-height: 1;
+    margin-top: 8px;
+    margin-bottom: 20px;
+    color: var(--text);
   }
   .plan-price {
-    font-family: var(--font-heading);
-    font-size: 2.2rem;
-    font-weight: 800;
-    margin: 8px 0 4px;
+    font-family: var(--font-display);
+    font-size: 3.4rem;
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: -1.6px;
+    margin: 0 0 6px;
+    color: var(--text);
+    display: inline-flex;
+    align-items: baseline;
+    gap: 8px;
   }
   .plan-price small {
-    font-size: 1rem;
-    font-weight: 500;
-    color: var(--text-muted);
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    font-weight: 400;
+    color: rgba(252,253,255,0.55);
+    letter-spacing: 0;
   }
   .plan-cop {
-    font-size: 0.9rem;
-    color: var(--text-dim);
-    margin-bottom: 24px;
+    font-family: 'SF Mono', Menlo, Consolas, monospace;
+    font-size: 0.74rem;
+    color: rgba(252,253,255,0.4);
+    margin-bottom: 22px;
+    letter-spacing: 0.02em;
   }
-  .plan ul { list-style: none; padding: 0; }
+  .plan ul {
+    list-style: none;
+    padding: 0;
+    margin: 22px 0 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding-top: 22px;
+  }
   .plan ul li {
-    padding: 10px 0;
-    padding-left: 28px;
+    padding: 0 0 0 24px;
     position: relative;
-    border-bottom: 1px solid rgba(255,255,255,0.05);
-    font-size: 0.95rem;
+    border-bottom: none;
+    font-size: 0.88rem;
+    line-height: 1.45;
+    color: rgba(252,253,255,0.86);
   }
-  .plan ul li:last-child { border-bottom: none; }
   .plan ul li::before {
     content: "\2713";
     position: absolute;
     left: 0;
-    top: 10px;
+    top: 0;
     color: var(--accent-cyan);
-    font-weight: 700;
+    font-weight: 600;
+    font-size: 0.95rem;
   }
   .plan-note {
-    margin-top: 16px;
-    font-size: 0.85rem;
-    color: var(--text-dim);
-    font-style: italic;
+    margin-top: 18px;
+    font-size: 0.78rem;
+    color: rgba(252,253,255,0.5);
+    font-style: normal;
+    text-align: center;
   }
   .plan-cta {
-    display: block;
-    text-align: center;
-    margin-top: 24px;
-    padding: 14px 24px;
-    border-radius: var(--radius);
-    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin: 14px auto 0;
+    padding: 0 26px;
+    height: 52px;
+    border-radius: 10px;
+    font-weight: 600;
     font-size: 0.95rem;
-    transition: transform 0.2s, box-shadow 0.2s;
+    letter-spacing: -0.2px;
+    transition: transform 0.2s, box-shadow 0.2s, background 0.16s;
   }
   .plan .plan-cta {
-    background: var(--gradient);
-    color: var(--bg);
+    background: #fcfdff;
+    color: #000;
+    box-shadow: 0 1px 0 rgba(255,255,255,0.5) inset, 0 12px 32px rgba(252,253,255,0.18);
   }
   .plan .plan-cta:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(8,145,178,0.3);
+    background: #f1f7fe;
+    transform: translateY(-1px) scale(1.02);
+    box-shadow: 0 1px 0 rgba(255,255,255,0.5) inset, 0 14px 36px rgba(252,253,255,0.28);
   }
 
   /* ── POR QUE ── */
