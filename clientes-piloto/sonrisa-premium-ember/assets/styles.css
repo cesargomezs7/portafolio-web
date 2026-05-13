@@ -142,12 +142,6 @@ a { color: inherit; text-decoration: none; }
   background-position: center center;
   background-repeat: no-repeat;
 }
-/* Desktop: separar el tag del navbar usando padding interno SOLO al .hero-text
-   (no afecta al .hero-strip que está fuera del grid → strip sigue visible) */
-@media (min-width: 1025px) {
-  .hero-home .hero-grid { align-items: start; padding-top: 40px; }
-  .hero-home .hero-doctors { align-self: end; }
-}
 
 /* Hero compact (nosotros, contacto): fondo simple en ember-deep */
 .hero-compact {
