@@ -31,7 +31,7 @@
 </nav>
 
 <!-- ─── HERO ────────────────────────────────────────────── -->
-<section class="hero">
+<section class="hero hero-home">
   <div class="hero-grid">
 
     <!-- Texto a la izquierda -->
@@ -340,6 +340,10 @@
 
 <!-- Reloj live Medellín GMT-5 + navbar + carrusel doctores -->
 <script>
+  // Forzar abrir desde arriba (no recordar scroll anterior)
+  if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; }
+  window.addEventListener('beforeunload', () => window.scrollTo(0, 0));
+
   // Reloj live
   function tickClock() {
     const now = new Date();

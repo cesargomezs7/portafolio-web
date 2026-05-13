@@ -29,6 +29,7 @@
 }
 
 html { scroll-behavior: smooth; }
+section[id] { scroll-margin-top: 90px; }
 
 body {
   font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -90,23 +91,37 @@ a { color: inherit; text-decoration: none; }
 }
 .nav-cta:hover { background: var(--white); color: var(--ember-base); transform: translateY(-1px); }
 
-/* ─── HERO con imagen completa de fondo (diente integrado) ──── */
+/* ─── HERO base (todas las páginas) ─────────────────────────── */
 .hero {
-  min-height: 100vh; height: 100vh; position: relative; overflow: hidden;
+  position: relative; overflow: hidden;
   padding: 90px 5% 40px;
   display: flex; flex-direction: column;
-  background: #110001;
-  background-image: url('../img/hero-bg.png');
-  background-size: cover;
-  background-position: center center;
-  background-repeat: no-repeat;
+  background: var(--ember-deep);
   image-rendering: -webkit-optimize-contrast;
   image-rendering: high-quality;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
 }
-/* Overlay sutil para mejorar legibilidad del texto sobre la imagen */
-.hero::before {
+
+/* Hero del home: imagen completa con diente integrado */
+.hero-home {
+  min-height: 100vh; height: 100vh;
+  background: #110001;
+  background-image: url('../img/hero-bg.png');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+/* Hero compact (nosotros, contacto): fondo simple en ember-deep */
+.hero-compact {
+  min-height: auto;
+  padding: 130px 5% 60px;
+  background:
+    radial-gradient(ellipse 900px 600px at 50% 30%, var(--ember-dark) 0%, var(--ember-deep) 60%, var(--black) 100%);
+}
+/* Overlay sutil solo en home (imagen de fondo) */
+.hero-home::before {
   content: ''; position: absolute; inset: 0;
   background: linear-gradient(to right, rgba(0,0,0,0.35) 0%, transparent 35%, transparent 65%, rgba(0,0,0,0.35) 100%);
   pointer-events: none; z-index: 1;
@@ -166,6 +181,8 @@ a { color: inherit; text-decoration: none; }
 /* Carrusel de doctores */
 .hero-doctors {
   position: relative;
+  align-self: end;
+  padding-bottom: 32px;
 }
 .hero-doctors-nav {
   display: inline-flex; align-items: center; gap: 8px;
@@ -228,25 +245,31 @@ a { color: inherit; text-decoration: none; }
 
 /* Section dark (negro): fade entry desde negro (matchea fin del hero) +
    fade exit hacia ember-dark para transición a section-warm */
+/* SECCIÓN DARK (negro) ─────────────────────────────────────
+   Color de fondo: var(--black)
+   ::after fade DOWN matchea con la sección siguiente. */
 .section-dark { background: var(--black); color: var(--white); padding-top: 200px; padding-bottom: 240px; }
 .section-dark::after {
   content: ''; position: absolute; bottom: 0; left: 0; right: 0;
   height: 320px; pointer-events: none; z-index: 1;
-  background: linear-gradient(to bottom, transparent, var(--ember-deep));
+  background: linear-gradient(to bottom, transparent, var(--ember-deep)); /* default → footer */
 }
+.section-dark:has(+ .section-warm)::after { background: linear-gradient(to bottom, transparent, var(--ember-dark)); }
+.section-dark:has(+ .section-dark)::after { background: linear-gradient(to bottom, transparent, var(--black)); }
+.section-dark:has(+ .section-cream)::after { background: linear-gradient(to bottom, transparent, var(--ember-cream)); }
 
-/* Section warm (naranja oscuro): top fade desde ember-deep + bottom fade a cream */
-.section-warm { background: var(--ember-dark); padding-top: 240px; padding-bottom: 240px; }
-.section-warm::before {
-  content: ''; position: absolute; top: 0; left: 0; right: 0;
-  height: 320px; pointer-events: none; z-index: 1;
-  background: linear-gradient(to bottom, var(--ember-deep), transparent);
-}
+/* SECCIÓN WARM (naranja oscuro) ─────────────────────────────
+   ::after fade DOWN matchea con la siguiente.
+   No usa ::before — la transición ENTRA viene del ::after de la anterior. */
+.section-warm { background: var(--ember-dark); padding-top: 200px; padding-bottom: 240px; }
 .section-warm::after {
   content: ''; position: absolute; bottom: 0; left: 0; right: 0;
   height: 320px; pointer-events: none; z-index: 1;
-  background: linear-gradient(to bottom, transparent, var(--ember-cream));
+  background: linear-gradient(to bottom, transparent, var(--ember-cream)); /* default → cream */
 }
+.section-warm:has(+ .section-dark)::after { background: linear-gradient(to bottom, transparent, var(--black)); }
+.section-warm:has(+ .section-warm)::after { background: linear-gradient(to bottom, transparent, var(--ember-dark)); }
+.section-warm:has(+ footer)::after { background: linear-gradient(to bottom, transparent, var(--ember-deep)); }
 
 /* Section cream (claro): el fade DESDE warm lo hace warm::after.
    El cream NO necesita ::before (causaba banda marrón dentro del cream).
@@ -516,14 +539,17 @@ footer {
   display: grid;
   grid-template-columns: 1.4fr 1fr;
   grid-template-rows: auto auto;
-  gap: 16px;
-  margin-top: 24px;
+  gap: 32px;
+  margin-top: 32px;
+  max-width: 1200px;
+  margin-left: auto; margin-right: auto;
 }
 .clinica-card {
-  position: relative; border-radius: 20px; overflow: hidden;
+  position: relative; border-radius: 16px; overflow: hidden;
   background: var(--black);
   transition: transform 0.4s var(--transition);
-  border: 1px solid var(--border);
+  border: 1px solid var(--black);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.25);
 }
 .clinica-card:hover { transform: translateY(-4px); }
 .clinica-card img {

@@ -31,7 +31,7 @@
 </nav>
 
 <!-- ─── HERO COMPACTO ───────────────────────────────────── -->
-<section class="hero" style="min-height:auto;padding-top:130px;padding-bottom:60px;">
+<section class="hero hero-compact">
   <div style="position:relative;z-index:2;max-width:1300px;margin:0 auto;">
     <div class="hero-tag">Contacto · Atención inmediata</div>
     <h1 class="reveal" style="font-size:clamp(2.6rem,5.2vw,4.6rem);font-weight:700;line-height:1.05;letter-spacing:-0.025em;color:var(--white);max-width:900px;margin:0;">
@@ -145,6 +145,9 @@
 </a>
 
 <script>
+  if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; }
+  window.addEventListener('beforeunload', () => window.scrollTo(0, 0));
+
   const navbar = document.getElementById('navbar');
   if (navbar) {
     const onScroll = () => navbar.classList.toggle('scrolled', window.scrollY > 60);
