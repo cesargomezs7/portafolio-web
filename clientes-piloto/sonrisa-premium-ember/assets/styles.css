@@ -47,9 +47,7 @@ a { color: inherit; text-decoration: none; }
 /* ─── NAVBAR ──────────────────────────────────────────────── */
 .navbar {
   position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-  background: rgba(201,66,27,0.85);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  background: var(--ember-base);
   padding: 22px 5%;
   display: flex; align-items: center; justify-content: space-between;
   transition: all 0.4s var(--transition);
@@ -106,8 +104,8 @@ a { color: inherit; text-decoration: none; }
 /* Fade out a negro al final del hero (transición a sección dark) */
 .hero::after {
   content: ''; position: absolute; bottom: 0; left: 0; right: 0;
-  height: 220px;
-  background: linear-gradient(to bottom, transparent 0%, var(--black) 100%);
+  height: 400px;
+  background: linear-gradient(to bottom, transparent 0%, rgba(13,13,13,0.5) 50%, var(--black) 100%);
   pointer-events: none; z-index: 1;
 }
 
@@ -218,39 +216,40 @@ a { color: inherit; text-decoration: none; }
 
 /* Section dark (negro): fade entry desde negro (matchea fin del hero) +
    fade exit hacia ember-dark para transición a section-warm */
-.section-dark { background: var(--black); color: var(--white); }
+.section-dark { background: var(--black); color: var(--white); padding-top: 200px; padding-bottom: 200px; }
 .section-dark::after {
   content: ''; position: absolute; bottom: 0; left: 0; right: 0;
-  height: 200px; pointer-events: none; z-index: 1;
-  background: linear-gradient(to bottom, transparent 0%, var(--ember-deep) 100%);
+  height: 350px; pointer-events: none; z-index: 1;
+  background: linear-gradient(to bottom, transparent 0%, rgba(61,19,8,0.5) 50%, var(--ember-deep) 100%);
 }
 
 /* Section warm (naranja oscuro): top fade desde ember-deep + bottom fade a cream */
-.section-warm { background: var(--ember-dark); }
+.section-warm { background: var(--ember-dark); padding-top: 220px; padding-bottom: 220px; }
 .section-warm::before {
   content: ''; position: absolute; top: 0; left: 0; right: 0;
-  height: 180px; pointer-events: none; z-index: 1;
-  background: linear-gradient(to bottom, var(--ember-deep) 0%, transparent 100%);
+  height: 350px; pointer-events: none; z-index: 1;
+  background: linear-gradient(to bottom, var(--ember-deep) 0%, rgba(107,31,14,0.6) 40%, transparent 100%);
 }
 .section-warm::after {
   content: ''; position: absolute; bottom: 0; left: 0; right: 0;
-  height: 180px; pointer-events: none; z-index: 1;
-  background: linear-gradient(to bottom, transparent 0%, var(--ember-cream) 100%);
+  height: 320px; pointer-events: none; z-index: 1;
+  background: linear-gradient(to bottom, transparent 0%, rgba(255,228,209,0.5) 50%, var(--ember-cream) 100%);
 }
 
 /* Section cream (claro): top fade desde naranja oscuro + bottom fade a ember-deep */
 .section-cream {
   background: var(--ember-cream); color: var(--black);
+  padding-top: 220px; padding-bottom: 220px;
 }
 .section-cream::before {
   content: ''; position: absolute; top: 0; left: 0; right: 0;
-  height: 150px; pointer-events: none; z-index: 1;
-  background: linear-gradient(to bottom, var(--ember-dark) 0%, transparent 100%);
+  height: 320px; pointer-events: none; z-index: 1;
+  background: linear-gradient(to bottom, var(--ember-dark) 0%, rgba(255,228,209,0.5) 50%, transparent 100%);
 }
 .section-cream::after {
   content: ''; position: absolute; bottom: 0; left: 0; right: 0;
-  height: 150px; pointer-events: none; z-index: 1;
-  background: linear-gradient(to bottom, transparent 0%, var(--ember-deep) 100%);
+  height: 280px; pointer-events: none; z-index: 1;
+  background: linear-gradient(to bottom, transparent 0%, rgba(61,19,8,0.5) 50%, var(--ember-deep) 100%);
 }
 .section-cream .section-tag, .section-cream p { color: var(--ember-dark); }
 
