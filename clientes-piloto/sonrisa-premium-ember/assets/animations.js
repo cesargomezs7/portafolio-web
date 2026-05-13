@@ -82,6 +82,58 @@
       );
     }
 
+    // ─── Counter animation (números cuentan al hacer scroll) ─
+    gsap.utils.toArray('[data-counter]').forEach(el => {
+      const target = parseFloat(el.dataset.counter);
+      const prefix = el.dataset.prefix || '';
+      const suffix = el.dataset.suffix || '';
+      const decimals = parseInt(el.dataset.decimals || '0', 10);
+      const obj = { val: 0 };
+      el.textContent = prefix + (0).toFixed(decimals) + suffix;
+      ScrollTrigger.create({
+        trigger: el,
+        start: 'top bottom-=80',
+        once: true,
+        onEnter: () => {
+          gsap.to(obj, {
+            val: target,
+            duration: 1.6,
+            ease: 'power2.out',
+            onUpdate: () => {
+              const formatted = obj.val.toFixed(decimals);
+              el.textContent = prefix + formatted + suffix;
+            }
+          });
+        }
+      });
+    });
+
+    // ─── Parallax sutil del hero (diente se mueve más lento) ─
+    const heroHome = document.querySelector('.hero-home');
+    if (heroHome) {
+      gsap.to(heroHome, {
+        backgroundPositionY: '15%',
+        ease: 'none',
+        scrollTrigger: {
+          trigger: heroHome,
+          start: 'top top',
+          end: 'bottom top',
+          scrub: 0.8
+        }
+      });
+    }
+
+    // ─── Scroll progress bar (línea fina arriba del navbar) ─
+    const progressBar = document.getElementById('scrollProgress');
+    if (progressBar) {
+      gsap.to(progressBar, {
+        scaleX: 1,
+        transformOrigin: 'left center',
+        ease: 'none',
+        scrollTrigger: { trigger: document.body, start: 'top top', end: 'bottom bottom', scrub: 0.3 }
+      });
+    }
+
     window.addEventListener('load', () => ScrollTrigger.refresh());
   }
 

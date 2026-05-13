@@ -8,9 +8,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/styles.css?v=20260513e">
+<link rel="stylesheet" href="assets/styles.css?v=20260513f">
 </head>
 <body class="has-banner">
+
+<div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
 
 <div class="pronto-banner">
   Ejemplo de implementación · Muestra del plan completo de <strong>Pronto</strong> · Clínica de demostración
@@ -143,7 +145,7 @@
     <p class="section-subtitle reveal">Más de 120 m² de instalaciones modernas en el corazón de Laureles. Cada rincón pensado para que te sientas cómodo desde que entras.</p>
 
     <div class="clinica-grid">
-      <div class="clinica-card clinica-card-big reveal">
+      <div class="clinica-card reveal">
         <img src="img/clinica-consultorio.jpg" alt="Consultorio principal Sonrisa Premium" loading="lazy">
         <div class="clinica-card-label">Consultorio principal</div>
       </div>
@@ -209,16 +211,16 @@
     <p class="section-subtitle reveal">Llevamos más de 8 años en Laureles atendiendo personas que buscan claridad, transparencia y resultados duraderos. Tres especialistas trabajan de forma coordinada para que cada paciente reciba un plan personalizado.</p>
 
     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:32px;">
-      <div class="reveal" style="padding:32px;background:rgba(0,0,0,0.25);border-radius:24px;border:1px solid var(--border);">
-        <div style="font-size:36px;font-weight:700;color:var(--ember-pale);letter-spacing:-0.03em;margin-bottom:8px;">+8</div>
+      <div class="reveal stat-card" style="padding:32px;background:rgba(0,0,0,0.25);border-radius:24px;border:1px solid var(--border);">
+        <div data-counter="8" data-prefix="+" style="font-size:36px;font-weight:700;color:var(--ember-pale);letter-spacing:-0.03em;margin-bottom:8px;">+0</div>
         <div style="font-size:13px;color:var(--ember-cream);letter-spacing:0.1em;text-transform:uppercase;">Años en Laureles</div>
       </div>
-      <div class="reveal" style="padding:32px;background:rgba(0,0,0,0.25);border-radius:24px;border:1px solid var(--border);">
-        <div style="font-size:36px;font-weight:700;color:var(--ember-pale);letter-spacing:-0.03em;margin-bottom:8px;">234</div>
+      <div class="reveal stat-card" style="padding:32px;background:rgba(0,0,0,0.25);border-radius:24px;border:1px solid var(--border);">
+        <div data-counter="234" style="font-size:36px;font-weight:700;color:var(--ember-pale);letter-spacing:-0.03em;margin-bottom:8px;">0</div>
         <div style="font-size:13px;color:var(--ember-cream);letter-spacing:0.1em;text-transform:uppercase;">Reseñas Google · 4.8 ★</div>
       </div>
-      <div class="reveal" style="padding:32px;background:rgba(0,0,0,0.25);border-radius:24px;border:1px solid var(--border);">
-        <div style="font-size:36px;font-weight:700;color:var(--ember-pale);letter-spacing:-0.03em;margin-bottom:8px;">3</div>
+      <div class="reveal stat-card" style="padding:32px;background:rgba(0,0,0,0.25);border-radius:24px;border:1px solid var(--border);">
+        <div data-counter="3" style="font-size:36px;font-weight:700;color:var(--ember-pale);letter-spacing:-0.03em;margin-bottom:8px;">0</div>
         <div style="font-size:13px;color:var(--ember-cream);letter-spacing:0.1em;text-transform:uppercase;">Especialistas certificados</div>
       </div>
     </div>
@@ -380,7 +382,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
-<script src="assets/animations.js" defer></script>
+<script src="assets/animations.js?v=20260513f" defer></script>
 
 </body>
 </html>

@@ -78,6 +78,16 @@ a { color: inherit; text-decoration: none; }
   color: var(--white); font-size: 14px; font-weight: 400;
   letter-spacing: 0.01em;
   transition: color 0.2s var(--transition);
+  position: relative; padding-bottom: 4px;
+}
+.nav-links a::after {
+  content: ''; position: absolute; left: 0; bottom: -2px;
+  width: 100%; height: 1px; background: var(--ember-pale);
+  transform: scaleX(0); transform-origin: right center;
+  transition: transform 0.35s var(--transition);
+}
+.nav-links a:hover::after, .nav-links a.active::after {
+  transform: scaleX(1); transform-origin: left center;
 }
 .nav-links a:hover, .nav-links a.active { color: var(--ember-pale); }
 
@@ -89,7 +99,20 @@ a { color: inherit; text-decoration: none; }
   font-size: 13.5px; font-weight: 500;
   transition: all 0.3s var(--transition);
 }
-.nav-cta:hover { background: var(--white); color: var(--ember-base); transform: translateY(-1px); }
+.nav-cta {
+  position: relative; overflow: hidden;
+}
+.nav-cta::before {
+  content: ''; position: absolute; top: 0; left: -100%;
+  width: 100%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+  transition: left 0.6s var(--transition);
+}
+.nav-cta:hover::before { left: 100%; }
+.nav-cta:hover {
+  background: var(--white); color: var(--ember-base);
+  transform: translateY(-2px); box-shadow: 0 10px 30px rgba(232,84,32,0.35);
+}
 
 /* ─── HERO base (todas las páginas) ─────────────────────────── */
 .hero {
@@ -193,7 +216,21 @@ a { color: inherit; text-decoration: none; }
   cursor: pointer; transition: all 0.3s var(--transition);
   border: none;
 }
-.hero-doctors-nav:hover { background: var(--ember-glow); }
+.hero-doctors-nav {
+  position: relative; overflow: hidden;
+}
+.hero-doctors-nav::before {
+  content: ''; position: absolute; top: 0; left: -100%;
+  width: 100%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  transition: left 0.5s var(--transition);
+}
+.hero-doctors-nav:hover::before { left: 100%; }
+.hero-doctors-nav:hover {
+  background: var(--ember-glow);
+  transform: translateY(-2px); box-shadow: 0 8px 24px rgba(232,84,32,0.45);
+}
+.hero-doctors-nav:active { transform: translateY(0); }
 
 .hero-doctors-track {
   display: flex; gap: 16px;
@@ -446,8 +483,23 @@ a { color: inherit; text-decoration: none; }
   cursor: pointer; transition: all 0.3s var(--transition); font-family: inherit;
   margin-top: 8px;
   display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  position: relative; overflow: hidden;
+  box-shadow: 0 4px 16px rgba(232,84,32,0.25);
 }
-.contacto-form button:hover { background: var(--white); color: var(--ember-base); }
+.contacto-form button::before {
+  content: ''; position: absolute; top: 0; left: -100%;
+  width: 100%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  transition: left 0.6s var(--transition);
+}
+.contacto-form button:hover::before { left: 100%; }
+.contacto-form button:hover {
+  background: var(--white); color: var(--ember-base);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(232,84,32,0.5);
+}
+.contacto-form button svg { transition: transform 0.3s var(--transition); }
+.contacto-form button:hover svg { transform: translateX(4px); }
 
 .status-dot {
   position: relative; display: inline-block;
@@ -502,8 +554,31 @@ footer {
   transition: transform 0.3s var(--transition);
   text-decoration: none;
 }
-.wa-float:hover { transform: scale(1.08); }
-.wa-float svg { width: 30px; height: 30px; }
+.wa-float::before {
+  content: ''; position: absolute; inset: -6px; border-radius: 50%;
+  background: #25D366; opacity: 0.35; z-index: -1;
+  animation: waPulse 2.4s var(--transition) infinite;
+}
+.wa-float:hover {
+  transform: scale(1.12);
+  box-shadow: 0 12px 32px rgba(37, 211, 102, 0.55);
+}
+.wa-float svg { width: 30px; height: 30px; transition: transform 0.3s var(--transition); }
+.wa-float:hover svg { transform: rotate(-8deg); }
+@keyframes waPulse {
+  0% { transform: scale(1); opacity: 0.45; }
+  70% { transform: scale(1.5); opacity: 0; }
+  100% { transform: scale(1.5); opacity: 0; }
+}
+
+/* Scroll progress bar — línea fina arriba del banner */
+.scroll-progress {
+  position: fixed; top: 0; left: 0; right: 0;
+  height: 2px; z-index: 1100;
+  background: linear-gradient(90deg, var(--ember-glow), var(--ember-pale));
+  transform: scaleX(0); transform-origin: left center;
+  pointer-events: none;
+}
 
 /* Pronto banner superior — fixed junto al navbar para que no haya gap */
 .pronto-banner {
@@ -538,9 +613,8 @@ footer {
 /* ─── CLÍNICA TOUR (galería del consultorio) ─────────────── */
 .clinica-grid {
   display: grid;
-  grid-template-columns: 1.4fr 1fr;
-  grid-template-rows: auto auto;
-  gap: 32px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
   margin-top: 32px;
   max-width: 1200px;
   margin-left: auto; margin-right: auto;
@@ -548,18 +622,20 @@ footer {
 .clinica-card {
   position: relative; border-radius: 16px; overflow: hidden;
   background: var(--black);
-  transition: transform 0.4s var(--transition);
+  transition: transform 0.5s var(--transition), box-shadow 0.5s var(--transition);
   border: 1px solid var(--black);
   box-shadow: 0 4px 24px rgba(0,0,0,0.25);
+  aspect-ratio: 3 / 2;
 }
-.clinica-card:hover { transform: translateY(-4px); }
+.clinica-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 14px 40px rgba(0,0,0,0.45);
+}
 .clinica-card img {
   width: 100%; height: 100%; object-fit: cover;
-  display: block; transition: transform 0.6s var(--transition);
+  display: block; transition: transform 0.8s var(--transition);
 }
-.clinica-card:hover img { transform: scale(1.04); }
-.clinica-card-big { grid-row: 1 / 3; min-height: 480px; }
-.clinica-card:not(.clinica-card-big) { min-height: 232px; }
+.clinica-card:hover img { transform: scale(1.06); }
 .clinica-card-label {
   position: absolute; bottom: 16px; left: 16px;
   background: rgba(13,13,13,0.85);
@@ -583,9 +659,10 @@ footer {
 }
 .tech-card:hover { transform: translateY(-4px); border-color: var(--ember-glow); }
 .tech-card img {
-  width: 100%; aspect-ratio: 16/10; object-fit: cover;
-  display: block;
+  width: 100%; aspect-ratio: 3/2; object-fit: cover;
+  display: block; transition: transform 0.8s var(--transition);
 }
+.tech-card:hover img { transform: scale(1.04); }
 .tech-card-body { padding: 24px 28px 28px; }
 .tech-card-tag {
   display: inline-block; padding: 4px 12px; border-radius: 50px;
@@ -642,10 +719,7 @@ footer {
 @media (max-width: 1024px) {
   .clinica-grid {
     grid-template-columns: 1fr;
-    grid-template-rows: auto;
   }
-  .clinica-card-big { grid-row: auto; min-height: 280px; }
-  .clinica-card:not(.clinica-card-big) { min-height: 200px; }
   .tech-grid { grid-template-columns: 1fr; }
   .testimonios-grid { grid-template-columns: 1fr; }
 }
