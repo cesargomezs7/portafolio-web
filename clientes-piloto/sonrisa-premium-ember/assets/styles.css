@@ -47,14 +47,14 @@ a { color: inherit; text-decoration: none; }
 /* ─── NAVBAR ──────────────────────────────────────────────── */
 .navbar {
   position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-  background: var(--ember-base);
-  padding: 14px 5%;
+  background: var(--ember-deep);
+  padding: 10px 5%;
   display: flex; align-items: center; justify-content: space-between;
   transition: all 0.4s var(--transition);
   border-bottom: 1px solid transparent;
 }
-.navbar.scrolled { padding: 10px 5%; border-bottom-color: var(--border); }
-.nav-cta { padding: 10px 22px; font-size: 13px; }
+.navbar.scrolled { padding: 8px 5%; border-bottom-color: var(--border); }
+.nav-cta { padding: 8px 18px; font-size: 12.5px; }
 
 .nav-logo { display: flex; align-items: center; gap: 12px; color: var(--white); }
 .nav-logo-icon {
@@ -245,15 +245,12 @@ a { color: inherit; text-decoration: none; }
   background: linear-gradient(to bottom, transparent, var(--ember-cream));
 }
 
-/* Section cream (claro): top fade desde naranja oscuro + bottom fade a ember-deep */
+/* Section cream (claro): el fade DESDE warm lo hace warm::after.
+   El cream NO necesita ::before (causaba banda marrón dentro del cream).
+   Solo ::after para fade al footer ember-deep. */
 .section-cream {
   background: var(--ember-cream); color: var(--black);
-  padding-top: 240px; padding-bottom: 240px;
-}
-.section-cream::before {
-  content: ''; position: absolute; top: 0; left: 0; right: 0;
-  height: 320px; pointer-events: none; z-index: 1;
-  background: linear-gradient(to bottom, var(--ember-dark), transparent);
+  padding-top: 120px; padding-bottom: 240px;
 }
 .section-cream::after {
   content: ''; position: absolute; bottom: 0; left: 0; right: 0;
@@ -484,7 +481,7 @@ footer {
 /* Pronto banner superior — fixed junto al navbar para que no haya gap */
 .pronto-banner {
   position: fixed; top: 0; left: 0; right: 0; z-index: 1001;
-  background: var(--ember-deep); color: var(--ember-cream);
+  background: var(--black); color: var(--ember-cream);
   font-size: 12px; padding: 8px 5%; text-align: center;
   border-bottom: 1px solid var(--border);
 }
