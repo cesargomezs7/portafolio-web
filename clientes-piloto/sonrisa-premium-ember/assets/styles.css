@@ -100,6 +100,10 @@ a { color: inherit; text-decoration: none; }
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: high-quality;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 /* Overlay sutil para mejorar legibilidad del texto sobre la imagen */
 .hero::before {
