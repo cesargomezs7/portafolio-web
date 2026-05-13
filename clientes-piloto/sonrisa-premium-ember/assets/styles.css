@@ -510,3 +510,115 @@ footer {
   .footer-grid { grid-template-columns: 1fr; }
   .footer-bottom { flex-direction: column; gap: 8px; }
 }
+
+/* ─── CLÍNICA TOUR (galería del consultorio) ─────────────── */
+.clinica-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 16px;
+  margin-top: 24px;
+}
+.clinica-card {
+  position: relative; border-radius: 20px; overflow: hidden;
+  background: var(--black);
+  transition: transform 0.4s var(--transition);
+  border: 1px solid var(--border);
+}
+.clinica-card:hover { transform: translateY(-4px); }
+.clinica-card img {
+  width: 100%; height: 100%; object-fit: cover;
+  display: block; transition: transform 0.6s var(--transition);
+}
+.clinica-card:hover img { transform: scale(1.04); }
+.clinica-card-big { grid-row: 1 / 3; min-height: 480px; }
+.clinica-card:not(.clinica-card-big) { min-height: 232px; }
+.clinica-card-label {
+  position: absolute; bottom: 16px; left: 16px;
+  background: rgba(13,13,13,0.85);
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  color: var(--white);
+  padding: 8px 16px; border-radius: 50px;
+  font-size: 12px; font-weight: 500;
+  border: 1px solid var(--border);
+}
+
+/* ─── TECNOLOGÍA (cards horizontales) ─────────────────────── */
+.tech-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+  margin-top: 24px;
+}
+.tech-card {
+  background: var(--black-2);
+  border: 1px solid var(--border);
+  border-radius: 24px; overflow: hidden;
+  transition: all 0.3s var(--transition);
+}
+.tech-card:hover { transform: translateY(-4px); border-color: var(--ember-glow); }
+.tech-card img {
+  width: 100%; aspect-ratio: 16/10; object-fit: cover;
+  display: block;
+}
+.tech-card-body { padding: 24px 28px 28px; }
+.tech-card-tag {
+  display: inline-block; padding: 4px 12px; border-radius: 50px;
+  background: rgba(232,84,32,0.15); color: var(--ember-pale);
+  font-size: 11px; font-weight: 500; letter-spacing: 0.05em;
+  text-transform: uppercase; margin-bottom: 14px;
+}
+.tech-card h3 {
+  font-size: 18px; font-weight: 600; color: var(--white);
+  margin-bottom: 10px; letter-spacing: -0.015em; line-height: 1.3;
+}
+.tech-card p { font-size: 13.5px; color: var(--gray-light); line-height: 1.6; }
+
+/* ─── TESTIMONIOS (cards con foto paciente) ──────────────── */
+.testimonios-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+  margin-top: 24px;
+}
+.testimonio-card {
+  background: var(--black-2);
+  border: 1px solid var(--border);
+  border-radius: 24px; padding: 32px;
+  display: flex; flex-direction: column;
+  transition: all 0.3s var(--transition);
+}
+.testimonio-card:hover { transform: translateY(-4px); border-color: var(--ember-glow); }
+.testimonio-stars {
+  color: var(--ember-glow); font-size: 16px;
+  letter-spacing: 2px; margin-bottom: 16px;
+}
+.testimonio-quote {
+  font-size: 14.5px; color: var(--gray-light); line-height: 1.65;
+  flex: 1; margin-bottom: 24px;
+  font-style: italic;
+}
+.testimonio-author {
+  display: flex; align-items: center; gap: 14px;
+  padding-top: 20px; border-top: 1px solid var(--border);
+}
+.testimonio-author img {
+  width: 48px; height: 48px; border-radius: 50%;
+  object-fit: cover; object-position: center top;
+  border: 2px solid var(--ember-glow);
+}
+.testimonio-author strong {
+  display: block; color: var(--white); font-size: 14px;
+  font-weight: 600; margin-bottom: 2px;
+}
+.testimonio-author span {
+  font-size: 12px; color: var(--ember-pale); letter-spacing: 0.02em;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .clinica-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+  }
+  .clinica-card-big { grid-row: auto; min-height: 280px; }
+  .clinica-card:not(.clinica-card-big) { min-height: 200px; }
+  .tech-grid { grid-template-columns: 1fr; }
+  .testimonios-grid { grid-template-columns: 1fr; }
+}
