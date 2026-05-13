@@ -803,34 +803,100 @@
     color: var(--bg);
   }
 
-  /* ── LIVE DEMO (horizontal, no frame) ── */
-  .demo-tabs {
+  /* ── DEMO CONTROLS (selector diseño + toggle viewport) ── */
+  .demo-controls {
     display: flex;
-    justify-content: center;
-    gap: 8px;
-    margin: 32px 0 24px;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    margin: 32px 0 28px;
   }
-  .demo-tab {
-    padding: 10px 24px;
+  .demo-selector {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 5px;
     border-radius: 999px;
     border: 1px solid var(--border);
+    background: rgba(255,255,255,0.03);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+  .demo-arrow {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    background: rgba(255,255,255,0.04);
+    color: var(--text-muted);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.25s ease;
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 1;
+    flex-shrink: 0;
+  }
+  .demo-arrow:hover {
+    border-color: var(--accent-blue);
+    color: var(--text);
+    background: rgba(8,145,178,0.12);
+    transform: scale(1.05);
+  }
+  .demo-arrow:active { transform: scale(0.95); }
+  .demo-name {
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text);
+    min-width: 240px;
+    text-align: center;
+    letter-spacing: -0.2px;
+    padding: 0 6px;
+  }
+  .demo-name .demo-name-counter {
+    color: var(--text-dim);
+    font-weight: 400;
+    margin-right: 8px;
+    font-size: 0.82rem;
+    letter-spacing: 0;
+  }
+  .viewport-toggle {
+    display: inline-flex;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: rgba(255,255,255,0.03);
+    padding: 4px;
+    gap: 2px;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+  .viewport-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 18px;
+    border-radius: 999px;
+    border: none;
     background: transparent;
     color: var(--text-muted);
     font-family: var(--font-body);
-    font-size: 0.9rem;
-    font-weight: 600;
+    font-size: 0.85rem;
+    font-weight: 500;
     cursor: pointer;
-    transition: all 0.2s;
+    transition: all 0.25s ease;
+    letter-spacing: -0.1px;
   }
-  .demo-tab.active {
+  .viewport-btn svg { width: 15px; height: 15px; stroke-width: 1.8; }
+  .viewport-btn.active {
     background: var(--gradient);
-    border-color: transparent;
     color: var(--bg);
   }
-  .demo-tab:hover:not(.active) {
-    border-color: var(--accent-blue);
-    color: var(--text);
-  }
+  .viewport-btn:hover:not(.active) { color: var(--text); }
+
+  /* ── LIVE DEMO CONTAINER (desktop + mobile modes) ── */
   .live-demo-container {
     max-width: 780px;
     margin: 0 auto;
@@ -841,6 +907,17 @@
     aspect-ratio: 16 / 9;
     background: var(--bg);
     position: relative;
+    transition: max-width 0.45s cubic-bezier(0.65, 0, 0.35, 1),
+                aspect-ratio 0.45s cubic-bezier(0.65, 0, 0.35, 1),
+                border-radius 0.45s cubic-bezier(0.65, 0, 0.35, 1),
+                border-width 0.45s cubic-bezier(0.65, 0, 0.35, 1);
+  }
+  .live-demo-container.mobile {
+    max-width: 320px;
+    aspect-ratio: 9 / 19.5;
+    border-radius: 38px;
+    border: 8px solid #0a0a0a;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.55), inset 0 0 0 1px rgba(255,255,255,0.04);
   }
   .live-demo-container iframe {
     position: absolute;
@@ -850,6 +927,11 @@
     height: 810px;
     border: none;
     transform-origin: top left;
+    transition: opacity 0.25s ease;
+  }
+  .live-demo-container.mobile iframe {
+    width: 375px;
+    height: 812px;
   }
 
   /* ── PHONES ROW (side by side) ── */
@@ -1478,11 +1560,25 @@
     <p style="text-align:center; color:var(--text-muted); max-width:560px; margin:0 auto 0">
       Haga scroll, haga click, explore. Estos son sitios reales funcionando ahora mismo.
     </p>
-    <div class="demo-tabs">
-      <button class="demo-tab active" data-url="https://sonrisapremium.prontoweb.co">Pronto Dental</button>
+    <div class="demo-controls">
+      <div class="demo-selector">
+        <button class="demo-arrow" id="demo-prev" aria-label="Diseño anterior" type="button">&larr;</button>
+        <span class="demo-name" id="demo-name"><span class="demo-name-counter">1 / 2</span>Sonrisa Ivory</span>
+        <button class="demo-arrow" id="demo-next" aria-label="Diseño siguiente" type="button">&rarr;</button>
+      </div>
+      <div class="viewport-toggle" role="tablist" aria-label="Cambiar entre vista de computador y vista móvil">
+        <button class="viewport-btn active" data-viewport="desktop" type="button" aria-label="Ver en computador">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          Computador
+        </button>
+        <button class="viewport-btn" data-viewport="mobile" type="button" aria-label="Ver en móvil">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2.5"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+          Móvil
+        </button>
+      </div>
     </div>
     <div class="live-demo-container">
-      <iframe id="demo-iframe" src="https://sonrisapremium.prontoweb.co" title="Demo en vivo de sitio Pronto Dental" loading="lazy"></iframe>
+      <iframe id="demo-iframe" src="https://sonrisapremium.prontoweb.co" title="Demo en vivo del sitio Pronto Dental seleccionado" loading="lazy"></iframe>
     </div>
     <p style="text-align:center; margin-top:12px;">
       <small style="color:var(--text-dim); font-style:italic;">Ejemplo de implementación. Muestra de capacidad.</small>
@@ -1829,17 +1925,61 @@
     });
   }
 
-  // ── DEMO TABS ──
-  var demoTabs = document.querySelectorAll('.demo-tab');
-  var demoIframe = document.getElementById('demo-iframe');
+  // ── DEMO SELECTOR (diseños rotables + toggle viewport) ──
+  var DEMOS = [
+    { name: 'Sonrisa Ivory', url: 'https://sonrisapremium.prontoweb.co/' },
+    { name: 'Sonrisa Ember', url: 'https://prontoweb.co/clientes-piloto/sonrisa-premium-ember/' }
+  ];
+  var demoState = { idx: 0, viewport: 'desktop' };
 
-  demoTabs.forEach(function(tab) {
-    tab.addEventListener('click', function() {
-      demoTabs.forEach(function(t) { t.classList.remove('active'); });
-      tab.classList.add('active');
-      if (demoIframe) {
-        demoIframe.src = tab.getAttribute('data-url');
-      }
+  function applyDemoState() {
+    var demo = DEMOS[demoState.idx];
+    var iframe = document.getElementById('demo-iframe');
+    var nameEl = document.getElementById('demo-name');
+    var container = document.querySelector('.live-demo-container');
+    if (!iframe || !nameEl || !container) return;
+
+    // Fade out → cambio src → fade in
+    iframe.style.opacity = '0';
+    setTimeout(function() {
+      if (iframe.src !== demo.url) iframe.src = demo.url;
+      iframe.style.opacity = '1';
+    }, 200);
+
+    // Actualizar texto del selector
+    nameEl.innerHTML = '<span class="demo-name-counter">' + (demoState.idx + 1) + ' / ' + DEMOS.length + '</span>' + demo.name;
+
+    // Toggle modo viewport
+    container.classList.toggle('mobile', demoState.viewport === 'mobile');
+
+    // Active state de botones viewport
+    var vBtns = document.querySelectorAll('.viewport-btn');
+    vBtns.forEach(function(b) {
+      b.classList.toggle('active', b.dataset.viewport === demoState.viewport);
+    });
+
+    // Recalcular scale del iframe tras el cambio de container size
+    setTimeout(function() {
+      if (typeof scaleAllIframes === 'function') scaleAllIframes();
+    }, 50);
+  }
+
+  var demoPrev = document.getElementById('demo-prev');
+  var demoNext = document.getElementById('demo-next');
+  if (demoPrev) demoPrev.addEventListener('click', function() {
+    demoState.idx = (demoState.idx - 1 + DEMOS.length) % DEMOS.length;
+    applyDemoState();
+  });
+  if (demoNext) demoNext.addEventListener('click', function() {
+    demoState.idx = (demoState.idx + 1) % DEMOS.length;
+    applyDemoState();
+  });
+  document.querySelectorAll('.viewport-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var v = btn.dataset.viewport;
+      if (v === demoState.viewport) return;
+      demoState.viewport = v;
+      applyDemoState();
     });
   });
 
@@ -1903,12 +2043,14 @@
 
   // ── SCALE ALL IFRAMES TO FIT CONTAINERS ──
   function scaleAllIframes() {
-    // Live demo horizontal iframe
+    // Live demo iframe — soporta modo desktop (1440px base) y mobile (375px base)
     var liveDemo = document.querySelector('.live-demo-container');
     if (liveDemo) {
       var demoIframe = liveDemo.querySelector('iframe');
       if (demoIframe) {
-        var scale = liveDemo.offsetWidth / 1440;
+        var isMobile = liveDemo.classList.contains('mobile');
+        var baseWidth = isMobile ? 375 : 1440;
+        var scale = liveDemo.offsetWidth / baseWidth;
         demoIframe.style.transform = 'scale(' + scale + ')';
       }
     }
