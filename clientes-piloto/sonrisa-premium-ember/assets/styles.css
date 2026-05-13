@@ -636,7 +636,7 @@ footer {
   }
   .hero-home::before { display: none; }
   .hero-text { padding-bottom: 0; }
-  .hero-text h1 { font-size: clamp(2.2rem, 9vw, 2.8rem) !important; }
+  .hero-text h1 { font-size: clamp(2.6rem, 10.5vw, 3.2rem) !important; line-height: 1.02; }
   .hero-lead { font-size: 14.5px; margin-bottom: 32px; }
   /* Strip mobile: SIN cuadro, texto se funde con el fondo */
   .hero-strip {
