@@ -1,5 +1,17 @@
 /* Sonrisa Premium · EMBER · Animaciones GSAP */
 (function () {
+  // ─── Sincronizar top del navbar con altura real del banner ─
+  // (el banner cambia de altura según viewport — desktop ~33px, mobile ~41px+)
+  function syncNavToBanner() {
+    const banner = document.querySelector('.pronto-banner');
+    const navbar = document.querySelector('.navbar');
+    if (banner && navbar) navbar.style.top = banner.offsetHeight + 'px';
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', syncNavToBanner);
+  else syncNavToBanner();
+  window.addEventListener('load', syncNavToBanner);
+  window.addEventListener('resize', syncNavToBanner);
+
   function init() {
     if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       document.querySelectorAll('.reveal').forEach(el => { el.style.opacity = 1; el.style.transform = 'none'; });
