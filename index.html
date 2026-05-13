@@ -913,11 +913,11 @@
                 border-width 0.45s cubic-bezier(0.65, 0, 0.35, 1);
   }
   .live-demo-container.mobile {
-    max-width: 320px;
-    aspect-ratio: 9 / 19.5;
-    border-radius: 38px;
-    border: 8px solid #0a0a0a;
-    box-shadow: 0 30px 80px rgba(0,0,0,0.55), inset 0 0 0 1px rgba(255,255,255,0.04);
+    max-width: 260px;
+    aspect-ratio: 9 / 19;
+    border-radius: 32px;
+    border: 7px solid #0a0a0a;
+    box-shadow: 0 24px 60px rgba(0,0,0,0.5), inset 0 0 0 1px rgba(255,255,255,0.04);
   }
   .live-demo-container iframe {
     position: absolute;
@@ -1932,6 +1932,17 @@
   ];
   var demoState = { idx: 0, viewport: 'desktop' };
 
+  // Animación continua del scale durante la transición CSS del container.
+  // La transición dura ~450ms, así que recalculamos scale en cada frame
+  // para que el iframe siga al container sin saltos visuales.
+  var scaleAnimEndTime = 0;
+  function animateIframeScale() {
+    if (typeof scaleAllIframes === 'function') scaleAllIframes();
+    if (Date.now() < scaleAnimEndTime) {
+      requestAnimationFrame(animateIframeScale);
+    }
+  }
+
   function applyDemoState() {
     var demo = DEMOS[demoState.idx];
     var iframe = document.getElementById('demo-iframe');
@@ -1939,17 +1950,15 @@
     var container = document.querySelector('.live-demo-container');
     if (!iframe || !nameEl || !container) return;
 
-    // Fade out → cambio src → fade in
+    var viewportChanged = container.classList.contains('mobile') !== (demoState.viewport === 'mobile');
+
+    // Fade out iframe
     iframe.style.opacity = '0';
-    setTimeout(function() {
-      if (iframe.src !== demo.url) iframe.src = demo.url;
-      iframe.style.opacity = '1';
-    }, 200);
 
     // Actualizar texto del selector
     nameEl.innerHTML = '<span class="demo-name-counter">' + (demoState.idx + 1) + ' / ' + DEMOS.length + '</span>' + demo.name;
 
-    // Toggle modo viewport
+    // Toggle modo viewport (arranca la transición CSS del container)
     container.classList.toggle('mobile', demoState.viewport === 'mobile');
 
     // Active state de botones viewport
@@ -1958,10 +1967,24 @@
       b.classList.toggle('active', b.dataset.viewport === demoState.viewport);
     });
 
-    // Recalcular scale del iframe tras el cambio de container size
-    setTimeout(function() {
+    // Si cambió viewport, animar scale durante la transición (~500ms)
+    if (viewportChanged) {
+      scaleAnimEndTime = Date.now() + 550;
+      requestAnimationFrame(animateIframeScale);
+    } else {
+      // Solo cambio de diseño, scale ya está bien — recalcular una vez
       if (typeof scaleAllIframes === 'function') scaleAllIframes();
-    }, 50);
+    }
+
+    // Cambiar src + fade in tras que termine la transición visual del container
+    // (la transición CSS dura ~450ms — esperamos a que termine antes de mostrar el iframe)
+    var delay = viewportChanged ? 420 : 180;
+    setTimeout(function() {
+      if (iframe.src !== demo.url) iframe.src = demo.url;
+      // Recalculamos scale una última vez con el container ya estable
+      if (typeof scaleAllIframes === 'function') scaleAllIframes();
+      iframe.style.opacity = '1';
+    }, delay);
   }
 
   var demoPrev = document.getElementById('demo-prev');
