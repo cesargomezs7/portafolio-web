@@ -914,8 +914,8 @@
   }
   .live-demo-container.mobile {
     max-width: 220px;
-    aspect-ratio: 375 / 812;
-    border-radius: 28px;
+    aspect-ratio: 430 / 932;
+    border-radius: 30px;
     border: 6px solid #0a0a0a;
     box-shadow: 0 20px 50px rgba(0,0,0,0.5), inset 0 0 0 1px rgba(255,255,255,0.04);
   }
@@ -930,8 +930,8 @@
     transition: opacity 0.25s ease;
   }
   .live-demo-container.mobile iframe {
-    width: 375px;
-    height: 812px;
+    width: 430px;
+    height: 932px;
   }
 
   /* ── PHONES ROW (side by side) ── */
@@ -2072,7 +2072,9 @@
       var demoIframe = liveDemo.querySelector('iframe');
       if (demoIframe) {
         var isMobile = liveDemo.classList.contains('mobile');
-        var baseWidth = isMobile ? 375 : 1440;
+        // Mobile simula iPhone 15 Pro Max (430×932 CSS px) — el viewport más
+        // común de iPhone moderno y para el que están diseñadas las demos.
+        var baseWidth = isMobile ? 430 : 1440;
         var scale = liveDemo.offsetWidth / baseWidth;
         demoIframe.style.transform = 'scale(' + scale + ')';
       }
