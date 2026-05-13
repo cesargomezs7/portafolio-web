@@ -92,10 +92,11 @@ a { color: inherit; text-decoration: none; }
 
 /* ─── HERO con imagen completa de fondo (diente integrado) ──── */
 .hero {
-  min-height: 100vh; position: relative; overflow: hidden;
-  padding: 110px 5% 60px;
+  min-height: 100vh; height: 100vh; position: relative; overflow: hidden;
+  padding: 90px 5% 40px;
+  display: flex; flex-direction: column;
   background: #110001;
-  background-image: url('../img/hero-bg.jpg');
+  background-image: url('../img/hero-bg.png');
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
@@ -118,9 +119,9 @@ a { color: inherit; text-decoration: none; }
 
 .hero-grid {
   position: relative; z-index: 3;
-  max-width: 1400px; margin: 0 auto;
-  display: grid; grid-template-columns: 1fr 1fr 380px; gap: 40px;
-  align-items: center; min-height: 70vh;
+  max-width: 1400px; margin: 0 auto; width: 100%;
+  display: grid; grid-template-columns: 1fr 1fr 340px; gap: 32px;
+  align-items: center; flex: 1;
 }
 
 .hero-text { position: relative; }
@@ -138,12 +139,12 @@ a { color: inherit; text-decoration: none; }
 }
 
 .hero-text h1 {
-  font-size: clamp(2.2rem, 4.2vw, 3.6rem);
-  font-weight: 700; line-height: 1.05;
+  font-size: clamp(2rem, 3.6vw, 3.1rem);
+  font-weight: 300; line-height: 1.05;
   letter-spacing: -0.025em; color: var(--white);
   margin: 0;
 }
-.hero-text h1 .pale { font-weight: 400; color: var(--ember-pale); }
+.hero-text h1 .pale { font-weight: 300; color: var(--ember-pale); }
 
 /* Diente 3D centrado */
 .hero-tooth {
@@ -197,11 +198,12 @@ a { color: inherit; text-decoration: none; }
 /* Bottom strip del hero */
 .hero-strip {
   position: relative; z-index: 3;
-  max-width: 1400px; margin: 60px auto 0;
+  max-width: 1400px; margin: 24px auto 0; width: 100%;
   display: grid; grid-template-columns: 1fr 1fr 1fr;
   gap: 40px;
-  padding-top: 32px;
+  padding-top: 20px;
   border-top: 1px solid var(--border);
+  flex-shrink: 0;
 }
 .hero-strip-block { font-size: 12px; color: var(--ember-cream); line-height: 1.6; }
 .hero-strip-block strong {
