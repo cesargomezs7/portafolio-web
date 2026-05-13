@@ -295,16 +295,16 @@ a { color: inherit; text-decoration: none; }
 
 .section-headline {
   font-size: clamp(2rem, 4.2vw, 3.6rem);
-  font-weight: 700; line-height: 1.05;
+  font-weight: 300; line-height: 1.05;
   letter-spacing: -0.025em; color: var(--white);
   margin-bottom: 24px; max-width: 800px;
 }
-.section-headline .pale { font-weight: 400; color: var(--ember-pale); }
+.section-headline .pale { font-weight: 300; color: var(--ember-pale); }
 .section-cream .section-headline { color: var(--black); }
 .section-cream .section-headline .pale { color: var(--ember-base); }
 
 .section-subtitle {
-  font-size: 16px; color: var(--ember-cream); max-width: 600px;
+  font-size: 16px; color: rgba(255,255,255,0.88); max-width: 600px;
   line-height: 1.7; margin-bottom: 64px;
 }
 .section-cream .section-subtitle { color: var(--ember-dark); }
