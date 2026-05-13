@@ -59,11 +59,18 @@ a { color: inherit; text-decoration: none; }
 
 .nav-logo { display: flex; align-items: center; gap: 12px; color: var(--white); }
 .nav-logo-icon {
-  width: 32px; height: 32px;
-  background: var(--white); color: var(--ember-base);
-  border-radius: 6px;
+  width: 36px; height: 36px;
+  background: linear-gradient(135deg, var(--ember-glow) 0%, var(--ember-base) 100%);
+  color: var(--white);
+  border-radius: 9px;
   display: flex; align-items: center; justify-content: center;
-  font-weight: 700; font-size: 16px;
+  box-shadow: 0 4px 14px rgba(232,84,32,0.35), inset 0 1px 0 rgba(255,255,255,0.15);
+  transition: transform 0.4s var(--transition), box-shadow 0.4s var(--transition);
+}
+.nav-logo-icon svg { width: 22px; height: 22px; }
+.nav-logo:hover .nav-logo-icon {
+  transform: rotate(-8deg) scale(1.05);
+  box-shadow: 0 6px 20px rgba(232,84,32,0.5), inset 0 1px 0 rgba(255,255,255,0.2);
 }
 .nav-logo-text { font-size: 18px; font-weight: 600; letter-spacing: -0.02em; }
 
@@ -134,6 +141,7 @@ a { color: inherit; text-decoration: none; }
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
+  padding-top: 140px;
 }
 
 /* Hero compact (nosotros, contacto): fondo simple en ember-deep */
@@ -610,7 +618,8 @@ footer {
   /* Navbar: logo y CTA no rompen línea */
   .navbar { padding: 8px 16px; gap: 8px; }
   .nav-logo-text { white-space: nowrap; font-size: 14px; }
-  .nav-logo-icon { width: 32px; height: 32px; font-size: 13px; }
+  .nav-logo-icon { width: 32px; height: 32px; border-radius: 8px; }
+  .nav-logo-icon svg { width: 20px; height: 20px; }
   .nav-cta { white-space: nowrap; padding: 7px 14px; font-size: 11.5px; }
 
   /* Hero index mobile: SIN imagen del diente, MISMO color que .section-warm
