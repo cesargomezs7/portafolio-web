@@ -621,6 +621,19 @@ footer {
     background: var(--ember-dark) !important;
     padding: 96px 5% 32px;
   }
+  /* En mobile el grid del hero se apila: texto → doctores → strip */
+  .hero-home .hero-grid {
+    grid-template-columns: 1fr !important;
+    gap: 28px !important;
+  }
+  .hero-home .hero-tooth-space { display: none !important; }
+  .hero-home .hero-doctors { display: block !important; }
+  .hero-home .hero-doctors-track { gap: 12px; }
+  .hero-home .doctor-card { flex: 0 0 calc(50% - 6px); border-radius: 14px; }
+  .hero-home .hero-doctors-nav {
+    padding: 10px 18px; font-size: 13px;
+    margin-bottom: 14px;
+  }
   .hero-home::before { display: none; }
   .hero-text { padding-bottom: 0; }
   .hero-text h1 { font-size: clamp(2.2rem, 9vw, 2.8rem) !important; }
