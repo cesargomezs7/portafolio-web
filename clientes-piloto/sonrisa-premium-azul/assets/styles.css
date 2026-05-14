@@ -139,24 +139,19 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .hero {
   position: relative;
   background: linear-gradient(165deg, #4488b3 0%, var(--azul) 45%, var(--azul-deep) 100%);
-  padding: 110px 32px 0;
+  padding: 110px 32px 32px;
   min-height: 100vh;
   display: flex; flex-direction: column;
-}
-/* Fade suave azul → blanco para transición a section siguiente */
-.hero::after {
-  content: ''; position: absolute;
-  bottom: -1px; left: 0; right: 0;
-  height: 80px;
-  background: linear-gradient(to bottom, transparent 0%, rgba(255,255,255,0) 60%, var(--white) 100%);
-  pointer-events: none; z-index: 1;
+  border-bottom-left-radius: 40px;
+  border-bottom-right-radius: 40px;
+  overflow: hidden;
 }
 
 .hero-top {
   display: grid;
   grid-template-columns: 1fr auto;
   gap: 40px;
-  align-items: start;
+  align-items: center;
   max-width: 1400px; width: 100%;
   margin: 0 auto;
 }
@@ -303,24 +298,26 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   font-size: 13px; font-weight: 500;
   color: var(--azul-dark); opacity: 0.55;
 }
+/* Layout asimétrico estilo Dentty: foto principal centro + 2 secundarias laterales */
 .clinic-grid {
   display: grid;
-  grid-template-columns: 1fr 0.7fr;
-  gap: 48px;
+  grid-template-columns: 0.7fr 1.6fr 0.7fr;
+  grid-template-rows: 1fr auto;
+  gap: 32px;
   margin-bottom: 80px;
-  align-items: start;
+  align-items: end;
 }
 .clinic-photo-main {
+  grid-column: 2;
+  grid-row: 1 / 3;
   background: var(--gray-light);
   border-radius: var(--radius-lg);
   overflow: hidden;
   aspect-ratio: 4/3;
-  max-height: 460px;
 }
 .clinic-photo-main img { width: 100%; height: 100%; object-fit: cover; }
 .clinic-photo-secondary {
-  display: grid; gap: 40px;
-  grid-template-rows: 1.5fr 0.85fr;
+  display: contents;
 }
 .clinic-photo-secondary > div {
   background: var(--gray-light);
@@ -328,6 +325,13 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   overflow: hidden;
   filter: grayscale(0.6);
   transition: filter 0.5s var(--t);
+  aspect-ratio: 4/3;
+}
+.clinic-photo-secondary > div:first-child {
+  grid-column: 1; grid-row: 2;
+}
+.clinic-photo-secondary > div:last-child {
+  grid-column: 3; grid-row: 2;
 }
 .clinic-photo-secondary > div:hover { filter: grayscale(0); }
 .clinic-photo-secondary img { width: 100%; height: 100%; object-fit: cover; }
@@ -848,7 +852,10 @@ footer { background: var(--white); padding: 80px 32px 40px; }
   .practice-hours { flex: 1; }
   .today-pill { flex-shrink: 0; }
   .benefits { grid-template-columns: 1fr; gap: 10px; bottom: 16px; left: 16px; right: 16px; }
-  .clinic-grid { grid-template-columns: 1fr; }
+  .clinic-grid { grid-template-columns: 1fr; grid-template-rows: auto; }
+  .clinic-photo-main { grid-column: 1; grid-row: auto; }
+  .clinic-photo-secondary > div:first-child,
+  .clinic-photo-secondary > div:last-child { grid-column: 1; grid-row: auto; }
   .services-grid { grid-template-columns: 1fr 1fr; }
   .team-card { grid-template-columns: 1fr; }
   .equipo-grid { grid-template-columns: 1fr; }
