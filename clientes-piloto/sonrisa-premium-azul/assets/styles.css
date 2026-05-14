@@ -4,9 +4,10 @@
    ═══════════════════════════════════════════════════════════ */
 
 :root {
-  --azul-dark:    #1e3a52;  /* azul oscuro dental — pills navbar + FAQ */
-  --azul:         #4292c7;  /* azul dental vibrante (hero background) */
-  --azul-deep:    #1e3a52;  /* misma que azul-dark para pills uniformes */
+  --azul-dark:    #1e3a52;  /* azul oscuro dental (FAQ) */
+  --azul:         #3a7ca5;  /* azul dental principal (hero) */
+  --azul-deep:    #2d6589;  /* azul medio para gradient + pills sutiles */
+  --azul-pill:    rgba(0,0,0,0.18); /* pills navbar camufladas */
   --azul-soft:    #87b8d8;  /* azul claro acentos */
   --gray-light:   #e9e9e9;
   --gray-bg:      #fbfbfb;
@@ -38,11 +39,11 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Tipografía serif elegante para headings principales (estilo Atelier Dental) */
+/* Headings: Manrope con peso medio (estilo Dentty) — delgado pero estructurado */
 .hero h1, .hero-compact h1, .section h2, .faq h2 {
-  font-family: 'Fraunces', 'Cormorant Garamond', Georgia, serif;
-  font-weight: 400;
-  letter-spacing: -0.02em;
+  font-family: 'Manrope', sans-serif;
+  font-weight: 500;
+  letter-spacing: -0.035em;
 }
 
 img { max-width: 100%; display: block; }
@@ -76,10 +77,11 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 
 .nav-logo {
   display: inline-flex; align-items: center;
-  background: var(--azul-deep);
+  background: rgba(0,0,0,0.18);
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
   color: var(--white);
   padding: 12px 22px; border-radius: 50px;
-  font-size: 17px; font-weight: 700;
+  font-size: 17px; font-weight: 600;
   letter-spacing: -0.02em;
   transition: transform 0.3s var(--t);
 }
@@ -88,7 +90,8 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .nav-links {
   list-style: none;
   display: flex; align-items: center; gap: 8px;
-  background: var(--azul-deep);
+  background: rgba(0,0,0,0.18);
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
   padding: 8px 12px; border-radius: 50px;
   flex: 1; justify-content: center;
 }
@@ -136,10 +139,18 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 /* ─── HERO ────────────────────────────────────────────────── */
 .hero {
   position: relative;
-  background: var(--azul);
-  padding: 130px 32px 32px;
+  background: linear-gradient(165deg, #4488b3 0%, var(--azul) 45%, var(--azul-deep) 100%);
+  padding: 110px 32px 0;
   min-height: 100vh;
   display: flex; flex-direction: column;
+}
+/* Fade suave azul → blanco para transición a section siguiente */
+.hero::after {
+  content: ''; position: absolute;
+  bottom: -1px; left: 0; right: 0;
+  height: 80px;
+  background: linear-gradient(to bottom, transparent 0%, rgba(255,255,255,0) 60%, var(--white) 100%);
+  pointer-events: none; z-index: 1;
 }
 
 .hero-top {
@@ -152,8 +163,8 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 }
 
 .hero h1 {
-  font-size: clamp(2.4rem, 5vw, 4.6rem);
-  font-weight: 800;
+  font-size: clamp(2.2rem, 4.6vw, 4rem);
+  font-weight: 500;
   line-height: 1.02;
   letter-spacing: -0.035em;
   color: var(--white);
@@ -177,7 +188,8 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   margin: 0;
 }
 .today-pill {
-  background: var(--azul-deep);
+  background: rgba(0,0,0,0.18);
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
   color: var(--white);
   padding: 14px 22px;
   border-radius: 18px;
@@ -190,22 +202,25 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 /* Foto + benefit cards */
 .hero-photo {
   position: relative;
-  margin-top: 40px;
+  margin-top: 36px; margin-bottom: 0;
   max-width: 1400px; width: 100%;
   margin-left: auto; margin-right: auto;
   flex: 1;
+  display: flex; flex-direction: column; justify-content: flex-end;
+  padding-bottom: 0;
 }
 .hero-photo-frame {
   background: var(--gray-light);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
   overflow: hidden;
-  height: 380px;
+  height: 440px;
+  width: 100%;
   position: relative;
 }
 .hero-photo-frame img {
   width: 100%; height: 100%;
   object-fit: cover;
-  object-position: center 35%;
+  object-position: center 55%;
 }
 
 .benefits {
