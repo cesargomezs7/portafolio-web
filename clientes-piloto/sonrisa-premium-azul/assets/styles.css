@@ -339,42 +339,46 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   font-size: 13px; font-weight: 500;
   color: var(--azul-dark); opacity: 0.55;
 }
-/* Layout asimétrico estilo Dentty: foto principal centro + 2 secundarias laterales */
+/* Layout asimétrico: foto principal izquierda + 2 secundarias derecha (asimétricas) */
 .clinic-grid {
   display: grid;
-  grid-template-columns: 0.7fr 1.6fr 0.7fr;
-  grid-template-rows: 1fr auto;
-  gap: 32px;
+  grid-template-columns: 1.1fr 0.8fr;
+  gap: 56px;
   margin-bottom: 80px;
-  align-items: end;
+  align-items: center;
 }
 .clinic-photo-main {
-  grid-column: 2;
-  grid-row: 1 / 3;
   background: var(--gray-light);
   border-radius: var(--radius-lg);
   overflow: hidden;
-  aspect-ratio: 4/3;
+  aspect-ratio: 5/4;
+  max-height: 440px;
+  width: 100%;
 }
 .clinic-photo-main img { width: 100%; height: 100%; object-fit: cover; }
 .clinic-photo-secondary {
-  display: contents;
+  display: flex; flex-direction: column;
+  gap: 32px;
 }
 .clinic-photo-secondary > div {
   background: var(--gray-light);
   border-radius: var(--radius);
   overflow: hidden;
   filter: grayscale(0.6);
-  transition: filter 0.5s var(--t);
+  transition: filter 0.5s var(--t), transform 0.5s var(--t);
   aspect-ratio: 4/3;
+  width: 75%;
 }
+/* Asimetría: primera alineada a la IZQUIERDA, segunda a la DERECHA, con offset vertical sutil */
 .clinic-photo-secondary > div:first-child {
-  grid-column: 1; grid-row: 2;
+  align-self: flex-start;
+  margin-top: 32px;
 }
 .clinic-photo-secondary > div:last-child {
-  grid-column: 3; grid-row: 2;
+  align-self: flex-end;
+  margin-bottom: 16px;
 }
-.clinic-photo-secondary > div:hover { filter: grayscale(0); }
+.clinic-photo-secondary > div:hover { filter: grayscale(0); transform: translateY(-4px); }
 .clinic-photo-secondary img { width: 100%; height: 100%; object-fit: cover; }
 
 .clinic-bottom {
