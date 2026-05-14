@@ -922,6 +922,59 @@
     height: 932px;
   }
 
+  /* ── DEVICE FRAME DETAILS (iPhone & MacBook overlay accents) ── */
+  .device-island,
+  .device-home,
+  .device-notch {
+    position: absolute;
+    z-index: 5;
+    pointer-events: none;
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s ease 0.15s;
+  }
+
+  /* MOBILE → simulación iPhone 15 Pro Max */
+  .live-demo-container.mobile .device-island {
+    display: block;
+    opacity: 1;
+    top: 9px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 30%;
+    height: 20px;
+    background: #000;
+    border-radius: 999px;
+    box-shadow:
+      inset 0 -1px 2px rgba(255,255,255,0.06),
+      0 0 0 0.5px rgba(255,255,255,0.04);
+  }
+  .live-demo-container.mobile .device-home {
+    display: block;
+    opacity: 1;
+    bottom: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 36%;
+    height: 4px;
+    background: rgba(255,255,255,0.78);
+    border-radius: 999px;
+    box-shadow: 0 0 4px rgba(255,255,255,0.3);
+  }
+
+  /* DESKTOP → simulación MacBook 14 (sutil notch arriba) */
+  .live-demo-container:not(.mobile) .device-notch {
+    display: block;
+    opacity: 1;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 12%;
+    height: 5px;
+    background: #0a0a0a;
+    border-radius: 0 0 8px 8px;
+  }
+
   /* ── PHONES ROW (side by side) ── */
   .phones-row {
     display: flex;
@@ -1532,7 +1585,10 @@
       </div>
     </div>
     <div class="live-demo-container">
+      <div class="device-notch" aria-hidden="true"></div>
+      <div class="device-island" aria-hidden="true"></div>
       <iframe id="demo-iframe" src="https://prontoweb.co/clientes-piloto/sonrisa-premium-ember/" title="Demo en vivo del sitio Pronto Dental seleccionado" loading="lazy"></iframe>
+      <div class="device-home" aria-hidden="true"></div>
     </div>
     <p style="text-align:center; margin-top:12px;">
       <small style="color:var(--text-dim); font-style:italic;">Ejemplo de implementación. Muestra de capacidad.</small>
