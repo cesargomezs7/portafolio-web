@@ -579,6 +579,149 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 }
 .team-book:hover { background: var(--azul); transform: translateY(-2px); }
 
+/* ─── TESTIMONIOS ─────────────────────────────────────── */
+.testimonios { background: var(--white); }
+.testimonios-header {
+  display: grid; grid-template-columns: 1fr; gap: 24px;
+  margin-bottom: 56px;
+}
+.testimonios-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+}
+.testimonio-card {
+  background: var(--gray-light);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  display: flex; flex-direction: column;
+  transition: transform 0.4s var(--t), box-shadow 0.4s var(--t);
+}
+.testimonio-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-md);
+}
+.testimonio-stars {
+  color: #f5a623; font-size: 18px;
+  letter-spacing: 2px;
+  margin-bottom: 18px;
+}
+.testimonio-quote {
+  font-size: 15.5px; line-height: 1.6;
+  color: var(--azul-dark);
+  margin-bottom: 24px;
+  flex: 1;
+}
+.testimonio-author {
+  display: flex; gap: 14px; align-items: center;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+}
+.testimonio-avatar {
+  width: 48px; height: 48px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.testimonio-avatar img { width: 100%; height: 100%; object-fit: cover; }
+.testimonio-author strong {
+  display: block;
+  font-size: 15px; font-weight: 700;
+  color: var(--azul-dark);
+  margin-bottom: 2px;
+}
+.testimonio-author span {
+  font-size: 13px; color: var(--azul-dark); opacity: 0.65;
+}
+
+/* ─── CTA FINAL ──────────────────────────────────────── */
+.cta-final {
+  background: var(--azul);
+  color: var(--white);
+  border-radius: var(--radius-lg);
+  margin: 80px auto;
+  padding: 96px 56px;
+  max-width: calc(1400px - 64px);
+  text-align: center;
+  position: relative; overflow: hidden;
+}
+.cta-final::before {
+  content: ''; position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 600px 400px at 20% 30%, rgba(255,255,255,0.10), transparent 60%),
+    radial-gradient(ellipse 500px 350px at 80% 70%, rgba(135,184,216,0.18), transparent 60%);
+  pointer-events: none;
+}
+.cta-final-inner { position: relative; z-index: 1; max-width: 720px; margin: 0 auto; }
+.cta-final .overline { color: rgba(255,255,255,0.7); margin-bottom: 14px; }
+.cta-final h2 {
+  font-size: clamp(2rem, 4.5vw, 3.8rem);
+  font-weight: 500;
+  color: var(--white);
+  letter-spacing: -0.035em;
+  line-height: 1.05;
+  margin-bottom: 20px;
+}
+.cta-final p {
+  font-size: 17px; line-height: 1.55;
+  color: rgba(255,255,255,0.92);
+  margin-bottom: 36px;
+}
+.cta-final-actions {
+  display: inline-flex; gap: 14px; flex-wrap: wrap; justify-content: center;
+}
+.cta-final-btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 16px 32px; border-radius: 50px;
+  font-size: 15px; font-weight: 600;
+  letter-spacing: -0.005em;
+  transition: all 0.3s var(--t);
+}
+.cta-final-btn.primary {
+  background: var(--white); color: var(--azul-dark);
+  box-shadow: var(--shadow-md);
+}
+.cta-final-btn.primary:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+  background: var(--azul-dark); color: var(--white);
+}
+.cta-final-btn.secondary {
+  background: transparent; color: var(--white);
+  border: 1px solid rgba(255,255,255,0.4);
+}
+.cta-final-btn.secondary:hover {
+  background: rgba(255,255,255,0.1);
+  border-color: var(--white);
+}
+
+/* ─── DIFERENCIA (nosotros) ───────────────────────────── */
+.diferencia { background: var(--white); }
+.diferencia-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px;
+}
+.diferencia-card {
+  background: var(--gray-light);
+  border-radius: var(--radius-lg);
+  padding: 36px;
+  transition: transform 0.4s var(--t);
+}
+.diferencia-card:hover { transform: translateY(-4px); }
+.diferencia-num {
+  font-size: 13px; font-weight: 600;
+  letter-spacing: 0.1em;
+  color: var(--azul);
+  margin-bottom: 18px;
+}
+.diferencia-card h3 {
+  font-size: 22px; font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--azul-dark);
+  margin-bottom: 12px;
+}
+.diferencia-card p {
+  font-size: 15px; line-height: 1.6;
+  color: var(--azul-dark); opacity: 0.75;
+}
+
 /* ─── FAQ ─────────────────────────────────────────────────── */
 .faq {
   background: var(--azul-dark);
@@ -947,4 +1090,11 @@ footer { background: var(--white); padding: 80px 32px 40px; }
   .hero-compact { padding: 110px 16px 60px; }
   .hero-compact h1 { font-size: clamp(2rem, 9vw, 2.8rem); }
   .hero-compact p { font-size: 16px; }
+  .testimonios-grid { grid-template-columns: 1fr; }
+  .testimonio-card { padding: 24px; }
+  .cta-final { padding: 64px 24px; margin: 40px 16px; }
+  .cta-final-actions { flex-direction: column; gap: 10px; width: 100%; }
+  .cta-final-btn { width: 100%; justify-content: center; }
+  .diferencia-grid { grid-template-columns: 1fr; }
+  .diferencia-card { padding: 28px; }
 }
