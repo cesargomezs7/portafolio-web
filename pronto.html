@@ -167,6 +167,15 @@
   }
 
   /* ── READING PROGRESS BAR ── */
+  #progress-bar-track {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: #000;
+    z-index: 199;
+  }
   #progress-bar {
     position: fixed;
     top: 0;
@@ -223,9 +232,10 @@
     padding: 10px 20px;
     border-radius: 10px;
     background: var(--gradient);
-    color: var(--bg);
-    font-weight: 700;
+    color: #000;
+    font-weight: 800;
     font-size: 0.85rem;
+    letter-spacing: -0.1px;
     transition: transform 0.2s, box-shadow 0.2s;
   }
   .navbar-cta:hover {
@@ -1388,6 +1398,7 @@
 <body>
 
 <!-- READING PROGRESS BAR -->
+<div id="progress-bar-track"></div>
 <div id="progress-bar"></div>
 
 <!-- NAVBAR -->
@@ -1400,7 +1411,7 @@
       <li><a href="#planes">Precios</a></li>
       <li><a href="#faqs">FAQ</a></li>
       <li class="nav-cta">
-        <a class="navbar-cta" href="https://wa.me/573124672674?text=Hola%2C%20vengo%20de%20prontoweb.co%20y%20quiero%20saber%20m%C3%A1s" data-umami-event="click-nav-cta">Hablar con César</a>
+        <a class="navbar-cta" href="https://wa.me/573124672674?text=Hola%2C%20vengo%20de%20prontoweb.co%20y%20quiero%20empezar" data-umami-event="click-nav-cta">Empecemos</a>
       </li>
     </ul>
   </div>
@@ -1418,8 +1429,8 @@
       Disponible &middot; 3 meses gratis &middot; Programa Primeros 10
     </div>
     <p class="hero-eyebrow">97 de cada 100 visitantes de tu web se van sin pedir cita<sup>¹</sup></p>
-    <h1>Deja de perder pacientes por una web <span class="brand-gradient">vieja y desactualizada</span></h1>
-    <p class="sub">Pronto Dental te moderniza la web en 48 horas. Aparece en Google, los pacientes te escriben por WhatsApp. 3 meses gratis. Cancela antes del mes 3 y no pagas nada.</p>
+    <h1>¿Quieres dejar de perder pacientes por una web <span class="brand-gradient">vieja y desactualizada</span>?</h1>
+    <p class="sub">Web nueva en 48 horas. Aparece en Google, los pacientes te escriben por WhatsApp. 3 meses gratis.</p>
     <p class="hero-footnote"><sup>¹</sup>Conversión 2-3% promedio en sitios dentales. Fuente: <a href="https://www.sixthcitymarketing.com/2024/02/28/dental-marketing-stats/" target="_blank" rel="noopener">Sixth City Marketing 2026</a></p>
     <ul style="list-style:none; padding:0; margin:0 auto 32px; max-width:480px; text-align:left; display:flex; flex-direction:column; gap:10px;">
       <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.95rem; color:var(--text); line-height:1.45;"><span style="color:var(--accent-green); font-weight:700; flex-shrink:0;">&#10003;</span> Web lista en 48 horas. Sin que tengas que aprender nada de tecnología.</li>
@@ -1427,7 +1438,7 @@
       <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.95rem; color:var(--text); line-height:1.45;"><span style="color:var(--accent-green); font-weight:700; flex-shrink:0;">&#10003;</span> $0 de setup. Si cancelas antes del mes 3, no pagas nada.</li>
     </ul>
     <div class="hero-buttons">
-      <a class="cta-primary" href="https://wa.me/573124672674?text=Hola%2C%20quiero%20ver%20la%20demo%20de%20mi%20cl%C3%ADnica" data-umami-event="click-hero-cta">Ver demo de mi clínica gratis</a>
+      <a class="cta-primary" href="https://wa.me/573124672674?text=Hola%2C%20quiero%20ver%20la%20demo%20de%20mi%20cl%C3%ADnica" data-umami-event="click-hero-cta">Empecemos gratis</a>
     </div>
     <div class="hero-stats">
       <div class="hero-stat">
@@ -1665,7 +1676,7 @@
   <div class="container">
     <h2>3 meses gratis &middot; Sin contratos &middot; Ver demo de tu clínica</h2>
     <p>5 minutos por WhatsApp y te mandamos una demo personalizada de tu clínica. Sin compromiso, sin contratos.</p>
-    <a class="cta-primary" href="https://wa.me/573124672674?text=Hola%2C%20quiero%20ver%20la%20demo%20de%20mi%20cl%C3%ADnica" data-umami-event="click-cta-final">Ver demo de mi clínica gratis</a>
+    <a class="cta-primary" href="https://wa.me/573124672674?text=Hola%2C%20quiero%20ver%20la%20demo%20de%20mi%20cl%C3%ADnica" data-umami-event="click-cta-final">Empecemos gratis</a>
   </div>
 </section>
 
