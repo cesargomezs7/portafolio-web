@@ -242,8 +242,12 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   width: 100%;
   position: relative;
 }
-/* Imagen IA generada al ratio 3:1 — llena exactamente todo el frame sin recortes */
+/* Imagen IA generada al ratio 3:1 — llena exactamente todo el frame sin recortes.
+   position absolute + inset 0 garantiza que llene el frame incluso si la cadena
+   flex no propaga height en mobile Safari. */
 .hero-photo-frame img {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -1042,10 +1046,18 @@ footer { background: var(--white); padding: 80px 32px 40px; }
   .practice-hours { flex: 1; }
   .today-pill { flex-shrink: 0; }
   .benefits { grid-template-columns: 1fr; gap: 10px; bottom: 16px; left: 16px; right: 16px; }
-  .clinic-grid { grid-template-columns: 1fr; grid-template-rows: auto; }
-  .clinic-photo-main { grid-column: 1; grid-row: auto; }
+  .clinic-grid { grid-template-columns: 1fr; grid-template-rows: auto; gap: 20px; margin-bottom: 32px; }
+  .clinic-photo-main { grid-column: 1; grid-row: auto; aspect-ratio: 4/3; }
+  .clinic-photo-secondary { gap: 20px; }
+  .clinic-photo-secondary > div {
+    width: 100%;
+    filter: none;
+    align-self: stretch;
+    margin: 0;
+    aspect-ratio: 16/10;
+  }
   .clinic-photo-secondary > div:first-child,
-  .clinic-photo-secondary > div:last-child { grid-column: 1; grid-row: auto; }
+  .clinic-photo-secondary > div:last-child { grid-column: 1; grid-row: auto; align-self: stretch; margin: 0; }
   .services-grid { grid-template-columns: 1fr 1fr; }
   .team-card { grid-template-columns: 1fr; }
   .equipo-grid { grid-template-columns: 1fr; }
@@ -1057,14 +1069,21 @@ footer { background: var(--white); padding: 80px 32px 40px; }
 @media (max-width: 768px) {
   .pronto-banner { font-size: 10.5px; padding: 6px 12px; line-height: 1.35; }
   .has-banner .navbar { top: auto; }
-  .navbar { padding: 12px 14px; gap: 6px; }
+  .navbar { padding: 12px 14px; gap: 6px; justify-content: space-between; }
   .nav-logo { padding: 8px 16px; font-size: 13px; }
-  .nav-cta { padding: 8px 14px; font-size: 12px; }
+  .nav-cta { padding: 8px 14px; font-size: 12px; margin-left: auto; }
   .nav-lang { display: none; }
   .hero { padding: 100px 16px 24px; min-height: auto; }
   .hero h1 { font-size: clamp(2.4rem, 11vw, 3.6rem); }
   .hero-meta { flex-direction: column; gap: 14px; }
-  .hero-photo-frame { min-height: 380px; }
+  /* Foto del hero mobile: cuadrada (1:1) para seguir la línea vertical del celular.
+     Aspect-ratio reemplaza min/max-height; object-fit:cover llena perfecto sin huecos. */
+  .hero-photo-frame {
+    min-height: 0;
+    max-height: none;
+    aspect-ratio: 1 / 1;
+    border-radius: var(--radius-lg);
+  }
   .benefits {
     position: static;
     grid-template-columns: 1fr;
@@ -1075,7 +1094,9 @@ footer { background: var(--white); padding: 80px 32px 40px; }
     grid-template-columns: 1fr;
     gap: 16px;
     align-items: start;
+    margin-bottom: 24px;
   }
+  .services-view-more { justify-self: start; }
   .section h2 { font-size: clamp(2rem, 9vw, 2.8rem); }
   .services-grid { grid-template-columns: 1fr; }
   .team-card { padding: 20px; }
@@ -1098,4 +1119,11 @@ footer { background: var(--white); padding: 80px 32px 40px; }
   .cta-final-btn { width: 100%; justify-content: center; }
   .diferencia-grid { grid-template-columns: 1fr; }
   .diferencia-card { padding: 28px; }
+  /* Form contacto: header en columna para que "Respuesta en menos de 2 horas"
+     no se apriete con el título */
+  .contacto-form { padding: 24px; }
+  .contacto-form-header { flex-direction: column; align-items: flex-start; gap: 6px; }
+  .contacto-info-list { gap: 18px; }
+  /* Hero meta: stack vertical más estrecho en mobile (practice-hours + today-pill) */
+  .practice-hours, .today-pill { width: 100%; }
 }

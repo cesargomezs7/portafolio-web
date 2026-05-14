@@ -26,13 +26,27 @@
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', splitHeroH1);
   else splitHeroH1();
 
+  // Helper: setea counters a su valor final (sin animar).
+  // Lo usan tanto el modo reduced-motion como el fallback sin GSAP.
+  function setCountersToFinal() {
+    document.querySelectorAll('[data-counter]').forEach(el => {
+      const target = parseFloat(el.dataset.counter);
+      const prefix = el.dataset.prefix || '';
+      const suffix = el.dataset.suffix || '';
+      const decimals = parseInt(el.dataset.decimals || '0', 10);
+      el.textContent = prefix + target.toFixed(decimals) + suffix;
+    });
+  }
+
   function init() {
     if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       document.querySelectorAll('.reveal, .word-inner').forEach(el => { el.style.opacity = 1; el.style.transform = 'none'; });
+      setCountersToFinal();
       return;
     }
     if (!window.gsap || !window.ScrollTrigger) {
       document.querySelectorAll('.reveal, .word-inner').forEach(el => { el.style.opacity = 1; el.style.transform = 'none'; });
+      setCountersToFinal();
       return;
     }
     gsap.registerPlugin(ScrollTrigger);
