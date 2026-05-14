@@ -4,10 +4,10 @@
    ═══════════════════════════════════════════════════════════ */
 
 :root {
-  --azul-dark:    #1e3a52;  /* azul oscuro dental */
-  --azul:         #3a7ca5;  /* azul dental clásico (mesa de instrumentos) */
-  --azul-deep:    #2c5f81;  /* azul profundo navbar */
-  --azul-soft:    #7eb0d0;  /* azul claro para acentos */
+  --azul-dark:    #1e3a52;  /* azul oscuro dental — pills navbar + FAQ */
+  --azul:         #4292c7;  /* azul dental vibrante (hero background) */
+  --azul-deep:    #1e3a52;  /* misma que azul-dark para pills uniformes */
+  --azul-soft:    #87b8d8;  /* azul claro acentos */
   --gray-light:   #e9e9e9;
   --gray-bg:      #fbfbfb;
   --white:        #ffffff;
@@ -36,6 +36,13 @@ body {
   letter-spacing: -0.005em;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* Tipografía serif elegante para headings principales (estilo Atelier Dental) */
+.hero h1, .hero-compact h1, .section h2, .faq h2 {
+  font-family: 'Fraunces', 'Cormorant Garamond', Georgia, serif;
+  font-weight: 400;
+  letter-spacing: -0.02em;
 }
 
 img { max-width: 100%; display: block; }
@@ -192,14 +199,13 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   background: var(--gray-light);
   border-radius: var(--radius-lg);
   overflow: hidden;
-  height: 100%;
-  min-height: 480px;
+  height: 380px;
   position: relative;
 }
 .hero-photo-frame img {
   width: 100%; height: 100%;
   object-fit: cover;
-  object-position: center 30%;
+  object-position: center 35%;
 }
 
 .benefits {
@@ -283,20 +289,22 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 }
 .clinic-grid {
   display: grid;
-  grid-template-columns: 1.3fr 1fr;
-  gap: 32px;
+  grid-template-columns: 1fr 0.7fr;
+  gap: 48px;
   margin-bottom: 80px;
+  align-items: start;
 }
 .clinic-photo-main {
   background: var(--gray-light);
   border-radius: var(--radius-lg);
   overflow: hidden;
-  aspect-ratio: 5/4;
+  aspect-ratio: 4/3;
+  max-height: 460px;
 }
 .clinic-photo-main img { width: 100%; height: 100%; object-fit: cover; }
 .clinic-photo-secondary {
-  display: grid; gap: 24px;
-  grid-template-rows: 1.2fr 1fr;
+  display: grid; gap: 40px;
+  grid-template-rows: 1.5fr 0.85fr;
 }
 .clinic-photo-secondary > div {
   background: var(--gray-light);
@@ -371,7 +379,15 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 }
 .service-card.text-only {
   background: var(--gray-light);
+  justify-content: flex-start;
+  padding: 28px 26px;
 }
+.service-card.text-only .service-card-title { margin-top: 32px; font-size: 22px; }
+.service-card.text-only .service-card-price {
+  color: var(--azul-dark); margin-top: auto;
+  font-size: 15px;
+}
+.service-card.text-only .service-card-price strong { color: var(--azul-dark); }
 .service-card-num {
   position: absolute; top: 16px; left: 22px;
   font-size: 13px; font-weight: 500;
