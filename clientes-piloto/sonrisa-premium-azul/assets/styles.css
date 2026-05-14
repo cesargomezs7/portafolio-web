@@ -68,7 +68,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 /* ─── Navbar pill ─────────────────────────────────────────── */
 .navbar {
   position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-  padding: 20px 32px;
+  padding: 20px max(32px, calc((100% - 1400px) / 2));
   display: flex; align-items: center; gap: 16px;
   background: transparent;
   transition: all 0.3s var(--t);
@@ -882,7 +882,7 @@ footer { background: var(--white); padding: 80px 32px 40px; }
   min-height: auto;
   box-shadow: 0 40px 0 var(--azul-deep);
 }
-.hero-compact-inner { max-width: 1400px; margin: 0 auto; }
+.hero-compact-inner { max-width: 1400px; width: 100%; margin: 0 auto; }
 .hero-compact h1 {
   font-size: clamp(2.5rem, 6vw, 5rem);
   font-weight: 500;
