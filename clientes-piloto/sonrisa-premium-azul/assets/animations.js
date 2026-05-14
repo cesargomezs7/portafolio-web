@@ -55,21 +55,7 @@
       });
     }
 
-    // Hero photo entrada
-    const heroPhoto = document.querySelector('.hero-photo');
-    if (heroPhoto) {
-      gsap.set(heroPhoto, { y: 30, opacity: 0, scale: 0.98 });
-      gsap.to(heroPhoto, { y: 0, opacity: 1, scale: 1, duration: 0.9, ease: 'power3.out', delay: 0.6 });
-    }
-
-    // ─── Parallax sutil hero photo (se mueve más lento que scroll) ─
-    const heroPhotoFrame = document.querySelector('.hero-photo-frame img');
-    if (heroPhotoFrame) {
-      gsap.to(heroPhotoFrame, {
-        yPercent: 12, ease: 'none',
-        scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 0.8 }
-      });
-    }
+    // Hero photo SIN animación (estática para evitar el "parpadeo" reportado por usuario)
 
     // ─── Headings clip-path reveal (más dramático que fade) ─
     gsap.utils.toArray('.section h2, .faq h2').forEach(h => {

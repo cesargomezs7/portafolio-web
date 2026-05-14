@@ -143,19 +143,19 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .hero {
   position: relative;
   background: linear-gradient(165deg, #4488b3 0%, var(--azul) 45%, var(--azul-deep) 100%);
-  padding: 100px 32px 0;
-  min-height: 92vh;
+  padding: 160px 32px 0;
+  min-height: 100vh;
   display: flex; flex-direction: column;
   overflow: hidden;
   /* Extiende el azul 40px más abajo para que se vea detrás de las esquinas
      curvas de la siguiente sección (efecto "valle hacia abajo") */
   box-shadow: 0 40px 0 var(--azul-deep);
 }
-/* La sección siguiente sube 40px sobre el hero con esquinas superiores curvas */
+/* La sección siguiente comienza después del hero con esquinas superiores curvas */
 .hero + section {
   border-top-left-radius: 40px;
   border-top-right-radius: 40px;
-  margin-top: -40px;
+  margin-top: 0;
   position: relative;
   z-index: 2;
   padding-top: 80px;
@@ -247,9 +247,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   height: 100%;
   object-fit: cover;
   object-position: center center;
-  transition: transform 0.8s var(--t);
 }
-.hero-photo-frame:hover img { transform: scale(1.04); }
 
 .benefits {
   position: absolute; bottom: 60px; left: 20px; right: 20px;
