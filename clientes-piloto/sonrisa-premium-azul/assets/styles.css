@@ -877,9 +877,10 @@ footer { background: var(--white); padding: 80px 32px 40px; }
 
 /* ─── HERO COMPACT (nosotros/contacto) ───────────────────── */
 .hero-compact {
-  background: var(--azul);
-  padding: 160px 32px 80px;
+  background: linear-gradient(165deg, #4488b3 0%, var(--azul) 60%, var(--azul-deep) 100%);
+  padding: 120px 32px 60px;
   min-height: auto;
+  box-shadow: 0 40px 0 var(--azul-deep);
 }
 .hero-compact-inner { max-width: 1400px; margin: 0 auto; }
 .hero-compact h1 {
