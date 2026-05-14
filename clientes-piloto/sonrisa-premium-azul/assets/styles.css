@@ -215,11 +215,15 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   height: 440px;
   width: 100%;
   position: relative;
+  display: flex; justify-content: center; align-items: flex-end;
 }
+/* Imagen centrada como retrato vertical (no ocupa todo el ancho), márgenes grises laterales — look Dentty */
 .hero-photo-frame img {
-  width: 100%; height: 100%;
+  width: auto;
+  height: 100%;
+  max-width: 560px;
   object-fit: cover;
-  object-position: center 55%;
+  object-position: center 30%;
 }
 
 .benefits {
