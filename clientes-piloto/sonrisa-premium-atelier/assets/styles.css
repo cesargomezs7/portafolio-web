@@ -147,10 +147,10 @@ a { color: inherit; text-decoration: none; }
   background: var(--sage-deep);
   color: var(--cream);
   border-radius: var(--radius-pill);
-  transition: background 0.3s var(--t);
+  transition: background 0.3s var(--t), transform 0.3s var(--t);
   letter-spacing: 0.01em;
 }
-.nav-phone:hover { background: var(--sage-deepest); }
+.nav-phone:hover { background: var(--sage-deepest); transform: translateY(-1px); }
 
 .nav-cta {
   font-family: 'Fraunces', Georgia, serif;
@@ -165,7 +165,7 @@ a { color: inherit; text-decoration: none; }
   transition: all 0.3s var(--t);
   letter-spacing: 0.01em;
 }
-.nav-cta:hover { background: var(--sage-deep); color: var(--cream); }
+.nav-cta:hover { background: var(--sage-deep); color: var(--cream); transform: translateY(-1px); }
 
 /* Mobile menu overlay */
 .mobile-menu {
@@ -253,10 +253,10 @@ a { color: inherit; text-decoration: none; }
   background: var(--sage-deep);
   color: var(--cream);
   border-radius: var(--radius-pill);
-  transition: background 0.3s var(--t);
+  transition: background 0.3s var(--t), transform 0.3s var(--t), box-shadow 0.3s var(--t);
   letter-spacing: 0.01em;
 }
-.hero-cta:hover { background: var(--sage-deepest); }
+.hero-cta:hover { background: var(--sage-deepest); transform: translateY(-2px); box-shadow: 0 12px 28px rgba(26,38,24,0.18); }
 
 .hero-link {
   font-family: 'Fraunces', Georgia, serif;
@@ -350,6 +350,7 @@ a { color: inherit; text-decoration: none; }
   align-items: center;
   margin-bottom: 80px;
 }
+.clinic-grid-photos { grid-template-columns: 1fr 1fr; }
 .clinic-photo-main {
   background: var(--cream-deep);
   border-radius: var(--radius-lg);
@@ -358,7 +359,8 @@ a { color: inherit; text-decoration: none; }
   max-height: 480px;
   width: 100%;
 }
-.clinic-photo-main img { width: 100%; height: 100%; object-fit: cover; }
+.clinic-photo-main img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s var(--t); }
+.clinic-photo-main:hover img { transform: scale(1.03); }
 
 .clinic-photo-secondary {
   display: grid;
@@ -371,7 +373,8 @@ a { color: inherit; text-decoration: none; }
   aspect-ratio: 4/5;
   background: var(--cream-deep);
 }
-.clinic-photo-secondary img { width: 100%; height: 100%; object-fit: cover; }
+.clinic-photo-secondary img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s var(--t); }
+.clinic-photo-secondary > div:hover img { transform: scale(1.04); }
 
 .clinic-text { padding: 20px 0; }
 .clinic-text h3 {
@@ -474,7 +477,8 @@ a { color: inherit; text-decoration: none; }
   aspect-ratio: 4/5;
   overflow: hidden;
 }
-.equipo-photo img { width: 100%; height: 100%; object-fit: cover; }
+.equipo-photo img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s var(--t); }
+.equipo-card:hover .equipo-photo img { transform: scale(1.05); }
 .equipo-info {
   padding: 28px;
   text-align: left;
@@ -592,6 +596,9 @@ a { color: inherit; text-decoration: none; }
   transition: transform 0.3s var(--t), background 0.3s var(--t);
   flex-shrink: 0;
 }
+.faq-question:hover .faq-toggle { background: var(--sage-deepest); }
+.faq-question:hover { color: var(--accent); }
+.faq-question { transition: color 0.3s var(--t); }
 .faq-toggle svg { width: 16px; height: 16px; }
 .faq-item.open .faq-toggle { transform: rotate(45deg); }
 .faq-answer {
