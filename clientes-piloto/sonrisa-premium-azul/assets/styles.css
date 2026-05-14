@@ -70,8 +70,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   transition: all 0.3s var(--t);
 }
 .navbar.scrolled {
-  background: rgba(86,125,170,0.92);
-  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  background: transparent;
   padding: 14px 32px;
 }
 
