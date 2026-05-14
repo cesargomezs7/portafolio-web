@@ -885,14 +885,6 @@
   .viewport-btn:hover:not(.active) { color: var(--text); }
 
   /* ── LIVE DEMO CONTAINER (desktop + mobile modes) ── */
-  /* Wrapper flex que centra el contenedor matemáticamente — más robusto
-     que 'margin: 0 auto' cuando hay overflow horizontal sutil del viewport mobile */
-  .demo-wrapper {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    overflow: hidden;
-  }
   .live-demo-container {
     max-width: 780px;
     margin: 0 auto;
@@ -1574,10 +1566,8 @@
         </button>
       </div>
     </div>
-    <div class="demo-wrapper">
-      <div class="live-demo-container">
-        <iframe id="demo-iframe" src="https://prontoweb.co/clientes-piloto/sonrisa-premium-ember/" title="Demo en vivo del sitio Pronto Dental seleccionado" loading="lazy"></iframe>
-      </div>
+    <div class="live-demo-container">
+      <iframe id="demo-iframe" src="https://prontoweb.co/clientes-piloto/sonrisa-premium-ember/" title="Demo en vivo del sitio Pronto Dental seleccionado" loading="lazy"></iframe>
     </div>
     <p style="text-align:center; margin-top:12px;">
       <small style="color:var(--text-dim); font-style:italic;">Ejemplo de implementación. Muestra de capacidad.</small>
