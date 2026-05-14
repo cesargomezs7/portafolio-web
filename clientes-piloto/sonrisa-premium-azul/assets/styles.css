@@ -151,11 +151,12 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
      curvas de la siguiente sección (efecto "valle hacia abajo") */
   box-shadow: 0 40px 0 var(--azul-deep);
 }
-/* La sección siguiente comienza después del hero con esquinas superiores curvas */
+/* La sección siguiente sube sobre el hero cubriendo los 40px de padding-bottom (azul),
+   y empieza exactamente donde termina la foto */
 .hero + section {
   border-top-left-radius: 40px;
   border-top-right-radius: 40px;
-  margin-top: 0;
+  margin-top: -40px;
   position: relative;
   z-index: 2;
   padding-top: 80px;
