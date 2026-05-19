@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contacto · OdontoSOAT · Cali</title>
+<meta name="description" content="Escríbenos por WhatsApp y coordinamos tu valoración. OdontoSOAT, Cali, Colombia. Pacientes nacionales e internacionales, atención en español e inglés.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css?v=20260519a">
+</head>
+<body class="has-banner">
+
+<div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
+<div class="pronto-banner">
+  Ejemplo de implementación · Muestra del plan completo de <strong>Pronto</strong> · Clínica de demostración
+</div>
+
+<nav class="navbar" id="navbar">
+  <button class="nav-burger" id="navBurger" aria-label="Abrir menú">
+    <svg viewBox="0 0 24 24" fill="none"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+  </button>
+  <a href="index.html" class="nav-logo">OdontoSOAT</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Inicio</a></li>
+    <li><a href="nosotros.html">Nosotros</a></li>
+    <li><a href="index.html#servicios">Servicios</a></li>
+    <li><a href="contacto.html" class="active">Contacto</a></li>
+  </ul>
+  <div class="nav-actions">
+    <a href="tel:+573162296000" class="nav-phone">+57 316 229 6000</a>
+    <a href="contacto.html" class="nav-cta">Agendar valoración</a>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-menu-close" id="mobileMenuClose" aria-label="Cerrar menú">
+    <svg viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+  </button>
+  <ul>
+    <li><a href="index.html">Inicio</a></li>
+    <li><a href="nosotros.html">Nosotros</a></li>
+    <li><a href="index.html#servicios">Servicios</a></li>
+    <li><a href="contacto.html">Contacto</a></li>
+    <li><a href="tel:+573162296000">+57 316 229 6000</a></li>
+  </ul>
+</div>
+
+<section class="hero-compact">
+  <div class="hero-compact-inner">
+    <span class="overline">Contacto</span>
+    <h1>Estamos aquí<br>para escucharte</h1>
+    <p>Escríbenos por WhatsApp y coordinamos tu valoración. Atendemos pacientes nacionales e internacionales en español e inglés.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="contacto-wrap">
+    <div class="contacto-info reveal">
+      <div class="overline">Datos de contacto</div>
+      <h2>Hablemos de tu nueva sonrisa</h2>
+      <p class="lead">Escríbenos por el medio que prefieras. Te atiende el equipo de OdontoSOAT.</p>
+
+      <div class="contacto-info-list" style="margin-top: 40px;">
+        <div class="contacto-info-block">
+          <strong>Ubicación</strong>
+          <p>Cali, Colombia</p>
+        </div>
+        <div class="contacto-info-block">
+          <strong>WhatsApp</strong>
+          <p><a href="https://wa.me/573162296000">+57 316 229 6000</a></p>
+        </div>
+        <div class="contacto-info-block">
+          <strong>Atención</strong>
+          <p>Pacientes nacionales e internacionales<br>Español e inglés</p>
+        </div>
+        <div class="contacto-info-block">
+          <strong>Turismo dental</strong>
+          <p>Coordinamos tu viaje a Colombia para tu tratamiento de arco completo</p>
+        </div>
+      </div>
+    </div>
+
+    <form class="contacto-form reveal" onsubmit="event.preventDefault(); const servicio = this.servicio.value ? '%20Servicio%20de%20interés:%20' + encodeURIComponent(this.servicio.value) : ''; window.open('https://wa.me/573162296000?text=Hola%20OdontoSOAT,%20mi%20nombre%20es%20' + encodeURIComponent(this.nombre.value) + '.' + servicio + '%20' + encodeURIComponent(this.mensaje.value || ''), '_blank');">
+      <div class="contacto-form-header">
+        <strong>Agenda tu valoración</strong>
+        <span><span class="status-dot"></span>Te respondemos lo antes posible</span>
+      </div>
+      <input type="text" name="nombre" placeholder="Nombre completo" required>
+      <input type="tel" name="telefono" placeholder="Teléfono / WhatsApp" required>
+      <select name="servicio">
+        <option value="">Servicio de interés (opcional)</option>
+        <option value="Implantes All-on-4">Implantes All-on-4</option>
+        <option value="Boca completa - All-on-X">Boca completa · All-on-X</option>
+        <option value="Implantes cigomáticos">Implantes cigomáticos</option>
+        <option value="Implantes dentales">Implantes dentales</option>
+        <option value="Sobredentaduras">Sobredentaduras</option>
+        <option value="Carillas dentales">Carillas dentales</option>
+        <option value="Turismo dental">Turismo dental</option>
+        <option value="Otro">Otro / No estoy seguro</option>
+      </select>
+      <textarea name="mensaje" placeholder="Cuéntanos brevemente cómo podemos ayudarte (opcional)"></textarea>
+      <button type="submit">
+        Enviar por WhatsApp
+        <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="footer-brand-name">OdontoSOAT</div>
+      <p>Implantología avanzada en Cali: All-on-4, All-on-X, implantes cigomáticos y estratégicos. Más de 2.000 sonrisas restauradas. Turismo dental en Colombia.</p>
+      <div class="footer-social">
+        <a href="https://wa.me/573162296000" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.6 6.3A7.85 7.85 0 0 0 12 4a7.93 7.93 0 0 0-7.93 7.93 7.83 7.83 0 0 0 1.06 3.95L4 20l4.22-1.1a7.94 7.94 0 0 0 3.78.97h.01A7.94 7.94 0 0 0 20 11.97 7.86 7.86 0 0 0 17.6 6.3z"/></svg></a>
+      </div>
+    </div>
+
+    <div class="footer-col">
+      <h4>Servicios</h4>
+      <ul>
+        <li><a href="index.html#servicios">Implantes All-on-4</a></li>
+        <li><a href="index.html#servicios">Implantes cigomáticos</a></li>
+        <li><a href="index.html#servicios">Boca completa</a></li>
+        <li><a href="index.html#servicios">Carillas dentales</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Información</h4>
+      <ul>
+        <li><a href="nosotros.html">Nosotros</a></li>
+        <li><a href="index.html#equipo">Cómo trabajamos</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Atención</h4>
+      <ul>
+        <li><a href="https://wa.me/573162296000">+57 316 229 6000</a></li>
+        <li>Atención en español e inglés</li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Legal</h4>
+      <ul>
+        <li><a href="#">Privacidad</a></li>
+        <li><a href="#">Términos</a></li>
+        <li><a href="#">Aviso médico</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 OdontoSOAT · Muestra Pronto</span>
+    <span>Cali · Colombia</span>
+  </div>
+</footer>
+
+<a href="https://wa.me/573162296000?text=Hola%20OdontoSOAT" target="_blank" class="wa-float" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892z"/></svg>
+</a>
+
+<script>
+  if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; }
+  window.addEventListener('beforeunload', () => window.scrollTo(0, 0));
+  const navbar = document.getElementById('navbar');
+  if (navbar) {
+    const onScroll = () => navbar.classList.toggle('scrolled', window.scrollY > 60);
+    window.addEventListener('scroll', onScroll, { passive: true });
+  }
+  const burger = document.getElementById('navBurger');
+  const menu = document.getElementById('mobileMenu');
+  const menuClose = document.getElementById('mobileMenuClose');
+  if (burger && menu) {
+    burger.addEventListener('click', () => menu.classList.add('open'));
+    menuClose && menuClose.addEventListener('click', () => menu.classList.remove('open'));
+    menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => menu.classList.remove('open')));
+  }
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
+<script src="assets/animations.js?v=20260519a" defer></script>
+
+</body>
+</html>
