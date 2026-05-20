@@ -134,7 +134,7 @@
   h1, h2, h3 { font-family: var(--font-heading); line-height: 1.15; font-weight: 700; letter-spacing: -0.02em; }
   /* Display serif para H1 + H2 grandes — estilo editorial premium */
   .hero h1, section h2, .cta-final h2 { font-family: var(--font-display); font-weight: 400; line-height: 1.05; letter-spacing: -0.015em; }
-  h1 { font-size: clamp(2.2rem, 5vw, 3.6rem); }
+  h1 { font-size: clamp(2.0rem, 4.5vw, 3.2rem); }
   h2 { font-size: clamp(1.6rem, 3.5vw, 2.4rem); margin-bottom: 24px; }
   h3 { font-size: 1.25rem; margin-bottom: 12px; }
 
@@ -1428,9 +1428,6 @@
 <!-- HERO -->
 <section class="hero" id="hero">
   <!-- Spline 3D scene — arcos turquesa orbitando, desktop only -->
-  <div class="hero-spline" aria-hidden="true" data-mobile-skip>
-    <spline-viewer url="https://prod.spline.design/xsS4jrP4xwWFxjqt/scene.splinecode" loading-anim-type="none"></spline-viewer>
-  </div>
   <div class="container">
     <div class="hero-badge">
       <span class="pulse-dot"></span>
@@ -1438,8 +1435,8 @@
     </div>
     <p class="hero-eyebrow">97 de cada 100 visitantes de tu web se van sin pedir cita<sup>¹</sup></p>
     <h1>¿Quieres dejar de perder pacientes por una web <span class="brand-gradient">vieja</span>?</h1>
-    <p class="sub">Una web profesional que trae pacientes, no solo que se ve bonita.</p>
-    <ul style="list-style:none; padding:0; margin:0 auto 32px; max-width:480px; text-align:left; display:flex; flex-direction:column; gap:10px;">
+    <ul style="list-style:none; padding:0; margin:24px auto 32px; max-width:480px; text-align:left; display:flex; flex-direction:column; gap:10px;">
+      <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.95rem; color:var(--text); line-height:1.45;"><span style="color:var(--accent-green); font-weight:700; flex-shrink:0;">&#10003;</span> Una web profesional que trae pacientes, no solo que se ve bonita.</li>
       <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.95rem; color:var(--text); line-height:1.45;"><span style="color:var(--accent-green); font-weight:700; flex-shrink:0;">&#10003;</span> Sin contratos. Cancelas cuando quieras con un mensaje.</li>
       <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.95rem; color:var(--text); line-height:1.45;"><span style="color:var(--accent-green); font-weight:700; flex-shrink:0;">&#10003;</span> Tú no aprendes tecnología — nosotros operamos todo.</li>
       <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.95rem; color:var(--text); line-height:1.45;"><span style="color:var(--accent-green); font-weight:700; flex-shrink:0;">&#10003;</span> Cambios y soporte por WhatsApp incluidos.</li>
