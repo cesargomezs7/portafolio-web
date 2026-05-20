@@ -400,7 +400,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 32px;
+    gap: 40px;
     padding-top: 32px;
     border-top: 1px solid var(--border);
     max-width: 700px;
@@ -408,18 +408,19 @@
   }
   .hero-stat {
     text-align: center;
-    min-width: 100px;
+    min-width: 110px;
   }
   .hero-stat .stat-number {
     font-family: var(--font-heading);
-    font-size: 1.6rem;
+    font-size: 2.2rem;
     font-weight: 800;
     color: var(--text);
+    line-height: 1.1;
   }
   .hero-stat .stat-label {
-    font-size: 0.8rem;
+    font-size: 0.92rem;
     color: var(--text-dim);
-    margin-top: 2px;
+    margin-top: 4px;
   }
 
   /* ── TICKER / MARQUEE ── */
@@ -1474,12 +1475,16 @@
     </div>
     <div class="hero-stats">
       <div class="hero-stat">
+        <div class="stat-number">$0</div>
+        <div class="stat-label">Inversión inicial</div>
+      </div>
+      <div class="hero-stat">
         <div class="stat-number" data-target="48" data-suffix="h">0h</div>
         <div class="stat-label">Entrega</div>
       </div>
       <div class="hero-stat">
-        <div class="stat-number">$0</div>
-        <div class="stat-label">Setup</div>
+        <div class="stat-number">1</div>
+        <div class="stat-label">mes gratis</div>
       </div>
     </div>
   </div>
