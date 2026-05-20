@@ -80,12 +80,12 @@
     box-shadow: 0 0 14px rgba(34,211,238,0.6);
   }
   h1 {
-    font-family: var(--font-display);
+    font-family: var(--font-grotesk);
     font-size: clamp(1.9rem, 5vw, 3rem);
-    font-weight: 400;
+    font-weight: 700;
     line-height: 1.12;
     margin: 26px 0 14px;
-    letter-spacing: -0.01em;
+    letter-spacing: -0.02em;
   }
   h1 .accent {
     background: var(--gradient);
@@ -172,14 +172,15 @@
     border: none;
     background: transparent;
     color: var(--text-muted);
-    font-family: var(--font-body);
+    font-family: var(--font-grotesk);
     font-size: 0.85rem;
-    font-weight: 500;
+    font-weight: 600;
+    letter-spacing: 0.01em;
     cursor: pointer;
     transition: all 0.25s ease;
   }
   .viewport-btn svg { width: 15px; height: 15px; stroke-width: 1.8; }
-  .viewport-btn.active { background: var(--gradient); color: var(--bg); }
+  .viewport-btn.active { background: var(--gradient); color: #fff; }
   .viewport-btn:hover:not(.active) { color: var(--text); }
 
   /* Live demo container */
@@ -232,9 +233,10 @@
     padding: 50px 0 60px;
   }
   .cta-foot h2 {
-    font-family: var(--font-display);
+    font-family: var(--font-grotesk);
     font-size: clamp(1.5rem, 4vw, 2.1rem);
-    font-weight: 400;
+    font-weight: 700;
+    letter-spacing: -0.02em;
     margin-bottom: 12px;
   }
   .cta-foot p {
@@ -254,16 +256,17 @@
     gap: 10px;
     padding: 15px 30px;
     border-radius: 999px;
-    font-family: var(--font-body);
+    font-family: var(--font-grotesk);
     font-size: 0.98rem;
-    font-weight: 600;
+    font-weight: 700;
+    letter-spacing: 0.02em;
     cursor: pointer;
     transition: all 0.25s ease;
     text-decoration: none;
   }
   .btn-primary {
     background: var(--gradient);
-    color: var(--bg);
+    color: #fff;
   }
   .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 14px 34px rgba(8,145,178,0.4); }
   .btn-ghost {
@@ -300,7 +303,7 @@
   <header>
     <span class="brand"><span class="dot"></span>Pronto</span>
     <h1>4 estilos de web<br>para <span class="accent">tu clínica dental</span></h1>
-    <p class="subtitle">Diseños reales funcionando ahora mismo. Navega cada uno en vivo — haz scroll, haz click. Cámbialo entre computador y móvil. Elige el que más te gusta.</p>
+    <p class="subtitle">Diseños reales funcionando ahora mismo. Navega cada uno en vivo. Haz scroll, haz click. Cámbialo entre computador y móvil. Elige el que más te gusta.</p>
   </header>
 
   <div class="demo-controls">
@@ -332,9 +335,9 @@
     <div class="cta-btns">
       <a href="https://wa.me/573124672674?text=Hola%20Pronto,%20vi%20los%204%20dise%C3%B1os%20y%20quiero%20una%20web%20para%20mi%20cl%C3%ADnica" target="_blank" class="btn btn-primary">
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.6 6.3A7.85 7.85 0 0 0 12 4a7.93 7.93 0 0 0-7.93 7.93 7.83 7.83 0 0 0 1.06 3.95L4 20l4.22-1.1a7.94 7.94 0 0 0 3.78.97h.01A7.94 7.94 0 0 0 20 11.97 7.86 7.86 0 0 0 17.6 6.3zm-5.6 12.21h-.01a6.6 6.6 0 0 1-3.36-.92l-.24-.14-2.5.65.67-2.44-.16-.25a6.58 6.58 0 0 1-1-3.49 6.6 6.6 0 0 1 11.27-4.66 6.55 6.55 0 0 1 1.93 4.68 6.6 6.6 0 0 1-6.6 6.57z"/></svg>
-        Quiero una web así
+        QUIERO UNA WEB ASÍ
       </a>
-      <a href="https://prontoweb.co/pronto.html" class="btn btn-ghost">Ver planes y precios</a>
+      <a href="https://prontoweb.co/pronto.html" class="btn btn-ghost">VER PLANES Y PRECIOS</a>
     </div>
   </div>
 </div>
