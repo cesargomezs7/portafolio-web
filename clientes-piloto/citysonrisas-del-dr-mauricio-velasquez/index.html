@@ -18,8 +18,11 @@
 /* Forzar fotos a llenar correctamente sin espacios crema */
 .hero-photo img, .equipo-photo img, .clinic-photo-main img { object-fit: cover !important; object-position: center 25% !important; }
 .equipo-photo { aspect-ratio: 3/4 !important; }
-/* Hero-photo: usar la proporción REAL de la foto del Dr. (3:4) + max-height para tablet */
-.hero-photo { aspect-ratio: 3/4 !important; max-height: 720px !important; max-width: 540px !important; margin-left: auto !important; margin-right: auto !important; }
+/* Hero-photo: usar la proporción REAL de la foto del Dr. (3:4) + max-height razonable */
+.hero-photo { aspect-ratio: 3/4 !important; width: 100% !important; max-height: 600px !important; }
+@media (min-width: 769px) and (max-width: 1024px) {
+  .hero-photo { max-width: 480px !important; margin: 0 auto !important; }
+}
 /* Testimonios: avatares con iniciales en círculo sage */
 .testimonio-avatar { background: var(--sage-deep) !important; color: var(--cream) !important; display: flex !important; align-items: center !important; justify-content: center !important; font-family: 'Fraunces', Georgia, serif !important; font-size: 16px !important; font-weight: 500 !important; letter-spacing: 0.05em !important; }
 /* Banner extras: Plan referidos + Urgencias */
