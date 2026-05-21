@@ -1,0 +1,4 @@
+_qa-out/
+node_modules/
+qa-*.mjs
+package-lock.json
