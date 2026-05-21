@@ -8,7 +8,26 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/styles.css?v=20260521b">
+<link rel="stylesheet" href="assets/styles.css?v=20260521c">
+<style>
+/* Video institucional */
+.video-section { padding: 96px 32px; background: linear-gradient(180deg, #1a2618 0%, #2a3e2a 100%); color: var(--cream); }
+.video-wrap { max-width: 1100px; margin: 0 auto; text-align: center; }
+.video-section .overline { color: rgba(245,237,217,0.7); font-family: 'Manrope', sans-serif; font-size: 12px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; }
+.video-section h2 { font-family: 'Fraunces', serif; font-weight: 400; font-size: clamp(32px, 4vw, 48px); color: var(--cream); margin: 16px 0 12px; letter-spacing: -0.02em; }
+.video-section h2 em { font-style: italic; color: #d2dcc8; }
+.video-section p.video-lead { font-family: 'Manrope', sans-serif; font-size: 17px; line-height: 1.6; color: rgba(245,237,217,0.85); max-width: 640px; margin: 0 auto 48px; }
+.video-frame { position: relative; width: 100%; aspect-ratio: 16/9; border-radius: 18px; overflow: hidden; box-shadow: 0 30px 80px rgba(0,0,0,0.4); background: #000; }
+.video-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; display: block; }
+.video-thumb { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; cursor: pointer; }
+.video-play { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background 0.3s; }
+.video-play:hover { background: rgba(0,0,0,0.15); }
+.video-play-btn { width: 88px; height: 88px; border-radius: 50%; background: rgba(255,255,255,0.92); display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 30px rgba(0,0,0,0.35); transition: transform 0.3s, background 0.3s; }
+.video-play:hover .video-play-btn { transform: scale(1.08); background: #fff; }
+.video-play-btn svg { width: 32px; height: 32px; margin-left: 4px; color: var(--sage-deepest); }
+.video-caption { margin-top: 22px; font-family: 'Manrope', sans-serif; font-size: 13px; color: rgba(245,237,217,0.65); letter-spacing: 0.04em; }
+@media (max-width: 720px) { .video-section { padding: 64px 20px; } .video-play-btn { width: 68px; height: 68px; } .video-play-btn svg { width: 26px; height: 26px; } }
+</style>
 <style>
 /* Grid de especialistas: 5 columnas desktop, 3 tablet, 2 mobile */
 .especialistas-section { padding: 80px 32px; }
@@ -192,6 +211,24 @@
       <div class="stat-num"><span data-counter="3">0</span></div>
       <div class="stat-label">Sedes (Cali · Buenaventura)</div>
     </div>
+  </div>
+</section>
+
+<section class="video-section reveal">
+  <div class="video-wrap">
+    <span class="overline">Conocenos</span>
+    <h2>Un mundo de <em>sonrisas</em></h2>
+    <p class="video-lead">Más de 30 años de experiencia y certificaciones internacionales que respaldan la calidad de todos nuestros tratamientos. Conocé por dentro a COI Salud.</p>
+
+    <div class="video-frame" id="videoFrame">
+      <img class="video-thumb" src="https://i.ytimg.com/vi/KpV6G-XvRjg/sddefault.jpg" alt="COI Un Mundo De Sonrisas" loading="lazy" onerror="this.src='https://i.ytimg.com/vi/KpV6G-XvRjg/hqdefault.jpg'">
+      <div class="video-play" id="videoPlay" role="button" aria-label="Reproducir video institucional COI Salud" tabindex="0">
+        <div class="video-play-btn">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+        </div>
+      </div>
+    </div>
+    <p class="video-caption">Video institucional · 4 min 19 s</p>
   </div>
 </section>
 
@@ -482,6 +519,24 @@
     burger.addEventListener('click', () => menu.classList.add('open'));
     menuClose && menuClose.addEventListener('click', () => menu.classList.remove('open'));
     menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => menu.classList.remove('open')));
+  }
+  // Video lazy load: thumbnail → iframe on click
+  const videoPlay = document.getElementById('videoPlay');
+  const videoFrame = document.getElementById('videoFrame');
+  function loadVideo() {
+    if (!videoFrame || videoFrame.querySelector('iframe')) return;
+    const iframe = document.createElement('iframe');
+    iframe.src = 'https://www.youtube.com/embed/KpV6G-XvRjg?autoplay=1&rel=0';
+    iframe.title = 'COI Un Mundo De Sonrisas';
+    iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+    iframe.allowFullscreen = true;
+    videoFrame.querySelector('.video-thumb')?.remove();
+    videoFrame.querySelector('.video-play')?.remove();
+    videoFrame.appendChild(iframe);
+  }
+  if (videoPlay) {
+    videoPlay.addEventListener('click', loadVideo);
+    videoPlay.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); loadVideo(); } });
   }
 </script>
 
