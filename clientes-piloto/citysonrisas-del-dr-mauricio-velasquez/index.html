@@ -15,8 +15,17 @@
 /* Equipo en 2 cards centradas (en lugar de 3) */
 .equipo-grid { grid-template-columns: repeat(2, 1fr); max-width: 880px; margin-left: auto; margin-right: auto; }
 @media (max-width: 1024px) { .equipo-grid { grid-template-columns: 1fr; max-width: 480px; } }
-/* Forzar fotos a llenar correctamente sin espacios crema */
-.hero-photo img, .equipo-photo img, .clinic-photo-main img { object-fit: cover !important; object-position: center 25% !important; }
+/* Forzar fotos a llenar completamente el contenedor */
+.hero-photo, .equipo-photo, .clinic-photo-main { position: relative !important; }
+.hero-photo img, .equipo-photo img, .clinic-photo-main img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center 25% !important;
+  display: block !important;
+  position: absolute !important;
+  inset: 0 !important;
+}
 .equipo-photo { aspect-ratio: 3/4 !important; }
 /* Hero-photo: width:100% para que llene su columna del grid + aspect-ratio 4/5 */
 .hero-photo { aspect-ratio: 4/5 !important; width: 100% !important; }
