@@ -3,17 +3,112 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nosotros · COI Salud Buenaventura · 30+ años cuidándote</title>
-<meta name="description" content="Más de 30 años combinando medicina convencional, odontología, terapias alternativas y sueroterapia en Buenaventura y Cali. Equipo profesional comprometido con tu bienestar integral.">
+<title>Nosotros · COI Salud · Medicina y Odontología Integral</title>
+<meta name="description" content="Desde 1990 cuidando la salud oral de miles de familias. Hoy COI evoluciona a COI Salud Medicina y Odontología Integral: 25 profesionales, 3 sedes (Cali Norte, Cali Centro y Buenaventura).">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/styles.css?v=20260521">
+<link rel="stylesheet" href="assets/styles.css?v=20260521b">
 <style>
-.equipo-grid { grid-template-columns: repeat(2, 1fr); max-width: 880px; margin-left: auto; margin-right: auto; }
-@media (max-width: 1024px) { .equipo-grid { grid-template-columns: 1fr; max-width: 480px; } }
-.equipo-photo, .clinic-photo-main { position: relative !important; }
-.equipo-photo img, .clinic-photo-main img { width: 100% !important; height: 100% !important; object-fit: cover !important; object-position: center center !important; display: block !important; position: absolute !important; inset: 0 !important; }
+/* Grid de especialistas: 5 columnas desktop, 3 tablet, 2 mobile */
+.especialistas-section { padding: 80px 32px; }
+.especialistas-section .section-rule { margin-bottom: 24px; }
+.grupo-especialidad { margin-bottom: 64px; }
+.grupo-titulo {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(20px, 2.2vw, 28px);
+  font-weight: 400;
+  color: var(--charcoal);
+  letter-spacing: -0.01em;
+  margin: 0 0 24px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(0,0,0,0.08);
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.grupo-titulo span { font-size: 14px; color: rgba(0,0,0,0.5); margin-left: 12px; letter-spacing: 0; font-family: 'Manrope', sans-serif; font-weight: 500; }
+.profs-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 24px;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+.prof-card { text-align: center; }
+.prof-photo {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1/1;
+  overflow: hidden;
+  border-radius: 12px;
+  background: #d2dcc8;
+  margin-bottom: 14px;
+}
+.prof-photo img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 22%;
+  display: block;
+  transition: transform 0.5s ease;
+}
+.prof-card:hover .prof-photo img { transform: scale(1.04); }
+.prof-name {
+  font-family: 'Fraunces', serif;
+  font-size: 17px;
+  font-weight: 500;
+  color: var(--charcoal);
+  margin: 0 0 4px;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+.prof-role {
+  font-family: 'Manrope', sans-serif;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--sage-deep);
+  font-weight: 500;
+}
+@media (max-width: 1100px) { .profs-grid { grid-template-columns: repeat(4, 1fr); } }
+@media (max-width: 860px) { .profs-grid { grid-template-columns: repeat(3, 1fr); gap: 18px; } }
+@media (max-width: 560px) {
+  .especialistas-section { padding: 56px 20px; }
+  .profs-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .prof-name { font-size: 15px; }
+  .prof-role { font-size: 10px; }
+}
+
+/* Hero & resto */
+.clinic-photo-main { position: relative !important; }
+.clinic-photo-main img { width: 100% !important; height: 100% !important; object-fit: cover !important; object-position: center center !important; display: block !important; position: absolute !important; inset: 0 !important; }
+
+/* Valores grid */
+.valores-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 32px;
+  max-width: 1100px;
+  margin: 56px auto 0;
+}
+.valor-card {
+  padding: 32px;
+  background: #fff;
+  border: 1px solid rgba(0,0,0,0.06);
+  border-radius: 16px;
+}
+.valor-card h4 {
+  font-family: 'Fraunces', serif;
+  font-size: 20px;
+  font-weight: 400;
+  margin: 0 0 12px;
+  color: var(--charcoal);
+}
+.valor-card p { font-size: 15px; line-height: 1.65; color: rgba(0,0,0,0.7); margin: 0; }
+@media (max-width: 720px) { .valores-grid { grid-template-columns: 1fr; gap: 16px; } .valor-card { padding: 24px; } }
 </style>
 </head>
 <body class="has-banner">
@@ -33,6 +128,7 @@
     <li><a href="index.html">Inicio</a></li>
     <li><a href="nosotros.html" class="active">Nosotros</a></li>
     <li><a href="index.html#servicios">Servicios</a></li>
+    <li><a href="nosotros.html#profesionales">Profesionales</a></li>
     <li><a href="contacto.html">Contacto</a></li>
   </ul>
   <div class="nav-actions">
@@ -49,6 +145,7 @@
     <li><a href="index.html">Inicio</a></li>
     <li><a href="nosotros.html">Nosotros</a></li>
     <li><a href="index.html#servicios">Servicios</a></li>
+    <li><a href="nosotros.html#profesionales">Profesionales</a></li>
     <li><a href="contacto.html">Contacto</a></li>
     <li><a href="tel:+573223319346">+57 322 331 9346</a></li>
   </ul>
@@ -57,36 +154,8 @@
 <section class="hero-compact">
   <div class="hero-compact-inner">
     <span class="overline">Nosotros</span>
-    <h1>Ciencia, naturaleza<br>y experiencia humana</h1>
-    <p>Un centro de salud integral con más de 30 años cuidando la salud de pacientes en Cali y Buenaventura. Cuatro especialidades, un mismo enfoque humano.</p>
-  </div>
-</section>
-
-<section class="equipo-section">
-  <div class="section-header reveal">
-    <div class="section-rule"><span class="section-rule-text">Profesionales expertos</span></div>
-  </div>
-
-  <div class="equipo-grid">
-    <div class="equipo-card reveal">
-      <div class="equipo-photo"><img src="img/doctora-lucia-ember.jpg" alt="Equipo odontológico COI Salud" loading="lazy"></div>
-      <div class="equipo-info">
-        <div class="role">Odontología</div>
-        <h3>Equipo odontológico</h3>
-        <p class="specialty">General · Especialidades · Estética</p>
-        <p>Profesionales en odontología general y especializada, comprometidos con la salud oral y la estética dental. Cada caso se evalúa con criterio clínico antes de iniciar tratamiento.</p>
-      </div>
-    </div>
-
-    <div class="equipo-card reveal">
-      <div class="equipo-photo"><img src="img/doctor-andres-ember.jpg" alt="Equipo médico integrativo COI Salud" loading="lazy"></div>
-      <div class="equipo-info">
-        <div class="role">Medicina integrativa</div>
-        <h3>Equipo médico</h3>
-        <p class="specialty">Dolor · Alternativa · Sueroterapia</p>
-        <p>Profesionales en medicina del dolor, terapias alternativas y sueroterapia. Combinamos ciencia y enfoques integrativos para tratar la causa, no solo el síntoma.</p>
-      </div>
-    </div>
+    <h1>Más de 30 años<br>cuidando sonrisas</h1>
+    <p>Nacimos en 1990 con una visión clara: ofrecer un servicio cercano, profesional y diferente. Hoy COI evoluciona a Medicina y Odontología Integral, con 25 profesionales y 3 sedes entre Cali y Buenaventura.</p>
   </div>
 </section>
 
@@ -98,10 +167,11 @@
   <div class="clinic-grid reveal">
     <div class="clinic-photo-main"><img src="img/clinica-consultorio.jpg" alt="COI Salud · centro integral"></div>
     <div class="clinic-text">
-      <div class="overline">Más de 30 años</div>
-      <h3>Salud integral con calidez humana</h3>
-      <p>COI Salud nació con un propósito claro: unir lo mejor de la medicina convencional con la odontología, las terapias alternativas y la sueroterapia en un solo lugar. Más de tres décadas después, mantenemos la misma vocación.</p>
-      <p>Hoy atendemos en tres sedes (Cali Norte, Cali Centro y Buenaventura) con un equipo de profesionales comprometidos con el bienestar real de cada paciente. Tecnología actual, trato humano y resultados duraderos en cada especialidad.</p>
+      <div class="overline">Desde 1990</div>
+      <h3>Tu sonrisa y tu bienestar en manos expertas</h3>
+      <p>En COI Odontología llevamos más de 30 años cuidando la salud oral de miles de familias y transformando sonrisas con resultados naturales, funcionales y duraderos.</p>
+      <p>Nacimos con una visión clara: ofrecer un servicio cercano, profesional y diferente, donde la calidad humana, la ética y el conocimiento especializado fueran la base de todo lo que hacemos. A lo largo de nuestra trayectoria hemos crecido junto a nuestros pacientes, incorporando especialistas, tecnología avanzada y nuevas soluciones que nos permiten brindar una atención integral, segura y personalizada.</p>
+      <p>Al cierre de 2025, COI evoluciona y da un paso adelante, consolidándose como <strong>COI Salud Medicina y Odontología Integral</strong>, un modelo de atención que integra la salud oral con la medicina del dolor, la medicina alternativa, terapias integrales y la sueroterapia, entendiendo al paciente como un todo y no solo desde una especialidad.</p>
     </div>
   </div>
 
@@ -111,41 +181,217 @@
       <div class="stat-label">Años de experiencia</div>
     </div>
     <div>
+      <div class="stat-num"><span data-counter="25" data-prefix="+">+0</span></div>
+      <div class="stat-label">Profesionales</div>
+    </div>
+    <div>
       <div class="stat-num"><span data-counter="4">0</span></div>
       <div class="stat-label">Especialidades integradas</div>
     </div>
     <div>
       <div class="stat-num"><span data-counter="3">0</span></div>
-      <div class="stat-label">Sedes en Valle del Cauca</div>
+      <div class="stat-label">Sedes (Cali · Buenaventura)</div>
     </div>
   </div>
 </section>
 
 <section class="section alt-bg">
   <div class="section-header reveal">
-    <div class="section-rule"><span class="section-rule-text">Lo que nos diferencia</span></div>
+    <div class="section-rule"><span class="section-rule-text">¿Por qué elegirnos?</span></div>
   </div>
 
-  <div class="diferencia-grid">
-    <div class="diferencia-card reveal">
-      <span class="diferencia-num">01</span>
-      <h3>Salud bajo un mismo techo</h3>
-      <p>Odontología, medicina del dolor, medicina alternativa y sueroterapia. En lugar de mandarte a buscar a 4 especialistas distintos, coordinamos tu plan desde un solo centro.</p>
+  <div class="valores-grid reveal">
+    <div class="valor-card">
+      <h4>+30 años de experiencia y respaldo</h4>
+      <p>Trayectoria comprobada cuidando la salud oral de miles de familias caleñas y bonaverenses, con un equipo que se ha ido especializando década tras década.</p>
     </div>
-    <div class="diferencia-card reveal">
-      <span class="diferencia-num">02</span>
-      <h3>Enfoque integrativo</h3>
-      <p>Combinamos lo mejor de la medicina convencional con terapias alternativas. Tratamos la causa, no solo el síntoma, con criterio clínico riguroso.</p>
+    <div class="valor-card">
+      <h4>Odontólogos generales y todas las especialidades</h4>
+      <p>Endodoncia, periodoncia, ortodoncia, rehabilitación oral, cirugía oral y patología, estética dental y promoción y prevención bajo un mismo techo.</p>
     </div>
-    <div class="diferencia-card reveal">
-      <span class="diferencia-num">03</span>
-      <h3>30 años de experiencia</h3>
-      <p>Trayectoria comprobada en Cali y ahora también en Buenaventura. Conocimiento que respalda cada diagnóstico y plan de tratamiento.</p>
+    <div class="valor-card">
+      <h4>Médicos en medicina alternativa y del dolor</h4>
+      <p>Sumamos al equipo médicos formados en acupuntura, terapia neural, biopuntura, ozonoterapia y manejo intervencionista del dolor agudo y crónico.</p>
     </div>
-    <div class="diferencia-card reveal">
-      <span class="diferencia-num">04</span>
-      <h3>Atención cálida y humana</h3>
-      <p>Procesos claros, seguros y enfocados en tu satisfacción real. Te acompañamos antes, durante y después del tratamiento.</p>
+    <div class="valor-card">
+      <h4>Servicios complementarios de bienestar</h4>
+      <p>Programa completo de sueroterapia con 8 fórmulas (energía, inmunidad, detox, deporte, belleza, control de peso) para apoyar tu salud de forma integral.</p>
+    </div>
+    <div class="valor-card">
+      <h4>Atención cálida y personalizada</h4>
+      <p>Cada paciente vive una experiencia superior, basada en diagnósticos precisos, tratamientos personalizados y resultados visibles, respaldados por un equipo humano que cuida cada detalle.</p>
+    </div>
+    <div class="valor-card">
+      <h4>Procesos claros, seguros y centrados en ti</h4>
+      <p>Te explicamos cada paso, los tiempos esperados y los costos antes de empezar. Nada de sorpresas: solo la confianza de saber qué viene a continuación.</p>
+    </div>
+  </div>
+</section>
+
+<section class="especialistas-section" id="profesionales">
+  <div class="section-header reveal" style="margin-bottom: 32px;">
+    <div class="section-rule"><span class="section-rule-text">Profesionales</span></div>
+    <h2 style="font-family: 'Fraunces', serif; font-size: clamp(32px, 4vw, 48px); font-weight: 400; color: var(--charcoal); letter-spacing: -0.02em; margin: 16px 0 12px; text-align: center;">Conocé a nuestro equipo</h2>
+    <p style="max-width: 700px; margin: 0 auto; text-align: center; color: rgba(0,0,0,0.65); font-size: 17px; line-height: 1.6;">Contamos con un equipo de profesionales altamente calificados, comprometidos con tu bienestar integral. Combinamos experiencia clínica, formación continua y un enfoque humano para brindarte atención segura, ética y personalizada.</p>
+  </div>
+
+  <!-- ODONTOLOGÍA GENERAL -->
+  <div class="grupo-especialidad reveal">
+    <h3 class="grupo-titulo">Odontología general <span>4 profesionales</span></h3>
+    <div class="profs-grid">
+      <div class="prof-card">
+        <div class="prof-photo"><img src="img/profesionales/julian-corredor.jpg" alt="Dr. Julián Andrés Corredor"></div>
+        <div class="prof-name">Julián Andrés Corredor</div>
+        <div class="prof-role">Odontología general</div>
+      </div>
+      <div class="prof-card">
+        <div class="prof-photo"><img src="img/profesionales/laura-mora.jpg" alt="Dra. Laura Mora"></div>
+        <div class="prof-name">Laura Mora</div>
+        <div class="prof-role">Odontología general</div>
+      </div>
+      <div class="prof-card">
+        <div class="prof-photo"><img src="img/profesionales/steven-osorno.jpg" alt="Dr. Steven Osorno"></div>
+        <div class="prof-name">Steven Osorno</div>
+        <div class="prof-role">Odontología general</div>
+      </div>
+      <div class="prof-card">
+        <div class="prof-photo"><img src="img/profesionales/cesar-buenaventura.jpg" alt="Dr. Cesar Buenaventura"></div>
+        <div class="prof-name">Cesar Buenaventura</div>
+        <div class="prof-role">Odontología general</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ESPECIALIDADES ODONTOLÓGICAS -->
+  <div class="grupo-especialidad reveal">
+    <h3 class="grupo-titulo">Especialidades odontológicas <span>9 especialistas</span></h3>
+    <div class="profs-grid">
+      <div class="prof-card">
+        <div class="prof-photo"><img src="img/profesionales/daniela-herrera.jpg" alt="Dra. Daniela Herrera"></div>
+        <div class="prof-name">Daniela Herrera</div>
+        <div class="prof-role">Rehabilitación oral</div>
+      </div>
+      <div class="prof-card">
+        <div class="prof-photo"><img src="img/profesionales/juan-fernando-restrepo.jpg" alt="Dr. Juan Fernando Restrepo"></div>
+        <div class="prof-name">Juan Fernando Restrepo</div>
+        <div class="prof-role">Rehabilitación oral</div>
+      </div>
+      <div class="prof-card">
+        <div class="prof-photo"><img src="img/profesionales/sebastian-quinayas.jpg" alt="Dr. Sebastián Quinayas"></div>
+        <div class="prof-name">Sebastián Quinayas</div>
+        <div class="prof-role">Periodoncia</div>
+      </div>
+      <div class="prof-card">
+        <div class="prof-photo"><img src="img/profesionales/gustavo-gelpud.jpg" alt="Dr. Gustavo Adolfo Gelpud"></div>
+        <div class="prof-name">Gustavo Adolfo Gelpud</div>
+        <div class="prof-role">Periodoncia</div>
+      </div>
+      <div class="prof-card">
+        <div class="prof-photo"><img src="img/profesionales/andres-camayo.jpg" alt="Dr. Andrés Camayo"></div>
+        <div class="prof-name">Andrés Camayo</div>
+        <div class="prof-role">Endodoncia</div>
+      </div>
+      <div class="prof-card">
+        <div class="prof-photo"><img src="img/profesionales/daniel-morera.jpg" alt="Dr. Daniel Morera"></div>
+        <div class="prof-name">Daniel Morera</div>
+        <div class="prof-role">Endodoncia</div>
+      </div>
+      <div class="prof-card">
+        <div class="prof-photo"><img src="img/profesionales/fernando-paz.jpg" alt="Dr. Fernando Paz"></div>
+        <div class="prof-name">Fernando Paz</div>
+        <div class="prof-role">Ortodoncia</div>
+      </div>
+      <div class="prof-card">
+        <div class="prof-photo"><img src="img/profesionales/hernan-linares.jpg" alt="Dr. Hernán Linares"></div>
+        <div class="prof-name">Hernán Linares</div>
+        <div class="prof-role">Ortodoncia</div>
+      </div>
+      <div class="prof-card">
+        <div class="prof-photo"><img src="img/profesionales/luz-karina-patino.jpg" alt="Dra. Luz Karina Patiño"></div>
+        <div class="prof-name">Luz Karina Patiño</div>
+        <div class="prof-role">Cirugía oral</div>
+      </div>
+      <div class="prof-card">
+        <div class="prof-photo"><img src="img/profesionales/ana-sofia-rodriguez.jpg" alt="Dra. Ana Sofía Rodríguez"></div>
+        <div class="prof-name">Ana Sofía Rodríguez</div>
+        <div class="prof-role">Cirugía oral y patología</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MEDICINA ALTERNATIVA -->
+  <div class="grupo-especialidad reveal">
+    <h3 class="grupo-titulo">Medicina alternativa <span>1 profesional</span></h3>
+    <div class="profs-grid">
+      <div class="prof-card">
+        <div class="prof-photo"><img src="img/profesionales/denisse-barreto.jpg" alt="Dra. Denisse Barreto"></div>
+        <div class="prof-name">Denisse Barreto</div>
+        <div class="prof-role">Medicina alternativa</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- AUXILIARES Y APOYO CLÍNICO -->
+  <div class="grupo-especialidad reveal">
+    <h3 class="grupo-titulo">Auxiliares de salud oral y apoyo clínico <span>8 profesionales</span></h3>
+    <div class="profs-grid">
+      <div class="prof-card">
+        <div class="prof-photo"><img src="img/profesionales/luisa-molina.jpg" alt="Luisa Molina"></div>
+        <div class="prof-name">Luisa Molina</div>
+        <div class="prof-role">Auxiliar de salud oral</div>
+      </div>
+      <div class="prof-card">
+        <div class="prof-photo"><img src="img/profesionales/brandon-cardona.jpg" alt="Brandon Cardona"></div>
+        <div class="prof-name">Brandon Cardona</div>
+        <div class="prof-role">Auxiliar de salud oral</div>
+      </div>
+      <div class="prof-card">
+        <div class="prof-photo"><img src="img/profesionales/rossi-narvaez.jpg" alt="Rossi Narváez"></div>
+        <div class="prof-name">Rossi Narváez</div>
+        <div class="prof-role">Auxiliar de salud oral</div>
+      </div>
+      <div class="prof-card">
+        <div class="prof-photo"><img src="img/profesionales/diana-castro.jpg" alt="Diana Castro"></div>
+        <div class="prof-name">Diana Castro</div>
+        <div class="prof-role">Auxiliar de salud oral</div>
+      </div>
+      <div class="prof-card">
+        <div class="prof-photo"><img src="img/profesionales/cristian-cuero.jpg" alt="Cristian Cuero Valenzuela"></div>
+        <div class="prof-name">Cristian Cuero Valenzuela</div>
+        <div class="prof-role">Auxiliar de salud oral</div>
+      </div>
+      <div class="prof-card">
+        <div class="prof-photo"><img src="img/profesionales/lina-vallecilla.jpg" alt="Lina Zamaira Vallecilla"></div>
+        <div class="prof-name">Lina Zamaira Vallecilla</div>
+        <div class="prof-role">Auxiliar de salud oral</div>
+      </div>
+      <div class="prof-card">
+        <div class="prof-photo"><img src="img/profesionales/maritza-murillo.jpg" alt="Maritza Murillo"></div>
+        <div class="prof-name">Maritza Murillo</div>
+        <div class="prof-role">Auxiliar de salud oral</div>
+      </div>
+      <div class="prof-card">
+        <div class="prof-photo"><img src="img/profesionales/karen-velazquez.jpg" alt="Karen Velázquez"></div>
+        <div class="prof-name">Karen Velázquez</div>
+        <div class="prof-role">Enfermera</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- COORDINACIÓN -->
+  <div class="grupo-especialidad reveal">
+    <h3 class="grupo-titulo">Coordinación y auditoría <span>2 profesionales</span></h3>
+    <div class="profs-grid">
+      <div class="prof-card">
+        <div class="prof-photo"><img src="img/profesionales/alma-caicedo.jpg" alt="Alma Caicedo"></div>
+        <div class="prof-name">Alma Caicedo</div>
+        <div class="prof-role">Coordinadora de clínicas</div>
+      </div>
+      <div class="prof-card">
+        <div class="prof-photo"><img src="img/profesionales/juan-fernando-paz.jpg" alt="Juan Fernando Paz"></div>
+        <div class="prof-name">Juan Fernando Paz</div>
+        <div class="prof-role">Auditor de calidad</div>
+      </div>
     </div>
   </div>
 </section>
@@ -166,11 +412,11 @@
   <div class="footer-inner">
     <div class="footer-brand">
       <div class="footer-brand-name">COI Salud</div>
-      <p>Centro de salud integral en Buenaventura y Cali. Odontología general y especializada, medicina del dolor, medicina alternativa y sueroterapia. +30 años cuidándote.</p>
+      <p>Medicina y Odontología Integral. +30 años cuidándote en Cali Norte, Cali Centro y Buenaventura. Odontología general y especializada, medicina del dolor, medicina alternativa y sueroterapia.</p>
       <div class="footer-social">
         <a href="https://wa.me/573223319346" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.6 6.3A7.85 7.85 0 0 0 12 4a7.93 7.93 0 0 0-7.93 7.93 7.83 7.83 0 0 0 1.06 3.95L4 20l4.22-1.1a7.94 7.94 0 0 0 3.78.97h.01A7.94 7.94 0 0 0 20 11.97 7.86 7.86 0 0 0 17.6 6.3z"/></svg></a>
-        <a href="#" target="_blank" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="3.5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a>
-        <a href="#" target="_blank" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95z"/></svg></a>
+        <a href="https://www.instagram.com/coisaludintegral" target="_blank" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="3.5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a>
+        <a href="https://www.facebook.com/coisaludintegral" target="_blank" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95z"/></svg></a>
       </div>
     </div>
 
@@ -188,26 +434,26 @@
       <h4>Información</h4>
       <ul>
         <li><a href="nosotros.html">Nosotros</a></li>
-        <li><a href="index.html#equipo">Profesionales</a></li>
+        <li><a href="nosotros.html#profesionales">Profesionales</a></li>
         <li><a href="contacto.html">Contacto</a></li>
       </ul>
     </div>
 
     <div class="footer-col">
-      <h4>Buenaventura</h4>
+      <h4>Sedes</h4>
       <ul>
-        <li><a href="https://wa.me/573223319346">+57 322 331 9346</a></li>
-        <li><a href="contacto.html">Calle 3 No. 2-18</a></li>
-        <li><a href="contacto.html">Centro de Especialistas</a></li>
+        <li>Buenaventura · Calle 3 No. 2-18</li>
+        <li>Cali Norte · Calle 39 N No. 2bn-121</li>
+        <li>Cali Centro · Calle 25 #4-82</li>
       </ul>
     </div>
 
     <div class="footer-col">
-      <h4>Legal</h4>
+      <h4>Teléfonos</h4>
       <ul>
-        <li><a href="#">Privacidad</a></li>
-        <li><a href="#">Términos</a></li>
-        <li><a href="#">Aviso médico</a></li>
+        <li><a href="tel:+573223319346">+57 322 331 9346</a></li>
+        <li><a href="tel:+573167447634">+57 316 744 7634</a></li>
+        <li><a href="tel:+573178929059">+57 317 892 9059</a></li>
       </ul>
     </div>
   </div>
@@ -241,7 +487,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
-<script src="assets/animations.js?v=20260521" defer></script>
+<script src="assets/animations.js?v=20260521b" defer></script>
 
 </body>
 </html>

@@ -11,12 +11,28 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/styles.css?v=20260521">
+<link rel="stylesheet" href="assets/styles.css?v=20260521b">
 <style>
 /* Overrides aprendidos del proceso City Sonrisas */
-/* Equipo en 2 cards centradas */
-.equipo-grid { grid-template-columns: repeat(2, 1fr); max-width: 880px; margin-left: auto; margin-right: auto; }
-@media (max-width: 1024px) { .equipo-grid { grid-template-columns: 1fr; max-width: 480px; } }
+/* Equipo PREVIEW: 6 mini-cards en grid */
+.equipo-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 18px; max-width: 1280px; margin: 0 auto; }
+@media (max-width: 1100px) { .equipo-grid { grid-template-columns: repeat(4, 1fr); } }
+@media (max-width: 720px) { .equipo-grid { grid-template-columns: repeat(3, 1fr); gap: 12px; } }
+@media (max-width: 480px) { .equipo-grid { grid-template-columns: repeat(2, 1fr); } }
+.equipo-mini { text-align: center; }
+.equipo-mini-photo { position: relative; width: 100%; aspect-ratio: 1/1; overflow: hidden; border-radius: 12px; background: #d2dcc8; margin-bottom: 12px; }
+.equipo-mini-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 22%; display: block; transition: transform 0.5s ease; }
+.equipo-mini:hover .equipo-mini-photo img { transform: scale(1.04); }
+.equipo-mini-name { font-family: 'Fraunces', serif; font-size: 15px; font-weight: 500; color: var(--charcoal); margin: 0 0 2px; line-height: 1.25; }
+.equipo-mini-role { font-family: 'Manrope', sans-serif; font-size: 10px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--sage-deep); font-weight: 500; }
+.equipo-cta-row { text-align: center; margin-top: 48px; }
+.equipo-cta-row a { display: inline-flex; align-items: center; gap: 8px; padding: 14px 32px; background: var(--sage-deep); color: var(--cream); text-decoration: none; border-radius: 100px; font-family: 'Manrope', sans-serif; font-weight: 500; font-size: 14px; letter-spacing: 0.02em; transition: opacity 0.2s; }
+.equipo-cta-row a:hover { opacity: 0.85; }
+.equipo-cta-row svg { width: 16px; height: 16px; }
+/* Servicios: listas detalladas */
+.service-card ul.service-list { list-style: none; padding: 0; margin: 16px 0 20px; font-family: 'Manrope', sans-serif; font-size: 13px; color: var(--text-soft); line-height: 1.65; }
+.service-card ul.service-list li { padding-left: 16px; position: relative; margin-bottom: 6px; }
+.service-card ul.service-list li::before { content: '·'; position: absolute; left: 4px; top: 0; font-weight: 700; color: var(--sage-deep); font-size: 18px; line-height: 1; }
 /* Forzar fotos a llenar contenedor sin huecos */
 .hero-photo, .equipo-photo, .clinic-photo-main, .clinic-photo-secondary > div { position: relative !important; }
 .hero-photo img, .equipo-photo img, .clinic-photo-main img, .clinic-photo-secondary img {
@@ -63,6 +79,7 @@
     <li><a href="index.html" class="active">Inicio</a></li>
     <li><a href="nosotros.html">Nosotros</a></li>
     <li><a href="#servicios">Servicios</a></li>
+    <li><a href="nosotros.html#profesionales">Profesionales</a></li>
     <li><a href="contacto.html">Contacto</a></li>
   </ul>
   <div class="nav-actions">
@@ -79,6 +96,7 @@
     <li><a href="index.html">Inicio</a></li>
     <li><a href="nosotros.html">Nosotros</a></li>
     <li><a href="#servicios">Servicios</a></li>
+    <li><a href="nosotros.html#profesionales">Profesionales</a></li>
     <li><a href="contacto.html">Contacto</a></li>
     <li><a href="tel:+573223319346">+57 322 331 9346</a></li>
   </ul>
@@ -157,25 +175,59 @@
   <div class="services-grid">
     <div class="service-card reveal">
       <h3>Odontología general y especializada</h3>
-      <p>Limpiezas, ortodoncia, endodoncia, rehabilitación oral, diseño de sonrisa y estética dental. Cuidado integral de tu boca con tecnología de vanguardia y trato cercano.</p>
+      <p>Cuidado oral integral con enfoque en promoción de la salud y prevención. Todos los tratamientos en un solo lugar.</p>
+      <ul class="service-list">
+        <li>Odontología general · diagnóstico y prevención</li>
+        <li>Odontología estética · diseño de sonrisa</li>
+        <li>Aclaramiento dental (express, casa o combinado)</li>
+        <li>Ortodoncia con brackets (metálicos, mini, autoligado)</li>
+        <li>Ortodoncia sin brackets · alineadores transparentes</li>
+        <li>Rehabilitación oral · endodoncia · periodoncia</li>
+        <li>Cirugía oral y maxilofacial · implantes</li>
+      </ul>
       <a href="https://wa.me/573223319346?text=Hola%20COI%20Salud,%20me%20interesa%20Odontología" target="_blank" class="learn-more">Saber más <svg viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
     </div>
 
     <div class="service-card reveal">
-      <h3>Medicina para el dolor</h3>
-      <p>Tratamiento integral del dolor crónico y agudo: lumbago, dolor articular, neuralgias y dolor postquirúrgico. Recuperá tu calidad de vida sin depender de analgésicos.</p>
-      <a href="https://wa.me/573223319346?text=Hola%20COI%20Salud,%20me%20interesa%20Medicina%20para%20el%20dolor" target="_blank" class="learn-more">Saber más <svg viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+      <h3>Medicina del dolor</h3>
+      <p>Atención especializada para mejorar tu calidad de vida con manejo integral del dolor agudo y crónico, con enfoque multidisciplinario.</p>
+      <ul class="service-list">
+        <li>Bloqueos nerviosos ecográficos</li>
+        <li>Bloqueos neuroaxiales (epidurales, caudales, radiofrecuencia)</li>
+        <li>Infiltraciones periféricas y articulares</li>
+        <li>Viscosuplementación con ácido hialurónico</li>
+        <li>Medicina regenerativa avanzada · plasma rico en plaquetas</li>
+        <li>Sueroterapia analgésica personalizada</li>
+        <li>Programas integrales de manejo del dolor</li>
+      </ul>
+      <a href="https://wa.me/573223319346?text=Hola%20COI%20Salud,%20me%20interesa%20Medicina%20del%20dolor" target="_blank" class="learn-more">Saber más <svg viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
     </div>
 
     <div class="service-card reveal">
       <h3>Medicina alternativa</h3>
-      <p>Acupuntura, terapia neural, homeopatía y abordajes integrativos. Trabajamos junto a la medicina convencional para encontrar el equilibrio que tu cuerpo necesita.</p>
+      <p>Combinamos la medicina convencional con terapias holísticas para cuidar al paciente de forma integral, en equilibrio cuerpo, mente y emociones.</p>
+      <ul class="service-list">
+        <li>Acupuntura · medicina tradicional china</li>
+        <li>Terapia neural · regulación del sistema nervioso</li>
+        <li>Biopuntura · microinyecciones biorreguladoras</li>
+        <li>Ozonoterapia · oxigenación y antiinflamatorio</li>
+      </ul>
       <a href="https://wa.me/573223319346?text=Hola%20COI%20Salud,%20me%20interesa%20Medicina%20alternativa" target="_blank" class="learn-more">Saber más <svg viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
     </div>
 
     <div class="service-card reveal">
       <h3>Sueroterapia</h3>
-      <p>Vitaminas, minerales y antioxidantes intravenosos personalizados según tu necesidad. Energía, defensas, recuperación deportiva, antiestrés y revitalización celular.</p>
+      <p>Terapias intravenosas con absorción rápida de vitaminas, minerales y nutrientes. Evaluación y plan personalizado según tu necesidad.</p>
+      <ul class="service-list">
+        <li>Vitality Boost · energía y rendimiento</li>
+        <li>Blue Mind Energy · concentración y memoria</li>
+        <li>Immune Defense · fortalece sistema inmune</li>
+        <li>Mega C Defense · vitamina C antioxidante</li>
+        <li>Detox Clean · depuración orgánica</li>
+        <li>Sport Recovery · recuperación muscular</li>
+        <li>Glow Therapy · colágeno y belleza</li>
+        <li>Slim Balance · metabolismo y control de peso</li>
+      </ul>
       <a href="https://wa.me/573223319346?text=Hola%20COI%20Salud,%20me%20interesa%20Sueroterapia" target="_blank" class="learn-more">Saber más <svg viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
     </div>
   </div>
@@ -184,29 +236,44 @@
 <section class="equipo-section" id="equipo">
   <div class="section-header reveal">
     <div class="section-rule"><span class="section-rule-text">Nuestros profesionales</span></div>
-    <p style="font-family: 'Manrope', sans-serif; font-size: 14px; color: var(--text-soft); line-height: 1.6; margin-top: 16px; max-width: 540px;">Equipo de profesionales expertos, comprometidos con tu salud y bienestar integral. Formación clínica sólida y vocación humana.</p>
+    <p style="font-family: 'Manrope', sans-serif; font-size: 14px; color: var(--text-soft); line-height: 1.6; margin: 16px auto 0; max-width: 640px; text-align: center;">Contamos con 25 profesionales altamente calificados, comprometidos con tu bienestar integral. Conoce a algunos del equipo:</p>
   </div>
 
-  <div class="equipo-grid">
-    <div class="equipo-card reveal">
-      <div class="equipo-photo"><img src="img/doctora-lucia-ember.jpg" alt="Odontóloga COI Salud" loading="lazy"></div>
-      <div class="equipo-info">
-        <div class="role">Odontología y estética</div>
-        <h3>Equipo odontológico</h3>
-        <p class="specialty">General · Ortodoncia · Diseño de sonrisa</p>
-        <p>Especialistas en cuidado oral integral, desde controles preventivos hasta rehabilitación completa y estética dental.</p>
-      </div>
+  <div class="equipo-grid reveal">
+    <div class="equipo-mini">
+      <div class="equipo-mini-photo"><img src="img/profesionales/daniela-herrera.jpg" alt="Dra. Daniela Herrera" loading="lazy"></div>
+      <div class="equipo-mini-name">Daniela Herrera</div>
+      <div class="equipo-mini-role">Rehabilitación oral</div>
     </div>
+    <div class="equipo-mini">
+      <div class="equipo-mini-photo"><img src="img/profesionales/sebastian-quinayas.jpg" alt="Dr. Sebastián Quinayas" loading="lazy"></div>
+      <div class="equipo-mini-name">Sebastián Quinayas</div>
+      <div class="equipo-mini-role">Periodoncia</div>
+    </div>
+    <div class="equipo-mini">
+      <div class="equipo-mini-photo"><img src="img/profesionales/fernando-paz.jpg" alt="Dr. Fernando Paz" loading="lazy"></div>
+      <div class="equipo-mini-name">Fernando Paz</div>
+      <div class="equipo-mini-role">Ortodoncia</div>
+    </div>
+    <div class="equipo-mini">
+      <div class="equipo-mini-photo"><img src="img/profesionales/andres-camayo.jpg" alt="Dr. Andrés Camayo" loading="lazy"></div>
+      <div class="equipo-mini-name">Andrés Camayo</div>
+      <div class="equipo-mini-role">Endodoncia</div>
+    </div>
+    <div class="equipo-mini">
+      <div class="equipo-mini-photo"><img src="img/profesionales/luz-karina-patino.jpg" alt="Dra. Luz Karina Patiño" loading="lazy"></div>
+      <div class="equipo-mini-name">Luz Karina Patiño</div>
+      <div class="equipo-mini-role">Cirugía oral</div>
+    </div>
+    <div class="equipo-mini">
+      <div class="equipo-mini-photo"><img src="img/profesionales/denisse-barreto.jpg" alt="Dra. Denisse Barreto" loading="lazy"></div>
+      <div class="equipo-mini-name">Denisse Barreto</div>
+      <div class="equipo-mini-role">Medicina alternativa</div>
+    </div>
+  </div>
 
-    <div class="equipo-card reveal">
-      <div class="equipo-photo"><img src="img/doctor-andres-ember.jpg" alt="Profesionales médicos COI Salud" loading="lazy"></div>
-      <div class="equipo-info">
-        <div class="role">Medicina integrativa</div>
-        <h3>Equipo médico</h3>
-        <p class="specialty">Dolor · Alternativa · Sueroterapia</p>
-        <p>Profesionales en medicina del dolor, terapias alternativas e infusiones intravenosas personalizadas. Atención de cuerpo y mente.</p>
-      </div>
-    </div>
+  <div class="equipo-cta-row reveal">
+    <a href="nosotros.html#profesionales">Ver los 25 profesionales <svg viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
   </div>
 </section>
 
@@ -348,8 +415,8 @@
       <p>Centro de salud integral en Buenaventura y Cali. Odontología general y especializada, medicina del dolor, medicina alternativa y sueroterapia. +30 años cuidándote.</p>
       <div class="footer-social">
         <a href="https://wa.me/573223319346" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.6 6.3A7.85 7.85 0 0 0 12 4a7.93 7.93 0 0 0-7.93 7.93 7.83 7.83 0 0 0 1.06 3.95L4 20l4.22-1.1a7.94 7.94 0 0 0 3.78.97h.01A7.94 7.94 0 0 0 20 11.97 7.86 7.86 0 0 0 17.6 6.3z"/></svg></a>
-        <a href="#" target="_blank" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="3.5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a>
-        <a href="#" target="_blank" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95z"/></svg></a>
+        <a href="https://www.instagram.com/coisaludintegral" target="_blank" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="3.5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a>
+        <a href="https://www.facebook.com/coisaludintegral" target="_blank" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95z"/></svg></a>
       </div>
     </div>
 
@@ -367,26 +434,26 @@
       <h4>Información</h4>
       <ul>
         <li><a href="nosotros.html">Nosotros</a></li>
-        <li><a href="#equipo">Profesionales</a></li>
+        <li><a href="nosotros.html#profesionales">Profesionales</a></li>
         <li><a href="contacto.html">Contacto</a></li>
       </ul>
     </div>
 
     <div class="footer-col">
-      <h4>Buenaventura</h4>
+      <h4>Sedes</h4>
       <ul>
-        <li><a href="https://wa.me/573223319346">+57 322 331 9346</a></li>
-        <li><a href="#contacto">Calle 3 No. 2-18</a></li>
-        <li><a href="#contacto">Centro de Especialistas</a></li>
+        <li>Buenaventura · Calle 3 No. 2-18</li>
+        <li>Cali Norte · Calle 39 N No. 2bn-121</li>
+        <li>Cali Centro · Calle 25 #4-82</li>
       </ul>
     </div>
 
     <div class="footer-col">
-      <h4>Legal</h4>
+      <h4>Teléfonos</h4>
       <ul>
-        <li><a href="#">Privacidad</a></li>
-        <li><a href="#">Términos</a></li>
-        <li><a href="#">Aviso médico</a></li>
+        <li><a href="tel:+573223319346">+57 322 331 9346</a></li>
+        <li><a href="tel:+573167447634">+57 316 744 7634</a></li>
+        <li><a href="tel:+573178929059">+57 317 892 9059</a></li>
       </ul>
     </div>
   </div>
@@ -424,7 +491,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
-<script src="assets/animations.js?v=20260521" defer></script>
+<script src="assets/animations.js?v=20260521b" defer></script>
 
 </body>
 </html>
