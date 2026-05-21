@@ -11,21 +11,80 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/styles.css?v=20260521b">
+<link rel="stylesheet" href="assets/styles.css?v=20260521c">
 <style>
 /* Overrides aprendidos del proceso City Sonrisas */
-/* Equipo PREVIEW: 6 mini-cards en grid */
-.equipo-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 18px; max-width: 1280px; margin: 0 auto; }
-@media (max-width: 1100px) { .equipo-grid { grid-template-columns: repeat(4, 1fr); } }
-@media (max-width: 720px) { .equipo-grid { grid-template-columns: repeat(3, 1fr); gap: 12px; } }
-@media (max-width: 480px) { .equipo-grid { grid-template-columns: repeat(2, 1fr); } }
-.equipo-mini { text-align: center; }
-.equipo-mini-photo { position: relative; width: 100%; aspect-ratio: 1/1; overflow: hidden; border-radius: 12px; background: #d2dcc8; margin-bottom: 12px; }
-.equipo-mini-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 22%; display: block; transition: transform 0.5s ease; }
-.equipo-mini:hover .equipo-mini-photo img { transform: scale(1.04); }
-.equipo-mini-name { font-family: 'Fraunces', serif; font-size: 15px; font-weight: 500; color: var(--charcoal); margin: 0 0 2px; line-height: 1.25; }
-.equipo-mini-role { font-family: 'Manrope', sans-serif; font-size: 10px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--sage-deep); font-weight: 500; }
-.equipo-cta-row { text-align: center; margin-top: 48px; }
+/* === CARRUSEL INFINITO DE PROFESIONALES === */
+.equipo-section { padding: 96px 0 64px; }
+.equipo-section .section-header { padding: 0 32px; }
+.profs-ticker {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  margin-top: 56px;
+  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 80px, #000 calc(100% - 80px), transparent 100%);
+          mask-image: linear-gradient(to right, transparent 0, #000 80px, #000 calc(100% - 80px), transparent 100%);
+}
+.profs-track {
+  display: flex;
+  width: max-content;
+  gap: 24px;
+  animation: ticker-scroll 75s linear infinite;
+  will-change: transform;
+}
+.profs-ticker:hover .profs-track { animation-play-state: paused; }
+@keyframes ticker-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(calc(-50% - 12px)); }
+}
+.profs-ticker .equipo-mini {
+  flex: 0 0 200px;
+  text-align: center;
+}
+.profs-ticker .equipo-mini-photo {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  overflow: hidden;
+  border-radius: 16px;
+  background: #d2dcc8;
+  margin-bottom: 14px;
+}
+.profs-ticker .equipo-mini-photo img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 22%;
+  display: block;
+}
+.profs-ticker .equipo-mini-name {
+  font-family: 'Fraunces', serif;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--charcoal);
+  margin: 0 0 2px;
+  line-height: 1.25;
+}
+.profs-ticker .equipo-mini-role {
+  font-family: 'Manrope', sans-serif;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--sage-deep);
+  font-weight: 500;
+}
+@media (max-width: 720px) {
+  .profs-ticker .equipo-mini { flex: 0 0 150px; }
+  .profs-ticker .equipo-mini-photo { width: 150px; height: 150px; }
+  .profs-track { gap: 16px; animation-duration: 60s; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .profs-track { animation: none; }
+  .profs-ticker { -webkit-mask-image: none; mask-image: none; overflow-x: auto; }
+}
+.equipo-cta-row { text-align: center; margin-top: 48px; padding: 0 32px; }
 .equipo-cta-row a { display: inline-flex; align-items: center; gap: 8px; padding: 14px 32px; background: var(--sage-deep); color: var(--cream); text-decoration: none; border-radius: 100px; font-family: 'Manrope', sans-serif; font-weight: 500; font-size: 14px; letter-spacing: 0.02em; transition: opacity 0.2s; }
 .equipo-cta-row a:hover { opacity: 0.85; }
 .equipo-cta-row svg { width: 16px; height: 16px; }
@@ -58,7 +117,7 @@
 .extras-card h3 { font-family: 'Fraunces', Georgia, serif; font-weight: 400; font-variation-settings: "opsz" 80; font-size: 22px; color: var(--sage-deepest); margin-bottom: 12px; letter-spacing: -0.005em; }
 .extras-card p { color: var(--text-soft); line-height: 1.65; font-size: 14px; margin-bottom: 8px; }
 .extras-card strong { color: var(--sage-deepest); font-weight: 600; }
-.extras-card.principal { border: 2px solid var(--sage-deep); }
+/* .extras-card.principal eliminado — todas las sedes con mismo estilo */
 @media (max-width: 1024px) { .extras-grid { grid-template-columns: 1fr; } }
 </style>
 </head>
@@ -236,44 +295,69 @@
 <section class="equipo-section" id="equipo">
   <div class="section-header reveal">
     <div class="section-rule"><span class="section-rule-text">Nuestros profesionales</span></div>
-    <p style="font-family: 'Manrope', sans-serif; font-size: 14px; color: var(--text-soft); line-height: 1.6; margin: 16px auto 0; max-width: 640px; text-align: center;">Contamos con 25 profesionales altamente calificados, comprometidos con tu bienestar integral. Conoce a algunos del equipo:</p>
+    <p style="font-family: 'Manrope', sans-serif; font-size: 14px; color: var(--text-soft); line-height: 1.6; margin: 16px auto 0; max-width: 640px; text-align: center;">25 profesionales altamente calificados, comprometidos con tu bienestar integral. Conoce al equipo completo:</p>
   </div>
 
-  <div class="equipo-grid reveal">
-    <div class="equipo-mini">
-      <div class="equipo-mini-photo"><img src="img/profesionales/daniela-herrera.jpg" alt="Dra. Daniela Herrera" loading="lazy"></div>
-      <div class="equipo-mini-name">Daniela Herrera</div>
-      <div class="equipo-mini-role">Rehabilitación oral</div>
-    </div>
-    <div class="equipo-mini">
-      <div class="equipo-mini-photo"><img src="img/profesionales/sebastian-quinayas.jpg" alt="Dr. Sebastián Quinayas" loading="lazy"></div>
-      <div class="equipo-mini-name">Sebastián Quinayas</div>
-      <div class="equipo-mini-role">Periodoncia</div>
-    </div>
-    <div class="equipo-mini">
-      <div class="equipo-mini-photo"><img src="img/profesionales/fernando-paz.jpg" alt="Dr. Fernando Paz" loading="lazy"></div>
-      <div class="equipo-mini-name">Fernando Paz</div>
-      <div class="equipo-mini-role">Ortodoncia</div>
-    </div>
-    <div class="equipo-mini">
-      <div class="equipo-mini-photo"><img src="img/profesionales/andres-camayo.jpg" alt="Dr. Andrés Camayo" loading="lazy"></div>
-      <div class="equipo-mini-name">Andrés Camayo</div>
-      <div class="equipo-mini-role">Endodoncia</div>
-    </div>
-    <div class="equipo-mini">
-      <div class="equipo-mini-photo"><img src="img/profesionales/luz-karina-patino.jpg" alt="Dra. Luz Karina Patiño" loading="lazy"></div>
-      <div class="equipo-mini-name">Luz Karina Patiño</div>
-      <div class="equipo-mini-role">Cirugía oral</div>
-    </div>
-    <div class="equipo-mini">
-      <div class="equipo-mini-photo"><img src="img/profesionales/denisse-barreto.jpg" alt="Dra. Denisse Barreto" loading="lazy"></div>
-      <div class="equipo-mini-name">Denisse Barreto</div>
-      <div class="equipo-mini-role">Medicina alternativa</div>
+  <div class="profs-ticker reveal" aria-label="Carrusel de profesionales COI Salud">
+    <div class="profs-track">
+      <!-- BLOQUE 1 — 25 profesionales -->
+      <div class="equipo-mini"><div class="equipo-mini-photo"><img src="img/profesionales/daniela-herrera.jpg" alt="Daniela Herrera" loading="lazy"></div><div class="equipo-mini-name">Daniela Herrera</div><div class="equipo-mini-role">Rehabilitación oral</div></div>
+      <div class="equipo-mini"><div class="equipo-mini-photo"><img src="img/profesionales/sebastian-quinayas.jpg" alt="Sebastián Quinayas" loading="lazy"></div><div class="equipo-mini-name">Sebastián Quinayas</div><div class="equipo-mini-role">Periodoncia</div></div>
+      <div class="equipo-mini"><div class="equipo-mini-photo"><img src="img/profesionales/andres-camayo.jpg" alt="Andrés Camayo" loading="lazy"></div><div class="equipo-mini-name">Andrés Camayo</div><div class="equipo-mini-role">Endodoncia</div></div>
+      <div class="equipo-mini"><div class="equipo-mini-photo"><img src="img/profesionales/daniel-morera.jpg" alt="Daniel Morera" loading="lazy"></div><div class="equipo-mini-name">Daniel Morera</div><div class="equipo-mini-role">Endodoncia</div></div>
+      <div class="equipo-mini"><div class="equipo-mini-photo"><img src="img/profesionales/fernando-paz.jpg" alt="Fernando Paz" loading="lazy"></div><div class="equipo-mini-name">Fernando Paz</div><div class="equipo-mini-role">Ortodoncia</div></div>
+      <div class="equipo-mini"><div class="equipo-mini-photo"><img src="img/profesionales/julian-corredor.jpg" alt="Julián Corredor" loading="lazy"></div><div class="equipo-mini-name">Julián Corredor</div><div class="equipo-mini-role">Odontología general</div></div>
+      <div class="equipo-mini"><div class="equipo-mini-photo"><img src="img/profesionales/laura-mora.jpg" alt="Laura Mora" loading="lazy"></div><div class="equipo-mini-name">Laura Mora</div><div class="equipo-mini-role">Odontología general</div></div>
+      <div class="equipo-mini"><div class="equipo-mini-photo"><img src="img/profesionales/luisa-molina.jpg" alt="Luisa Molina" loading="lazy"></div><div class="equipo-mini-name">Luisa Molina</div><div class="equipo-mini-role">Auxiliar salud oral</div></div>
+      <div class="equipo-mini"><div class="equipo-mini-photo"><img src="img/profesionales/brandon-cardona.jpg" alt="Brandon Cardona" loading="lazy"></div><div class="equipo-mini-name">Brandon Cardona</div><div class="equipo-mini-role">Auxiliar salud oral</div></div>
+      <div class="equipo-mini"><div class="equipo-mini-photo"><img src="img/profesionales/rossi-narvaez.jpg" alt="Rossi Narváez" loading="lazy"></div><div class="equipo-mini-name">Rossi Narváez</div><div class="equipo-mini-role">Auxiliar salud oral</div></div>
+      <div class="equipo-mini"><div class="equipo-mini-photo"><img src="img/profesionales/denisse-barreto.jpg" alt="Denisse Barreto" loading="lazy"></div><div class="equipo-mini-name">Denisse Barreto</div><div class="equipo-mini-role">Medicina alternativa</div></div>
+      <div class="equipo-mini"><div class="equipo-mini-photo"><img src="img/profesionales/alma-caicedo.jpg" alt="Alma Caicedo" loading="lazy"></div><div class="equipo-mini-name">Alma Caicedo</div><div class="equipo-mini-role">Coordinación</div></div>
+      <div class="equipo-mini"><div class="equipo-mini-photo"><img src="img/profesionales/steven-osorno.jpg" alt="Steven Osorno" loading="lazy"></div><div class="equipo-mini-name">Steven Osorno</div><div class="equipo-mini-role">Odontología general</div></div>
+      <div class="equipo-mini"><div class="equipo-mini-photo"><img src="img/profesionales/luz-karina-patino.jpg" alt="Luz Karina Patiño" loading="lazy"></div><div class="equipo-mini-name">Luz Karina Patiño</div><div class="equipo-mini-role">Cirugía oral</div></div>
+      <div class="equipo-mini"><div class="equipo-mini-photo"><img src="img/profesionales/ana-sofia-rodriguez.jpg" alt="Ana Sofía Rodríguez" loading="lazy"></div><div class="equipo-mini-name">Ana Sofía Rodríguez</div><div class="equipo-mini-role">Cirugía y patología</div></div>
+      <div class="equipo-mini"><div class="equipo-mini-photo"><img src="img/profesionales/juan-fernando-restrepo.jpg" alt="Juan Fernando Restrepo" loading="lazy"></div><div class="equipo-mini-name">Juan F. Restrepo</div><div class="equipo-mini-role">Rehabilitación oral</div></div>
+      <div class="equipo-mini"><div class="equipo-mini-photo"><img src="img/profesionales/diana-castro.jpg" alt="Diana Castro" loading="lazy"></div><div class="equipo-mini-name">Diana Castro</div><div class="equipo-mini-role">Auxiliar salud oral</div></div>
+      <div class="equipo-mini"><div class="equipo-mini-photo"><img src="img/profesionales/cristian-cuero.jpg" alt="Cristian Cuero" loading="lazy"></div><div class="equipo-mini-name">Cristian Cuero</div><div class="equipo-mini-role">Auxiliar salud oral</div></div>
+      <div class="equipo-mini"><div class="equipo-mini-photo"><img src="img/profesionales/lina-vallecilla.jpg" alt="Lina Vallecilla" loading="lazy"></div><div class="equipo-mini-name">Lina Vallecilla</div><div class="equipo-mini-role">Auxiliar salud oral</div></div>
+      <div class="equipo-mini"><div class="equipo-mini-photo"><img src="img/profesionales/maritza-murillo.jpg" alt="Maritza Murillo" loading="lazy"></div><div class="equipo-mini-name">Maritza Murillo</div><div class="equipo-mini-role">Auxiliar salud oral</div></div>
+      <div class="equipo-mini"><div class="equipo-mini-photo"><img src="img/profesionales/karen-velazquez.jpg" alt="Karen Velázquez" loading="lazy"></div><div class="equipo-mini-name">Karen Velázquez</div><div class="equipo-mini-role">Enfermera</div></div>
+      <div class="equipo-mini"><div class="equipo-mini-photo"><img src="img/profesionales/hernan-linares.jpg" alt="Hernán Linares" loading="lazy"></div><div class="equipo-mini-name">Hernán Linares</div><div class="equipo-mini-role">Ortodoncia</div></div>
+      <div class="equipo-mini"><div class="equipo-mini-photo"><img src="img/profesionales/cesar-buenaventura.jpg" alt="Cesar Buenaventura" loading="lazy"></div><div class="equipo-mini-name">Cesar Buenaventura</div><div class="equipo-mini-role">Odontología general</div></div>
+      <div class="equipo-mini"><div class="equipo-mini-photo"><img src="img/profesionales/gustavo-gelpud.jpg" alt="Gustavo Gelpud" loading="lazy"></div><div class="equipo-mini-name">Gustavo Gelpud</div><div class="equipo-mini-role">Periodoncia</div></div>
+      <div class="equipo-mini"><div class="equipo-mini-photo"><img src="img/profesionales/juan-fernando-paz.jpg" alt="Juan Fernando Paz" loading="lazy"></div><div class="equipo-mini-name">Juan Fernando Paz</div><div class="equipo-mini-role">Auditor de calidad</div></div>
+
+      <!-- BLOQUE 2 — Duplicado para loop seamless -->
+      <div class="equipo-mini" aria-hidden="true"><div class="equipo-mini-photo"><img src="img/profesionales/daniela-herrera.jpg" alt="" loading="lazy"></div><div class="equipo-mini-name">Daniela Herrera</div><div class="equipo-mini-role">Rehabilitación oral</div></div>
+      <div class="equipo-mini" aria-hidden="true"><div class="equipo-mini-photo"><img src="img/profesionales/sebastian-quinayas.jpg" alt="" loading="lazy"></div><div class="equipo-mini-name">Sebastián Quinayas</div><div class="equipo-mini-role">Periodoncia</div></div>
+      <div class="equipo-mini" aria-hidden="true"><div class="equipo-mini-photo"><img src="img/profesionales/andres-camayo.jpg" alt="" loading="lazy"></div><div class="equipo-mini-name">Andrés Camayo</div><div class="equipo-mini-role">Endodoncia</div></div>
+      <div class="equipo-mini" aria-hidden="true"><div class="equipo-mini-photo"><img src="img/profesionales/daniel-morera.jpg" alt="" loading="lazy"></div><div class="equipo-mini-name">Daniel Morera</div><div class="equipo-mini-role">Endodoncia</div></div>
+      <div class="equipo-mini" aria-hidden="true"><div class="equipo-mini-photo"><img src="img/profesionales/fernando-paz.jpg" alt="" loading="lazy"></div><div class="equipo-mini-name">Fernando Paz</div><div class="equipo-mini-role">Ortodoncia</div></div>
+      <div class="equipo-mini" aria-hidden="true"><div class="equipo-mini-photo"><img src="img/profesionales/julian-corredor.jpg" alt="" loading="lazy"></div><div class="equipo-mini-name">Julián Corredor</div><div class="equipo-mini-role">Odontología general</div></div>
+      <div class="equipo-mini" aria-hidden="true"><div class="equipo-mini-photo"><img src="img/profesionales/laura-mora.jpg" alt="" loading="lazy"></div><div class="equipo-mini-name">Laura Mora</div><div class="equipo-mini-role">Odontología general</div></div>
+      <div class="equipo-mini" aria-hidden="true"><div class="equipo-mini-photo"><img src="img/profesionales/luisa-molina.jpg" alt="" loading="lazy"></div><div class="equipo-mini-name">Luisa Molina</div><div class="equipo-mini-role">Auxiliar salud oral</div></div>
+      <div class="equipo-mini" aria-hidden="true"><div class="equipo-mini-photo"><img src="img/profesionales/brandon-cardona.jpg" alt="" loading="lazy"></div><div class="equipo-mini-name">Brandon Cardona</div><div class="equipo-mini-role">Auxiliar salud oral</div></div>
+      <div class="equipo-mini" aria-hidden="true"><div class="equipo-mini-photo"><img src="img/profesionales/rossi-narvaez.jpg" alt="" loading="lazy"></div><div class="equipo-mini-name">Rossi Narváez</div><div class="equipo-mini-role">Auxiliar salud oral</div></div>
+      <div class="equipo-mini" aria-hidden="true"><div class="equipo-mini-photo"><img src="img/profesionales/denisse-barreto.jpg" alt="" loading="lazy"></div><div class="equipo-mini-name">Denisse Barreto</div><div class="equipo-mini-role">Medicina alternativa</div></div>
+      <div class="equipo-mini" aria-hidden="true"><div class="equipo-mini-photo"><img src="img/profesionales/alma-caicedo.jpg" alt="" loading="lazy"></div><div class="equipo-mini-name">Alma Caicedo</div><div class="equipo-mini-role">Coordinación</div></div>
+      <div class="equipo-mini" aria-hidden="true"><div class="equipo-mini-photo"><img src="img/profesionales/steven-osorno.jpg" alt="" loading="lazy"></div><div class="equipo-mini-name">Steven Osorno</div><div class="equipo-mini-role">Odontología general</div></div>
+      <div class="equipo-mini" aria-hidden="true"><div class="equipo-mini-photo"><img src="img/profesionales/luz-karina-patino.jpg" alt="" loading="lazy"></div><div class="equipo-mini-name">Luz Karina Patiño</div><div class="equipo-mini-role">Cirugía oral</div></div>
+      <div class="equipo-mini" aria-hidden="true"><div class="equipo-mini-photo"><img src="img/profesionales/ana-sofia-rodriguez.jpg" alt="" loading="lazy"></div><div class="equipo-mini-name">Ana Sofía Rodríguez</div><div class="equipo-mini-role">Cirugía y patología</div></div>
+      <div class="equipo-mini" aria-hidden="true"><div class="equipo-mini-photo"><img src="img/profesionales/juan-fernando-restrepo.jpg" alt="" loading="lazy"></div><div class="equipo-mini-name">Juan F. Restrepo</div><div class="equipo-mini-role">Rehabilitación oral</div></div>
+      <div class="equipo-mini" aria-hidden="true"><div class="equipo-mini-photo"><img src="img/profesionales/diana-castro.jpg" alt="" loading="lazy"></div><div class="equipo-mini-name">Diana Castro</div><div class="equipo-mini-role">Auxiliar salud oral</div></div>
+      <div class="equipo-mini" aria-hidden="true"><div class="equipo-mini-photo"><img src="img/profesionales/cristian-cuero.jpg" alt="" loading="lazy"></div><div class="equipo-mini-name">Cristian Cuero</div><div class="equipo-mini-role">Auxiliar salud oral</div></div>
+      <div class="equipo-mini" aria-hidden="true"><div class="equipo-mini-photo"><img src="img/profesionales/lina-vallecilla.jpg" alt="" loading="lazy"></div><div class="equipo-mini-name">Lina Vallecilla</div><div class="equipo-mini-role">Auxiliar salud oral</div></div>
+      <div class="equipo-mini" aria-hidden="true"><div class="equipo-mini-photo"><img src="img/profesionales/maritza-murillo.jpg" alt="" loading="lazy"></div><div class="equipo-mini-name">Maritza Murillo</div><div class="equipo-mini-role">Auxiliar salud oral</div></div>
+      <div class="equipo-mini" aria-hidden="true"><div class="equipo-mini-photo"><img src="img/profesionales/karen-velazquez.jpg" alt="" loading="lazy"></div><div class="equipo-mini-name">Karen Velázquez</div><div class="equipo-mini-role">Enfermera</div></div>
+      <div class="equipo-mini" aria-hidden="true"><div class="equipo-mini-photo"><img src="img/profesionales/hernan-linares.jpg" alt="" loading="lazy"></div><div class="equipo-mini-name">Hernán Linares</div><div class="equipo-mini-role">Ortodoncia</div></div>
+      <div class="equipo-mini" aria-hidden="true"><div class="equipo-mini-photo"><img src="img/profesionales/cesar-buenaventura.jpg" alt="" loading="lazy"></div><div class="equipo-mini-name">Cesar Buenaventura</div><div class="equipo-mini-role">Odontología general</div></div>
+      <div class="equipo-mini" aria-hidden="true"><div class="equipo-mini-photo"><img src="img/profesionales/gustavo-gelpud.jpg" alt="" loading="lazy"></div><div class="equipo-mini-name">Gustavo Gelpud</div><div class="equipo-mini-role">Periodoncia</div></div>
+      <div class="equipo-mini" aria-hidden="true"><div class="equipo-mini-photo"><img src="img/profesionales/juan-fernando-paz.jpg" alt="" loading="lazy"></div><div class="equipo-mini-name">Juan Fernando Paz</div><div class="equipo-mini-role">Auditor de calidad</div></div>
     </div>
   </div>
 
   <div class="equipo-cta-row reveal">
-    <a href="nosotros.html#profesionales">Ver los 25 profesionales <svg viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+    <a href="nosotros.html#profesionales">Ver perfiles completos <svg viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
   </div>
 </section>
 
@@ -283,7 +367,7 @@
   </div>
 
   <div class="extras-grid reveal">
-    <div class="extras-card principal">
+    <div class="extras-card">
       <span class="extras-overline">Sede Buenaventura</span>
       <h3>Centro de Especialistas</h3>
       <p><strong>Calle 3 No. 2-18</strong><br>Barrio Centro<br>Buenaventura</p>
@@ -491,7 +575,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
-<script src="assets/animations.js?v=20260521b" defer></script>
+<script src="assets/animations.js?v=20260521c" defer></script>
 
 </body>
 </html>
