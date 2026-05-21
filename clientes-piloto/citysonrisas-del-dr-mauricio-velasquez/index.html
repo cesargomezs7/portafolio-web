@@ -18,9 +18,10 @@
 /* Forzar fotos a llenar correctamente sin espacios crema */
 .hero-photo img, .equipo-photo img, .clinic-photo-main img { object-fit: cover !important; object-position: center 25% !important; }
 .equipo-photo { aspect-ratio: 3/4 !important; }
-/* Hero-photo: limitar tamaño en mobile+tablet (mantener aspect-ratio del template) */
+/* Hero-photo: forzar aspect-ratio 4/5 en todos los breakpoints + limitar tamaño en mobile+tablet */
+.hero-photo { aspect-ratio: 4/5 !important; }
 @media (max-width: 1024px) {
-  .hero-photo { width: 100% !important; max-width: 460px !important; max-height: 580px !important; margin: 0 auto !important; }
+  .hero-photo { width: 100% !important; max-width: 460px !important; margin: 0 auto !important; }
 }
 /* Testimonios: avatares con iniciales en círculo sage */
 .testimonio-avatar { background: var(--sage-deep) !important; color: var(--cream) !important; display: flex !important; align-items: center !important; justify-content: center !important; font-family: 'Fraunces', Georgia, serif !important; font-size: 16px !important; font-weight: 500 !important; letter-spacing: 0.05em !important; }
