@@ -15,6 +15,11 @@
 /* Equipo en 2 cards centradas (en lugar de 3) */
 .equipo-grid { grid-template-columns: repeat(2, 1fr); max-width: 880px; margin-left: auto; margin-right: auto; }
 @media (max-width: 1024px) { .equipo-grid { grid-template-columns: 1fr; max-width: 480px; } }
+/* Forzar fotos a llenar correctamente sin espacios crema */
+.hero-photo img, .equipo-photo img, .clinic-photo-main img { object-fit: cover !important; object-position: center 25% !important; width: 100% !important; height: 100% !important; }
+.equipo-photo { aspect-ratio: 3/4 !important; }
+/* Testimonios: avatares con iniciales en círculo sage */
+.testimonio-avatar { background: var(--sage-deep) !important; color: var(--cream) !important; display: flex !important; align-items: center !important; justify-content: center !important; font-family: 'Fraunces', Georgia, serif !important; font-size: 16px !important; font-weight: 500 !important; letter-spacing: 0.05em !important; }
 /* Banner extras: Plan referidos + Urgencias */
 .extras-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin-top: 48px; }
 .extras-card { background: var(--cream); border: 1px solid var(--border); border-radius: 18px; padding: 40px; }
@@ -256,7 +261,7 @@
       <div class="testimonio-stars">★★★★★</div>
       <blockquote>"Llevé a mi hijo desde los 12 años con el Dr. Mauricio. Hoy con 18 tiene una sonrisa perfecta. Cero presión, cada control bien explicado y precios justos."</blockquote>
       <div class="testimonio-author">
-        <div class="testimonio-avatar"><img src="img/paciente-carolina.jpg" alt="Madre de paciente"></div>
+        <div class="testimonio-avatar">MP</div>
         <div>
           <div class="testimonio-author-name">Madre de paciente</div>
           <div class="testimonio-author-meta">Ortodoncia · adolescente</div>
@@ -268,7 +273,7 @@
       <div class="testimonio-stars">★★★★★</div>
       <blockquote>"Hice mi tratamiento con Invisalign. El proceso fue muy organizado y el resultado superó mis expectativas. Recomendados al 100%."</blockquote>
       <div class="testimonio-author">
-        <div class="testimonio-avatar"><img src="img/paciente-roberto.jpg" alt="Paciente Invisalign"></div>
+        <div class="testimonio-avatar">PI</div>
         <div>
           <div class="testimonio-author-name">Paciente de Invisalign</div>
           <div class="testimonio-author-meta">Ortodoncia invisible · Pasto</div>
@@ -280,7 +285,7 @@
       <div class="testimonio-stars">★★★★★</div>
       <blockquote>"Me hice el blanqueamiento ZOOM y los resultados son inmediatos. Volví a sonreír con confianza después de mucho tiempo. Atención de primera."</blockquote>
       <div class="testimonio-author">
-        <div class="testimonio-avatar"><img src="img/paciente-mercedes.jpg" alt="Paciente de blanqueamiento"></div>
+        <div class="testimonio-avatar">PZ</div>
         <div>
           <div class="testimonio-author-name">Paciente de blanqueamiento</div>
           <div class="testimonio-author-meta">Blanqueamiento ZOOM · Pasto</div>
