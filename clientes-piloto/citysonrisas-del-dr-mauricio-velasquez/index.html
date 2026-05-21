@@ -11,6 +11,19 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/styles.css?v=20260521">
+<style>
+/* Equipo en 2 cards centradas (en lugar de 3) */
+.equipo-grid { grid-template-columns: repeat(2, 1fr); max-width: 880px; margin-left: auto; margin-right: auto; }
+@media (max-width: 1024px) { .equipo-grid { grid-template-columns: 1fr; max-width: 480px; } }
+/* Banner extras: Plan referidos + Urgencias */
+.extras-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin-top: 48px; }
+.extras-card { background: var(--cream); border: 1px solid var(--border); border-radius: 18px; padding: 40px; }
+.extras-card .extras-overline { font-family: 'Manrope', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; display: block; }
+.extras-card h3 { font-family: 'Fraunces', Georgia, serif; font-weight: 400; font-variation-settings: "opsz" 80; font-size: 24px; color: var(--sage-deepest); margin-bottom: 14px; letter-spacing: -0.005em; }
+.extras-card p { color: var(--text-soft); line-height: 1.7; font-size: 15px; margin-bottom: 12px; }
+.extras-card strong { color: var(--sage-deepest); font-weight: 600; }
+@media (max-width: 1024px) { .extras-grid { grid-template-columns: 1fr; } .extras-card { padding: 28px; } }
+</style>
 </head>
 <body class="has-banner">
 
@@ -121,39 +134,75 @@
 
   <div class="services-grid">
     <div class="service-card reveal">
-      <h3>Ortodoncia clásica</h3>
-      <p>Brackets metálicos y cerámicos para niños, adolescentes y adultos. Tratamiento personalizado con seguimiento estricto y resultados que duran toda la vida.</p>
-      <a href="https://wa.me/573042081918?text=Hola%20City%20Sonrisas,%20me%20interesa%20Ortodoncia%20clásica" target="_blank" class="learn-more">Saber más <svg viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+      <h3>Brackets metálicos</h3>
+      <p>Ortodoncia clásica y autoligado. Los metálicos autoligado son más rápidos y seguros, con menos daño a los tejidos óseos y dentales. La opción más económica para alinear tu sonrisa.</p>
+      <a href="https://wa.me/573042081918?text=Hola%20City%20Sonrisas,%20me%20interesan%20Brackets%20metálicos" target="_blank" class="learn-more">Saber más <svg viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
     </div>
 
     <div class="service-card reveal">
-      <h3>Ortodoncia invisible · Invisalign</h3>
-      <p>Alineadores transparentes que corrigen tu sonrisa sin que se note. Confort para el día a día y resultados predecibles con la marca líder mundial.</p>
-      <a href="https://wa.me/573042081918?text=Hola%20City%20Sonrisas,%20me%20interesa%20Ortodoncia%20invisible%20Invisalign" target="_blank" class="learn-more">Saber más <svg viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+      <h3>Brackets cerámicos</h3>
+      <p>Estéticos clásicos o autoligado de última generación. Lo más estético dentro de la ortodoncia con brackets: prácticamente del color de tus dientes, con la misma efectividad.</p>
+      <a href="https://wa.me/573042081918?text=Hola%20City%20Sonrisas,%20me%20interesan%20Brackets%20cerámicos" target="_blank" class="learn-more">Saber más <svg viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+    </div>
+
+    <div class="service-card reveal">
+      <h3>Invisalign · sin brackets</h3>
+      <p>La última tecnología digital en ortodoncia invisible. Escaneamos tu boca, digitalizamos tu sonrisa y movemos tus dientes con alineadores transparentes, sin brackets y en menos tiempo.</p>
+      <a href="https://wa.me/573042081918?text=Hola%20City%20Sonrisas,%20me%20interesa%20Invisalign" target="_blank" class="learn-more">Saber más <svg viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
     </div>
 
     <div class="service-card reveal">
       <h3>Ortodoncia lingual</h3>
-      <p>Brackets ubicados por detrás de los dientes, totalmente invisibles desde el frente. Corregí tu mordida sin sacrificar tu imagen profesional.</p>
+      <p>Brackets ubicados por la cara interna de los dientes. Sonriés y no se ven los brackets. La alternativa invisible para quienes no quieren alineadores removibles.</p>
       <a href="https://wa.me/573042081918?text=Hola%20City%20Sonrisas,%20me%20interesa%20Ortodoncia%20lingual" target="_blank" class="learn-more">Saber más <svg viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
     </div>
 
     <div class="service-card reveal">
-      <h3>Cirugía ortognática</h3>
-      <p>Corrección de mordidas complejas que combinan ortodoncia con cirugía maxilar. Diagnóstico interdisciplinario y plan integral para casos avanzados.</p>
-      <a href="https://wa.me/573042081918?text=Hola%20City%20Sonrisas,%20me%20interesa%20Cirugía%20ortognática" target="_blank" class="learn-more">Saber más <svg viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+      <h3>Ortopedia y crecimiento</h3>
+      <p>Ortopedia funcional para niños y adolescentes: corrección de prognatismo, clase II y III, expansión palatina con Hyrax, ortopedia con trainer. Guiamos el crecimiento para evitar cirugías futuras.</p>
+      <a href="https://wa.me/573042081918?text=Hola%20City%20Sonrisas,%20me%20interesa%20Ortopedia%20funcional" target="_blank" class="learn-more">Saber más <svg viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
     </div>
 
     <div class="service-card reveal">
-      <h3>Blanqueamiento dental ZOOM</h3>
-      <p>El sistema de blanqueamiento más usado en Estados Unidos. Resultados visibles en una sola sesión, con técnica segura y respetuosa con el esmalte natural.</p>
+      <h3>Microtornillos · sin extracciones</h3>
+      <p>Para casos complejos donde antes había que extraer dientes, hoy usamos microtornillos para crear el espacio necesario sin perder piezas naturales.</p>
+      <a href="https://wa.me/573042081918?text=Hola%20City%20Sonrisas,%20me%20interesan%20Microtornillos" target="_blank" class="learn-more">Saber más <svg viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+    </div>
+
+    <div class="service-card reveal">
+      <h3>Blanqueamiento ZOOM Philips</h3>
+      <p>El blanqueamiento más usado en Estados Unidos y Europa, de la multinacional Philips. Utiliza luz láser para lograr el aclaramiento de la mejor calidad y la menor sensibilidad del mercado.</p>
       <a href="https://wa.me/573042081918?text=Hola%20City%20Sonrisas,%20me%20interesa%20Blanqueamiento%20ZOOM" target="_blank" class="learn-more">Saber más <svg viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
     </div>
 
     <div class="service-card reveal">
+      <h3>Diseño de sonrisa</h3>
+      <p>Carillas o reconstrucción con resinas de alta estética. La opción más conservadora: rediseñamos tu sonrisa sin tallar el diente, manteniendo tu esmalte natural.</p>
+      <a href="https://wa.me/573042081918?text=Hola%20City%20Sonrisas,%20me%20interesa%20Diseño%20de%20sonrisa" target="_blank" class="learn-more">Saber más <svg viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+    </div>
+
+    <div class="service-card reveal">
+      <h3>Placas para bruxismo</h3>
+      <p>Placas neuromiorelajantes para proteger tus dientes del bruxismo (rechinar nocturno). Detenemos el desgaste y mejoramos tu calidad de vida.</p>
+      <a href="https://wa.me/573042081918?text=Hola%20City%20Sonrisas,%20me%20interesa%20Placas%20para%20bruxismo" target="_blank" class="learn-more">Saber más <svg viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+    </div>
+
+    <div class="service-card reveal">
+      <h3>Retenedores y mantenimiento</h3>
+      <p>Diferentes tipos de retención post-ortodoncia para mantener tus resultados a largo plazo. Revisión cada 6 meses y reemplazo cuando lo necesiten.</p>
+      <a href="https://wa.me/573042081918?text=Hola%20City%20Sonrisas,%20me%20interesan%20Retenedores" target="_blank" class="learn-more">Saber más <svg viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+    </div>
+
+    <div class="service-card reveal">
       <h3>Odontología general</h3>
-      <p>Limpiezas profesionales, resinas, controles preventivos y diseño de sonrisa. La base de una sonrisa sana para toda la familia.</p>
+      <p>Limpiezas profesionales, resinas, controles preventivos y atención familiar. La base de una sonrisa sana para vos y los tuyos.</p>
       <a href="https://wa.me/573042081918?text=Hola%20City%20Sonrisas,%20me%20interesa%20Odontología%20general" target="_blank" class="learn-more">Saber más <svg viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+    </div>
+
+    <div class="service-card reveal">
+      <h3>Cirugía ortognática</h3>
+      <p>Para mordidas complejas que requieren combinación de ortodoncia y cirugía maxilar. Diagnóstico interdisciplinario y plan integral para casos avanzados.</p>
+      <a href="https://wa.me/573042081918?text=Hola%20City%20Sonrisas,%20me%20interesa%20Cirugía%20ortognática" target="_blank" class="learn-more">Saber más <svg viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
     </div>
   </div>
 </section>
@@ -170,17 +219,7 @@
         <div class="role">Director · Especialista en Ortodoncia</div>
         <h3>Dr. Mauricio Velásquez Morales</h3>
         <p class="specialty">Pontificia Universidad Javeriana</p>
-        <p>Odontólogo desde 1987, especialista en Ortodoncia desde 1996. Fundador de City Sonrisas en 1991, con más de 5.000 casos de ortodoncia completados.</p>
-      </div>
-    </div>
-
-    <div class="equipo-card reveal">
-      <div class="equipo-photo"><img src="img/doctora-camila-ember.jpg" alt="Dra. María Camila Velásquez P" loading="lazy"></div>
-      <div class="equipo-info">
-        <div class="role">Odontóloga · Estética dental</div>
-        <h3>Dra. María Camila Velásquez P</h3>
-        <p class="specialty">Odontología general y estética</p>
-        <p>Continúa el legado familiar con un enfoque moderno en odontología estética. La mejor odontología especializada para tu familia.</p>
+        <p>Odontólogo desde 1987, especialista en Ortodoncia desde 1996. Fundador de City Sonrisas en febrero de 1991, con más de 5.000 casos de ortodoncia completados con éxito.</p>
       </div>
     </div>
 
@@ -190,8 +229,31 @@
         <div class="role">Apoyo clínico</div>
         <h3>Equipo de Auxiliares</h3>
         <p class="specialty">Atención y seguimiento al paciente</p>
-        <p>Cuatro auxiliares dentales capacitadas que acompañan cada tratamiento. Hacen que cada visita sea cómoda, organizada y humana.</p>
+        <p>Cuatro auxiliares dentales capacitadas que acompañan cada tratamiento. Hacen que cada visita sea cómoda, organizada y profesional.</p>
       </div>
+    </div>
+  </div>
+</section>
+
+<section class="section alt-bg">
+  <div class="section-header reveal">
+    <div class="section-rule"><span class="section-rule-text">Beneficios para nuestros pacientes</span></div>
+  </div>
+
+  <div class="extras-grid reveal">
+    <div class="extras-card">
+      <span class="extras-overline">Plan Referidos</span>
+      <h3>Tu tratamiento puede costar menos</h3>
+      <p>Por cada paciente que nos referís e inicia su tratamiento, recibís un <strong>bono de $50.000 COP</strong> redimible 30 días después.</p>
+      <p>Usalo en: control de ortodoncia, odontología general, radiografías en Orthoandina Ltda., compra de elásticos o pago de cualquier servicio de la clínica.</p>
+      <p><strong>Recordá pedir tu voucher de consulta gratis</strong> para los familiares o amigos que quieras recomendarnos.</p>
+    </div>
+    <div class="extras-card">
+      <span class="extras-overline">Horario de urgencias</span>
+      <h3>Atención por fuera del horario regular</h3>
+      <p>Para urgencias de ortodoncia atendemos en horario extendido:</p>
+      <p><strong>Lunes, martes y miércoles:</strong> después de las 6:00 PM<br><strong>Jueves y viernes:</strong> después de las 5:30 PM</p>
+      <p>Si llegás en otro horario deberás esperar los turnos previamente asignados. Para agendar una urgencia, escribinos al WhatsApp.</p>
     </div>
   </div>
 </section>
@@ -249,14 +311,35 @@
         ¿A qué edad puedo iniciar un tratamiento de ortodoncia?
         <div class="faq-toggle"><svg viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
       </div>
-      <div class="faq-answer"><div class="faq-answer-inner">La ortodoncia se puede iniciar a cualquier edad. En niños suele recomendarse una primera valoración entre los 7 y 9 años para detectar problemas tempranos. En adultos no hay límite: hemos atendido pacientes desde los 7 hasta los 70 años.</div></div>
+      <div class="faq-answer"><div class="faq-answer-inner">La ortodoncia se puede iniciar a cualquier edad. En niños suele recomendarse una primera valoración entre los 7 y 9 años con ortopedia funcional, lo que muchas veces evita cirugías futuras. En adultos no hay límite: hemos atendido pacientes desde los 7 hasta los 70 años con resultados excelentes.</div></div>
     </div>
     <div class="faq-item open">
       <div class="faq-question">
         ¿Qué diferencia hay entre Invisalign y los brackets tradicionales?
         <div class="faq-toggle"><svg viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
       </div>
-      <div class="faq-answer"><div class="faq-answer-inner">Invisalign usa alineadores transparentes removibles, prácticamente invisibles. Los brackets tradicionales son fijos y van pegados al diente. Ambos son efectivos, la diferencia está en estética, comodidad y manejo diario. En consulta evaluamos cuál te conviene según tu caso.</div></div>
+      <div class="faq-answer"><div class="faq-answer-inner">Invisalign usa alineadores transparentes removibles, prácticamente invisibles. Los brackets tradicionales son fijos y van pegados al diente. Ambos son efectivos, la diferencia está en estética, comodidad y manejo diario. Para casos donde no querés brackets visibles también ofrecemos ortodoncia lingual (brackets por dentro). En consulta evaluamos cuál te conviene según tu caso.</div></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question">
+        ¿Cómo funciona el plan referidos?
+        <div class="faq-toggle"><svg viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+      </div>
+      <div class="faq-answer"><div class="faq-answer-inner">Por cada paciente que nos referís e inicia tratamiento, recibís un bono de $50.000 COP redimible 30 días después. Lo podés usar en control de ortodoncia, odontología general, radiografías en Orthoandina Ltda., compra de elásticos o cualquier servicio de la clínica. Pedí tu voucher de consulta gratis para los familiares y amigos que quieras recomendarnos.</div></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question">
+        ¿Manejan urgencias odontológicas?
+        <div class="faq-toggle"><svg viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+      </div>
+      <div class="faq-answer"><div class="faq-answer-inner">Sí. Atendemos urgencias de ortodoncia en horario extendido: lunes, martes y miércoles después de las 6:00 PM, jueves y viernes después de las 5:30 PM. Para agendar escribinos al WhatsApp +57 304 208 1918 o +57 300 619 3614.</div></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question">
+        ¿En cuánto tiempo se ven resultados del blanqueamiento ZOOM?
+        <div class="faq-toggle"><svg viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+      </div>
+      <div class="faq-answer"><div class="faq-answer-inner">El blanqueamiento ZOOM Philips produce resultados visibles desde la misma sesión, que dura aproximadamente una hora. Es el sistema más usado en Estados Unidos y Europa, aprobado por la sociedad americana de odontólogos. Genera menos sensibilidad que otros sistemas y respeta el esmalte natural.</div></div>
     </div>
     <div class="faq-item">
       <div class="faq-question">
@@ -264,13 +347,6 @@
         <div class="faq-toggle"><svg viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
       </div>
       <div class="faq-answer"><div class="faq-answer-inner">Los retenedores removibles deben revisarse cada 6 meses. Si presentan desgaste, fisuras o mal ajuste, se reemplazan. Un buen mantenimiento del retenedor protege todo el trabajo previo de ortodoncia.</div></div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-question">
-        ¿En cuánto tiempo se ven resultados del blanqueamiento ZOOM?
-        <div class="faq-toggle"><svg viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
-      </div>
-      <div class="faq-answer"><div class="faq-answer-inner">El blanqueamiento ZOOM produce resultados visibles desde la misma sesión, que dura aproximadamente una hora. Es el sistema más usado en Estados Unidos y respeta el esmalte natural cuando lo aplica un profesional.</div></div>
     </div>
   </div>
 </section>
