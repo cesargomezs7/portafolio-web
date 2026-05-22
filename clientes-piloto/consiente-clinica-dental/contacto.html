@@ -17,21 +17,7 @@
 .footer-logo { height: 64px; width: auto; display: block; margin-bottom: 20px; }
 .footer-brand-name { display: none; }
 
-.sedes-section { padding: 80px 32px; background: var(--sage-soft); }
-.sedes-grid { display: grid; grid-template-columns: 1fr; gap: 32px; max-width: 720px; margin: 56px auto 0; }
-.sede-card { background: #fff; border-radius: 18px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.04); display: flex; flex-direction: column; }
-.sede-map { width: 100%; aspect-ratio: 16/9; overflow: hidden; background: #d6e3ec; position: relative; }
-.sede-map iframe { width: 100%; height: 100%; border: 0; display: block; }
-.sede-info { padding: 28px 32px 32px; flex: 1; display: flex; flex-direction: column; gap: 6px; }
-.sede-info .sede-tag { font-family: 'Manrope', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--sage-deep); margin-bottom: 8px; }
-.sede-info h3 { font-family: 'Fraunces', serif; font-size: 24px; font-weight: 400; color: var(--charcoal); margin: 0; letter-spacing: -0.01em; line-height: 1.25; }
-.sede-info .sede-address { font-family: 'Manrope', sans-serif; font-size: 15px; color: rgba(0,0,0,0.7); line-height: 1.55; margin: 10px 0 16px; }
-.sede-info .sede-contact { display: flex; flex-direction: column; gap: 8px; margin-top: auto; }
-.sede-info .sede-contact a { font-family: 'Manrope', sans-serif; font-size: 14px; color: var(--sage-deep); text-decoration: none; font-weight: 500; display: inline-flex; align-items: center; gap: 8px; }
-.sede-info .sede-contact a:hover { text-decoration: underline; }
-.sede-info .sede-contact svg { width: 16px; height: 16px; flex-shrink: 0; }
-.sede-info .ver-mapa { display: inline-flex; align-items: center; gap: 6px; margin-top: 12px; font-family: 'Manrope', sans-serif; font-size: 13px; color: var(--charcoal); text-decoration: underline; text-underline-offset: 3px; }
-@media (max-width: 720px) { .sedes-section { padding: 56px 20px; } .sede-info { padding: 22px 24px 24px; } }
+/* CSS .sedes-section eliminado — mapa de sede ahora vive en index, no en contacto */
 </style>
 </head>
 <body>
@@ -78,60 +64,33 @@
   </div>
 </section>
 
-<section class="sedes-section">
-  <div class="section-header reveal" style="text-align:center;">
-    <div class="section-rule" style="justify-content:center;"><span class="section-rule-text">Nuestra sede</span></div>
-    <p style="font-family: 'Manrope', sans-serif; font-size: 16px; color: rgba(0,0,0,0.65); line-height: 1.6; margin: 20px auto 0; max-width: 640px;">Atendemos en City Médica de Rionegro, torre 2, consultorio 405. Estacionamiento disponible y acceso fácil desde todo el Oriente antioqueño.</p>
-  </div>
-
-  <div class="sedes-grid reveal">
-    <div class="sede-card">
-      <div class="sede-map">
-        <iframe
-          src="https://maps.google.com/maps?q=Carrera%2055A%20%2335-227%20City%20Medica%20Rionegro%20Antioquia%20Colombia&t=&z=16&ie=UTF8&iwloc=&output=embed"
-          loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade"
-          title="Mapa Consiente Clínica Dental Rionegro"></iframe>
-      </div>
-      <div class="sede-info">
-        <span class="sede-tag">Rionegro · Antioquia</span>
-        <h3>City Médica · Torre 2, consultorio 405</h3>
-        <p class="sede-address">Carrera 55A # 35-227<br>Complejo City Médica · Torre 2, consultorio 405<br>Rionegro, Antioquia</p>
-        <div class="sede-contact">
-          <a href="https://wa.me/573116281698" target="_blank">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.6 6.3A7.85 7.85 0 0 0 12 4a7.93 7.93 0 0 0-7.93 7.93 7.83 7.83 0 0 0 1.06 3.95L4 20l4.22-1.1a7.94 7.94 0 0 0 3.78.97h.01A7.94 7.94 0 0 0 20 11.97 7.86 7.86 0 0 0 17.6 6.3z"/></svg>
-            WhatsApp +57 311 628 1698
-          </a>
-          <a href="tel:+5744806890">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.33 1.85.56 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-            Fijo +57 4 480 68 90
-          </a>
-          <a href="mailto:info@consiente.co">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-            info@consiente.co
-          </a>
-          <a href="https://maps.google.com/maps?q=Carrera+55A+%2335-227+City+Medica+Rionegro+Antioquia" target="_blank" class="ver-mapa">Ver en Google Maps</a>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <section class="section">
   <div class="contacto-wrap">
     <div class="contacto-info reveal">
-      <div class="overline">Otros canales</div>
+      <div class="overline">Datos de contacto</div>
       <h2>Contáctenos</h2>
-      <p class="lead">¿Prefiere dejarnos sus datos? Llene el formulario y le respondemos por WhatsApp lo antes posible. Atendemos durante horario laboral.</p>
+      <p class="lead">Escríbanos por WhatsApp, llámenos o llene el formulario y le respondemos lo antes posible. Le agendamos con el especialista indicado para su caso.</p>
 
       <div class="contacto-info-list" style="margin-top: 40px;">
         <div class="contacto-info-block">
-          <strong>Redes sociales</strong>
-          <p><a href="https://www.instagram.com/consiente_dental/" target="_blank">Instagram @consiente_dental</a></p>
+          <strong>WhatsApp</strong>
+          <p><a href="https://wa.me/573116281698">+57 311 628 1698</a></p>
+        </div>
+        <div class="contacto-info-block">
+          <strong>Teléfono fijo</strong>
+          <p><a href="tel:+5744806890">+57 4 480 68 90</a></p>
         </div>
         <div class="contacto-info-block">
           <strong>Email institucional</strong>
           <p><a href="mailto:info@consiente.co">info@consiente.co</a></p>
+        </div>
+        <div class="contacto-info-block">
+          <strong>Dirección</strong>
+          <p>Carrera 55A # 35-227, consultorio 405<br>Torre 2 · City Médica<br>Rionegro, Antioquia</p>
+        </div>
+        <div class="contacto-info-block">
+          <strong>Redes sociales</strong>
+          <p><a href="https://www.instagram.com/consiente_dental/" target="_blank">Instagram @consiente_dental</a></p>
         </div>
         <div class="contacto-info-block">
           <strong>Horario sugerido</strong>
