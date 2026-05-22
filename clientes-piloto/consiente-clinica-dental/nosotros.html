@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/styles.css?v=20260522">
-<link rel="stylesheet" href="assets/theme-azul.css?v=20260522">
+<link rel="stylesheet" href="assets/theme-azul.css?v=20260522b">
 <style>
 .nav-logo { padding: 4px 0; display: inline-flex; align-items: center; line-height: 1; }
 .nav-logo img { height: 44px; width: auto; display: block; }
@@ -33,51 +33,45 @@
   margin-right: auto;
 }
 .grupo-titulo span { font-size: 14px; color: rgba(0,0,0,0.5); margin-left: 12px; letter-spacing: 0; font-family: 'Manrope', sans-serif; font-weight: 500; }
-.profs-grid {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 24px;
-  max-width: 1280px;
+.profs-list-group {
+  max-width: 900px;
   margin: 0 auto;
 }
-.prof-card { text-align: center; }
-.prof-photo {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 1/1;
-  overflow: hidden;
-  border-radius: 16px;
-  background: linear-gradient(135deg, var(--sage-deep) 0%, #3a7ca5 100%);
-  margin-bottom: 14px;
-  display: flex; align-items: center; justify-content: center;
-  color: var(--cream);
-  font-family: 'Fraunces', serif; font-size: 64px; font-weight: 400; letter-spacing: 0.02em;
+.prof-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 22px 0;
+  border-bottom: 1px solid rgba(28,74,94,0.10);
+  font-family: 'Fraunces', Georgia, serif;
+  transition: transform 0.3s var(--t);
 }
-.prof-name {
-  font-family: 'Fraunces', serif;
-  font-size: 17px;
+.prof-row:first-child { border-top: 1px solid rgba(28,74,94,0.18); }
+.prof-row:hover { transform: translateX(4px); }
+.prof-row .prof-name {
+  font-size: 20px;
   font-weight: 500;
-  color: var(--charcoal);
-  margin: 0 0 4px;
-  line-height: 1.25;
+  color: var(--sage-deepest);
   letter-spacing: -0.01em;
+  line-height: 1.3;
 }
-.prof-role {
+.prof-row .prof-specialty {
   font-family: 'Manrope', sans-serif;
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: var(--sage-deep);
+  font-size: 12px;
   font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--sage-deep);
+  text-align: right;
+  flex-shrink: 0;
+  line-height: 1.4;
 }
-@media (max-width: 1100px) { .profs-grid { grid-template-columns: repeat(4, 1fr); } }
-@media (max-width: 860px) { .profs-grid { grid-template-columns: repeat(3, 1fr); gap: 18px; } }
-@media (max-width: 560px) {
+@media (max-width: 720px) {
   .especialistas-section { padding: 56px 20px; }
-  .profs-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
-  .prof-name { font-size: 15px; }
-  .prof-role { font-size: 10px; }
-  .prof-photo { font-size: 44px; }
+  .prof-row { flex-direction: column; align-items: flex-start; gap: 4px; padding: 16px 0; }
+  .prof-row .prof-name { font-size: 17px; }
+  .prof-row .prof-specialty { text-align: left; font-size: 11px; }
 }
 
 .clinic-photo-main { position: relative !important; }
@@ -223,105 +217,45 @@
     <p style="max-width: 700px; margin: 0 auto; text-align: center; color: rgba(0,0,0,0.65); font-size: 17px; line-height: 1.6;">13 profesionales especializados en las siete áreas clave de la odontología moderna. Cada uno con formación postgradual y experiencia clínica que respalda cada tratamiento que ofrecemos.</p>
   </div>
 
-  <div class="grupo-especialidad reveal">
-    <h3 class="grupo-titulo">Rehabilitación oral <span>2 especialistas</span></h3>
-    <div class="profs-grid">
-      <div class="prof-card">
-        <div class="prof-photo">PG</div>
-        <div class="prof-name">Dra. Paola Garcés Jurado</div>
-        <div class="prof-role">Rehabilitación oral · Estética</div>
-      </div>
-      <div class="prof-card">
-        <div class="prof-photo">PO</div>
-        <div class="prof-name">Dra. Patricia Ortíz Pérez</div>
-        <div class="prof-role">Rehabilitación oral · Estética</div>
-      </div>
-    </div>
-  </div>
+  <div class="profs-list-group reveal">
 
-  <div class="grupo-especialidad reveal">
-    <h3 class="grupo-titulo">Ortodoncia <span>2 especialistas</span></h3>
-    <div class="profs-grid">
-      <div class="prof-card">
-        <div class="prof-photo">AD</div>
-        <div class="prof-name">Dr. Andrés Duque Acevedo</div>
-        <div class="prof-role">Ortodoncia</div>
-      </div>
-      <div class="prof-card">
-        <div class="prof-photo">DA</div>
-        <div class="prof-name">Dr. David Ángel Morales</div>
-        <div class="prof-role">Ortodoncia · Invisalign Doctor</div>
-      </div>
+    <div class="grupo-especialidad">
+      <h3 class="grupo-titulo">Rehabilitación oral <span>2 especialistas</span></h3>
+      <div class="prof-row"><span class="prof-name">Dra. Paola Garcés Jurado</span><span class="prof-specialty">Rehabilitación oral · Estética</span></div>
+      <div class="prof-row"><span class="prof-name">Dra. Patricia Ortíz Pérez</span><span class="prof-specialty">Rehabilitación oral · Estética</span></div>
     </div>
-  </div>
 
-  <div class="grupo-especialidad reveal">
-    <h3 class="grupo-titulo">Endodoncia <span>2 especialistas</span></h3>
-    <div class="profs-grid">
-      <div class="prof-card">
-        <div class="prof-photo">AJ</div>
-        <div class="prof-name">Dr. Alejandro Jaramillo Rico</div>
-        <div class="prof-role">Endodoncia</div>
-      </div>
-      <div class="prof-card">
-        <div class="prof-photo">MY</div>
-        <div class="prof-name">Dra. Marcela Yepes Jiménez</div>
-        <div class="prof-role">Endodoncia</div>
-      </div>
+    <div class="grupo-especialidad">
+      <h3 class="grupo-titulo">Ortodoncia <span>2 especialistas</span></h3>
+      <div class="prof-row"><span class="prof-name">Dr. Andrés Duque Acevedo</span><span class="prof-specialty">Ortodoncia</span></div>
+      <div class="prof-row"><span class="prof-name">Dr. David Ángel Morales</span><span class="prof-specialty">Ortodoncia · Invisalign Doctor</span></div>
     </div>
-  </div>
 
-  <div class="grupo-especialidad reveal">
-    <h3 class="grupo-titulo">Periodoncia · Cirugía maxilofacial <span>2 especialistas</span></h3>
-    <div class="profs-grid">
-      <div class="prof-card">
-        <div class="prof-photo">DD</div>
-        <div class="prof-name">Dr. Andrés Duque Duque MSc</div>
-        <div class="prof-role">Periodoncia · Implantes</div>
-      </div>
-      <div class="prof-card">
-        <div class="prof-photo">JS</div>
-        <div class="prof-name">Dr. Juan Pablo Sanín Vélez</div>
-        <div class="prof-role">Cirugía maxilofacial · Implantes</div>
-      </div>
+    <div class="grupo-especialidad">
+      <h3 class="grupo-titulo">Endodoncia <span>2 especialistas</span></h3>
+      <div class="prof-row"><span class="prof-name">Dr. Alejandro Jaramillo Rico</span><span class="prof-specialty">Endodoncia</span></div>
+      <div class="prof-row"><span class="prof-name">Dra. Marcela Yepes Jiménez</span><span class="prof-specialty">Endodoncia</span></div>
     </div>
-  </div>
 
-  <div class="grupo-especialidad reveal">
-    <h3 class="grupo-titulo">Odontología general y estética <span>3 especialistas</span></h3>
-    <div class="profs-grid">
-      <div class="prof-card">
-        <div class="prof-photo">MA</div>
-        <div class="prof-name">Dra. Martha Cecilia Abad L.</div>
-        <div class="prof-role">Estética dental</div>
-      </div>
-      <div class="prof-card">
-        <div class="prof-photo">AP</div>
-        <div class="prof-name">Dra. Ana Isabel Pérez Sierra</div>
-        <div class="prof-role">Estética dental</div>
-      </div>
-      <div class="prof-card">
-        <div class="prof-photo">MR</div>
-        <div class="prof-name">Dra. Manuela Rico Vargas</div>
-        <div class="prof-role">Odontología general · Estética</div>
-      </div>
+    <div class="grupo-especialidad">
+      <h3 class="grupo-titulo">Periodoncia · Cirugía maxilofacial <span>2 especialistas</span></h3>
+      <div class="prof-row"><span class="prof-name">Dr. Andrés Duque Duque MSc</span><span class="prof-specialty">Periodoncia · Implantes</span></div>
+      <div class="prof-row"><span class="prof-name">Dr. Juan Pablo Sanín Vélez</span><span class="prof-specialty">Cirugía maxilofacial · Implantes</span></div>
     </div>
-  </div>
 
-  <div class="grupo-especialidad reveal">
-    <h3 class="grupo-titulo">Odontopediatría <span>2 especialistas</span></h3>
-    <div class="profs-grid">
-      <div class="prof-card">
-        <div class="prof-photo">IM</div>
-        <div class="prof-name">Dra. Isabel Medina Alzate</div>
-        <div class="prof-role">Odontopediatría</div>
-      </div>
-      <div class="prof-card">
-        <div class="prof-photo">LV</div>
-        <div class="prof-name">Dra. Luz Beatriz Vera Uribe</div>
-        <div class="prof-role">Odontopediatría</div>
-      </div>
+    <div class="grupo-especialidad">
+      <h3 class="grupo-titulo">Odontología general y estética <span>3 especialistas</span></h3>
+      <div class="prof-row"><span class="prof-name">Dra. Martha Cecilia Abad L.</span><span class="prof-specialty">Estética dental</span></div>
+      <div class="prof-row"><span class="prof-name">Dra. Ana Isabel Pérez Sierra</span><span class="prof-specialty">Estética dental</span></div>
+      <div class="prof-row"><span class="prof-name">Dra. Manuela Rico Vargas</span><span class="prof-specialty">Odontología general · Estética</span></div>
     </div>
+
+    <div class="grupo-especialidad">
+      <h3 class="grupo-titulo">Odontopediatría <span>2 especialistas</span></h3>
+      <div class="prof-row"><span class="prof-name">Dra. Isabel Medina Alzate</span><span class="prof-specialty">Odontopediatría</span></div>
+      <div class="prof-row"><span class="prof-name">Dra. Luz Beatriz Vera Uribe</span><span class="prof-specialty">Odontopediatría</span></div>
+    </div>
+
   </div>
 </section>
 

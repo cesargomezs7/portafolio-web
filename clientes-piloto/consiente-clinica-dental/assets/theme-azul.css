@@ -1,74 +1,52 @@
 /* ═══════════════════════════════════════════════════════════
-   COI Salud · Theme AZUL (override del Atelier sage)
-   Mantiene TODA la estructura/layout/animaciones del Atelier,
-   solo sobrescribe variables de color con paleta dental azul.
+   CONSIENTE · Theme AZUL TURQUESA
+   Paleta extraída del logo oficial Consiente (azul aqua / turquesa
+   un tono más oscuro para mejor contraste y legibilidad).
+   Sobrescribe variables del Atelier sage sin tocar styles.css.
    ═══════════════════════════════════════════════════════════ */
 
 :root {
-  /* Paleta azul corporativa (extraída de sonrisa-premium-azul) */
-  --azul-dark:    #1e3a52;
-  --azul:         #3a7ca5;
-  --azul-deep:    #2d6589;
-  --azul-soft:    #87b8d8;
-  --azul-bg:      #e8f0f6;
-  --azul-bg-2:    #dde8f0;
+  /* Paleta azul turquesa Consiente */
+  --aqua-deepest: #1c4a5e;
+  --aqua-deep:    #2d7a8f;
+  --aqua:         #4ba0b8;
+  --aqua-soft:    #8ec8d6;
+  --aqua-bg:      #e0eff3;
+  --aqua-bg-2:    #d4e8ef;
   --gray-bg:      #fbfbfb;
 
-  /* === Mapeo de variables Atelier → Azul === */
-  --sage-bg:      #e8f0f6;   /* fondo hero claro */
-  --sage-soft:    #f0f5f9;   /* about section */
-  --sage-deep:    #1e3a52;   /* botones primarios, headings */
-  --sage-deepest: #15293c;   /* texto principal, casi negro azulado */
-  --cream:        #fbfbfb;   /* fondo principal */
-  --cream-deep:   #ecf0f4;   /* cream un poco más oscuro */
-  --accent:       #c97a3d;   /* mantenemos acento cálido (cobre suave) para contraste */
+  /* === Mapeo Atelier → Aqua Consiente === */
+  --sage-bg:      #e0eff3;
+  --sage-soft:    #edf5f8;
+  --sage-deep:    #2d7a8f;
+  --sage-deepest: #1c4a5e;
+  --cream:        #fbfbfb;
+  --cream-deep:   #ecf3f5;
+  --accent:       #c97a3d;
   --accent-soft:  #d99860;
-  --text:         #15293c;
-  --text-soft:    #4a5a6e;
-  --border:       #c8d4dc;
+  --text:         #1c4a5e;
+  --text-soft:    #4a6878;
+  --border:       #c8d8de;
+  --charcoal:     #1c4a5e;
 
-  /* Shadows azules en vez de sage */
-  --shadow-sm: 0 2px 6px rgba(30,58,82,0.08);
-  --shadow-md: 0 14px 38px rgba(30,58,82,0.12);
-  --shadow-lg: 0 30px 70px rgba(30,58,82,0.18);
+  --shadow-sm: 0 2px 6px rgba(28,74,94,0.08);
+  --shadow-md: 0 14px 38px rgba(28,74,94,0.12);
+  --shadow-lg: 0 30px 70px rgba(28,74,94,0.18);
 }
 
-/* === Overrides específicos para piezas que no usan vars === */
+/* === Overrides específicos === */
 
-/* Gradientes hero — el original usa #ecf0e0 hardcoded */
-.hero { background: linear-gradient(to left, var(--sage-bg) 30%, #d6e3ec 100%) !important; }
-.hero-compact { background: linear-gradient(to left, var(--sage-bg) 30%, #d6e3ec 100%) !important; }
+.hero { background: linear-gradient(to left, var(--sage-bg) 30%, #c8e0e7 100%) !important; }
+.hero-compact { background: linear-gradient(to left, var(--sage-bg) 30%, #c8e0e7 100%) !important; }
 .section.alt-bg { background: var(--sage-soft) !important; }
 
-/* Testimonios avatares: sage-deep → azul */
 .testimonio-avatar { background: var(--sage-deep) !important; color: var(--cream) !important; }
 
-/* FAQ borders */
-.faq-list { border-top-color: rgba(30,58,82,0.18) !important; }
-.faq-item { border-bottom-color: rgba(30,58,82,0.18) !important; }
+.faq-list { border-top-color: rgba(28,74,94,0.18) !important; }
+.faq-item { border-bottom-color: rgba(28,74,94,0.18) !important; }
 
-/* Profesionales photo bg (era #d2dcc8 sage) → azul claro */
-.equipo-mini-photo, .prof-photo, .profs-ticker .equipo-mini-photo { background: #d6e3ec !important; }
+.equipo-mini-photo, .prof-photo, .profs-ticker .equipo-mini-photo { background: #c8e0e7 !important; }
 
-/* Hero rule + scroll-progress: accent cobre se mantiene, solo verifico que se vea bien con azul */
+.valor-card { background: #ffffff !important; border-color: rgba(28,74,94,0.08) !important; }
 
-/* Sede cards mapa background */
-.sede-map { background: #d6e3ec !important; }
-
-/* Video section gradient: sage oscuro → azul oscuro */
-.video-section { background: linear-gradient(180deg, #15293c 0%, #1e3a52 100%) !important; }
-.video-section h2 em { color: #87b8d8 !important; }
-
-/* Sedes section background (en contacto.html) */
-.sedes-section { background: var(--sage-soft) !important; }
-
-/* Valor cards (nosotros.html) */
-.valor-card { background: #ffffff !important; border-color: rgba(30,58,82,0.08) !important; }
-
-/* Logo: el dark.png sigue funcionando porque #1e3a52 es similar oscuridad que #1a2618 */
-/* Pero re-generamos abajo si hace falta */
-
-/* Pronto banner sigue sage-deep que ahora es azul-dark, OK */
-
-/* Selección de texto */
-::selection { background: var(--azul-soft); color: var(--azul-dark); }
+::selection { background: var(--aqua-soft); color: var(--aqua-deepest); }
