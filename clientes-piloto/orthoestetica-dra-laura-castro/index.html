@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Orthoestética · Top Doctor Invisalign Bogotá · Dra. Laura Castro</title>
+<meta name="description" content="Clínica dental integral en Bogotá. Dra. Laura Castro, Top Doctor Invisalign Colombia 4 años consecutivos. 10 profesionales, 9 especialidades odontológicas, escáner iTero 5D NIRI y láser Gemini. Centro Médico Dali.">
+<meta property="og:title" content="Orthoestética · Sonría con confianza · Bogotá">
+<meta property="og:description" content="Top Doctor Invisalign Bogotá. Ortodoncia, rehabilitación oral, diseño de sonrisa, implantes y turismo dental con plan todo incluido.">
+<meta property="og:image" content="img/hero-modelo.jpg">
+<link rel="icon" type="image/png" href="img/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css?v=20260525a">
+<link rel="stylesheet" href="assets/theme-azul.css?v=20260525a">
+<style>
+.nav-logo { padding: 4px 0; display: inline-flex; align-items: center; line-height: 1; }
+.nav-logo img { height: 44px; width: auto; display: block; }
+@media (max-width: 720px) { .nav-logo img { height: 32px; } }
+.footer-logo { height: 64px; width: auto; display: block; margin-bottom: 20px; }
+.footer-brand-name { display: none; }
+
+.hero h1 { font-size: clamp(36px, 5.5vw, 64px) !important; line-height: 1.05 !important; }
+@media (max-width: 720px) { .hero h1 { font-size: clamp(32px, 9vw, 42px) !important; } }
+.hero-photo img { object-position: center 25% !important; }
+
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(13,53,86,0.06);
+  border: 1px solid rgba(13,53,86,0.18);
+  padding: 7px 14px;
+  border-radius: 100px;
+  font-family: 'Manrope', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--sage-deepest);
+  margin-bottom: 24px;
+}
+.hero-badge::before { content: '★'; color: var(--ortho-aqua); font-size: 14px; }
+
+.hero-photo, .equipo-photo, .clinic-photo-main, .clinic-photo-secondary > div { position: relative !important; }
+.hero-photo img, .equipo-photo img, .clinic-photo-main img, .clinic-photo-secondary img {
+  width: 100% !important; height: 100% !important;
+  object-fit: cover !important; object-position: center center !important;
+  display: block !important; position: absolute !important; inset: 0 !important;
+}
+.hero-photo { aspect-ratio: 4/5 !important; width: 100% !important; }
+.clinic-photo-main { aspect-ratio: 1/1 !important; max-height: none !important; }
+@media (max-width: 1024px) { .hero-photo { max-width: 460px !important; margin: 0 auto !important; } }
+@media (min-width: 1025px) { .hero-inner { padding-left: 32px !important; padding-right: 32px !important; } }
+
+.testimonio-avatar { background: var(--sage-deep) !important; color: var(--cream) !important; display: flex !important; align-items: center !important; justify-content: center !important; font-family: 'Fraunces', Georgia, serif !important; font-size: 16px !important; font-weight: 500 !important; letter-spacing: 0.05em !important; }
+
+.service-card ul.service-list { list-style: none; padding: 0; margin: 16px 0 20px; font-family: 'Manrope', sans-serif; font-size: 13px; color: var(--text-soft); line-height: 1.65; }
+.service-card ul.service-list li { padding-left: 16px; position: relative; margin-bottom: 6px; }
+.service-card ul.service-list li::before { content: '·'; position: absolute; left: 4px; top: 0; font-weight: 700; color: var(--sage-deep); font-size: 18px; line-height: 1; }
+
+.services-extra { max-width: 1320px; margin: 56px auto 0; padding: 24px 32px 0; border-top: 1px solid var(--border); display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 20px 36px; font-family: 'Manrope', sans-serif; font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-soft); }
+.services-extra strong { color: var(--ortho-aqua); font-weight: 600; letter-spacing: 0.14em; }
+
+.casos-section { padding: 110px 0; background: var(--sage-soft); }
+.casos-section .section-header { padding: 0 32px; }
+.casos-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; max-width: 1320px; margin: 56px auto 0; padding: 0 32px; }
+.caso-card { background: #fff; border-radius: 16px; overflow: hidden; box-shadow: 0 2px 10px rgba(13,53,86,0.06); transition: transform 0.4s var(--t), box-shadow 0.4s var(--t); }
+.caso-card:hover { transform: translateY(-4px); box-shadow: 0 18px 36px rgba(13,53,86,0.14); }
+.caso-photo { position: relative; width: 100%; aspect-ratio: 1/1; overflow: hidden; background: #d4ecf2; }
+.caso-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s var(--t); }
+.caso-card:hover .caso-photo img { transform: scale(1.04); }
+.caso-info { padding: 18px 20px 22px; }
+.caso-tag { font-family: 'Manrope', sans-serif; font-size: 10px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ortho-aqua); margin-bottom: 8px; }
+.caso-info h3 { font-family: 'Fraunces', Georgia, serif; font-size: 18px; font-weight: 500; color: var(--sage-deepest); margin: 0 0 6px; letter-spacing: -0.005em; line-height: 1.3; }
+.caso-info p { font-family: 'Manrope', sans-serif; font-size: 13px; color: var(--text-soft); line-height: 1.55; margin: 0; }
+.casos-cta { text-align: center; margin-top: 48px; }
+.casos-cta a { display: inline-flex; align-items: center; gap: 8px; padding: 14px 32px; background: var(--sage-deep); color: var(--cream); text-decoration: none; border-radius: 100px; font-family: 'Manrope', sans-serif; font-weight: 500; font-size: 14px; letter-spacing: 0.02em; transition: opacity 0.2s, transform 0.3s; }
+.casos-cta a:hover { opacity: 0.92; transform: translateY(-1px); }
+.casos-cta svg { width: 16px; height: 16px; }
+@media (max-width: 1100px) { .casos-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .casos-grid { grid-template-columns: 1fr; max-width: 380px; } }
+
+.equipo-section { padding: 110px 32px; background: var(--cream-deep); }
+.equipo-hero { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 60px; align-items: center; max-width: 1180px; margin: 48px auto 0; }
+.equipo-hero-photo { position: relative; aspect-ratio: 4/5; border-radius: 18px; overflow: hidden; box-shadow: var(--shadow-md); background: #d4ecf2; }
+.equipo-hero-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 22%; }
+.equipo-hero-text .role-badge { font-family: 'Manrope', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); margin-bottom: 14px; display: inline-block; }
+.equipo-hero-text h3 { font-family: 'Fraunces', Georgia, serif; font-size: clamp(28px, 3.5vw, 40px); font-weight: 400; color: var(--sage-deepest); letter-spacing: -0.015em; margin: 0 0 8px; line-height: 1.1; }
+.equipo-hero-text .credencial { font-family: 'Fraunces', Georgia, serif; font-style: italic; font-size: 16px; color: var(--text-soft); margin-bottom: 24px; }
+.equipo-hero-text p { font-family: 'Fraunces', Georgia, serif; font-size: 16px; color: var(--text-soft); line-height: 1.7; margin-bottom: 14px; }
+.equipo-hero-stats { display: flex; gap: 36px; margin-top: 24px; flex-wrap: wrap; }
+.equipo-hero-stats > div { border-left: 2px solid var(--ortho-aqua); padding-left: 14px; }
+.equipo-hero-stats .num { font-family: 'Fraunces', Georgia, serif; font-size: 26px; font-weight: 500; color: var(--sage-deepest); letter-spacing: -0.02em; line-height: 1; }
+.equipo-hero-stats .label { font-family: 'Manrope', sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-soft); margin-top: 4px; }
+@media (max-width: 860px) { .equipo-hero { grid-template-columns: 1fr; gap: 36px; } .equipo-hero-photo { max-width: 380px; margin: 0 auto; } .equipo-hero-stats { gap: 24px; } }
+
+.profs-list-wrap { max-width: 1180px; margin: 80px auto 0; }
+.profs-list-wrap .profs-title { font-family: 'Manrope', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ortho-aqua); text-align: center; margin-bottom: 20px; }
+.profs-list-wrap .profs-subtitle { font-family: 'Fraunces', Georgia, serif; font-size: clamp(22px, 2.6vw, 30px); font-weight: 400; color: var(--sage-deepest); text-align: center; margin-bottom: 36px; letter-spacing: -0.01em; }
+.profs-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0 56px; border-top: 1px solid rgba(13,53,86,0.15); }
+.prof-row { display: flex; align-items: baseline; gap: 16px; padding: 18px 0; border-bottom: 1px solid rgba(13,53,86,0.10); font-family: 'Fraunces', Georgia, serif; transition: transform 0.3s var(--t); }
+.prof-row:hover { transform: translateX(4px); }
+.prof-row .prof-name { font-size: 17px; font-weight: 500; color: var(--sage-deepest); letter-spacing: -0.005em; flex: 1; line-height: 1.3; }
+.prof-row .prof-divider { color: rgba(13,53,86,0.3); font-weight: 300; font-size: 17px; }
+.prof-row .prof-specialty { font-family: 'Manrope', sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--sage-deep); text-align: right; flex-shrink: 0; line-height: 1.4; }
+@media (max-width: 720px) { .profs-list { grid-template-columns: 1fr; gap: 0; } .prof-row { flex-direction: column; align-items: flex-start; gap: 4px; padding: 14px 0; } .prof-row .prof-divider { display: none; } .prof-row .prof-specialty { text-align: left; font-size: 10.5px; } .prof-row .prof-name { font-size: 16px; } }
+
+.turismo-section { padding: 110px 0; background: var(--sage-deepest); color: var(--cream); }
+.turismo-wrap { max-width: 1320px; margin: 0 auto; padding: 0 32px; }
+.turismo-header { text-align: center; max-width: 720px; margin: 0 auto 56px; }
+.turismo-header .overline { font-family: 'Manrope', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ortho-aqua); display: inline-block; margin-bottom: 18px; }
+.turismo-header h2 { font-family: 'Fraunces', Georgia, serif; font-size: clamp(28px, 4vw, 44px); font-weight: 400; color: var(--cream) !important; letter-spacing: -0.015em; line-height: 1.15; margin-bottom: 18px; }
+.turismo-header h2 em { color: var(--ortho-aqua); font-style: italic; }
+.turismo-header p { font-family: 'Manrope', sans-serif; font-size: 16px; color: rgba(251, 251, 251, 0.78); line-height: 1.65; }
+.turismo-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; margin-bottom: 40px; }
+.turismo-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(135,202,214,0.18); border-radius: 18px; padding: 32px 26px; }
+.turismo-card .icon { display: inline-flex; align-items: center; justify-content: center; width: 48px; height: 48px; border-radius: 12px; background: rgba(59,170,190,0.16); color: var(--ortho-aqua); margin-bottom: 18px; }
+.turismo-card .icon svg { width: 22px; height: 22px; }
+.turismo-card h3 { font-family: 'Fraunces', Georgia, serif; font-size: 20px; font-weight: 500; color: var(--cream); margin: 0 0 10px; letter-spacing: -0.005em; }
+.turismo-card p { font-family: 'Manrope', sans-serif; font-size: 13.5px; line-height: 1.6; color: rgba(251,251,251,0.72); margin: 0; }
+.turismo-paises { display: flex; align-items: center; justify-content: center; gap: 16px 26px; flex-wrap: wrap; padding-top: 36px; border-top: 1px solid rgba(135,202,214,0.2); font-family: 'Manrope', sans-serif; font-size: 12px; color: rgba(251,251,251,0.78); letter-spacing: 0.08em; text-transform: uppercase; }
+.turismo-paises strong { color: var(--ortho-aqua); letter-spacing: 0.14em; font-weight: 600; }
+.turismo-cta { text-align: center; margin-top: 40px; }
+.turismo-cta a { display: inline-flex; align-items: center; gap: 8px; padding: 16px 36px; background: var(--ortho-aqua); color: var(--sage-deepest); text-decoration: none; border-radius: 100px; font-family: 'Manrope', sans-serif; font-weight: 600; font-size: 14px; letter-spacing: 0.04em; transition: transform 0.3s, background 0.3s; }
+.turismo-cta a:hover { background: var(--ortho-soft); transform: translateY(-2px); }
+.turismo-cta svg { width: 16px; height: 16px; }
+@media (max-width: 1024px) { .turismo-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .turismo-grid { grid-template-columns: 1fr; } .turismo-section { padding: 70px 0; } }
+
+.sede-wrap { max-width: 1100px; margin: 56px auto 0; padding: 0 32px; }
+.sede-card-big { background: #fff; border-radius: 20px; overflow: hidden; box-shadow: 0 2px 14px rgba(13,53,86,0.08); display: grid; grid-template-columns: 1fr 1fr; }
+.sede-card-big .sede-map { aspect-ratio: 4/3; background: #d4ecf2; position: relative; min-height: 360px; }
+.sede-card-big .sede-map iframe { width: 100%; height: 100%; border: 0; display: block; }
+.sede-card-big .sede-info { padding: 40px 44px; display: flex; flex-direction: column; gap: 8px; justify-content: center; }
+.sede-card-big .sede-tag { font-family: 'Manrope', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
+.sede-card-big h3 { font-family: 'Fraunces', serif; font-weight: 400; font-size: 26px; color: var(--sage-deepest); margin: 0 0 4px; letter-spacing: -0.005em; }
+.sede-card-big .sede-address { font-family: 'Manrope', sans-serif; font-size: 15px; color: var(--text-soft); line-height: 1.6; margin: 8px 0 18px; }
+.sede-card-big .sede-contact { display: flex; flex-direction: column; gap: 8px; }
+.sede-card-big .sede-contact a { font-family: 'Manrope', sans-serif; font-size: 14px; color: var(--sage-deep); text-decoration: none; font-weight: 500; display: inline-flex; align-items: center; gap: 8px; }
+.sede-card-big .sede-contact a:hover { text-decoration: underline; }
+.sede-card-big .sede-contact svg { width: 16px; height: 16px; flex-shrink: 0; }
+.sede-card-big .ver-mapa { display: inline-flex; align-items: center; gap: 6px; margin-top: 8px; font-family: 'Manrope', sans-serif; font-size: 13px; color: var(--charcoal); text-decoration: underline; text-underline-offset: 3px; }
+@media (max-width: 860px) { .sede-card-big { grid-template-columns: 1fr; } .sede-card-big .sede-map { aspect-ratio: 16/10; min-height: 280px; } .sede-card-big .sede-info { padding: 28px 24px; } .sede-card-big h3 { font-size: 22px; } }
+</style>
+</head>
+<body>
+
+<div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
+<nav class="navbar" id="navbar">
+  <button class="nav-burger" id="navBurger" aria-label="Abrir menú">
+    <svg viewBox="0 0 24 24" fill="none"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+  </button>
+  <a href="index.html" class="nav-logo" aria-label="Orthoestética · By Dra. Laura Castro"><img src="img/logo-ortho-dark.png" alt="Orthoestética · By Dra. Laura Castro"></a>
+  <ul class="nav-links">
+    <li><a href="index.html" class="active">Inicio</a></li>
+    <li><a href="nosotros.html">Nosotros</a></li>
+    <li><a href="#servicios">Tratamientos</a></li>
+    <li><a href="#casos">Casos</a></li>
+    <li><a href="#turismo">Turismo dental</a></li>
+    <li><a href="contacto.html">Contacto</a></li>
+  </ul>
+  <div class="nav-actions">
+    <a href="tel:+573195764867" class="nav-phone">+57 319 576 4867</a>
+    <a href="https://wa.me/573195764867?text=Hola%20Orthoest%C3%A9tica,%20quiero%20agendar%20una%20cita" target="_blank" class="nav-cta">Pedir cita</a>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-menu-close" id="mobileMenuClose" aria-label="Cerrar menú">
+    <svg viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+  </button>
+  <ul>
+    <li><a href="index.html">Inicio</a></li>
+    <li><a href="nosotros.html">Nosotros</a></li>
+    <li><a href="#servicios">Tratamientos</a></li>
+    <li><a href="#casos">Casos</a></li>
+    <li><a href="#turismo">Turismo dental</a></li>
+    <li><a href="contacto.html">Contacto</a></li>
+    <li><a href="tel:+573195764867">+57 319 576 4867</a></li>
+  </ul>
+</div>
+
+<section class="hero" id="home">
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="hero-rule"></div>
+      <span class="hero-badge">Top Doctor Invisalign · Colombia</span>
+      <h1>Sonría<br>con confianza</h1>
+      <p class="hero-lead">Clínica dental integral en Bogotá. Más de 14 años transformando sonrisas con la Dra. Laura Castro y un equipo de 10 profesionales en 9 especialidades odontológicas, escáner iTero 5D NIRI y láser de diodo Gemini.</p>
+      <div class="hero-actions">
+        <a href="https://wa.me/573195764867?text=Hola%20Orthoest%C3%A9tica,%20quiero%20agendar%20una%20cita" target="_blank" class="hero-cta">Pedir cita por WhatsApp</a>
+        <a href="contacto.html" class="hero-link">O ver contacto</a>
+      </div>
+    </div>
+    <div class="hero-photo">
+      <img src="img/hero-modelo.jpg" alt="Dra. Laura Castro · Orthoestética Bogotá" loading="eager">
+    </div>
+  </div>
+</section>
+
+<section class="section clinic">
+  <div class="section-header reveal">
+    <div class="section-rule"><span class="section-rule-text">Nuestra clínica</span></div>
+  </div>
+
+  <div class="clinic-grid reveal">
+    <div class="clinic-photo-main">
+      <img src="img/clinica-consultorio.jpg" alt="Dra. Laura Castro · Directora Orthoestética" loading="lazy">
+    </div>
+    <div class="clinic-text">
+      <div class="overline">By Dra. Laura Castro</div>
+      <h3>Sonrisas que cambian vidas</h3>
+      <p>En Orthoestética combinamos tecnología avanzada, especialistas en cada área y un enfoque humano para ofrecerle un tratamiento odontológico integral. Atendemos pacientes desde los 4 años con casos clínicos de alta complejidad, siempre con los mejores materiales y resultados duraderos.</p>
+      <p>Nuestra directora, la Dra. Laura Castro, es Top Doctor Invisalign Colombia durante 4 años consecutivos y máster en ortodoncia invisible por Innovation São Paulo. Con 16 años de experiencia clínica y actualizaciones internacionales en Filadelfia, Nueva York, San Francisco y Miami, lidera un equipo de 10 profesionales que conoce cada caso desde el primer día.</p>
+      <a href="nosotros.html" class="learn-more">Conozca al equipo <svg viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+    </div>
+  </div>
+
+  <div class="clinic-grid clinic-grid-photos reveal">
+    <div class="clinic-photo-secondary">
+      <div><img src="img/clinica-recepcion.jpg" alt="Caso de diseño de sonrisa antes y después · Orthoestética" loading="lazy"></div>
+      <div><img src="img/clinica-sala-espera.jpg" alt="Resultado de diseño de sonrisa · Orthoestética" loading="lazy"></div>
+    </div>
+    <div class="clinic-text">
+      <div class="overline">Resultados que se ven</div>
+      <h3>Casos reales que respaldan nuestro trabajo</h3>
+      <p>Más de 14 casos clínicos publicados con fotos antes y después. Cada paciente representa un proceso completo desde el diagnóstico hasta el resultado final, con la misma técnica y cuidado que aplicamos a quienes confían en nosotros.</p>
+      <p>Tecnología que respalda cada diagnóstico: escáner intraoral iTero 5D con NIRI para impresiones sin moldes, simulación digital de sonrisa antes de iniciar el tratamiento y láser de diodo Gemini™ de doble longitud de onda para procedimientos en tejidos blandos con menos dolor y mejor cicatrización.</p>
+      <a href="#casos" class="learn-more">Ver casos antes y después <svg viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+    </div>
+  </div>
+
+  <div class="clinic-bottom reveal">
+    <div>
+      <h4>Top Doctor Invisalign</h4>
+      <p>Cuatro años consecutivos galardonada por los resultados Invisalign con la Dra. Laura Castro, máster en ortodoncia invisible.</p>
+    </div>
+    <div>
+      <h4>Tecnología iTero 5D NIRI</h4>
+      <p>Escáner intraoral con tecnología NIRI para diagnóstico digital sin moldes incómodos y planeación 3D previa al tratamiento.</p>
+    </div>
+    <div>
+      <h4>14 años de experiencia</h4>
+      <p>Equipo trabajando como grupo desde hace 12 años. ORTHOESTETICA SAS con 8 años en el mercado odontológico bogotano.</p>
+    </div>
+  </div>
+</section>
+
+<section class="services-section" id="servicios">
+  <div class="section-header reveal">
+    <div class="section-rule"><span class="section-rule-text">Nuestros tratamientos</span></div>
+    <p style="font-family: 'Manrope', sans-serif; font-size: 13px; color: var(--text-soft); letter-spacing: 0.1em; margin-top: 12px;">NUEVE ESPECIALIDADES ODONTOLÓGICAS BAJO UN MISMO TECHO</p>
+  </div>
+
+  <div class="services-grid">
+    <div class="service-card reveal">
+      <h3>Ortodoncia</h3>
+      <p>Corregimos la posición de los dientes y la mordida con todas las técnicas modernas, desde alternativas estéticas hasta brackets convencionales. Cada plan se diseña tras un diagnóstico digital con escáner intraoral.</p>
+      <ul class="service-list">
+        <li>Brackets de zafiro (estéticos y discretos)</li>
+        <li>Brackets autoligados metálicos y cerámicos</li>
+        <li>Brackets metálicos Micro Sprint Forestadent</li>
+        <li>Ortodoncia lingual (totalmente invisible)</li>
+        <li>Ortopedia maxilar para niños y adolescentes</li>
+      </ul>
+      <a href="https://wa.me/573195764867?text=Hola%20Orthoest%C3%A9tica,%20me%20interesa%20Ortodoncia" target="_blank" class="learn-more">Pedir cita <svg viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+    </div>
+
+    <div class="service-card reveal">
+      <h3>Invisalign</h3>
+      <p>Sistema de alineadores transparentes hechos a la medida. Nuestra Dra. Laura Castro es Top Doctor Invisalign Colombia durante cuatro años consecutivos. Trabajamos con escáner iTero 5D y planeación 3D antes de iniciar el tratamiento.</p>
+      <ul class="service-list">
+        <li>Alineadores transparentes y removibles</li>
+        <li>Planeación digital 3D previa al tratamiento</li>
+        <li>Indicado en apiñamiento, mordida abierta, sobremordida</li>
+        <li>Acompañamiento personalizado durante el proceso</li>
+      </ul>
+      <a href="https://wa.me/573195764867?text=Hola%20Orthoest%C3%A9tica,%20me%20interesa%20Invisalign" target="_blank" class="learn-more">Pedir cita <svg viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+    </div>
+
+    <div class="service-card reveal">
+      <h3>Rehabilitación oral</h3>
+      <p>Restauramos la estética y la función masticatoria mediante planes integrales que combinan implantes, coronas, prótesis y diseño de sonrisa. Diagnóstico preciso con escáner intraoral y radiografías digitales.</p>
+      <ul class="service-list">
+        <li>Implantes dentales en titanio</li>
+        <li>Coronas en cerámica, zirconio o metal porcelana</li>
+        <li>Prótesis fija atornillada sobre implantes</li>
+        <li>Prótesis removibles totales o parciales</li>
+      </ul>
+      <a href="https://wa.me/573195764867?text=Hola%20Orthoest%C3%A9tica,%20me%20interesa%20Rehabilitaci%C3%B3n%20oral" target="_blank" class="learn-more">Pedir cita <svg viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+    </div>
+
+    <div class="service-card reveal">
+      <h3>Diseño de sonrisa</h3>
+      <p>Combinamos carillas, blanqueamiento y reconfiguración estética con tecnología digital previa para mostrarle el resultado antes de iniciar. Procedimientos mínimamente invasivos y de alta durabilidad.</p>
+      <ul class="service-list">
+        <li>Carillas en resina (4 a 7 años de duración)</li>
+        <li>Carillas en cerámica (10 a 15 años o más)</li>
+        <li>Diseño digital de sonrisa (DSD)</li>
+        <li>Materiales premium con acabado natural</li>
+      </ul>
+      <a href="https://wa.me/573195764867?text=Hola%20Orthoest%C3%A9tica,%20me%20interesa%20Dise%C3%B1o%20de%20sonrisa" target="_blank" class="learn-more">Pedir cita <svg viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+    </div>
+
+    <div class="service-card reveal">
+      <h3>Implantología</h3>
+      <p>Reemplazamos dientes perdidos con implantes de titanio que se integran al hueso maxilar. Le devolvemos la funcionalidad para comer, hablar y sonreír con naturalidad. Cirugía guiada y planeación digital para máxima precisión.</p>
+      <ul class="service-list">
+        <li>Implantes endo-óseos en titanio</li>
+        <li>Implantes subperiósticos cuando aplica</li>
+        <li>Tiempo total del tratamiento: 3 a 6 meses</li>
+        <li>Durabilidad: toda la vida con cuidados adecuados</li>
+      </ul>
+      <a href="https://wa.me/573195764867?text=Hola%20Orthoest%C3%A9tica,%20me%20interesa%20Implantes" target="_blank" class="learn-more">Pedir cita <svg viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+    </div>
+
+    <div class="service-card reveal">
+      <h3>Odontopediatría</h3>
+      <p>Atendemos la salud dental de niños y adolescentes desde los 4 años. Prevenimos y diagnosticamos a tiempo caries, alteraciones de mordida y problemas en encías para corregirlos durante el desarrollo.</p>
+      <ul class="service-list">
+        <li>Atención especializada para niños y adolescentes</li>
+        <li>Prevención de caries y enfermedades de encías</li>
+        <li>Educación en higiene bucal infantil</li>
+        <li>Tratamientos restaurativos pediátricos</li>
+      </ul>
+      <a href="https://wa.me/573195764867?text=Hola%20Orthoest%C3%A9tica,%20me%20interesa%20Odontopediatr%C3%ADa" target="_blank" class="learn-more">Pedir cita <svg viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+    </div>
+  </div>
+
+  <div class="services-extra reveal">
+    <strong>También atendemos:</strong>
+    <span>Periodoncia</span>
+    <span>Endodoncia (tratamiento de conducto)</span>
+    <span>Cirugía maxilofacial</span>
+    <span>Láser de diodo Gemini™</span>
+  </div>
+</section>
+
+<section class="casos-section" id="casos">
+  <div class="section-header reveal">
+    <div class="section-rule"><span class="section-rule-text">Casos reales</span></div>
+    <p style="font-family: 'Manrope', sans-serif; font-size: 13px; color: var(--text-soft); letter-spacing: 0.1em; margin-top: 12px;">ANTES Y DESPUÉS · PACIENTES VERIFICABLES</p>
+  </div>
+
+  <div class="casos-grid reveal">
+    <div class="caso-card">
+      <div class="caso-photo"><img src="img/caso-disenio-sonrisa-1.jpg" alt="Caso 1 · Diseño de sonrisa antes y después" loading="lazy"></div>
+      <div class="caso-info">
+        <div class="caso-tag">Diseño de sonrisa</div>
+        <h3>Cierre de diastema</h3>
+        <p>Carillas en cerámica con planeación digital previa.</p>
+      </div>
+    </div>
+
+    <div class="caso-card">
+      <div class="caso-photo"><img src="img/caso-disenio-sonrisa-2.jpg" alt="Caso 2 · Diseño de sonrisa antes y después" loading="lazy"></div>
+      <div class="caso-info">
+        <div class="caso-tag">Diseño de sonrisa</div>
+        <h3>Rehabilitación estética</h3>
+        <p>Combinación de carillas y reconfiguración del borde incisal.</p>
+      </div>
+    </div>
+
+    <div class="caso-card">
+      <div class="caso-photo"><img src="img/caso-disenio-sonrisa-3.jpg" alt="Caso 3 · Diseño de sonrisa antes y después" loading="lazy"></div>
+      <div class="caso-info">
+        <div class="caso-tag">Diseño de sonrisa</div>
+        <h3>Diseño armónico</h3>
+        <p>Carillas mínimamente invasivas con acabado natural.</p>
+      </div>
+    </div>
+
+    <div class="caso-card">
+      <div class="caso-photo"><img src="img/caso-disenio-sonrisa-4.jpg" alt="Caso 4 · Diseño de sonrisa antes y después" loading="lazy"></div>
+      <div class="caso-info">
+        <div class="caso-tag">Diseño de sonrisa</div>
+        <h3>Translucidez natural</h3>
+        <p>Cerámica feldespática con anatomía dental real.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="casos-cta reveal">
+    <a href="https://wa.me/573195764867?text=Hola%20Orthoest%C3%A9tica,%20quiero%20ver%20m%C3%A1s%20casos%20cl%C3%ADnicos" target="_blank">
+      Ver más casos por WhatsApp
+      <svg viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    </a>
+  </div>
+</section>
+
+<section class="equipo-section" id="equipo">
+  <div class="section-header reveal">
+    <div class="section-rule"><span class="section-rule-text">Nuestro equipo</span></div>
+  </div>
+
+  <div class="equipo-hero reveal">
+    <div class="equipo-hero-photo">
+      <img src="img/laura-castro-bust.jpg" alt="Dra. Laura Castro · CEO Orthoestética">
+    </div>
+    <div class="equipo-hero-text">
+      <span class="role-badge">Directora · CEO · Top Doctor Invisalign Colombia</span>
+      <h3>Dra. Laura Castro</h3>
+      <div class="credencial">Odontóloga · Ortodoncista · Ortopedista maxilar con énfasis en estética dental</div>
+      <p>Máster en ortodoncia invisible por Innovation São Paulo 2024. Top Doctor Invisalign Colombia durante cuatro años consecutivos, galardonada por los resultados que entrega a sus pacientes con esta técnica.</p>
+      <p>Graduada con mención de honor y tesis laureada. Diplomados y actualizaciones internacionales en Filadelfia, Nueva Orleans, San Francisco, Nueva York, San Diego, Miami, Orlando, Washington y Boston. Diplomado en gerencia en salud.</p>
+      <div class="equipo-hero-stats">
+        <div>
+          <div class="num">16</div>
+          <div class="label">Años de experiencia</div>
+        </div>
+        <div>
+          <div class="num">4</div>
+          <div class="label">Top Doctor Invisalign</div>
+        </div>
+        <div>
+          <div class="num">10</div>
+          <div class="label">Profesionales en equipo</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="profs-list-wrap reveal">
+    <div class="profs-title">Equipo de especialistas</div>
+    <div class="profs-subtitle">Nueve profesionales que trabajan con la Dra. Laura</div>
+    <div class="profs-list">
+      <div class="prof-row"><span class="prof-name">Dr. Angel Soto</span><span class="prof-divider">|</span><span class="prof-specialty">Estética dental · Rehabilitación</span></div>
+      <div class="prof-row"><span class="prof-name">Dr. Sergio Rodríguez</span><span class="prof-divider">|</span><span class="prof-specialty">Rehabilitación oral</span></div>
+      <div class="prof-row"><span class="prof-name">Dra. Ana María Pérez</span><span class="prof-divider">|</span><span class="prof-specialty">Ortodoncia · Ortopedia maxilar</span></div>
+      <div class="prof-row"><span class="prof-name">Dr. John Alexander Suárez</span><span class="prof-divider">|</span><span class="prof-specialty">Periodoncia</span></div>
+      <div class="prof-row"><span class="prof-name">Dr. Jorge Páez</span><span class="prof-divider">|</span><span class="prof-specialty">Cirugía maxilofacial</span></div>
+      <div class="prof-row"><span class="prof-name">Dra. Paola González</span><span class="prof-divider">|</span><span class="prof-specialty">Odontología pediátrica</span></div>
+      <div class="prof-row"><span class="prof-name">Dra. Geraldine Salcedo</span><span class="prof-divider">|</span><span class="prof-specialty">Estética dental · Láser</span></div>
+      <div class="prof-row"><span class="prof-name">Dr. Camilo García</span><span class="prof-divider">|</span><span class="prof-specialty">Odontología general · Estética</span></div>
+      <div class="prof-row"><span class="prof-name">Edgar Cruz</span><span class="prof-divider">|</span><span class="prof-specialty">Coordinación administrativa</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="turismo-section" id="turismo">
+  <div class="turismo-wrap">
+    <div class="turismo-header reveal">
+      <span class="overline">Turismo dental</span>
+      <h2>Sonríale al mundo desde <em>Bogotá</em></h2>
+      <p>Colombia es un destino líder en turismo dental. En Orthoestética coordinamos un plan todo incluido para que reciba su tratamiento mientras disfruta de la ciudad. Especialistas bilingües, tecnología de punta y costos accesibles desde cualquier país.</p>
+    </div>
+
+    <div class="turismo-grid reveal">
+      <div class="turismo-card">
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 L19 9 L19 22 L5 22 L5 9 Z"/><path d="M9 14 h6 M9 18 h6"/></svg></div>
+        <h3>Tratamientos</h3>
+        <p>Plan personalizado con cada uno de nuestros especialistas según su caso clínico. Atención integral en una sola sede.</p>
+      </div>
+      <div class="turismo-card">
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21 v-7 a3 3 0 0 1 3-3 h12 a3 3 0 0 1 3 3 v7 M3 14 h18 M7 11 V8 a5 5 0 0 1 10 0 v3"/></svg></div>
+        <h3>Hospedaje</h3>
+        <p>Opciones de alojamiento que se adaptan a su gusto y presupuesto, con bioseguridad certificada y buena ubicación.</p>
+      </div>
+      <div class="turismo-card">
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/><path d="M5 17 H3 V13 l2-5 h10 l2 5 v4 h-2 M9 17 h6 M5 13 h14"/></svg></div>
+        <h3>Transporte</h3>
+        <p>Coordinamos sus traslados, lo recibimos en el aeropuerto y nos encargamos de las rutas agendadas en su plan.</p>
+      </div>
+      <div class="turismo-card">
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 v6 a3 3 0 0 0 3 3 v11 M15 2 v6 a3 3 0 0 1 -3 3 M18 2 v20"/></svg></div>
+        <h3>Alimentación</h3>
+        <p>Disfrute de la cocina colombiana en restaurantes destacados. Acompañamos cada experiencia con detalle.</p>
+      </div>
+    </div>
+
+    <div class="turismo-paises reveal">
+      <strong>Atendemos pacientes de:</strong>
+      <span>Ecuador</span>
+      <span>Panamá</span>
+      <span>Puerto Rico</span>
+      <span>Estados Unidos</span>
+    </div>
+
+    <div class="turismo-cta reveal">
+      <a href="https://wa.me/573195764867?text=Hola%20Orthoest%C3%A9tica,%20quiero%20informaci%C3%B3n%20del%20plan%20de%20turismo%20dental" target="_blank">
+        Conocer el plan turismo dental
+        <svg viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-header reveal">
+    <div class="section-rule"><span class="section-rule-text">Dónde estamos</span></div>
+  </div>
+
+  <div class="sede-wrap reveal">
+    <div class="sede-card-big">
+      <div class="sede-map">
+        <iframe
+          src="https://maps.google.com/maps?q=Calle%2097%20%2323-37%20Consultorio%20411%20Centro%20Medico%20Dali%20Bogota%20Colombia&t=&z=16&ie=UTF8&iwloc=&output=embed"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Mapa Orthoestética · Centro Médico Dali Bogotá"></iframe>
+      </div>
+      <div class="sede-info">
+        <span class="sede-tag">Bogotá · Centro Médico Dali</span>
+        <h3>Consultorios 411 y 412 · Torre Médica</h3>
+        <p class="sede-address">Calle 97 # 23-37<br>Centro Médico Dali · Consultorios 411 y 412<br>Bogotá D.C., Colombia</p>
+        <div class="sede-contact">
+          <a href="https://wa.me/573195764867" target="_blank">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.6 6.3A7.85 7.85 0 0 0 12 4a7.93 7.93 0 0 0-7.93 7.93 7.83 7.83 0 0 0 1.06 3.95L4 20l4.22-1.1a7.94 7.94 0 0 0 3.78.97h.01A7.94 7.94 0 0 0 20 11.97 7.86 7.86 0 0 0 17.6 6.3z"/></svg>
+            WhatsApp +57 319 576 4867
+          </a>
+          <a href="tel:+573195764867">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.33 1.85.56 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            +57 319 576 4867
+          </a>
+          <a href="https://maps.google.com/maps?q=Calle+97+%2323-37+Centro+Medico+Dali+Bogota+Colombia" target="_blank" class="ver-mapa">Ver en Google Maps</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="testimonios-section">
+  <div class="section-header reveal">
+    <div class="section-rule"><span class="section-rule-text">Lo que dicen nuestros pacientes</span></div>
+    <p style="font-family: 'Manrope', sans-serif; font-size: 13px; color: var(--text-soft); letter-spacing: 0.1em; margin-top: 12px;">RESEÑAS REALES · 5.0 ★ GOOGLE</p>
+  </div>
+
+  <div class="testimonios-grid">
+    <div class="testimonio-card reveal">
+      <div class="testimonio-stars">★★★★★</div>
+      <blockquote>"La mejor profesional del mundo. Una bendición haber encontrado a la Dra. Laura. Profesionalismo, confianza y un equipo de trabajo maravilloso. Amo mi proceso y los resultados tan lindos en este tiempo. Súper recomendado."</blockquote>
+      <div class="testimonio-author">
+        <div class="testimonio-avatar">PR</div>
+        <div>
+          <div class="testimonio-author-name">Pilar Rocha</div>
+          <div class="testimonio-author-meta">Tratamiento de ortodoncia</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="testimonio-card reveal">
+      <div class="testimonio-stars">★★★★★</div>
+      <blockquote>"Excelente servicio, estoy en mi tratamiento de ortodoncia con la doctora Laura Castro y estoy muy contenta por los resultados obtenidos. Trabajan de una forma excelente y muy profesional. Aparte de ser unas personas maravillosas, lo tratan a uno muy lindo y con mucha profesionalidad."</blockquote>
+      <div class="testimonio-author">
+        <div class="testimonio-avatar">JF</div>
+        <div>
+          <div class="testimonio-author-name">Jessica Fajardo</div>
+          <div class="testimonio-author-meta">Tratamiento de ortodoncia</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="testimonio-card reveal">
+      <div class="testimonio-stars">★★★★★</div>
+      <blockquote>"Lo recomiendo 100%. La Dra. Laura y todo el equipo hacen un trabajo excelente y el consultorio es muy lindo. Siempre lo reciben con la mejor actitud. La Dra. Laura siempre ha escuchado todas mis necesidades buscando alternativas y soluciones, lo hace sentir como en casa en cada control."</blockquote>
+      <div class="testimonio-author">
+        <div class="testimonio-avatar">EC</div>
+        <div>
+          <div class="testimonio-author-name">Elisa Marcela Carrillo</div>
+          <div class="testimonio-author-meta">Paciente Orthoestética</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="faq">
+  <h2>Preguntas frecuentes</h2>
+  <div class="faq-list">
+    <div class="faq-item open">
+      <div class="faq-question">
+        Qué hace diferente a Orthoestética
+        <div class="faq-toggle"><svg viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+      </div>
+      <div class="faq-answer"><div class="faq-answer-inner">Nuestra directora, la Dra. Laura Castro, es Top Doctor Invisalign Colombia durante cuatro años consecutivos. Reunimos 10 profesionales en nueve especialidades odontológicas en una sola sede, con tecnología iTero 5D NIRI y láser de diodo Gemini. En lugar de visitar cuatro consultorios para un caso integral, coordinamos todo desde un mismo equipo.</div></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question">
+        Cuánto dura un tratamiento de Invisalign
+        <div class="faq-toggle"><svg viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+      </div>
+      <div class="faq-answer"><div class="faq-answer-inner">Entre 4 y 18 meses, dependiendo de la complejidad del caso. Los alineadores deben usarse 20 a 22 horas al día. Antes de iniciar le mostramos en 3D cómo evolucionará su sonrisa con el escáner iTero. Al terminar entregamos retenedores Vivera para mantener el resultado.</div></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question">
+        Cómo funciona el plan de turismo dental
+        <div class="faq-toggle"><svg viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+      </div>
+      <div class="faq-answer"><div class="faq-answer-inner">Coordinamos un plan todo incluido con tratamiento, hospedaje, transporte y alimentación. La estadía típica es de 2 a 10 días según el procedimiento. Atendemos pacientes desde Ecuador, Panamá, Puerto Rico y Estados Unidos. Escríbanos por WhatsApp para enviarle el itinerario y costos según su caso.</div></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question">
+        Atienden niños y adolescentes
+        <div class="faq-toggle"><svg viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+      </div>
+      <div class="faq-answer"><div class="faq-answer-inner">Sí. Atendemos pacientes desde los 4 años con odontopediatría especializada. La Dra. Paola González lidera los casos pediátricos, con enfoque en prevención y formación de hábitos. También ofrecemos ortopedia maxilar para corregir el desarrollo óseo durante el crecimiento.</div></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question">
+        Cómo agendo mi primera cita
+        <div class="faq-toggle"><svg viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+      </div>
+      <div class="faq-answer"><div class="faq-answer-inner">Escríbanos por WhatsApp al +57 319 576 4867 indicando el tratamiento que le interesa. Le confirmamos disponibilidad el mismo día y le agendamos con el especialista indicado para su caso. La primera valoración es sin compromiso.</div></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question">
+        Los tratamientos son dolorosos
+        <div class="faq-toggle"><svg viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+      </div>
+      <div class="faq-answer"><div class="faq-answer-inner">No. Usamos anestesia local de última generación y el láser de diodo Gemini para tejidos blandos, que reduce sangrado, dolor y tiempo de cicatrización. En endodoncia trabajamos con instrumental moderno y en ortodoncia con técnicas autoligadas de baja fricción.</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-final">
+  <h2>Sonría con confianza desde hoy</h2>
+  <p>Pida su primera valoración en Orthoestética. Le atendemos en Centro Médico Dali, Bogotá, con un plan personalizado según su caso.</p>
+  <div class="cta-final-actions">
+    <a href="https://wa.me/573195764867?text=Hola%20Orthoest%C3%A9tica,%20quiero%20agendar%20mi%20primera%20valoraci%C3%B3n" target="_blank" class="cta-final-btn">
+      Pedir cita por WhatsApp
+      <svg viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    </a>
+    <a href="contacto.html" class="cta-final-btn outline">Ver más formas de contacto</a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <img src="img/logo-ortho-light.png" alt="Orthoestética · By Dra. Laura Castro" class="footer-logo">
+      <div class="footer-brand-name">Orthoestética</div>
+      <p>Clínica dental integral en Bogotá. Top Doctor Invisalign Colombia. Nueve especialidades odontológicas con la Dra. Laura Castro y un equipo de 10 profesionales. Atendemos pacientes nacionales e internacionales.</p>
+      <div class="footer-social">
+        <a href="https://wa.me/573195764867" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.6 6.3A7.85 7.85 0 0 0 12 4a7.93 7.93 0 0 0-7.93 7.93 7.83 7.83 0 0 0 1.06 3.95L4 20l4.22-1.1a7.94 7.94 0 0 0 3.78.97h.01A7.94 7.94 0 0 0 20 11.97 7.86 7.86 0 0 0 17.6 6.3z"/></svg></a>
+        <a href="https://www.instagram.com/orthoesteticalc/" target="_blank" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="3.5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a>
+        <a href="https://www.facebook.com/orthoestetical" target="_blank" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95z"/></svg></a>
+      </div>
+    </div>
+
+    <div class="footer-col">
+      <h4>Tratamientos</h4>
+      <ul>
+        <li><a href="#servicios">Invisalign</a></li>
+        <li><a href="#servicios">Ortodoncia</a></li>
+        <li><a href="#servicios">Rehabilitación oral</a></li>
+        <li><a href="#servicios">Diseño de sonrisa</a></li>
+        <li><a href="#servicios">Implantología</a></li>
+        <li><a href="#servicios">Odontopediatría</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Información</h4>
+      <ul>
+        <li><a href="nosotros.html">Nosotros</a></li>
+        <li><a href="#casos">Casos antes y después</a></li>
+        <li><a href="#turismo">Turismo dental</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Sede</h4>
+      <ul>
+        <li>Calle 97 # 23-37</li>
+        <li>Cons. 411 y 412</li>
+        <li>Centro Médico Dali</li>
+        <li>Bogotá D.C., Colombia</li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Contacto</h4>
+      <ul>
+        <li><a href="https://wa.me/573195764867">+57 319 576 4867</a></li>
+        <li><a href="tel:+573195764867">Llamar directo</a></li>
+        <li><a href="mailto:orthoesteticalc@gmail.com">orthoesteticalc@gmail.com</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Orthoestética SAS · Muestra Pronto</span>
+    <span>Calle 97 # 23-37 · Centro Médico Dali · Bogotá D.C.</span>
+  </div>
+</footer>
+
+<a href="https://wa.me/573195764867?text=Hola%20Orthoest%C3%A9tica" target="_blank" class="wa-float" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.371-.025-.52-.075-.149-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+</a>
+
+<script>
+  if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; }
+  window.addEventListener('beforeunload', () => window.scrollTo(0, 0));
+  const navbar = document.getElementById('navbar');
+  if (navbar) {
+    const onScroll = () => navbar.classList.toggle('scrolled', window.scrollY > 60);
+    window.addEventListener('scroll', onScroll, { passive: true });
+  }
+  const burger = document.getElementById('navBurger');
+  const menu = document.getElementById('mobileMenu');
+  const menuClose = document.getElementById('mobileMenuClose');
+  if (burger && menu) {
+    burger.addEventListener('click', () => menu.classList.add('open'));
+    menuClose && menuClose.addEventListener('click', () => menu.classList.remove('open'));
+    menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => menu.classList.remove('open')));
+  }
+  document.querySelectorAll('.faq-item').forEach(item => {
+    const q = item.querySelector('.faq-question');
+    q && q.addEventListener('click', () => item.classList.toggle('open'));
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
+<script src="assets/animations.js?v=20260525a" defer></script>
+
+</body>
+</html>

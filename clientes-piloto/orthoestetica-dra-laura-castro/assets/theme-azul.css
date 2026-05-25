@@ -1,0 +1,70 @@
+/* ═══════════════════════════════════════════════════════════
+   ORTHOESTÉTICA · Theme AZUL (paleta extraída del logo oficial)
+   Azul corporativo profundo + turquesa marca + cobre acento.
+   Sobrescribe variables Atelier sage sin tocar styles.css.
+   ═══════════════════════════════════════════════════════════ */
+
+:root {
+  /* Paleta extraída del logo Orthoestética */
+  --ortho-deepest:  #0d3556;   /* azul corporativo profundo (texto Orthoestética) */
+  --ortho-deep:     #104169;   /* azul principal (botones, navbar oscuro) */
+  --ortho-mid:      #1a5e8a;   /* intermedio (hover, accents secundarios) */
+  --ortho-aqua:     #3baabe;   /* turquesa marca (símbolo del logo) */
+  --ortho-soft:     #87cad6;   /* turquesa claro (hover, badges) */
+  --ortho-bg:       #e8f4f7;   /* fondo hero claro */
+  --ortho-bg-2:     #d4ecf2;   /* fondo hero más saturado */
+  --gray-bg:        #fbfbfb;
+
+  /* === Mapeo Atelier sage → Azul Orthoestética === */
+  --sage-bg:      #e8f4f7;      /* hero background light */
+  --sage-soft:    #f0f7f9;      /* sections alt-bg suave */
+  --sage-deep:    #104169;      /* botones primarios + headings */
+  --sage-deepest: #0d3556;      /* texto principal */
+  --cream:        #fbfbfb;      /* fondo principal */
+  --cream-deep:   #ecf3f6;      /* equipo section */
+  --accent:       #c97a3d;      /* acento cobre (idéntico Atelier — combina con azul profundo) */
+  --accent-soft:  #d99860;
+  --text:         #0d3556;
+  --text-soft:    #4a6478;
+  --border:       #cbdde5;
+  --charcoal:     #0d3556;
+
+  /* Shadows con tinte azul */
+  --shadow-sm: 0 2px 6px rgba(13,53,86,0.08);
+  --shadow-md: 0 14px 38px rgba(13,53,86,0.12);
+  --shadow-lg: 0 30px 70px rgba(13,53,86,0.18);
+}
+
+/* === Overrides específicos para piezas con colores hardcoded === */
+
+/* Hero gradient: del sage al azul orthoestética */
+.hero { background: linear-gradient(to left, var(--sage-bg) 30%, #c8e0ea 100%) !important; }
+.hero-compact { background: linear-gradient(to left, var(--sage-bg) 30%, #c8e0ea 100%) !important; }
+.section.alt-bg { background: var(--sage-soft) !important; }
+
+/* Testimonios avatares: azul deep */
+.testimonio-avatar { background: var(--sage-deep) !important; color: var(--cream) !important; }
+
+/* FAQ borders azules */
+.faq-list { border-top-color: rgba(13,53,86,0.18) !important; }
+.faq-item { border-bottom-color: rgba(13,53,86,0.18) !important; }
+
+/* Photo placeholders bg */
+.equipo-mini-photo, .prof-photo, .profs-ticker .equipo-mini-photo {
+  background: #d4ecf2 !important;
+}
+
+/* Sede map placeholder */
+.sede-map { background: #d4ecf2 !important; }
+
+/* Sedes section background (cuando se usa) */
+.sedes-section { background: var(--sage-soft) !important; }
+
+/* Valor cards (nosotros) */
+.valor-card { background: #ffffff !important; border-color: rgba(13,53,86,0.08) !important; }
+
+/* Selection azul */
+::selection { background: var(--ortho-aqua); color: var(--ortho-deepest); }
+
+/* Banda gris fondo footer turquesa marca */
+.footer-social a:hover { background: var(--ortho-aqua) !important; }
