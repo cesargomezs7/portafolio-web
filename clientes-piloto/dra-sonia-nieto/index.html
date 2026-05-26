@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dra. Sonia Nieto · Rehabilitación Oral y Odontología Biomimética · Bucaramanga</title>
+<meta name="description" content="Especialista en Rehabilitación Oral y Odontología Biomimética en Bucaramanga. +15 años de experiencia, +2.500 pacientes satisfechos. Diseño de sonrisa, implantes, blanqueamiento y rehabilitación oral.">
+<meta property="og:title" content="Dra. Sonia Nieto · Bucaramanga">
+<meta property="og:description" content="Recupere su sonrisa natural. Especialista en Rehabilitación Oral y Odontología Biomimética con resultados que perduran.">
+<meta property="og:image" content="img/hero-modelo.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css?v=20260526">
+<link rel="stylesheet" href="assets/theme-azul.css?v=20260526">
+<style>
+.nav-logo { padding: 4px 0; display: inline-flex; align-items: center; line-height: 1; }
+.nav-logo img { height: 44px; width: auto; display: block; }
+@media (max-width: 720px) { .nav-logo img { height: 34px; } }
+.footer-logo { height: 60px; width: auto; display: block; margin-bottom: 20px; }
+.footer-brand-name { display: none; }
+
+.hero h1 { font-size: clamp(36px, 5.2vw, 60px) !important; line-height: 1.05 !important; }
+.hero h1 em { font-style: italic; color: var(--accent); font-weight: 400; }
+@media (max-width: 720px) { .hero h1 { font-size: clamp(32px, 8.5vw, 42px) !important; } }
+
+.hero-photo, .clinic-photo-main, .tech-photo { position: relative !important; }
+.hero-photo img, .clinic-photo-main img, .tech-photo img {
+  width: 100% !important; height: 100% !important;
+  object-fit: cover !important; object-position: center 22% !important;
+  display: block !important; position: absolute !important; inset: 0 !important;
+}
+.hero-photo { aspect-ratio: 4/5 !important; width: 100% !important; }
+@media (max-width: 1024px) { .hero-photo { max-width: 460px !important; margin: 0 auto !important; } }
+@media (min-width: 1025px) { .hero-inner { padding-left: 32px !important; padding-right: 32px !important; } }
+
+.hero-metricas { display: flex; gap: 32px; margin: 16px 0 24px; padding: 0 0 0 0; flex-wrap: wrap; }
+.hero-metricas .metrica { font-family: 'Fraunces', serif; font-size: 14px; color: var(--text-soft); }
+.hero-metricas .metrica strong { display: block; font-size: 28px; font-weight: 500; color: var(--sage-deepest); line-height: 1; margin-bottom: 4px; }
+
+.testimonio-avatar { background: var(--sage-deep) !important; color: var(--cream) !important; display: flex !important; align-items: center !important; justify-content: center !important; font-family: 'Fraunces', Georgia, serif !important; font-size: 16px !important; font-weight: 500 !important; }
+
+.service-card { display: flex; flex-direction: column; }
+.service-card ul.service-list { list-style: none; padding: 0; margin: 12px 0 20px; font-family: 'Manrope', sans-serif; font-size: 13px; color: var(--text-soft); line-height: 1.65; }
+.service-card ul.service-list li { padding-left: 16px; position: relative; margin-bottom: 6px; }
+.service-card ul.service-list li::before { content: '·'; position: absolute; left: 4px; top: 0; font-weight: 700; color: var(--accent); font-size: 18px; line-height: 1; }
+
+/* Biomimética destacada */
+.biomimetica { background: var(--sage-soft); padding: 80px 32px; }
+.biomimetica-wrap { max-width: 1100px; margin: 0 auto; text-align: center; }
+.biomimetica .overline { font-family: 'Manrope', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); }
+.biomimetica h2 { font-family: 'Fraunces', serif; font-weight: 400; font-size: clamp(32px, 4vw, 48px); color: var(--sage-deepest); margin: 16px 0 12px; letter-spacing: -0.02em; }
+.biomimetica h2 em { font-style: italic; color: var(--accent); }
+.biomimetica .lead { font-family: 'Manrope', sans-serif; font-size: 17px; color: var(--text-soft); margin: 0 auto 48px; max-width: 640px; line-height: 1.6; }
+.bio-pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.bio-pillar { padding: 28px; background: #fff; border-radius: 16px; text-align: left; }
+.bio-pillar h4 { font-family: 'Fraunces', serif; font-size: 20px; font-weight: 500; color: var(--sage-deepest); margin: 0 0 8px; }
+.bio-pillar p { font-family: 'Manrope', sans-serif; font-size: 14px; color: var(--text-soft); line-height: 1.6; margin: 0; }
+@media (max-width: 720px) { .biomimetica { padding: 56px 20px; } .bio-pillars { grid-template-columns: 1fr; } }
+
+/* Caso antes/después */
+.caso-wrap { max-width: 1000px; margin: 48px auto 0; padding: 0 32px; }
+.caso-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.caso-img { aspect-ratio: 1/1; overflow: hidden; border-radius: 16px; background: #d6e3ec; position: relative; }
+.caso-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.caso-label { font-family: 'Manrope', sans-serif; font-size: 12px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); padding: 12px 16px; display: block; text-align: center; }
+@media (max-width: 720px) { .caso-grid { grid-template-columns: 1fr; } }
+
+/* Tecnología */
+.tech-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 1200px; margin: 48px auto 0; padding: 0 32px; }
+.tech-card { text-align: left; }
+.tech-photo { aspect-ratio: 4/3; overflow: hidden; border-radius: 16px; background: #d6e3ec; margin-bottom: 16px; }
+.tech-card h4 { font-family: 'Fraunces', serif; font-size: 22px; font-weight: 500; color: var(--sage-deepest); margin: 0 0 8px; }
+.tech-card p { font-family: 'Manrope', sans-serif; font-size: 14px; color: var(--text-soft); line-height: 1.6; margin: 0; }
+@media (max-width: 720px) { .tech-grid { grid-template-columns: 1fr; padding: 0 20px; } }
+
+/* Sede con mapa */
+.sede-wrap { max-width: 1100px; margin: 48px auto 0; padding: 0 32px; }
+.sede-card-big { background: #fff; border-radius: 20px; overflow: hidden; box-shadow: 0 2px 12px rgba(30,58,82,0.06); display: grid; grid-template-columns: 1fr 1fr; }
+.sede-card-big .sede-map { aspect-ratio: 4/3; background: #d6e3ec; position: relative; min-height: 360px; }
+.sede-card-big .sede-map iframe { width: 100%; height: 100%; border: 0; display: block; }
+.sede-card-big .sede-info { padding: 40px 44px; display: flex; flex-direction: column; gap: 8px; justify-content: center; }
+.sede-card-big .sede-tag { font-family: 'Manrope', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
+.sede-card-big h3 { font-family: 'Fraunces', serif; font-weight: 400; font-size: 26px; color: var(--sage-deepest); margin: 0 0 4px; }
+.sede-card-big .sede-address { font-family: 'Manrope', sans-serif; font-size: 15px; color: var(--text-soft); line-height: 1.6; margin: 8px 0 18px; }
+.sede-card-big .sede-contact { display: flex; flex-direction: column; gap: 8px; }
+.sede-card-big .sede-contact a { font-family: 'Manrope', sans-serif; font-size: 14px; color: var(--sage-deep); text-decoration: none; font-weight: 500; display: inline-flex; align-items: center; gap: 8px; }
+.sede-card-big .sede-contact a:hover { text-decoration: underline; }
+.sede-card-big .sede-contact svg { width: 16px; height: 16px; flex-shrink: 0; }
+.sede-card-big .ver-mapa { display: inline-flex; align-items: center; gap: 6px; margin-top: 8px; font-family: 'Manrope', sans-serif; font-size: 13px; color: var(--charcoal); text-decoration: underline; text-underline-offset: 3px; }
+@media (max-width: 860px) {
+  .sede-card-big { grid-template-columns: 1fr; }
+  .sede-card-big .sede-map { aspect-ratio: 16/10; min-height: 280px; }
+  .sede-card-big .sede-info { padding: 28px 24px; }
+}
+
+/* Financiamiento Welli */
+.welli-banner { background: linear-gradient(135deg, var(--sage-deep) 0%, var(--sage-deepest) 100%); color: #fff; padding: 48px; border-radius: 20px; max-width: 1100px; margin: 48px auto 0; display: grid; grid-template-columns: 2fr 1fr; gap: 32px; align-items: center; }
+.welli-banner .welli-text { color: #fff; }
+.welli-banner .overline { color: rgba(255,255,255,0.7); font-family: 'Manrope', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; }
+.welli-banner h3 { font-family: 'Fraunces', serif; font-weight: 400; font-size: 32px; color: #fff; margin: 12px 0 8px; }
+.welli-banner h3 em { font-style: italic; color: var(--accent); }
+.welli-banner p { font-family: 'Manrope', sans-serif; font-size: 15px; color: rgba(255,255,255,0.85); line-height: 1.55; margin: 0 0 20px; }
+.welli-banner .welli-cta { display: inline-flex; align-items: center; gap: 8px; padding: 14px 28px; background: var(--accent); color: #fff; border-radius: 100px; text-decoration: none; font-family: 'Manrope', sans-serif; font-weight: 500; font-size: 14px; transition: opacity 0.2s; }
+.welli-banner .welli-cta:hover { opacity: 0.9; }
+.welli-banner .welli-features { display: flex; flex-direction: column; gap: 12px; }
+.welli-banner .welli-feature { font-family: 'Manrope', sans-serif; font-size: 14px; color: rgba(255,255,255,0.92); padding-left: 16px; position: relative; }
+.welli-banner .welli-feature::before { content: '✓'; position: absolute; left: 0; color: var(--accent); font-weight: 700; }
+@media (max-width: 720px) { .welli-banner { grid-template-columns: 1fr; padding: 32px 24px; } }
+</style>
+</head>
+<body>
+
+<div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
+<nav class="navbar" id="navbar">
+  <button class="nav-burger" id="navBurger" aria-label="Abrir menú">
+    <svg viewBox="0 0 24 24" fill="none"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+  </button>
+  <a href="index.html" class="nav-logo" aria-label="Dra. Sonia Nieto"><img src="img/logo-sn-dark.png" alt="Dra. Sonia Nieto · Rehabilitación Oral y Odontología Biomimética"></a>
+  <ul class="nav-links">
+    <li><a href="index.html" class="active">Inicio</a></li>
+    <li><a href="nosotros.html">Nosotros</a></li>
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="contacto.html">Contacto</a></li>
+  </ul>
+  <div class="nav-actions">
+    <a href="tel:+573135968695" class="nav-phone">+57 313 596 8695</a>
+    <a href="https://wa.me/573135968695?text=Hola%20Dra.%20Sonia,%20quiero%20agendar%20una%20valoraci%C3%B3n" target="_blank" class="nav-cta">Pedir cita</a>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-menu-close" id="mobileMenuClose" aria-label="Cerrar menú">
+    <svg viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+  </button>
+  <ul>
+    <li><a href="index.html">Inicio</a></li>
+    <li><a href="nosotros.html">Nosotros</a></li>
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="contacto.html">Contacto</a></li>
+    <li><a href="tel:+573135968695">+57 313 596 8695</a></li>
+  </ul>
+</div>
+
+<section class="hero" id="home">
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="hero-rule"></div>
+      <p class="overline" style="font-family: 'Manrope', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px;">Especialista en Rehabilitación Oral · Bucaramanga</p>
+      <h1>Recupere su<br>sonrisa <em>natural</em></h1>
+      <p class="hero-lead">Especialista en Rehabilitación Oral y Odontología Biomimética con resultados que perduran. Tratamientos personalizados que conservan la biología natural de sus dientes.</p>
+      <div class="hero-metricas">
+        <div class="metrica"><strong>+15</strong>Años de experiencia</div>
+        <div class="metrica"><strong>+2.500</strong>Pacientes satisfechos</div>
+        <div class="metrica"><strong>5.0</strong>35 reseñas en Google</div>
+      </div>
+      <div class="hero-actions">
+        <a href="https://wa.me/573135968695?text=Hola%20Dra.%20Sonia,%20quiero%20agendar%20una%20valoraci%C3%B3n" target="_blank" class="hero-cta">Agendar valoración</a>
+        <a href="#servicios" class="hero-link">Ver servicios</a>
+      </div>
+    </div>
+    <div class="hero-photo">
+      <img src="img/hero-modelo.jpg" alt="Dra. Sonia Nieto · Especialista en Rehabilitación Oral" loading="eager">
+    </div>
+  </div>
+</section>
+
+<section class="section clinic">
+  <div class="section-header reveal">
+    <div class="section-rule"><span class="section-rule-text">Más que odontología</span></div>
+  </div>
+
+  <div class="clinic-grid reveal">
+    <div class="clinic-photo-main">
+      <img src="img/clinica-consultorio.jpg" alt="Consultorio Dra. Sonia Nieto · Bucaramanga" loading="lazy">
+    </div>
+    <div class="clinic-text">
+      <div class="overline">Por qué elegirnos</div>
+      <h3>Transformamos vidas a través de la sonrisa</h3>
+      <p>La Dra. Sonia Nieto es Especialista en Rehabilitación Oral y miembro activo de la <strong>Asociación Colombiana de Prostodoncia</strong>. Combina la excelencia clínica con una profunda vocación de servicio, donde el rigor científico y la calidez humana se unen para restaurar la salud de cada paciente.</p>
+      <p>Su consultorio en Bucaramanga aplica los principios de la <strong>Odontología Biomimética</strong>: tratamientos que respetan la biología natural de los dientes y conservan la mayor cantidad de tejido sano posible.</p>
+      <a href="nosotros.html" class="learn-more">Conozca más <svg viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+    </div>
+  </div>
+
+  <div class="clinic-bottom reveal">
+    <div>
+      <h4>Atención humana y empática</h4>
+      <p>Su comodidad y bienestar son nuestra prioridad. Le explicamos cada paso antes de hacerlo, sin sorpresas.</p>
+    </div>
+    <div>
+      <h4>Resultados que perduran</h4>
+      <p>Tratamientos respaldados por la ciencia y técnicas de mínima intervención que duran décadas.</p>
+    </div>
+    <div>
+      <h4>Planes personalizados</h4>
+      <p>Cada sonrisa es única. Diseñamos un plan específico según su anatomía, expectativas y presupuesto.</p>
+    </div>
+  </div>
+</section>
+
+<section class="biomimetica">
+  <div class="biomimetica-wrap reveal">
+    <p class="overline">Nuestro diferenciador</p>
+    <h2>Odontología <em>Biomimética</em></h2>
+    <p class="lead">La ciencia de imitar a la naturaleza. Restauraciones que conservan la estructura dental original y devuelven la función perdida sin desgastar dientes sanos.</p>
+    <div class="bio-pillars">
+      <div class="bio-pillar">
+        <h4>Mínima invasión</h4>
+        <p>Preservamos la mayor cantidad de tejido dental natural posible. Lo que no se toca, no se daña.</p>
+      </div>
+      <div class="bio-pillar">
+        <h4>Conservación dental</h4>
+        <p>Respetamos la biología natural de sus dientes. La estructura propia siempre será mejor que la artificial.</p>
+      </div>
+      <div class="bio-pillar">
+        <h4>Resultados duraderos</h4>
+        <p>Restauraciones que imitan a la naturaleza y perduran en el tiempo, con menor riesgo de fracaso a largo plazo.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="services-section" id="servicios">
+  <div class="section-header reveal">
+    <div class="section-rule"><span class="section-rule-text">Nuestros servicios</span></div>
+    <p style="font-family: 'Manrope', sans-serif; font-size: 13px; color: var(--text-soft); letter-spacing: 0.1em; margin-top: 12px;">LA SONRISA QUE SIEMPRE SOÑÓ</p>
+  </div>
+
+  <div class="services-grid">
+    <div class="service-card reveal">
+      <h3>Diseño de sonrisa</h3>
+      <p>Carillas dentales perfectas para su rostro. Análisis facial y dental personalizado, con resultados estéticos naturales que se ven hechos por la naturaleza, no por el dentista.</p>
+      <ul class="service-list">
+        <li>Carillas de porcelana y composite</li>
+        <li>Análisis facial y dental</li>
+        <li>Pruebas estéticas antes del tratamiento final</li>
+        <li>Tiempo aproximado: 2 a 4 semanas</li>
+      </ul>
+      <a href="https://wa.me/573135968695?text=Hola%20Dra.%20Sonia,%20me%20interesa%20Dise%C3%B1o%20de%20sonrisa" target="_blank" class="learn-more">Pedir cita <svg viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+    </div>
+
+    <div class="service-card reveal">
+      <h3>Rehabilitación oral</h3>
+      <p>Recupere la función y la belleza natural de su sonrisa. Es la especialidad principal de la Dra. Sonia Nieto, miembro activo de la Asociación Colombiana de Prostodoncia.</p>
+      <ul class="service-list">
+        <li>Coronas sobre dientes propios o implantes</li>
+        <li>Prótesis fijas y removibles</li>
+        <li>Rehabilitación completa de la sonrisa</li>
+        <li>Enfoque biomimético en cada caso</li>
+      </ul>
+      <a href="https://wa.me/573135968695?text=Hola%20Dra.%20Sonia,%20me%20interesa%20Rehabilitaci%C3%B3n%20oral" target="_blank" class="learn-more">Pedir cita <svg viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+    </div>
+
+    <div class="service-card reveal">
+      <h3>Implantes dentales</h3>
+      <p>Recupere dientes perdidos de forma permanente. Procedimiento prácticamente indoloro gracias a la anestesia local y técnicas modernas. La mayoría de pacientes reportan mínimas molestias.</p>
+      <ul class="service-list">
+        <li>Implantes unitarios y múltiples</li>
+        <li>Rehabilitación completa sobre implantes</li>
+        <li>Planeación digital 3D</li>
+        <li>Procedimiento prácticamente indoloro</li>
+      </ul>
+      <a href="https://wa.me/573135968695?text=Hola%20Dra.%20Sonia,%20me%20interesa%20Implantes%20dentales" target="_blank" class="learn-more">Pedir cita <svg viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+    </div>
+
+    <div class="service-card reveal">
+      <h3>Blanqueamiento</h3>
+      <p>Sonrisa más brillante y radiante. Materiales de última generación que blanquean sin dañar el esmalte natural, con resultados visibles desde la primera sesión.</p>
+      <ul class="service-list">
+        <li>Blanqueamiento en consultorio</li>
+        <li>Blanqueamiento en casa con férulas</li>
+        <li>Materiales certificados y biocompatibles</li>
+        <li>Sin daño al esmalte natural</li>
+      </ul>
+      <a href="https://wa.me/573135968695?text=Hola%20Dra.%20Sonia,%20me%20interesa%20Blanqueamiento" target="_blank" class="learn-more">Pedir cita <svg viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-header reveal">
+    <div class="section-rule"><span class="section-rule-text">Resultados reales</span></div>
+    <p style="font-family: 'Manrope', sans-serif; font-size: 13px; color: var(--text-soft); letter-spacing: 0.1em; margin-top: 12px;">SONRISAS QUE TRANSFORMAN VIDAS</p>
+  </div>
+
+  <div class="caso-wrap reveal">
+    <h3 style="text-align:center; font-family: 'Fraunces', serif; font-size: 24px; color: var(--sage-deepest); margin: 0 0 12px;">Diseño de Sonrisa Completo</h3>
+    <p style="text-align:center; font-family: 'Manrope', sans-serif; font-size: 15px; color: var(--text-soft); margin: 0 0 32px;">Transformación con carillas de porcelana</p>
+    <div class="caso-grid">
+      <div>
+        <div class="caso-img"><img src="img/caso-antes.jpg" alt="Antes del tratamiento"></div>
+        <span class="caso-label">Antes</span>
+      </div>
+      <div>
+        <div class="caso-img"><img src="img/caso-despues.jpg" alt="Después del tratamiento"></div>
+        <span class="caso-label">Después</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section alt-bg">
+  <div class="section-header reveal">
+    <div class="section-rule"><span class="section-rule-text">Tecnología</span></div>
+    <p style="font-family: 'Manrope', sans-serif; font-size: 13px; color: var(--text-soft); letter-spacing: 0.1em; margin-top: 12px;">EQUIPAMIENTO DE ÚLTIMA GENERACIÓN</p>
+  </div>
+
+  <div class="tech-grid reveal">
+    <div class="tech-card">
+      <div class="tech-photo"><img src="img/tech-magnificacion.jpg" alt="Magnificación"></div>
+      <h4>Magnificación</h4>
+      <p>Precisión máxima en cada procedimiento gracias a sistemas de magnificación que permiten ver detalles imposibles a simple vista.</p>
+    </div>
+    <div class="tech-card">
+      <div class="tech-photo"><img src="img/tech-scanner.jpg" alt="Escáner 3D"></div>
+      <h4>Escáner 3D</h4>
+      <p>Diagnóstico preciso y planificación exacta de su tratamiento. Sin impresiones tradicionales incómodas.</p>
+    </div>
+    <div class="tech-card">
+      <div class="tech-photo"><img src="img/dra-perfil.jpg" alt="Materiales Premium"></div>
+      <h4>Materiales Premium</h4>
+      <p>Porcelana, zirconio y composite de última generación. Certificados y biocompatibles para durabilidad superior.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-header reveal">
+    <div class="section-rule"><span class="section-rule-text">Visítenos en Bucaramanga</span></div>
+  </div>
+
+  <div class="sede-wrap reveal">
+    <div class="sede-card-big">
+      <div class="sede-map">
+        <iframe
+          src="https://maps.google.com/maps?q=Carrera%2033%20%2348-30%20Consultorio%20308%20Bucaramanga%20Santander%20Colombia&t=&z=16&ie=UTF8&iwloc=&output=embed"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Mapa Dra. Sonia Nieto · Bucaramanga"></iframe>
+      </div>
+      <div class="sede-info">
+        <span class="sede-tag">Bucaramanga · Santander</span>
+        <h3>Consultorio 308</h3>
+        <p class="sede-address">Carrera 33 # 48-30, Consultorio 308<br>Bucaramanga, Santander</p>
+        <div class="sede-contact">
+          <a href="https://wa.me/573135968695" target="_blank">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.6 6.3A7.85 7.85 0 0 0 12 4a7.93 7.93 0 0 0-7.93 7.93 7.83 7.83 0 0 0 1.06 3.95L4 20l4.22-1.1a7.94 7.94 0 0 0 3.78.97h.01A7.94 7.94 0 0 0 20 11.97 7.86 7.86 0 0 0 17.6 6.3z"/></svg>
+            WhatsApp +57 313 596 8695
+          </a>
+          <a href="mailto:info@drasonianieto.com">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            info@drasonianieto.com
+          </a>
+          <a href="https://maps.google.com/maps?q=Carrera+33+%2348-30+Bucaramanga+Santander" target="_blank" class="ver-mapa">Ver en Google Maps</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-header reveal">
+    <div class="section-rule"><span class="section-rule-text">Financiamiento flexible</span></div>
+  </div>
+
+  <div class="welli-banner reveal">
+    <div class="welli-text">
+      <p class="overline">Su sonrisa, hoy</p>
+      <h3>Cuotas mensuales con <em>Welli</em></h3>
+      <p>Sabemos que la salud oral es una prioridad. Por eso ofrecemos planes de financiamiento fáciles y accesibles a través de nuestro aliado Welli: paga su tratamiento en cómodas cuotas mensuales con aprobación rápida.</p>
+      <a href="https://wa.me/573135968695?text=Hola%20Dra.%20Sonia,%20quiero%20informaci%C3%B3n%20sobre%20financiamiento%20Welli" target="_blank" class="welli-cta">Conocer financiamiento
+        <svg viewBox="0 0 24 24" fill="none" width="16" height="16"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </a>
+    </div>
+    <div class="welli-features">
+      <div class="welli-feature">Cuotas flexibles</div>
+      <div class="welli-feature">Aprobación rápida</div>
+      <div class="welli-feature">Proceso simple y ágil</div>
+      <div class="welli-feature">Inicia su tratamiento hoy</div>
+    </div>
+  </div>
+</section>
+
+<section class="testimonios-section">
+  <div class="section-header reveal">
+    <div class="section-rule"><span class="section-rule-text">Sonrisas que hablan</span></div>
+    <p style="font-family: 'Manrope', sans-serif; font-size: 13px; color: var(--text-soft); letter-spacing: 0.1em; margin-top: 12px;">5.0 ★ EN GOOGLE · 35 RESEÑAS</p>
+  </div>
+
+  <div class="testimonios-grid">
+    <div class="testimonio-card reveal">
+      <div class="testimonio-stars">★★★★★</div>
+      <blockquote>"La Dra. Sonia Nieto es excelente, muy profesional y con una calidad humana excepcional. La recomiendo 100%."</blockquote>
+      <div class="testimonio-author">
+        <div class="testimonio-avatar">LR</div>
+        <div>
+          <div class="testimonio-author-name">Lizeth Rudas</div>
+          <div class="testimonio-author-meta">Reseña en Google · Dic 2025</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="testimonio-card reveal">
+      <div class="testimonio-stars">★★★★★</div>
+      <blockquote>"Para mí que ir al odontólogo había sido una experiencia traumática, la atención y delicadeza de la Dra. Sonia me permitió superar el trauma. Es una profesional muy eficaz, eficiente y por sobre todo muy humana."</blockquote>
+      <div class="testimonio-author">
+        <div class="testimonio-avatar">EM</div>
+        <div>
+          <div class="testimonio-author-name">Edgar Mariño Guerrero</div>
+          <div class="testimonio-author-meta">Reseña en Google · Dic 2025</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="testimonio-card reveal">
+      <div class="testimonio-stars">★★★★★</div>
+      <blockquote>"Excelente servicio y la Dra. Sonia Nieto excelente profesional, ya que solucionó mi motivo de consulta. Sus instalaciones están muy cómodas y me sentí bien atendida. La recomiendo sin pensarlo."</blockquote>
+      <div class="testimonio-author">
+        <div class="testimonio-avatar">YC</div>
+        <div>
+          <div class="testimonio-author-name">Yasmin Chaparro</div>
+          <div class="testimonio-author-meta">Reseña en Google · Dic 2025</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="testimonio-card reveal">
+      <div class="testimonio-stars">★★★★★</div>
+      <blockquote>"La Dra. Sonia es una excelente profesional, que se preocupa porque sus pacientes sean atendidos con todas las calidades humanas, bajo condiciones tecnológicas que aseguren el éxito de los procedimientos."</blockquote>
+      <div class="testimonio-author">
+        <div class="testimonio-avatar">CR</div>
+        <div>
+          <div class="testimonio-author-name">Carmen Alicia Rueda</div>
+          <div class="testimonio-author-meta">Reseña en Google · Dic 2025</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="faq">
+  <h2>Resolvemos sus dudas</h2>
+  <div class="faq-list">
+    <div class="faq-item open">
+      <div class="faq-question">
+        Qué es la odontología biomimética
+        <div class="faq-toggle"><svg viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+      </div>
+      <div class="faq-answer"><div class="faq-answer-inner">Es una técnica avanzada que imita la estructura natural del diente, preservando al máximo el tejido dental sano y restaurando la función y estética de manera conservadora. Lo que no se daña, no necesita reparación posterior.</div></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question">
+        Cuánto dura un tratamiento de diseño de sonrisa
+        <div class="faq-toggle"><svg viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+      </div>
+      <div class="faq-answer"><div class="faq-answer-inner">Varía según cada caso, pero generalmente un diseño de sonrisa completo toma entre 2 a 4 semanas, incluyendo consultas de planificación, pruebas estéticas y procedimientos finales.</div></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question">
+        Los implantes dentales son dolorosos
+        <div class="faq-toggle"><svg viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+      </div>
+      <div class="faq-answer"><div class="faq-answer-inner">No. Usamos anestesia local y técnicas modernas que hacen el procedimiento prácticamente indoloro. La mayoría de pacientes reportan mínimas molestias durante la recuperación.</div></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question">
+        Ofrecen planes de financiamiento
+        <div class="faq-toggle"><svg viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+      </div>
+      <div class="faq-answer"><div class="faq-answer-inner">Sí. Trabajamos con Welli para ofrecer planes de financiamiento flexibles que se adaptan a su presupuesto, con cuotas mensuales accesibles y aprobación rápida.</div></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question">
+        Atienden urgencias dentales
+        <div class="faq-toggle"><svg viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+      </div>
+      <div class="faq-answer"><div class="faq-answer-inner">Actualmente no contamos con atención 24/7. Para urgencias contáctenos por WhatsApp al +57 313 596 8695 dentro del horario de atención y tratamos de atender lo más rápido posible.</div></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question">
+        Qué materiales utilizan
+        <div class="faq-toggle"><svg viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+      </div>
+      <div class="faq-answer"><div class="faq-answer-inner">Porcelana, zirconio y composite de última generación. Todos certificados y biocompatibles para una durabilidad superior y resultados estéticos naturales.</div></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question">
+        Qué incluye la primera consulta
+        <div class="faq-toggle"><svg viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+      </div>
+      <div class="faq-answer"><div class="faq-answer-inner">La primera consulta incluye evaluación completa, diagnóstico, plan de tratamiento personalizado y resolución de todas sus dudas. Es el primer paso para su nueva sonrisa.</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-final">
+  <h2>Su sonrisa, en manos de una especialista</h2>
+  <p>Pida una valoración con la Dra. Sonia Nieto. Más de 15 años de experiencia respaldan cada tratamiento. Carrera 33 # 48-30 Consultorio 308, Bucaramanga.</p>
+  <div class="cta-final-actions">
+    <a href="https://wa.me/573135968695?text=Hola%20Dra.%20Sonia,%20quiero%20agendar%20una%20valoraci%C3%B3n" target="_blank" class="cta-final-btn">
+      Agendar valoración
+      <svg viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    </a>
+    <a href="contacto.html" class="cta-final-btn outline">Ver más formas de contacto</a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <img src="img/logo-sn-light.png" alt="Dra. Sonia Nieto" class="footer-logo">
+      <div class="footer-brand-name">Dra. Sonia Nieto</div>
+      <p>Especialista en Rehabilitación Oral y Odontología Biomimética. Bucaramanga, Santander. Miembro activo de la Asociación Colombiana de Prostodoncia.</p>
+      <div class="footer-social">
+        <a href="https://wa.me/573135968695" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.6 6.3A7.85 7.85 0 0 0 12 4a7.93 7.93 0 0 0-7.93 7.93 7.83 7.83 0 0 0 1.06 3.95L4 20l4.22-1.1a7.94 7.94 0 0 0 3.78.97h.01A7.94 7.94 0 0 0 20 11.97 7.86 7.86 0 0 0 17.6 6.3z"/></svg></a>
+        <a href="https://www.instagram.com/sonianietorehabilitacionoral/" target="_blank" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="3.5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a>
+        <a href="https://www.facebook.com/profile.php?id=100039987202458" target="_blank" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95z"/></svg></a>
+      </div>
+    </div>
+
+    <div class="footer-col">
+      <h4>Servicios</h4>
+      <ul>
+        <li><a href="#servicios">Diseño de sonrisa</a></li>
+        <li><a href="#servicios">Rehabilitación oral</a></li>
+        <li><a href="#servicios">Implantes dentales</a></li>
+        <li><a href="#servicios">Blanqueamiento</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Información</h4>
+      <ul>
+        <li><a href="nosotros.html">Sobre la Dra. Sonia</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Sede</h4>
+      <ul>
+        <li>Carrera 33 # 48-30</li>
+        <li>Consultorio 308</li>
+        <li>Bucaramanga, Santander</li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Contacto</h4>
+      <ul>
+        <li><a href="https://wa.me/573135968695">+57 313 596 8695</a></li>
+        <li><a href="mailto:info@drasonianieto.com">info@drasonianieto.com</a></li>
+        <li>Financiamiento Welli</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Dra. Sonia Nieto · Muestra Pronto</span>
+    <span>Carrera 33 # 48-30 Cons. 308 · Bucaramanga</span>
+  </div>
+</footer>
+
+<a href="https://wa.me/573135968695?text=Hola%20Dra.%20Sonia" target="_blank" class="wa-float" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.371-.025-.52-.075-.149-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+</a>
+
+<script>
+  if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; }
+  window.addEventListener('beforeunload', () => window.scrollTo(0, 0));
+  const navbar = document.getElementById('navbar');
+  if (navbar) { const onScroll = () => navbar.classList.toggle('scrolled', window.scrollY > 60); window.addEventListener('scroll', onScroll, { passive: true }); }
+  const burger = document.getElementById('navBurger');
+  const menu = document.getElementById('mobileMenu');
+  const menuClose = document.getElementById('mobileMenuClose');
+  if (burger && menu) {
+    burger.addEventListener('click', () => menu.classList.add('open'));
+    menuClose && menuClose.addEventListener('click', () => menu.classList.remove('open'));
+    menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => menu.classList.remove('open')));
+  }
+  document.querySelectorAll('.faq-item').forEach(item => {
+    const q = item.querySelector('.faq-question');
+    q && q.addEventListener('click', () => item.classList.toggle('open'));
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
+<script src="assets/animations.js?v=20260526" defer></script>
+
+</body>
+</html>
