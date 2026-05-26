@@ -7,14 +7,17 @@
 <meta name="description" content="Escríbanos al WhatsApp +57 313 346 9367 o llene el formulario. Atendemos en Villavicencio, Bogotá, Pasto y Medellín. Le respondemos lo antes posible.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Pacifico&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/styles.css?v=20260526">
 <link rel="stylesheet" href="assets/theme-azul.css?v=20260526">
 <style>
-.nav-logo { padding: 4px 0; display: inline-flex; align-items: center; line-height: 1; }
-.nav-logo img { height: 52px; width: auto; display: block; }
-@media (max-width: 720px) { .nav-logo img { height: 42px; } }
-.footer-logo { height: 70px; width: auto; display: block; margin-bottom: 20px; }
+.nav-logo { padding: 4px 0; display: inline-flex; align-items: center; gap: 8px; line-height: 1; text-decoration: none; }
+.nav-logo .nav-tooth { width: 28px; height: 28px; color: #1e3a52; }
+.nav-logo .nav-brand { font-family: 'Pacifico', cursive; font-size: 30px; color: #1e3a52; line-height: 1; }
+@media (max-width: 720px) { .nav-logo .nav-brand { font-size: 24px; } .nav-logo .nav-tooth { width: 22px; height: 22px; } }
+.footer-brand-logo { display: inline-flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+.footer-brand-logo .footer-tooth { width: 34px; height: 34px; color: #1e3a52; }
+.footer-brand-logo .footer-brand-text { font-family: 'Pacifico', cursive; font-size: 38px; color: #1e3a52; line-height: 1; }
 .footer-brand-name { display: none; }
 </style>
 </head>
@@ -26,7 +29,10 @@
   <button class="nav-burger" id="navBurger" aria-label="Abrir menú">
     <svg viewBox="0 0 24 24" fill="none"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
   </button>
-  <a href="index.html" class="nav-logo" aria-label="Glodents · Consultorio y Laboratorio Dental"><img src="img/logo-glodents-dark.png" alt="Glodents"></a>
+  <a href="index.html" class="nav-logo" aria-label="Glodents · Consultorio y Laboratorio Dental">
+    <svg class="nav-tooth" viewBox="0 0 64 64" fill="none"><path d="M32 6c-9 0-14 6-14 13 0 5 2 9 3 15 1 5 1 12 4 17 2 3 4 5 7 5s4-3 5-9c0-3 1-6 2-6s2 3 2 6c1 6 2 9 5 9s5-2 7-5c3-5 3-12 4-17 1-6 3-10 3-15 0-7-5-13-14-13-3 0-5 1-7 3-2-2-4-3-7-3z" fill="currentColor"/></svg>
+    <span class="nav-brand">Glodents</span>
+  </a>
   <ul class="nav-links">
     <li><a href="index.html">Inicio</a></li>
     <li><a href="nosotros.html">Nosotros</a></li>
@@ -141,8 +147,10 @@
 <footer>
   <div class="footer-inner">
     <div class="footer-brand">
-      <img src="img/logo-glodents-light.png" alt="Glodents · Consultorio y Laboratorio Dental" class="footer-logo">
-      <div class="footer-brand-name">Glodents</div>
+      <div class="footer-brand-logo">
+        <svg class="footer-tooth" viewBox="0 0 64 64" fill="none"><path d="M32 6c-9 0-14 6-14 13 0 5 2 9 3 15 1 5 1 12 4 17 2 3 4 5 7 5s4-3 5-9c0-3 1-6 2-6s2 3 2 6c1 6 2 9 5 9s5-2 7-5c3-5 3-12 4-17 1-6 3-10 3-15 0-7-5-13-14-13-3 0-5 1-7 3-2-2-4-3-7-3z" fill="currentColor"/></svg>
+        <span class="footer-brand-text">Glodents</span>
+      </div>
       <p>Consultorio y Laboratorio Dental. Cuatro sedes en Colombia: Villavicencio, Bogotá, Pasto y Medellín. Atención odontológica de alta calidad con especialistas certificados.</p>
       <div class="footer-social">
         <a href="https://wa.me/573133469367" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.6 6.3A7.85 7.85 0 0 0 12 4a7.93 7.93 0 0 0-7.93 7.93 7.83 7.83 0 0 0 1.06 3.95L4 20l4.22-1.1a7.94 7.94 0 0 0 3.78.97h.01A7.94 7.94 0 0 0 20 11.97 7.86 7.86 0 0 0 17.6 6.3z"/></svg></a>
