@@ -1,0 +1,55 @@
+/* ═══════════════════════════════════════════════════════════
+   ODONTOEVOLUTION · Theme NARANJA
+   Paleta extraída del logo y branding oficial (naranja
+   corporativo + gris oscuro + tagline gris claro).
+   Sobrescribe variables del Atelier sage sin tocar styles.css.
+   ═══════════════════════════════════════════════════════════ */
+
+:root {
+  /* Paleta naranja Odontoevolution */
+  --naranja-deepest: #6e2a0e;   /* footer, texto muy oscuro */
+  --naranja-deep:    #c4461c;   /* botones, headings (más saturado que original) */
+  --naranja:         #d4602e;   /* hover, secundario */
+  --naranja-soft:    #f4b894;   /* highlights, gradients */
+  --naranja-bg:      #fbe9d8;   /* hero background light */
+  --naranja-bg-2:    #f8dcc2;   /* gradient end */
+  --gray-bg:         #fbfaf7;   /* fondo crema casi blanco */
+
+  /* === Mapeo Atelier sage → Naranja Odontoevolution === */
+  --sage-bg:      #fbe9d8;
+  --sage-soft:    #fdf4ec;
+  --sage-deep:    #c4461c;
+  --sage-deepest: #2a1610;       /* texto muy oscuro con tinte café */
+  --cream:        #fbfaf7;
+  --cream-deep:   #f5ede5;
+  --accent:       #0f7d8a;       /* turquesa oscuro — contraste limpio con naranja */
+  --accent-soft:  #1a98a7;
+  --text:         #2a1610;
+  --text-soft:    #5a4337;
+  --border:       #e8d4c2;
+  --charcoal:     #2a1610;
+
+  /* Shadows con tinte naranja */
+  --shadow-sm: 0 2px 6px rgba(196,70,28,0.08);
+  --shadow-md: 0 14px 38px rgba(196,70,28,0.12);
+  --shadow-lg: 0 30px 70px rgba(196,70,28,0.18);
+}
+
+/* === Overrides específicos === */
+
+.hero { background: linear-gradient(to left, var(--sage-bg) 30%, #fcd9b8 100%) !important; }
+.hero-compact { background: linear-gradient(to left, var(--sage-bg) 30%, #fcd9b8 100%) !important; }
+.section.alt-bg { background: var(--sage-soft) !important; }
+
+.testimonio-avatar { background: var(--sage-deep) !important; color: var(--cream) !important; }
+
+.faq-list { border-top-color: rgba(196,70,28,0.18) !important; }
+.faq-item { border-bottom-color: rgba(196,70,28,0.18) !important; }
+
+.equipo-mini-photo, .prof-photo { background: #fcd9b8 !important; }
+
+.valor-card { background: #ffffff !important; border-color: rgba(196,70,28,0.08) !important; }
+
+.sede-map { background: #fcd9b8 !important; }
+
+::selection { background: var(--naranja-soft); color: var(--naranja-deepest); }

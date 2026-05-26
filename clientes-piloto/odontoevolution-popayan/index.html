@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Odontoevolution · Su sonrisa en manos expertas · Popayán y Cauca</title>
+<meta name="description" content="Clínica odontológica en Popayán y Cauca. Ortodoncia, implantes dentales, estética dental y servicios orofaciales. 3 sedes (Popayán, Silvia, El Tambo). Financiación con Crédito Brilla.">
+<meta property="og:title" content="Odontoevolution · Su sonrisa en manos expertas">
+<meta property="og:description" content="Odontología integral en Popayán y Cauca. 4 especialistas, 3 sedes, ortodoncia con cinco planes (Estándar, Roth, MBT, Damon, Clear Aligner) y financiación Brilla.">
+<meta property="og:image" content="img/hero-doctora.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css?v=20260526a">
+<link rel="stylesheet" href="assets/theme-naranja.css?v=20260526a">
+<style>
+/* Logo oficial */
+.nav-logo { padding: 4px 0; display: inline-flex; align-items: center; line-height: 1; }
+.nav-logo img { height: 48px; width: auto; display: block; }
+@media (max-width: 720px) { .nav-logo img { height: 36px; } }
+.footer-logo { height: 72px; width: auto; display: block; margin-bottom: 20px; }
+.footer-brand-name { display: none; }
+
+/* Hero H1 compacto — botón visible en viewport inicial */
+.hero h1 { font-size: clamp(36px, 5.5vw, 64px) !important; line-height: 1.05 !important; }
+@media (max-width: 720px) { .hero h1 { font-size: clamp(34px, 9vw, 44px) !important; } }
+.hero-photo img { object-position: center 30% !important; }
+
+/* Fotos forzadas a llenar contenedor */
+.hero-photo, .clinic-photo-main, .clinic-photo-secondary > div { position: relative !important; }
+.hero-photo img, .clinic-photo-main img, .clinic-photo-secondary img {
+  width: 100% !important; height: 100% !important;
+  object-fit: cover !important; object-position: center center !important;
+  display: block !important; position: absolute !important; inset: 0 !important;
+}
+.hero-photo { aspect-ratio: 4/5 !important; width: 100% !important; }
+@media (max-width: 1024px) { .hero-photo { max-width: 460px !important; margin: 0 auto !important; } }
+@media (min-width: 1025px) { .hero-inner { padding-left: 32px !important; padding-right: 32px !important; } }
+
+/* Service-card listas */
+.service-card ul.service-list { list-style: none; padding: 0; margin: 16px 0 20px; font-family: 'Manrope', sans-serif; font-size: 13px; color: var(--text-soft); line-height: 1.65; }
+.service-card ul.service-list li { padding-left: 16px; position: relative; margin-bottom: 6px; }
+.service-card ul.service-list li::before { content: '·'; position: absolute; left: 4px; top: 0; font-weight: 700; color: var(--sage-deep); font-size: 18px; line-height: 1; }
+
+/* Planes ortodoncia mini grid */
+.planes-orto-wrap { max-width: 1100px; margin: 56px auto 0; padding: 0 32px; }
+.planes-orto-intro { text-align: center; max-width: 720px; margin: 0 auto 40px; color: var(--text-soft); font-size: 16px; line-height: 1.7; }
+.planes-orto-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; }
+.plan-orto-card { background: #fff; border: 1px solid rgba(196,70,28,0.10); border-radius: 14px; padding: 24px 18px; text-align: center; transition: transform 0.3s var(--t), box-shadow 0.3s var(--t); }
+.plan-orto-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+.plan-orto-name { font-family: 'Fraunces', serif; font-size: 17px; font-weight: 500; color: var(--sage-deepest); margin-bottom: 8px; letter-spacing: -0.005em; }
+.plan-orto-attr { font-family: 'Manrope', sans-serif; font-size: 10px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--sage-deep); line-height: 1.4; }
+@media (max-width: 900px) { .planes-orto-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 480px) { .planes-orto-grid { grid-template-columns: 1fr; } }
+
+/* Sedes con mapas embebidos */
+.sedes-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; max-width: 1280px; margin: 48px auto 0; padding: 0 32px; }
+.sede-card { background: #fff; border-radius: 18px; overflow: hidden; box-shadow: 0 2px 12px rgba(196,70,28,0.06); display: flex; flex-direction: column; }
+.sede-map { width: 100%; aspect-ratio: 4/3; overflow: hidden; background: #fcd9b8; position: relative; }
+.sede-map iframe { width: 100%; height: 100%; border: 0; display: block; }
+.sede-info { padding: 24px 26px 26px; flex: 1; display: flex; flex-direction: column; gap: 6px; }
+.sede-info .sede-tag { font-family: 'Manrope', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--sage-deep); margin-bottom: 8px; }
+.sede-info h3 { font-family: 'Fraunces', serif; font-size: 22px; font-weight: 400; color: var(--charcoal); margin: 0; letter-spacing: -0.01em; line-height: 1.25; }
+.sede-info .sede-address { font-family: 'Manrope', sans-serif; font-size: 14px; color: rgba(0,0,0,0.7); line-height: 1.55; margin: 10px 0 14px; }
+.sede-info .sede-horario { font-family: 'Manrope', sans-serif; font-size: 13px; color: rgba(0,0,0,0.6); line-height: 1.55; margin-bottom: 14px; }
+.sede-info .sede-contact { display: flex; flex-direction: column; gap: 6px; margin-top: auto; }
+.sede-info .sede-contact a { font-family: 'Manrope', sans-serif; font-size: 14px; color: var(--sage-deep); text-decoration: none; font-weight: 500; display: inline-flex; align-items: center; gap: 8px; }
+.sede-info .sede-contact a:hover { text-decoration: underline; }
+.sede-info .sede-contact svg { width: 16px; height: 16px; flex-shrink: 0; }
+.sede-info .ver-mapa { display: inline-flex; align-items: center; gap: 6px; margin-top: 12px; font-family: 'Manrope', sans-serif; font-size: 13px; color: var(--charcoal); text-decoration: underline; text-underline-offset: 3px; }
+@media (max-width: 1024px) { .sedes-grid { grid-template-columns: 1fr; max-width: 540px; gap: 24px; } }
+
+/* Bloque Brilla destacado */
+.brilla-banner { background: linear-gradient(135deg, #fde6d0 0%, #fbe9d8 100%); border-radius: 20px; padding: 48px 56px; max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
+.brilla-banner .brilla-text .overline { color: var(--sage-deep); margin-bottom: 12px; }
+.brilla-banner h3 { font-family: 'Fraunces', serif; font-size: clamp(24px, 3vw, 32px); font-weight: 400; color: var(--sage-deepest); margin: 0 0 14px; letter-spacing: -0.01em; line-height: 1.2; }
+.brilla-banner p { font-size: 15px; line-height: 1.65; color: var(--text-soft); margin: 0 0 20px; }
+.brilla-banner .brilla-cta { display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px; background: var(--sage-deep); color: var(--cream); border-radius: 100px; font-family: 'Manrope', sans-serif; font-size: 14px; font-weight: 500; text-decoration: none; transition: opacity 0.2s; }
+.brilla-banner .brilla-cta:hover { opacity: 0.9; }
+.brilla-icon { display: flex; justify-content: center; align-items: center; }
+.brilla-icon-circle { width: 180px; height: 180px; border-radius: 50%; background: var(--sage-deep); display: flex; align-items: center; justify-content: center; color: var(--cream); }
+.brilla-icon svg { width: 80px; height: 80px; }
+@media (max-width: 720px) {
+  .brilla-banner { grid-template-columns: 1fr; padding: 32px 24px; text-align: center; }
+  .brilla-icon-circle { width: 120px; height: 120px; }
+  .brilla-icon svg { width: 56px; height: 56px; }
+}
+
+/* Casos clínicos */
+.casos-section { padding: 96px 32px; }
+.casos-grid { max-width: 1100px; margin: 56px auto 0; display: grid; grid-template-columns: 1.4fr 1fr; gap: 40px; align-items: center; }
+.casos-image { border-radius: 18px; overflow: hidden; box-shadow: var(--shadow-md); }
+.casos-image img { width: 100%; height: auto; display: block; }
+.casos-text h3 { font-family: 'Fraunces', serif; font-size: clamp(24px, 3vw, 36px); font-weight: 400; color: var(--sage-deepest); margin: 0 0 16px; letter-spacing: -0.01em; line-height: 1.2; }
+.casos-text p { font-size: 16px; line-height: 1.7; color: var(--text-soft); margin: 0 0 14px; }
+@media (max-width: 900px) { .casos-grid { grid-template-columns: 1fr; gap: 32px; } }
+</style>
+</head>
+<body>
+
+<div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
+<nav class="navbar" id="navbar">
+  <button class="nav-burger" id="navBurger" aria-label="Abrir menú">
+    <svg viewBox="0 0 24 24" fill="none"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+  </button>
+  <a href="index.html" class="nav-logo" aria-label="Odontoevolution · Su sonrisa en manos expertas"><img src="img/logo-odontoevolution-dark.png" alt="Odontoevolution · Su sonrisa en manos expertas"></a>
+  <ul class="nav-links">
+    <li><a href="index.html" class="active">Inicio</a></li>
+    <li><a href="nosotros.html">Nosotros</a></li>
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="nosotros.html#profesionales">Profesionales</a></li>
+    <li><a href="contacto.html">Contacto</a></li>
+  </ul>
+  <div class="nav-actions">
+    <a href="tel:+5728387794" class="nav-phone">+57 (2) 838 7794</a>
+    <a href="https://wa.me/573147213686?text=Hola%20Odontoevolution,%20quiero%20agendar%20una%20cita" target="_blank" class="nav-cta">Pedir cita</a>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-menu-close" id="mobileMenuClose" aria-label="Cerrar menú">
+    <svg viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+  </button>
+  <ul>
+    <li><a href="index.html">Inicio</a></li>
+    <li><a href="nosotros.html">Nosotros</a></li>
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="nosotros.html#profesionales">Profesionales</a></li>
+    <li><a href="contacto.html">Contacto</a></li>
+    <li><a href="tel:+5728387794">+57 (2) 838 7794</a></li>
+  </ul>
+</div>
+
+<section class="hero" id="home">
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="hero-rule"></div>
+      <h1>Su sonrisa,<br>en manos<br>expertas</h1>
+      <p class="hero-lead">Odontología integral con énfasis en estética y ortodoncia, en Popayán y Cauca. Tres sedes, cuatro especialistas acreditados en universidades del país y financiación con Crédito Brilla disponible.</p>
+      <div class="hero-actions">
+        <a href="https://wa.me/573147213686?text=Hola%20Odontoevolution,%20quiero%20agendar%20una%20cita" target="_blank" class="hero-cta">Pedir cita por WhatsApp</a>
+        <a href="contacto.html" class="hero-link">O ver contacto</a>
+      </div>
+    </div>
+    <div class="hero-photo">
+      <img src="img/hero-doctora.jpg" alt="Especialista Odontoevolution Popayán" loading="eager">
+    </div>
+  </div>
+</section>
+
+<section class="section clinic">
+  <div class="section-header reveal">
+    <div class="section-rule"><span class="section-rule-text">Nuestra clínica</span></div>
+  </div>
+
+  <div class="clinic-grid reveal">
+    <div class="clinic-photo-main">
+      <img src="img/sede-popayan-recepcion.jpg" alt="Recepción Odontoevolution Popayán" loading="lazy">
+    </div>
+    <div class="clinic-text">
+      <div class="overline">Acerca de Odontoevolution</div>
+      <h3>Tratamiento personalizado, tecnología de avanzada</h3>
+      <p>En Odontoevolution tratamos a cada paciente con técnicas y materiales contemporáneos, respaldados con evidencia científica. Lo recibimos en la sede principal de Popayán y en nuestras sedes de Silvia y El Tambo, en el Cauca.</p>
+      <p>Nuestro equipo de odontólogos generales y especialistas, acreditados en universidades como la Nacional, la Javeriana y San Martín, le proporciona asesoría clara para que elija el tratamiento que mejor se acomoda a sus necesidades funcionales y estéticas.</p>
+      <a href="nosotros.html" class="learn-more">Conozca más <svg viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+    </div>
+  </div>
+
+  <div class="clinic-grid clinic-grid-photos reveal">
+    <div class="clinic-photo-secondary">
+      <div><img src="img/sede-popayan-fachada.jpg" alt="Fachada sede Popayán" loading="lazy"></div>
+      <div><img src="img/sede-popayan-consultorio.jpg" alt="Consultorio Odontoevolution" loading="lazy"></div>
+    </div>
+    <div class="clinic-text">
+      <div class="overline">Popayán · Centro</div>
+      <h3>Carrera 9 # 4-68, Barrio Centro</h3>
+      <p>Nuestra sede principal queda al lado de la notaría primera, en el antiguo Tijuana Bar. Un espacio cómodo, con tecnología actualizada y atención cálida que nuestros pacientes ya conocen.</p>
+      <a href="contacto.html" class="learn-more">Cómo llegar <svg viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+    </div>
+  </div>
+
+  <div class="clinic-bottom reveal">
+    <div>
+      <h4>Cuatro especialistas</h4>
+      <p>Ortodoncia, implantología, rehabilitación oral y odontología estética. Cada caso lo atiende el profesional formado en esa área específica.</p>
+    </div>
+    <div>
+      <h4>Tres sedes</h4>
+      <p>Popayán Centro, Silvia y El Tambo. Lo recibimos cerca de donde vive, con la misma calidad clínica en cada sede.</p>
+    </div>
+    <div>
+      <h4>Financiación Brilla</h4>
+      <p>Trabajamos con Crédito Brilla de la Compañía Energética de Occidente. Pague su tratamiento en cuotas a través de su factura de energía.</p>
+    </div>
+  </div>
+</section>
+
+<section class="services-section" id="servicios">
+  <div class="section-header reveal">
+    <div class="section-rule"><span class="section-rule-text">Servicios odontológicos</span></div>
+    <p style="font-family: 'Manrope', sans-serif; font-size: 13px; color: var(--text-soft); letter-spacing: 0.1em; margin-top: 12px;">TÉCNICAS CONTEMPORÁNEAS, MATERIALES DE ALTA CALIDAD</p>
+  </div>
+
+  <div class="services-grid">
+    <div class="service-card reveal">
+      <h3>Ortodoncia y ortopedia maxilar</h3>
+      <p>Corregimos la posición de los dientes y el crecimiento de los huesos maxilares en niños, jóvenes y adultos. Ofrecemos cinco planes de ortodoncia según su necesidad y presupuesto.</p>
+      <ul class="service-list">
+        <li>Brackets metálicos · plan Estándar</li>
+        <li>Brackets Roth · plan calidad</li>
+        <li>Brackets MBT · comodidad y calidad</li>
+        <li>Autoligado Damon · sofisticación</li>
+        <li>Clear Aligner · alineadores transparentes</li>
+        <li>Ortopedia maxilar para niños en crecimiento</li>
+      </ul>
+      <a href="https://wa.me/573147213686?text=Hola%20Odontoevolution,%20me%20interesa%20Ortodoncia" target="_blank" class="learn-more">Saber más <svg viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+    </div>
+
+    <div class="service-card reveal">
+      <h3>Implantes dentales</h3>
+      <p>Reemplazo de dientes perdidos con implantes de titanio. Tratamiento dirigido por nuestro especialista en implantología oral y oseointegración formado en la Universidad del Desarrollo, Chile.</p>
+      <ul class="service-list">
+        <li>Implantología oral y oseointegración</li>
+        <li>Diagnóstico previo con imagen</li>
+        <li>Coronas sobre implante</li>
+        <li>Casos parciales y totales</li>
+      </ul>
+      <a href="https://wa.me/573147213686?text=Hola%20Odontoevolution,%20me%20interesa%20Implantes%20dentales" target="_blank" class="learn-more">Saber más <svg viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+    </div>
+
+    <div class="service-card reveal">
+      <h3>Odontología general</h3>
+      <p>Atención integral de prevención y promoción de la salud oral. Diagnóstico claro, tratamientos en corto tiempo y materiales de avanzada.</p>
+      <ul class="service-list">
+        <li>Consulta y diagnóstico</li>
+        <li>Limpieza profesional</li>
+        <li>Restauraciones en resina estética</li>
+        <li>Prevención de caries</li>
+      </ul>
+      <a href="https://wa.me/573147213686?text=Hola%20Odontoevolution,%20me%20interesa%20Odontología%20general" target="_blank" class="learn-more">Saber más <svg viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+    </div>
+
+    <div class="service-card reveal">
+      <h3>Cirugía oral</h3>
+      <p>Procedimientos quirúrgicos orales planificados, con protocolo de manejo del dolor postoperatorio. Lo acompañamos antes, durante y después del procedimiento.</p>
+      <ul class="service-list">
+        <li>Extracciones dentales</li>
+        <li>Cirugía de cordales</li>
+        <li>Procedimientos pre-implantológicos</li>
+        <li>Atención de urgencia odontológica</li>
+      </ul>
+      <a href="https://wa.me/573147213686?text=Hola%20Odontoevolution,%20me%20interesa%20Cirugía%20oral" target="_blank" class="learn-more">Saber más <svg viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+    </div>
+
+    <div class="service-card reveal">
+      <h3>Rehabilitación oral</h3>
+      <p>Recuperamos la función masticatoria y la estética con coronas, prótesis y restauraciones de avanzada. Atención individualizada con materiales contemporáneos.</p>
+      <ul class="service-list">
+        <li>Coronas estéticas</li>
+        <li>Prótesis fijas y removibles</li>
+        <li>Rehabilitación sobre implantes</li>
+        <li>Resinas de alta estética</li>
+      </ul>
+      <a href="https://wa.me/573147213686?text=Hola%20Odontoevolution,%20me%20interesa%20Rehabilitación%20oral" target="_blank" class="learn-more">Saber más <svg viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+    </div>
+
+    <div class="service-card reveal">
+      <h3>Estética dental</h3>
+      <p>Diseño de sonrisa, carillas y blanqueamiento dental con técnicas mínimamente invasivas. Resultados naturales que cuidan el esmalte y respetan la armonía de su rostro.</p>
+      <ul class="service-list">
+        <li>Diseño de sonrisa</li>
+        <li>Carillas estéticas</li>
+        <li>Blanqueamiento dental</li>
+        <li>Resinas de alta estética</li>
+      </ul>
+      <a href="https://wa.me/573147213686?text=Hola%20Odontoevolution,%20me%20interesa%20Estética%20dental" target="_blank" class="learn-more">Saber más <svg viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+    </div>
+  </div>
+
+  <div class="planes-orto-wrap reveal">
+    <p class="planes-orto-intro"><strong>Cinco planes de ortodoncia</strong> para que elija el que mejor se ajusta a sus expectativas. Pregunte por nuestros planes sin cuota inicial y por tiempo limitado le obsequiamos sus retenedores.</p>
+    <div class="planes-orto-grid">
+      <div class="plan-orto-card">
+        <div class="plan-orto-name">Estándar</div>
+        <div class="plan-orto-attr">Economía</div>
+      </div>
+      <div class="plan-orto-card">
+        <div class="plan-orto-name">Roth</div>
+        <div class="plan-orto-attr">Calidad</div>
+      </div>
+      <div class="plan-orto-card">
+        <div class="plan-orto-name">MBT</div>
+        <div class="plan-orto-attr">Comodidad y calidad</div>
+      </div>
+      <div class="plan-orto-card">
+        <div class="plan-orto-name">Damon</div>
+        <div class="plan-orto-attr">Autoligado · sofisticación</div>
+      </div>
+      <div class="plan-orto-card">
+        <div class="plan-orto-name">Clear Aligner</div>
+        <div class="plan-orto-attr">Alineadores transparentes</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section alt-bg" id="orofaciales">
+  <div class="section-header reveal">
+    <div class="section-rule"><span class="section-rule-text">Servicios orofaciales</span></div>
+    <p style="font-family: 'Manrope', sans-serif; font-size: 13px; color: var(--text-soft); letter-spacing: 0.1em; margin-top: 12px;">ESTÉTICA FACIAL MÍNIMAMENTE INVASIVA</p>
+  </div>
+
+  <div class="services-grid">
+    <div class="service-card reveal">
+      <h3>Botox</h3>
+      <p>Disminuye y previene temporalmente las arrugas y líneas de expresión. Resultado natural que suaviza las marcas del tiempo y previene la aparición de nuevas arrugas.</p>
+      <ul class="service-list">
+        <li>Arrugas frontales</li>
+        <li>Entrecejo</li>
+        <li>Patas de gallina</li>
+        <li>Arrugas de conejo</li>
+        <li>Sonrisa gingival</li>
+        <li>Bruxismo</li>
+      </ul>
+      <a href="https://wa.me/573147213686?text=Hola%20Odontoevolution,%20me%20interesa%20Botox" target="_blank" class="learn-more">Saber más <svg viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+    </div>
+
+    <div class="service-card reveal">
+      <h3>Ácido hialurónico</h3>
+      <p>Tratamiento ideal para dar soporte y volumen a los tejidos, hidratando profundamente la piel. Resultados visibles desde la primera sesión.</p>
+      <ul class="service-list">
+        <li>Diseño de labios</li>
+        <li>Filler de mentón</li>
+        <li>Filler zona malar</li>
+        <li>Surcos nasogenianos</li>
+        <li>Ángulo de la mandíbula</li>
+      </ul>
+      <a href="https://wa.me/573147213686?text=Hola%20Odontoevolution,%20me%20interesa%20Ácido%20Hialurónico" target="_blank" class="learn-more">Saber más <svg viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+    </div>
+
+    <div class="service-card reveal">
+      <h3>Rinomodelación</h3>
+      <p>Técnica mínimamente invasiva que corrige irregularidades de la nariz sin cirugía. Procedimiento sencillo, rápido, reversible y ambulatorio con efecto inmediato.</p>
+      <ul class="service-list">
+        <li>Perfilar el dorso nasal</li>
+        <li>Moldear y elevar la punta</li>
+        <li>Resultado inmediato</li>
+        <li>Sin tiempos de recuperación</li>
+      </ul>
+      <a href="https://wa.me/573147213686?text=Hola%20Odontoevolution,%20me%20interesa%20Rinomodelación" target="_blank" class="learn-more">Saber más <svg viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+    </div>
+
+    <div class="service-card reveal">
+      <h3>Filler de ojeras</h3>
+      <p>Tratamiento ideal para dar soporte a los tejidos de la zona infraocular. Mejora el color, homogeniza la región y aporta hidratación visible.</p>
+      <ul class="service-list">
+        <li>Reducción del surco palpebral</li>
+        <li>Mejora del tono</li>
+        <li>Hidratación local</li>
+      </ul>
+      <a href="https://wa.me/573147213686?text=Hola%20Odontoevolution,%20me%20interesa%20Filler%20de%20Ojeras" target="_blank" class="learn-more">Saber más <svg viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+    </div>
+
+    <div class="service-card reveal">
+      <h3>Filler de mentón</h3>
+      <p>Corrige un mentón retrusivo o demasiado pequeño, mejorando la armonía facial. Procedimiento ambulatorio con resultado inmediato.</p>
+      <ul class="service-list">
+        <li>Proyección del mentón</li>
+        <li>Equilibrio del perfil</li>
+        <li>Sin cirugía</li>
+      </ul>
+      <a href="https://wa.me/573147213686?text=Hola%20Odontoevolution,%20me%20interesa%20Filler%20de%20Mentón" target="_blank" class="learn-more">Saber más <svg viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+    </div>
+
+    <div class="service-card reveal">
+      <h3>Diseño de labios</h3>
+      <p>Conseguimos labios hidratados, perfilados y con mayor volumen, mejorando su estructura y proyección. Resultado natural y proporcional.</p>
+      <ul class="service-list">
+        <li>Hidratación profunda</li>
+        <li>Perfilado natural</li>
+        <li>Volumen proporcional</li>
+        <li>Proyección armónica</li>
+      </ul>
+      <a href="https://wa.me/573147213686?text=Hola%20Odontoevolution,%20me%20interesa%20Diseño%20de%20Labios" target="_blank" class="learn-more">Saber más <svg viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<section class="casos-section">
+  <div class="section-header reveal">
+    <div class="section-rule"><span class="section-rule-text">Casos clínicos</span></div>
+  </div>
+  <div class="casos-grid reveal">
+    <div class="casos-image">
+      <img src="img/caso-antes-despues.jpg" alt="Caso de ortodoncia · antes y después en Odontoevolution" loading="lazy">
+    </div>
+    <div class="casos-text">
+      <div class="overline" style="color: var(--sage-deep); margin-bottom: 12px;">Tratamientos reales</div>
+      <h3>Pacientes que vuelven a sonreír</h3>
+      <p>Cada caso se planea con el especialista indicado para su necesidad. Diagnóstico inicial, plan de tratamiento por escrito y seguimiento durante todo el proceso.</p>
+      <p>Estos son algunos de los pacientes que finalizaron satisfactoriamente su tratamiento en nuestras sedes. Odontoevolution, comprometidos con cambiar vidas, una sonrisa a la vez.</p>
+      <a href="https://wa.me/573147213686?text=Hola%20Odontoevolution,%20quiero%20pedir%20una%20valoración" target="_blank" class="learn-more">Pida su valoración <svg viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<section class="section alt-bg" id="sedes">
+  <div class="section-header reveal">
+    <div class="section-rule"><span class="section-rule-text">Tres sedes para atenderlo</span></div>
+  </div>
+
+  <div class="sedes-grid reveal">
+
+    <div class="sede-card">
+      <div class="sede-map">
+        <iframe
+          src="https://maps.google.com/maps?q=Carrera%209%20%23%204-68%20Centro%20Popay%C3%A1n%20Cauca&t=&z=16&ie=UTF8&iwloc=&output=embed"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Mapa Odontoevolution Popayán Centro"></iframe>
+      </div>
+      <div class="sede-info">
+        <span class="sede-tag">Popayán · Sede principal</span>
+        <h3>Carrera 9 # 4-68, Barrio Centro</h3>
+        <p class="sede-address">Al lado de la notaría primera<br>Antiguo Tijuana Bar · Popayán, Cauca</p>
+        <p class="sede-horario"><strong>Lunes a viernes:</strong> 8:00 a.m. – 12:00 m. y 2:00 – 6:00 p.m.<br><strong>Sábados:</strong> 8:00 a.m. – 12:00 m.</p>
+        <div class="sede-contact">
+          <a href="https://wa.me/573147213686" target="_blank">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.6 6.3A7.85 7.85 0 0 0 12 4a7.93 7.93 0 0 0-7.93 7.93 7.83 7.83 0 0 0 1.06 3.95L4 20l4.22-1.1a7.94 7.94 0 0 0 3.78.97h.01A7.94 7.94 0 0 0 20 11.97 7.86 7.86 0 0 0 17.6 6.3z"/></svg>
+            WhatsApp +57 314 721 3686
+          </a>
+          <a href="tel:+5728387794">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.33 1.85.56 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            Telefax +57 (2) 838 7794
+          </a>
+          <a href="https://maps.google.com/maps?q=Carrera+9+%23+4-68+Centro+Popayan+Cauca" target="_blank" class="ver-mapa">Ver en Google Maps</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="sede-card">
+      <div class="sede-map">
+        <iframe
+          src="https://maps.google.com/maps?q=Calle%2013%20%23%202-15%20Silvia%20Cauca&t=&z=15&ie=UTF8&iwloc=&output=embed"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Mapa Odontoevolution Silvia"></iframe>
+      </div>
+      <div class="sede-info">
+        <span class="sede-tag">Silvia · Cauca</span>
+        <h3>Calle 13 # 2-15, Diagonal al Baratillo</h3>
+        <p class="sede-address">Silvia, Cauca</p>
+        <p class="sede-horario"><strong>Martes y sábado:</strong> 8:00 a.m. – 12:00 m.<br><strong>Lunes, miércoles, jueves y viernes:</strong> 2:00 – 6:00 p.m.</p>
+        <div class="sede-contact">
+          <a href="tel:+573113983829">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.33 1.85.56 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            +57 311 398 3829
+          </a>
+          <a href="tel:+573108420591">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.33 1.85.56 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            +57 310 842 0591
+          </a>
+          <a href="https://maps.google.com/maps?q=Calle+13+%23+2-15+Silvia+Cauca" target="_blank" class="ver-mapa">Ver en Google Maps</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="sede-card">
+      <div class="sede-map">
+        <iframe
+          src="https://maps.google.com/maps?q=Carrera%209%20%232-143%20El%20Tambo%20Cauca&t=&z=15&ie=UTF8&iwloc=&output=embed"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Mapa Odontoevolution El Tambo"></iframe>
+      </div>
+      <div class="sede-info">
+        <span class="sede-tag">El Tambo · Cauca</span>
+        <h3>Carrera 9 # 2-143</h3>
+        <p class="sede-address">Junto a los talleres de motos<br>Vía al Colegio Santander · El Tambo, Cauca</p>
+        <p class="sede-horario">Consulte horario por WhatsApp.</p>
+        <div class="sede-contact">
+          <a href="tel:+573233259401">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.33 1.85.56 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            +57 323 325 9401
+          </a>
+          <a href="https://maps.google.com/maps?q=Carrera+9+%232-143+El+Tambo+Cauca" target="_blank" class="ver-mapa">Ver en Google Maps</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-header reveal">
+    <div class="section-rule"><span class="section-rule-text">Financiación Brilla</span></div>
+  </div>
+  <div class="brilla-banner reveal">
+    <div class="brilla-text">
+      <div class="overline">Crédito Brilla</div>
+      <h3>Pague su tratamiento en cuotas a través de la factura de energía</h3>
+      <p>Trabajamos con Crédito Brilla de la Compañía Energética de Occidente. Si tiene cupo aprobado en su factura, puede acceder a su tratamiento de ortodoncia, implantes o cualquier otro servicio sin cuota inicial. Lo guiamos en todo el proceso.</p>
+      <a href="https://wa.me/573147213686?text=Hola%20Odontoevolution,%20quiero%20saber%20cómo%20aplicar%20al%20Crédito%20Brilla" target="_blank" class="brilla-cta">
+        Pregunte por Brilla
+        <svg viewBox="0 0 24 24" fill="none" width="16" height="16"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </a>
+    </div>
+    <div class="brilla-icon">
+      <div class="brilla-icon-circle">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18"/><path d="M7 15h2"/></svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="faq">
+  <h2>Preguntas frecuentes</h2>
+  <div class="faq-list">
+    <div class="faq-item open">
+      <div class="faq-question">
+        Qué planes de ortodoncia ofrecen
+        <div class="faq-toggle"><svg viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+      </div>
+      <div class="faq-answer"><div class="faq-answer-inner">Cinco planes ajustables a su necesidad y presupuesto: Estándar (economía), Roth (calidad), MBT (comodidad y calidad), Damon autoligado (sofisticación) y Clear Aligner (alineadores transparentes). Pregunte también por nuestros planes sin cuota inicial y por tiempo limitado le obsequiamos sus retenedores.</div></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question">
+        Trabajan con financiación Brilla
+        <div class="faq-toggle"><svg viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+      </div>
+      <div class="faq-answer"><div class="faq-answer-inner">Sí. Tenemos convenio con Crédito Brilla de la Compañía Energética de Occidente (CEO). Si usted es titular del recibo de energía, tiene cupo disponible y está al día en sus pagos, puede financiar su tratamiento a través de la factura. Lo guiamos en los requisitos y le ayudamos con la documentación.</div></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question">
+        A qué edad se recomienda iniciar ortopedia maxilar
+        <div class="faq-toggle"><svg viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+      </div>
+      <div class="faq-answer"><div class="faq-answer-inner">La edad ideal para iniciar tratamiento de ortopedia maxilar es durante las etapas de crecimiento del niño. Tratar temprano permite redireccionar el crecimiento de los huesos maxilares, guiar la erupción dentaria y corregir hábitos orales. Esto ahorra tiempo y dinero comparado con esperar a la adolescencia.</div></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question">
+        En cuál de las tres sedes me pueden atender
+        <div class="faq-toggle"><svg viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+      </div>
+      <div class="faq-answer"><div class="faq-answer-inner">Atendemos en tres sedes: Popayán Centro (Carrera 9 # 4-68), Silvia (Calle 13 # 2-15) y El Tambo (Carrera 9 # 2-143). Escríbanos al WhatsApp +57 314 721 3686 indicando la sede de su preferencia y el tratamiento que le interesa, y le confirmamos disponibilidad el mismo día.</div></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question">
+        Cómo agendo mi cita
+        <div class="faq-toggle"><svg viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+      </div>
+      <div class="faq-answer"><div class="faq-answer-inner">Escríbanos por WhatsApp al +57 314 721 3686 indicando el servicio que le interesa (ortodoncia, implantes, estética dental, botox, etcétera) y la sede de su preferencia. Le confirmamos disponibilidad el mismo día y le agendamos con el especialista indicado para su caso.</div></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question">
+        Tienen servicios de estética facial además de odontología
+        <div class="faq-toggle"><svg viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+      </div>
+      <div class="faq-answer"><div class="faq-answer-inner">Sí. Ofrecemos servicios orofaciales mínimamente invasivos: botox, ácido hialurónico, rinomodelación, filler de ojeras, filler de mentón y diseño de labios. Todos son procedimientos ambulatorios con resultados visibles y sin cirugía.</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-final">
+  <h2>Listos para cuidar su sonrisa</h2>
+  <p>Pida su cita en Odontoevolution. Lo atendemos en Popayán, Silvia o El Tambo con el especialista indicado para su caso.</p>
+  <div class="cta-final-actions">
+    <a href="https://wa.me/573147213686?text=Hola%20Odontoevolution,%20quiero%20agendar%20una%20cita" target="_blank" class="cta-final-btn">
+      Agendar por WhatsApp
+      <svg viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    </a>
+    <a href="contacto.html" class="cta-final-btn outline">Ver más formas de contacto</a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <img src="img/logo-odontoevolution-light.png" alt="Odontoevolution · Su sonrisa en manos expertas" class="footer-logo">
+      <div class="footer-brand-name">Odontoevolution</div>
+      <p>Clínica odontológica en Popayán y Cauca. Odontología integral con énfasis en estética y ortodoncia. Tres sedes, cuatro especialistas y financiación con Crédito Brilla.</p>
+      <div class="footer-social">
+        <a href="https://wa.me/573147213686" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.6 6.3A7.85 7.85 0 0 0 12 4a7.93 7.93 0 0 0-7.93 7.93 7.83 7.83 0 0 0 1.06 3.95L4 20l4.22-1.1a7.94 7.94 0 0 0 3.78.97h.01A7.94 7.94 0 0 0 20 11.97 7.86 7.86 0 0 0 17.6 6.3z"/></svg></a>
+        <a href="https://www.instagram.com/odontoevolution/" target="_blank" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="3.5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a>
+        <a href="https://www.facebook.com/odontoevolution/" target="_blank" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95z"/></svg></a>
+      </div>
+    </div>
+
+    <div class="footer-col">
+      <h4>Servicios</h4>
+      <ul>
+        <li><a href="#servicios">Ortodoncia</a></li>
+        <li><a href="#servicios">Implantes dentales</a></li>
+        <li><a href="#servicios">Estética dental</a></li>
+        <li><a href="#orofaciales">Botox</a></li>
+        <li><a href="#orofaciales">Ácido hialurónico</a></li>
+        <li><a href="#orofaciales">Rinomodelación</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Información</h4>
+      <ul>
+        <li><a href="nosotros.html">Nosotros</a></li>
+        <li><a href="nosotros.html#profesionales">Profesionales</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Sedes</h4>
+      <ul>
+        <li>Popayán · Cra 9 # 4-68</li>
+        <li>Silvia · Calle 13 # 2-15</li>
+        <li>El Tambo · Cra 9 # 2-143</li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Contacto</h4>
+      <ul>
+        <li><a href="https://wa.me/573147213686">+57 314 721 3686</a></li>
+        <li><a href="tel:+5728387794">+57 (2) 838 7794</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Odontoevolution · Muestra Pronto</span>
+    <span>Carrera 9 # 4-68 · Barrio Centro · Popayán, Cauca</span>
+  </div>
+</footer>
+
+<a href="https://wa.me/573147213686?text=Hola%20Odontoevolution" target="_blank" class="wa-float" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.371-.025-.52-.075-.149-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+</a>
+
+<script>
+  if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; }
+  window.addEventListener('beforeunload', () => window.scrollTo(0, 0));
+  const navbar = document.getElementById('navbar');
+  if (navbar) {
+    const onScroll = () => navbar.classList.toggle('scrolled', window.scrollY > 60);
+    window.addEventListener('scroll', onScroll, { passive: true });
+  }
+  const burger = document.getElementById('navBurger');
+  const menu = document.getElementById('mobileMenu');
+  const menuClose = document.getElementById('mobileMenuClose');
+  if (burger && menu) {
+    burger.addEventListener('click', () => menu.classList.add('open'));
+    menuClose && menuClose.addEventListener('click', () => menu.classList.remove('open'));
+    menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => menu.classList.remove('open')));
+  }
+  document.querySelectorAll('.faq-item').forEach(item => {
+    const q = item.querySelector('.faq-question');
+    q && q.addEventListener('click', () => item.classList.toggle('open'));
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
+<script src="assets/animations.js?v=20260526a" defer></script>
+
+</body>
+</html>
