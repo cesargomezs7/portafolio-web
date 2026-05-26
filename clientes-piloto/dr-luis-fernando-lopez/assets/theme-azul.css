@@ -1,0 +1,51 @@
+/* ═══════════════════════════════════════════════════════════
+   DR. LUIS FERNANDO LÓPEZ · Theme AZUL CORPORATE
+   Paleta médica premium para clínica de endodoncia especializada.
+   Sobrescribe variables del Atelier sage sin tocar styles.css.
+   ═══════════════════════════════════════════════════════════ */
+
+:root {
+  /* Paleta azul corporate dental premium */
+  --azul-dark:    #1e3a52;
+  --azul:         #3a7ca5;
+  --azul-deep:    #2d6589;
+  --azul-soft:    #87b8d8;
+  --azul-bg:      #e8f0f6;
+  --azul-bg-2:    #dde8f0;
+  --gray-bg:      #fbfbfb;
+
+  /* === Mapeo Atelier → Azul Corporate === */
+  --sage-bg:      #e8f0f6;
+  --sage-soft:    #f0f5f9;
+  --sage-deep:    #1e3a52;
+  --sage-deepest: #15293c;
+  --cream:        #fbfbfb;
+  --cream-deep:   #ecf0f4;
+  --accent:       #c97a3d;     /* cobre cálido para contraste premium */
+  --accent-soft:  #d99860;
+  --text:         #15293c;
+  --text-soft:    #4a5a6e;
+  --border:       #c8d4dc;
+  --charcoal:     #15293c;
+
+  --shadow-sm: 0 2px 6px rgba(30,58,82,0.08);
+  --shadow-md: 0 14px 38px rgba(30,58,82,0.12);
+  --shadow-lg: 0 30px 70px rgba(30,58,82,0.18);
+}
+
+/* === Overrides específicos === */
+
+.hero { background: linear-gradient(to left, var(--sage-bg) 30%, #d6e3ec 100%) !important; }
+.hero-compact { background: linear-gradient(to left, var(--sage-bg) 30%, #d6e3ec 100%) !important; }
+.section.alt-bg { background: var(--sage-soft) !important; }
+
+.testimonio-avatar { background: var(--sage-deep) !important; color: var(--cream) !important; }
+
+.faq-list { border-top-color: rgba(30,58,82,0.18) !important; }
+.faq-item { border-bottom-color: rgba(30,58,82,0.18) !important; }
+
+.equipo-mini-photo, .prof-photo, .profs-ticker .equipo-mini-photo { background: #d6e3ec !important; }
+
+.valor-card { background: #ffffff !important; border-color: rgba(30,58,82,0.08) !important; }
+
+::selection { background: var(--azul-soft); color: var(--azul-dark); }

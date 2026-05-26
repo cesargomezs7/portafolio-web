@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nosotros · Dr. Luis Fernando López · Endodoncia microscópica Medellín</title>
+<meta name="description" content="Conozca al equipo de especialistas con más de 20 años de experiencia en endodoncia microscópica y ortodoncia. Dr. Luis Fernando López y Dra. Isabel Fernández. The Dental Office, El Poblado, Medellín.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css?v=20260526a">
+<link rel="stylesheet" href="assets/theme-azul.css?v=20260526a">
+<style>
+.nav-logo { padding: 4px 0; display: inline-flex; align-items: center; line-height: 1; }
+.nav-logo img { height: 44px; width: auto; display: block; }
+@media (max-width: 720px) { .nav-logo img { height: 34px; } }
+.footer-logo { height: 72px; width: auto; display: block; margin-bottom: 20px; }
+.footer-brand-name { display: none; }
+
+.clinic-photo-main { position: relative !important; }
+.clinic-photo-main img { width: 100% !important; height: 100% !important; object-fit: cover !important; object-position: center center !important; display: block !important; position: absolute !important; inset: 0 !important; }
+
+.equipo-photo { position: relative !important; }
+.equipo-photo img { width: 100% !important; height: 100% !important; object-fit: cover !important; object-position: center center !important; display: block !important; position: absolute !important; inset: 0 !important; }
+
+.equipo-info blockquote {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--text-soft);
+  margin: 14px 0 0;
+  padding-left: 14px;
+  border-left: 2px solid var(--accent);
+}
+
+.valores-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 32px;
+  max-width: 1100px;
+  margin: 56px auto 0;
+}
+.valor-card {
+  padding: 32px;
+  background: #fff;
+  border: 1px solid rgba(30,58,82,0.06);
+  border-radius: 16px;
+}
+.valor-card h4 {
+  font-family: 'Fraunces', serif;
+  font-size: 20px;
+  font-weight: 400;
+  margin: 0 0 12px;
+  color: var(--charcoal);
+}
+.valor-card p { font-size: 15px; line-height: 1.65; color: rgba(0,0,0,0.7); margin: 0; }
+@media (max-width: 720px) { .valores-grid { grid-template-columns: 1fr; gap: 16px; } .valor-card { padding: 24px; } }
+
+/* Tech section */
+.tech-section { padding: 110px 32px; background: linear-gradient(180deg, var(--sage-deepest) 0%, var(--sage-deep) 100%); color: var(--cream); }
+.tech-wrap { max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: 1.05fr 1fr; gap: 64px; align-items: center; }
+.tech-text .overline { color: rgba(251,251,251,0.7); margin-bottom: 18px; }
+.tech-text h2 { font-family: 'Fraunces', serif; font-weight: 400; font-size: clamp(32px, 4vw, 48px); color: var(--cream); margin: 0 0 22px; letter-spacing: -0.015em; line-height: 1.1; }
+.tech-text h2 em { font-style: italic; color: var(--azul-soft); font-weight: 400; }
+.tech-text p { font-family: 'Fraunces', serif; font-size: 17px; line-height: 1.7; color: rgba(251,251,251,0.85); margin-bottom: 16px; }
+.tech-text .tech-cta { display: inline-flex; align-items: center; gap: 8px; padding: 14px 28px; background: var(--cream); color: var(--sage-deepest); border-radius: 100px; text-decoration: none; font-family: 'Fraunces', serif; font-size: 16px; margin-top: 14px; transition: transform 0.3s var(--t); }
+.tech-text .tech-cta:hover { transform: translateY(-2px); }
+.tech-text .tech-cta svg { width: 14px; height: 14px; }
+.tech-photo { position: relative; border-radius: 20px; overflow: hidden; aspect-ratio: 5/4; box-shadow: 0 30px 70px rgba(0,0,0,0.45); }
+.tech-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+@media (max-width: 1024px) { .tech-section { padding: 80px 20px; } .tech-wrap { grid-template-columns: 1fr; gap: 40px; } }
+</style>
+</head>
+<body>
+
+<div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
+<nav class="navbar" id="navbar">
+  <button class="nav-burger" id="navBurger" aria-label="Abrir menú">
+    <svg viewBox="0 0 24 24" fill="none"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+  </button>
+  <a href="index.html" class="nav-logo" aria-label="Dr. Luis F. López · Endodoncista"><img src="img/logo-lopez-dark.png" alt="Dr. Luis F. López · Endodoncista"></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Inicio</a></li>
+    <li><a href="nosotros.html" class="active">Nosotros</a></li>
+    <li><a href="index.html#servicios">Servicios</a></li>
+    <li><a href="#profesionales">Equipo</a></li>
+    <li><a href="contacto.html">Contacto</a></li>
+  </ul>
+  <div class="nav-actions">
+    <a href="tel:+573122469942" class="nav-phone">+57 312 246 9942</a>
+    <a href="https://wa.me/573122469942?text=Hola%20Dr.%20López,%20quiero%20agendar%20una%20cita" target="_blank" class="nav-cta">Agendar cita</a>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-menu-close" id="mobileMenuClose" aria-label="Cerrar menú">
+    <svg viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+  </button>
+  <ul>
+    <li><a href="index.html">Inicio</a></li>
+    <li><a href="nosotros.html">Nosotros</a></li>
+    <li><a href="index.html#servicios">Servicios</a></li>
+    <li><a href="#profesionales">Equipo</a></li>
+    <li><a href="contacto.html">Contacto</a></li>
+    <li><a href="tel:+573122469942">+57 312 246 9942</a></li>
+  </ul>
+</div>
+
+<section class="hero-compact">
+  <div class="hero-compact-inner">
+    <span class="overline">Nosotros</span>
+    <h1>Tu salud,<br>nuestra misión</h1>
+    <p>Especialistas con más de 20 años de experiencia en el cuidado integral de su salud oral. Endodoncia microscópica, ortodoncia, rehabilitación oral, implantes y diseño de sonrisa. Atendemos pacientes nacionales e internacionales en El Poblado, Medellín.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-header reveal">
+    <div class="section-rule"><span class="section-rule-text">Quiénes somos</span></div>
+  </div>
+
+  <div class="clinic-grid reveal">
+    <div class="clinic-photo-main"><img src="img/clinica-consultorio.jpg" alt="Equipo The Dental Office · El Poblado"></div>
+    <div class="clinic-text">
+      <div class="overline">Más de 20 años de experiencia</div>
+      <h3>Endodoncia microscópica con compromiso humano</h3>
+      <p>Somos un grupo de especialistas con más de 20 años de experiencia en el cuidado de su salud oral, a través de servicios integrales y seguros. Cada plan de tratamiento se diseña pensando en su caso particular, con diagnóstico personalizado y presupuesto claro antes de iniciar.</p>
+      <p>Nos especializamos en <strong>endodoncia microscópica</strong>, una técnica que permite procedimientos más precisos, mínimamente invasivos y con mejor pronóstico. Combinamos esa especialidad con ortodoncia tradicional e invisible, rehabilitación oral, implantes y diseño de sonrisa.</p>
+      <p>Atendemos en nuestra sede de <strong>El Poblado, Medellín (Sao Paulo Plaza, oficina 617)</strong>, con un equipo que recibe pacientes nacionales e internacionales por igual.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section alt-bg">
+  <div class="section-header reveal">
+    <div class="section-rule"><span class="section-rule-text">Por qué elegirnos</span></div>
+  </div>
+
+  <div class="valores-grid reveal">
+    <div class="valor-card">
+      <h4>Endodoncia microscópica</h4>
+      <p>Microscopio que aumenta hasta 32x con iluminación directa. Procedimientos más precisos, conservadores y rápidos. Mejor pronóstico y mayor preservación del diente natural.</p>
+    </div>
+    <div class="valor-card">
+      <h4>Más de 20 años de experiencia</h4>
+      <p>Trayectoria comprobada en endodoncia y ortodoncia. Participación en congresos internacionales y actualización continua en nuevas tecnologías odontológicas.</p>
+    </div>
+    <div class="valor-card">
+      <h4>Atención bilingüe</h4>
+      <p>El Dr. López atiende en inglés. Recibimos pacientes que viajan por turismo dental desde Estados Unidos y el exterior, con coordinación previa por WhatsApp y videollamada.</p>
+    </div>
+    <div class="valor-card">
+      <h4>Sin dolor en cada procedimiento</h4>
+      <p>Anestesia local moderna y, cuando el caso lo amerita, servicio de sedación consciente e inconsciente coordinado con aliados en anestesiología. Comodidad y confianza.</p>
+    </div>
+    <div class="valor-card">
+      <h4>Tratamientos integrales</h4>
+      <p>Endodoncia, ortodoncia, rehabilitación oral, implantes y odontología estética coordinados internamente. No le mandamos a otras clínicas: completamos su plan acá.</p>
+    </div>
+    <div class="valor-card">
+      <h4>Honestidad clínica</h4>
+      <p>Si un tratamiento que le propusieron no es necesario, se lo decimos. Diagnóstico transparente y plan de tratamiento por escrito antes de iniciar, sin sobrediagnóstico.</p>
+    </div>
+  </div>
+</section>
+
+<section class="tech-section">
+  <div class="tech-wrap">
+    <div class="tech-text reveal">
+      <span class="overline">Tecnología destacada</span>
+      <h2>El microscopio <em>cambia</em> la endodoncia</h2>
+      <p>La endodoncia microscópica permite ver el interior del diente con un aumento de hasta 32 veces, con iluminación directa de la zona. Eso significa procedimientos más precisos, más rápidos y con conservación máxima del tejido sano de la pieza dental.</p>
+      <p>El uso del microscopio es la diferencia entre adivinar y ver. La mayoría de los conductos radiculares son del tamaño de un cabello humano: con visión a simple vista se perdían anatomías que ahora podemos identificar y tratar correctamente.</p>
+      <a href="https://wa.me/573122469942?text=Hola%20Dr.%20López,%20quiero%20una%20valoración%20de%20endodoncia%20microscópica" target="_blank" class="tech-cta">
+        Pedir valoración
+        <svg viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </a>
+    </div>
+    <div class="tech-photo reveal">
+      <img src="img/tech-microscopio.jpg" alt="Dr. Luis Fernando López revisando radiografía con paciente" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<section class="equipo-section" id="profesionales">
+  <div class="section-header reveal">
+    <div class="section-rule"><span class="section-rule-text">¡Conoce a nuestros profesionales!</span></div>
+    <p style="font-family: 'Manrope', sans-serif; font-size: 14px; color: var(--text-soft); line-height: 1.6; margin: 16px auto 0; max-width: 640px; text-align: center;">Dos especialistas, una visión compartida. Formación universitaria, experiencia clínica y compromiso humano con cada paciente.</p>
+  </div>
+
+  <div class="equipo-grid" style="grid-template-columns: repeat(2, 1fr); max-width: 1000px; margin: 0 auto;">
+    <div class="equipo-card reveal">
+      <div class="equipo-photo"><img src="img/doctor-luis.jpg" alt="Dr. Luis Fernando López Diez · Endodoncista" loading="lazy"></div>
+      <div class="equipo-info">
+        <div class="role">Endodoncista · Director</div>
+        <h3>Dr. Luis Fernando López Diez</h3>
+        <p class="specialty">Especialista en Endodoncia · Universidad CES Medellín<br>Odontólogo · Colegio Odontológico Colombiano</p>
+        <blockquote>"Me apasiona mi profesión, y mi mayor motivación es brindarle salud oral a cada uno de mis pacientes. Mi especialidad es muy importante, porque gracias a ella puedo eliminar el dolor y los focos de infección, causantes de la mayoría de los problemas dentales, para la rehabilitación de la salud, función y estética dental. Participo en congresos y cursos de actualización en endodoncia, en donde he conocido e integrado nuevas tecnologías a los procedimientos que practico."</blockquote>
+      </div>
+    </div>
+
+    <div class="equipo-card reveal">
+      <div class="equipo-photo"><img src="img/doctora-isabel.jpg" alt="Dra. Isabel Fernández Acosta · Ortodoncista" loading="lazy"></div>
+      <div class="equipo-info">
+        <div class="role">Ortodoncista · Docente</div>
+        <h3>Dra. Isabel Fernández Acosta</h3>
+        <p class="specialty">Odontóloga y Ortodoncista · Universidad CES Medellín<br>+12 años de experiencia como ortodoncista y docente</p>
+        <blockquote>"Me apasiona ayudar a mis pacientes a mejorar su función, y lograr sonreír de nuevo sin temores. Es satisfactorio ver pacientes a los que su tratamiento cambia sus vidas tan positivamente, al punto de recuperar la confianza en sí mismos y las ganas de sonreír. Soy consciente de que el mundo avanza a pasos agigantados cada día, y lo mismo pasa con los tratamientos de ortodoncia. Por eso para mí, es una prioridad estar actualizada y ofrecer tratamientos mucho más efectivos, cómodos, estéticos, rápidos y confiables."</blockquote>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-final">
+  <h2>Conózcanos en persona</h2>
+  <p>Agende una cita de valoración sin compromiso. Lo recibimos en nuestra sede de Sao Paulo Plaza, oficina 617, en El Poblado, Medellín.</p>
+  <div class="cta-final-actions">
+    <a href="https://wa.me/573122469942?text=Hola%20Dr.%20López,%20quiero%20una%20valoración" target="_blank" class="cta-final-btn">
+      Agendar valoración
+      <svg viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    </a>
+    <a href="contacto.html" class="cta-final-btn outline">Ir a contacto</a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <img src="img/logo-lopez-light.png" alt="Dr. Luis F. López · Endodoncista" class="footer-logo">
+      <div class="footer-brand-name">Dr. Luis F. López</div>
+      <p>Endodoncia microscópica y odontología especializada en El Poblado, Medellín. Más de 20 años de experiencia. Atendemos pacientes nacionales e internacionales.</p>
+      <div class="footer-social">
+        <a href="https://wa.me/573122469942" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.6 6.3A7.85 7.85 0 0 0 12 4a7.93 7.93 0 0 0-7.93 7.93 7.83 7.83 0 0 0 1.06 3.95L4 20l4.22-1.1a7.94 7.94 0 0 0 3.78.97h.01A7.94 7.94 0 0 0 20 11.97 7.86 7.86 0 0 0 17.6 6.3z"/></svg></a>
+        <a href="https://www.instagram.com/thedentaloffice617/" target="_blank" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="3.5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a>
+      </div>
+    </div>
+
+    <div class="footer-col">
+      <h4>Servicios</h4>
+      <ul>
+        <li><a href="index.html#servicios">Endodoncia microscópica</a></li>
+        <li><a href="index.html#servicios">Ortodoncia invisible</a></li>
+        <li><a href="index.html#servicios">Rehabilitación oral</a></li>
+        <li><a href="index.html#servicios">Implantes dentales</a></li>
+        <li><a href="index.html#servicios">Diseño de sonrisa</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Información</h4>
+      <ul>
+        <li><a href="nosotros.html">Nosotros</a></li>
+        <li><a href="#profesionales">Equipo</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Sede</h4>
+      <ul>
+        <li>Cra 43a # 18 sur 135</li>
+        <li>Sao Paulo Plaza, of 617</li>
+        <li>El Poblado, Medellín</li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Contacto</h4>
+      <ul>
+        <li><a href="https://wa.me/573122469942">+57 312 246 9942</a></li>
+        <li><a href="tel:+576045809070">+57 604 580 9070</a></li>
+        <li><a href="https://www.instagram.com/thedentaloffice617/" target="_blank">@thedentaloffice617</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Dr. Luis F. López · Muestra Pronto</span>
+    <span>Sao Paulo Plaza, oficina 617 · El Poblado, Medellín</span>
+  </div>
+</footer>
+
+<a href="https://wa.me/573122469942?text=Hola%20Dr.%20López" target="_blank" class="wa-float" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.371-.025-.52-.075-.149-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+</a>
+
+<script>
+  if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; }
+  window.addEventListener('beforeunload', () => window.scrollTo(0, 0));
+  const navbar = document.getElementById('navbar');
+  if (navbar) {
+    const onScroll = () => navbar.classList.toggle('scrolled', window.scrollY > 60);
+    window.addEventListener('scroll', onScroll, { passive: true });
+  }
+  const burger = document.getElementById('navBurger');
+  const menu = document.getElementById('mobileMenu');
+  const menuClose = document.getElementById('mobileMenuClose');
+  if (burger && menu) {
+    burger.addEventListener('click', () => menu.classList.add('open'));
+    menuClose && menuClose.addEventListener('click', () => menu.classList.remove('open'));
+    menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => menu.classList.remove('open')));
+  }
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
+<script src="assets/animations.js?v=20260526a" defer></script>
+
+</body>
+</html>
