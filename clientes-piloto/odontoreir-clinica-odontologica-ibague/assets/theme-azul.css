@@ -1,0 +1,52 @@
+/* ═══════════════════════════════════════════════════════════
+   ODONTOREIR · Theme AZUL TURQUESA
+   Paleta derivada del logo oficial Odontoreir (verde aqua + azul cyan)
+   Sobrescribe variables del Atelier sage sin tocar styles.css.
+   ═══════════════════════════════════════════════════════════ */
+
+:root {
+  /* Paleta Odontoreir extraída del logo + recepción turquesa */
+  --aqua-deepest: #144e5c;
+  --aqua-deep:    #2a8aa3;
+  --aqua:         #4cb7c9;
+  --aqua-soft:    #87d0d8;
+  --aqua-bg:      #e3f1f4;
+  --aqua-bg-2:    #d4ebf0;
+  --green-accent: #6bbf3c;  /* verde del logo Odontoreir */
+  --gray-bg:      #fbfbfb;
+
+  /* === Mapeo Atelier → Aqua Odontoreir === */
+  --sage-bg:      #e3f1f4;
+  --sage-soft:    #eef6f8;
+  --sage-deep:    #2a8aa3;
+  --sage-deepest: #144e5c;
+  --cream:        #fbfbfb;
+  --cream-deep:   #ecf3f5;
+  --accent:       #6bbf3c;   /* acento verde fresco - dental clean */
+  --accent-soft:  #88d05a;
+  --text:         #144e5c;
+  --text-soft:    #4a6878;
+  --border:       #c8dde2;
+  --charcoal:     #144e5c;
+
+  --shadow-sm: 0 2px 6px rgba(20,78,92,0.08);
+  --shadow-md: 0 14px 38px rgba(20,78,92,0.12);
+  --shadow-lg: 0 30px 70px rgba(20,78,92,0.18);
+}
+
+/* === Overrides específicos === */
+
+.hero { background: linear-gradient(to left, var(--sage-bg) 30%, #cce6ec 100%) !important; }
+.hero-compact { background: linear-gradient(to left, var(--sage-bg) 30%, #cce6ec 100%) !important; }
+.section.alt-bg { background: var(--sage-soft) !important; }
+
+.testimonio-avatar { background: var(--sage-deep) !important; color: var(--cream) !important; }
+
+.faq-list { border-top-color: rgba(20,78,92,0.18) !important; }
+.faq-item { border-bottom-color: rgba(20,78,92,0.18) !important; }
+
+.equipo-mini-photo, .prof-photo, .profs-ticker .equipo-mini-photo { background: #cce6ec !important; }
+
+.valor-card { background: #ffffff !important; border-color: rgba(20,78,92,0.08) !important; }
+
+::selection { background: var(--aqua-soft); color: var(--aqua-deepest); }
