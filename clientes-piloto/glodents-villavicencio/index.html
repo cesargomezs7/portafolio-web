@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Glodents · Consultorio y Laboratorio Dental · 4 Sedes en Colombia</title>
+<meta name="description" content="Clínica odontológica con sedes en Villavicencio, Bogotá, Pasto y Medellín. Periodoncia, ortodoncia, implantes, diseño de sonrisa, blanqueamiento y coronas dentales. Atención humana y especialistas certificados.">
+<meta property="og:title" content="Glodents · Consultorio y Laboratorio Dental">
+<meta property="og:description" content="Transformamos sonrisas con atención odontológica de alta calidad. 4 sedes en Colombia: Villavicencio, Bogotá, Pasto y Medellín.">
+<meta property="og:image" content="img/hero-modelo.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css?v=20260526">
+<link rel="stylesheet" href="assets/theme-azul.css?v=20260526">
+<style>
+.nav-logo { padding: 4px 0; display: inline-flex; align-items: center; line-height: 1; }
+.nav-logo img { height: 52px; width: auto; display: block; }
+@media (max-width: 720px) { .nav-logo img { height: 42px; } }
+.footer-logo { height: 70px; width: auto; display: block; margin-bottom: 20px; }
+.footer-brand-name { display: none; }
+
+.hero h1 { font-size: clamp(36px, 5.2vw, 60px) !important; line-height: 1.05 !important; }
+.hero h1 em { font-style: italic; color: var(--accent); font-weight: 400; }
+@media (max-width: 720px) { .hero h1 { font-size: clamp(32px, 8.5vw, 42px) !important; } }
+
+.hero-photo, .clinic-photo-main { position: relative !important; }
+.hero-photo img, .clinic-photo-main img {
+  width: 100% !important; height: 100% !important;
+  object-fit: cover !important; object-position: center 22% !important;
+  display: block !important; position: absolute !important; inset: 0 !important;
+}
+.hero-photo { aspect-ratio: 4/5 !important; width: 100% !important; }
+@media (max-width: 1024px) { .hero-photo { max-width: 460px !important; margin: 0 auto !important; } }
+@media (min-width: 1025px) { .hero-inner { padding-left: 32px !important; padding-right: 32px !important; } }
+
+.hero-metricas { display: flex; gap: 32px; margin: 16px 0 24px; padding: 0; flex-wrap: wrap; }
+.hero-metricas .metrica { font-family: 'Fraunces', serif; font-size: 14px; color: var(--text-soft); }
+.hero-metricas .metrica strong { display: block; font-size: 28px; font-weight: 500; color: var(--sage-deepest); line-height: 1; margin-bottom: 4px; }
+
+.service-card { display: flex; flex-direction: column; }
+.service-card ul.service-list { list-style: none; padding: 0; margin: 12px 0 20px; font-family: 'Manrope', sans-serif; font-size: 13px; color: var(--text-soft); line-height: 1.65; }
+.service-card ul.service-list li { padding-left: 16px; position: relative; margin-bottom: 6px; }
+.service-card ul.service-list li::before { content: '·'; position: absolute; left: 4px; top: 0; font-weight: 700; color: var(--accent); font-size: 18px; line-height: 1; }
+
+/* Sedes grid 4 */
+.sedes-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; max-width: 1200px; margin: 48px auto 0; padding: 0 32px; }
+.sede-card { background: #fff; border-radius: 20px; overflow: hidden; box-shadow: 0 2px 12px rgba(30,58,82,0.06); display: flex; flex-direction: column; }
+.sede-card .sede-map { aspect-ratio: 16/9; background: #d6e3ec; position: relative; }
+.sede-card .sede-map iframe { width: 100%; height: 100%; border: 0; display: block; }
+.sede-card .sede-info { padding: 28px 28px 24px; display: flex; flex-direction: column; gap: 6px; }
+.sede-card .sede-tag { font-family: 'Manrope', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; }
+.sede-card h3 { font-family: 'Fraunces', serif; font-weight: 400; font-size: 22px; color: var(--sage-deepest); margin: 0 0 4px; }
+.sede-card .sede-address { font-family: 'Manrope', sans-serif; font-size: 14px; color: var(--text-soft); line-height: 1.6; margin: 4px 0 14px; }
+.sede-card .sede-contact { display: flex; flex-direction: column; gap: 6px; }
+.sede-card .sede-contact a { font-family: 'Manrope', sans-serif; font-size: 13px; color: var(--sage-deep); text-decoration: none; font-weight: 500; display: inline-flex; align-items: center; gap: 8px; }
+.sede-card .sede-contact a:hover { text-decoration: underline; }
+.sede-card .sede-contact svg { width: 14px; height: 14px; flex-shrink: 0; }
+@media (max-width: 860px) { .sedes-grid { grid-template-columns: 1fr; padding: 0 20px; } }
+
+/* Beneficios */
+.beneficios { background: var(--sage-soft); padding: 80px 32px; }
+.beneficios-wrap { max-width: 1100px; margin: 0 auto; text-align: center; }
+.beneficios .overline { font-family: 'Manrope', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); }
+.beneficios h2 { font-family: 'Fraunces', serif; font-weight: 400; font-size: clamp(32px, 4vw, 48px); color: var(--sage-deepest); margin: 16px 0 12px; letter-spacing: -0.02em; }
+.beneficios h2 em { font-style: italic; color: var(--accent); }
+.beneficios .lead { font-family: 'Manrope', sans-serif; font-size: 17px; color: var(--text-soft); margin: 0 auto 48px; max-width: 640px; line-height: 1.6; }
+.beneficios-list { display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; }
+.beneficio { padding: 24px 18px; background: #fff; border-radius: 16px; text-align: left; }
+.beneficio .icon { font-size: 28px; margin-bottom: 10px; display: block; }
+.beneficio p { font-family: 'Manrope', sans-serif; font-size: 13px; color: var(--text-soft); line-height: 1.55; margin: 0; }
+.beneficio strong { color: var(--sage-deepest); font-weight: 600; }
+@media (max-width: 900px) { .beneficios-list { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px) { .beneficios { padding: 56px 20px; } .beneficios-list { grid-template-columns: 1fr; } }
+
+/* Misión visión */
+.mision-vision { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; max-width: 1100px; margin: 48px auto 0; padding: 0 32px; }
+.mv-card { background: #fff; padding: 40px 36px; border-radius: 20px; border: 1px solid rgba(30,58,82,0.08); }
+.mv-card h3 { font-family: 'Fraunces', serif; font-weight: 400; font-size: 28px; color: var(--sage-deepest); margin: 0 0 16px; }
+.mv-card h3 em { font-style: italic; color: var(--accent); }
+.mv-card p { font-family: 'Manrope', sans-serif; font-size: 15px; color: var(--text-soft); line-height: 1.7; margin: 0; }
+@media (max-width: 720px) { .mision-vision { grid-template-columns: 1fr; padding: 0 20px; gap: 16px; } .mv-card { padding: 28px 24px; } }
+</style>
+</head>
+<body>
+
+<div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
+<nav class="navbar" id="navbar">
+  <button class="nav-burger" id="navBurger" aria-label="Abrir menú">
+    <svg viewBox="0 0 24 24" fill="none"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+  </button>
+  <a href="index.html" class="nav-logo" aria-label="Glodents · Consultorio y Laboratorio Dental"><img src="img/logo-glodents-dark.png" alt="Glodents · Consultorio y Laboratorio Dental"></a>
+  <ul class="nav-links">
+    <li><a href="index.html" class="active">Inicio</a></li>
+    <li><a href="nosotros.html">Nosotros</a></li>
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#sedes">Sedes</a></li>
+    <li><a href="contacto.html">Contacto</a></li>
+  </ul>
+  <div class="nav-actions">
+    <a href="tel:+573133469367" class="nav-phone">+57 313 346 9367</a>
+    <a href="https://wa.me/573133469367?text=Hola%20Glodents,%20quiero%20agendar%20una%20cita" target="_blank" class="nav-cta">Pedir cita</a>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-menu-close" id="mobileMenuClose" aria-label="Cerrar menú">
+    <svg viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+  </button>
+  <ul>
+    <li><a href="index.html">Inicio</a></li>
+    <li><a href="nosotros.html">Nosotros</a></li>
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#sedes">Sedes</a></li>
+    <li><a href="contacto.html">Contacto</a></li>
+    <li><a href="tel:+573133469367">+57 313 346 9367</a></li>
+  </ul>
+</div>
+
+<section class="hero" id="home">
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="hero-rule"></div>
+      <p class="overline" style="font-family: 'Manrope', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px;">Consultorio y Laboratorio Dental · 4 sedes</p>
+      <h1>Transformamos<br><em>sonrisas</em></h1>
+      <p class="hero-lead">Atención odontológica de alta calidad con tecnología moderna y un equipo humano altamente calificado. Cada tratamiento es realizado por especialistas en su área, con enfoque en su bienestar integral.</p>
+      <div class="hero-metricas">
+        <div class="metrica"><strong>4</strong>Sedes en Colombia</div>
+        <div class="metrica"><strong>7</strong>Especialidades</div>
+        <div class="metrica"><strong>Sí</strong>Laboratorio propio</div>
+      </div>
+      <div class="hero-actions">
+        <a href="https://wa.me/573133469367?text=Hola%20Glodents,%20quiero%20agendar%20una%20cita" target="_blank" class="hero-cta">Pedir cita</a>
+        <a href="#servicios" class="hero-link">Ver servicios</a>
+      </div>
+    </div>
+    <div class="hero-photo">
+      <img src="img/hero-modelo.jpg" alt="Glodents · Tratamiento de ortodoncia" loading="eager">
+    </div>
+  </div>
+</section>
+
+<section class="section clinic">
+  <div class="section-header reveal">
+    <div class="section-rule"><span class="section-rule-text">Quiénes somos</span></div>
+  </div>
+
+  <div class="clinic-grid reveal">
+    <div class="clinic-photo-main">
+      <img src="img/dra-perfil.jpg" alt="Equipo Glodents en tratamiento" loading="lazy">
+    </div>
+    <div class="clinic-text">
+      <div class="overline">Aquí no solo cuidamos dientes</div>
+      <h3>Cuidamos personas</h3>
+      <p>En <strong>Glodents</strong> nos enorgullecemos de ofrecer un ambiente cálido, atención personalizada y soluciones dentales duraderas que devuelven confianza y salud oral. Combinamos tecnología moderna, un equipo de especialistas certificados y una filosofía clínica centrada en su bienestar.</p>
+      <p>Nuestro compromiso es brindar tranquilidad, eficiencia y resultados a través de procesos transparentes y diseñados estratégicamente para cada caso. Atendemos en <strong>cuatro sedes</strong>: Villavicencio, Bogotá, Pasto y Medellín, con la misma calidad y filosofía en todas.</p>
+      <a href="nosotros.html" class="learn-more">Conozca más <svg viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+    </div>
+  </div>
+
+  <div class="clinic-bottom reveal">
+    <div>
+      <h4>Atención cálida y humana</h4>
+      <p>Ambiente cómodo y atención personalizada desde la primera consulta. Cuidamos personas, no solo dientes.</p>
+    </div>
+    <div>
+      <h4>Especialistas certificados</h4>
+      <p>Cada tratamiento es realizado por profesionales con formación específica en su área. Nada de generalistas para todo.</p>
+    </div>
+    <div>
+      <h4>Laboratorio propio</h4>
+      <p>Coronas, prótesis y restauraciones se elaboran en nuestro laboratorio dental. Más control, mejor precisión.</p>
+    </div>
+  </div>
+</section>
+
+<section class="mision-vision reveal">
+  <div class="mv-card">
+    <h3>Misión</h3>
+    <p>Brindar atención dental de calidad, humana y personalizada a cada paciente, mediante un equipo de especialistas altamente capacitados y comprometidos con la salud oral, el bienestar y la estética de quienes nos confían su mejor expresión: su sonrisa.</p>
+  </div>
+  <div class="mv-card">
+    <h3>Visión</h3>
+    <p>Ser una clínica de vanguardia reconocida por su excelencia profesional, innovación constante y enfoque integral en la odontología estética y funcional. Nuestro objetivo es transformar vidas, una sonrisa a la vez.</p>
+  </div>
+</section>
+
+<section class="beneficios">
+  <div class="beneficios-wrap reveal">
+    <p class="overline">Beneficios</p>
+    <h2>¿Por qué <em>Glodents</em>?</h2>
+    <p class="lead">Cinco razones que respaldan la decisión de cada paciente que nos elige para cuidar su sonrisa.</p>
+    <div class="beneficios-list">
+      <div class="beneficio">
+        <span class="icon">✨</span>
+        <p><strong>Sonrisas perfectas</strong> con tratamientos personalizados y atención de calidad.</p>
+      </div>
+      <div class="beneficio">
+        <span class="icon">🦷</span>
+        <p><strong>Equipos modernos</strong> que garantizan precisión, comodidad y resultados efectivos.</p>
+      </div>
+      <div class="beneficio">
+        <span class="icon">🎓</span>
+        <p><strong>Especialistas certificados</strong> en cada área de la salud dental.</p>
+      </div>
+      <div class="beneficio">
+        <span class="icon">💎</span>
+        <p><strong>Servicios estéticos y funcionales</strong> para transformar su imagen y bienestar.</p>
+      </div>
+      <div class="beneficio">
+        <span class="icon">💙</span>
+        <p><strong>Atención cálida</strong> humana y segura desde la primera consulta.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="services-section" id="servicios">
+  <div class="section-header reveal">
+    <div class="section-rule"><span class="section-rule-text">Nuestros servicios</span></div>
+    <p style="font-family: 'Manrope', sans-serif; font-size: 13px; color: var(--text-soft); letter-spacing: 0.1em; margin-top: 12px;">SIETE ESPECIALIDADES BAJO UN MISMO ESTÁNDAR</p>
+  </div>
+
+  <div class="services-grid">
+    <div class="service-card reveal">
+      <h3>Periodoncia</h3>
+      <p>Especialidad enfocada en el diagnóstico, prevención y tratamiento de enfermedades de las encías y los tejidos que soportan los dientes. Las limpiezas dentales y demás procedimientos periodontales son realizados por expertos, asegurando atención precisa, segura y eficaz.</p>
+      <ul class="service-list">
+        <li>Diagnóstico y tratamiento de enfermedades de encías</li>
+        <li>Limpiezas dentales especializadas</li>
+        <li>Prevención de pérdida dental</li>
+        <li>Mantenimiento periodontal</li>
+      </ul>
+      <a href="https://wa.me/573133469367?text=Hola%20Glodents,%20me%20interesa%20Periodoncia" target="_blank" class="learn-more">Pedir cita <svg viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+    </div>
+
+    <div class="service-card reveal">
+      <h3>Blanqueamiento dental</h3>
+      <p>Tratamiento profesional para aclarar varios tonos la coloración de los dientes causada por pigmentaciones alimenticias, hábitos o envejecimiento. Se aplica cuidadosamente en consultorio para lograr una sonrisa más luminosa sin dañar el esmalte dental.</p>
+      <ul class="service-list">
+        <li>Aclaramiento dental profesional</li>
+        <li>Aplicación segura en consultorio</li>
+        <li>Sin daño al esmalte</li>
+        <li>Resultados visibles en pocas sesiones</li>
+      </ul>
+      <a href="https://wa.me/573133469367?text=Hola%20Glodents,%20me%20interesa%20Blanqueamiento%20dental" target="_blank" class="learn-more">Pedir cita <svg viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+    </div>
+
+    <div class="service-card reveal">
+      <h3>Implantes y prótesis dentales</h3>
+      <p>Solución estética y funcional para reemplazar dientes ausentes. Los implantes son fijaciones de titanio que se integran al hueso maxilar, mientras que las prótesis restauran estructura, masticación y armonía facial.</p>
+      <ul class="service-list">
+        <li>Implantes unitarios y múltiples</li>
+        <li>Prótesis fijas y removibles</li>
+        <li>Recuperación de funcionalidad oral</li>
+        <li>Restauración de la apariencia natural</li>
+      </ul>
+      <a href="https://wa.me/573133469367?text=Hola%20Glodents,%20me%20interesa%20Implantes%20o%20Pr%C3%B3tesis" target="_blank" class="learn-more">Pedir cita <svg viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+    </div>
+
+    <div class="service-card reveal">
+      <h3>Ortodoncia</h3>
+      <p>Especialidad encargada de alinear dientes y corregir la mordida mediante dispositivos personalizados. Glodents ofrece tratamientos modernos y personalizados, enfocados en lograr una sonrisa armónica y saludable.</p>
+      <ul class="service-list">
+        <li>Ortodoncia tradicional</li>
+        <li>Ortodoncia invisible</li>
+        <li>Controles periódicos</li>
+        <li>Corrección de malposiciones dentales</li>
+      </ul>
+      <a href="https://wa.me/573133469367?text=Hola%20Glodents,%20me%20interesa%20Ortodoncia" target="_blank" class="learn-more">Pedir cita <svg viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+    </div>
+
+    <div class="service-card reveal">
+      <h3>Diseño y microdiseño de sonrisa</h3>
+      <p>Transformación estética integral que combina técnicas odontológicas para mejorar forma, tamaño, color y alineación de los dientes, brindando una sonrisa atractiva, saludable y personalizada.</p>
+      <ul class="service-list">
+        <li>Análisis facial y dental personalizado</li>
+        <li>Mejora forma, tamaño, color y alineación</li>
+        <li>Renueva completamente la sonrisa</li>
+        <li>Aumenta seguridad y expresión personal</li>
+      </ul>
+      <a href="https://wa.me/573133469367?text=Hola%20Glodents,%20me%20interesa%20Dise%C3%B1o%20de%20Sonrisa" target="_blank" class="learn-more">Pedir cita <svg viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+    </div>
+
+    <div class="service-card reveal">
+      <h3>Limpieza dental</h3>
+      <p>Procedimiento básico pero fundamental para eliminar placa bacteriana, sarro y manchas superficiales, previniendo enfermedades bucales y manteniendo la boca en óptimo estado.</p>
+      <ul class="service-list">
+        <li>Eliminación de placa y sarro</li>
+        <li>Previene caries y mal aliento</li>
+        <li>Previene enfermedades periodontales</li>
+        <li>Mantenimiento bucal recomendado</li>
+      </ul>
+      <a href="https://wa.me/573133469367?text=Hola%20Glodents,%20me%20interesa%20Limpieza%20dental" target="_blank" class="learn-more">Pedir cita <svg viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+    </div>
+
+    <div class="service-card reveal">
+      <h3>Coronas dentales</h3>
+      <p>Tratamientos restaurativos que protegen o reemplazan piezas dentales muy debilitadas. Las coronas son hechas a la medida del paciente en nuestro laboratorio dental para lograr estética y durabilidad.</p>
+      <ul class="service-list">
+        <li>Corona en zirconio</li>
+        <li>Corona en metal cerámica</li>
+        <li>Elaboración en laboratorio propio</li>
+        <li>Restauración estética y funcional</li>
+      </ul>
+      <a href="https://wa.me/573133469367?text=Hola%20Glodents,%20me%20interesa%20Coronas%20dentales" target="_blank" class="learn-more">Pedir cita <svg viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="sedes">
+  <div class="section-header reveal">
+    <div class="section-rule"><span class="section-rule-text">Nuestras sedes</span></div>
+    <p style="font-family: 'Manrope', sans-serif; font-size: 13px; color: var(--text-soft); letter-spacing: 0.1em; margin-top: 12px;">VILLAVICENCIO · BOGOTÁ · PASTO · MEDELLÍN</p>
+  </div>
+
+  <div class="sedes-grid reveal">
+    <div class="sede-card">
+      <div class="sede-map">
+        <iframe src="https://maps.google.com/maps?q=Carrera%2036%20%23%2033B-11%20Barrio%20Barzal%20Villavicencio%20Meta&t=&z=16&ie=UTF8&iwloc=&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Sede Villavicencio"></iframe>
+      </div>
+      <div class="sede-info">
+        <span class="sede-tag">Villavicencio · Meta</span>
+        <h3>Sede Villavicencio</h3>
+        <p class="sede-address">Carrera 36 N° 33B - 11<br>Barrio Barzal · Villavicencio, Meta</p>
+        <div class="sede-contact">
+          <a href="https://wa.me/573133469367?text=Hola%20Glodents,%20quiero%20agendar%20en%20la%20sede%20de%20Villavicencio" target="_blank">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.6 6.3A7.85 7.85 0 0 0 12 4a7.93 7.93 0 0 0-7.93 7.93 7.83 7.83 0 0 0 1.06 3.95L4 20l4.22-1.1a7.94 7.94 0 0 0 3.78.97h.01A7.94 7.94 0 0 0 20 11.97 7.86 7.86 0 0 0 17.6 6.3z"/></svg>
+            WhatsApp Villavicencio
+          </a>
+          <a href="https://maps.google.com/maps?q=Carrera+36+%23+33B-11+Barrio+Barzal+Villavicencio+Meta" target="_blank">Ver en Google Maps</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="sede-card">
+      <div class="sede-map">
+        <iframe src="https://maps.google.com/maps?q=Carrera%2072%20bis%20%23%2081A-05%20Local%20102%20Villa%20Carolina%20Minuto%20de%20Dios%20Bogot%C3%A1&t=&z=16&ie=UTF8&iwloc=&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Sede Bogotá"></iframe>
+      </div>
+      <div class="sede-info">
+        <span class="sede-tag">Bogotá D.C.</span>
+        <h3>Sede Bogotá</h3>
+        <p class="sede-address">Carrera 72 bis N° 81A - 05, Local 102<br>Villa Carolina · Minuto de Dios, Bogotá D.C.</p>
+        <div class="sede-contact">
+          <a href="https://wa.me/573133469367?text=Hola%20Glodents,%20quiero%20agendar%20en%20la%20sede%20de%20Bogot%C3%A1" target="_blank">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.6 6.3A7.85 7.85 0 0 0 12 4a7.93 7.93 0 0 0-7.93 7.93 7.83 7.83 0 0 0 1.06 3.95L4 20l4.22-1.1a7.94 7.94 0 0 0 3.78.97h.01A7.94 7.94 0 0 0 20 11.97 7.86 7.86 0 0 0 17.6 6.3z"/></svg>
+            WhatsApp Bogotá
+          </a>
+          <a href="https://maps.google.com/maps?q=Carrera+72+bis+%23+81A-05+Villa+Carolina+Bogot%C3%A1" target="_blank">Ver en Google Maps</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="sede-card">
+      <div class="sede-map">
+        <iframe src="https://maps.google.com/maps?q=Calle%2018%20%23%2036-24%20Barrio%20Palermo%20Edificio%20Asturias%20Pasto%20Nari%C3%B1o&t=&z=16&ie=UTF8&iwloc=&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Sede Pasto"></iframe>
+      </div>
+      <div class="sede-info">
+        <span class="sede-tag">Pasto · Nariño</span>
+        <h3>Sede Pasto</h3>
+        <p class="sede-address">Calle 18 N° 36 - 24, Barrio Palermo<br>Edificio Asturias, Consultorio 303 · Pasto, Nariño</p>
+        <div class="sede-contact">
+          <a href="https://wa.me/573133469367?text=Hola%20Glodents,%20quiero%20agendar%20en%20la%20sede%20de%20Pasto" target="_blank">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.6 6.3A7.85 7.85 0 0 0 12 4a7.93 7.93 0 0 0-7.93 7.93 7.83 7.83 0 0 0 1.06 3.95L4 20l4.22-1.1a7.94 7.94 0 0 0 3.78.97h.01A7.94 7.94 0 0 0 20 11.97 7.86 7.86 0 0 0 17.6 6.3z"/></svg>
+            WhatsApp Pasto
+          </a>
+          <a href="https://maps.google.com/maps?q=Calle+18+%23+36-24+Barrio+Palermo+Edificio+Asturias+Pasto+Nari%C3%B1o" target="_blank">Ver en Google Maps</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="sede-card">
+      <div class="sede-map">
+        <iframe src="https://maps.google.com/maps?q=Calle%2050%20%23%2047-28%20Edificio%20Jenaro%20Guti%C3%A9rrez%20Medell%C3%ADn&t=&z=16&ie=UTF8&iwloc=&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Sede Medellín"></iframe>
+      </div>
+      <div class="sede-info">
+        <span class="sede-tag">Medellín · Antioquia</span>
+        <h3>Sede Medellín</h3>
+        <p class="sede-address">Calle 50 N° 47 - 28<br>Edificio Jenaro Gutiérrez, Consultorio 407 · Medellín</p>
+        <div class="sede-contact">
+          <a href="https://wa.me/573133469367?text=Hola%20Glodents,%20quiero%20agendar%20en%20la%20sede%20de%20Medell%C3%ADn" target="_blank">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.6 6.3A7.85 7.85 0 0 0 12 4a7.93 7.93 0 0 0-7.93 7.93 7.83 7.83 0 0 0 1.06 3.95L4 20l4.22-1.1a7.94 7.94 0 0 0 3.78.97h.01A7.94 7.94 0 0 0 20 11.97 7.86 7.86 0 0 0 17.6 6.3z"/></svg>
+            WhatsApp Medellín
+          </a>
+          <a href="https://maps.google.com/maps?q=Calle+50+%23+47-28+Edificio+Jenaro+Guti%C3%A9rrez+Medell%C3%ADn" target="_blank">Ver en Google Maps</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="faq">
+  <h2>Resolvemos sus dudas</h2>
+  <div class="faq-list">
+    <div class="faq-item open">
+      <div class="faq-question">
+        En qué sedes están atendiendo
+        <div class="faq-toggle"><svg viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+      </div>
+      <div class="faq-answer"><div class="faq-answer-inner">Atendemos en cuatro sedes: Villavicencio (Meta), Bogotá D.C., Pasto (Nariño) y Medellín (Antioquia). Todas con los mismos estándares de calidad, especialistas certificados y atención cálida.</div></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question">
+        Tienen laboratorio dental propio
+        <div class="faq-toggle"><svg viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+      </div>
+      <div class="faq-answer"><div class="faq-answer-inner">Sí. Las coronas dentales, prótesis y restauraciones se elaboran en nuestro laboratorio. Esto nos permite mayor control sobre la calidad, los tiempos y la precisión final del trabajo.</div></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question">
+        Cómo agendo una cita
+        <div class="faq-toggle"><svg viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+      </div>
+      <div class="faq-answer"><div class="faq-answer-inner">Escríbanos al WhatsApp +57 313 346 9367 indicándonos la sede y el servicio que le interesa. También puede llenar el formulario de la página de contacto.</div></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question">
+        Trabajan con todas las especialidades
+        <div class="faq-toggle"><svg viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+      </div>
+      <div class="faq-answer"><div class="faq-answer-inner">Cubrimos siete áreas principales: periodoncia, blanqueamiento dental, implantes y prótesis, ortodoncia, diseño y microdiseño de sonrisa, limpieza dental y coronas dentales. Cada una atendida por especialistas certificados.</div></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question">
+        El blanqueamiento daña el esmalte
+        <div class="faq-toggle"><svg viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+      </div>
+      <div class="faq-answer"><div class="faq-answer-inner">No. Nuestro blanqueamiento profesional se aplica cuidadosamente en consultorio y permite aclarar varios tonos sin dañar el esmalte dental. Es seguro cuando lo realiza un odontólogo.</div></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question">
+        Ofrecen ortodoncia invisible
+        <div class="faq-toggle"><svg viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+      </div>
+      <div class="faq-answer"><div class="faq-answer-inner">Sí. Tenemos ortodoncia tradicional y ortodoncia invisible. Coordinamos controles periódicos para acompañar el avance del tratamiento. El plan se diseña en función del caso clínico de cada paciente.</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-final">
+  <h2>Su sonrisa en buenas manos</h2>
+  <p>Atendemos en Villavicencio, Bogotá, Pasto y Medellín. Pida una cita por WhatsApp indicándonos la sede más conveniente y el servicio que le interesa.</p>
+  <div class="cta-final-actions">
+    <a href="https://wa.me/573133469367?text=Hola%20Glodents,%20quiero%20agendar%20una%20cita" target="_blank" class="cta-final-btn">
+      Pedir cita por WhatsApp
+      <svg viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    </a>
+    <a href="contacto.html" class="cta-final-btn outline">Ver más formas de contacto</a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <img src="img/logo-glodents-light.png" alt="Glodents · Consultorio y Laboratorio Dental" class="footer-logo">
+      <div class="footer-brand-name">Glodents</div>
+      <p>Consultorio y Laboratorio Dental. Cuatro sedes en Colombia: Villavicencio, Bogotá, Pasto y Medellín. Atención odontológica de alta calidad con especialistas certificados.</p>
+      <div class="footer-social">
+        <a href="https://wa.me/573133469367" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.6 6.3A7.85 7.85 0 0 0 12 4a7.93 7.93 0 0 0-7.93 7.93 7.83 7.83 0 0 0 1.06 3.95L4 20l4.22-1.1a7.94 7.94 0 0 0 3.78.97h.01A7.94 7.94 0 0 0 20 11.97 7.86 7.86 0 0 0 17.6 6.3z"/></svg></a>
+        <a href="https://www.instagram.com/glodents_oficial/" target="_blank" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="3.5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a>
+        <a href="https://www.facebook.com/www.glodents.co" target="_blank" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95z"/></svg></a>
+      </div>
+    </div>
+
+    <div class="footer-col">
+      <h4>Servicios</h4>
+      <ul>
+        <li><a href="#servicios">Periodoncia</a></li>
+        <li><a href="#servicios">Blanqueamiento dental</a></li>
+        <li><a href="#servicios">Implantes y prótesis</a></li>
+        <li><a href="#servicios">Ortodoncia</a></li>
+        <li><a href="#servicios">Diseño de sonrisa</a></li>
+        <li><a href="#servicios">Limpieza dental</a></li>
+        <li><a href="#servicios">Coronas dentales</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Sedes</h4>
+      <ul>
+        <li><a href="#sedes">Villavicencio · Meta</a></li>
+        <li><a href="#sedes">Bogotá D.C.</a></li>
+        <li><a href="#sedes">Pasto · Nariño</a></li>
+        <li><a href="#sedes">Medellín · Antioquia</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Información</h4>
+      <ul>
+        <li><a href="nosotros.html">Sobre Glodents</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Contacto</h4>
+      <ul>
+        <li><a href="https://wa.me/573133469367">+57 313 346 9367</a></li>
+        <li><a href="mailto:glodent.s@gmail.com">glodent.s@gmail.com</a></li>
+        <li>4 sedes en Colombia</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Glodents · Consultorio y Laboratorio Dental · Muestra Pronto</span>
+    <span>Villavicencio · Bogotá · Pasto · Medellín</span>
+  </div>
+</footer>
+
+<a href="https://wa.me/573133469367?text=Hola%20Glodents" target="_blank" class="wa-float" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.371-.025-.52-.075-.149-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+</a>
+
+<script>
+  if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; }
+  window.addEventListener('beforeunload', () => window.scrollTo(0, 0));
+  const navbar = document.getElementById('navbar');
+  if (navbar) { const onScroll = () => navbar.classList.toggle('scrolled', window.scrollY > 60); window.addEventListener('scroll', onScroll, { passive: true }); }
+  const burger = document.getElementById('navBurger'), menu = document.getElementById('mobileMenu'), menuClose = document.getElementById('mobileMenuClose');
+  if (burger && menu) {
+    burger.addEventListener('click', () => menu.classList.add('open'));
+    menuClose && menuClose.addEventListener('click', () => menu.classList.remove('open'));
+    menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => menu.classList.remove('open')));
+  }
+  document.querySelectorAll('.faq-item').forEach(item => {
+    const q = item.querySelector('.faq-question');
+    q && q.addEventListener('click', () => item.classList.toggle('open'));
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
+<script src="assets/animations.js?v=20260526" defer></script>
+
+</body>
+</html>

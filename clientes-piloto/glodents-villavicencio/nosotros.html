@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nosotros · Glodents · Consultorio y Laboratorio Dental</title>
+<meta name="description" content="Glodents · Consultorio y Laboratorio Dental con 4 sedes en Colombia. Atención cálida, especialistas certificados y laboratorio dental propio. Misión, visión y valores.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css?v=20260526">
+<link rel="stylesheet" href="assets/theme-azul.css?v=20260526">
+<style>
+.nav-logo { padding: 4px 0; display: inline-flex; align-items: center; line-height: 1; }
+.nav-logo img { height: 52px; width: auto; display: block; }
+@media (max-width: 720px) { .nav-logo img { height: 42px; } }
+.footer-logo { height: 70px; width: auto; display: block; margin-bottom: 20px; }
+.footer-brand-name { display: none; }
+
+.clinic-photo-main { position: relative !important; }
+.clinic-photo-main img { width: 100% !important; height: 100% !important; object-fit: cover !important; object-position: center 22% !important; display: block !important; position: absolute !important; inset: 0 !important; }
+
+.valores-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px; max-width: 1100px; margin: 56px auto 0; }
+.valor-card { padding: 32px; background: #fff; border: 1px solid rgba(0,0,0,0.06); border-radius: 16px; }
+.valor-card h4 { font-family: 'Fraunces', serif; font-size: 20px; font-weight: 400; margin: 0 0 12px; color: var(--charcoal); }
+.valor-card p { font-size: 15px; line-height: 1.65; color: rgba(0,0,0,0.7); margin: 0; }
+@media (max-width: 720px) { .valores-grid { grid-template-columns: 1fr; gap: 16px; } .valor-card { padding: 24px; } }
+</style>
+</head>
+<body>
+
+<div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
+<nav class="navbar" id="navbar">
+  <button class="nav-burger" id="navBurger" aria-label="Abrir menú">
+    <svg viewBox="0 0 24 24" fill="none"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+  </button>
+  <a href="index.html" class="nav-logo" aria-label="Glodents · Consultorio y Laboratorio Dental"><img src="img/logo-glodents-dark.png" alt="Glodents · Consultorio y Laboratorio Dental"></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Inicio</a></li>
+    <li><a href="nosotros.html" class="active">Nosotros</a></li>
+    <li><a href="index.html#servicios">Servicios</a></li>
+    <li><a href="index.html#sedes">Sedes</a></li>
+    <li><a href="contacto.html">Contacto</a></li>
+  </ul>
+  <div class="nav-actions">
+    <a href="tel:+573133469367" class="nav-phone">+57 313 346 9367</a>
+    <a href="https://wa.me/573133469367?text=Hola%20Glodents,%20quiero%20agendar%20una%20cita" target="_blank" class="nav-cta">Pedir cita</a>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-menu-close" id="mobileMenuClose" aria-label="Cerrar menú">
+    <svg viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+  </button>
+  <ul>
+    <li><a href="index.html">Inicio</a></li>
+    <li><a href="nosotros.html">Nosotros</a></li>
+    <li><a href="index.html#servicios">Servicios</a></li>
+    <li><a href="index.html#sedes">Sedes</a></li>
+    <li><a href="contacto.html">Contacto</a></li>
+    <li><a href="tel:+573133469367">+57 313 346 9367</a></li>
+  </ul>
+</div>
+
+<section class="hero-compact">
+  <div class="hero-compact-inner">
+    <span class="overline">Nosotros</span>
+    <h1>Glodents</h1>
+    <p>Consultorio y Laboratorio Dental con cuatro sedes en Colombia. Atención odontológica de alta calidad con tecnología moderna, especialistas certificados y filosofía centrada en cuidar personas, no solo dientes.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-header reveal">
+    <div class="section-rule"><span class="section-rule-text">Quiénes somos</span></div>
+  </div>
+
+  <div class="clinic-grid reveal">
+    <div class="clinic-photo-main"><img src="img/dra-perfil.jpg" alt="Equipo Glodents"></div>
+    <div class="clinic-text">
+      <div class="overline">Calidad, calidez y resultados</div>
+      <h3>Aquí no solo cuidamos dientes, cuidamos personas</h3>
+      <p>Somos una <strong>clínica odontológica moderna</strong> con un equipo de especialistas altamente calificados que se comprometen con su salud bucal. Ofrecemos una experiencia única basada en la calidad, la calidez humana y tratamientos innovadores, adaptados a cada necesidad.</p>
+      <p>Nos especializamos en ofrecer un servicio integral, cercano y confiable, con soluciones a la medida de cada paciente. Nuestro compromiso es brindar <strong>tranquilidad, eficiencia y resultados</strong> mediante procesos transparentes y estratégicamente diseñados.</p>
+      <p>Contamos con <strong>laboratorio dental propio</strong>, lo que nos permite controlar la calidad y los tiempos en coronas, prótesis y trabajos restaurativos. Atendemos en Villavicencio, Bogotá, Pasto y Medellín con los mismos estándares en todas las sedes.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section alt-bg">
+  <div class="section-header reveal">
+    <div class="section-rule"><span class="section-rule-text">Misión y visión</span></div>
+  </div>
+
+  <div class="valores-grid reveal">
+    <div class="valor-card">
+      <h4>Misión</h4>
+      <p>Brindar atención dental de calidad, humana y personalizada a cada paciente, mediante un equipo de especialistas altamente capacitados y comprometidos con la salud oral, el bienestar y la estética de quienes nos confían su mejor expresión: su sonrisa.</p>
+    </div>
+    <div class="valor-card">
+      <h4>Visión</h4>
+      <p>Ser una clínica de vanguardia reconocida por su excelencia profesional, innovación constante y enfoque integral en la odontología estética y funcional. Nuestro objetivo es transformar vidas, una sonrisa a la vez.</p>
+    </div>
+    <div class="valor-card">
+      <h4>Atención cálida y humana</h4>
+      <p>El paciente es el centro de todo. Ambiente cómodo, comunicación clara y un trato personalizado desde la primera consulta hasta el último control. Cuidamos personas, no solo dientes.</p>
+    </div>
+    <div class="valor-card">
+      <h4>Especialistas certificados</h4>
+      <p>Cada tratamiento lo realiza un profesional con formación específica en su área (periodoncia, ortodoncia, implantología, estética dental, etc.). No hay generalistas para casos complejos.</p>
+    </div>
+    <div class="valor-card">
+      <h4>Laboratorio dental propio</h4>
+      <p>Coronas en zirconio, coronas en metal cerámica, prótesis y restauraciones se elaboran en nuestro laboratorio. Mayor control sobre la precisión, la calidad y los tiempos de entrega.</p>
+    </div>
+    <div class="valor-card">
+      <h4>Procesos transparentes</h4>
+      <p>Le explicamos cada paso antes de hacerlo. Plan de tratamiento claro, presupuesto detallado y comunicación abierta. Sin sorpresas y sin presiones de venta.</p>
+    </div>
+  </div>
+</section>
+
+<section class="cta-final">
+  <h2>Conózcanos en persona</h2>
+  <p>Pida una valoración inicial. Atendemos en Villavicencio, Bogotá, Pasto y Medellín. Escríbanos al WhatsApp indicándonos la sede y el servicio que le interesa.</p>
+  <div class="cta-final-actions">
+    <a href="https://wa.me/573133469367?text=Hola%20Glodents,%20quiero%20agendar%20una%20cita" target="_blank" class="cta-final-btn">
+      Pedir cita
+      <svg viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    </a>
+    <a href="contacto.html" class="cta-final-btn outline">Ir a contacto</a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <img src="img/logo-glodents-light.png" alt="Glodents · Consultorio y Laboratorio Dental" class="footer-logo">
+      <div class="footer-brand-name">Glodents</div>
+      <p>Consultorio y Laboratorio Dental. Cuatro sedes en Colombia: Villavicencio, Bogotá, Pasto y Medellín. Atención odontológica de alta calidad con especialistas certificados.</p>
+      <div class="footer-social">
+        <a href="https://wa.me/573133469367" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.6 6.3A7.85 7.85 0 0 0 12 4a7.93 7.93 0 0 0-7.93 7.93 7.83 7.83 0 0 0 1.06 3.95L4 20l4.22-1.1a7.94 7.94 0 0 0 3.78.97h.01A7.94 7.94 0 0 0 20 11.97 7.86 7.86 0 0 0 17.6 6.3z"/></svg></a>
+        <a href="https://www.instagram.com/glodents_oficial/" target="_blank" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="3.5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a>
+        <a href="https://www.facebook.com/www.glodents.co" target="_blank" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95z"/></svg></a>
+      </div>
+    </div>
+
+    <div class="footer-col">
+      <h4>Servicios</h4>
+      <ul>
+        <li><a href="index.html#servicios">Periodoncia</a></li>
+        <li><a href="index.html#servicios">Blanqueamiento dental</a></li>
+        <li><a href="index.html#servicios">Implantes y prótesis</a></li>
+        <li><a href="index.html#servicios">Ortodoncia</a></li>
+        <li><a href="index.html#servicios">Diseño de sonrisa</a></li>
+        <li><a href="index.html#servicios">Limpieza dental</a></li>
+        <li><a href="index.html#servicios">Coronas dentales</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Sedes</h4>
+      <ul>
+        <li><a href="index.html#sedes">Villavicencio · Meta</a></li>
+        <li><a href="index.html#sedes">Bogotá D.C.</a></li>
+        <li><a href="index.html#sedes">Pasto · Nariño</a></li>
+        <li><a href="index.html#sedes">Medellín · Antioquia</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Información</h4>
+      <ul>
+        <li><a href="nosotros.html">Sobre Glodents</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Contacto</h4>
+      <ul>
+        <li><a href="https://wa.me/573133469367">+57 313 346 9367</a></li>
+        <li><a href="mailto:glodent.s@gmail.com">glodent.s@gmail.com</a></li>
+        <li>4 sedes en Colombia</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Glodents · Consultorio y Laboratorio Dental · Muestra Pronto</span>
+    <span>Villavicencio · Bogotá · Pasto · Medellín</span>
+  </div>
+</footer>
+
+<a href="https://wa.me/573133469367?text=Hola%20Glodents" target="_blank" class="wa-float" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.371-.025-.52-.075-.149-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+</a>
+
+<script>
+  if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; }
+  window.addEventListener('beforeunload', () => window.scrollTo(0, 0));
+  const navbar = document.getElementById('navbar');
+  if (navbar) { const onScroll = () => navbar.classList.toggle('scrolled', window.scrollY > 60); window.addEventListener('scroll', onScroll, { passive: true }); }
+  const burger = document.getElementById('navBurger'), menu = document.getElementById('mobileMenu'), menuClose = document.getElementById('mobileMenuClose');
+  if (burger && menu) {
+    burger.addEventListener('click', () => menu.classList.add('open'));
+    menuClose && menuClose.addEventListener('click', () => menu.classList.remove('open'));
+    menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => menu.classList.remove('open')));
+  }
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
+<script src="assets/animations.js?v=20260526" defer></script>
+
+</body>
+</html>
