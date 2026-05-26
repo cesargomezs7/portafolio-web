@@ -1,0 +1,36 @@
+/* ═══════════════════════════════════════════════════════════
+   SONRIYA · Theme AZUL + NARANJA
+   Paleta extraída de la identidad visual del cliente:
+   - Azul corporate como base
+   - Naranja/amarillo del logo Sonriya como accent cálido
+   ═══════════════════════════════════════════════════════════ */
+
+:root {
+  --sage-bg:      #e8f0f6;
+  --sage-soft:    #f0f5f9;
+  --sage-deep:    #1e3a52;
+  --sage-deepest: #15293c;
+  --cream:        #fbfbfb;
+  --cream-deep:   #ecf0f4;
+  --accent:       #f08826;
+  --accent-soft:  #f5a23e;
+  --text:         #15293c;
+  --text-soft:    #4a5a6e;
+  --border:       #c8d4dc;
+  --charcoal:     #15293c;
+
+  --shadow-sm: 0 2px 6px rgba(30,58,82,0.08);
+  --shadow-md: 0 14px 38px rgba(30,58,82,0.12);
+  --shadow-lg: 0 30px 70px rgba(30,58,82,0.18);
+}
+
+.hero { background: linear-gradient(to left, var(--sage-bg) 30%, #d6e3ec 100%) !important; }
+.hero-compact { background: linear-gradient(to left, var(--sage-bg) 30%, #d6e3ec 100%) !important; }
+.section.alt-bg { background: var(--sage-soft) !important; }
+
+.testimonio-avatar { background: var(--sage-deep) !important; color: var(--cream) !important; }
+.faq-list { border-top-color: rgba(30,58,82,0.18) !important; }
+.faq-item { border-bottom-color: rgba(30,58,82,0.18) !important; }
+.valor-card { background: #ffffff !important; border-color: rgba(30,58,82,0.08) !important; }
+
+::selection { background: var(--accent); color: var(--cream); }
