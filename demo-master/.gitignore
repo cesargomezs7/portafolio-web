@@ -1,0 +1,5 @@
+# QA local: capturas de pantalla, scripts de Playwright y node_modules
+_qa-out/
+node_modules/
+qa-*.mjs
+package-lock.json

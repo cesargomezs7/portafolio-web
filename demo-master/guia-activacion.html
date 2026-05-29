@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guía de Activación · Pronto</title>
+<meta name="robots" content="noindex">
+<!-- ============================================================
+     GUÍA DE ACTIVACIÓN PRONTO (entregable de onboarding)
+     Se entrega al cliente al iniciar. La ejecuta él solo.
+     PERSONALIZACIÓN: editar CONFIG (nombre, teléfono, URL reseñas).
+     Imprimir / PDF: Cmd+P.
+     ============================================================ -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{ --azul-dark:#1e3a52; --azul:#3a7ca5; --azul-bg:#e8f0f6; --text:#15293c; --soft:#4a5a6e; }
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  body{ font-family:'Manrope',sans-serif; background:#eef4f9; color:var(--text); padding:24px; line-height:1.6; }
+  .toolbar{ max-width:760px; margin:0 auto 16px; }
+  .toolbar button{ background:var(--azul-dark); color:#fff; border:none; font-family:'Manrope',sans-serif; font-weight:600; font-size:14px; padding:11px 22px; border-radius:999px; cursor:pointer; }
+  .doc{ max-width:760px; margin:0 auto; background:#fff; border-radius:18px; box-shadow:0 18px 50px rgba(30,58,82,.12); padding:56px 56px 48px; }
+  .brand{ font-family:'Manrope',sans-serif; font-weight:700; font-size:12px; letter-spacing:.16em; text-transform:uppercase; color:var(--azul); margin-bottom:10px; }
+  h1{ font-family:'Fraunces',serif; font-weight:400; font-size:34px; color:var(--azul-dark); line-height:1.15; margin-bottom:8px; }
+  .lead{ color:var(--soft); font-size:16px; margin-bottom:36px; }
+  .step{ border-top:1px solid #e0e8ef; padding:28px 0; }
+  .step-num{ font-family:'Manrope',sans-serif; font-weight:700; font-size:12px; letter-spacing:.12em; color:var(--azul); margin-bottom:8px; }
+  h2{ font-family:'Fraunces',serif; font-weight:500; font-size:22px; color:var(--azul-dark); margin-bottom:10px; }
+  p{ font-size:15px; color:var(--text); margin-bottom:12px; }
+  .nota{ font-size:13.5px; color:var(--soft); background:var(--azul-bg); border-radius:12px; padding:12px 16px; }
+  .tmpl{ background:#f5f8fb; border:1px dashed #b9cad8; border-radius:12px; padding:16px 18px; font-size:14.5px; color:var(--azul-dark); margin:12px 0; white-space:pre-wrap; }
+  .tmpl-label{ font-family:'Manrope',sans-serif; font-weight:600; font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:var(--azul); margin-bottom:6px; }
+  ul{ margin:0 0 4px 18px; } li{ font-size:15px; margin-bottom:6px; }
+  .foot{ border-top:1px solid #e0e8ef; margin-top:8px; padding-top:20px; font-size:12px; color:#8aa0b2; text-align:center; }
+  @media print{ body{ background:#fff; padding:0; } .toolbar{ display:none; } .doc{ box-shadow:none; border-radius:0; max-width:100%; padding:32px; } .step{ break-inside:avoid; } }
+</style>
+</head>
+<body>
+  <div class="toolbar"><button onclick="window.print()">🖨️ Imprimir / Guardar PDF</button></div>
+
+  <div class="doc">
+    <div class="brand">Guía de Activación · por Pronto</div>
+    <h1 id="titulo">Activa tu sistema en los primeros 3 días</h1>
+    <p class="lead">4 pasos cortos que haces tú mismo. Son tu victoria más rápida: tus primeras reseñas y cero leads perdidos.</p>
+
+    <div class="step">
+      <div class="step-num">PASO 1</div>
+      <h2>Configura el mensaje de ausencia en WhatsApp Business</h2>
+      <p>En WhatsApp Business → Ajustes → Herramientas para la empresa → Mensaje de ausencia. Actívalo y pega:</p>
+      <div class="tmpl-label">Mensaje recomendado</div>
+      <div class="tmpl" id="t-ausencia"></div>
+      <p class="nota">Así nunca pierdes a alguien que escribe fuera de horario: recibe respuesta al instante.</p>
+    </div>
+
+    <div class="step">
+      <div class="step-num">PASO 2</div>
+      <h2>Lanza tu campaña de reseñas inicial</h2>
+      <p>Desde TU PROPIO WhatsApp, envíales este mensaje a tus últimos 20-30 pacientes. Como ya te conocen, responden mucho más.</p>
+      <div class="tmpl-label">Plantilla (copia, pega y envía)</div>
+      <div class="tmpl" id="t-campana"></div>
+      <p class="nota"><strong>Importante:</strong> lo envías tú desde tu número, no nosotros. Así respetamos la ley de datos (Habeas Data, Ley 1581) y llega de un número conocido. En pocos días verás tus primeras reseñas 5★.</p>
+    </div>
+
+    <div class="step">
+      <div class="step-num">PASO 3</div>
+      <h2>Pega el código QR de reseñas</h2>
+      <p>Imprime el afiche que te entregamos y pégalo donde el paciente lo vea al terminar:</p>
+      <ul>
+        <li>En la recepción, al pagar o agendar la próxima cita.</li>
+        <li>En la sala de espera, frente a las sillas.</li>
+        <li>En la tarjeta de la próxima cita.</li>
+      </ul>
+      <p class="nota">El QR pasa por el filtro: solo las experiencias 5★ llegan a Google; las demás te llegan en privado a ti.</p>
+    </div>
+
+    <div class="step">
+      <div class="step-num">PASO 4</div>
+      <h2>Usa la plantilla post-cita (el goteo constante)</h2>
+      <p>El día después de cada cita, envíale al paciente este mensaje. Es lo que mantiene un flujo constante de reseñas nuevas.</p>
+      <div class="tmpl-label">Plantilla post-cita</div>
+      <div class="tmpl" id="t-postcita"></div>
+    </div>
+
+    <div class="foot">Sistema gestionado por Pronto · prontoweb.co · ¿Dudas? Escríbenos al soporte.</div>
+  </div>
+
+<script>
+  // ===== PERSONALIZACIÓN POR CLIENTE =====
+  const CONFIG = {
+    clinica: "Sonrisa Premium",
+    telefono: "+57 312 467 2674",
+    reviewUrl: "https://prontoweb.co/demo-master/reviews.html"
+  };
+  document.getElementById('titulo').textContent = "Activa tu sistema · " + CONFIG.clinica;
+  document.getElementById('t-ausencia').textContent =
+    "Hola, gracias por escribir a " + CONFIG.clinica + ". En este momento estamos en consulta. Te respondemos antes de 30 minutos. Si es urgente, llámanos al " + CONFIG.telefono + ".";
+  document.getElementById('t-campana').textContent =
+    "Hola [nombre], gracias por confiar en " + CONFIG.clinica + ". Una reseña tuya en Google nos ayudaría muchísimo y te toma 10 segundos: " + CONFIG.reviewUrl;
+  document.getElementById('t-postcita').textContent =
+    "Hola [nombre], gracias por tu visita de ayer. Esperamos que te haya ido muy bien. Si quedaste contento, una reseña nos ayuda enormemente: " + CONFIG.reviewUrl;
+</script>
+</body>
+</html>
