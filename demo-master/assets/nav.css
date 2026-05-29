@@ -156,17 +156,19 @@
 }
 
 /* ───────────────────────────────────────────────
-   Sin banner Pronto: el hero arranca más arriba y es
-   más compacto, para que la FOTO + las tarjetas se vean
-   completas dentro de la pantalla (como debe verse).
+   Sin banner Pronto: SOLO el hero del HOME (con foto a
+   sangre) arranca más arriba y ocupa toda la pantalla.
+   IMPORTANTE: usar :not(.hero-compact) — si no, el 100vh
+   se aplica a Nosotros/Contacto/servicios/sedes (que son
+   .hero.hero-compact) y deja un hueco azul gigante.
    ─────────────────────────────────────────────── */
-.hero { padding-top: 104px !important; min-height: 100vh !important; }
-.hero h1 { font-size: clamp(1.9rem, 3.3vw, 3.1rem) !important; line-height: 1.06 !important; }
+.hero:not(.hero-compact) { padding-top: 104px !important; min-height: 100vh !important; }
+.hero:not(.hero-compact) h1 { font-size: clamp(1.9rem, 3.3vw, 3.1rem) !important; line-height: 1.06 !important; }
 /* La foto se estira (flex) para llenar hasta abajo del hero → sin hueco azul */
 .hero-photo { flex: 1 !important; }
 .hero-photo-frame { min-height: 300px !important; max-height: none !important; flex: 1 !important; }
 @media (max-width: 860px) {
-  .hero { padding-top: 92px !important; min-height: auto !important; }
+  .hero:not(.hero-compact) { padding-top: 92px !important; min-height: auto !important; }
   .hero-photo-frame { max-height: 460px !important; }
 }
 
