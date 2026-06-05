@@ -36,19 +36,26 @@
   .scan{ font-family:'Manrope',sans-serif; font-weight:600; font-size:19px; color:var(--azul-dark); }
   .scan span{ display:block; font-weight:500; font-size:15px; color:#7e93a6; margin-top:6px; }
   @media print{
+    @page{ margin:8mm; }
     body{ background:#fff; padding:0; }
     .toolbar{ display:none; }
-    .afiche{ box-shadow:none; border-radius:0; width:100%; min-height:100vh; }
+    .afiche{ box-shadow:none; border-radius:0; width:100%; min-height:auto; padding:18px 40px; justify-content:flex-start; }
+    .afiche .clinica{ margin-bottom:26px; }
+    .afiche h1{ margin-bottom:16px; }
+    .afiche .sub{ margin-bottom:24px; }
+    .stars{ margin-bottom:26px; }
+    .qr-box{ margin-bottom:18px; padding:18px; }
+    .qr-box img{ width:280px; height:280px; }
   }
 </style>
 </head>
 <body>
-  <div class="toolbar"><button onclick="window.print()">🖨️ Imprimir / Guardar PDF</button></div>
+  <div class="toolbar"><button onclick="window.print()">📄 Guardar como PDF</button></div>
 
   <div class="afiche">
     <div class="clinica" id="clinica">Sonrisa Premium</div>
     <h1>¿Te gustó<br>tu visita?</h1>
-    <p class="sub">Tu reseña en Google nos ayuda muchísimo y le toma solo 10 segundos.</p>
+    <p class="sub">Una reseña tuya en Google nos ayuda muchísimo. Solo te toma 10 segundos.</p>
     <div class="stars">★★★★★</div>
     <div class="qr-box"><img id="qr" alt="Código QR para dejar tu reseña"></div>
     <div class="scan">Escanea con la cámara de tu celular<span>Apunta y toca el enlace que aparece</span></div>
