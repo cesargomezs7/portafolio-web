@@ -22,6 +22,7 @@
   --radius-lg:    28px;
   --radius-xl:    40px;
   --t:            cubic-bezier(0.4, 0, 0.2, 1);
+  --cw:           min(94vw, 1680px); /* ancho de contenido fluido: llena pantallas grandes sin estirar el texto */
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -68,7 +69,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 /* ─── Navbar pill ─────────────────────────────────────────── */
 .navbar {
   position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-  padding: 20px max(32px, calc((100% - 1400px) / 2));
+  padding: 20px max(32px, calc((100% - var(--cw)) / 2));
   display: flex; align-items: center; gap: 16px;
   background: transparent;
   transition: all 0.3s var(--t);
@@ -181,12 +182,12 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   grid-template-columns: 1fr auto;
   gap: 40px;
   align-items: center;
-  max-width: 1400px; width: 100%;
+  max-width: var(--cw); width: 100%;
   margin: 0 auto;
 }
 
 .hero h1 {
-  font-size: clamp(2.2rem, 4.6vw, 4rem);
+  font-size: clamp(2.2rem, 4.8vw, 5.2rem);
   font-weight: 500;
   line-height: 1.02;
   letter-spacing: -0.035em;
@@ -226,7 +227,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .hero-photo {
   position: relative;
   margin-top: 24px; margin-bottom: 0;
-  max-width: 1400px; width: 100%;
+  max-width: var(--cw); width: 100%;
   margin-left: auto; margin-right: auto;
   flex: 1;
   display: flex; flex-direction: column; justify-content: flex-end;
@@ -238,7 +239,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   overflow: hidden;
   flex: 1;
   min-height: 360px;
-  max-height: 460px;
+  max-height: min(60vh, 660px);
   width: 100%;
   position: relative;
 }
@@ -311,7 +312,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 /* ─── SECTION base ────────────────────────────────────────── */
 .section {
   padding: 120px 32px;
-  max-width: 1400px; margin: 0 auto;
+  max-width: var(--cw); margin: 0 auto;
   width: 100%;
 }
 
@@ -322,7 +323,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   letter-spacing: -0.005em;
 }
 .section h2 {
-  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  font-size: clamp(2.5rem, 5.2vw, 6rem);
   font-weight: 800;
   line-height: 1.0;
   letter-spacing: -0.04em;
@@ -643,7 +644,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   border-radius: var(--radius-lg);
   margin: 80px auto;
   padding: 96px 56px;
-  max-width: calc(1400px - 64px);
+  max-width: calc(var(--cw) - 64px);
   text-align: center;
   position: relative; overflow: hidden;
 }
@@ -657,7 +658,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .cta-final-inner { position: relative; z-index: 1; max-width: 720px; margin: 0 auto; }
 .cta-final .overline { color: rgba(255,255,255,0.7); margin-bottom: 14px; }
 .cta-final h2 {
-  font-size: clamp(2rem, 4.5vw, 3.8rem);
+  font-size: clamp(2rem, 4.5vw, 5rem);
   font-weight: 500;
   color: var(--white);
   letter-spacing: -0.035em;
@@ -733,7 +734,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   border-radius: var(--radius-lg);
   margin: 80px auto;
   padding: 80px 56px;
-  max-width: 1400px;
+  max-width: var(--cw);
 }
 .faq .overline { color: rgba(255,255,255,0.55); }
 .faq h2 { color: var(--white); margin-bottom: 48px; }
@@ -791,7 +792,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 /* ─── FOOTER ──────────────────────────────────────────────── */
 footer { background: var(--white); padding: 80px 32px 40px; }
 .footer-inner {
-  max-width: 1400px; margin: 0 auto;
+  max-width: var(--cw); margin: 0 auto;
   display: grid;
   grid-template-columns: 1.6fr 1fr 1fr 1fr 1fr;
   gap: 48px;
@@ -837,7 +838,7 @@ footer { background: var(--white); padding: 80px 32px 40px; }
 .footer-col a:hover { opacity: 1; }
 
 .footer-bottom {
-  max-width: 1400px; margin: 60px auto 0;
+  max-width: var(--cw); margin: 60px auto 0;
   padding-top: 24px;
   border-top: 1px solid var(--border);
   font-size: 13px; color: var(--azul-dark); opacity: 0.55;
@@ -886,9 +887,9 @@ footer { background: var(--white); padding: 80px 32px 40px; }
   min-height: auto;
   box-shadow: 0 40px 0 var(--azul-deep);
 }
-.hero-compact-inner { max-width: 1400px; width: 100%; margin: 0 auto; }
+.hero-compact-inner { max-width: var(--cw); width: 100%; margin: 0 auto; }
 .hero-compact h1 {
-  font-size: clamp(2.5rem, 6vw, 5rem);
+  font-size: clamp(2.5rem, 6vw, 6.5rem);
   font-weight: 500;
   letter-spacing: -0.035em;
   line-height: 1.02;
