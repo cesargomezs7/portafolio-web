@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pronto · Deck Loom</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#000; --text:#E6E8F0; --muted:#B0B6CC; --dim:#5b6478;
+    --blue:#0891b2; --cyan:#22d3ee;
+    --grad:linear-gradient(135deg,#0891b2,#22d3ee);
+    --border:rgba(255,255,255,0.10); --card:rgba(255,255,255,0.04);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{background:#0a0a0a;font-family:'Inter',sans-serif;display:flex;align-items:center;justify-content:center;height:100vh;overflow:hidden;}
+  .stage{width:1280px;height:720px;transform-origin:center center;flex:none;}
+  .slide{
+    width:1280px;height:720px;
+    background:radial-gradient(80% 60% at 80% 8%, rgba(34,211,238,0.10), transparent 60%),radial-gradient(70% 60% at 8% 96%, rgba(8,145,178,0.12), transparent 55%),#000;
+    color:var(--text);display:none;flex-direction:column;justify-content:center;padding:72px 84px;position:relative;overflow:hidden;
+  }
+  .slide.active{display:flex;}
+  .logo{position:absolute;top:42px;right:84px;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:20px;letter-spacing:-0.01em;background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+  h1{font-family:'Space Grotesk',sans-serif;font-weight:700;line-height:1.05;letter-spacing:-0.02em;color:var(--text);}
+
+  /* OBJETIVOS */
+  .s-obj h1{font-size:46px;margin-bottom:6px;}
+  .olist{display:flex;flex-direction:column;gap:13px;margin-top:34px;}
+  .oi{display:flex;align-items:center;gap:20px;transition:all .45s cubic-bezier(.2,.8,.2,1);}
+  .oi .n{width:36px;height:36px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:17px;flex:none;transition:all .45s cubic-bezier(.2,.8,.2,1);}
+  .oi .tx{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:23px;transition:all .45s cubic-bezier(.2,.8,.2,1);}
+  .oi.neutral .tx{color:var(--text);}
+  .oi.neutral .n{background:rgba(255,255,255,0.06);color:var(--muted);}
+  .oi.upcoming .tx{color:var(--dim);}
+  .oi.upcoming .n{background:rgba(255,255,255,0.04);color:var(--dim);}
+  .oi.done .tx{color:var(--cyan);}
+  .oi.done .n{background:var(--grad);color:#06121a;}
+  .oi.current .tx{color:var(--cyan);font-size:40px;font-weight:700;}
+  .oi.current .n{background:var(--grad);color:#06121a;width:50px;height:50px;font-size:23px;border-radius:12px;}
+
+  /* PRECIO + MATERIALES — filas de screenshots a la misma altura */
+  .s-precio h1{font-size:44px;margin-bottom:6px;}
+  .shots{display:flex;align-items:center;justify-content:center;gap:44px;margin-top:30px;width:100%;}
+  .shots img{height:430px;width:auto;border-radius:14px;box-shadow:0 16px 50px rgba(0,0,0,.55);display:block;}
+  .shot-ph{height:430px;width:680px;border:2px dashed rgba(255,255,255,0.22);border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;background:var(--card);}
+  .shot-ph .t{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:18px;color:var(--muted);}
+  .shot-ph .h{font-size:14px;color:var(--dim);text-align:center;line-height:1.55;}
+  .phone{position:relative;height:470px;background:#070707;border:3px solid rgba(255,255,255,0.14);border-radius:40px;padding:12px 11px 18px;box-shadow:0 18px 55px rgba(0,0,0,.6);display:flex;align-items:center;justify-content:center;}
+  .phone img{height:100%;width:auto;border-radius:28px;display:block;box-shadow:none;}
+  .phone::after{content:"";position:absolute;bottom:8px;left:50%;transform:translateX(-50%);width:92px;height:5px;border-radius:3px;background:rgba(255,255,255,0.22);}
+  /* PRECIO — título "Precios" arriba + comparación dividida con revelado por clic */
+  .s-precio h1{font-size:44px;margin-bottom:22px;text-align:center;}
+  .vs{display:grid;grid-template-columns:1fr 1fr;align-items:stretch;min-height:454px;width:100%;}
+  .vs .side{display:flex;justify-content:center;align-items:flex-start;padding:4px 36px 0;opacity:1;transition:opacity .5s ease;}
+  .vs .side.left{border-right:1px solid rgba(255,255,255,0.14);}
+  .vs-inner{display:flex;flex-direction:column;align-items:center;gap:20px;}
+  .vs-h{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:29px;letter-spacing:-0.01em;color:var(--text);text-align:center;}
+  .vs-h.hi{color:var(--cyan);}
+  .vs .side img{display:block;border-radius:12px;box-shadow:0 14px 44px rgba(0,0,0,.5);}
+  .vs .side.left img{width:100%;max-width:520px;height:auto;}
+  .vs .side.right img{height:374px;width:auto;max-width:100%;}
+
+  /* OFERTA */
+  .s-oferta h1{font-size:46px;margin-bottom:36px;}
+  .off{display:flex;flex-direction:column;gap:22px;}
+  .off-item{display:flex;align-items:center;gap:20px;font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:30px;color:var(--text);}
+  .off-item .ck{width:44px;height:44px;border-radius:11px;background:var(--grad);color:#06121a;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:22px;flex:none;}
+  /* PROBAR */
+  .s-probar h1{font-size:42px;margin-bottom:26px;}
+  .cols{display:grid;grid-template-columns:1fr 1fr;gap:40px;}
+  .col h3{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:19px;letter-spacing:.04em;text-transform:uppercase;margin-bottom:16px;}
+  .col.go h3{color:var(--cyan);}
+  .col.no h3{color:var(--dim);}
+  .col ul{list-style:none;display:flex;flex-direction:column;gap:12px;}
+  .col li{font-size:20px;color:var(--text);padding-left:28px;position:relative;line-height:1.3;}
+  .col.go li::before{content:"\2713";position:absolute;left:0;color:var(--cyan);font-weight:700;}
+  .col.no li{color:var(--muted);}
+  .col.no li::before{content:"\2013";position:absolute;left:0;color:var(--dim);}
+  .probar-foot{margin-top:26px;font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:21px;color:var(--text);}
+  /* PASOS */
+  .s-pasos h1{font-size:46px;margin-bottom:38px;}
+  .steps{display:flex;flex-direction:column;gap:26px;}
+  .step{display:flex;align-items:center;gap:22px;transition:all .45s cubic-bezier(.2,.8,.2,1);}
+  .step .sn{width:54px;height:54px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:26px;flex:none;transition:all .45s cubic-bezier(.2,.8,.2,1);}
+  .step .stx{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:24px;line-height:1.25;transition:all .45s cubic-bezier(.2,.8,.2,1);}
+  .step.neutral .stx{color:var(--text);} .step.neutral .sn{background:rgba(255,255,255,0.06);color:var(--muted);}
+  .step.upcoming .stx{color:var(--dim);} .step.upcoming .sn{background:rgba(255,255,255,0.04);color:var(--dim);}
+  .step.done .stx{color:var(--cyan);} .step.done .sn{background:var(--grad);color:#06121a;}
+  .step.current .stx{color:var(--cyan);font-size:32px;font-weight:700;} .step.current .sn{background:var(--grad);color:#06121a;width:64px;height:64px;font-size:30px;border-radius:16px;}
+  /* CUALQUIER CLÍNICA */
+  .s-any{justify-content:center;}
+  .s-any .bar{height:5px;width:120px;background:var(--grad);border-radius:3px;margin-bottom:26px;}
+  .s-any h1{font-size:52px;max-width:1000px;margin-bottom:30px;}
+  .s-any .alist{display:flex;flex-direction:column;gap:18px;margin-bottom:28px;}
+  .s-any .ai{display:flex;align-items:center;gap:18px;font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:27px;color:var(--text);}
+  .s-any .ai .dot{width:13px;height:13px;border-radius:50%;background:var(--grad);flex:none;}
+  .s-any .sub{font-size:23px;color:var(--cyan);font-family:'Space Grotesk',sans-serif;font-weight:600;}
+  /* MATERIALES */
+  .s-mat h1{font-size:44px;margin-bottom:6px;}
+  /* ROI */
+  .s-roi{justify-content:center;}
+  .s-roi .bar{height:5px;width:120px;background:var(--grad);border-radius:3px;margin-bottom:26px;}
+  .s-roi h1{font-size:52px;margin-bottom:22px;}
+  .s-roi .roi-q{font-size:27px;color:var(--muted);margin-bottom:24px;}
+  .s-roi .roi-big{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:40px;line-height:1.22;max-width:1020px;margin-bottom:24px;}
+  .s-roi .roi-big .hl{color:var(--cyan);}
+  .s-roi .roi-end{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:26px;color:var(--cyan);}
+  /* INTERCAMBIO */
+  .s-inter{justify-content:center;}
+  .s-inter h1{font-size:46px;margin-bottom:40px;}
+  .s-inter .inter{display:flex;flex-direction:column;gap:26px;}
+  .s-inter .inter-item{display:flex;align-items:center;gap:20px;font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:30px;color:var(--text);max-width:1050px;}
+  .s-inter .inter-item .ck{width:44px;height:44px;border-radius:11px;background:var(--grad);color:#06121a;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:22px;flex:none;}
+</style>
+</head>
+<body>
+<div class="stage" id="stage">
+
+  <!-- OBJETIVOS (una sola slide, estados por avance) -->
+  <section class="slide s-obj" id="objSlide">
+    <div class="logo">Pronto</div>
+    <h1>Esto es lo que quiero lograr</h1>
+    <div class="olist">
+      <div class="oi"><span class="n">1</span><span class="tx">Que lo encuentren en Google y ChatGPT</span></div>
+      <div class="oi"><span class="n">2</span><span class="tx">Que quien entra se vuelva paciente</span></div>
+      <div class="oi"><span class="n">3</span><span class="tx">Más y mejores reseñas en Google</span></div>
+      <div class="oi"><span class="n">4</span><span class="tx">Recepción sin perder un solo mensaje</span></div>
+      <div class="oi"><span class="n">5</span><span class="tx">Reportes con números reales, cada mes</span></div>
+      <div class="oi"><span class="n">6</span><span class="tx">Una web profesional, en computador y celular</span></div>
+      <div class="oi"><span class="n">7</span><span class="tx">Cero preocupaciones técnicas</span></div>
+    </div>
+  </section>
+
+  <!-- CUALQUIER CLÍNICA -->
+  <section class="slide s-any" data-s="9">
+    <div class="logo">Pronto</div>
+    <div class="bar"></div>
+    <h1>Esto le sirve a cualquier clínica</h1>
+    <div class="alist">
+      <div class="ai"><span class="dot"></span>Grande o apenas empezando</div>
+      <div class="ai"><span class="dot"></span>Con una sede o con cinco</div>
+      <div class="ai"><span class="dot"></span>Cualquier especialidad: general, ortodoncia, estética, implantes…</div>
+      <div class="ai"><span class="dot"></span>Con web vieja o sin web</div>
+    </div>
+    <div class="sub">No es solo para las grandes.</div>
+  </section>
+
+  <!-- PRECIO -->
+  <section class="slide s-precio" data-s="10" id="precioSlide">
+    <div class="logo">Pronto</div>
+    <h1>Precios</h1>
+    <div class="vs">
+      <div class="side left" id="vsLeft">
+        <div class="vs-inner"><div class="vs-h">Lo que cobran otros</div><img src="img/oferta-eeuu.png" alt="Oferta agencia EE.UU."></div>
+      </div>
+      <div class="side right" id="vsRight">
+        <div class="vs-inner"><div class="vs-h hi">Lo que cobro yo</div><img src="img/oferta-pronto.png" alt="Plan Pronto Dental $199.900"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ROI -->
+  <section class="slide s-roi" data-s="11">
+    <div class="logo">Pronto</div>
+    <div class="bar"></div>
+    <h1>Haga la cuenta</h1>
+    <div class="roi-q">¿Cuánto le deja un paciente nuevo en un año?</div>
+    <div class="roi-big">Con que esta web le traiga <span class="hl">UNO</span>, ya se pagó varios meses sola.</div>
+    <div class="roi-end">De ahí en adelante, todo es ganancia.</div>
+  </section>
+
+  <!-- OFERTA -->
+  <section class="slide s-oferta" data-s="12">
+    <div class="logo">Pronto</div>
+    <h1>Y todo, sin riesgo para usted</h1>
+    <div class="off">
+      <div class="off-item"><span class="ck">&#10003;</span><span>Primer mes gratis</span></div>
+      <div class="off-item"><span class="ck">&#10003;</span><span>Sin contratos, cancela cuando quiera</span></div>
+      <div class="off-item"><span class="ck">&#10003;</span><span>Su dominio propio, a su nombre, de regalo</span></div>
+      <div class="off-item"><span class="ck">&#10003;</span><span>Cero inversión inicial</span></div>
+    </div>
+  </section>
+
+  <!-- INTERCAMBIO -->
+  <section class="slide s-inter" data-s="13">
+    <div class="logo">Pronto</div>
+    <h1>Lo único que le pido a cambio</h1>
+    <div class="inter">
+      <div class="inter-item"><span class="ck">&#10003;</span>Que la use de verdad</div>
+      <div class="inter-item"><span class="ck">&#10003;</span>Que me dé su opinión honesta</div>
+      <div class="inter-item"><span class="ck">&#10003;</span>Un testimonio corto en video</div>
+    </div>
+  </section>
+
+  <!-- MATERIALES -->
+  <section class="slide s-mat" data-s="14">
+    <div class="logo">Pronto</div>
+    <h1>Y le entrego todo para arrancar</h1>
+    <div class="shots">
+      <img src="img/afiche.png" alt="Afiche con QR de reseñas">
+      <img src="img/guia.png" alt="Guía de activación">
+    </div>
+  </section>
+
+  <!-- PROBAR -->
+  <section class="slide s-probar" data-s="15">
+    <div class="logo">Pronto</div>
+    <h1>Pruébela usted mismo</h1>
+    <div class="cols">
+      <div class="col go">
+        <h3>Pruebe esto</h3>
+        <ul>
+          <li>Ábrala en computador y celular</li>
+          <li>Toque el botón de WhatsApp</li>
+          <li>Entre a un servicio y a una sede</li>
+          <li>Vea el filtro de reseñas</li>
+          <li>Muéstresela a su equipo</li>
+        </ul>
+      </div>
+      <div class="col no">
+        <h3>Aún no, hasta activar</h3>
+        <ul>
+          <li>El formulario, a su correo</li>
+          <li>Las reseñas, a su Google</li>
+          <li>Su dominio propio</li>
+        </ul>
+      </div>
+    </div>
+    <div class="probar-foot">Le dejo el link 2 días.</div>
+  </section>
+
+  <!-- CÓMO EMPEZAR -->
+  <section class="slide s-pasos" id="pasosSlide">
+    <div class="logo">Pronto</div>
+    <h1>Empezar es así de fácil</h1>
+    <div class="steps">
+      <div class="step"><span class="sn">1</span><span class="stx">Registra su tarjeta, sin ningún cobro</span></div>
+      <div class="step"><span class="sn">2</span><span class="stx">Me avisa apenas quede registrado</span></div>
+      <div class="step"><span class="sn">3</span><span class="stx">Llena el formulario y en 48 h, su web lista</span></div>
+    </div>
+  </section>
+
+</div>
+<script>
+  function fit(){var st=document.getElementById('stage');var sc=Math.min(window.innerWidth/1280,window.innerHeight/720);st.style.transform='scale('+sc+')';}
+  window.addEventListener('resize',fit); fit();
+
+  var TOTAL_OBJ = 8; // s=1 intro, s=2..8 = objetivo 1..7 resaltado; s=9 = precio
+  function setObj(h){ // h=0 intro, 1..7 actual
+    document.querySelectorAll('#objSlide .oi').forEach(function(el,idx){
+      var i=idx+1, c;
+      if(h===0) c='neutral'; else if(i<h) c='done'; else if(i===h) c='current'; else c='upcoming';
+      el.className='oi '+c;
+    });
+  }
+  function setPaso(h){ // h=0 intro, 1..3 actual
+    document.querySelectorAll('#pasosSlide .step').forEach(function(el,idx){
+      var i=idx+1, c;
+      if(h===0) c='neutral'; else if(i<h) c='done'; else if(i===h) c='current'; else c='upcoming';
+      el.className='step '+c;
+    });
+  }
+  var precioStep = 0; // 0=título solo, 1=+gringa, 2=+mía
+  function setPrecio(st){
+    precioStep = st;
+    var l=document.getElementById('vsLeft'), r=document.getElementById('vsRight');
+    if(l) l.style.opacity = st>=1 ? '1' : '0';
+    if(r) r.style.opacity = st>=2 ? '1' : '0';
+  }
+  function show(s){
+    s=parseInt(s,10)||1;
+    document.querySelectorAll('.slide').forEach(function(el){el.classList.remove('active');});
+    var obj=document.getElementById('objSlide'), pas=document.getElementById('pasosSlide');
+    if(s>=1 && s<=TOTAL_OBJ){ obj.classList.add('active'); setObj(s-1); }
+    else if(s>=16 && s<=19){ pas.classList.add('active'); setPaso(s-16); }
+    else { var t=document.querySelector('.slide[data-s="'+s+'"]'); (t||obj).classList.add('active'); }
+    if(s===10) setPrecio(precioStep);
+    window._s=s;
+  }
+  show(new URLSearchParams(location.search).get('s')||'1');
+  document.addEventListener('keydown',function(e){
+    var s=window._s||1;
+    if(e.key==='ArrowRight'){
+      if(s===10 && precioStep<2){ setPrecio(precioStep+1); return; }
+      var ns=Math.min(s+1,19); if(ns===10) precioStep=0; show(ns);
+    }
+    if(e.key==='ArrowLeft'){
+      if(s===10 && precioStep>0){ setPrecio(precioStep-1); return; }
+      var ns=Math.max(s-1,1); if(ns===10) precioStep=2; show(ns);
+    }
+  });
+</script>
+</body>
+</html>
