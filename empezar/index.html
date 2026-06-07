@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Empecemos su web · Pronto</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0a0a; --panel:rgba(255,255,255,0.035); --panel-2:rgba(255,255,255,0.06);
+    --text:#E6E8F0; --muted:#B0B6CC; --dim:#7c84a0;
+    --blue:#0891b2; --cyan:#22d3ee; --grad:linear-gradient(135deg,#0891b2,#22d3ee);
+    --border:rgba(255,255,255,0.12); --border-2:rgba(255,255,255,0.18);
+    --ok:#22c55e; --err:#f87171; --radius:16px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{
+    font-family:'Inter',sans-serif; background:
+      radial-gradient(70% 50% at 80% 0%, rgba(34,211,238,0.10), transparent 60%),
+      radial-gradient(60% 50% at 10% 100%, rgba(8,145,178,0.12), transparent 55%), var(--bg);
+    color:var(--text); min-height:100vh; line-height:1.55; -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:680px; margin:0 auto; padding:28px 22px 80px;}
+  /* Top bar */
+  .topbar{display:flex; align-items:center; justify-content:space-between; margin-bottom:22px;}
+  .logo{font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:22px; letter-spacing:-0.01em;
+    background:var(--grad); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;}
+  .stepcount{font-size:13px; color:var(--dim); font-weight:500;}
+  /* Progress */
+  .progress{height:5px; background:rgba(255,255,255,0.08); border-radius:3px; overflow:hidden; margin-bottom:34px;}
+  .progress-bar{height:100%; width:0; background:var(--grad); border-radius:3px; transition:width .45s cubic-bezier(.2,.8,.2,1);}
+  /* Steps */
+  .step{display:none; animation:fade .4s ease;}
+  .step.active{display:block;}
+  @keyframes fade{from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:none;}}
+  h1{font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:30px; line-height:1.12; letter-spacing:-0.02em; margin-bottom:10px;}
+  .lead{color:var(--muted); font-size:16px; margin-bottom:28px;}
+  label.q{display:block; font-weight:600; font-size:16px; margin:22px 0 10px;}
+  label.q .opt{color:var(--dim); font-weight:500; font-size:14px;}
+  .hint{color:var(--dim); font-size:13.5px; margin:-4px 0 10px;}
+  /* Inputs */
+  input[type=text], input[type=email], input[type=tel], input[type=url], textarea{
+    width:100%; background:var(--panel); color:var(--text);
+    border:1px solid var(--border); border-radius:12px; padding:14px 16px;
+    font-family:inherit; font-size:15.5px; transition:border-color .2s, background .2s;
+  }
+  input::placeholder, textarea::placeholder{color:#5f6780;}
+  input:focus, textarea:focus{outline:none; border-color:var(--cyan); background:var(--panel-2);}
+  textarea{min-height:96px; resize:vertical;}
+  .row{display:grid; grid-template-columns:1fr 1fr; gap:14px;}
+  /* Radio / choice cards */
+  .choices{display:flex; flex-direction:column; gap:12px; margin-top:6px;}
+  .choice{display:flex; gap:14px; align-items:flex-start; padding:16px 18px; border:1px solid var(--border);
+    border-radius:14px; cursor:pointer; background:var(--panel); transition:all .2s;}
+  .choice:hover{border-color:var(--border-2); background:var(--panel-2);}
+  .choice.sel{border-color:var(--cyan); background:rgba(34,211,238,0.07);}
+  .choice input{position:absolute; opacity:0; pointer-events:none;}
+  .choice .dot{flex:none; width:20px; height:20px; border-radius:50%; border:2px solid var(--dim); margin-top:2px; position:relative; transition:all .2s;}
+  .choice.sel .dot{border-color:var(--cyan);}
+  .choice.sel .dot::after{content:''; position:absolute; inset:3px; border-radius:50%; background:var(--grad);}
+  .choice .c-body strong{display:block; font-weight:600; font-size:15.5px;}
+  .choice .c-body span{display:block; color:var(--dim); font-size:13.5px; margin-top:2px;}
+  /* Checkboxes (consent) */
+  .check{display:flex; gap:13px; align-items:flex-start; padding:15px 16px; border:1px solid var(--border);
+    border-radius:12px; cursor:pointer; background:var(--panel); transition:all .2s; margin-bottom:12px;}
+  .check:hover{border-color:var(--border-2);}
+  .check.sel{border-color:var(--cyan); background:rgba(34,211,238,0.06);}
+  .check input{position:absolute; opacity:0;}
+  .check .box{flex:none; width:22px; height:22px; border-radius:6px; border:2px solid var(--dim); display:flex; align-items:center; justify-content:center; margin-top:1px; transition:all .2s;}
+  .check.sel .box{border-color:transparent; background:var(--grad);}
+  .check .box svg{width:13px; height:13px; opacity:0; transition:opacity .15s; color:#06121a;}
+  .check.sel .box svg{opacity:1;}
+  .check .c-txt{font-size:14px; color:var(--muted); line-height:1.5;}
+  .check .c-txt a{color:var(--cyan); text-decoration:underline;}
+  /* File upload */
+  .drop{border:1.5px dashed var(--border-2); border-radius:14px; padding:26px 18px; text-align:center; cursor:pointer; transition:all .2s; background:var(--panel);}
+  .drop:hover{border-color:var(--cyan); background:var(--panel-2);}
+  .drop .di{font-size:15px; font-weight:600;}
+  .drop .ds{font-size:13px; color:var(--dim); margin-top:4px;}
+  .drop input{display:none;}
+  .files{display:flex; flex-wrap:wrap; gap:8px; margin-top:12px;}
+  .file-chip{display:flex; align-items:center; gap:8px; background:var(--panel-2); border:1px solid var(--border); border-radius:999px; padding:7px 12px; font-size:12.5px; color:var(--muted); max-width:100%;}
+  .file-chip .nm{overflow:hidden; text-overflow:ellipsis; white-space:nowrap; max-width:170px;}
+  .file-chip .x{cursor:pointer; color:var(--dim); font-weight:700;}
+  .file-chip .x:hover{color:var(--err);}
+  /* Conditional blocks */
+  .cond{display:none;} .cond.show{display:block;}
+  /* Nav */
+  .nav{display:flex; gap:12px; margin-top:34px; align-items:center;}
+  .btn{font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:15.5px; border:none; border-radius:999px; padding:14px 30px; cursor:pointer; transition:all .25s;}
+  .btn-primary{background:var(--grad); color:#06121a;}
+  .btn-primary:hover{transform:translateY(-1px); box-shadow:0 10px 28px rgba(34,211,238,0.25);}
+  .btn-primary:disabled{opacity:0.45; cursor:default; transform:none; box-shadow:none;}
+  .btn-ghost{background:transparent; color:var(--muted); border:1px solid var(--border); padding:14px 22px;}
+  .btn-ghost:hover{border-color:var(--border-2); color:var(--text);}
+  .btn-skip{background:none; color:var(--dim); font-size:14px; padding:14px 8px; margin-left:auto; text-decoration:underline; font-family:'Inter';}
+  .btn-skip:hover{color:var(--muted);}
+  .err-msg{color:var(--err); font-size:13.5px; margin-top:12px; min-height:18px;}
+  /* Thank you */
+  .ty{text-align:center; padding:40px 0;}
+  .ty .ico{width:72px; height:72px; border-radius:50%; background:var(--grad); display:flex; align-items:center; justify-content:center; margin:0 auto 24px;}
+  .ty .ico svg{width:34px; height:34px; color:#06121a;}
+  .ty h1{font-size:32px;}
+  .ty p{color:var(--muted); font-size:16px; max-width:440px; margin:14px auto 0;}
+  .footer{text-align:center; color:var(--dim); font-size:12px; margin-top:40px;}
+  .footer a{color:var(--dim);}
+  @media(max-width:520px){ h1{font-size:25px;} .row{grid-template-columns:1fr;} .wrap{padding:22px 16px 70px;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar">
+    <div class="logo">Pronto</div>
+    <div class="stepcount" id="stepcount">Paso 1 de 5</div>
+  </div>
+  <div class="progress"><div class="progress-bar" id="pbar"></div></div>
+
+  <form id="form" novalidate>
+
+  <!-- ░░ PASO 1 — Bienvenida + permisos + bifurca ░░ -->
+  <section class="step active" id="s1">
+    <h1>Empecemos su web</h1>
+    <p class="lead">En 48 horas se la entregamos. Esto toma 3-5 minutos. Entre más nos deje sacar de lo que usted ya tiene, menos llena.</p>
+
+    <label class="check" id="chk-ley">
+      <input type="checkbox" name="consent_ley" required>
+      <span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg></span>
+      <span class="c-txt">Acepto el tratamiento de mis datos personales (Ley 1581 de 2012). <a href="https://prontoweb.co/privacidad" target="_blank">Ver política</a>.</span>
+    </label>
+    <label class="check" id="chk-uso">
+      <input type="checkbox" name="consent_uso" required>
+      <span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg></span>
+      <span class="c-txt">Autorizo a Pronto a usar la información pública de mi web, redes y Google (textos, servicios, fotos, logo) para construir y mejorar mi nueva web. Los textos se reescriben con voz profesional; yo apruebo todo antes de publicar.</span>
+    </label>
+
+    <label class="q">¿Tiene hoy página web, Instagram/Facebook o ficha de Google?</label>
+    <div class="choices" data-radio="presencia">
+      <label class="choice"><input type="radio" name="presencia" value="si"><span class="dot"></span><span class="c-body"><strong>Sí, tengo al menos uno</strong><span>Sacamos todo de ahí — usted casi no llena nada</span></span></label>
+      <label class="choice"><input type="radio" name="presencia" value="no"><span class="dot"></span><span class="c-body"><strong>No, casi nada</strong><span>No hay problema, lo armamos con lo que nos cuente</span></span></label>
+    </div>
+    <div class="err-msg" id="e-s1"></div>
+    <div class="nav"><button type="button" class="btn btn-primary" onclick="next()">Continuar</button></div>
+  </section>
+
+  <!-- ░░ PASO 2A — Sus links (tiene presencia) ░░ -->
+  <section class="step" id="s2a">
+    <h1>Sus links</h1>
+    <p class="lead">Denos lo que tenga y nosotros sacamos todo de ahí. Lo que no tenga, déjelo en blanco.</p>
+    <label class="q">Página web actual <span class="opt">(si tiene)</span></label>
+    <input type="text" name="web_url" placeholder="suclinica.com">
+    <div class="row" style="margin-top:14px">
+      <div><label class="q">Instagram <span class="opt">(opcional)</span></label><input type="text" name="instagram" placeholder="@suclinica"></div>
+      <div><label class="q">Facebook <span class="opt">(opcional)</span></label><input type="text" name="facebook" placeholder="facebook.com/..."></div>
+    </div>
+    <label class="q">Link de su Google / Maps <span class="opt">(opcional, para las reseñas)</span></label>
+    <input type="text" name="google_url" placeholder="Pegue el link de su ficha de Google">
+
+    <label class="q">¿Cómo lo hacemos?</label>
+    <div class="choices" data-radio="modo">
+      <label class="choice"><input type="radio" name="modo" value="todo"><span class="dot"></span><span class="c-body"><strong>Saquen TODO de mis links y mejórenlo</strong><span>No quiero llenar nada más. Lo reviso cuando me la entreguen.</span></span></label>
+      <label class="choice"><input type="radio" name="modo" value="cambiar"><span class="dot"></span><span class="c-body"><strong>Saquen lo de mis links, pero quiero cambiar o agregar cosas</strong><span>Más adelante le dejo subir fotos y decirnos qué cambiar</span></span></label>
+    </div>
+    <div class="err-msg" id="e-s2a"></div>
+    <div class="nav"><button type="button" class="btn btn-ghost" onclick="back()">Atrás</button><button type="button" class="btn btn-primary" onclick="next()">Continuar</button></div>
+  </section>
+
+  <!-- ░░ PASO 2B — Su clínica (sin presencia) ░░ -->
+  <section class="step" id="s2b">
+    <h1>Su clínica</h1>
+    <p class="lead">Como no hay de dónde sacarlo, cuéntenos lo básico. Tranquilo, es rápido.</p>
+    <label class="q">Nombre de la clínica</label>
+    <input type="text" name="clinica_nombre" placeholder="Ej: Clínica Dental Sonrisa">
+    <label class="q">Ciudad y dirección(es) / sede(s)</label>
+    <textarea name="clinica_direccion" placeholder="Ej: Bogotá, Cra 15 #93-47. (Si tiene varias sedes, póngalas todas con su dirección.)"></textarea>
+    <label class="q">Horarios de atención</label>
+    <input type="text" name="clinica_horarios" placeholder="Ej: Lun-Vie 8am-6pm, Sáb 8am-1pm">
+    <label class="q">Servicios que ofrece</label>
+    <textarea name="clinica_servicios" placeholder="Ej: ortodoncia, implantes, blanqueamiento, diseño de sonrisa, odontología general..."></textarea>
+    <label class="q">Doctor(es): nombre y especialidad</label>
+    <textarea name="clinica_equipo" placeholder="Ej: Dra. Ana Pérez — Ortodoncista. Dr. Luis Gómez — Implantólogo."></textarea>
+    <div class="err-msg" id="e-s2b"></div>
+    <div class="nav"><button type="button" class="btn btn-ghost" onclick="back()">Atrás</button><button type="button" class="btn btn-primary" onclick="next()">Continuar</button></div>
+  </section>
+
+  <!-- ░░ PASO 3 — Esenciales ░░ -->
+  <section class="step" id="s3">
+    <h1>Lo esencial</h1>
+    <p class="lead">Esto no lo podemos adivinar — lo necesitamos sí o sí para que su web funcione.</p>
+    <div class="row">
+      <div><label class="q">WhatsApp que ve el paciente</label><input type="tel" name="wa_publico" placeholder="+57 300 000 0000"></div>
+      <div><label class="q">WhatsApp donde recibe los contactos</label><input type="tel" name="wa_recepcion" placeholder="Puede ser el mismo"></div>
+    </div>
+    <label class="q">Correo donde quiere recibir los reportes mensuales</label>
+    <p class="hint">Puede ser su correo personal. Ahí le llega cada mes cuánta gente entró, cuántos escribieron por WhatsApp, etc.</p>
+    <input type="email" name="email_reportes" placeholder="sucorreo@ejemplo.com">
+
+    <label class="q">¿Quiere que su web muestre precios?</label>
+    <div class="choices" data-radio="precios">
+      <label class="choice"><input type="radio" name="precios" value="si"><span class="dot"></span><span class="c-body"><strong>Sí, mostrar precios orientativos</strong><span>Genera confianza y filtra pacientes serios</span></span></label>
+      <label class="choice"><input type="radio" name="precios" value="no"><span class="dot"></span><span class="c-body"><strong>No, solo "consulte por WhatsApp"</strong><span>Más conservador</span></span></label>
+    </div>
+
+    <label class="q">¿Ya tiene un dominio (la dirección .com) que quiera conservar?</label>
+    <div class="choices" data-radio="dominio">
+      <label class="choice"><input type="radio" name="dominio_tiene" value="no"><span class="dot"></span><span class="c-body"><strong>No / no tengo</strong><span>Le registramos uno nuevo gratis, a nombre de su clínica</span></span></label>
+      <label class="choice"><input type="radio" name="dominio_tiene" value="si"><span class="dot"></span><span class="c-body"><strong>Sí, quiero conservar el mío</strong><span>Lo apuntamos a su nueva web (usted sigue siendo el dueño)</span></span></label>
+    </div>
+    <div class="cond" id="dom-no">
+      <label class="q">Ideas de nombre para su dominio <span class="opt">(1 a 3, o déjelo y lo elegimos nosotros)</span></label>
+      <input type="text" name="dominio_ideas" placeholder="Ej: clinicasonrisa.com, sonrisabogota.com">
+    </div>
+    <div class="cond" id="dom-si">
+      <label class="q">¿Cuál es su dominio actual?</label>
+      <input type="text" name="dominio_actual" placeholder="suclinica.com">
+    </div>
+    <div class="err-msg" id="e-s3"></div>
+    <div class="nav"><button type="button" class="btn btn-ghost" onclick="back()">Atrás</button><button type="button" class="btn btn-primary" onclick="next()">Continuar</button></div>
+  </section>
+
+  <!-- ░░ PASO 4 — Facturación ░░ -->
+  <section class="step" id="s4">
+    <h1>Facturación</h1>
+    <p class="lead">Solo para registrar el dominio a su nombre y emitir su factura. No lo usamos para nada más.</p>
+    <label class="q">Titular (nombre completo o razón social)</label>
+    <input type="text" name="fact_titular" placeholder="Ej: Clínica Dental Sonrisa S.A.S. o Dr. Nombre Apellido">
+    <div class="row" style="margin-top:14px">
+      <div>
+        <label class="q">Tipo de identificación</label>
+        <div class="choices" data-radio="id_tipo" style="gap:8px">
+          <label class="choice" style="padding:12px 14px"><input type="radio" name="id_tipo" value="CC"><span class="dot"></span><span class="c-body"><strong>Cédula (CC)</strong></span></label>
+          <label class="choice" style="padding:12px 14px"><input type="radio" name="id_tipo" value="NIT"><span class="dot"></span><span class="c-body"><strong>NIT</strong></span></label>
+          <label class="choice" style="padding:12px 14px"><input type="radio" name="id_tipo" value="CE"><span class="dot"></span><span class="c-body"><strong>Cédula de extranjería (CE)</strong></span></label>
+        </div>
+      </div>
+      <div><label class="q">Número de identificación</label><input type="text" name="id_numero" placeholder="Sin puntos ni guiones"></div>
+    </div>
+    <div class="err-msg" id="e-s4"></div>
+    <div class="nav"><button type="button" class="btn btn-ghost" onclick="back()">Atrás</button><button type="button" class="btn btn-primary" onclick="next()">Continuar</button></div>
+  </section>
+
+  <!-- ░░ PASO 5 — Fotos + extras (opcional) ░░ -->
+  <section class="step" id="s5">
+    <h1>Fotos y extras <span style="font-size:17px;color:var(--dim);font-weight:500">· opcional</span></h1>
+    <p class="lead">Si no sube nada, sacamos todo de su web. Si quiere mejores fotos o tiene su logo en alta, súbalos aquí — sin límite y en su calidad original.</p>
+
+    <label class="q">Su logo en alta calidad <span class="opt">(si lo tiene)</span></label>
+    <div class="drop" onclick="document.getElementById('f-logo').click()">
+      <div class="di">Subir logo</div><div class="ds">SVG, PNG o PDF</div>
+      <input type="file" id="f-logo" accept="image/*,.pdf,.svg">
+    </div>
+    <div class="files" id="files-logo"></div>
+
+    <label class="q" style="margin-top:24px">Fotos de su clínica, equipo o trabajos <span class="opt">(hasta 40, opcional)</span></label>
+    <div class="drop" onclick="document.getElementById('f-fotos').click()">
+      <div class="di">Subir fotos</div><div class="ds">Hasta 40 · se guardan en calidad original</div>
+      <input type="file" id="f-fotos" accept="image/*" multiple>
+    </div>
+    <div class="files" id="files-fotos"></div>
+
+    <label class="q" style="margin-top:24px">¿Algo que quiera cambiar, destacar o agregar? <span class="opt">(opcional)</span></label>
+    <textarea name="cambios" placeholder="Ej: Destacar Invisalign. Cambiar el eslogan. Sin cambios, solo modernícenla."></textarea>
+
+    <div class="err-msg" id="e-s5"></div>
+    <div class="nav">
+      <button type="button" class="btn btn-ghost" onclick="back()">Atrás</button>
+      <button type="button" class="btn btn-primary" id="btn-submit" onclick="submitForm()">Enviar</button>
+      <button type="button" class="btn-skip" onclick="submitForm()">Saltar y enviar</button>
+    </div>
+  </section>
+
+  <!-- ░░ PASO 6 — Gracias ░░ -->
+  <section class="step" id="s6">
+    <div class="ty">
+      <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg></div>
+      <h1>Recibido. Su web está en camino.</h1>
+      <p>En 48 horas le escribimos por WhatsApp con el enlace de su nueva web para que la revise. Tiene 2 rondas de ajustes incluidas. Cuando usted diga "publíquela", queda activa.</p>
+    </div>
+  </section>
+
+  </form>
+  <div class="footer">Hecho por <a href="https://prontoweb.co" target="_blank">Pronto</a> · prontoweb.co</div>
+</div>
+
+<script>
+  // ===== CONFIG =====
+  const ENDPOINT = "https://pronto-forms-worker.cesargomezs711.workers.dev/onboarding";
+
+  let current = 's1';
+  const stack = [];
+  let path = null; // 'A'(s2a) | 'B'(s2b)
+  const logoFiles = []; const fotoFiles = [];
+
+  // ---- choice / check visual selection ----
+  document.querySelectorAll('.choice').forEach(c=>{
+    c.addEventListener('click', ()=>{
+      const name = c.querySelector('input').name;
+      document.querySelectorAll('input[name="'+name+'"]').forEach(i=>i.closest('.choice').classList.remove('sel'));
+      c.classList.add('sel');
+      c.querySelector('input').checked = true;
+      if(name==='dominio_tiene') toggleDominio(c.querySelector('input').value);
+    });
+  });
+  document.querySelectorAll('.check').forEach(c=>{
+    c.addEventListener('click',(e)=>{ if(e.target.tagName!=='A'){ const i=c.querySelector('input'); i.checked=!i.checked; c.classList.toggle('sel', i.checked);} });
+  });
+  function toggleDominio(v){
+    document.getElementById('dom-no').classList.toggle('show', v==='no');
+    document.getElementById('dom-si').classList.toggle('show', v==='si');
+  }
+
+  // ---- file handling ----
+  document.getElementById('f-logo').addEventListener('change', e=>addFiles(e.target.files, logoFiles, 'files-logo', false));
+  document.getElementById('f-fotos').addEventListener('change', e=>addFiles(e.target.files, fotoFiles, 'files-fotos', true, 40));
+  function addFiles(list, store, containerId, multi, max){
+    if(!multi) store.length=0;
+    for(const f of list) store.push(f);
+    if(max && store.length>max){ store.length=max; var em=document.getElementById('e-s5'); if(em) em.textContent='Máximo '+max+' fotos — guardamos las primeras '+max+'. El resto lo sacamos de su web o lo manda luego.'; }
+    renderFiles(store, containerId);
+  }
+  function renderFiles(store, containerId){
+    const c=document.getElementById(containerId); c.innerHTML='';
+    store.forEach((f,idx)=>{
+      const el=document.createElement('span'); el.className='file-chip';
+      el.innerHTML='<span class="nm">'+f.name+'</span><span class="x">✕</span>';
+      el.querySelector('.x').onclick=()=>{ store.splice(idx,1); renderFiles(store,containerId); };
+      c.appendChild(el);
+    });
+  }
+
+  // ---- navigation ----
+  function show(id){
+    document.querySelectorAll('.step').forEach(s=>s.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    current=id; updateProgress(); window.scrollTo({top:0,behavior:'smooth'});
+  }
+  function val(name){ const el=document.querySelector('[name="'+name+'"]'); return el?el.value.trim():''; }
+  function radio(name){ const el=document.querySelector('input[name="'+name+'"]:checked'); return el?el.value:''; }
+
+  function validate(id){
+    const e=document.getElementById('e-'+id); if(e) e.textContent='';
+    function fail(msg){ if(e) e.textContent=msg; return false; }
+    if(id==='s1'){
+      if(!document.querySelector('[name=consent_ley]').checked || !document.querySelector('[name=consent_uso]').checked) return fail('Marque los dos permisos para continuar.');
+      if(!radio('presencia')) return fail('Elija una opción.');
+    }
+    if(id==='s2a'){ if(!radio('modo')) return fail('Elija cómo lo hacemos.'); }
+    if(id==='s2b'){
+      if(!val('clinica_nombre')||!val('clinica_direccion')||!val('clinica_horarios')||!val('clinica_servicios')||!val('clinica_equipo')) return fail('Complete los campos para poder armar su web.');
+    }
+    if(id==='s3'){
+      if(!val('wa_publico')||!val('wa_recepcion')) return fail('Necesitamos los dos WhatsApp.');
+      if(!val('email_reportes')||!/.+@.+\..+/.test(val('email_reportes'))) return fail('Escriba un correo válido para los reportes.');
+      if(!radio('precios')) return fail('Elija si muestra precios.');
+      if(!radio('dominio')&&!radio('dominio_tiene')) return fail('Indique si ya tiene dominio.');
+      if(radio('dominio_tiene')==='si' && !val('dominio_actual')) return fail('Escriba su dominio actual.');
+    }
+    if(id==='s4'){
+      if(!val('fact_titular')) return fail('Escriba el titular.');
+      if(!radio('id_tipo')||!val('id_numero')) return fail('Complete tipo y número de identificación.');
+    }
+    return true;
+  }
+
+  function computeNext(id){
+    if(id==='s1'){ path = radio('presencia')==='si' ? 'A':'B'; return path==='A'?'s2a':'s2b'; }
+    if(id==='s2a'||id==='s2b') return 's3';
+    if(id==='s3') return 's4';
+    if(id==='s4') return 's5';
+    return null;
+  }
+  function next(){
+    if(!validate(current)) return;
+    const n=computeNext(current);
+    if(n){ stack.push(current); show(n); }
+  }
+  function back(){ if(stack.length) show(stack.pop()); }
+
+  function updateProgress(){
+    const order=['s1', path==='B'?'s2b':'s2a','s3','s4','s5'];
+    let i=order.indexOf(current);
+    if(current==='s6') i=5;
+    if(i<0) i=0;
+    document.getElementById('pbar').style.width=((i)/(order.length-1)*100)+'%';
+    const sc=document.getElementById('stepcount');
+    sc.textContent = current==='s6' ? '¡Listo!' : ('Paso '+(i+1)+' de '+order.length);
+  }
+
+  // ---- submit ----
+  async function submitForm(){
+    if(!validate('s3')) { show('s3'); return; } // re-safety (essentials)
+    const btn=document.getElementById('btn-submit'); btn.disabled=true; btn.textContent='Enviando…';
+    const fd=new FormData();
+    // text fields
+    document.querySelectorAll('#form input[type=text], #form input[type=email], #form input[type=tel], #form textarea').forEach(el=>{ if(el.name) fd.append(el.name, el.value.trim()); });
+    // radios + consents
+    ['presencia','modo','precios','dominio_tiene','id_tipo'].forEach(n=>fd.append(n, radio(n)));
+    fd.append('consent_ley', document.querySelector('[name=consent_ley]').checked);
+    fd.append('consent_uso', document.querySelector('[name=consent_uso]').checked);
+    fd.append('path', path||'');
+    fd.append('submitted_at', new Date().toISOString());
+    // files
+    logoFiles.forEach(f=>fd.append('logo', f, f.name));
+    fotoFiles.forEach(f=>fd.append('fotos', f, f.name));
+    try{
+      const r=await fetch(ENDPOINT, {method:'POST', body:fd});
+      if(!r.ok) throw new Error('status '+r.status);
+      stack.push(current); show('s6');
+    }catch(err){
+      btn.disabled=false; btn.textContent='Enviar';
+      document.getElementById('e-s5').textContent='No se pudo enviar. Revise su internet e intente de nuevo. (Si sigue, escríbanos por WhatsApp.)';
+    }
+  }
+
+  updateProgress();
+</script>
+</body>
+</html>
