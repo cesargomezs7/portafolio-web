@@ -119,9 +119,25 @@
 
   function esc(s){ return String(s==null?'':s).replace(/[<>&"']/g,c=>({'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;',"'":'&#39;'}[c])); }
   function fmtDate(iso){ if(!iso) return '—'; var d=new Date(iso); if(isNaN(d.getTime())) return esc(iso); return d.toLocaleDateString('es-CO',{day:'2-digit',month:'short',year:'numeric'})+' · '+d.toLocaleTimeString('es-CO',{hour:'2-digit',minute:'2-digit'}); }
-  function fileUrl(key){ return WORKER+'/onboarding/file/'+encodeURIComponent(key)+'?token='+encodeURIComponent(token); }
-  // si una imagen no carga (PDF/SVG forzado a descarga, red caída, objeto borrado), la cambia por un link de descarga (nombre escapado vía textNode, sin XSS)
-  function imgFail(img){ var a=img.parentNode; var n=img.getAttribute('data-name')||'archivo'; img.remove(); a.classList.add('filelink'); a.appendChild(document.createTextNode('⬇ '+n)); }
+  // Archivos: se cargan con fetch + header (el token NUNCA viaja en la URL) y se muestran vía blob local
+  let blobUrls = [];
+  function revokeBlobs(){ blobUrls.forEach(u=>{ try{ URL.revokeObjectURL(u); }catch(e){} }); blobUrls=[]; }
+  async function fetchBlob(key){
+    const r = await fetch(WORKER+'/onboarding/file/'+encodeURIComponent(key), { headers:{ 'X-Panel-Token': token } });
+    if(!r.ok) throw new Error('file '+r.status);
+    const url = URL.createObjectURL(await r.blob()); blobUrls.push(url); return url;
+  }
+  async function loadImg(img){
+    try{ const url = await fetchBlob(img.getAttribute('data-r2key')); img.src=url; const a=img.closest('a'); if(a) a.href=url; }
+    catch(e){ imgFail(img); }
+  }
+  async function openFile(btn){
+    try{ const url = await fetchBlob(btn.getAttribute('data-r2key')); window.open(url,'_blank'); }
+    catch(e){ alert('No se pudo abrir el archivo.'); }
+  }
+  function loadDetailImages(){ document.querySelectorAll('#detailBody img[data-r2key]').forEach(loadImg); }
+  // si una imagen no carga, la cambia por un link de descarga (nombre como textNode, sin XSS)
+  function imgFail(img){ var a=img.parentNode; var n=img.getAttribute('data-name')||'archivo'; img.remove(); if(a){ a.classList.add('filelink'); a.appendChild(document.createTextNode('⬇ '+n)); } }
 
   async function api(path){
     const r = await fetch(WORKER+path, { headers:{ 'X-Panel-Token': token } });
@@ -150,7 +166,7 @@
     document.getElementById('app').classList.remove('hidden');
     showList(); renderList();
   }
-  function showList(){ document.getElementById('listView').classList.remove('hidden'); document.getElementById('detailView').classList.add('hidden'); window.scrollTo(0,0); }
+  function showList(){ revokeBlobs(); document.getElementById('listView').classList.remove('hidden'); document.getElementById('detailView').classList.add('hidden'); window.scrollTo(0,0); }
 
   function renderList(){
     const q = (document.getElementById('search').value||'').toLowerCase();
@@ -179,10 +195,12 @@
   async function openDetail(id){
     try{
       const d = await api('/onboarding/'+id);
+      revokeBlobs();
       renderDetail(d.item);
       document.getElementById('listView').classList.add('hidden');
       document.getElementById('detailView').classList.remove('hidden');
       window.scrollTo(0,0);
+      loadDetailImages();
     }catch(e){ if(e&&e.auth){ alert('Tu sesión expiró. Vuelve a entrar.'); logout(); } else { alert('No se pudo abrir el cliente. Revisa tu conexión e inténtalo de nuevo.'); } }
   }
 
@@ -224,14 +242,14 @@
     if(logos.length){
       var lg=logos[0], lct=(lg.content_type||''), lren=lct.indexOf('image/')===0 && lct.indexOf('svg')<0;
       var lhtml = lren
-        ? '<div class="logo-box"><a href="'+esc(fileUrl(lg.r2_key))+'" target="_blank"><img src="'+esc(fileUrl(lg.r2_key))+'" alt="logo" data-name="'+esc(lg.original_name||'logo')+'" onerror="imgFail(this)"></a></div>'
-        : '<a href="'+esc(fileUrl(lg.r2_key))+'" target="_blank" class="filelink">⬇ Ver / descargar logo ('+esc(lg.original_name||'archivo')+')</a>';
+        ? '<div class="logo-box"><a target="_blank"><img alt="logo" data-r2key="'+esc(lg.r2_key)+'" data-name="'+esc(lg.original_name||'logo')+'"></a></div>'
+        : '<button type="button" class="filelink" data-r2key="'+esc(lg.r2_key)+'" onclick="openFile(this)">⬇ Ver / descargar logo ('+esc(lg.original_name||'archivo')+')</button>';
       html += '<div class="section"><h3>Logo</h3>'+lhtml+'</div>';
     }
     // Fotos
     if(fotos.length){
       html += '<div class="section"><h3>Fotos ('+fotos.length+')</h3><div class="gallery">'+
-        fotos.map(f=>'<a href="'+esc(fileUrl(f.r2_key))+'" target="_blank"><img src="'+esc(fileUrl(f.r2_key))+'" alt="foto" loading="lazy" data-name="'+esc(f.original_name||'foto')+'" onerror="imgFail(this)"></a>').join('')+'</div></div>';
+        fotos.map(f=>'<a target="_blank"><img alt="foto" data-r2key="'+esc(f.r2_key)+'" data-name="'+esc(f.original_name||'foto')+'"></a>').join('')+'</div></div>';
     } else {
       html += '<div class="section"><h3>Fotos</h3><div class="note">Sin fotos subidas (se sacan de su web), o R2 aún no estaba activo cuando llenó el formulario.</div></div>';
     }

@@ -81,6 +81,7 @@
   .drop .di{font-size:15px; font-weight:600;}
   .drop .ds{font-size:13px; color:var(--dim); margin-top:4px;}
   .drop input{display:none;}
+  .choice:focus-visible, .check:focus-visible, .drop:focus-visible, .btn:focus-visible, .btn-ghost:focus-visible, .btn-skip:focus-visible{ outline:2px solid var(--cyan); outline-offset:2px; }
   .files{display:flex; flex-wrap:wrap; gap:8px; margin-top:12px;}
   .file-chip{display:flex; align-items:center; gap:8px; background:var(--panel-2); border:1px solid var(--border); border-radius:999px; padding:7px 12px; font-size:12.5px; color:var(--muted); max-width:100%;}
   .file-chip .nm{overflow:hidden; text-overflow:ellipsis; white-space:nowrap; max-width:170px;}
@@ -141,7 +142,7 @@
       <label class="choice"><input type="radio" name="presencia" value="si"><span class="dot"></span><span class="c-body"><strong>Sí, tengo al menos uno</strong><span>Sacamos todo de ahí — usted casi no llena nada</span></span></label>
       <label class="choice"><input type="radio" name="presencia" value="no"><span class="dot"></span><span class="c-body"><strong>No, casi nada</strong><span>No hay problema, lo armamos con lo que nos cuente</span></span></label>
     </div>
-    <div class="err-msg" id="e-s1"></div>
+    <div class="err-msg" role="alert" aria-live="polite" id="e-s1"></div>
     <div class="nav"><button type="button" class="btn btn-primary" onclick="next()">Continuar</button></div>
   </section>
 
@@ -163,7 +164,7 @@
       <label class="choice"><input type="radio" name="modo" value="todo"><span class="dot"></span><span class="c-body"><strong>Saquen TODO de mis links y mejórenlo</strong><span>No quiero llenar nada más. Lo reviso cuando me la entreguen.</span></span></label>
       <label class="choice"><input type="radio" name="modo" value="cambiar"><span class="dot"></span><span class="c-body"><strong>Saquen lo de mis links, pero quiero cambiar o agregar cosas</strong><span>Más adelante le dejo subir fotos y decirnos qué cambiar</span></span></label>
     </div>
-    <div class="err-msg" id="e-s2a"></div>
+    <div class="err-msg" role="alert" aria-live="polite" id="e-s2a"></div>
     <div class="nav"><button type="button" class="btn btn-ghost" onclick="back()">Atrás</button><button type="button" class="btn btn-primary" onclick="next()">Continuar</button></div>
   </section>
 
@@ -181,7 +182,7 @@
     <textarea name="clinica_servicios" placeholder="Ej: ortodoncia, implantes, blanqueamiento, diseño de sonrisa, odontología general..."></textarea>
     <label class="q">Doctor(es): nombre y especialidad</label>
     <textarea name="clinica_equipo" placeholder="Ej: Dra. Ana Pérez — Ortodoncista. Dr. Luis Gómez — Implantólogo."></textarea>
-    <div class="err-msg" id="e-s2b"></div>
+    <div class="err-msg" role="alert" aria-live="polite" id="e-s2b"></div>
     <div class="nav"><button type="button" class="btn btn-ghost" onclick="back()">Atrás</button><button type="button" class="btn btn-primary" onclick="next()">Continuar</button></div>
   </section>
 
@@ -216,7 +217,7 @@
       <label class="q">¿Cuál es su dominio actual?</label>
       <input type="text" name="dominio_actual" placeholder="suclinica.com">
     </div>
-    <div class="err-msg" id="e-s3"></div>
+    <div class="err-msg" role="alert" aria-live="polite" id="e-s3"></div>
     <div class="nav"><button type="button" class="btn btn-ghost" onclick="back()">Atrás</button><button type="button" class="btn btn-primary" onclick="next()">Continuar</button></div>
   </section>
 
@@ -237,7 +238,7 @@
       </div>
       <div><label class="q">Número de identificación</label><input type="text" name="id_numero" placeholder="Sin puntos ni guiones"></div>
     </div>
-    <div class="err-msg" id="e-s4"></div>
+    <div class="err-msg" role="alert" aria-live="polite" id="e-s4"></div>
     <div class="nav"><button type="button" class="btn btn-ghost" onclick="back()">Atrás</button><button type="button" class="btn btn-primary" onclick="next()">Continuar</button></div>
   </section>
 
@@ -263,7 +264,7 @@
     <label class="q" style="margin-top:24px">¿Algo que quiera cambiar, destacar o agregar? <span class="opt">(opcional)</span></label>
     <textarea name="cambios" placeholder="Ej: Destacar Invisalign. Cambiar el eslogan. Sin cambios, solo modernícenla."></textarea>
 
-    <div class="err-msg" id="e-s5"></div>
+    <div class="err-msg" role="alert" aria-live="polite" id="e-s5"></div>
     <div class="nav">
       <button type="button" class="btn btn-ghost" onclick="back()">Atrás</button>
       <button type="button" class="btn btn-primary" id="btn-submit" onclick="submitForm()">Enviar</button>
@@ -307,6 +308,20 @@
   document.querySelectorAll('.check').forEach(c=>{
     const i=c.querySelector('input');
     i.addEventListener('change',()=>c.classList.toggle('sel', i.checked));
+  });
+  // ---- accesibilidad: teclado en zonas de subida + asociar cada label con su campo ----
+  document.querySelectorAll('.drop').forEach(d=>{
+    d.setAttribute('tabindex','0'); d.setAttribute('role','button');
+    d.addEventListener('keydown', e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); d.click(); } });
+  });
+  document.querySelectorAll('label.q').forEach((lb,i)=>{
+    let n=lb.nextElementSibling, ctl=null, hops=0;
+    while(n && hops<3 && !ctl){
+      if(n.matches && n.matches('input:not([type=radio]):not([type=checkbox]),textarea,select')) ctl=n;
+      else if(n.querySelector) ctl=n.querySelector('input:not([type=radio]):not([type=checkbox]),textarea,select');
+      n=n.nextElementSibling; hops++;
+    }
+    if(ctl && !ctl.id){ ctl.id='q_'+i; lb.setAttribute('for', ctl.id); }
   });
   function toggleDominio(v){
     document.getElementById('dom-no').classList.toggle('show', v==='no');
