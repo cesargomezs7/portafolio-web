@@ -128,8 +128,8 @@
   .hero h1, section h2, .cta-final h2 { font-family: var(--font-heading); font-weight: 700; line-height: 1.1; letter-spacing: -0.02em; }
   h1 { font-size: clamp(2.0rem, 4.5vw, 3.2rem); }
   h2 { font-size: clamp(1.6rem, 3.5vw, 2.4rem); margin-bottom: 24px; }
-  /* Escala global de la landing (equivale a un zoom-out uniforme). Ajustar este número para más/menos pequeño. */
-  body { zoom: 0.82; }
+  /* Escala compacta SOLO en desktop; en móvil queda al 100% para que se lea bien. Ajustar el número para más/menos pequeño. */
+  @media (min-width: 768px) { body { zoom: 0.82; } }
   h3 { font-size: 1.25rem; margin-bottom: 12px; }
 
   .brand-gradient {
