@@ -65,6 +65,8 @@
   .gallery img{width:100%; height:100%; object-fit:cover;}
   .logo-box{display:inline-block; max-width:200px; background:#fff; border-radius:12px; padding:14px;}
   .logo-box img{max-width:100%; display:block;}
+  .filelink{display:inline-block; padding:9px 14px; color:#0891b2; background:rgba(34,211,238,0.12); border:1px solid var(--border); border-radius:8px; font-size:13px; text-decoration:none; font-weight:600;}
+  .filelink:hover{background:rgba(34,211,238,0.2);}
   .note{color:var(--dim); font-size:13px; margin-top:8px;}
   .hidden{display:none;}
   @media(max-width:560px){ .field{grid-template-columns:1fr; gap:2px;} .det-head h1{font-size:23px;} }
@@ -115,9 +117,11 @@
   let token = localStorage.getItem('pronto_panel_token') || '';
   let items = [];
 
-  function esc(s){ return String(s==null?'':s).replace(/[<>&]/g,c=>({'<':'&lt;','>':'&gt;','&':'&amp;'}[c])); }
-  function fmtDate(iso){ try{ var d=new Date(iso); return d.toLocaleDateString('es-CO',{day:'2-digit',month:'short',year:'numeric'})+' · '+d.toLocaleTimeString('es-CO',{hour:'2-digit',minute:'2-digit'}); }catch(e){ return iso||''; } }
+  function esc(s){ return String(s==null?'':s).replace(/[<>&"']/g,c=>({'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;',"'":'&#39;'}[c])); }
+  function fmtDate(iso){ if(!iso) return '—'; var d=new Date(iso); if(isNaN(d.getTime())) return esc(iso); return d.toLocaleDateString('es-CO',{day:'2-digit',month:'short',year:'numeric'})+' · '+d.toLocaleTimeString('es-CO',{hour:'2-digit',minute:'2-digit'}); }
   function fileUrl(key){ return WORKER+'/onboarding/file/'+encodeURIComponent(key)+'?token='+encodeURIComponent(token); }
+  // si una imagen no carga (PDF/SVG forzado a descarga, red caída, objeto borrado), la cambia por un link de descarga (nombre escapado vía textNode, sin XSS)
+  function imgFail(img){ var a=img.parentNode; var n=img.getAttribute('data-name')||'archivo'; img.remove(); a.classList.add('filelink'); a.appendChild(document.createTextNode('⬇ '+n)); }
 
   async function api(path){
     const r = await fetch(WORKER+path, { headers:{ 'X-Panel-Token': token } });
@@ -152,7 +156,10 @@
     const q = (document.getElementById('search').value||'').toLowerCase();
     const list = items.filter(it => !q || (it.clinica_nombre||'').toLowerCase().includes(q) || (it.email_reportes||'').toLowerCase().includes(q) || (it.web_url||'').toLowerCase().includes(q));
     document.getElementById('count').textContent = list.length + (list.length===1?' cliente':' clientes');
-    document.getElementById('empty').classList.toggle('hidden', items.length>0);
+    const raw=(document.getElementById('search').value||'').trim();
+    const empty=document.getElementById('empty');
+    empty.textContent = items.length===0 ? 'Aún no hay envíos. Cuando un cliente llene el formulario, aparece aquí.' : ('Sin resultados para "'+raw+'".');
+    empty.classList.toggle('hidden', list.length>0);
     const c = document.getElementById('cards'); c.innerHTML='';
     list.forEach(it=>{
       const el=document.createElement('div'); el.className='card'; el.onclick=()=>openDetail(it.id);
@@ -176,7 +183,7 @@
       document.getElementById('listView').classList.add('hidden');
       document.getElementById('detailView').classList.remove('hidden');
       window.scrollTo(0,0);
-    }catch(e){ alert('No se pudo abrir el cliente.'); }
+    }catch(e){ if(e&&e.auth){ alert('Tu sesión expiró. Vuelve a entrar.'); logout(); } else { alert('No se pudo abrir el cliente. Revisa tu conexión e inténtalo de nuevo.'); } }
   }
 
   function field(k,v){ if(!v) return ''; return '<div class="field"><div class="k">'+esc(k)+'</div><div class="v">'+esc(v)+'</div></div>'; }
@@ -208,26 +215,30 @@
     html += '<div class="section"><h3>Esenciales</h3>'+
       field('WhatsApp público', it.wa_publico)+field('WhatsApp recepción', it.wa_recepcion)+field('Correo reportes', it.email_reportes)+
       field('¿Mostrar precios?', it.precios)+field('Dominio', dominio)+'</div>';
-    // Facturación
-    html += '<div class="section"><h3>Facturación</h3>'+
-      field('Titular', it.fact_titular)+field('Identificación', (it.id_tipo?it.id_tipo+' ':'')+(it.id_numero||''))+'</div>';
+    // Facturación (solo si hay datos)
+    var fact = field('Titular', it.fact_titular)+field('Identificación', (it.id_tipo?it.id_tipo+' ':'')+(it.id_numero||''));
+    if(fact.trim()) html += '<div class="section"><h3>Facturación</h3>'+fact+'</div>';
     // Cambios
     if(it.cambios) html += '<div class="section"><h3>Quiere cambiar / agregar</h3><div class="v" style="font-size:14.5px">'+esc(it.cambios)+'</div></div>';
     // Logo
     if(logos.length){
-      html += '<div class="section"><h3>Logo</h3><div class="logo-box"><img src="'+fileUrl(logos[0].r2_key)+'" alt="logo"></div></div>';
+      var lg=logos[0], lct=(lg.content_type||''), lren=lct.indexOf('image/')===0 && lct.indexOf('svg')<0;
+      var lhtml = lren
+        ? '<div class="logo-box"><a href="'+esc(fileUrl(lg.r2_key))+'" target="_blank"><img src="'+esc(fileUrl(lg.r2_key))+'" alt="logo" data-name="'+esc(lg.original_name||'logo')+'" onerror="imgFail(this)"></a></div>'
+        : '<a href="'+esc(fileUrl(lg.r2_key))+'" target="_blank" class="filelink">⬇ Ver / descargar logo ('+esc(lg.original_name||'archivo')+')</a>';
+      html += '<div class="section"><h3>Logo</h3>'+lhtml+'</div>';
     }
     // Fotos
     if(fotos.length){
       html += '<div class="section"><h3>Fotos ('+fotos.length+')</h3><div class="gallery">'+
-        fotos.map(f=>'<a href="'+fileUrl(f.r2_key)+'" target="_blank"><img src="'+fileUrl(f.r2_key)+'" alt="foto" loading="lazy"></a>').join('')+'</div></div>';
+        fotos.map(f=>'<a href="'+esc(fileUrl(f.r2_key))+'" target="_blank"><img src="'+esc(fileUrl(f.r2_key))+'" alt="foto" loading="lazy" data-name="'+esc(f.original_name||'foto')+'" onerror="imgFail(this)"></a>').join('')+'</div></div>';
     } else {
       html += '<div class="section"><h3>Fotos</h3><div class="note">Sin fotos subidas (se sacan de su web), o R2 aún no estaba activo cuando llenó el formulario.</div></div>';
     }
     // Consentimiento
     html += '<div class="section"><h3>Consentimiento (Ley 1581)</h3>'+
       field('Datos personales', it.consent_ley? 'Aceptado':'—')+field('Uso de contenido', it.consent_uso?'Aceptado':'—')+
-      field('IP', it.consent_ip)+field('Fecha servidor', it.created_at)+'</div>';
+      field('IP', it.consent_ip||'—')+field('Fecha servidor', fmtDate(it.created_at))+'</div>';
 
     document.getElementById('detailBody').innerHTML = html;
   }

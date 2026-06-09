@@ -68,7 +68,7 @@
     border-radius:12px; cursor:pointer; background:var(--panel); transition:all .2s; margin-bottom:12px;}
   .check:hover{border-color:var(--border-2);}
   .check.sel{border-color:var(--cyan); background:rgba(34,211,238,0.06);}
-  .check input{position:absolute; opacity:0;}
+  .check input{position:absolute; opacity:0; pointer-events:none;}
   .check .box{flex:none; width:22px; height:22px; border-radius:6px; border:2px solid var(--dim); display:flex; align-items:center; justify-content:center; margin-top:1px; transition:all .2s;}
   .check.sel .box{border-color:transparent; background:var(--grad);}
   .check .box svg{width:13px; height:13px; opacity:0; transition:opacity .15s; color:#06121a;}
@@ -244,7 +244,7 @@
   <!-- ░░ PASO 5 — Fotos + extras (opcional) ░░ -->
   <section class="step" id="s5">
     <h1>Fotos y extras <span style="font-size:17px;color:var(--dim);font-weight:500">· opcional</span></h1>
-    <p class="lead">Si no sube nada, sacamos todo de su web. Si quiere mejores fotos o tiene su logo en alta, súbalos aquí — sin límite y en su calidad original.</p>
+    <p class="lead">Si no sube nada, sacamos todo de su web. Si quiere mejores fotos o tiene su logo en alta, súbalos aquí — en buena calidad, máximo 25MB por archivo.</p>
 
     <label class="q">Su logo en alta calidad <span class="opt">(si lo tiene)</span></label>
     <div class="drop" onclick="document.getElementById('f-logo').click()">
@@ -255,7 +255,7 @@
 
     <label class="q" style="margin-top:24px">Fotos de su clínica, equipo o trabajos <span class="opt">(hasta 40, opcional)</span></label>
     <div class="drop" onclick="document.getElementById('f-fotos').click()">
-      <div class="di">Subir fotos</div><div class="ds">Hasta 40 · se guardan en calidad original</div>
+      <div class="di">Subir fotos</div><div class="ds">Hasta 40 · imagen o PDF, máx 25MB c/u</div>
       <input type="file" id="f-fotos" accept="image/*" multiple>
     </div>
     <div class="files" id="files-fotos"></div>
@@ -289,6 +289,7 @@
   const ENDPOINT = "https://pronto-forms-worker.cesargomezs711.workers.dev/onboarding";
 
   let current = 's1';
+  let sending = false;
   const stack = [];
   let path = null; // 'A'(s2a) | 'B'(s2b)
   const logoFiles = []; const fotoFiles = [];
@@ -304,7 +305,8 @@
     });
   });
   document.querySelectorAll('.check').forEach(c=>{
-    c.addEventListener('click',(e)=>{ if(e.target.tagName!=='A'){ const i=c.querySelector('input'); i.checked=!i.checked; c.classList.toggle('sel', i.checked);} });
+    const i=c.querySelector('input');
+    i.addEventListener('change',()=>c.classList.toggle('sel', i.checked));
   });
   function toggleDominio(v){
     document.getElementById('dom-no').classList.toggle('show', v==='no');
@@ -316,17 +318,30 @@
   document.getElementById('f-fotos').addEventListener('change', e=>addFiles(e.target.files, fotoFiles, 'files-fotos', true, 40));
   function addFiles(list, store, containerId, multi, max){
     if(!multi) store.length=0;
-    for(const f of list) store.push(f);
-    if(max && store.length>max){ store.length=max; var em=document.getElementById('e-s5'); if(em) em.textContent='Máximo '+max+' fotos — guardamos las primeras '+max+'. El resto lo sacamos de su web o lo manda luego.'; }
+    var rejected=[];
+    for(const f of list){
+      var okType = /^image\//.test(f.type) || f.type==='application/pdf' || (f.type==='' && /\.(jpe?g|png|webp|gif|svg|heic|heif|pdf)$/i.test(f.name));
+      var okSize = f.size <= 25*1024*1024;
+      if(!okType || !okSize){ rejected.push(f.name+(!okSize?' (mayor a 25MB)':' (formato no válido)')); continue; }
+      store.push(f);
+    }
+    if(max && store.length>max) store.length=max;
+    var em=document.getElementById('e-s5');
+    if(em){
+      if(rejected.length) em.textContent=rejected.join(', ')+' — use imagen o PDF de máximo 25MB. El resto lo sacamos de su web o lo manda luego.';
+      else if(max && store.length>=max) em.textContent='Máximo '+max+' fotos — guardamos las primeras '+max+'.';
+      else em.textContent='';
+    }
     renderFiles(store, containerId);
   }
   function renderFiles(store, containerId){
     const c=document.getElementById(containerId); c.innerHTML='';
     store.forEach((f,idx)=>{
       const el=document.createElement('span'); el.className='file-chip';
-      el.innerHTML='<span class="nm">'+f.name+'</span><span class="x">✕</span>';
-      el.querySelector('.x').onclick=()=>{ store.splice(idx,1); renderFiles(store,containerId); };
-      c.appendChild(el);
+      const nm=document.createElement('span'); nm.className='nm'; nm.textContent=f.name;
+      const x=document.createElement('span'); x.className='x'; x.textContent='✕';
+      x.onclick=()=>{ store.splice(idx,1); renderFiles(store,containerId); };
+      el.appendChild(nm); el.appendChild(x); c.appendChild(el);
     });
   }
 
@@ -391,10 +406,21 @@
   // ---- submit ----
   async function submitForm(){
     if(!validate('s3')) { show('s3'); return; } // re-safety (essentials)
-    const btn=document.getElementById('btn-submit'); btn.disabled=true; btn.textContent='Enviando…';
+    if(sending) return;                          // candado anti doble-envío (cubre "Enviar" y "Saltar y enviar")
+    sending=true;
+    const navBtns=document.querySelectorAll('#s5 .nav button, #s5 .btn-skip');
+    navBtns.forEach(b=>b.disabled=true);
+    const btn=document.getElementById('btn-submit'); btn.textContent='Enviando…';
     const fd=new FormData();
-    // text fields
-    document.querySelectorAll('#form input[type=text], #form input[type=email], #form input[type=tel], #form textarea').forEach(el=>{ if(el.name) fd.append(el.name, el.value.trim()); });
+    // text fields — excluir la sección del camino NO elegido para no mandar datos viejos (path A vs B)
+    const skipSection = path==='B' ? 's2a' : (path==='A' ? 's2b' : null);
+    document.querySelectorAll('#form input[type=text], #form input[type=email], #form input[type=tel], #form textarea').forEach(el=>{
+      if(!el.name) return;
+      if(skipSection && el.closest('#'+skipSection)) return;
+      if(el.name==='dominio_ideas' && radio('dominio_tiene')!=='no') return;
+      if(el.name==='dominio_actual' && radio('dominio_tiene')!=='si') return;
+      fd.append(el.name, el.value.trim());
+    });
     // radios + consents
     ['presencia','modo','precios','dominio_tiene','id_tipo'].forEach(n=>fd.append(n, radio(n)));
     fd.append('consent_ley', document.querySelector('[name=consent_ley]').checked);
@@ -409,7 +435,9 @@
       if(!r.ok) throw new Error('status '+r.status);
       stack.push(current); show('s6');
     }catch(err){
-      btn.disabled=false; btn.textContent='Enviar';
+      sending=false;
+      navBtns.forEach(b=>b.disabled=false);
+      btn.textContent='Enviar';
       document.getElementById('e-s5').textContent='No se pudo enviar. Revise su internet e intente de nuevo. (Si sigue, escríbanos por WhatsApp.)';
     }
   }
