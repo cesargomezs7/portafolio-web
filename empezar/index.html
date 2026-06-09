@@ -137,10 +137,10 @@
       <span class="c-txt">Autorizo a Pronto a usar la información pública de mi web, redes y Google (textos, servicios, fotos, logo) para construir y mejorar mi nueva web. Los textos se reescriben con voz profesional; yo apruebo todo antes de publicar.</span>
     </label>
 
-    <label class="q">¿Tiene hoy página web, Instagram/Facebook o ficha de Google?</label>
+    <label class="q">¿Tiene una página web actual?</label>
     <div class="choices" data-radio="presencia">
-      <label class="choice"><input type="radio" name="presencia" value="si"><span class="dot"></span><span class="c-body"><strong>Sí, tengo al menos uno</strong><span>Sacamos todo de ahí — usted casi no llena nada</span></span></label>
-      <label class="choice"><input type="radio" name="presencia" value="no"><span class="dot"></span><span class="c-body"><strong>No, casi nada</strong><span>No hay problema, lo armamos con lo que nos cuente</span></span></label>
+      <label class="choice"><input type="radio" name="presencia" value="si"><span class="dot"></span><span class="c-body"><strong>Sí, tengo página web</strong><span>Sacamos toda su información de ahí — usted casi no llena nada</span></span></label>
+      <label class="choice"><input type="radio" name="presencia" value="no"><span class="dot"></span><span class="c-body"><strong>No tengo / casi nada</strong><span>No hay problema, lo armamos con lo que nos cuente</span></span></label>
     </div>
     <div class="err-msg" role="alert" aria-live="polite" id="e-s1"></div>
     <div class="nav"><button type="button" class="btn btn-primary" onclick="next()">Continuar</button></div>
@@ -148,9 +148,9 @@
 
   <!-- ░░ PASO 2A — Sus links (tiene presencia) ░░ -->
   <section class="step" id="s2a">
-    <h1>Sus links</h1>
-    <p class="lead">Denos lo que tenga y nosotros sacamos todo de ahí. Lo que no tenga, déjelo en blanco.</p>
-    <label class="q">Página web actual <span class="opt">(si tiene)</span></label>
+    <h1>Su página web</h1>
+    <p class="lead">Pásenos el link de su web actual: de ahí sacamos sus textos, servicios, fotos y datos para construir la nueva. Lo demás es opcional.</p>
+    <label class="q">Link de su página web actual</label>
     <input type="text" name="web_url" placeholder="suclinica.com">
     <div class="row" style="margin-top:14px">
       <div><label class="q">Instagram <span class="opt">(opcional)</span></label><input type="text" name="instagram" placeholder="@suclinica"></div>
@@ -158,11 +158,12 @@
     </div>
     <label class="q">Link de su Google / Maps <span class="opt">(opcional, para las reseñas)</span></label>
     <input type="text" name="google_url" placeholder="Pegue el link de su ficha de Google">
+    <p class="hint">Instagram, Facebook y Google los <b>enlazamos</b> en su nueva web. La información para armarla la sacamos de su página web.</p>
 
     <label class="q">¿Cómo lo hacemos?</label>
     <div class="choices" data-radio="modo">
-      <label class="choice"><input type="radio" name="modo" value="todo"><span class="dot"></span><span class="c-body"><strong>Saquen TODO de mis links y mejórenlo</strong><span>No quiero llenar nada más. Lo reviso cuando me la entreguen.</span></span></label>
-      <label class="choice"><input type="radio" name="modo" value="cambiar"><span class="dot"></span><span class="c-body"><strong>Saquen lo de mis links, pero quiero cambiar o agregar cosas</strong><span>Más adelante le dejo subir fotos y decirnos qué cambiar</span></span></label>
+      <label class="choice"><input type="radio" name="modo" value="todo"><span class="dot"></span><span class="c-body"><strong>Saquen todo de mi web y mejórenla</strong><span>No quiero llenar nada más. Lo reviso cuando me la entreguen.</span></span></label>
+      <label class="choice"><input type="radio" name="modo" value="cambiar"><span class="dot"></span><span class="c-body"><strong>Saquen lo de mi web, pero quiero cambiar o agregar cosas</strong><span>Más adelante le dejo subir fotos y decirnos qué cambiar</span></span></label>
     </div>
     <div class="err-msg" role="alert" aria-live="polite" id="e-s2a"></div>
     <div class="nav"><button type="button" class="btn btn-ghost" onclick="back()">Atrás</button><button type="button" class="btn btn-primary" onclick="next()">Continuar</button></div>
