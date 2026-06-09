@@ -90,6 +90,8 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   transition: transform 0.3s var(--t);
 }
 .nav-logo:hover { transform: translateY(-1px); }
+.nav-logo-img { height: 30px; width: auto; display: block; filter: brightness(0) invert(1); }
+.footer-logo-img { height: 34px; width: auto; display: block; filter: brightness(0) invert(1); }
 
 .nav-links {
   list-style: none;

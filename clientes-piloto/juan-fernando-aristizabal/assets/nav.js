@@ -15,7 +15,7 @@
   var navbar =
     '<nav class="navbar" id="navbar">' +
       '<button class="nav-burger" id="navBurger" aria-label="Abrir menú"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 7h16M4 12h16M4 17h16" stroke-linecap="round"/></svg></button>' +
-      '<a href="index.html" class="nav-logo">Aristizábal</a>' +
+      '<a href="index.html" class="nav-logo" aria-label="Aristizábal · Ortodoncia"><img src="img/logo-aristizabal.png" alt="Aristizábal · Ortodoncia digital" class="nav-logo-img"></a>' +
       '<ul class="nav-links">' +
         '<li><a href="index.html" data-nav="inicio">Inicio</a></li>' +
         '<li class="nav-dd">' +
