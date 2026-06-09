@@ -139,7 +139,7 @@
 
     <label class="q">¿Tiene una página web actual?</label>
     <div class="choices" data-radio="presencia">
-      <label class="choice"><input type="radio" name="presencia" value="si"><span class="dot"></span><span class="c-body"><strong>Sí, tengo página web</strong><span>Sacamos toda su información de ahí — usted casi no llena nada</span></span></label>
+      <label class="choice"><input type="radio" name="presencia" value="si"><span class="dot"></span><span class="c-body"><strong>Sí, tengo página web</strong><span>Sacamos toda su información de ahí, usted casi no llena nada</span></span></label>
       <label class="choice"><input type="radio" name="presencia" value="no"><span class="dot"></span><span class="c-body"><strong>No tengo / casi nada</strong><span>No hay problema, lo armamos con lo que nos cuente</span></span></label>
     </div>
     <div class="err-msg" role="alert" aria-live="polite" id="e-s1"></div>
@@ -182,7 +182,7 @@
     <label class="q">Servicios que ofrece</label>
     <textarea name="clinica_servicios" placeholder="Ej: ortodoncia, implantes, blanqueamiento, diseño de sonrisa, odontología general..."></textarea>
     <label class="q">Doctor(es): nombre y especialidad</label>
-    <textarea name="clinica_equipo" placeholder="Ej: Dra. Ana Pérez — Ortodoncista. Dr. Luis Gómez — Implantólogo."></textarea>
+    <textarea name="clinica_equipo" placeholder="Ej: Dra. Ana Pérez, Ortodoncista. Dr. Luis Gómez, Implantólogo."></textarea>
     <div class="err-msg" role="alert" aria-live="polite" id="e-s2b"></div>
     <div class="nav"><button type="button" class="btn btn-ghost" onclick="back()">Atrás</button><button type="button" class="btn btn-primary" onclick="next()">Continuar</button></div>
   </section>
@@ -190,7 +190,7 @@
   <!-- ░░ PASO 3 — Esenciales ░░ -->
   <section class="step" id="s3">
     <h1>Lo esencial</h1>
-    <p class="lead">Esto no lo podemos adivinar — lo necesitamos sí o sí para que su web funcione.</p>
+    <p class="lead">Esto no lo podemos adivinar, lo necesitamos sí o sí para que su web funcione.</p>
     <div class="row">
       <div><label class="q">WhatsApp que ve el paciente</label><input type="tel" name="wa_publico" placeholder="+57 300 000 0000"></div>
       <div><label class="q">WhatsApp donde recibe los contactos</label><input type="tel" name="wa_recepcion" placeholder="Puede ser el mismo"></div>
@@ -246,7 +246,7 @@
   <!-- ░░ PASO 5 — Fotos + extras (opcional) ░░ -->
   <section class="step" id="s5">
     <h1>Fotos y extras <span style="font-size:17px;color:var(--dim);font-weight:500">· opcional</span></h1>
-    <p class="lead">Si no sube nada, sacamos todo de su web. Si quiere mejores fotos o tiene su logo en alta, súbalos aquí — en buena calidad, máximo 25MB por archivo.</p>
+    <p class="lead">Si no sube nada, sacamos todo de su web. Si quiere mejores fotos o tiene su logo en alta, súbalos aquí en buena calidad, máximo 25MB por archivo.</p>
 
     <label class="q">Su logo en alta calidad <span class="opt">(si lo tiene)</span></label>
     <div class="drop" onclick="document.getElementById('f-logo').click()">
@@ -344,8 +344,8 @@
     if(max && store.length>max) store.length=max;
     var em=document.getElementById('e-s5');
     if(em){
-      if(rejected.length) em.textContent=rejected.join(', ')+' — use imagen o PDF de máximo 25MB. El resto lo sacamos de su web o lo manda luego.';
-      else if(max && store.length>=max) em.textContent='Máximo '+max+' fotos — guardamos las primeras '+max+'.';
+      if(rejected.length) em.textContent=rejected.join(', ')+'. Use imagen o PDF de máximo 25MB. El resto lo sacamos de su web o lo manda luego.';
+      else if(max && store.length>=max) em.textContent='Máximo '+max+' fotos, guardamos las primeras '+max+'.';
       else em.textContent='';
     }
     renderFiles(store, containerId);
