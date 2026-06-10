@@ -193,7 +193,7 @@
     <p class="lead">Esto no lo podemos adivinar, lo necesitamos sí o sí para que su web funcione.</p>
     <div class="row">
       <div><label class="q">WhatsApp que ve el paciente</label><input type="tel" name="wa_publico" placeholder="+57 300 000 0000"></div>
-      <div><label class="q">WhatsApp donde recibe los contactos</label><input type="tel" name="wa_recepcion" placeholder="Puede ser el mismo"></div>
+      <div><label class="q">WhatsApp donde recibe los contactos</label><label style="display:flex;align-items:center;gap:7px;font-size:13px;color:var(--dim);margin:0 0 8px;cursor:pointer"><input type="checkbox" id="wa-same" style="width:16px;height:16px;accent-color:#22d3ee"> Es el mismo del paciente</label><input type="tel" name="wa_recepcion" id="wa_recepcion" placeholder="Puede ser el mismo"></div>
     </div>
     <label class="q">Correo donde quiere recibir los reportes mensuales</label>
     <p class="hint">Puede ser su correo personal. Ahí le llega cada mes cuánta gente entró, cuántos escribieron por WhatsApp, etc.</p>
@@ -258,7 +258,7 @@
     <label class="q" style="margin-top:24px">Fotos de su clínica, equipo o trabajos <span class="opt">(hasta 40, opcional)</span></label>
     <div class="drop" onclick="document.getElementById('f-fotos').click()">
       <div class="di">Subir fotos</div><div class="ds">Hasta 40 · imagen o PDF, máx 25MB c/u</div>
-      <input type="file" id="f-fotos" accept="image/*" multiple>
+      <input type="file" id="f-fotos" accept="image/*,.pdf" multiple>
     </div>
     <div class="files" id="files-fotos"></div>
 
@@ -458,6 +458,17 @@
     }
   }
 
+  // ---- WhatsApp "es el mismo del paciente" ----
+  (function(){
+    var waPub=document.querySelector('[name=wa_publico]');
+    var waRec=document.querySelector('[name=wa_recepcion]');
+    var waSame=document.getElementById('wa-same');
+    if(waPub&&waRec&&waSame){
+      function syncWa(){ if(waSame.checked){ waRec.value=waPub.value; waRec.readOnly=true; waRec.style.opacity='0.55'; } else { waRec.readOnly=false; waRec.style.opacity='1'; } }
+      waSame.addEventListener('change', syncWa);
+      waPub.addEventListener('input', function(){ if(waSame.checked) waRec.value=waPub.value; });
+    }
+  })();
   updateProgress();
 </script>
 </body>
