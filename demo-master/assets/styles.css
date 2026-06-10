@@ -1138,3 +1138,11 @@ footer { background: var(--white); padding: 80px 32px 40px; }
   .nav-logo { font-size: 14px; padding: 10px 16px; }
 }
 .hero-compact { padding-bottom: 84px; }
+
+/* ─── Logo de IMAGEN para demos de clientes (10-jun-2026, caso real Oral+) ───
+   Uso en nav.js:  <a class="nav-logo nav-logo--img"><img class="nav-logo-img" ...></a>
+   Box = 50px (igual a la pill de texto) → el gate c-bis pasa sin iterar.
+   El modificador --img NO altera la pill de texto del master. */
+.nav-logo--img { padding-top: 8px; padding-bottom: 8px; }
+.nav-logo-img { height: 34px; width: auto; display: block; filter: brightness(0) invert(1) drop-shadow(0 1px 1.5px rgba(0,0,0,.5)); }
+.footer-logo-img { height: 36px; width: auto; display: block; filter: brightness(0) invert(1); }
