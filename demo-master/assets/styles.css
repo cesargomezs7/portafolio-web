@@ -1128,3 +1128,13 @@ footer { background: var(--white); padding: 80px 32px 40px; }
   /* Hero meta: stack vertical más estrecho en mobile (practice-hours + today-pill) */
   .practice-hours, .today-pill { width: 100%; }
 }
+
+/* ─── Fix 9-jun-2026 (verificado vs ventana real de César ~905px) ───
+   1) El logo del navbar NUNCA se parte en varias líneas (nombres largos de clínica).
+   2) La hoja blanca (.section margin-top:-40px) no debe tapar el texto del hero compacto:
+      el media query ≤1024 bajaba el padding-bottom del hero a 24px y la hoja tapaba ~16px del lead. */
+.nav-logo { white-space: nowrap; }
+@media (max-width: 1100px) and (min-width: 769px) {
+  .nav-logo { font-size: 14px; padding: 10px 16px; }
+}
+.hero-compact { padding-bottom: 84px; }
