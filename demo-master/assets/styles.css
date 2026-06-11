@@ -1146,3 +1146,18 @@ footer { background: var(--white); padding: 80px 32px 40px; }
 .nav-logo--img { padding-top: 8px; padding-bottom: 8px; }
 .nav-logo-img { height: 34px; width: auto; display: block; filter: brightness(0) invert(1) drop-shadow(0 1px 1.5px rgba(0,0,0,.5)); }
 .footer-logo-img { height: 36px; width: auto; display: block; filter: brightness(0) invert(1); }
+
+/* ─── CTA de reseñas en testimonios (10-jun-2026) ───
+   Entrada visible al sistema de reseñas desde el home: el deck del video invita a
+   "ver el filtro de reseñas" y este botón es el camino (antes reviews.html era inalcanzable). */
+.testimonios-review-cta { text-align: center; margin-top: 40px; }
+.testimonios-review-cta p { color: #4a5a6e; font-size: 14.5px; margin-bottom: 14px; }
+.review-cta-btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 14px 28px; border-radius: 50px;
+  font-size: 15px; font-weight: 600;
+  background: transparent; color: var(--azul-dark);
+  border: 1.5px solid var(--azul);
+  transition: all .25s ease;
+}
+.review-cta-btn:hover { background: var(--azul-dark); color: var(--white); border-color: var(--azul-dark); transform: translateY(-2px); }
