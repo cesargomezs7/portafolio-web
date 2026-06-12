@@ -1165,3 +1165,11 @@ footer { background: var(--white); padding: 80px 32px 40px; }
 @media (max-width: 1100px) and (min-width: 769px) {
   .nav-links a { padding: 8px 12px; font-size: 14px; }
 }
+
+/* ─── Fix 10-jun-2026 (parte 2) · contacto + footer en zona 769-1024px ───
+   El bloque ≤1024 apilaba: formulario de contacto (1 col), y footer (2 cols).
+   En la ventana real del Mac (~1000px) debe verse como en monitor. */
+@media (max-width: 1024px) and (min-width: 769px) {
+  .contacto-wrap { grid-template-columns: 1fr 1fr; gap: 32px; }
+  .footer-inner { grid-template-columns: 1.4fr 1fr 1fr 1fr 1fr; gap: 24px; }
+}
