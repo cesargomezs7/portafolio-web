@@ -1161,3 +1161,15 @@ footer { background: var(--white); padding: 80px 32px 40px; }
   transition: all .25s ease;
 }
 .review-cta-btn:hover { background: var(--azul-dark); color: var(--white); border-color: var(--azul-dark); transform: translateY(-2px); }
+
+/* ─── Fix 10-jun-2026 · zona 769-1024px (ventana real del Mac de César) ───
+   1) El carrusel de Equipo se quedaba apilado (media ≤1024 lo colapsaba a 1fr):
+      se mantiene foto | info lado a lado hasta 769px; solo móvil real apila.
+   2) Los items del menú (● Inicio) se partían en 2 líneas e inflaban la pastilla. */
+@media (max-width: 1024px) and (min-width: 769px) {
+  .team-card { grid-template-columns: 0.8fr 1fr; gap: 28px; }
+}
+.nav-links a { white-space: nowrap; }
+@media (max-width: 1100px) and (min-width: 769px) {
+  .nav-links a { padding: 8px 12px; font-size: 14px; }
+}
