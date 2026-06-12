@@ -732,7 +732,11 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   max-width: var(--cw);
 }
 .faq .overline { color: rgba(255,255,255,0.55); }
-.faq h2 { color: var(--white); margin-bottom: 48px; }
+.faq h2 {
+  color: var(--white); margin-bottom: 48px;
+  /* 12-jun: era ~24px (default), casi igual que las preguntas (18px) — ahora sí es título */
+  font-size: clamp(1.9rem, 3vw, 2.6rem);
+}
 
 .faq-list { display: flex; flex-direction: column; }
 .faq-item { border-bottom: 1px solid rgba(255,255,255,0.12); }
@@ -1230,7 +1234,7 @@ footer { background: var(--white); padding: 80px 32px 40px; }
 }
 .booking-bar {
   position: relative; z-index: 1;
-  max-width: var(--cw); margin: 0 auto;
+  max-width: 600px; margin: 0 auto;
   background: var(--white);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
@@ -1250,12 +1254,14 @@ footer { background: var(--white); padding: 80px 32px 40px; }
   font-size: 13px; font-weight: 600; color: #2e7d4f;
 }
 .booking-fields {
+  /* Vertical, igual que el form de contacto (pedido César 12-jun) */
   display: grid;
-  grid-template-columns: 1.15fr 1fr 1fr auto;
+  grid-template-columns: 1fr;
   gap: 12px;
 }
 .booking-fields input,
-.booking-fields select {
+.booking-fields select,
+.booking-fields textarea {
   width: 100%;
   background: var(--gray-bg);
   color: var(--azul-dark);
@@ -1265,7 +1271,9 @@ footer { background: var(--white); padding: 80px 32px 40px; }
   font-size: 14px; font-family: inherit;
 }
 .booking-fields input:focus,
-.booking-fields select:focus { outline: none; border-color: var(--azul); }
+.booking-fields select:focus,
+.booking-fields textarea:focus { outline: none; border-color: var(--azul); }
+.booking-fields textarea { min-height: 100px; resize: vertical; }
 .booking-fields button {
   background: var(--azul-dark); color: var(--white);
   padding: 15px 26px; border-radius: var(--radius-sm);
@@ -1279,11 +1287,7 @@ footer { background: var(--white); padding: 80px 32px 40px; }
   transform: translateY(-2px);
   box-shadow: var(--shadow-md);
 }
-@media (max-width: 1024px) and (min-width: 769px) {
-  .booking-fields { grid-template-columns: 1fr 1fr; }
-}
 @media (max-width: 768px) {
   .booking { padding: 0 16px; }
   .booking-head { flex-direction: column; align-items: flex-start; gap: 6px; }
-  .booking-fields { grid-template-columns: 1fr; }
 }
