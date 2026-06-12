@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/styles.css?v=20260612a">
+<link rel="stylesheet" href="assets/styles.css?v=20260612b">
 <link rel="stylesheet" href="assets/wa-widget.css?v=2">
 <link rel="stylesheet" href="assets/nav.css?v=8">
 
@@ -330,7 +330,7 @@
       <div class="faq-answer"><p>El dolor puede ceder momentáneamente, pero suele indicar un problema que sigue avanzando (caries, infección, fractura). Lo más seguro es agendar una valoración apenas notes molestia: detectar a tiempo evita tratamientos más invasivos.</p></div>
     </div>
 
-    <div class="faq-item open">
+    <div class="faq-item">
       <button class="faq-question">
         <span>¿Qué es la caries y cómo se previene?</span>
         <span class="faq-toggle"><svg viewBox="0 0 24 24" fill="none" width="20" height="20"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span>
@@ -376,19 +376,36 @@
 
 <!-- ─── CTA FINAL ──────────────────────────────────────── -->
 <section class="cta-final reveal" data-wa="Hola Sonrisa Premium, quiero agendar mi cita" data-wa-label="Agenda tu cita">
-  <div class="cta-final-inner">
-    <div class="overline">Próximos pasos</div>
-    <h2>¿Listo para tu primera consulta?</h2>
-    <p>Agenda tu valoración inicial. Recibirás un diagnóstico personalizado y un plan de tratamiento por escrito el mismo día.</p>
-    <div class="cta-final-actions">
-      <a href="https://wa.me/573124672674?text=Hola%20Sonrisa%20Premium,%20quiero%20agendar%20mi%20valoración" target="_blank" class="cta-final-btn primary">
-        Agendar por WhatsApp
-        <svg viewBox="0 0 24 24" fill="none" width="16" height="16"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-      </a>
-      <a href="contacto.html" class="cta-final-btn secondary">
-        Ver más formas de contacto
-      </a>
+  <div class="cta-final-inner cta-final-split">
+    <div class="cta-final-copy">
+      <div class="overline">Próximos pasos</div>
+      <h2>¿Listo para tu primera consulta?</h2>
+      <p>Agenda tu valoración inicial. Recibirás un diagnóstico personalizado y un plan de tratamiento por escrito el mismo día.</p>
+      <a href="contacto.html" class="cta-final-more">Ver más formas de contacto →</a>
     </div>
+    <form class="contacto-form" id="contactForm">
+      <div class="contacto-form-header">
+        <strong>Agenda tu consulta</strong>
+        <span><span class="status-dot"></span>Respuesta en menos de 2 horas</span>
+      </div>
+      <input type="text" name="nombre" placeholder="Nombre completo" required>
+      <input type="tel" name="telefono" placeholder="Teléfono / WhatsApp" required>
+      <input type="email" name="email" placeholder="Correo electrónico (opcional)">
+      <select name="servicio">
+        <option value="">Servicio de interés (opcional)</option>
+        <option value="Ortodoncia">Ortodoncia</option>
+        <option value="Implantes dentales">Implantes dentales</option>
+        <option value="Blanqueamiento dental">Blanqueamiento dental</option>
+        <option value="Limpieza dental">Limpieza dental</option>
+        <option value="Otro">Otro / No estoy seguro</option>
+      </select>
+      <textarea name="mensaje" placeholder="Cuéntanos brevemente cómo podemos ayudarte (opcional)"></textarea>
+      <button type="submit" id="contactSubmit">
+        Enviar solicitud
+        <svg viewBox="0 0 24 24" fill="none" width="14" height="14"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </button>
+      <p id="contactMsg" style="display:none;margin-top:14px;font-family:'Manrope',sans-serif;font-size:14px;line-height:1.5;color:#4a5a6e"></p>
+    </form>
   </div>
 </section>
 
@@ -408,10 +425,12 @@
     <div class="footer-col">
       <h4>Servicios</h4>
       <ul>
-        <li><a href="#servicios">Ortodoncia</a></li>
-        <li><a href="#servicios">Implantes</a></li>
-        <li><a href="#servicios">Blanqueamiento</a></li>
-        <li><a href="#servicios">Escáner 3D</a></li>
+        <li><a href="ortodoncia.html">Ortodoncia</a></li>
+        <li><a href="implantes.html">Implantes dentales</a></li>
+        <li><a href="blanqueamiento.html">Blanqueamiento</a></li>
+        <li><a href="diseno-de-sonrisa.html">Diseño de sonrisa</a></li>
+        <li><a href="endodoncia.html">Endodoncia</a></li>
+        <li><a href="odontologia-general.html">Odontología general</a></li>
       </ul>
     </div>
 
@@ -533,6 +552,50 @@
 <script src="assets/animations.js?v=20260513r" defer></script>
 <script src="assets/wa-widget.js?v=3" defer></script>
 <script src="assets/nav.js?v=2" defer></script>
+
+<!-- Conexión del formulario del home al Worker de Pronto (mismo endpoint que contacto.html) -->
+<script>
+(function () {
+  var form = document.getElementById('contactForm');
+  if (!form) return;
+  var ENDPOINT = 'https://pronto-forms-worker.cesargomezs711.workers.dev/contact';
+  var CLINICA = 'Sonrisa Premium';
+  var btn = document.getElementById('contactSubmit');
+  var msg = document.getElementById('contactMsg');
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var nombre = form.nombre.value;
+    btn.disabled = true;
+    var orig = btn.innerHTML;
+    btn.textContent = 'Enviando…';
+    fetch(ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        clinica: CLINICA,
+        nombre: nombre,
+        telefono: form.telefono.value,
+        email: form.email.value,
+        servicio: form.servicio.value,
+        mensaje: form.mensaje.value
+      })
+    }).then(function (r) { return r.json(); }).then(function () {
+      form.innerHTML =
+        '<div style="text-align:center;padding:24px 8px">' +
+        '<div style="font-size:44px;line-height:1;margin-bottom:12px">✅</div>' +
+        '<strong style="display:block;font-family:\'Fraunces\',serif;font-size:22px;color:var(--azul-dark);margin-bottom:8px">¡Gracias, ' + nombre + '!</strong>' +
+        '<p style="color:#4a5a6e;font-size:15px;line-height:1.6">Recibimos tu solicitud. Te contactamos muy pronto en horario de atención.</p>' +
+        '</div>';
+    }).catch(function () {
+      btn.disabled = false;
+      btn.innerHTML = orig;
+      msg.style.display = 'block';
+      msg.style.color = '#b14d2e';
+      msg.textContent = 'No pudimos enviar la solicitud. Escríbenos directo por WhatsApp con el botón verde.';
+    });
+  });
+})();
+</script>
 
 </body>
 </html>
