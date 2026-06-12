@@ -458,13 +458,6 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   font-size: 15px;
 }
 .service-card.text-only .service-card-price strong { color: var(--azul-dark); }
-.service-card-num {
-  position: absolute; top: 16px; left: 22px;
-  font-size: 13px; font-weight: 500;
-  color: rgba(255,255,255,0.85);
-  z-index: 3;
-}
-.service-card.text-only .service-card-num { color: var(--azul-dark); opacity: 0.5; }
 .service-card-arrow {
   position: absolute; top: 14px; right: 14px;
   width: 32px; height: 32px;
@@ -484,7 +477,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 }
 .service-card-title {
   position: relative; z-index: 3;
-  font-size: 18px; font-weight: 700;
+  font-size: 20px; font-weight: 700;
   color: var(--white);
   letter-spacing: -0.015em;
 }
@@ -889,10 +882,12 @@ footer { background: var(--white); padding: 80px 32px 40px; }
 }
 .hero-compact-inner { max-width: var(--cw); width: 100%; margin: 0 auto; }
 .hero-compact h1 {
-  font-size: clamp(2.5rem, 6vw, 6.5rem);
+  /* Mismo tamaño que el H1 REAL del home — nav.css:166 .hero:not(.hero-compact) h1 —
+     (pedido César 12-jun: los heroes internos se veían inmensos) */
+  font-size: clamp(1.9rem, 3.3vw, 3.1rem);
   font-weight: 500;
   letter-spacing: -0.035em;
-  line-height: 1.02;
+  line-height: 1.06;
   color: var(--white);
   margin: 0;
   max-width: 900px;
@@ -904,15 +899,13 @@ footer { background: var(--white); padding: 80px 32px 40px; }
   margin-top: 24px;
 }
 .hero-compact .hero-tag {
+  /* Texto plano, sin pastilla (pedido César 12-jun: parecía un botón sin serlo) */
   display: inline-block;
-  background: var(--azul-deep);
-  color: var(--white);
-  padding: 8px 16px;
-  border-radius: 50px;
-  font-size: 12px; font-weight: 600;
-  letter-spacing: 0.05em;
+  color: rgba(255,255,255,0.85);
+  font-size: 13px; font-weight: 600;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  margin-bottom: 20px;
+  margin-bottom: 18px;
 }
 
 /* ─── EQUIPO grid (nosotros) ──────────────────────────────── */
@@ -1150,17 +1143,36 @@ footer { background: var(--white); padding: 80px 32px 40px; }
 /* ─── CTA de reseñas en testimonios (10-jun-2026) ───
    Entrada visible al sistema de reseñas desde el home: el deck del video invita a
    "ver el filtro de reseñas" y este botón es el camino (antes reviews.html era inalcanzable). */
-.testimonios-review-cta { text-align: center; margin-top: 40px; }
-.testimonios-review-cta p { color: #4a5a6e; font-size: 14.5px; margin-bottom: 14px; }
+.testimonios-review-cta {
+  text-align: center; margin-top: 48px;
+  background: var(--gray-light);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 44px 32px;
+}
+.testimonios-review-cta h3 {
+  font-size: 24px; font-weight: 700;
+  color: var(--azul-dark);
+  letter-spacing: -0.02em;
+  margin-bottom: 10px;
+}
+.testimonios-review-cta p { color: #4a5a6e; font-size: 15px; margin-bottom: 22px; }
 .review-cta-btn {
   display: inline-flex; align-items: center; gap: 10px;
-  padding: 14px 28px; border-radius: 50px;
-  font-size: 15px; font-weight: 600;
-  background: transparent; color: var(--azul-dark);
-  border: 1.5px solid var(--azul);
-  transition: all .25s ease;
+  padding: 15px 30px; border-radius: 50px;
+  font-size: 15px; font-weight: 700;
+  background: var(--azul-dark); color: var(--white);
+  border: 1.5px solid var(--azul-dark);
+  box-shadow: var(--shadow-sm);
+  transition: all .3s ease;
 }
-.review-cta-btn:hover { background: var(--azul-dark); color: var(--white); border-color: var(--azul-dark); transform: translateY(-2px); }
+.review-cta-btn .star { color: #f5a623; font-size: 17px; line-height: 1; transition: all .3s ease; }
+.review-cta-btn:hover {
+  background: #f5a623; border-color: #f5a623; color: var(--azul-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 26px rgba(245, 166, 35, 0.35);
+}
+.review-cta-btn:hover .star { color: var(--white); transform: scale(1.2) rotate(72deg); }
 
 /* ─── Fix 10-jun-2026 · zona 769-1024px (ventana real del Mac de César) ───
    1) El carrusel de Equipo se quedaba apilado (media ≤1024 lo colapsaba a 1fr):
@@ -1180,4 +1192,21 @@ footer { background: var(--white); padding: 80px 32px 40px; }
 @media (max-width: 1024px) and (min-width: 769px) {
   .contacto-wrap { grid-template-columns: 1fr 1fr; gap: 32px; }
   .footer-inner { grid-template-columns: 1.4fr 1fr 1fr 1fr 1fr; gap: 24px; }
+}
+
+/* ─── Fix 12-jun-2026 · tanda 3 (reporte de César, Mac ~905px vs monitor) ───
+   1) El collage "Nuestra clínica" y el grid de servicios del home se apilaban en
+      769-1024px: se mantiene el layout de monitor; solo móvil real (≤768) apila.
+   2) .stats-grid (contadores animados, ahora también en el home) apila solo en móvil. */
+@media (max-width: 1024px) and (min-width: 769px) {
+  .clinic-grid { grid-template-columns: 1.1fr 0.8fr; gap: 36px; margin-bottom: 56px; }
+  .clinic-photo-main { aspect-ratio: 5/4; }
+  .clinic-photo-secondary { gap: 24px; }
+  .clinic-photo-secondary > div { width: 75%; aspect-ratio: 4/3; filter: grayscale(0.6); }
+  .clinic-photo-secondary > div:first-child { align-self: flex-start; margin: 32px 0 0 0; }
+  .clinic-photo-secondary > div:last-child { align-self: flex-end; margin: 0 0 16px 0; }
+  .services-grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 768px) {
+  .stats-grid { grid-template-columns: 1fr !important; gap: 28px !important; }
 }

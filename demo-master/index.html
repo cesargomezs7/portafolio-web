@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/styles.css?v=20260610c">
+<link rel="stylesheet" href="assets/styles.css?v=20260612a">
 <link rel="stylesheet" href="assets/wa-widget.css?v=2">
 <link rel="stylesheet" href="assets/nav.css?v=8">
 
@@ -119,8 +119,6 @@
   <span class="trust-item"><strong>+8 años</strong>&nbsp;de experiencia</span>
   <span class="trust-sep"></span>
   <span class="trust-item"><strong>3 sedes</strong>&nbsp;·&nbsp;Bogotá y Medellín</span>
-  <span class="trust-sep"></span>
-  <span class="trust-item"><strong>Diagnóstico personalizado</strong></span>
 </div>
 
 <!-- ─── OUR CLINIC ──────────────────────────────────────── -->
@@ -152,6 +150,22 @@
       <p>Cuidamos tu salud y hacemos lo necesario para que cada visita sea cómoda, transparente y enfocada en resultados duraderos para tu sonrisa.</p>
     </div>
   </div>
+
+  <!-- Stats animados (mismos contadores que nosotros.html — animations.js los anima solo) -->
+  <div class="stats-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:64px;padding-top:48px;border-top:1px solid var(--border);">
+    <div class="reveal">
+      <div data-counter="8" data-prefix="+" style="font-size:56px;font-weight:800;color:var(--azul-dark);letter-spacing:-0.04em;line-height:1;">+0</div>
+      <div style="font-size:13px;color:var(--azul-dark);opacity:0.65;letter-spacing:0.05em;text-transform:uppercase;margin-top:12px;font-weight:500;">Años de experiencia</div>
+    </div>
+    <div class="reveal">
+      <div data-counter="3" style="font-size:56px;font-weight:800;color:var(--azul-dark);letter-spacing:-0.04em;line-height:1;">0</div>
+      <div style="font-size:13px;color:var(--azul-dark);opacity:0.65;letter-spacing:0.05em;text-transform:uppercase;margin-top:12px;font-weight:500;">Especialistas</div>
+    </div>
+    <div class="reveal">
+      <div data-counter="4.8" data-decimals="1" data-suffix=" ★" style="font-size:56px;font-weight:800;color:var(--azul-dark);letter-spacing:-0.04em;line-height:1;">0.0 ★</div>
+      <div style="font-size:13px;color:var(--azul-dark);opacity:0.65;letter-spacing:0.05em;text-transform:uppercase;margin-top:12px;font-weight:500;">234 reseñas Google</div>
+    </div>
+  </div>
 </section>
 
 <!-- ─── SERVICES ────────────────────────────────────────── -->
@@ -170,7 +184,6 @@
   <div class="services-grid">
     <a href="ortodoncia.html" class="service-card with-photo reveal">
       <img src="img/servicio-ortodoncia.jpg" alt="Ortodoncia">
-      <span class="service-card-num">[1] · Especialidad</span>
       <div class="service-card-arrow"><svg viewBox="0 0 24 24" fill="none" width="14" height="14"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
       <div class="service-card-title">Ortodoncia</div>
       <div class="service-card-price">Desde <strong>$4.200.000 COP</strong></div>
@@ -178,7 +191,6 @@
 
     <a href="implantes.html" class="service-card with-photo reveal">
       <img src="img/servicio-implantes.jpg" alt="Implantes dentales">
-      <span class="service-card-num">[2] · Especialidad</span>
       <div class="service-card-arrow"><svg viewBox="0 0 24 24" fill="none" width="14" height="14"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
       <div class="service-card-title">Implantes dentales</div>
       <div class="service-card-price">Desde <strong>$4.500.000 COP</strong></div>
@@ -186,7 +198,6 @@
 
     <a href="blanqueamiento.html" class="service-card with-photo reveal">
       <img src="img/servicio-blanqueamiento.jpg" alt="Blanqueamiento">
-      <span class="service-card-num">[3] · Estética</span>
       <div class="service-card-arrow"><svg viewBox="0 0 24 24" fill="none" width="14" height="14"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
       <div class="service-card-title">Blanqueamiento</div>
       <div class="service-card-price">Desde <strong>$650.000 COP</strong></div>
@@ -194,7 +205,6 @@
 
     <a href="diseno-de-sonrisa.html" class="service-card with-photo reveal">
       <img src="img/hero-modelo.jpg" alt="Diseño de sonrisa">
-      <span class="service-card-num">[4] · Estética</span>
       <div class="service-card-arrow"><svg viewBox="0 0 24 24" fill="none" width="14" height="14"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
       <div class="service-card-title">Diseño de sonrisa</div>
       <div class="service-card-price">Plan personalizado</div>
@@ -202,7 +212,6 @@
 
     <a href="endodoncia.html" class="service-card with-photo reveal">
       <img src="img/tech-microscopio.jpg" alt="Endodoncia">
-      <span class="service-card-num">[5] · Especialidad</span>
       <div class="service-card-arrow"><svg viewBox="0 0 24 24" fill="none" width="14" height="14"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
       <div class="service-card-title">Endodoncia</div>
       <div class="service-card-price">Desde $700.000 COP</div>
@@ -210,7 +219,6 @@
 
     <a href="odontologia-general.html" class="service-card with-photo reveal">
       <img src="img/clinica-consultorio.jpg" alt="Odontología general">
-      <span class="service-card-num">[6]</span>
       <div class="service-card-arrow"><svg viewBox="0 0 24 24" fill="none" width="14" height="14"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
       <div class="service-card-title">Odontología general</div>
       <div class="service-card-price">Limpieza desde $120.000</div>
@@ -302,8 +310,9 @@
     </article>
   </div>
   <div class="testimonios-review-cta reveal">
-    <p>¿Ya nos visitaste? Tu opinión ayuda a más pacientes a encontrarnos.</p>
-    <a href="reviews.html" class="review-cta-btn">★ Déjanos tu reseña</a>
+    <h3>Tu opinión ayuda a otros a sonreír</h3>
+    <p>Comparte tu experiencia: a ti te toma un minuto y a otro paciente le da la confianza para dar el primer paso.</p>
+    <a href="reviews.html" class="review-cta-btn"><span class="star">★</span>Déjanos tu reseña en Google</a>
   </div>
 </section>
 
