@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Microsoft Clarity (interno Pronto) -->
+<script type="text/javascript">(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window, document, "clarity", "script", "wygnitnsj3");</script>
+<title>Califícanos — DentiTown</title>
+<meta name="robots" content="noindex"><!-- página de reseñas no se indexa -->
+
+<!-- ============================================================
+     MÓDULO PRONTO: SISTEMA FILTRO DE RESEÑAS GOOGLE (la joya)
+     ============================================================
+     Lógica:
+       - Paciente elige estrellas
+       - 5 estrellas  -> redirige a Google a dejar reseña pública
+       - 1 a 4 estrellas -> form privado que llega al dueño (NO a Google)
+
+     PERSONALIZACIÓN POR CLIENTE (editar solo este bloque CONFIG):
+============================================================ -->
+<script>
+  const CONFIG = {
+    // Nombre de la clínica (aparece en los textos)
+    clinica: "DentiTown",
+
+    // URL de "dejar reseña" en Google. Se obtiene del Place ID:
+    // https://search.google.com/local/writereview?placeid=PLACE_ID
+    // En la DEMO apunta a placeholder. Al personalizar, poner el real del cliente.
+    googleReviewUrl: "https://www.google.com/maps/search/?api=1&query=DentiTown+odontolog%C3%ADa+Filandia",
+
+    // Endpoint que recibe el feedback negativo (Cloudflare Worker).
+    // En la DEMO es placeholder. Cuando el backend esté listo, poner la URL real.
+    workerEndpoint: "https://pronto-forms-worker.cesargomezs711.workers.dev/review-feedback",
+  };
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  /* ===== PALETA AZUL DENTAL (equivalente a las variables del Atelier verde) ===== */
+  :root {
+    --blue-bg: #e8f0f6;        /* azul claro - fondo hero */
+    --blue-soft: #f0f5f9;      /* azul muy claro - cards */
+    --blue-deep: #1e3a52;      /* azul profundo - botones + headings */
+    --blue-deepest: #15293c;   /* azul casi negro - texto principal */
+    --cream: #fbfbfb;          /* blanco azulado - background */
+    --cream-deep: #ecf0f4;
+    --accent: #3a7ca5;         /* azul dental principal - acentos */
+    --accent-soft: #2d6589;    /* hover */
+    --text: #15293c;
+    --text-soft: #4a5a6e;
+    --border: #c8d4dc;
+    --white: #ffffff;
+    --radius-sm: 12px;
+    --radius: 18px;
+    --radius-lg: 28px;
+    --radius-pill: 999px;
+    --shadow-sm: 0 2px 6px rgba(30,58,82,0.08);
+    --shadow-md: 0 14px 38px rgba(30,58,82,0.12);
+    --shadow-lg: 0 30px 70px rgba(30,58,82,0.18);
+    --t: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Fraunces', Georgia, serif;
+    background: linear-gradient(to bottom, var(--blue-bg) 0%, var(--cream) 45%);
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .card {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    max-width: 540px;
+    width: 100%;
+    padding: 48px 40px;
+    text-align: center;
+    border: 1px solid var(--border);
+  }
+
+  .overline {
+    font-family: 'Manrope', sans-serif;
+    font-weight: 600;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 16px;
+  }
+
+  h1 {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: clamp(1.8rem, 4.5vw, 2.4rem);
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    color: var(--blue-deepest);
+    margin-bottom: 14px;
+  }
+
+  .sub {
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--text-soft);
+    margin-bottom: 36px;
+  }
+
+  /* ===== ESTRELLAS ===== */
+  .stars {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+  .star {
+    font-size: 46px;
+    color: var(--border);
+    cursor: pointer;
+    transition: transform 0.15s var(--t), color 0.15s var(--t);
+    line-height: 1;
+    user-select: none;
+  }
+  .star:hover { transform: scale(1.18); }
+  .star.lit { color: #f5a623; }
+
+  .star-hint {
+    font-family: 'Manrope', sans-serif;
+    font-size: 13px;
+    color: var(--text-soft);
+    min-height: 20px;
+    margin-bottom: 8px;
+  }
+
+  /* ===== FORM PRIVADO (1-4 estrellas) ===== */
+  .private-form { display: none; text-align: left; margin-top: 8px; }
+  .private-form.show { display: block; animation: fade 0.4s var(--t); }
+  @keyframes fade { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+  .field { margin-bottom: 18px; }
+  .field label {
+    display: block;
+    font-family: 'Manrope', sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    color: var(--blue-deep);
+    margin-bottom: 6px;
+  }
+  .field input, .field textarea {
+    width: 100%;
+    padding: 13px 15px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    font-family: 'Manrope', sans-serif;
+    font-size: 15px;
+    color: var(--text);
+    background: var(--cream);
+    transition: border-color 0.2s;
+  }
+  .field input:focus, .field textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+  }
+  .field textarea { resize: vertical; min-height: 90px; }
+
+  .btn {
+    display: inline-block;
+    width: 100%;
+    padding: 15px 28px;
+    background: var(--blue-deep);
+    color: var(--white);
+    border: none;
+    border-radius: var(--radius-pill);
+    font-family: 'Manrope', sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+    cursor: pointer;
+    transition: background 0.2s var(--t), transform 0.15s var(--t);
+  }
+  .btn:hover { background: var(--accent); transform: translateY(-2px); }
+
+  /* ===== PANTALLA DE GRACIAS ===== */
+  .thanks { display: none; text-align: center; }
+  .thanks.show { display: block; animation: fade 0.4s var(--t); }
+  .thanks .check {
+    font-size: 56px;
+    margin-bottom: 16px;
+  }
+
+  .footer-note {
+    margin-top: 28px;
+    font-family: 'Manrope', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--text-soft);
+    opacity: 0.7;
+  }
+
+  @media (max-width: 520px) {
+    .card { padding: 36px 24px; }
+    .star { font-size: 40px; gap: 6px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="card">
+
+  <!-- ===== PASO 1: CALIFICAR ===== -->
+  <div id="step-rate">
+    <p class="overline">Tu opinión nos importa</p>
+    <h1 id="title-rate">¿Cómo fue tu experiencia en DentiTown?</h1>
+    <p class="sub">Califícanos con estrellas. Toma 10 segundos.</p>
+
+    <div class="stars" id="stars">
+      <span class="star" data-v="1">★</span>
+      <span class="star" data-v="2">★</span>
+      <span class="star" data-v="3">★</span>
+      <span class="star" data-v="4">★</span>
+      <span class="star" data-v="5">★</span>
+    </div>
+    <p class="star-hint" id="hint">Pasa el cursor y elige</p>
+  </div>
+
+  <!-- ===== PASO 2: FORM PRIVADO (1-4 estrellas) ===== -->
+  <div class="private-form" id="private-form">
+    <p class="overline">Queremos mejorar</p>
+    <h1>Lamentamos que tu experiencia no fue perfecta</h1>
+    <p class="sub">Cuéntanos qué pasó. Tu mensaje llega directo a la dirección de la clínica, de forma privada.</p>
+
+    <form id="feedback-form">
+      <div class="field">
+        <label>Tu nombre (opcional)</label>
+        <input type="text" name="nombre" placeholder="Cómo te llamas">
+      </div>
+      <div class="field">
+        <label>Tu email o WhatsApp (opcional)</label>
+        <input type="text" name="contacto" placeholder="Para poder responderte">
+      </div>
+      <div class="field">
+        <label>¿Qué podemos mejorar?</label>
+        <textarea name="feedback" placeholder="Cuéntanos con confianza" required></textarea>
+      </div>
+      <button type="submit" class="btn">Enviar a la clínica</button>
+    </form>
+  </div>
+
+  <!-- ===== PASO 3: GRACIAS ===== -->
+  <div class="thanks" id="thanks">
+    <div class="check">🦷</div>
+    <h1 id="thanks-title">¡Gracias por tu opinión!</h1>
+    <p class="sub" id="thanks-msg">La dirección de la clínica revisará tu mensaje personalmente.</p>
+  </div>
+
+  <p class="footer-note">Sistema de reseñas por Pronto</p>
+</div>
+
+<script>
+  // Insertar nombre de clínica en los textos
+  document.getElementById('title-rate').textContent =
+    `¿Cómo fue tu experiencia en ${CONFIG.clinica}?`;
+
+  // Contadores Pronto (visita + intención de reseña 5★)
+  const TRACK_URL = CONFIG.workerEndpoint.replace('/review-feedback', '/track');
+  function track(ev) {
+    try { fetch(TRACK_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ event: ev, clinica: CONFIG.clinica }), keepalive: true }); } catch (e) {}
+  }
+  track('visit');
+
+  const hints = {
+    1: "Muy insatisfecho",
+    2: "Insatisfecho",
+    3: "Regular",
+    4: "Bueno",
+    5: "¡Excelente!"
+  };
+
+  const stars = document.querySelectorAll('.star');
+  const hint = document.getElementById('hint');
+
+  // Hover: iluminar hasta donde pasa el cursor
+  stars.forEach(star => {
+    star.addEventListener('mouseenter', () => {
+      const v = +star.dataset.v;
+      stars.forEach(s => s.classList.toggle('lit', +s.dataset.v <= v));
+      hint.textContent = hints[v];
+    });
+    star.addEventListener('click', () => {
+      const v = +star.dataset.v;
+      handleRating(v);
+    });
+  });
+
+  document.getElementById('stars').addEventListener('mouseleave', () => {
+    stars.forEach(s => s.classList.remove('lit'));
+    hint.textContent = "Pasa el cursor y elige";
+  });
+
+  function handleRating(value) {
+    if (value === 5) {
+      // 5 estrellas -> a Google (reseña pública)
+      track('review_5');
+      window.location.href = CONFIG.googleReviewUrl;
+    } else {
+      // 1-4 estrellas -> form privado al dueño
+      document.getElementById('step-rate').style.display = 'none';
+      document.getElementById('private-form').classList.add('show');
+      // Guardar el rating para enviarlo con el feedback
+      document.getElementById('feedback-form').dataset.rating = value;
+    }
+  }
+
+  // Enviar feedback negativo al Worker (privado, no va a Google)
+  document.getElementById('feedback-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const payload = {
+      clinica: CONFIG.clinica,
+      rating: form.dataset.rating,
+      nombre: form.nombre.value,
+      contacto: form.contacto.value,
+      feedback: form.feedback.value,
+    };
+
+    // Intentar enviar al Worker. En la DEMO el endpoint es placeholder,
+    // así que envolvemos en try/catch para que la pantalla de gracias
+    // se muestre igual (la demo sigue siendo "usable").
+    try {
+      await fetch(CONFIG.workerEndpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+    } catch (err) {
+      console.log('[demo] endpoint pendiente de conectar:', err);
+    }
+
+    document.getElementById('private-form').classList.remove('show');
+    document.getElementById('private-form').style.display = 'none';
+    document.getElementById('thanks').classList.add('show');
+  });
+</script>
+
+</body>
+</html>
