@@ -248,20 +248,25 @@
     var telefono = (form.telefono.value || '').trim();
     var servicio = form.servicio ? form.servicio.value : '';
     var mensaje = form.mensaje ? (form.mensaje.value || '').trim() : '';
+    var email = form.email ? (form.email.value || '').trim() : '';
     if (!nombre || !telefono) return;
     // 1) Abre el WhatsApp del PACIENTE con sus datos ya escritos. Al darle "enviar" nace un chat
     //    real con la recepción (ve su número y le responde en ese mismo chat). window.open va
     //    primero, dentro del gesto del clic, para que el navegador no lo bloquee.
-    var txt = 'Hola, soy ' + nombre + '. Llené el formulario en su página y quiero agendar una valoración.';
-    if (servicio) txt += '\nMe interesa: ' + servicio;
-    if (mensaje) txt += '\n' + mensaje;
+    //    El texto llega como una ficha de lead limpia y clara (viene de la web), lista para atender.
+    var txt = 'Hola 👋 Escribo desde su página web, me gustaría agendar una cita' + (servicio ? ' de *' + servicio + '*' : '') + '.';
+    txt += '\n\n👤 *Nombre:* ' + nombre;
+    txt += '\n📞 *Teléfono:* ' + telefono;
+    if (email) txt += '\n✉️ *Correo:* ' + email;
+    if (mensaje) txt += '\n📝 *Comentario:* ' + mensaje;
+    txt += '\n\nQuedo pendiente de su confirmación. ¡Gracias! 🙌';
     var waUrl = 'https://wa.me/' + WA_CLINICA + '?text=' + encodeURIComponent(txt);
     window.open(waUrl, '_blank');
     // 2) En segundo plano: confirmación por correo al paciente + conteo para el reporte mensual.
     try {
       fetch(ENDPOINT, {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ clinica: CLINICA, nombre: nombre, telefono: telefono, email: form.email ? form.email.value : '', servicio: servicio, mensaje: mensaje })
+        body: JSON.stringify({ clinica: CLINICA, nombre: nombre, telefono: telefono, email: email, servicio: servicio, mensaje: mensaje })
       }).catch(function () {});
     } catch (e2) {}
     // 3) Confirmación en la página (con enlace de respaldo si el navegador bloqueó la ventana).
