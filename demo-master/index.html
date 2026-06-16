@@ -556,39 +556,37 @@
   if (!form) return;
   var ENDPOINT = 'https://pronto-forms-worker.cesargomezs711.workers.dev/contact';
   var CLINICA = 'Sonrisa Premium';
-  var btn = document.getElementById('contactSubmit');
-  var msg = document.getElementById('contactMsg');
+  var WA_CLINICA = '573124672674';
   form.addEventListener('submit', function (e) {
     e.preventDefault();
-    var nombre = form.nombre.value;
-    btn.disabled = true;
-    var orig = btn.innerHTML;
-    btn.textContent = 'Enviando…';
-    fetch(ENDPOINT, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        clinica: CLINICA,
-        nombre: nombre,
-        telefono: form.telefono.value,
-        email: form.email ? form.email.value : '',
-        servicio: form.servicio.value,
-        mensaje: form.mensaje ? form.mensaje.value : ''
-      })
-    }).then(function (r) { return r.json(); }).then(function () {
-      form.innerHTML =
-        '<div style="text-align:center;padding:24px 8px">' +
-        '<div style="font-size:44px;line-height:1;margin-bottom:12px">✅</div>' +
-        '<strong style="display:block;font-family:\'Fraunces\',serif;font-size:22px;color:var(--azul-dark);margin-bottom:8px">¡Gracias, ' + nombre + '!</strong>' +
-        '<p style="color:#4a5a6e;font-size:15px;line-height:1.6">Recibimos tu solicitud. Te contactamos muy pronto en horario de atención.</p>' +
-        '</div>';
-    }).catch(function () {
-      btn.disabled = false;
-      btn.innerHTML = orig;
-      msg.style.display = 'block';
-      msg.style.color = '#b14d2e';
-      msg.textContent = 'No pudimos enviar la solicitud. Escríbenos directo por WhatsApp con el botón verde.';
-    });
+    var nombre = (form.nombre.value || '').trim();
+    var telefono = (form.telefono.value || '').trim();
+    var servicio = form.servicio ? form.servicio.value : '';
+    var mensaje = form.mensaje ? (form.mensaje.value || '').trim() : '';
+    if (!nombre || !telefono) return;
+    // 1) Abre el WhatsApp del PACIENTE con sus datos ya escritos. Al darle "enviar" nace un chat
+    //    real con la recepción (ve su número y le responde en ese mismo chat). window.open va
+    //    primero, dentro del gesto del clic, para que el navegador no lo bloquee.
+    var txt = 'Hola, soy ' + nombre + '. Llené el formulario en su página y quiero agendar una valoración.';
+    if (servicio) txt += '\nMe interesa: ' + servicio;
+    if (mensaje) txt += '\n' + mensaje;
+    var waUrl = 'https://wa.me/' + WA_CLINICA + '?text=' + encodeURIComponent(txt);
+    window.open(waUrl, '_blank');
+    // 2) En segundo plano: confirmación por correo al paciente + conteo para el reporte mensual.
+    try {
+      fetch(ENDPOINT, {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ clinica: CLINICA, nombre: nombre, telefono: telefono, email: form.email ? form.email.value : '', servicio: servicio, mensaje: mensaje })
+      }).catch(function () {});
+    } catch (e2) {}
+    // 3) Confirmación en la página (con enlace de respaldo si el navegador bloqueó la ventana).
+    form.innerHTML =
+      '<div style="text-align:center;padding:24px 8px">' +
+      '<div style="font-size:44px;line-height:1;margin-bottom:12px">💬</div>' +
+      '<strong style="display:block;font-family:\'Fraunces\',serif;font-size:22px;color:var(--azul-dark);margin-bottom:8px">¡Listo, ' + nombre + '!</strong>' +
+      '<p style="color:#4a5a6e;font-size:15px;line-height:1.6">Abrimos WhatsApp con tu solicitud lista. Dale <b>enviar</b> y la recepción te responde por ahí mismo.</p>' +
+      '<p style="font-size:13px;margin-top:12px"><a href="' + waUrl + '" target="_blank" style="color:var(--azul);text-decoration:underline">¿No se abrió? Toca aquí para abrir el chat</a></p>' +
+      '</div>';
   });
 })();
 </script>
