@@ -575,13 +575,13 @@
     //    real con la recepción (ve su número y le responde en ese mismo chat). window.open va
     //    primero, dentro del gesto del clic, para que el navegador no lo bloquee.
     //    El texto llega como una ficha de lead limpia y clara (viene de la web), lista para atender.
-    var txt = 'Hola 👋 Escribo desde su página web.';
-    txt += '\n\n👤 *Nombre:* ' + nombre;
-    txt += '\n📞 *Teléfono:* ' + telefono;
-    if (email) txt += '\n✉️ *Correo:* ' + email;
-    if (servicio) txt += '\n🦷 *Servicio de interés:* ' + servicio;
-    if (mensaje) txt += '\n📝 *Comentario:* ' + mensaje;
-    txt += '\n\nEspero su respuesta. ¡Gracias! 🙌';
+    var txt = 'Hola, le escribo desde su página web.';
+    txt += '\n\n*Nombre:* ' + nombre;
+    txt += '\n*Teléfono:* ' + telefono;
+    if (email) txt += '\n*Correo:* ' + email;
+    if (servicio) txt += '\n*Servicio de interés:* ' + servicio;
+    if (mensaje) txt += '\n*Comentario:* ' + mensaje;
+    txt += '\n\nEspero su respuesta. ¡Gracias!';
     var waUrl = 'https://wa.me/' + WA_CLINICA + '?text=' + encodeURIComponent(txt);
     window.open(waUrl, '_blank');
     // 2) En segundo plano: confirmación por correo al paciente + conteo para el reporte mensual.
