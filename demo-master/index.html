@@ -564,6 +564,12 @@
     var servicio = form.servicio ? form.servicio.value : '';
     var mensaje = form.mensaje ? (form.mensaje.value || '').trim() : '';
     var email = form.email ? (form.email.value || '').trim() : '';
+    // Reescribe los valores ya recortados y deja que la validación nativa avise si un obligatorio
+    // quedó vacío (incluido el caso "solo espacios"): muestra "Completa este campo" y enfoca el campo.
+    form.nombre.value = nombre;
+    form.telefono.value = telefono;
+    if (form.email) form.email.value = email;
+    if (typeof form.reportValidity === 'function' && !form.reportValidity()) return;
     if (!nombre || !telefono) return;
     // 1) Abre el WhatsApp del PACIENTE con sus datos ya escritos. Al darle "enviar" nace un chat
     //    real con la recepción (ve su número y le responde en ese mismo chat). window.open va
