@@ -277,10 +277,12 @@
       }).catch(function () {});
     } catch (e2) {}
     // 3) Confirmación en la página (con enlace de respaldo si el navegador bloqueó la ventana).
+    var primerNombre = (nombre.split(/\s+/)[0] || nombre);
     form.innerHTML =
       '<div style="text-align:center;padding:24px 8px">' +
-      '<div style="font-size:44px;line-height:1;margin-bottom:12px">💬</div>' +
-      '<strong style="display:block;font-family:\'Fraunces\',serif;font-size:22px;color:var(--azul-dark);margin-bottom:8px">¡Listo, ' + nombre + '!</strong>' +
+      '<style>@keyframes pbPop{0%{transform:scale(.2);opacity:0}60%{transform:scale(1.1)}100%{transform:scale(1);opacity:1}}.pb-check{animation:pbPop .5s cubic-bezier(.2,.8,.2,1) both}</style>' +
+      '<svg class="pb-check" viewBox="0 0 52 52" width="62" height="62" style="display:block;margin:0 auto 16px" aria-hidden="true"><circle cx="26" cy="26" r="26" fill="#25D366"/><path d="M15.5 27l6.5 6.5L36.5 19" fill="none" stroke="#fff" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/></svg>' +
+      '<strong style="display:block;font-family:\'Fraunces\',serif;font-size:22px;color:var(--azul-dark);margin-bottom:8px">¡Listo, ' + primerNombre + '!</strong>' +
       '<p style="color:#4a5a6e;font-size:15px;line-height:1.6">Abrimos WhatsApp con tu solicitud lista. Dale <b>enviar</b> y la recepción te responde por ahí mismo.</p>' +
       '<p style="font-size:13px;margin-top:12px"><a href="' + waUrl + '" target="_blank" style="color:var(--azul);text-decoration:underline">¿No se abrió? Toca aquí para abrir el chat</a></p>' +
       '</div>';
