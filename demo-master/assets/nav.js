@@ -40,7 +40,7 @@
         '<li><a href="nosotros.html" data-nav="nosotros">Nosotros</a></li>' +
         '<li><a href="contacto.html" data-nav="contacto">Contacto</a></li>' +
       '</ul>' +
-      '<a href="' + WA + '?text=Hola%20Sonrisa%20Premium,%20quiero%20agendar%20una%20valoración" target="_blank" class="nav-cta">Agendar consulta</a>' +
+      '<a href="' + WA + '?text=Hola,%20vengo%20de%20su%20página%20web%20y%20quiero%20agendar%20una%20cita." target="_blank" class="nav-cta">Agendar consulta</a>' +
     '</nav>';
 
   var mobile =
@@ -61,7 +61,7 @@
         '<li><a class="mm-sub" href="sede-poblado.html">El Poblado · Medellín</a></li>' +
         '<li><a href="nosotros.html">Nosotros</a></li>' +
         '<li><a href="contacto.html">Contacto</a></li>' +
-        '<li><a class="mm-cta" href="' + WA + '?text=Hola%20Sonrisa%20Premium,%20quiero%20agendar%20una%20valoración" target="_blank">Agendar por WhatsApp</a></li>' +
+        '<li><a class="mm-cta" href="' + WA + '?text=Hola,%20vengo%20de%20su%20página%20web%20y%20quiero%20agendar%20una%20cita." target="_blank">Agendar por WhatsApp</a></li>' +
       '</ul>' +
     '</div>';
 
