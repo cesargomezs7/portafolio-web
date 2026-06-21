@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La Casa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0A0807;        /* casi negro, tinte cálido mínimo */
+    --text:#FAFAF9;      /* blanco cálido */
+    --soft:#A8A29E;      /* gris cálido (subtítulos) */
+    --dim:#57534E;       /* gris muy desenfatizado */
+    --accent:#D4A574;    /* dorado suave, sobrio */
+    --accent-soft:rgba(212,165,116,0.16);
+    --good:#9CB89A;       /* soluciones */
+    --warn:#D8A06A;       /* problemas */
+    --hard:#CF9B9B;       /* dificultades */
+    --border:rgba(255,255,255,0.10);
+    --card:rgba(255,255,255,0.035);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    background:#070605;
+    font-family:'Inter',sans-serif;
+    display:flex;align-items:center;justify-content:center;
+    height:100vh;overflow:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+  .stage{
+    width:1280px;height:720px;
+    transform-origin:center center;flex:none;position:relative;
+  }
+
+  /* ---------- SLIDE BASE ---------- */
+  .slide{
+    position:absolute;inset:0;
+    width:1280px;height:720px;
+    background:
+      radial-gradient(70% 55% at 82% 6%, rgba(212,165,116,0.10), transparent 60%),
+      radial-gradient(75% 60% at 6% 98%, rgba(212,165,116,0.06), transparent 58%),
+      var(--bg);
+    color:var(--text);
+    display:none;
+    flex-direction:column;justify-content:center;
+    padding:96px 110px;
+    overflow:hidden;
+  }
+  .slide.active{display:flex}
+  .slide.center{align-items:center;text-align:center}
+
+  /* ---------- TYPOGRAPHY ---------- */
+  .kicker{
+    font-family:'Inter',sans-serif;
+    font-size:15px;font-weight:500;
+    letter-spacing:0.22em;text-transform:uppercase;
+    color:var(--accent);
+    margin-bottom:30px;
+  }
+  h1{
+    font-family:'Fraunces',serif;
+    font-weight:300;
+    font-size:84px;line-height:1.04;
+    letter-spacing:-0.02em;
+    max-width:19ch;
+  }
+  .center h1{max-width:20ch}
+  .sub{
+    font-family:'Inter',sans-serif;
+    font-weight:400;font-size:27px;line-height:1.5;
+    color:var(--soft);max-width:40ch;
+    margin-top:30px;
+  }
+  em{font-style:italic;color:var(--accent)}
+
+  /* ---------- PORTADA ---------- */
+  .cover h1{font-size:148px;line-height:0.96;letter-spacing:-0.03em}
+  .cover .sub{font-size:30px;margin-top:34px}
+
+  /* ---------- MATEMÁTICA ---------- */
+  .nums{display:flex;gap:90px;align-items:flex-end;margin-top:14px}
+  .num .big{
+    font-family:'Fraunces',serif;font-weight:300;
+    font-size:124px;line-height:0.9;letter-spacing:-0.03em;
+  }
+  .num.you .big{color:var(--accent)}
+  .num .lbl{
+    font-family:'Inter',sans-serif;font-size:21px;color:var(--soft);
+    margin-top:18px;
+  }
+  .num .lbl b{color:var(--text);font-weight:600}
+  .arrow{
+    font-family:'Fraunces',serif;font-size:80px;color:var(--dim);
+    font-weight:300;padding-bottom:46px;
+  }
+
+  /* ---------- OBJECIONES ---------- */
+  .honest h1{font-size:52px;margin-bottom:46px}
+  .rows{display:flex;flex-direction:column;gap:20px;width:100%;max-width:1000px}
+  .row{display:grid;grid-template-columns:1fr auto 1.1fr;align-items:center;gap:28px}
+  .row .prob{font-size:23px;color:var(--soft)}
+  .row .sep{color:var(--accent);font-size:22px}
+  .row .sol{font-size:23px;color:var(--text);font-weight:500}
+
+  /* ---------- PASOS DECISIÓN ---------- */
+  .steps{display:flex;gap:54px;margin-top:50px}
+  .step{display:flex;flex-direction:column;gap:14px;max-width:230px}
+  .step .sn{
+    font-family:'Fraunces',serif;font-size:44px;font-weight:300;
+    color:var(--accent);line-height:1;
+  }
+  .step .st{font-size:21px;color:var(--soft);line-height:1.4}
+
+  /* ---------- CASAS (placeholder full-bleed) ---------- */
+  .casa{padding:0;justify-content:flex-end}
+  .casa .photo{
+    position:absolute;inset:0;
+    background:
+      linear-gradient(rgba(28,25,23,0.10), rgba(28,25,23,0.85)),
+      repeating-linear-gradient(45deg, #26221f 0 22px, #211d1b 22px 44px);
+    display:flex;align-items:center;justify-content:center;
+  }
+  .casa .photo .ph-label{
+    font-family:'Inter',sans-serif;font-size:24px;letter-spacing:0.16em;
+    text-transform:uppercase;color:rgba(250,250,249,0.30);
+    border:2px dashed rgba(250,250,249,0.22);
+    padding:22px 40px;border-radius:14px;
+  }
+  .casa .caption{position:relative;padding:96px 110px;width:100%}
+  .casa .caption .kicker{margin-bottom:16px}
+  .casa .caption h2{
+    font-family:'Fraunces',serif;font-weight:300;font-size:64px;
+    letter-spacing:-0.02em;line-height:1.02;
+  }
+  .casa .meta{display:flex;gap:46px;margin-top:26px}
+  .casa .meta .m{font-family:'Inter',sans-serif}
+  .casa .meta .m .mk{font-size:14px;letter-spacing:0.14em;text-transform:uppercase;color:var(--soft)}
+  .casa .meta .m .mv{font-size:28px;color:var(--text);font-weight:500;margin-top:6px}
+  .casa .meta .m.price .mv{color:var(--accent)}
+
+  /* ---------- CHROME (progreso + número) ---------- */
+  .progress{position:absolute;left:0;bottom:0;height:2px;background:var(--accent);width:0;transition:width .55s cubic-bezier(.16,1,.3,1);z-index:5}
+  .pageno{position:absolute;right:46px;bottom:34px;font-family:'Inter',sans-serif;font-size:14px;letter-spacing:0.16em;color:var(--dim);z-index:5}
+  .pageno b{color:var(--soft);font-weight:500}
+  .hint{position:absolute;left:50%;bottom:34px;transform:translateX(-50%);font-family:'Inter',sans-serif;font-size:13px;letter-spacing:0.14em;color:var(--dim);z-index:5;transition:opacity .5s ease}
+
+  /* ---------- SLIDE CASAS POR PRECIO ($14M) ---------- */
+  .s14{padding:38px 60px;justify-content:flex-start}
+  .s14 .s14head{display:flex;align-items:baseline;gap:22px;margin-bottom:24px}
+  .s14 .s14head .kicker{margin-bottom:0}
+  .s14 .s14head .price{font-family:'Fraunces',serif;font-weight:300;font-size:42px;letter-spacing:-0.02em;line-height:1}
+  .s14 .s14head .price small{font-size:19px;color:var(--soft);font-family:'Inter',sans-serif;font-weight:400}
+  .s14 .casarow{display:grid;grid-template-columns:210px 1fr;gap:24px;align-items:center;margin-bottom:16px}
+  .s14 .casarow:last-child{margin-bottom:0}
+  .s14 .clabel .cnum{font-family:'Fraunces',serif;font-weight:300;font-size:36px;color:var(--accent);line-height:1}
+  .s14 .clabel .cmeta{font-family:'Inter',sans-serif;font-size:15px;color:var(--soft);margin-top:7px;line-height:1.4}
+  .s14 .clabel .cmeta b{color:var(--text);font-weight:500}
+  .s14 .cphotos{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;height:120px}
+  .s14 .cphotos img{width:100%;height:120px;object-fit:cover;border-radius:5px;display:block}
+  .s14 .cphotos .hole{grid-column:1/-1;display:flex;align-items:center;justify-content:center;border:1.5px dashed rgba(250,250,249,0.22);border-radius:5px;color:rgba(250,250,249,0.34);font-size:13px;letter-spacing:0.12em;text-transform:uppercase}
+
+  /* ---------- SLIDES DE RESUMEN ---------- */
+  .resumen{padding:44px 60px;justify-content:flex-start}
+  .resumen .kicker{margin-bottom:22px}
+  .res-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px 30px}
+  .res-cat{font-family:'Inter',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:var(--accent);margin-bottom:13px}
+  .res-col ul{list-style:none}
+  .res-col li{font-family:'Inter',sans-serif;font-size:14.5px;color:var(--text);line-height:1.45;padding-left:15px;position:relative;margin-bottom:8px}
+  .res-col li::before{content:'';position:absolute;left:0;top:8px;width:5px;height:5px;border-radius:50%;background:var(--accent)}
+  .res-sub{font-family:'Inter',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;margin-bottom:16px}
+  .res-rows{display:flex;flex-direction:column;gap:11px;margin-bottom:32px}
+  .res-rows .rrow{display:grid;grid-template-columns:1fr auto 1.25fr;align-items:center;gap:18px}
+  .res-rows .p{font-size:15px;color:var(--warn)}
+  .res-rows .arr{color:var(--soft);font-size:14px}
+  .res-rows .s{font-size:15px;color:var(--good);font-weight:500}
+  .res-dif ul{list-style:none;display:flex;flex-direction:column;gap:10px}
+  .res-dif li{font-family:'Inter',sans-serif;font-size:15.5px;color:var(--hard);line-height:1.4;padding-left:17px;position:relative}
+  .res-dif li::before{content:'!';position:absolute;left:0;color:var(--hard);font-weight:700}
+
+  /* ---------- SLIDE AMOBLAR (3 opciones) ---------- */
+  .muebles{padding:42px 60px;justify-content:flex-start}
+  .muebles .kicker{margin-bottom:10px}
+  .muebles h1{font-size:46px;margin-bottom:10px}
+  .muebles .msub{font-family:'Inter',sans-serif;font-size:16px;color:var(--soft);margin-bottom:30px}
+  .mcards{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .mcard{border:1px solid var(--border);border-radius:12px;padding:26px 24px;background:var(--card)}
+  .mcard.best{border-color:var(--accent);background:var(--accent-soft)}
+  .mcard .mtag{font-family:'Inter',sans-serif;font-size:11px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--soft);margin-bottom:12px}
+  .mcard.best .mtag{color:var(--accent)}
+  .mcard .mname{font-family:'Fraunces',serif;font-weight:300;font-size:25px;line-height:1.1;margin-bottom:18px}
+  .mcard .mline{font-family:'Inter',sans-serif;font-size:14px;color:var(--text);line-height:1.45;margin-bottom:10px;padding-left:16px;position:relative}
+  .mcard .mline::before{content:'';position:absolute;left:0;top:7px;width:5px;height:5px;border-radius:50%;background:var(--soft)}
+  .mcard.best .mline::before{background:var(--accent)}
+  .muebles .mfoot{font-family:'Inter',sans-serif;font-size:14px;color:var(--soft);margin-top:26px;font-style:italic}
+
+  /* ---------- ANIMACIÓN DE ENTRADA ---------- */
+  @keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+  .slide.active .kicker{animation:fadeUp .7s cubic-bezier(.16,1,.3,1) both}
+  .slide.active h1,
+  .slide.active .nums,
+  .slide.active h2{animation:fadeUp .7s cubic-bezier(.16,1,.3,1) .10s both}
+  .slide.active .sub,
+  .slide.active .rows,
+  .slide.active .steps,
+  .slide.active .meta{animation:fadeUp .7s cubic-bezier(.16,1,.3,1) .22s both}
+  @media (prefers-reduced-motion: reduce){
+    .slide.active *{animation:none!important}
+  }
+</style>
+</head>
+<body>
+<div class="stage" id="stage">
+
+  <!-- 1 · PORTADA -->
+  <section class="slide center cover">
+    <h1>Casa compartida</h1>
+  </section>
+
+  <!-- 2 · LA VISIÓN -->
+  <section class="slide">
+    <div class="kicker">La visión</div>
+    <h1>Nadie viviría como nosotros.</h1>
+  </section>
+
+  <!-- 3 · EL PRECIO -->
+  <section class="slide">
+    <div class="kicker">El precio</div>
+    <h1>Una <em>fracción</em> de lo que costaría en cualquier otro caso.</h1>
+  </section>
+
+  <!-- 4 · POR QUÉ NOSOTROS -->
+  <section class="slide">
+    <div class="kicker">Por qué nosotros</div>
+    <h1>Mismos objetivos. Hábitos similares.</h1>
+  </section>
+
+  <!-- 5 · CRECIMIENTO -->
+  <section class="slide">
+    <div class="kicker">Crecimiento</div>
+    <h1>Subimos el nivel.</h1>
+  </section>
+
+  <!-- 6 · ESTUDIO DE CONTENIDO -->
+  <section class="slide">
+    <div class="kicker">Contenido</div>
+    <h1>La casa ya es el set.</h1>
+  </section>
+
+  <!-- 6 · ESPACIO -->
+  <section class="slide">
+    <div class="kicker">Espacio</div>
+    <h1>Privacidad e independencia.</h1>
+  </section>
+
+  <!-- 7 · LIBERTAD -->
+  <section class="slide">
+    <div class="kicker">Libertad</div>
+    <h1>Libres geográficamente.</h1>
+  </section>
+
+  <!-- 8 · LA TRIBU -->
+  <section class="slide">
+    <div class="kicker">Entretenimiento</div>
+    <h1>Asados, partidos, fiesta.</h1>
+  </section>
+
+  <!-- 9 · EL MOMENTO -->
+  <section class="slide">
+    <div class="kicker">El momento</div>
+    <h1>Ahora o nunca.</h1>
+  </section>
+
+  <!-- 10 · LA MATEMÁTICA -->
+  <section class="slide">
+    <div class="kicker">La cuenta</div>
+    <h1>¿A cuánto sale?</h1>
+  </section>
+
+  <!-- 11 · CASAS $14M -->
+  <section class="slide s14">
+    <div class="s14head">
+      <span class="kicker">Arriendo · Bogotá</span>
+      <span class="price">$14M <small>/ mes</small></span>
+    </div>
+
+    <div class="casarow">
+      <div class="clabel"><div class="cnum">01</div><div class="cmeta"><b>1.570 m²</b><br>4 habitaciones</div></div>
+      <div class="cphotos">
+        <img src="img/c1-1.webp" alt=""><img src="img/c1-2.webp" alt=""><img src="img/c1-3.webp" alt=""><img src="img/c1-4.webp" alt="">
+      </div>
+    </div>
+
+    <div class="casarow">
+      <div class="clabel"><div class="cnum">02</div><div class="cmeta"><b>370 m²</b><br>4 habitaciones</div></div>
+      <div class="cphotos">
+        <img src="img/c2-1.webp" alt=""><img src="img/c2-2.webp" alt=""><img src="img/c2-3.webp" alt=""><img src="img/c2-4.webp" alt="">
+      </div>
+    </div>
+
+    <div class="casarow">
+      <div class="clabel"><div class="cnum">03</div><div class="cmeta"><b>308 m²</b> const.<br>1.385 m² lote · 4 hab</div></div>
+      <div class="cphotos">
+        <img src="img/c3-1.jpg" alt=""><img src="img/c3-2.jpg" alt=""><img src="img/c3-3.jpg" alt=""><img src="img/c3-4.jpg" alt="">
+      </div>
+    </div>
+
+    <div class="casarow">
+      <div class="clabel"><div class="cnum">04</div><div class="cmeta"><b>500 m²</b><br>4 habitaciones</div></div>
+      <div class="cphotos">
+        <img src="img/c4-1.jpg" alt=""><img src="img/c4-2.jpg" alt=""><img src="img/c4-3.jpg" alt=""><img src="img/c4-4.jpg" alt="">
+      </div>
+    </div>
+  </section>
+
+  <!-- 12 · CASAS $13M -->
+  <section class="slide s14">
+    <div class="s14head">
+      <span class="kicker">Arriendo · Bogotá</span>
+      <span class="price">$13M <small>/ mes</small></span>
+    </div>
+
+    <div class="casarow">
+      <div class="clabel"><div class="cnum">01</div><div class="cmeta"><b>450 m²</b><br>4 habitaciones</div></div>
+      <div class="cphotos">
+        <img src="img/d1-1.jpg" alt=""><img src="img/d1-2.jpg" alt=""><img src="img/d1-3.jpg" alt=""><img src="img/d1-4.jpg" alt="">
+      </div>
+    </div>
+
+    <div class="casarow">
+      <div class="clabel"><div class="cnum">02</div><div class="cmeta"><b>542 m²</b><br>3 habitaciones</div></div>
+      <div class="cphotos">
+        <img src="img/d2-1.jpg" alt=""><img src="img/d2-2.jpg" alt=""><img src="img/d2-3.jpg" alt=""><img src="img/d2-4.jpg" alt="">
+      </div>
+    </div>
+
+    <div class="casarow">
+      <div class="clabel"><div class="cnum">03</div><div class="cmeta"><b>500 m²</b> const.<br>1.400 m² lote · 5 hab</div></div>
+      <div class="cphotos">
+        <img src="img/d3-1.jpg" alt=""><img src="img/d3-2.jpg" alt=""><img src="img/d3-3.jpg" alt=""><img src="img/d3-4.jpg" alt="">
+      </div>
+    </div>
+
+    <div class="casarow">
+      <div class="clabel"><div class="cnum">04</div><div class="cmeta"><b>367 m²</b><br>4 habitaciones</div></div>
+      <div class="cphotos">
+        <img src="img/d4-1.webp" alt=""><img src="img/d4-2.webp" alt=""><img src="img/d4-3.webp" alt=""><img src="img/d4-4.webp" alt="">
+      </div>
+    </div>
+  </section>
+
+  <!-- 13 · CASAS $12M -->
+  <section class="slide s14">
+    <div class="s14head">
+      <span class="kicker">Arriendo · Bogotá</span>
+      <span class="price">$12M <small>/ mes</small></span>
+    </div>
+
+    <div class="casarow">
+      <div class="clabel"><div class="cnum">01</div><div class="cmeta"><b>540 m²</b><br>4 habitaciones</div></div>
+      <div class="cphotos">
+        <img src="img/e1-1.webp" alt=""><img src="img/e1-2.webp" alt=""><img src="img/e1-3.webp" alt=""><img src="img/e1-4.webp" alt="">
+      </div>
+    </div>
+
+    <div class="casarow">
+      <div class="clabel"><div class="cnum">02</div><div class="cmeta"><b>1.300 m²</b><br>5 habitaciones</div></div>
+      <div class="cphotos">
+        <img src="img/e2-1.webp" alt=""><img src="img/e2-2.webp" alt=""><img src="img/e2-3.webp" alt=""><img src="img/e2-4.webp" alt="">
+      </div>
+    </div>
+
+    <div class="casarow">
+      <div class="clabel"><div class="cnum">03</div><div class="cmeta"><b>680 m²</b><br>4 habitaciones</div></div>
+      <div class="cphotos">
+        <img src="img/e3-1.jpg" alt=""><img src="img/e3-2.jpg" alt=""><img src="img/e3-3.jpg" alt=""><img src="img/e3-4.jpg" alt="">
+      </div>
+    </div>
+
+    <div class="casarow">
+      <div class="clabel"><div class="cnum">04</div><div class="cmeta"><b>580 m²</b> const.<br>800 m² priv · 5 hab</div></div>
+      <div class="cphotos">
+        <img src="img/e4-1.jpg" alt=""><img src="img/e4-2.jpg" alt=""><img src="img/e4-3.jpg" alt=""><img src="img/e4-4.jpg" alt="">
+      </div>
+    </div>
+  </section>
+
+  <!-- 15 · AMOBLAR -->
+  <section class="slide muebles">
+    <div class="kicker">Amoblar</div>
+    <h1>Cómo la montamos.</h1>
+    <div class="msub">Ya tenemos camas y TVs. Esto lo decidimos al ver la casa.</div>
+    <div class="mcards">
+      <div class="mcard">
+        <div class="mtag">Opción A</div>
+        <div class="mname">Amoblada</div>
+        <div class="mline">$0 de entrada, todo listo</div>
+        <div class="mline">Pero ~20-25% más de arriendo</div>
+        <div class="mline">≈ $10-12M más por cabeza al año</div>
+        <div class="mline">De pronto más pequeña</div>
+      </div>
+      <div class="mcard best">
+        <div class="mtag">Opción B · la más barata</div>
+        <div class="mname">Vacía + usado / a la medida</div>
+        <div class="mline">~$6-8M cada uno de entrada</div>
+        <div class="mline">Nos ahorramos ~$10-12M c/u al año</div>
+        <div class="mline">Sofá a la medida + resto usado</div>
+        <div class="mline">Casa más grande, muebles quedan</div>
+      </div>
+      <div class="mcard">
+        <div class="mtag">Opción C</div>
+        <div class="mname">Vacía + todo nuevo</div>
+        <div class="mline">~$13-16M cada uno de entrada</div>
+        <div class="mline">≈ $8-10M por cabeza al año</div>
+        <div class="mline">Lo nuevo pierde ~40% al año</div>
+        <div class="mline">No vale para 1 año</div>
+      </div>
+    </div>
+    <div class="mfoot">Lo definimos juntos cuando veamos la casa.</div>
+  </section>
+
+  <!-- 14 · SEAMOS HONESTOS -->
+  <section class="slide honest">
+    <div class="kicker">Seamos honestos</div>
+    <h1>Lo que puede salir mal — y cómo lo resolvemos.</h1>
+    <div class="rows">
+      <div class="row"><div class="prob">La distancia</div><div class="sep">&rarr;</div><div class="sol">Privacidad, silencio y naturaleza</div></div>
+      <div class="row"><div class="prob">Privacidad en lo común</div><div class="sep">&rarr;</div><div class="sol">Se coordina por el grupo</div></div>
+      <div class="row"><div class="prob">Bulla mientras se trabaja</div><div class="sep">&rarr;</div><div class="sol">Horarios coordinados</div></div>
+      <div class="row"><div class="prob">Si alguien se quiere ir</div><div class="sep">&rarr;</div><div class="sol">Contrato a un año + reemplazo</div></div>
+      <div class="row"><div class="prob">La comida</div><div class="sep">&rarr;</div><div class="sol">Nevera dividida + zona compartida</div></div>
+      <div class="row"><div class="prob">El riesgo financiero</div><div class="sep">&rarr;</div><div class="sol">Cuenta compartida + fondo común de 2 meses</div></div>
+    </div>
+  </section>
+
+  <!-- 15 · EL RETO REAL -->
+  <section class="slide">
+    <div class="kicker">El reto real</div>
+    <h1>Libertad geográfica y financiera.</h1>
+  </section>
+
+  <!-- 16 · ES UNA INVERSIÓN -->
+  <section class="slide">
+    <div class="kicker">En el fondo</div>
+    <h1>Es una <em>inversión.</em></h1>
+    <div class="sub">Nos mudamos con gente que también quiere ganar. Crecemos juntos.</div>
+  </section>
+
+  <!-- 17 · CIERRE -->
+  <section class="slide center">
+    <div class="kicker">Lo que importa</div>
+    <h1>Una tribu.</h1>
+    <div class="sub">Salimos de la monotonía. Subimos de nivel juntos.</div>
+  </section>
+
+  <!-- 18 · CIERRE -->
+  <section class="slide center">
+    <div class="kicker">Sin afán</div>
+    <h1>Piénsenlo.</h1>
+  </section>
+
+  <!-- 20 · RESUMEN: LO BUENO -->
+  <section class="slide resumen">
+    <div class="kicker">En resumen · lo que ganamos</div>
+    <div class="res-grid">
+      <div class="res-col">
+        <div class="res-cat">Plata</div>
+        <ul>
+          <li>Por una fracción del precio</li>
+          <li>Sale barato (~$2M tu parte)</li>
+          <li>Ahorro: PriceSmart, suscripciones</li>
+          <li>Es una inversión</li>
+          <li>Carro compartido</li>
+        </ul>
+      </div>
+      <div class="res-col">
+        <div class="res-cat">Crecimiento</div>
+        <ul>
+          <li>Más productivos, nos motivamos</li>
+          <li>Accountability: menos procrastinación</li>
+          <li>Entrenar juntos, subir de nivel</li>
+          <li>Skills compartidos, 3× más rápido</li>
+          <li>Estudio de contenido montado</li>
+        </ul>
+      </div>
+      <div class="res-col">
+        <div class="res-cat">Vida</div>
+        <ul>
+          <li>Lujo inalcanzable solos</li>
+          <li>Casa grande + privacidad</li>
+          <li>Cuotas según el cuarto</li>
+          <li>Ubicación justa</li>
+          <li>Libertad geográfica</li>
+          <li>Entretenimiento sin límite</li>
+        </ul>
+      </div>
+      <div class="res-col">
+        <div class="res-cat">Tribu &amp; momento</div>
+        <ul>
+          <li>El poder está en los números</li>
+          <li>Networking: contactos de los 3</li>
+          <li>Las novias se hacen amigas</li>
+          <li>Menos soledad, mejor ánimo</li>
+          <li>Salir de la monotonía</li>
+          <li>Mismos objetivos, cero conflicto</li>
+          <li>Ahora o nunca</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 21 · RESUMEN: RIESGOS Y LO QUE FALTA -->
+  <section class="slide resumen">
+    <div class="kicker" style="color:var(--warn)">En resumen · riesgos y lo que falta</div>
+    <div class="res-sub" style="color:var(--good)">Lo que puede salir mal &nbsp;→&nbsp; cómo lo resolvemos</div>
+    <div class="res-rows">
+      <div class="rrow"><span class="p">La distancia</span><span class="arr">→</span><span class="s">Privacidad, silencio y naturaleza</span></div>
+      <div class="rrow"><span class="p">Privacidad en lo común</span><span class="arr">→</span><span class="s">Se coordina por el grupo</span></div>
+      <div class="rrow"><span class="p">Invitados ajenos</span><span class="arr">→</span><span class="s">Se coordina por el grupo</span></div>
+      <div class="rrow"><span class="p">Bulla mientras se trabaja</span><span class="arr">→</span><span class="s">Horarios coordinados</span></div>
+      <div class="rrow"><span class="p">Si alguien se va antes</span><span class="arr">→</span><span class="s">Contrato a un año + reemplazo</span></div>
+      <div class="rrow"><span class="p">La comida</span><span class="arr">→</span><span class="s">Nevera dividida + zona compartida</span></div>
+      <div class="rrow"><span class="p">El riesgo financiero</span><span class="arr">→</span><span class="s">Cuenta compartida + fondo de 2 meses</span></div>
+    </div>
+    <div class="res-dif">
+      <div class="res-sub" style="color:var(--hard)">Lo que falta resolver hoy</div>
+      <ul>
+        <li>Libertad geográfica + libertad financiera mínima (hacer plata)</li>
+        <li>Que los papás no se entrometan (si te va bien, no dicen nada)</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- CHROME -->
+  <div class="progress" id="progress"></div>
+  <div class="pageno"><b id="pn">01</b> / <span id="pt">18</span></div>
+  <div class="hint" id="hint">&larr; &rarr; para navegar</div>
+
+</div>
+
+<script>
+  var stage = document.getElementById('stage');
+  function fit(){
+    var sc = Math.min(window.innerWidth/1280, window.innerHeight/720);
+    stage.style.transform = 'scale('+sc+')';
+  }
+  window.addEventListener('resize', fit); fit();
+
+  var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
+  var total = slides.length;
+  var cur = 1;
+  document.getElementById('pt').textContent = String(total).padStart(2,'0');
+
+  function show(n){
+    n = Math.max(1, Math.min(total, n));
+    cur = n;
+    slides.forEach(function(s){ s.classList.remove('active'); });
+    var el = slides[n-1];
+    void el.offsetWidth;            // fuerza reflow → re-dispara la animación de entrada
+    el.classList.add('active');
+    document.getElementById('progress').style.width = (n/total*100)+'%';
+    document.getElementById('pn').textContent = String(n).padStart(2,'0');
+    var hint = document.getElementById('hint');
+    hint.style.opacity = (n===1) ? '0.7' : '0';
+  }
+
+  document.addEventListener('keydown', function(e){
+    if(e.key==='ArrowRight' || e.key==='ArrowDown' || e.key===' '){ e.preventDefault(); show(cur+1); }
+    if(e.key==='ArrowLeft'  || e.key==='ArrowUp'){ e.preventDefault(); show(cur-1); }
+  });
+  // click: avanza (mitad derecha) / retrocede (mitad izquierda)
+  document.body.addEventListener('click', function(e){
+    if(e.clientX < window.innerWidth*0.32){ show(cur-1); } else { show(cur+1); }
+  });
+
+  show(1);
+</script>
+</body>
+</html>
