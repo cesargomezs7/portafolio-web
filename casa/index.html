@@ -213,6 +213,17 @@
   table.calc td:first-child,table.calc th:first-child{color:var(--soft)}
   table.calc td:last-child{color:var(--good);font-weight:500}
 
+  /* ---------- RESUMEN COMPLETO (varias secciones) ---------- */
+  .res2{padding:38px 60px;justify-content:flex-start}
+  .res2 .kicker{margin-bottom:20px}
+  .res2-grid{display:grid;grid-template-columns:1fr 1fr;gap:4px 56px;align-items:start}
+  .res2-sec{margin-bottom:16px}
+  .res2-cat{font-family:'Inter',sans-serif;font-size:11.5px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);margin-bottom:8px}
+  .res2-sec ul{list-style:none}
+  .res2-sec li{font-family:'Inter',sans-serif;font-size:13.5px;color:var(--text);line-height:1.38;padding-left:13px;position:relative;margin-bottom:5px}
+  .res2-sec li::before{content:'';position:absolute;left:0;top:6px;width:4px;height:4px;border-radius:50%;background:var(--soft)}
+  .res2-sec li b{color:var(--accent);font-weight:500}
+
   /* ---------- ANIMACIÓN DE ENTRADA ---------- */
   @keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
   .slide.active .kicker{animation:fadeUp .7s cubic-bezier(.16,1,.3,1) both}
@@ -581,6 +592,66 @@
         <li>Libertad geográfica + libertad financiera mínima (hacer plata)</li>
         <li>Que los papás no se entrometan (si te va bien, no dicen nada)</li>
       </ul>
+    </div>
+  </section>
+
+  <!-- 22 · RESUMEN COMPLETO 1 -->
+  <section class="slide res2">
+    <div class="kicker">Resumen completo · la idea</div>
+    <div class="res2-grid">
+      <div>
+        <div class="res2-sec"><div class="res2-cat">La visión</div><ul><li>Lujo inalcanzable a esta edad; mejor que la casa de los papás.</li></ul></div>
+        <div class="res2-sec"><div class="res2-cat">El precio</div><ul><li>Una fracción del costo (vivirlo solo costaría 15-20M/mes).</li></ul></div>
+        <div class="res2-sec"><div class="res2-cat">Por qué nosotros</div><ul><li>Gente que impulsa, no que distrae.</li><li>Misma mentalidad y objetivos; sin vicios.</li><li>Cero conflicto: cada quien respeta al otro.</li></ul></div>
+      </div>
+      <div>
+        <div class="res2-sec"><div class="res2-cat">Subimos de nivel</div><ul><li>Más productividad por motivación mutua.</li><li>Accountability: menos procrastinación.</li><li>Entrenar juntos (boxeo/MMA, pesas).</li><li>Tres aprendiendo a la vez: resultados más rápidos.</li></ul></div>
+        <div class="res2-sec"><div class="res2-cat">Estudio de contenido</div><ul><li>La casa es un set gratis para video, reels, ads.</li><li>Monetizar el estilo de vida; apoyo para grabar.</li></ul></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 23 · RESUMEN COMPLETO 2 -->
+  <section class="slide res2">
+    <div class="kicker">Resumen completo · la vida</div>
+    <div class="res2-grid">
+      <div>
+        <div class="res2-sec"><div class="res2-cat">Espacio e independencia</div><ul><li>Privacidad e independencia en casa grande.</li><li>Cuotas según el cuarto de cada uno.</li><li>Ubicación equilibrada (ni muy cerca ni muy lejos).</li></ul></div>
+        <div class="res2-sec"><div class="res2-cat">Libertad geográfica</div><ul><li>Ingresos remotos; sin gasto de transporte laboral.</li></ul></div>
+        <div class="res2-sec"><div class="res2-cat">Entretenimiento</div><ul><li>Asados, partidos, música alta, fiestas (no es apartamento).</li></ul></div>
+        <div class="res2-sec"><div class="res2-cat">Es ahora o nunca</div><ul><li>Única ventana: antes de formar familia y separar caminos.</li></ul></div>
+      </div>
+      <div>
+        <div class="res2-sec"><div class="res2-cat">La tribu</div><ul><li>Fuerza en los números.</li><li>Networking: los invitados se vuelven contactos de los tres.</li><li>Combate la soledad del trabajo remoto; sostiene el ánimo.</li><li>Más vida social, menos monotonía.</li></ul></div>
+        <div class="res2-sec"><div class="res2-cat">Es una inversión</div><ul><li>Mudarse con gente enfocada en crecer acelera el ingreso de todos.</li></ul></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 24 · RESUMEN COMPLETO 3 -->
+  <section class="slide res2">
+    <div class="kicker">Resumen completo · la plata</div>
+    <div class="res2-grid">
+      <div>
+        <div class="res2-sec"><div class="res2-cat">La cuenta</div><ul><li>Casa ~12M/mes: ~4M arriendo c/u + ~1-1.5M servicios y comida = <b>~5-5.5M fijo c/u</b>.</li><li>La ayuda de los papás (mientras jóvenes) reduce el aporte propio.</li><li>Ejemplos a $14M / $13M / $12M (referencia; hay mejores buscando).</li><li>Equivale a una familia de 50-80M/mes, pero a los 24-25 y sin cargas.</li><li>Zonas: Guaymaral y San José de Bavaria (norte); también en la ciudad.</li><li>Uber más caro entre más afuera; se compensa al no pagar transporte laboral.</li><li>Ahorro: compras al por mayor (PriceSmart), suscripciones compartidas.</li><li>A futuro: carro usado compartido (ej. Mazda 2 ~50M, ~17M c/u).</li></ul></div>
+      </div>
+      <div>
+        <div class="res2-sec"><div class="res2-cat">Cómo la amoblamos</div><ul><li>Amoblada: $0 inicial, pero +20-25% de arriendo; no queda nada al salir.</li><li>Vacía + usado (recomendada): ~6-8M c/u una vez; se revende. Ahorro vs amoblada: ~7M el año 1 hasta ~40M al año 4.</li><li>Vacía + nuevo: ~13-16M c/u; pierde ~40%; casi descartada.</li><li>Ya hay camas y TVs; falta sala, comedor y cocina.</li></ul></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 25 · RESUMEN COMPLETO 4 -->
+  <section class="slide res2">
+    <div class="kicker">Resumen completo · riesgos y cierre</div>
+    <div class="res2-grid">
+      <div>
+        <div class="res2-sec"><div class="res2-cat">Seamos honestos · riesgo &rarr; solución</div><ul><li>Distancia &rarr; privacidad y naturaleza.</li><li>Privacidad en común &rarr; se coordina por el grupo.</li><li>Invitados ajenos &rarr; se coordina.</li><li>Bulla al trabajar &rarr; horarios coordinados.</li><li>Salida anticipada &rarr; contrato a 1 año + reemplazo.</li><li>Comida &rarr; nevera dividida + zona compartida.</li><li>Riesgo financiero &rarr; cuenta compartida + fondo de 2 meses.</li></ul></div>
+      </div>
+      <div>
+        <div class="res2-sec"><div class="res2-cat">El reto real</div><ul><li>Pendiente: libertad geográfica + ingreso remoto estable.</li><li>Arranque (día 1, c/u): <b>~7M amoblada · ~14M vacía</b>.</li><li>Seguro evitable (directo con dueño); codeudor con finca sí es requisito.</li><li>Mes a mes: parte ~5M; el sobrante depende del aporte de los papás.</li></ul></div>
+        <div class="res2-sec"><div class="res2-cat">Piénsenlo</div><ul><li>Horizonte: de 6 meses a 2 años (lo normal, 1-2 años).</li><li>Decisión a futuro; si no encaja con los planes, no se hace.</li><li>¿De qué se arrepentirían más a los 60: de hacerlo o de no hacerlo?</li></ul></div>
+      </div>
     </div>
   </section>
 
