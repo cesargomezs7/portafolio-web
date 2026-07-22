@@ -1,0 +1,2165 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pronto — Preview Noir (prueba interna)</title>
+<meta name="robots" content="noindex,nofollow">
+<meta name="description" content="Pronto Dental · $199.900 COP/mes. Web profesional dental en 7-10 días, dominio propio, hosting incluido. Primer mes gratis. Sin contratos.">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+<!-- Open Graph / WhatsApp share -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Pronto · Presencia web profesional para clínicas dentales">
+<meta property="og:description" content="Pronto Dental · $199.900 COP/mes. Web profesional dental en 7-10 días, dominio propio, hosting incluido. Primer mes gratis. Sin contratos.">
+<meta property="og:url" content="https://prontoweb.co">
+<meta property="og:site_name" content="Pronto">
+<meta property="og:locale" content="es_CO">
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- GSAP — animaciones disparadas por scroll + timeline hero -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+
+
+<!-- Umami Cloud analytics -->
+
+<!-- FAQ Schema JSON-LD -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "¿Por qué $199.900 al mes?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Lo que cobra el mercado en Colombia: una web con agencia se paga única vez más mantenimiento mensual aparte (hosting, cambios, soporte y dominio cada uno por su lado). Pronto entrega todo incluido por $199.900/mes con primer mes gratis. Tu ROI real: 1 paciente nuevo con un tratamiento mediano al mes ya cubre el plan. 1 implante o diseño de sonrisa al año equivale a varios meses del servicio pagados."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Por qué te regalamos un mes?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Porque sabemos que esta web te va a traer pacientes y queremos que lo veas con tus propios ojos. Confiamos en el producto, no necesitamos amarrarte con contratos largos ni meses de prueba pagados. Si después de 30 días con la web activa no notas más mensajes por WhatsApp o más agendas, cancelas y no pagas nada. Pero apostamos a que sí."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Cobran setup o matrícula?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. $0 de setup permanente. Lo único que pagas es la mensualidad después del primer mes gratis."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Puedo cancelar cuando quiera?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sí, en cualquier momento, sin penalidad. Solo nos avisas por WhatsApp y procesamos la baja."
+      }
+    }
+  ]
+}
+</script>
+
+<style>
+  :root {
+    --bg: #000000;
+    --bg-subtle: rgba(255,255,255,0.02);
+    --bg-card: rgba(255,255,255,0.04);
+    --text: #D9D9D9;
+    --text-muted: #9E9E9E;
+    --text-dim: #8A8A8A;
+    --accent-blue: #8E9296;
+    --accent-cyan: #C9CCCF;
+    --accent-green: #D8D8D8;
+    --accent-red: #8A8A8A;
+    --border: rgba(255,255,255,0.08);
+    --border-blue: rgba(255,255,255,0.25);
+    --gradient: linear-gradient(0deg, #E8E8E8, #E8E8E8);
+    --font-heading: 'Archivo Black', 'Archivo', sans-serif;
+    --font-display: 'Archivo Black', 'Archivo', sans-serif;
+    --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --radius: 2px;
+    --radius-lg: 3px;
+
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--font-body);
+    color: var(--text);
+    background: var(--bg);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+    position: relative;
+  }
+  a { color: inherit; text-decoration: none; }
+  img { max-width: 100%; display: block; }
+  .container { max-width: 1120px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+  section { padding: 80px 0; position: relative; z-index: 1; }
+  h1, h2, h3 { font-family: var(--font-heading); line-height: 1.15; font-weight: 400; letter-spacing: -0.02em; }
+  h1, h2 { text-transform: uppercase; }
+  /* Display Archivo Black para H1 + H2 grandes */
+  .hero h1, section h2, .cta-final h2 { font-family: var(--font-heading); font-weight: 400; line-height: 1.12; letter-spacing: -0.02em; }
+  h1 { font-size: clamp(1.6rem, 3.6vw, 2.6rem); }
+  h2 { font-size: clamp(1.3rem, 2.8vw, 1.95rem); margin-bottom: 24px; color: #A6AAAE; }
+  /* Escala compacta SOLO en desktop; en móvil queda al 100% para que se lea bien. Ajustar el número para más/menos pequeño. */
+  @media (min-width: 768px) { body { zoom: 0.82; } }
+  h3 { font-size: 1.25rem; margin-bottom: 12px; }
+
+  .brand-gradient { color: #C9CCCF; }
+
+  .section-label {
+    text-align: center;
+    font-size: 0.72rem;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.28em;
+    color: #8E9296;
+    margin-bottom: 12px;
+  }
+
+  /* Reveal animations */
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── READING PROGRESS BAR ── */
+  #progress-bar-track {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: #000;
+    z-index: 199;
+  }
+  #progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    width: 0%;
+    background: var(--gradient);
+    z-index: 200;
+    transition: width 0.1s linear;
+  }
+
+  /* ── NAVBAR ── */
+  .navbar {
+    position: fixed;
+    top: 3px;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    padding: 12px 0;
+    background: rgba(0,0,0,0.94);
+    border-bottom: 1px solid var(--border);
+    transition: background 0.3s;
+  }
+  .navbar .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .navbar-logo {
+    font-family: var(--font-heading);
+    font-size: 1.35rem;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: #9A9EA2;
+  }
+  .navbar-links {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    list-style: none;
+  }
+  .navbar-links a {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    transition: color 0.2s;
+  }
+  .navbar-links a:hover { color: var(--text); }
+  .navbar-links a.navbar-cta {
+    display: inline-block;
+    padding: 10px 22px;
+    border-radius: 10px;
+    background: var(--gradient);
+    color: #000;
+    font-family: var(--font-heading);
+    font-weight: 400;
+    font-size: 0.88rem;
+    letter-spacing: 0.02em;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .navbar-links a.navbar-cta:hover {
+    background: #000;
+    color: #EFEFEF;
+    box-shadow: inset 0 0 0 2px #EFEFEF;
+  }
+  @media (max-width: 768px) {
+    .navbar-links li:not(.nav-cta) { display: none; }
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 120px 0 60px;
+    background:
+      radial-gradient(ellipse at 50% 15%, rgba(255,255,255,0.07), transparent 55%);
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+  }
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 16px;
+    border-radius: 2px;
+    background: transparent;
+    border: 1px solid rgba(158,158,158,0.5);
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--accent-green);
+    margin-bottom: 22px;
+  }
+  .hero-badge .pulse-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--accent-green);
+    border-radius: 50%;
+    animation: pulse-dot 2s ease-in-out infinite;
+  }
+  @keyframes pulse-dot {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.45; }
+  }
+  .hero-eyebrow {
+    font-size: 0.92rem;
+    color: var(--accent-cyan);
+    text-align: center;
+    margin: 0 auto 18px;
+    max-width: 620px;
+    letter-spacing: 0.3px;
+    font-weight: 500;
+    line-height: 1.4;
+  }
+  .hero-eyebrow sup { font-size: 0.7em; }
+  .hero h1 { margin-bottom: 20px; font-family: var(--font-heading); font-weight: 400; letter-spacing: -0.02em; color: #A6AAAE; }
+  .hero .sub {
+    font-size: 1.15rem;
+    color: var(--text-muted);
+    margin: 0 auto 16px;
+    max-width: 620px;
+    line-height: 1.7;
+  }
+  .hero-footnote {
+    font-size: 0.72rem;
+    color: var(--text-dim);
+    text-align: center;
+    margin: 0 auto 28px;
+    max-width: 560px;
+    line-height: 1.5;
+    opacity: 0.75;
+  }
+  .hero-footnote a {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .hero-footnote a:hover { color: var(--text); }
+  .hero-footnote sup { font-size: 0.85em; }
+  .hero-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 48px;
+  }
+  .cta-primary {
+    display: inline-block;
+    padding: 24px 72px;
+    border-radius: var(--radius);
+    background: var(--gradient);
+    color: #000;
+    font-family: var(--font-heading);
+    font-weight: 400;
+    font-size: 1.25rem;
+    letter-spacing: 0.02em;
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+  }
+  .cta-primary:hover {
+    background: #000;
+    color: #EFEFEF;
+    box-shadow: inset 0 0 0 2px #EFEFEF;
+  }
+  .cta-primary:active { transform: translateY(0) scale(0.98); }
+  .cta-secondary {
+    display: inline-block;
+    padding: 16px 32px;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-weight: 600;
+    font-size: 1rem;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .cta-secondary:hover {
+    border-color: var(--accent-blue);
+    background: rgba(255,255,255,0.03);
+  }
+
+  /* Hero Stats */
+  .hero-stats {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 32px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+    max-width: 700px;
+    margin: 0 auto;
+  }
+  .hero-stat {
+    text-align: center;
+    min-width: 100px;
+  }
+  .hero-stat .stat-number {
+    font-family: var(--font-heading);
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: var(--text);
+  }
+  .hero-stat .stat-label {
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    margin-top: 2px;
+  }
+
+  /* ── TICKER / MARQUEE ── */
+  .ticker {
+    overflow: hidden;
+    background: rgba(255,255,255,0.03);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 0;
+    white-space: nowrap;
+  }
+  .ticker:hover .ticker-track { animation-play-state: paused; }
+  .ticker-track {
+    display: inline-flex;
+    animation: ticker-scroll 30s linear infinite;
+  }
+  .ticker-item {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    padding: 0 24px;
+    font-weight: 500;
+  }
+  .ticker-star { color: var(--accent-blue); padding: 0 8px; }
+  @keyframes ticker-scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* ── SIN WEB VS CON PRONTO ── */
+  .comparison-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 40px;
+  }
+  @media (max-width: 768px) {
+    .comparison-grid { grid-template-columns: 1fr; }
+  }
+  .comp-card {
+    padding: 32px 28px;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+  }
+  .comp-card.pain {
+    background: rgba(130,130,130,0.04);
+    border-color: rgba(130,130,130,0.15);
+  }
+  .comp-card.gain {
+    background: rgba(255,255,255,0.02);
+    border-color: rgba(255,255,255,0.08);
+  }
+  .comp-card h3 {
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+  }
+  .comp-card.pain h3 { color: var(--accent-red); }
+  .comp-card.gain h3 { color: var(--accent-cyan); }
+  .comp-card ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .comp-card li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+  .comp-icon {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 700;
+    margin-top: 1px;
+  }
+  .comp-card.pain .comp-icon {
+    background: rgba(130,130,130,0.15);
+    color: var(--accent-red);
+  }
+  .comp-card.gain .comp-icon {
+    background: rgba(255,255,255,0.09);
+    color: var(--accent-cyan);
+  }
+
+  /* ── PROCESS TIMELINE ── */
+  .timeline {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 56px;
+  }
+  .timeline-step {
+    padding: 22px 22px 24px;
+    border-radius: 3px;
+    background: #0A0A0A;
+    border: 1px solid rgba(255,255,255,0.08);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+    text-align: left;
+    position: relative;
+  }
+  .timeline-step:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    right: -14px;
+    top: 50%;
+    width: 12px;
+    height: 12px;
+    border-top: 2px solid rgba(252,253,255,0.28);
+    border-right: 2px solid rgba(252,253,255,0.28);
+    transform: translateY(-50%) rotate(45deg);
+    pointer-events: none;
+    z-index: 2;
+  }
+  .timeline-step:hover {
+    transform: translateY(-6px) scale(1.02);
+    border-color: rgba(255,255,255,0.18);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.4);
+  }
+  .timeline-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 18px;
+  }
+  .timeline-icon-box {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.12);
+    background: rgba(16,16,18,0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .timeline-icon-box svg {
+    width: 22px;
+    height: 22px;
+    stroke: rgba(252,253,255,0.85);
+  }
+  .timeline-num {
+    font-family: 'SF Mono', Menlo, Consolas, monospace;
+    font-size: 0.82rem;
+    color: rgba(252,253,255,0.6);
+    letter-spacing: 0.02em;
+  }
+  .timeline-step h3 {
+    font-family: var(--font-heading);
+    font-size: 1.3rem;
+    font-weight: 400;
+    letter-spacing: -0.4px;
+    color: var(--text);
+    margin: 0;
+    line-height: 1.25;
+  }
+  .timeline-step p {
+    font-family: var(--font-body);
+    font-size: 0.88rem;
+    line-height: 1.5;
+    color: rgba(252,253,255,0.65);
+    margin: 0;
+  }
+  @media (max-width: 768px) {
+    .timeline { grid-template-columns: 1fr; gap: 24px; }
+    .timeline-step:not(:last-child)::after {
+      right: 50%;
+      top: auto;
+      bottom: -18px;
+      transform: translateX(50%) rotate(135deg);
+    }
+  }
+
+  /* ── ROI CALCULATOR ── */
+  .roi-calc {
+    max-width: 600px;
+    margin: 40px auto 0;
+    padding: 36px 32px;
+    border-radius: var(--radius-lg);
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+  }
+  .roi-field {
+    margin-bottom: 24px;
+  }
+  .roi-field label {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--text);
+  }
+  .roi-field input[type="range"] {
+    width: 100%;
+    padding: 0;
+    height: 6px;
+    -webkit-appearance: none;
+    appearance: none;
+    background: rgba(255,255,255,0.1);
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+  .roi-input-group {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+  .roi-btn {
+    width: 56px;
+    height: 52px;
+    border: none;
+    background: rgba(255,255,255,0.08);
+    color: var(--accent-cyan);
+    font-size: 1.4rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s;
+    font-family: var(--font-body);
+    flex-shrink: 0;
+  }
+  .roi-btn:hover {
+    background: rgba(255,255,255,0.17);
+  }
+  .roi-btn:active {
+    background: rgba(255,255,255,0.28);
+  }
+  .roi-input-group input {
+    flex: 1;
+    text-align: center;
+    border: none;
+    border-left: 1px solid var(--border);
+    border-right: 1px solid var(--border);
+    background: rgba(255,255,255,0.05);
+    color: var(--text);
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    font-weight: 700;
+    padding: 12px;
+    outline: none;
+  }
+  .roi-field input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--accent-blue);
+    cursor: pointer;
+  }
+  .roi-field .range-value {
+    text-align: center;
+    font-family: var(--font-heading);
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-top: 8px;
+    color: var(--text);
+  }
+  .roi-results {
+    margin-top: 24px;
+    padding: 24px;
+    border-radius: var(--radius);
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.11);
+  }
+  .roi-results .roi-line {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+  .roi-results .roi-line:last-child { border-bottom: none; }
+  .roi-results .roi-line strong { color: var(--text); }
+  .roi-highlight {
+    margin-top: 16px;
+    padding: 20px;
+    border-radius: var(--radius);
+    background: var(--gradient);
+    text-align: center;
+  }
+  .roi-highlight .roi-big {
+    font-family: var(--font-heading);
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: var(--bg);
+  }
+  .roi-highlight .roi-label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: rgba(8,8,8,0.7);
+  }
+
+  /* ── BEFORE / AFTER SLIDER ── */
+  .ba-container {
+    max-width: 780px;
+    margin: 40px auto 0;
+    position: relative;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    border: 1px solid var(--border);
+    aspect-ratio: 16 / 9;
+    cursor: ew-resize;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: none;
+  }
+  .ba-side {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    overflow: hidden;
+  }
+  .ba-before {
+    left: 0;
+    width: 50%;
+    z-index: 2;
+  }
+  .ba-after {
+    left: 0;
+    width: 100%;
+    z-index: 1;
+  }
+  .ba-side iframe {
+    width: 1440px;
+    height: 810px;
+    border: none;
+    pointer-events: none;
+    transform-origin: top left;
+  }
+  .ba-divider {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 4px;
+    background: var(--text);
+    box-shadow: 0 0 0 1px rgba(0,0,0,0.6);
+    z-index: 3;
+    transform: translateX(-50%);
+  }
+  .ba-divider::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--text);
+    border: 2px solid rgba(0,0,0,0.55);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+  }
+  .ba-divider::before {
+    content: '\2194';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 4;
+    font-size: 1.2rem;
+    color: var(--bg);
+    font-weight: 700;
+  }
+  .ba-label {
+    position: absolute;
+    bottom: 16px;
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    z-index: 5;
+  }
+  .ba-label-before {
+    left: 16px;
+    background: rgba(0,0,0,0.78);
+    color: #EFEFEF;
+    border: 1px solid rgba(255,255,255,0.25);
+  }
+  .ba-label-after {
+    right: 16px;
+    background: var(--gradient);
+    color: var(--bg);
+  }
+
+  /* ── DEMO CONTROLS (selector diseño + toggle viewport) ── */
+  .demo-controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    margin: 32px 0 28px;
+  }
+  .demo-selector {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 5px;
+    border-radius: 2px;
+    border: 1px solid var(--border);
+    background: #0A0A0A;
+  }
+  .demo-arrow {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    background: rgba(255,255,255,0.04);
+    color: var(--text-muted);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.25s ease;
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 1;
+    flex-shrink: 0;
+  }
+  .demo-arrow:hover {
+    border-color: var(--accent-blue);
+    color: var(--text);
+    background: rgba(255,255,255,0.07);
+    transform: scale(1.05);
+  }
+  .demo-arrow:active { transform: scale(0.95); }
+  .demo-name {
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text);
+    min-width: 240px;
+    text-align: center;
+    letter-spacing: -0.2px;
+    padding: 0 6px;
+  }
+  .demo-name .demo-name-counter {
+    color: var(--text-dim);
+    font-weight: 400;
+    margin-right: 8px;
+    font-size: 0.82rem;
+    letter-spacing: 0;
+  }
+  .viewport-toggle {
+    display: inline-flex;
+    border-radius: 2px;
+    border: 1px solid var(--border);
+    background: #0A0A0A;
+    padding: 4px;
+    gap: 2px;
+  }
+  .viewport-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 18px;
+    border-radius: 2px;
+    border: none;
+    background: transparent;
+    color: var(--text-muted);
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    letter-spacing: -0.1px;
+  }
+  .viewport-btn svg { width: 15px; height: 15px; stroke-width: 1.8; }
+  .viewport-btn.active {
+    background: var(--gradient);
+    color: var(--bg);
+  }
+  .viewport-btn:hover:not(.active) { color: var(--text); }
+
+  /* ── LIVE DEMO CONTAINER (desktop + mobile modes) ── */
+  .live-demo-container {
+    max-width: 780px;
+    margin: 0 auto;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    border: 1px solid var(--border);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+    aspect-ratio: 16 / 9;
+    background: var(--bg);
+    position: relative;
+    transition: max-width 0.45s cubic-bezier(0.65, 0, 0.35, 1),
+                aspect-ratio 0.45s cubic-bezier(0.65, 0, 0.35, 1),
+                border-radius 0.45s cubic-bezier(0.65, 0, 0.35, 1),
+                border-width 0.45s cubic-bezier(0.65, 0, 0.35, 1);
+  }
+  .live-demo-container.mobile {
+    max-width: 280px;
+    aspect-ratio: 430 / 932;
+    border-radius: 36px;
+    border: 8px solid #0a0a0a;
+    box-shadow: 0 24px 60px rgba(0,0,0,0.5), inset 0 0 0 1px rgba(255,255,255,0.04);
+  }
+  .live-demo-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1440px;
+    height: 810px;
+    border: none;
+    transform-origin: top left;
+    transition: opacity 0.25s ease;
+  }
+  .live-demo-container.mobile iframe {
+    width: 430px;
+    height: 932px;
+  }
+
+  /* ── PHONES ROW (side by side) ── */
+  .phones-row {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 40px;
+  }
+  .phone-col {
+    text-align: center;
+  }
+  @media (max-width: 480px) {
+    .phones-row { gap: 16px; }
+    .device-phone { width: 180px; }
+  }
+
+  /* ── DEVICE LABELS ── */
+  .device-label {
+    text-align: center;
+    margin-top: 12px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  /* Phone mockup */
+  .device-phone {
+    width: 280px;
+    background: #050505;
+    border-radius: 36px;
+    padding: 6px;
+    border: 3px solid rgba(255,255,255,0.2);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.6), inset 0 0 0 1px rgba(255,255,255,0.05);
+  }
+  .device-phone-screen {
+    border-radius: 30px;
+    overflow: hidden;
+    aspect-ratio: 9 / 19.5;
+    background: var(--bg);
+    position: relative;
+  }
+  .device-phone-screen iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 375px;
+    height: 812px;
+    border: none;
+    pointer-events: auto;
+    transform-origin: top left;
+  }
+  .device-phone-notch {
+    width: 90px;
+    height: 6px;
+    background: #161616;
+    border-radius: 3px;
+    margin: 4px auto 4px;
+  }
+  .device-phone-home {
+    width: 40px;
+    height: 5px;
+    background: #161616;
+    border-radius: 3px;
+    margin: 4px auto 0;
+  }
+  @media (max-width: 768px) {
+    .device-phone { width: 200px; }
+  }
+
+  /* ── PLANES ── */
+  .planes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 24px;
+    margin-top: 40px;
+  }
+  .plan {
+    padding: 36px;
+    border-radius: var(--radius-lg);
+    background: #0A0A0A;
+    border: 1px solid rgba(255,255,255,0.18);
+    position: relative;
+    transition: transform 0.2s;
+  }
+  .plan:hover { border-color: rgba(255,255,255,0.32); }
+  .plan.destacado {
+    border: 2px solid #EFEFEF;
+    box-shadow: none;
+  }
+  .plan .ribbon {
+    position: absolute;
+    top: -1px;
+    left: 28px;
+    background: #C9CCCF;
+    color: #000;
+    padding: 6px 14px;
+    border-radius: 0 0 2px 2px;
+    font-family: var(--font-body);
+    font-size: 0.69rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    box-shadow: 0 2px 12px rgba(255,255,255,0.19);
+  }
+  .plan-name {
+    font-family: var(--font-heading);
+    font-size: 1.75rem;
+    font-weight: 400;
+    letter-spacing: -0.3px;
+    line-height: 1;
+    margin-top: 8px;
+    margin-bottom: 20px;
+    color: var(--text);
+  }
+  .plan-price {
+    font-family: var(--font-heading);
+    font-size: 3.4rem;
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: -1.6px;
+    margin: 0 0 6px;
+    color: var(--text);
+    display: inline-flex;
+    align-items: baseline;
+    gap: 8px;
+  }
+  .plan-price small {
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    font-weight: 400;
+    color: rgba(252,253,255,0.55);
+    letter-spacing: 0;
+  }
+  .plan-cop {
+    font-family: 'SF Mono', Menlo, Consolas, monospace;
+    font-size: 0.74rem;
+    color: rgba(252,253,255,0.65);
+    margin-bottom: 22px;
+    letter-spacing: 0.02em;
+  }
+  .plan ul {
+    list-style: none;
+    padding: 0;
+    margin: 22px 0 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding-top: 22px;
+  }
+  .plan ul li {
+    padding: 0 0 0 24px;
+    position: relative;
+    border-bottom: none;
+    font-size: 0.88rem;
+    line-height: 1.45;
+    color: rgba(252,253,255,0.86);
+  }
+  .plan ul li::before {
+    content: "\2713";
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: var(--accent-cyan);
+    font-weight: 600;
+    font-size: 0.95rem;
+  }
+  .plan-note {
+    margin-top: 18px;
+    font-size: 0.78rem;
+    color: rgba(252,253,255,0.5);
+    font-style: normal;
+    text-align: center;
+  }
+  .plan-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin: 14px auto 0;
+    padding: 0 26px;
+    height: 52px;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    letter-spacing: -0.2px;
+    transition: transform 0.2s, box-shadow 0.2s, background 0.16s;
+  }
+  .plan .plan-cta {
+    background: var(--gradient);
+    color: #000;
+    font-family: var(--font-heading);
+    text-transform: uppercase;
+    font-weight: 400;
+
+  }
+  .plan .plan-cta:hover {
+    background: #000;
+    color: #EFEFEF;
+    box-shadow: inset 0 0 0 2px #EFEFEF;
+  }
+
+  /* ── POR QUE ── */
+  .porque {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 32px;
+    margin-top: 32px;
+  }
+  .porque-item {
+    padding: 28px;
+    text-align: center;
+    border-radius: var(--radius-lg);
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    transition: transform 0.2s;
+  }
+  .porque-item:hover { transform: translateY(-4px); }
+  .porque-item .icon {
+    width: 56px;
+    height: 56px;
+    margin: 0 auto 16px;
+    background: linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.09));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent-cyan);
+  }
+  .porque-item h3 { margin-bottom: 8px; }
+  .porque-item p { color: var(--text-muted); font-size: 0.95rem; }
+
+  /* ── FAQs ── */
+  .faqs {
+    max-width: 760px;
+    margin: 32px auto 0;
+  }
+  .faq {
+    background: #0A0A0A;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    margin-bottom: 12px;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+  .faq[open] { border-color: rgba(255,255,255,0.11); }
+  .faq summary {
+    cursor: pointer;
+    padding: 18px 24px;
+    list-style: none;
+    font-weight: 600;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: color 0.2s;
+  }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary::after {
+    content: "+";
+    color: var(--accent-cyan);
+    font-size: 1.4rem;
+    transition: transform 0.3s;
+    flex-shrink: 0;
+    margin-left: 16px;
+  }
+  .faq[open] summary::after { transform: rotate(45deg); }
+  .faq-body {
+    padding: 0 24px 20px;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    line-height: 1.7;
+  }
+
+  /* ── CTA FINAL ── */
+  .cta-final {
+    text-align: center;
+    padding: 100px 24px;
+    background: radial-gradient(ellipse at center, rgba(255,255,255,0.03), transparent 70%);
+  }
+  .cta-final h2 { margin-bottom: 16px; }
+  .cta-final p {
+    color: var(--text-muted);
+    margin-bottom: 32px;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.7;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 48px 24px 32px;
+    border-top: 1px solid var(--border);
+    color: var(--text-dim);
+    font-size: 0.85rem;
+    text-align: center;
+  }
+  footer a { color: var(--accent-cyan); transition: color 0.2s; }
+  footer a:hover { color: #EFEFEF; }
+  footer .footer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 24px;
+    margin-bottom: 24px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+  }
+  footer .footer-grid h4 {
+    font-family: var(--font-heading);
+    color: var(--text);
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+  }
+  footer .footer-bottom {
+    padding-top: 24px;
+    border-top: 1px solid rgba(255,255,255,0.05);
+  }
+
+  /* ── WHATSAPP FLOATING BUTTON ── */
+  .wa-float {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: #25D366;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+    z-index: 90;
+    transition: transform 0.2s;
+  }
+  .wa-float:hover { transform: scale(1.1); }
+  .wa-float svg { width: 32px; height: 32px; fill: #fff; }
+  @media (max-width: 768px) {
+    .wa-float { bottom: 80px; }
+  }
+
+  /* ── STICKY CTA MOBILE ── */
+  .sticky-cta-mobile {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 150;
+    background: var(--bg);
+    border-top: 1px solid var(--border);
+    padding: 12px 16px;
+    box-shadow: 0 -4px 20px rgba(0,0,0,0.3);
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+  }
+  .sticky-cta-mobile.show { transform: translateY(0); }
+  .sticky-cta-mobile a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 14px;
+    border-radius: var(--radius);
+    background: #25D366;
+    color: #fff;
+    font-weight: 700;
+    font-size: 0.95rem;
+  }
+  .sticky-cta-mobile svg { width: 22px; height: 22px; fill: #fff; }
+  @media (max-width: 768px) {
+    .sticky-cta-mobile { display: block; }
+  }
+
+  /* ── EXIT INTENT POPUP ── */
+  .popup-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    z-index: 300;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+    padding: 20px;
+  }
+  .popup-overlay.show {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .popup {
+    background: #111111;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 48px 40px;
+    max-width: 440px;
+    text-align: center;
+    position: relative;
+    transform: scale(0.9);
+    transition: transform 0.3s;
+  }
+  .popup-overlay.show .popup { transform: scale(1); }
+  .popup-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 32px;
+    height: 32px;
+    border: none;
+    background: rgba(255,255,255,0.08);
+    border-radius: 50%;
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+  }
+  .popup-close:hover { background: rgba(255,255,255,0.15); }
+  .popup h2 {
+    font-size: 1.6rem;
+    margin-bottom: 12px;
+  }
+  .popup p {
+    color: var(--text-muted);
+    margin-bottom: 28px;
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 640px) {
+    section { padding: 56px 0; }
+    .hero { padding: 100px 0 40px; min-height: auto; }
+    .hero-stats { gap: 20px; }
+    .hero-stat .stat-number { font-size: 1.3rem; }
+    .plan { padding: 24px 20px; }
+    .roi-calc { padding: 24px 20px; }
+    .popup { padding: 32px 24px; }
+    .ba-container { aspect-ratio: 16/9; }
+    .cta-primary {
+      padding: 18px 36px;
+      font-size: 1.05rem;
+      box-shadow: 0 6px 20px rgba(255,255,255,0.18);
+    }
+  }
+
+  /* ── SECTION ALT SMOOTH GRADIENTS ── */
+  .section-alt {
+    background: var(--bg-subtle);
+    position: relative;
+  }
+  .section-alt::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background: linear-gradient(to bottom, var(--bg), transparent);
+    pointer-events: none;
+    z-index: 1;
+  }
+  .section-alt::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background: linear-gradient(to top, var(--bg), transparent);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* ── NOIR: línea de corte del empaque ── */
+  .cut-divider {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 0 24px;
+    color: #8E9296;
+    user-select: none;
+  }
+  .cut-divider .scissors { font-size: 0.95rem; transform: scaleX(-1); line-height: 1; }
+  .cut-divider .dash {
+    flex: 1;
+    border-top: 1px dashed #6E6E6E;
+    height: 0;
+  }
+
+  /* ── NOIR: sello octagonal estilo empaque ── */
+  .seal-octagon {
+    position: absolute;
+    top: -30px;
+    right: 22px;
+    width: 108px;
+    height: 108px;
+    background: #F2F2F2;
+    clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #000;
+    font-family: var(--font-heading);
+    font-size: 0.62rem;
+    line-height: 1.25;
+    letter-spacing: 0.03em;
+    transform: rotate(0deg);
+    z-index: 2;
+  }
+  .seal-octagon small {
+    display: block;
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.5rem;
+    letter-spacing: 0.08em;
+    margin-top: 3px;
+    color: #333;
+  }
+  @media (max-width: 768px) {
+    .seal-octagon { width: 80px; height: 80px; font-size: 0.54rem; top: -20px; right: 14px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- READING PROGRESS BAR -->
+<div id="progress-bar-track"></div>
+<div id="progress-bar"></div>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="container">
+    <a href="#" class="navbar-logo">Pronto</a>
+    <ul class="navbar-links">
+      <li><a href="#portafolio">Ver en vivo</a></li>
+      <li><a href="#como-funciona">Cómo funciona</a></li>
+      <li><a href="#planes">Precios</a></li>
+      <li><a href="#faqs">FAQ</a></li>
+      <li class="nav-cta">
+        <a class="navbar-cta" href="https://wa.me/573124672674?text=Hola%2C%20vengo%20de%20prontoweb.co%20y%20quiero%20empezar" data-umami-event="click-nav-cta">EMPECEMOS</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="container">
+    <div class="hero-badge">
+      <span class="pulse-dot"></span>
+      Disponible &middot; Primer mes gratis &middot; Pronto Dental
+    </div>
+    <p class="hero-eyebrow">97 de cada 100 visitantes de tu web se van sin pedir cita<sup>¹</sup></p>
+    <h1>La web inteligente que convierte visitantes en citas</h1>
+    <ul style="list-style:none; padding:0; margin:24px auto 32px; max-width:480px; text-align:left; display:flex; flex-direction:column; gap:10px;">
+      <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.95rem; color:var(--text); line-height:1.45;"><span style="color:var(--accent-green); font-weight:700; flex-shrink:0;">&#10003;</span> Te hacemos una web que trae pacientes, no solo bonita.</li>
+      <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.95rem; color:var(--text); line-height:1.45;"><span style="color:var(--accent-green); font-weight:700; flex-shrink:0;">&#10003;</span> Sin contratos. Cancelas cuando quieras con un mensaje.</li>
+      <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.95rem; color:var(--text); line-height:1.45;"><span style="color:var(--accent-green); font-weight:700; flex-shrink:0;">&#10003;</span> Tú no aprendes tecnología, nosotros operamos todo.</li>
+      <li style="display:flex; align-items:flex-start; gap:10px; font-size:0.95rem; color:var(--text); line-height:1.45;"><span style="color:var(--accent-green); font-weight:700; flex-shrink:0;">&#10003;</span> Cambios y soporte por WhatsApp incluidos.</li>
+    </ul>
+    <div class="hero-buttons">
+      <a class="cta-primary" href="https://wa.me/573124672674?text=Hola%2C%20quiero%20ver%20la%20demo%20de%20mi%20cl%C3%ADnica" data-umami-event="click-hero-cta">EMPECEMOS GRATIS</a>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="stat-number" data-target="7" data-suffix="-10 días">0</div>
+        <div class="stat-label">Entrega</div>
+      </div>
+      <div class="hero-stat">
+        <div class="stat-number">$0</div>
+        <div class="stat-label">Inversión inicial</div>
+      </div>
+      <div class="hero-stat">
+        <div class="stat-number">100%</div>
+        <div class="stat-label">Dental</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER / MARQUEE -->
+<div class="ticker">
+  <div class="ticker-track">
+    <span class="ticker-item">Primer mes gratis &middot; Pronto Dental</span><span class="ticker-star" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:middle"><path d="M16.5 3C14.7 3 13.6 3.6 12 3.6S9.3 3 7.5 3C4.5 3 3 5.2 3 8c0 2 .6 3.6 1.2 5.4l.7 2.1c.7 2.2 1.6 5.5 3.1 5.5 1.1 0 1.5-1.4 1.7-3l.4-2.4c.2-1.3.5-2.2 1.9-2.2s1.7.9 1.9 2.2l.4 2.4c.2 1.6.6 3 1.7 3 1.5 0 2.4-3.3 3.1-5.5l.7-2.1C20.4 11.6 21 10 21 8c0-2.8-1.5-5-4.5-5z"/></svg></span>
+    <span class="ticker-item">Web en 7-10 días</span><span class="ticker-star" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:middle"><path d="M16.5 3C14.7 3 13.6 3.6 12 3.6S9.3 3 7.5 3C4.5 3 3 5.2 3 8c0 2 .6 3.6 1.2 5.4l.7 2.1c.7 2.2 1.6 5.5 3.1 5.5 1.1 0 1.5-1.4 1.7-3l.4-2.4c.2-1.3.5-2.2 1.9-2.2s1.7.9 1.9 2.2l.4 2.4c.2 1.6.6 3 1.7 3 1.5 0 2.4-3.3 3.1-5.5l.7-2.1C20.4 11.6 21 10 21 8c0-2.8-1.5-5-4.5-5z"/></svg></span>
+    <span class="ticker-item">Dominio propio a su nombre</span><span class="ticker-star" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:middle"><path d="M16.5 3C14.7 3 13.6 3.6 12 3.6S9.3 3 7.5 3C4.5 3 3 5.2 3 8c0 2 .6 3.6 1.2 5.4l.7 2.1c.7 2.2 1.6 5.5 3.1 5.5 1.1 0 1.5-1.4 1.7-3l.4-2.4c.2-1.3.5-2.2 1.9-2.2s1.7.9 1.9 2.2l.4 2.4c.2 1.6.6 3 1.7 3 1.5 0 2.4-3.3 3.1-5.5l.7-2.1C20.4 11.6 21 10 21 8c0-2.8-1.5-5-4.5-5z"/></svg></span>
+    <span class="ticker-item">Sin contratos</span><span class="ticker-star" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:middle"><path d="M16.5 3C14.7 3 13.6 3.6 12 3.6S9.3 3 7.5 3C4.5 3 3 5.2 3 8c0 2 .6 3.6 1.2 5.4l.7 2.1c.7 2.2 1.6 5.5 3.1 5.5 1.1 0 1.5-1.4 1.7-3l.4-2.4c.2-1.3.5-2.2 1.9-2.2s1.7.9 1.9 2.2l.4 2.4c.2 1.6.6 3 1.7 3 1.5 0 2.4-3.3 3.1-5.5l.7-2.1C20.4 11.6 21 10 21 8c0-2.8-1.5-5-4.5-5z"/></svg></span>
+    <span class="ticker-item">Cambios semanales incluidos</span><span class="ticker-star" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:middle"><path d="M16.5 3C14.7 3 13.6 3.6 12 3.6S9.3 3 7.5 3C4.5 3 3 5.2 3 8c0 2 .6 3.6 1.2 5.4l.7 2.1c.7 2.2 1.6 5.5 3.1 5.5 1.1 0 1.5-1.4 1.7-3l.4-2.4c.2-1.3.5-2.2 1.9-2.2s1.7.9 1.9 2.2l.4 2.4c.2 1.6.6 3 1.7 3 1.5 0 2.4-3.3 3.1-5.5l.7-2.1C20.4 11.6 21 10 21 8c0-2.8-1.5-5-4.5-5z"/></svg></span>
+    <span class="ticker-item">Cancela cuando quieras</span><span class="ticker-star" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:middle"><path d="M16.5 3C14.7 3 13.6 3.6 12 3.6S9.3 3 7.5 3C4.5 3 3 5.2 3 8c0 2 .6 3.6 1.2 5.4l.7 2.1c.7 2.2 1.6 5.5 3.1 5.5 1.1 0 1.5-1.4 1.7-3l.4-2.4c.2-1.3.5-2.2 1.9-2.2s1.7.9 1.9 2.2l.4 2.4c.2 1.6.6 3 1.7 3 1.5 0 2.4-3.3 3.1-5.5l.7-2.1C20.4 11.6 21 10 21 8c0-2.8-1.5-5-4.5-5z"/></svg></span>
+    <span class="ticker-item">Primer mes gratis &middot; Pronto Dental</span><span class="ticker-star" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:middle"><path d="M16.5 3C14.7 3 13.6 3.6 12 3.6S9.3 3 7.5 3C4.5 3 3 5.2 3 8c0 2 .6 3.6 1.2 5.4l.7 2.1c.7 2.2 1.6 5.5 3.1 5.5 1.1 0 1.5-1.4 1.7-3l.4-2.4c.2-1.3.5-2.2 1.9-2.2s1.7.9 1.9 2.2l.4 2.4c.2 1.6.6 3 1.7 3 1.5 0 2.4-3.3 3.1-5.5l.7-2.1C20.4 11.6 21 10 21 8c0-2.8-1.5-5-4.5-5z"/></svg></span>
+    <span class="ticker-item">Web en 7-10 días</span><span class="ticker-star" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:middle"><path d="M16.5 3C14.7 3 13.6 3.6 12 3.6S9.3 3 7.5 3C4.5 3 3 5.2 3 8c0 2 .6 3.6 1.2 5.4l.7 2.1c.7 2.2 1.6 5.5 3.1 5.5 1.1 0 1.5-1.4 1.7-3l.4-2.4c.2-1.3.5-2.2 1.9-2.2s1.7.9 1.9 2.2l.4 2.4c.2 1.6.6 3 1.7 3 1.5 0 2.4-3.3 3.1-5.5l.7-2.1C20.4 11.6 21 10 21 8c0-2.8-1.5-5-4.5-5z"/></svg></span>
+    <span class="ticker-item">Dominio propio a su nombre</span><span class="ticker-star" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:middle"><path d="M16.5 3C14.7 3 13.6 3.6 12 3.6S9.3 3 7.5 3C4.5 3 3 5.2 3 8c0 2 .6 3.6 1.2 5.4l.7 2.1c.7 2.2 1.6 5.5 3.1 5.5 1.1 0 1.5-1.4 1.7-3l.4-2.4c.2-1.3.5-2.2 1.9-2.2s1.7.9 1.9 2.2l.4 2.4c.2 1.6.6 3 1.7 3 1.5 0 2.4-3.3 3.1-5.5l.7-2.1C20.4 11.6 21 10 21 8c0-2.8-1.5-5-4.5-5z"/></svg></span>
+    <span class="ticker-item">Sin contratos</span><span class="ticker-star" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:middle"><path d="M16.5 3C14.7 3 13.6 3.6 12 3.6S9.3 3 7.5 3C4.5 3 3 5.2 3 8c0 2 .6 3.6 1.2 5.4l.7 2.1c.7 2.2 1.6 5.5 3.1 5.5 1.1 0 1.5-1.4 1.7-3l.4-2.4c.2-1.3.5-2.2 1.9-2.2s1.7.9 1.9 2.2l.4 2.4c.2 1.6.6 3 1.7 3 1.5 0 2.4-3.3 3.1-5.5l.7-2.1C20.4 11.6 21 10 21 8c0-2.8-1.5-5-4.5-5z"/></svg></span>
+    <span class="ticker-item">Cambios semanales incluidos</span><span class="ticker-star" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:middle"><path d="M16.5 3C14.7 3 13.6 3.6 12 3.6S9.3 3 7.5 3C4.5 3 3 5.2 3 8c0 2 .6 3.6 1.2 5.4l.7 2.1c.7 2.2 1.6 5.5 3.1 5.5 1.1 0 1.5-1.4 1.7-3l.4-2.4c.2-1.3.5-2.2 1.9-2.2s1.7.9 1.9 2.2l.4 2.4c.2 1.6.6 3 1.7 3 1.5 0 2.4-3.3 3.1-5.5l.7-2.1C20.4 11.6 21 10 21 8c0-2.8-1.5-5-4.5-5z"/></svg></span>
+    <span class="ticker-item">Cancela cuando quieras</span><span class="ticker-star" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:middle"><path d="M16.5 3C14.7 3 13.6 3.6 12 3.6S9.3 3 7.5 3C4.5 3 3 5.2 3 8c0 2 .6 3.6 1.2 5.4l.7 2.1c.7 2.2 1.6 5.5 3.1 5.5 1.1 0 1.5-1.4 1.7-3l.4-2.4c.2-1.3.5-2.2 1.9-2.2s1.7.9 1.9 2.2l.4 2.4c.2 1.6.6 3 1.7 3 1.5 0 2.4-3.3 3.1-5.5l.7-2.1C20.4 11.6 21 10 21 8c0-2.8-1.5-5-4.5-5z"/></svg></span>
+  </div>
+</div>
+
+<!-- BEFORE / AFTER SLIDER -->
+<div class="cut-divider" aria-hidden="true"><span class="scissors">&#9986;&#xFE0E;</span><span class="dash"></span></div>
+
+<section class="reveal" id="antes-despues">
+  <div class="container">
+    <p class="section-label">El cambio</p>
+    <h2 style="text-align:center">La diferencia que hace Pronto</h2>
+    <div class="ba-container" id="ba-slider">
+      <div class="ba-side ba-before" id="ba-before">
+        <iframe src="./before-mockup.html" title="Ejemplo realista de web dental colombiana actual" loading="lazy"></iframe>
+      </div>
+      <div class="ba-side ba-after">
+        <iframe src="https://prontoweb.co/clientes-piloto/sonrisa-premium-atelier/" title="Ejemplo de web dental con Pronto Dental" loading="lazy"></iframe>
+      </div>
+      <div class="ba-divider" id="ba-divider"></div>
+      <span class="ba-label ba-label-before">ANTES</span>
+      <span class="ba-label ba-label-after">DESPUÉS</span>
+    </div>
+  </div>
+</section>
+
+<!-- VEA LOS SITIOS EN VIVO (horizontal, con tabs) -->
+<div class="cut-divider" aria-hidden="true"><span class="scissors">&#9986;&#xFE0E;</span><span class="dash"></span></div>
+
+<section class="reveal" id="portafolio">
+  <div class="container">
+    <p class="section-label">Ve en vivo</p>
+    <h2 style="text-align:center">Navegue los sitios en vivo</h2>
+    <p style="text-align:center; color:var(--text-muted); max-width:560px; margin:0 auto 0">
+      Haga scroll, haga click, explore. Estos son sitios reales funcionando ahora mismo.
+    </p>
+    <div class="demo-controls">
+      <div class="demo-selector">
+        <button class="demo-arrow" id="demo-prev" aria-label="Diseño anterior" type="button">&larr;</button>
+        <span class="demo-name" id="demo-name"><span class="demo-name-counter">1 / 4</span>Sonrisa Ember</span>
+        <button class="demo-arrow" id="demo-next" aria-label="Diseño siguiente" type="button">&rarr;</button>
+      </div>
+      <div class="viewport-toggle" role="tablist" aria-label="Cambiar entre vista de computador y vista móvil">
+        <button class="viewport-btn active" data-viewport="desktop" type="button" aria-label="Ver en computador">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          Computador
+        </button>
+        <button class="viewport-btn" data-viewport="mobile" type="button" aria-label="Ver en móvil">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2.5"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+          Móvil
+        </button>
+      </div>
+    </div>
+    <div class="live-demo-container">
+      <iframe id="demo-iframe" src="https://prontoweb.co/clientes-piloto/sonrisa-premium-ember/" title="Demo en vivo del sitio Pronto Dental seleccionado" loading="lazy"></iframe>
+    </div>
+    <p style="text-align:center; margin-top:12px;">
+      <small style="color:var(--text-dim); font-style:italic;">Ejemplo de implementación. Muestra de capacidad.</small>
+    </p>
+  </div>
+</section>
+
+<!-- PROCESS TIMELINE -->
+<div class="cut-divider" aria-hidden="true"><span class="scissors">&#9986;&#xFE0E;</span><span class="dash"></span></div>
+
+<section class="reveal" id="como-funciona">
+  <div class="container">
+    <p class="section-label">Así de simple</p>
+    <h2 style="text-align:center">De WhatsApp a tu web en 7-10 días</h2>
+    <div class="timeline">
+      <div class="timeline-step">
+        <div class="timeline-head">
+          <div class="timeline-icon-box">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          </div>
+          <div class="timeline-num">01</div>
+        </div>
+        <h3>Escríbenos por WhatsApp</h3>
+      </div>
+      <div class="timeline-step">
+        <div class="timeline-head">
+          <div class="timeline-icon-box">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+          </div>
+          <div class="timeline-num">02</div>
+        </div>
+        <h3>Nos envías tu información</h3>
+      </div>
+      <div class="timeline-step">
+        <div class="timeline-head">
+          <div class="timeline-icon-box">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          </div>
+          <div class="timeline-num">03</div>
+        </div>
+        <h3>Tu web lista en 7-10 días</h3>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PLANES / PRICING -->
+<div class="cut-divider" aria-hidden="true"><span class="scissors">&#9986;&#xFE0E;</span><span class="dash"></span></div>
+
+<section id="planes" class="reveal section-alt">
+  <div class="container">
+    <p class="section-label">Precios</p>
+    <h2 style="text-align:center">Un plan, todo incluido</h2>
+
+    <div class="planes-grid" style="display:flex; justify-content:center;">
+      <div class="plan destacado" style="max-width:520px; width:100%;">
+        <div class="ribbon">Plan único</div>
+        <div class="seal-octagon" aria-hidden="true">1 MES<br>GRATIS<small>SIN TARJETA</small></div>
+        <div class="plan-name">Pronto Dental</div>
+        <div class="plan-price">$199.900<small> COP/mes</small></div>
+        <div class="plan-cop">aproximadamente $47 USD</div>
+        <ul>
+          <li>Web profesional en 7-10 días (5-8 páginas), optimizada para celulares</li>
+          <li>Dominio propio a nombre de la clínica</li>
+          <li>Web siempre online (hosting + SSL + backups)</li>
+          <li>SEO base (Google + ChatGPT/AI Overviews)</li>
+          <li>Una página optimizada por cada servicio (ortodoncia, implantes, blanqueamiento, diseño de sonrisa…)</li>
+          <li>Una página por cada sede, con mapa y horarios</li>
+          <li>Botón y formulario de WhatsApp con notificación inmediata a recepción + correo</li>
+          <li>WhatsApp inteligente que cambia el mensaje según la sección que mira el paciente</li>
+          <li>Sistema de reseñas con filtro 5★: las 5 estrellas van a Google; las demás llegan privadas a la clínica</li>
+          <li>Materiales listos: afiche con código QR para recepción + guía de activación + plantillas de mensajes</li>
+          <li>Reporte mensual automático: visitas, clics, formularios y reseñas</li>
+          <li>Grabación de sesiones para mejorar la conversión (Microsoft Clarity)</li>
+          <li>Hasta 3 cambios menores al mes (extras con costo aparte)</li>
+          <li>Soporte WhatsApp ante problemas técnicos (24-48h hábiles)</li>
+          <li>Análisis comparativo de su web actual: fallas detectadas y cómo las solucionamos</li>
+        </ul>
+        <p class="plan-note">Primer mes gratis. Sin contratos. Cancela cuando quieras.</p>
+        <a class="plan-cta" href="https://wa.me/573124672674?text=Hola%2C%20vengo%20de%20prontoweb.co%20y%20quiero%20saber%20m%C3%A1s%20de%20Pronto%20Dental" data-umami-event="click-plan-dental">Empezar gratis</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQs -->
+<div class="cut-divider" aria-hidden="true"><span class="scissors">&#9986;&#xFE0E;</span><span class="dash"></span></div>
+
+<section id="faqs" class="reveal">
+  <div class="container">
+    <p class="section-label">Dudas</p>
+    <h2 style="text-align:center">Preguntas frecuentes</h2>
+    <div class="faqs">
+
+      <details class="faq">
+        <summary>¿Por qué $199.900 al mes?</summary>
+        <div class="faq-body">
+          <p style="margin:0 0 10px;">Lo que cobra el mercado en Colombia:</p>
+          <ul style="margin:0 0 12px; padding-left:20px; line-height:1.6;">
+            <li>Una web con agencia: pago único + mantenimiento mensual aparte (hosting, cambios, soporte, dominio cada uno por su lado).</li>
+            <li>Pronto: todo incluido por $199.900/mes. Primer mes gratis.</li>
+          </ul>
+          <p style="margin:0 0 10px;"><strong>Tu ROI real:</strong></p>
+          <ul style="margin:0; padding-left:20px; line-height:1.6;">
+            <li>1 paciente nuevo con un tratamiento mediano al mes ya cubre el plan.</li>
+            <li>1 implante o diseño de sonrisa al año = varios meses pagados.</li>
+          </ul>
+        </div>
+      </details>
+
+      <details class="faq">
+        <summary>¿Por qué te regalamos un mes?</summary>
+        <div class="faq-body">Porque sabemos que esta web te va a traer pacientes y queremos que lo veas con tus propios ojos. Confiamos en el producto, no necesitamos amarrarte con contratos largos ni meses de prueba pagados. Si después de 30 días con la web activa no notas más mensajes por WhatsApp o más agendas, cancelas y no pagas nada. Pero apostamos a que sí.</div>
+      </details>
+
+      <details class="faq">
+        <summary>¿Cobran setup o matrícula?</summary>
+        <div class="faq-body">No. $0 de setup permanente. Lo único que pagas es la mensualidad después del primer mes gratis.</div>
+      </details>
+
+      <details class="faq">
+        <summary>¿Puedo cancelar cuando quiera?</summary>
+        <div class="faq-body">Sí, en cualquier momento, sin penalidad. Solo nos avisas por WhatsApp y procesamos la baja.</div>
+      </details>
+
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <h4>Contacto</h4>
+      <p><a href="https://wa.me/573124672674">WhatsApp: +57 312 467 2674</a></p>
+      <p><a href="mailto:cesar@prontoweb.co">cesar@prontoweb.co</a></p>
+    </div>
+    <div>
+      <h4>Legal</h4>
+      <p><a href="privacidad.html">Política de privacidad</a></p>
+      <p>Cumplimiento Ley 1581 de 2012 (Colombia)</p>
+    </div>
+    <div>
+      <h4>Dirección</h4>
+      <p>Bogotá, Colombia</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    &copy; 2026 Pronto · Presencia web profesional para clínicas dentales.
+  </div>
+  <p style="text-align:center; font-size:0.72rem; color:var(--text-dim); margin:12px auto 0; max-width:720px; line-height:1.5;"><sup>¹</sup>Conversión 2-3% promedio en sitios dentales. Fuente: <a href="https://www.sixthcitymarketing.com/2024/02/28/dental-marketing-stats/" target="_blank" rel="noopener" style="color:inherit; text-decoration:underline; text-underline-offset:2px;">Sixth City Marketing 2026</a></p>
+</footer>
+
+<!-- WHATSAPP FLOATING BUTTON -->
+<a class="wa-float" href="https://wa.me/573124672674?text=Hola%2C%20vengo%20de%20prontoweb.co%20y%20quiero%20saber%20m%C3%A1s" target="_blank" rel="noopener" data-umami-event="click-wa-float" aria-label="Escribir por WhatsApp">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<script>
+(function() {
+  'use strict';
+
+  // ── READING PROGRESS BAR ──
+  var progressBar = document.getElementById('progress-bar');
+  function updateProgress() {
+    var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    var progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    progressBar.style.width = progress + '%';
+  }
+  window.addEventListener('scroll', updateProgress, { passive: true });
+
+  // ── SCROLL REVEAL ──
+  var revealElements = document.querySelectorAll('.reveal');
+  var revealObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  revealElements.forEach(function(el) { revealObserver.observe(el); });
+
+  // ── ANIMATED STATS COUNTERS ──
+  var statsAnimated = false;
+  var statElements = document.querySelectorAll('.stat-number[data-target]');
+
+  function formatNumber(num) {
+    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+  }
+
+  function animateCounter(el, delay) {
+    setTimeout(function() {
+      var target = parseInt(el.getAttribute('data-target'));
+      var prefix = el.getAttribute('data-prefix') || '';
+      var suffix = el.getAttribute('data-suffix') || '';
+      var isPrice = el.getAttribute('data-format') === 'price';
+      var duration = 1500;
+      var startTime = null;
+
+      function step(timestamp) {
+        if (!startTime) startTime = timestamp;
+        var progress = Math.min((timestamp - startTime) / duration, 1);
+        var eased = 1 - Math.pow(1 - progress, 3);
+        var current = Math.floor(eased * target);
+
+        if (isPrice) {
+          el.textContent = prefix + formatNumber(current) + suffix;
+        } else {
+          el.textContent = prefix + current + suffix;
+        }
+
+        if (progress < 1) {
+          requestAnimationFrame(step);
+        } else {
+          if (isPrice) {
+            el.textContent = prefix + formatNumber(target) + suffix;
+          } else {
+            el.textContent = prefix + target + suffix;
+          }
+        }
+      }
+      requestAnimationFrame(step);
+    }, delay);
+  }
+
+  var statsObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting && !statsAnimated) {
+        statsAnimated = true;
+        statElements.forEach(function(el, i) {
+          animateCounter(el, i * 100);
+        });
+        statsObserver.disconnect();
+      }
+    });
+  }, { threshold: 0.3 });
+
+  var heroStats = document.querySelector('.hero-stats');
+  if (heroStats) statsObserver.observe(heroStats);
+
+  // ── STICKY CTA MOBILE ──
+  var stickyCta = document.getElementById('sticky-cta');
+  var heroSection = document.getElementById('hero');
+  if (stickyCta && heroSection) {
+    var stickyObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          stickyCta.classList.remove('show');
+        } else {
+          stickyCta.classList.add('show');
+        }
+      });
+    }, { threshold: 0 });
+    stickyObserver.observe(heroSection);
+  }
+
+  // ── ROI CALCULATOR ──
+  var roiPatients = document.getElementById('roi-patients');
+  var roiTicket = document.getElementById('roi-ticket');
+  var roiTicketMinus = document.getElementById('roi-ticket-minus');
+  var roiTicketPlus = document.getElementById('roi-ticket-plus');
+  var roiPatientsVal = document.getElementById('roi-patients-val');
+  var roiLost = document.getElementById('roi-lost');
+  var roiRevenue = document.getElementById('roi-revenue');
+  var roiValue = document.getElementById('roi-value');
+
+  var ticketValue = 200000;
+  var ticketMin = 50000;
+  var ticketMax = 4000000;
+  var ticketStep = 50000;
+
+  function updateTicketDisplay() {
+    roiTicket.value = formatNumber(ticketValue);
+  }
+
+  function calculateROI() {
+    var patients = parseInt(roiPatients.value) || 200;
+    var lostPatients = Math.round(patients * 0.15);
+    var lostRevenue = lostPatients * ticketValue;
+    var roi = Math.round(lostRevenue / 199900);
+
+    roiPatientsVal.textContent = patients;
+    roiLost.textContent = lostPatients;
+    roiRevenue.textContent = '$' + formatNumber(lostRevenue);
+    roiValue.textContent = roi + 'x';
+  }
+
+  if (roiPatients) {
+    roiPatients.addEventListener('input', calculateROI);
+
+    roiTicketMinus.addEventListener('click', function() {
+      if (ticketValue > ticketMin) {
+        ticketValue -= ticketStep;
+        updateTicketDisplay();
+        calculateROI();
+      }
+    });
+
+    roiTicketPlus.addEventListener('click', function() {
+      if (ticketValue < ticketMax) {
+        ticketValue += ticketStep;
+        updateTicketDisplay();
+        calculateROI();
+      }
+    });
+
+    updateTicketDisplay();
+    calculateROI();
+  }
+
+  // ── BEFORE / AFTER SLIDER ──
+  var baSlider = document.getElementById('ba-slider');
+  var baBefore = document.getElementById('ba-before');
+  var baDivider = document.getElementById('ba-divider');
+
+  if (baSlider && baBefore && baDivider) {
+    var isDragging = false;
+
+    function updateSlider(clientX) {
+      var rect = baSlider.getBoundingClientRect();
+      var x = clientX - rect.left;
+      var percent = Math.max(5, Math.min(95, (x / rect.width) * 100));
+      baBefore.style.width = percent + '%';
+      baDivider.style.left = percent + '%';
+    }
+
+    baSlider.addEventListener('mousedown', function(e) {
+      isDragging = true;
+      updateSlider(e.clientX);
+      e.preventDefault();
+    });
+
+    document.addEventListener('mousemove', function(e) {
+      if (isDragging) {
+        updateSlider(e.clientX);
+        e.preventDefault();
+      }
+    });
+
+    document.addEventListener('mouseup', function() {
+      isDragging = false;
+    });
+
+    baSlider.addEventListener('touchstart', function(e) {
+      isDragging = true;
+      updateSlider(e.touches[0].clientX);
+    }, { passive: true });
+
+    document.addEventListener('touchmove', function(e) {
+      if (isDragging) {
+        updateSlider(e.touches[0].clientX);
+      }
+    }, { passive: true });
+
+    document.addEventListener('touchend', function() {
+      isDragging = false;
+    });
+  }
+
+  // ── DEMO SELECTOR (diseños rotables + toggle viewport) ──
+  var DEMOS = [
+    { name: 'Sonrisa Ember', url: 'https://prontoweb.co/clientes-piloto/sonrisa-premium-ember/' },
+    { name: 'Sonrisa Azul', url: 'https://prontoweb.co/clientes-piloto/sonrisa-premium-azul/' },
+    { name: 'Sonrisa Ivory', url: 'https://sonrisapremium.prontoweb.co/' },
+    { name: 'Sonrisa Atelier', url: 'https://prontoweb.co/clientes-piloto/sonrisa-premium-atelier/' }
+  ];
+  var demoState = { idx: 0, viewport: 'desktop' };
+
+  // Animación continua del scale durante la transición CSS del container.
+  // La transición dura ~450ms, así que recalculamos scale en cada frame
+  // para que el iframe siga al container sin saltos visuales.
+  var scaleAnimEndTime = 0;
+  function animateIframeScale() {
+    if (typeof scaleAllIframes === 'function') scaleAllIframes();
+    if (Date.now() < scaleAnimEndTime) {
+      requestAnimationFrame(animateIframeScale);
+    }
+  }
+
+  function applyDemoState() {
+    var demo = DEMOS[demoState.idx];
+    var iframe = document.getElementById('demo-iframe');
+    var nameEl = document.getElementById('demo-name');
+    var container = document.querySelector('.live-demo-container');
+    if (!iframe || !nameEl || !container) return;
+
+    var viewportChanged = container.classList.contains('mobile') !== (demoState.viewport === 'mobile');
+
+    // Fade out iframe
+    iframe.style.opacity = '0';
+
+    // Actualizar texto del selector
+    nameEl.innerHTML = '<span class="demo-name-counter">' + (demoState.idx + 1) + ' / ' + DEMOS.length + '</span>' + demo.name;
+
+    // Toggle modo viewport (arranca la transición CSS del container)
+    container.classList.toggle('mobile', demoState.viewport === 'mobile');
+
+    // Active state de botones viewport
+    var vBtns = document.querySelectorAll('.viewport-btn');
+    vBtns.forEach(function(b) {
+      b.classList.toggle('active', b.dataset.viewport === demoState.viewport);
+    });
+
+    // Si cambió viewport, animar scale durante la transición (~500ms)
+    if (viewportChanged) {
+      scaleAnimEndTime = Date.now() + 550;
+      requestAnimationFrame(animateIframeScale);
+    } else {
+      // Solo cambio de diseño, scale ya está bien — recalcular una vez
+      if (typeof scaleAllIframes === 'function') scaleAllIframes();
+    }
+
+    // Cambiar src + fade in tras que termine la transición visual del container
+    // (la transición CSS dura ~450ms — esperamos a que termine antes de mostrar el iframe)
+    var delay = viewportChanged ? 420 : 180;
+    setTimeout(function() {
+      if (iframe.src !== demo.url) iframe.src = demo.url;
+      // Recalculamos scale una última vez con el container ya estable
+      if (typeof scaleAllIframes === 'function') scaleAllIframes();
+      iframe.style.opacity = '1';
+    }, delay);
+  }
+
+  var demoPrev = document.getElementById('demo-prev');
+  var demoNext = document.getElementById('demo-next');
+  if (demoPrev) demoPrev.addEventListener('click', function() {
+    demoState.idx = (demoState.idx - 1 + DEMOS.length) % DEMOS.length;
+    applyDemoState();
+  });
+  if (demoNext) demoNext.addEventListener('click', function() {
+    demoState.idx = (demoState.idx + 1) % DEMOS.length;
+    applyDemoState();
+  });
+  document.querySelectorAll('.viewport-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var v = btn.dataset.viewport;
+      if (v === demoState.viewport) return;
+      demoState.viewport = v;
+      applyDemoState();
+    });
+  });
+
+  // ── EXIT INTENT POPUP ──
+  var exitPopup = document.getElementById('exit-popup');
+  var popupClose = document.getElementById('popup-close');
+  var exitShown = false;
+
+  function showExitPopup() {
+    if (exitShown) return;
+    if (localStorage.getItem('pronto-exit-shown')) return;
+    exitPopup.classList.add('show');
+    exitShown = true;
+    localStorage.setItem('pronto-exit-shown', '1');
+  }
+
+  function hideExitPopup() {
+    exitPopup.classList.remove('show');
+  }
+
+  if (exitPopup && popupClose) {
+    document.addEventListener('mouseleave', function(e) {
+      if (e.clientY <= 0) {
+        showExitPopup();
+      }
+    });
+
+    popupClose.addEventListener('click', hideExitPopup);
+
+    exitPopup.addEventListener('click', function(e) {
+      if (e.target === exitPopup) hideExitPopup();
+    });
+  }
+
+  // ── SMOOTH SCROLL FOR NAV LINKS ──
+  document.querySelectorAll('a[href^="#"]').forEach(function(link) {
+    link.addEventListener('click', function(e) {
+      var targetId = this.getAttribute('href');
+      if (targetId === '#') return;
+      var target = document.querySelector(targetId);
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+
+  // ── SCALE IFRAMES IN BEFORE/AFTER ON RESIZE ──
+  function scaleBAIframes() {
+    var container = document.getElementById('ba-slider');
+    if (!container) return;
+    var containerWidth = container.offsetWidth;
+    var scale = containerWidth / 1440;
+    var iframes = container.querySelectorAll('iframe');
+    iframes.forEach(function(iframe) {
+      iframe.style.transform = 'scale(' + scale + ')';
+    });
+  }
+
+  window.addEventListener('resize', scaleBAIframes);
+
+  // ── SCALE ALL IFRAMES TO FIT CONTAINERS ──
+  function scaleAllIframes() {
+    // Live demo iframe — soporta modo desktop (1440px base) y mobile (375px base)
+    var liveDemo = document.querySelector('.live-demo-container');
+    if (liveDemo) {
+      var demoIframe = liveDemo.querySelector('iframe');
+      if (demoIframe) {
+        var isMobile = liveDemo.classList.contains('mobile');
+        // Mobile simula iPhone 15 Pro Max (430×932 CSS px) — el viewport más
+        // común de iPhone moderno y para el que están diseñadas las demos.
+        var baseWidth = isMobile ? 430 : 1440;
+        var scale = liveDemo.offsetWidth / baseWidth;
+        demoIframe.style.transform = 'scale(' + scale + ')';
+      }
+    }
+    // Phone iframes
+    var phones = document.querySelectorAll('.device-phone-screen');
+    phones.forEach(function(screen) {
+      var iframe = screen.querySelector('iframe');
+      if (!iframe) return;
+      var scale = screen.offsetWidth / 375;
+      iframe.style.transform = 'scale(' + scale + ')';
+    });
+  }
+
+  window.addEventListener('resize', scaleAllIframes);
+  window.addEventListener('load', function() {
+    scaleBAIframes();
+    scaleAllIframes();
+    updateProgress();
+  });
+
+})();
+</script>
+
+<!-- GSAP animations: hero timeline + scroll-triggered scale-ups -->
+<script>
+window.addEventListener('load', function() {
+  if (typeof gsap === 'undefined') return;
+
+  // Respetar preferencia accesibilidad
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  // ── HERO TIMELINE: fade-in escalonado al cargar ──
+  var heroElems = gsap.utils.toArray('.hero .hero-badge, .hero h1, .hero .sub, .hero ul, .hero .hero-buttons, .hero .hero-stats');
+  if (heroElems.length) {
+    gsap.set(heroElems, { opacity: 0, y: 24 });
+    gsap.to(heroElems, {
+      opacity: 1,
+      y: 0,
+      duration: 0.9,
+      ease: 'power3.out',
+      stagger: 0.12,
+      delay: 0.1
+    });
+  }
+
+  // ── SCROLLTRIGGER: scale-up del iframe principal "Navegue sitios en vivo" ──
+  if (typeof ScrollTrigger !== 'undefined') {
+    gsap.registerPlugin(ScrollTrigger);
+
+    var demoFrame = document.getElementById('demo-iframe');
+    if (demoFrame) {
+      gsap.from(demoFrame, {
+        scale: 0.94,
+        opacity: 0.4,
+        duration: 1,
+        ease: 'power3.out',
+        scrollTrigger: { trigger: demoFrame, start: 'top 80%', once: true }
+      });
+    }
+
+    // ── ScrollTrigger: scale-up + reveal del slider Antes/Después ──
+    var baContainer = document.querySelector('.ba-container');
+    if (baContainer) {
+      gsap.from(baContainer, {
+        scale: 0.96,
+        opacity: 0,
+        duration: 1,
+        ease: 'power3.out',
+        scrollTrigger: { trigger: baContainer, start: 'top 75%', once: true }
+      });
+    }
+
+    // ── ScrollTrigger: slide-in escalonado de los 3 pasos "Cómo funciona" ──
+    var timelineSteps = gsap.utils.toArray('.timeline-step');
+    if (timelineSteps.length) {
+      gsap.from(timelineSteps, {
+        y: 32,
+        opacity: 0,
+        duration: 0.8,
+        ease: 'power3.out',
+        stagger: 0.15,
+        scrollTrigger: { trigger: '.timeline', start: 'top 75%', once: true }
+      });
+    }
+
+    // ── ScrollTrigger: pricing card scale-up + bloque escasez ──
+    var planCard = document.querySelector('.plan.destacado');
+    if (planCard) {
+      gsap.from(planCard, {
+        scale: 0.97,
+        opacity: 0,
+        duration: 0.9,
+        ease: 'power3.out',
+        scrollTrigger: { trigger: planCard, start: 'top 80%', once: true }
+      });
+    }
+  }
+});
+</script>
+
+</body>
+</html>
+<!-- rebuild 1776359580 -->
+
