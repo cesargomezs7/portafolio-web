@@ -246,7 +246,21 @@
 
 </div>
 <script>
-  function fit(){var st=document.getElementById('stage');var sc=Math.min(window.innerWidth/1280,window.innerHeight/720);st.style.transform='scale('+sc+')';}
+  /* fit() — 24-jul: el lienzo se ADAPTA al aspecto de la pantalla en vez de quedarse
+     en 16:9 fijo. Antes, en monitores más anchos que 16:9 (el de César es 1920x1000 =
+     1.92) quedaban franjas negras de ~71px a cada lado. Ahora llena de borde a borde
+     sin recortar nada y sin deformar: se fija la altura de diseño (720) y se ensancha
+     el lienzo lo que haga falta. En pantallas más altas que 16:9 se hace al revés. */
+  function fit(){
+    var st=document.getElementById('stage');
+    var W=window.innerWidth, H=window.innerHeight, BW=1280, BH=720, sc, w, h;
+    if (W/H >= BW/BH){ sc = H/BH; w = Math.ceil(W/sc); h = BH; }   // pantalla ancha
+    else             { sc = W/BW; w = BW; h = Math.ceil(H/sc); }    // pantalla alta
+    st.style.width = w+'px'; st.style.height = h+'px';
+    st.style.transform = 'scale('+sc+')';
+    var sl=document.querySelectorAll('.slide');
+    for (var i=0;i<sl.length;i++){ sl[i].style.width = w+'px'; sl[i].style.height = h+'px'; }
+  }
   window.addEventListener('resize',fit); fit();
 
   var TOTAL_OBJ = 8; // s=1 intro, s=2..8 = objetivo 1..7 resaltado; s=9 = precio
