@@ -31,9 +31,9 @@
    Estas reglas hacen que el 100% del visitante se vea así (zoom 1.5 en pantallas
    grandes), escalonado hacia abajo para que el nav (necesita ~1280px efectivos)
    no se rompa en portátiles. Móvil y tablet (<1420px) intactos. ═══ */
-@media screen and (min-width: 1950px) { body { zoom: 1.5; } }
-@media screen and (min-width: 1750px) and (max-width: 1949.98px) { body { zoom: 1.35; } }
-@media screen and (min-width: 1550px) and (max-width: 1749.98px) { body { zoom: 1.2; } }
+@media screen and (min-width: 1880px) { body { zoom: 1.5; } }
+@media screen and (min-width: 1750px) and (max-width: 1879.98px) { body { zoom: 1.4; } }
+@media screen and (min-width: 1550px) and (max-width: 1749.98px) { body { zoom: 1.25; } }
 @media screen and (min-width: 1420px) and (max-width: 1549.98px) { body { zoom: 1.1; } }
 html { scroll-behavior: smooth; }
 section[id] { scroll-margin-top: 110px; }
