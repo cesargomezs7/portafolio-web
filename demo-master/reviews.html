@@ -40,10 +40,10 @@
 
 <style>
 /* ESCALA VISUAL (20-jun-2026): disenado al 150%; el 100% del visitante se ve asi. Escalonado; movil intacto. */
-@media screen and (min-width: 1880px) { body { zoom: 1.5; } }
-@media screen and (min-width: 1750px) and (max-width: 1879.98px) { body { zoom: 1.4; } }
-@media screen and (min-width: 1550px) and (max-width: 1749.98px) { body { zoom: 1.25; } }
-@media screen and (min-width: 1420px) and (max-width: 1549.98px) { body { zoom: 1.1; } }
+@media screen and (min-width: 1880px) { body { zoom: 1.5; } :root { --z: 1.5; } }
+@media screen and (min-width: 1750px) and (max-width: 1879.98px) { body { zoom: 1.4; } :root { --z: 1.4; } }
+@media screen and (min-width: 1550px) and (max-width: 1749.98px) { body { zoom: 1.25; } :root { --z: 1.25; } }
+@media screen and (min-width: 1420px) and (max-width: 1549.98px) { body { zoom: 1.1; } :root { --z: 1.1; } }
 
   /* ===== PALETA AZUL DENTAL (equivalente a las variables del Atelier verde) ===== */
   :root {
@@ -215,6 +215,12 @@
     .card { padding: 36px 24px; }
     .star { font-size: 40px; gap: 6px; }
   }
+
+@supports (-webkit-app-region: drag) {
+  @media screen and (min-width: 1420px) {
+    body { min-height: calc(100vh / var(--z, 1)); }
+  }
+}
 </style>
 </head>
 <body>

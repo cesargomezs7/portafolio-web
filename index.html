@@ -131,9 +131,17 @@
   /* ═══ ESCALA VISUAL (20-jun-2026): el sitio se diseñó viéndolo al 150% de zoom.
      El look aprobado = 0.82 × 1.5 = 1.23. Estas reglas hacen que el 100% del visitante
      se vea así, escalonado para no romper el layout en pantallas medianas. Móvil intacto. ═══ */
-  @media screen and (min-width: 1400px) { body { zoom: 1.23; } }
-  @media screen and (min-width: 1100px) and (max-width: 1399.98px) { body { zoom: 1.15; } }
-  @media screen and (min-width: 768px) and (max-width: 1099.98px) { body { zoom: 1.05; } }
+  @media screen and (min-width: 1400px) { body { zoom: 1.23; } :root { --z: 1.23; } }
+  @media screen and (min-width: 1100px) and (max-width: 1399.98px) { body { zoom: 1.15; } :root { --z: 1.15; } }
+  @media screen and (min-width: 768px) and (max-width: 1099.98px) { body { zoom: 1.05; } :root { --z: 1.05; } }
+
+  /* CORRECCIÓN BLINK: Chrome/Edge no dividen vh entre el zoom (Safari sí) */
+  @supports (-webkit-app-region: drag) {
+    @media screen and (min-width: 768px) {
+      body .hero { min-height: calc(100vh / var(--z, 1)); }
+    }
+  }
+
   h3 { font-size: 1.25rem; margin-bottom: 12px; }
 
   .brand-gradient {

@@ -31,10 +31,10 @@
    Estas reglas hacen que el 100% del visitante se vea así (zoom 1.5 en pantallas
    grandes), escalonado hacia abajo para que el nav (necesita ~1280px efectivos)
    no se rompa en portátiles. Móvil y tablet (<1420px) intactos. ═══ */
-@media screen and (min-width: 1880px) { body { zoom: 1.5; } }
-@media screen and (min-width: 1750px) and (max-width: 1879.98px) { body { zoom: 1.4; } }
-@media screen and (min-width: 1550px) and (max-width: 1749.98px) { body { zoom: 1.25; } }
-@media screen and (min-width: 1420px) and (max-width: 1549.98px) { body { zoom: 1.1; } }
+@media screen and (min-width: 1880px) { body { zoom: 1.5; } :root { --z: 1.5; } }
+@media screen and (min-width: 1750px) and (max-width: 1879.98px) { body { zoom: 1.4; } :root { --z: 1.4; } }
+@media screen and (min-width: 1550px) and (max-width: 1749.98px) { body { zoom: 1.25; } :root { --z: 1.25; } }
+@media screen and (min-width: 1420px) and (max-width: 1549.98px) { body { zoom: 1.1; } :root { --z: 1.1; } }
 html { scroll-behavior: smooth; }
 section[id] { scroll-margin-top: 110px; }
 
@@ -1299,4 +1299,15 @@ footer { background: var(--white); padding: 80px 32px 40px; }
 @media (max-width: 768px) {
   .booking { padding: 0 16px; }
   .booking-head { flex-direction: column; align-items: flex-start; gap: 6px; }
+}
+
+/* ═══ CORRECCIÓN BLINK (24-jun): Chrome/Edge NO dividen vh entre el zoom CSS; Safari sí.
+   Sin esto, en Chrome el hero (100vh) mide zoom×pantalla y la foto se estira.
+   Solo aplica en motores Blink (detector @supports -webkit-app-region). ═══ */
+@supports (-webkit-app-region: drag) {
+  @media screen and (min-width: 1420px) {
+    body .hero { min-height: calc(100vh / var(--z, 1)); }
+    body .hero:not(.hero-compact) { min-height: calc(100vh / var(--z, 1)) !important; }
+    body .hero-photo-frame { max-height: min(calc(60vh / var(--z, 1)), 660px); }
+  }
 }
