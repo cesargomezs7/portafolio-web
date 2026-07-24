@@ -2152,6 +2152,20 @@ window.addEventListener('load', function() {
 });
 </script>
 
+<script>
+if (location.search.indexOf('debug') !== -1) {
+  window.addEventListener('load', function(){
+    var h1 = document.querySelector('h1');
+    var d = document.createElement('div');
+    d.style.cssText = 'position:fixed;top:8px;left:8px;background:#000;color:#0f0;font:15px/1.5 monospace;padding:10px 14px;z-index:2147483647;border-radius:8px;opacity:0.95';
+    d.textContent = 'vw=' + window.innerWidth + ' x ' + window.innerHeight
+      + ' | dpr=' + window.devicePixelRatio
+      + ' | bodyZoom=' + (getComputedStyle(document.body).zoom || 'n/a')
+      + ' | h1px=' + (h1 ? getComputedStyle(h1).fontSize : '?');
+    document.body.appendChild(d);
+  });
+}
+</script>
 </body>
 </html>
 <!-- rebuild 1776359580 -->
