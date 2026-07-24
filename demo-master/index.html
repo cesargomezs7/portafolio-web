@@ -541,14 +541,44 @@
   teamData.forEach(d => { const im = new Image(); im.src = d.img; }); // precarga: crossfade sin huecos
   let teamTimer = null, teamResume = null;
 
+  // Crossfade con Web Animations API: la animación es idéntica en CADA ciclo
+  // (infinitamente), sin depender de clases CSS ni de caché de estilos.
+  // Red de seguridad: si el navegador pausa/olvida la animación (pestaña de
+  // fondo, throttling), el cambio procede igual a los 1100ms — nunca se atasca.
+  let teamSwitching = false;
+  const teamWait = ms => new Promise(r => setTimeout(r, ms));
+  function teamFade(els, dir) {
+    const FOTO_KF = dir === 'out'
+      ? [{ opacity: 1, transform: 'scale(1)' }, { opacity: 0, transform: 'scale(1.02)' }]
+      : [{ opacity: 0, transform: 'scale(1.02)' }, { opacity: 1, transform: 'scale(1)' }];
+    const TXT_KF = dir === 'out'
+      ? [{ opacity: 1, transform: 'translateY(0)' }, { opacity: 0, transform: 'translateY(8px)' }]
+      : [{ opacity: 0, transform: 'translateY(8px)' }, { opacity: 1, transform: 'translateY(0)' }];
+    const conf = { duration: 750, easing: 'ease-in-out', fill: 'forwards' };
+    const anims = els.map((el, i) => el.animate(i === 0 ? FOTO_KF : TXT_KF, conf));
+    const done = Promise.all(anims.map(a => a.finished.catch(() => {})));
+    return Promise.race([done, teamWait(1100)]);
+  }
   function switchTeam(idx) {
-    teamCard.classList.add('team-switching');
-    // 750ms = duración del fade-out en CSS (crossfade lento, pedido César)
-    setTimeout(() => {
+    if (teamSwitching) return;
+    teamSwitching = true;
+    const els = [
+      document.querySelector('.team-photo img'),
+      document.getElementById('teamName'),
+      document.getElementById('teamExp'),
+      document.getElementById('teamBio')
+    ];
+    teamFade(els, 'out').then(() => {
       teamIdx = (idx + teamData.length) % teamData.length;
       renderTeam();
-      teamCard.classList.remove('team-switching');
-    }, 750);
+      return teamFade(els, 'in');
+    }).then(() => {
+      els.forEach(el => el.getAnimations().forEach(a => a.cancel()));
+      teamSwitching = false;
+    }).catch(() => {
+      els.forEach(el => el.getAnimations().forEach(a => a.cancel()));
+      teamSwitching = false;
+    });
   }
   function teamVisible() {
     const r = teamCard.getBoundingClientRect();
