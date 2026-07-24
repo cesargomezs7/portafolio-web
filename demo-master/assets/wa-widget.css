@@ -45,6 +45,14 @@
   transform: translateY(-50%) translateX(0);
 }
 
+/* Móvil (24-jul): la etiqueta contextual TAMBIÉN se muestra — igual que en desktop,
+   solo más compacta y con tope de ancho para no salirse en pantallas angostas. */
 @media (max-width: 768px) {
-  .wa-float-label { display: none; }
+  .wa-float-label {
+    font-size: 12px;
+    padding: 9px 13px;
+    max-width: 62vw;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 }

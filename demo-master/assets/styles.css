@@ -1223,8 +1223,25 @@ footer { background: var(--white); padding: 80px 32px 40px; }
   .services-grid { grid-template-columns: repeat(3, 1fr); }
 }
 @media (max-width: 768px) {
-  .stats-grid { grid-template-columns: 1fr !important; gap: 28px !important; }
+  /* 24-jul: en móvil los 3 contadores van LADO A LADO (no apilados), con tipografía
+     reducida para caber en cualquier celular. !important porque los tamaños vienen inline. */
+  .stats-grid { grid-template-columns: repeat(3, 1fr) !important; gap: 12px !important; }
+  .stats-grid [data-counter] { font-size: clamp(26px, 8vw, 34px) !important; }
+  .stats-grid [data-counter] + div { font-size: 10px !important; letter-spacing: 0.04em !important; margin-top: 8px !important; }
 }
+
+/* 24-jul: en celulares ultra-angostos (≤380px) el footer de 2 columnas desbordaba 30px */
+@media (max-width: 380px) {
+  .footer-inner { grid-template-columns: 1fr !important; }
+}
+
+/* ─── Carrusel de equipo: transición premium + auto-rotación (24-jul) ─── */
+.team-photo img { transition: opacity .3s ease, transform .5s cubic-bezier(0.22, 1, 0.36, 1); }
+.team-info h3, .team-info .team-exp, .team-info p { transition: opacity .3s ease, transform .3s ease; }
+.team-card.team-switching .team-photo img { opacity: 0; transform: scale(1.02); }
+.team-card.team-switching .team-info h3,
+.team-card.team-switching .team-info .team-exp,
+.team-card.team-switching .team-info p { opacity: 0; transform: translateY(8px); }
 
 /* ─── 12-jun-2026 · tanda 4 ───
    Doctores de nosotros lado a lado también en la ventana del Mac (769-1024). */
