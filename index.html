@@ -128,8 +128,12 @@
   .hero h1, section h2, .cta-final h2 { font-family: var(--font-heading); font-weight: 700; line-height: 1.1; letter-spacing: -0.02em; }
   h1 { font-size: clamp(2.0rem, 4.5vw, 3.2rem); }
   h2 { font-size: clamp(1.6rem, 3.5vw, 2.4rem); margin-bottom: 24px; }
-  /* Escala compacta SOLO en desktop; en móvil queda al 100% para que se lea bien. Ajustar el número para más/menos pequeño. */
-  @media (min-width: 768px) { body { zoom: 0.82; } }
+  /* ═══ ESCALA VISUAL (20-jun-2026): el sitio se diseñó viéndolo al 150% de zoom.
+     El look aprobado = 0.82 × 1.5 = 1.23. Estas reglas hacen que el 100% del visitante
+     se vea así, escalonado para no romper el layout en pantallas medianas. Móvil intacto. ═══ */
+  @media screen and (min-width: 1400px) { body { zoom: 1.23; } }
+  @media screen and (min-width: 1100px) and (max-width: 1399.98px) { body { zoom: 1.15; } }
+  @media screen and (min-width: 768px) and (max-width: 1099.98px) { body { zoom: 1.05; } }
   h3 { font-size: 1.25rem; margin-bottom: 12px; }
 
   .brand-gradient {
