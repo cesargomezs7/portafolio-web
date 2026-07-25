@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/styles.css?v=20260724escala6">
+<link rel="stylesheet" href="assets/styles.css?v=20260724escala7">
 <link rel="stylesheet" href="assets/wa-widget.css?v=3">
 <link rel="stylesheet" href="assets/nav.css?v=9">
 
@@ -534,72 +534,76 @@
     document.querySelector('.team-book').href = 'https://wa.me/573124672674?text=' + d.wa;
   }
 
-  // ── Auto-rotación premium (24-jul): los 3 especialistas rotan solos cada 5s
-  //    con crossfade; pausa al pasar el mouse / tocar / usar las flechas, y solo
-  //    gira mientras la tarjeta está visible en pantalla. ──
-  const teamCard = document.getElementById('teamCarousel');
-  teamData.forEach(d => { const im = new Image(); im.src = d.img; }); // precarga: crossfade sin huecos
-  let teamTimer = null, teamResume = null;
+  /* ── Auto-rotación del equipo (24-jul, v3 · compatible Safari) ─────────────
+     Los 3 especialistas rotan solos cada 5s con crossfade lento. Pausa al pasar
+     el mouse, al tocar y al usar las flechas; no gira si la tarjeta no está a la
+     vista o la pestaña está en segundo plano.
 
-  // Crossfade con Web Animations API: la animación es idéntica en CADA ciclo
-  // (infinitamente), sin depender de clases CSS ni de caché de estilos.
-  // Red de seguridad: si el navegador pausa/olvida la animación (pestaña de
-  // fondo, throttling), el cambio procede igual a los 1100ms — nunca se atasca.
-  let teamSwitching = false;
-  const teamWait = ms => new Promise(r => setTimeout(r, ms));
-  function teamFade(els, dir) {
-    const FOTO_KF = dir === 'out'
-      ? [{ opacity: 1, transform: 'scale(1)' }, { opacity: 0, transform: 'scale(1.02)' }]
-      : [{ opacity: 0, transform: 'scale(1.02)' }, { opacity: 1, transform: 'scale(1)' }];
-    const TXT_KF = dir === 'out'
-      ? [{ opacity: 1, transform: 'translateY(0)' }, { opacity: 0, transform: 'translateY(8px)' }]
-      : [{ opacity: 0, transform: 'translateY(8px)' }, { opacity: 1, transform: 'translateY(0)' }];
-    const conf = { duration: 750, easing: 'ease-in-out', fill: 'forwards' };
-    const anims = els.map((el, i) => el.animate(i === 0 ? FOTO_KF : TXT_KF, conf));
-    const done = Promise.all(anims.map(a => a.finished.catch(() => {})));
-    return Promise.race([done, teamWait(1100)]);
+     POR QUÉ ESTA IMPLEMENTACIÓN: la versión anterior usaba Web Animations API
+     (element.animate + promesa .finished + getAnimations()). En Safari eso fallaba
+     y el carrusel quedaba congelado: si getAnimations() lanzaba excepción, el
+     manejador de error TAMBIÉN la llamaba, así que la bandera "ocupado" nunca se
+     liberaba. Ahora todo es transición CSS por estilo en línea + setTimeout —
+     lo más compatible que existe: sin WAAPI, sin promesas que puedan colgarse,
+     sin transitionend (que se pierde si la pestaña se va al fondo). El reloj es
+     un único intervalo de 1s basado en marcas de tiempo: aunque el navegador lo
+     ralentice, al volver retoma solo. ES5-safe. ───────────────────────────── */
+  var teamCard  = document.getElementById('teamCarousel');
+  var teamPhoto = document.querySelector('.team-photo img');
+  var teamTexts = [document.getElementById('teamName'), document.getElementById('teamExp'), document.getElementById('teamBio')];
+  var TEAM_FADE = 750;    // duración de cada lado del crossfade (ms)
+  var TEAM_EVERY = 5000;  // cada cuánto cambia de especialista (ms)
+  var teamBusy = false, teamHover = false, teamPausedUntil = 0, teamLast = Date.now();
+
+  for (var tp = 0; tp < teamData.length; tp++) { var tImg = new Image(); tImg.src = teamData[tp].img; } // precarga
+
+  function teamStyle(el, op, tr) { el.style.opacity = op; el.style.transform = tr; }
+  function teamApply(visible) {
+    teamStyle(teamPhoto, visible ? '1' : '0', visible ? 'scale(1)' : 'scale(1.02)');
+    for (var i = 0; i < teamTexts.length; i++) {
+      teamStyle(teamTexts[i], visible ? '1' : '0', visible ? 'translateY(0)' : 'translateY(8px)');
+    }
+  }
+  function teamTransitionOn() {
+    var t = 'opacity ' + TEAM_FADE + 'ms ease-in-out, transform ' + TEAM_FADE + 'ms ease-in-out';
+    teamPhoto.style.transition = t;
+    for (var i = 0; i < teamTexts.length; i++) teamTexts[i].style.transition = t;
   }
   function switchTeam(idx) {
-    if (teamSwitching) return;
-    teamSwitching = true;
-    const els = [
-      document.querySelector('.team-photo img'),
-      document.getElementById('teamName'),
-      document.getElementById('teamExp'),
-      document.getElementById('teamBio')
-    ];
-    teamFade(els, 'out').then(() => {
-      teamIdx = (idx + teamData.length) % teamData.length;
-      renderTeam();
-      return teamFade(els, 'in');
-    }).then(() => {
-      els.forEach(el => el.getAnimations().forEach(a => a.cancel()));
-      teamSwitching = false;
-    }).catch(() => {
-      els.forEach(el => el.getAnimations().forEach(a => a.cancel()));
-      teamSwitching = false;
-    });
+    if (teamBusy) return;
+    teamBusy = true;
+    var target = (idx + teamData.length) % teamData.length;
+    teamTransitionOn();
+    void teamCard.offsetWidth;          // reflow: garantiza que la transición arranque
+    teamApply(false);                   // desvanecer
+    setTimeout(function () {
+      teamIdx = target;
+      renderTeam();                     // cambio de doctor mientras está invisible
+      void teamCard.offsetWidth;        // reflow
+      teamApply(true);                  // aparecer
+      setTimeout(function () { teamBusy = false; }, TEAM_FADE + 80);
+    }, TEAM_FADE + 40);
   }
   function teamVisible() {
-    const r = teamCard.getBoundingClientRect();
+    var r = teamCard.getBoundingClientRect();
     return r.top < window.innerHeight * 0.9 && r.bottom > window.innerHeight * 0.1;
   }
-  function startAuto() {
-    stopAuto();
-    // gira solo si la pestaña está activa Y la tarjeta se ve en pantalla
-    teamTimer = setInterval(() => {
-      if (!document.hidden && teamVisible()) switchTeam(teamIdx + 1);
-    }, 5000);
-  }
-  function stopAuto() { if (teamTimer) { clearInterval(teamTimer); teamTimer = null; } }
-  function pauseAuto(ms) { stopAuto(); clearTimeout(teamResume); teamResume = setTimeout(startAuto, ms); }
+  function teamPause(ms) { teamPausedUntil = Date.now() + ms; }
 
-  document.getElementById('teamPrev').addEventListener('click', () => { switchTeam(teamIdx - 1); pauseAuto(12000); });
-  document.getElementById('teamNext').addEventListener('click', () => { switchTeam(teamIdx + 1); pauseAuto(12000); });
-  teamCard.addEventListener('mouseenter', stopAuto);
-  teamCard.addEventListener('mouseleave', () => pauseAuto(1500));
-  teamCard.addEventListener('touchstart', () => pauseAuto(10000), { passive: true });
-  startAuto();
+  setInterval(function () {
+    var now = Date.now();
+    if (teamBusy || teamHover || now < teamPausedUntil || document.hidden || !teamVisible()) {
+      teamLast = now;                   // reinicia el conteo: al volver espera el ciclo completo
+      return;
+    }
+    if (now - teamLast >= TEAM_EVERY) { teamLast = now; switchTeam(teamIdx + 1); }
+  }, 1000);
+
+  document.getElementById('teamPrev').addEventListener('click', function () { switchTeam(teamIdx - 1); teamPause(12000); });
+  document.getElementById('teamNext').addEventListener('click', function () { switchTeam(teamIdx + 1); teamPause(12000); });
+  teamCard.addEventListener('mouseenter', function () { teamHover = true; });
+  teamCard.addEventListener('mouseleave', function () { teamHover = false; teamLast = Date.now(); });
+  teamCard.addEventListener('touchstart', function () { teamPause(10000); }, { passive: true });
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>

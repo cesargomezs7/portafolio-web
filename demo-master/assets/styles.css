@@ -1235,14 +1235,12 @@ footer { background: var(--white); padding: 80px 32px 40px; }
   .footer-inner { grid-template-columns: 1fr !important; }
 }
 
-/* ─── Carrusel de equipo: transición premium + auto-rotación (24-jul) ───
-   Crossfade LENTO y suave (pedido César: que el cambio no sea impactante) */
-.team-photo img { transition: opacity .75s ease-in-out, transform 1.1s cubic-bezier(0.22, 1, 0.36, 1); }
-.team-info h3, .team-info .team-exp, .team-info p { transition: opacity .7s ease-in-out, transform .7s ease-in-out; }
-.team-card.team-switching .team-photo img { opacity: 0; transform: scale(1.02); }
-.team-card.team-switching .team-info h3,
-.team-card.team-switching .team-info .team-exp,
-.team-card.team-switching .team-info p { opacity: 0; transform: translateY(8px); }
+/* ─── Carrusel de equipo (24-jul v3) ───
+   El crossfade lo aplica el JS con transiciones en línea (compatible con Safari).
+   Aquí solo se garantiza que la foto y los textos arranquen VISIBLES aunque el
+   JS no corra, y que el cambio de foto no provoque saltos de layout. */
+.team-photo img { opacity: 1; will-change: opacity, transform; }
+.team-info h3, .team-info .team-exp, .team-info p { opacity: 1; }
 
 /* ─── 12-jun-2026 · tanda 4 ───
    Doctores de nosotros lado a lado también en la ventana del Mac (769-1024). */
