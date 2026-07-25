@@ -1237,10 +1237,10 @@ footer { background: var(--white); padding: 80px 32px 40px; }
 
 /* ─── Carrusel de equipo (24-jul v3) ───
    El crossfade lo aplica el JS con transiciones en línea (compatible con Safari).
-   Aquí solo se garantiza que la foto y los textos arranquen VISIBLES aunque el
-   JS no corra, y que el cambio de foto no provoque saltos de layout. */
-.team-photo img { opacity: 1; will-change: opacity, transform; }
-.team-info h3, .team-info .team-exp, .team-info p { opacity: 1; }
+   OJO: NO forzar opacity aquí sobre los textos — cada uno tiene su opacidad de
+   diseño (.team-exp 0.7 · p 0.85) y el JS la lee para devolverlos a su valor
+   correcto al terminar el fundido. */
+.team-photo img { will-change: opacity, transform; }
 
 /* ─── 12-jun-2026 · tanda 4 ───
    Doctores de nosotros lado a lado también en la ventana del Mac (769-1024). */

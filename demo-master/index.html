@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script>window.__errs=[];window.addEventListener('error',function(e){window.__errs.push((e.message||'err')+' @'+(e.filename||'').split('/').pop()+':'+e.lineno);});</script>
 <!-- Microsoft Clarity (interno Pronto) -->
 <script type="text/javascript">(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window, document, "clarity", "script", "wygnitnsj3");</script>
 <title>Sonrisa Premium · Odontología en Bogotá y Medellín</title>
@@ -11,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/styles.css?v=20260724escala7">
+<link rel="stylesheet" href="assets/styles.css?v=20260724escala8">
 <link rel="stylesheet" href="assets/wa-widget.css?v=3">
 <link rel="stylesheet" href="assets/nav.css?v=9">
 
@@ -551,38 +550,70 @@
      ralentice, al volver retoma solo. ES5-safe. ───────────────────────────── */
   var teamCard  = document.getElementById('teamCarousel');
   var teamPhoto = document.querySelector('.team-photo img');
-  var teamTexts = [document.getElementById('teamName'), document.getElementById('teamExp'), document.getElementById('teamBio')];
   var TEAM_FADE = 750;    // duración de cada lado del crossfade (ms)
   var TEAM_EVERY = 5000;  // cada cuánto cambia de especialista (ms)
   var teamBusy = false, teamHover = false, teamPausedUntil = 0, teamLast = Date.now();
+  var teamT1 = null, teamT2 = null, teamDog = null;
 
   for (var tp = 0; tp < teamData.length; tp++) { var tImg = new Image(); tImg.src = teamData[tp].img; } // precarga
 
-  function teamStyle(el, op, tr) { el.style.opacity = op; el.style.transform = tr; }
+  /* Cada nodo guarda SU opacidad de diseño (la foto 1, el subtítulo 0.7, la bio
+     0.85). Al reaparecer se devuelve a ese valor, no a 1: así el fundido nunca
+     altera el diseño original de la tarjeta. */
+  var teamNodes = [];
+  function teamReg(el, oculto) {
+    if (!el) return;
+    var op = 1;
+    try { op = parseFloat(window.getComputedStyle(el).opacity); } catch (e) {}
+    if (!(op > 0)) op = 1;
+    teamNodes.push({ el: el, op: op, hid: oculto });
+  }
+  teamReg(teamPhoto, 'scale(1.02)');
+  teamReg(document.getElementById('teamName'), 'translateY(8px)');
+  teamReg(document.getElementById('teamExp'),  'translateY(8px)');
+  teamReg(document.getElementById('teamBio'),  'translateY(8px)');
+
   function teamApply(visible) {
-    teamStyle(teamPhoto, visible ? '1' : '0', visible ? 'scale(1)' : 'scale(1.02)');
-    for (var i = 0; i < teamTexts.length; i++) {
-      teamStyle(teamTexts[i], visible ? '1' : '0', visible ? 'translateY(0)' : 'translateY(8px)');
+    for (var i = 0; i < teamNodes.length; i++) {
+      var n = teamNodes[i];
+      n.el.style.opacity   = visible ? String(n.op) : '0';
+      n.el.style.transform = visible ? 'none' : n.hid;
     }
   }
-  function teamTransitionOn() {
-    var t = 'opacity ' + TEAM_FADE + 'ms ease-in-out, transform ' + TEAM_FADE + 'ms ease-in-out';
-    teamPhoto.style.transition = t;
-    for (var i = 0; i < teamTexts.length; i++) teamTexts[i].style.transition = t;
+  function teamTransition(on) {
+    var t = on ? ('opacity ' + TEAM_FADE + 'ms ease-in-out, transform ' + TEAM_FADE + 'ms ease-in-out') : 'none';
+    for (var i = 0; i < teamNodes.length; i++) teamNodes[i].el.style.transition = t;
+  }
+  /* Salida única: pase lo que pase, la tarjeta queda visible y libre. */
+  function teamRelease() {
+    if (teamT1) { clearTimeout(teamT1); teamT1 = null; }
+    if (teamT2) { clearTimeout(teamT2); teamT2 = null; }
+    if (teamDog) { clearTimeout(teamDog); teamDog = null; }
+    teamBusy = false;
+    try { teamTransition(false); teamApply(true); } catch (e) {}
+    teamLast = Date.now();
   }
   function switchTeam(idx) {
     if (teamBusy) return;
     teamBusy = true;
-    var target = (idx + teamData.length) % teamData.length;
-    teamTransitionOn();
-    void teamCard.offsetWidth;          // reflow: garantiza que la transición arranque
-    teamApply(false);                   // desvanecer
-    setTimeout(function () {
-      teamIdx = target;
-      renderTeam();                     // cambio de doctor mientras está invisible
-      void teamCard.offsetWidth;        // reflow
-      teamApply(true);                  // aparecer
-      setTimeout(function () { teamBusy = false; }, TEAM_FADE + 80);
+    if (teamT1) clearTimeout(teamT1);
+    if (teamT2) clearTimeout(teamT2);
+    if (teamDog) clearTimeout(teamDog);
+    teamDog = setTimeout(teamRelease, TEAM_FADE * 2 + 900);   // perro guardián: imposible atascarse
+    var target = ((idx % teamData.length) + teamData.length) % teamData.length;
+    try {
+      teamTransition(true);
+      void teamCard.offsetWidth;        // reflow: garantiza que la transición arranque
+      teamApply(false);                 // desvanecer
+    } catch (e) { teamRelease(); return; }
+    teamT1 = setTimeout(function () {
+      try {
+        teamIdx = target;
+        renderTeam();                   // cambio de doctor mientras está invisible
+        void teamCard.offsetWidth;      // reflow
+        teamApply(true);                // aparecer
+      } catch (e) {}
+      teamT2 = setTimeout(function () { teamBusy = false; teamDog && clearTimeout(teamDog); teamDog = null; }, TEAM_FADE + 100);
     }, TEAM_FADE + 40);
   }
   /* ¿La tarjeta está a la vista? Con IntersectionObserver, NO con
@@ -605,28 +636,21 @@
   function teamVisible() { return teamOnScreen; }
   function teamPause(ms) { teamPausedUntil = Date.now() + ms; }
 
-  // Panel de diagnóstico temporal: solo con ?debug en la URL
-  var teamDbg = null, teamTicks = 0;
-  if (location.search.indexOf('debug') !== -1) {
-    teamDbg = document.createElement('div');
-    teamDbg.style.cssText = 'position:fixed;top:8px;left:8px;z-index:2147483647;background:#000;color:#0f0;font:12px/1.6 monospace;padding:8px 12px;border-radius:6px;white-space:pre;opacity:.95';
-    document.body.appendChild(teamDbg);
+  /* Hover: se le pregunta al DOM en vez de confiar solo en la bandera, porque
+     WebKit no siempre dispara mouseleave cuando el contenido se mueve por scroll
+     sin mover el mouse (la bandera se quedaba pegada en true). En pantallas
+     táctiles ni se consulta. */
+  var teamFinePointer = true;
+  try { teamFinePointer = !window.matchMedia || window.matchMedia('(hover: hover)').matches; } catch (e) {}
+  function teamIsHover() {
+    if (!teamFinePointer) return false;
+    try { if (teamCard.matches) return teamCard.matches(':hover'); } catch (e) {}
+    return teamHover;
   }
 
   setInterval(function () {
     var now = Date.now();
-    teamTicks++;
-    if (teamDbg) {
-      teamDbg.textContent =
-        'ticks=' + teamTicks + '  idx=' + teamIdx +
-        '\nbusy=' + teamBusy + ' hover=' + teamHover +
-        ' hidden=' + document.hidden +
-        '\nvisible=' + teamVisible() +
-        ' pausa=' + Math.max(0, Math.round((teamPausedUntil - now) / 1000)) + 's' +
-        '\nespera=' + Math.round((now - teamLast) / 1000) + 's/' + (TEAM_EVERY / 1000) + 's' +
-        '\nerrores=' + ((window.__errs && window.__errs.length) ? window.__errs.join(' | ') : 'ninguno');
-    }
-    if (teamBusy || teamHover || now < teamPausedUntil || document.hidden || !teamVisible()) {
+    if (teamBusy || teamIsHover() || now < teamPausedUntil || document.hidden || !teamVisible()) {
       teamLast = now;                   // reinicia el conteo: al volver espera el ciclo completo
       return;
     }
@@ -642,7 +666,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
-<script src="assets/animations.js?v=20260513r" defer></script>
+<script src="assets/animations.js?v=20260724b" defer></script>
 <script src="assets/wa-widget.js?v=3" defer></script>
 <script src="assets/nav.js?v=3" defer></script>
 

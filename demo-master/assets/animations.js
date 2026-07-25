@@ -175,23 +175,14 @@
       });
     });
 
-    // ─── Team carrusel: fade transition al cambiar doctor ─
-    const teamPhoto = document.querySelector('.team-photo img');
-    const teamCarousel = document.querySelector('.team-card');
-    if (teamPhoto && teamCarousel) {
-      // Interceptar el cambio: cuando el src cambia, animar fade
-      const observer = new MutationObserver(() => {
-        gsap.fromTo(teamPhoto,
-          { opacity: 0, scale: 1.04 },
-          { opacity: 1, scale: 1, duration: 0.5, ease: 'power2.out' }
-        );
-        gsap.fromTo('.team-info > *',
-          { opacity: 0, y: 8 },
-          { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out', stagger: 0.04 }
-        );
-      });
-      observer.observe(teamPhoto, { attributes: true, attributeFilter: ['src'] });
-    }
+    /* ─── Team carrusel ───
+       RETIRADO 24-jul-2026: aquí había un MutationObserver que, al cambiar la
+       foto, lanzaba su propio fade con GSAP sobre la foto y sobre .team-info > *.
+       Desde que el carrusel del index.html hace su propio crossfade, había DOS
+       motores animando los mismos nodos: GSAP pisaba la transición (el cambio se
+       veía brusco a partir del segundo doctor) y además forzaba opacity:1 en los
+       textos, borrando las opacidades de diseño (.team-exp 0.7 / p 0.85).
+       El carrusel del index.html es ahora el único dueño de esta animación. */
 
     // Scroll progress bar
     const progressBar = document.getElementById('scrollProgress');
