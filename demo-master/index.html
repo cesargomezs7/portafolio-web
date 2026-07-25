@@ -585,10 +585,24 @@
       setTimeout(function () { teamBusy = false; }, TEAM_FADE + 80);
     }, TEAM_FADE + 40);
   }
-  function teamVisible() {
-    var r = teamCard.getBoundingClientRect();
-    return r.top < window.innerHeight * 0.9 && r.bottom > window.innerHeight * 0.1;
+  /* ¿La tarjeta está a la vista? Con IntersectionObserver, NO con
+     getBoundingClientRect(): el <body> lleva zoom CSS y Safari calcula mal esas
+     coordenadas cuando hay zoom (devolvía "fuera de pantalla" con la tarjeta
+     perfectamente visible, y por eso el carrusel no rotaba en Safari).
+     Por defecto asumimos visible: si el observador falla, rota igual. */
+  var teamOnScreen = true;
+  if ('IntersectionObserver' in window) {
+    try {
+      new IntersectionObserver(function (entries) {
+        for (var i = 0; i < entries.length; i++) {
+          var vis = entries[i].isIntersecting;
+          if (vis && !teamOnScreen) teamLast = Date.now();  // al entrar, ciclo completo
+          teamOnScreen = vis;
+        }
+      }, { threshold: 0.15 }).observe(teamCard);
+    } catch (e) { teamOnScreen = true; }
   }
+  function teamVisible() { return teamOnScreen; }
   function teamPause(ms) { teamPausedUntil = Date.now() + ms; }
 
   // Panel de diagnóstico temporal: solo con ?debug en la URL
