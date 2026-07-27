@@ -84,13 +84,13 @@
     --ink: #F7F8F8;
     --text: #D0D6E0;
     --text-muted: #8A8F98;
-    --text-dim: #62666D;
+    --text-dim: #7E838C;
     --accent-blue: #0891b2;
     --accent-cyan: #22d3ee;
     --accent-green: #22C55E;
     --border: rgba(255,255,255,0.08);
     --border-strong: rgba(255,255,255,0.14);
-    --border-blue: rgba(8,145,178,0.4);
+    --border-accent: rgba(34,211,238,0.4);
     --gradient: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
     --font-display: 'Fraunces', Georgia, serif;
     --font-body: 'Onest', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -145,6 +145,7 @@
   }
   h1 { font-size: clamp(2.2rem, 4.5vw, 3.3rem); line-height: 1.06; letter-spacing: -0.02em; }
   h1 em { font-style: italic; font-weight: 430; }
+  section h2 { text-align: center; }
   h2 { font-size: clamp(1.65rem, 3.2vw, 2.35rem); line-height: 1.12; letter-spacing: -0.015em; font-weight: 500; margin-bottom: 24px; }
   h3 { font-family: var(--font-body); font-size: 1.18rem; font-weight: 600; letter-spacing: -0.01em; color: var(--ink); margin-bottom: 12px; }
 
@@ -222,7 +223,7 @@
   .navbar-logo {
     font-family: var(--font-logo);
     font-size: 1.5rem;
-    font-weight: 800;
+    font-weight: 700;
     background: var(--gradient);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -493,9 +494,9 @@
   }
   .ba-label-before {
     left: 16px;
-    background: rgba(0,0,0,0.72);
+    background: rgba(0,0,0,0.85);
     border: 1px solid rgba(255,255,255,0.2);
-    color: var(--text-muted);
+    color: var(--ink);
   }
   .ba-label-after {
     right: 16px;
@@ -509,7 +510,7 @@
     flex-direction: column;
     align-items: center;
     gap: 14px;
-    margin: 32px 0 28px;
+    margin: 40px 0 28px;
   }
   .demo-selector {
     display: inline-flex;
@@ -643,7 +644,7 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
-    margin-top: 44px;
+    margin-top: 40px;
   }
   .timeline-step {
     padding: 26px 24px 28px;
@@ -695,6 +696,8 @@
   }
 
   /* ── PLANES ── */
+  .planes-grid { display: flex; justify-content: center; }
+  .planes-grid .plan { max-width: 520px; width: 100%; }
   .plan {
     padding: 40px 36px;
     border-radius: var(--radius-lg);
@@ -703,7 +706,7 @@
     position: relative;
   }
   .plan.destacado {
-    border-color: rgba(34,211,238,0.35);
+    border-color: var(--border-accent);
     box-shadow: 0 24px 64px rgba(8,145,178,0.10);
   }
   .plan .ribbon {
@@ -711,7 +714,7 @@
     top: -13px;
     left: 32px;
     background: var(--bg);
-    border: 1px solid rgba(34,211,238,0.4);
+    border: 1px solid var(--border-accent);
     color: var(--accent-cyan);
     padding: 4px 13px;
     border-radius: 999px;
@@ -812,7 +815,7 @@
   /* ── FAQs: lista minimal con hairlines ── */
   .faqs {
     max-width: 720px;
-    margin: 36px auto 0;
+    margin: 40px auto 0;
     border-top: 1px solid var(--border);
   }
   .faq {
@@ -1003,6 +1006,7 @@
     .demo-name { min-width: 170px; font-size: 0.85rem; }
     .ba-container { margin-top: 28px; }
     h1 { font-size: clamp(1.9rem, 8vw, 2.3rem); }
+    .plan .ribbon, .plan-group-title, .demo-note { font-size: 0.7rem; }
   }
 </style>
 </head>
@@ -1068,13 +1072,13 @@
   <div class="ticker-track">
     <span class="ticker-item">Primer mes gratis &middot; Pronto Dental</span><span class="ticker-star" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:middle"><path d="M16.5 3C14.7 3 13.6 3.6 12 3.6S9.3 3 7.5 3C4.5 3 3 5.2 3 8c0 2 .6 3.6 1.2 5.4l.7 2.1c.7 2.2 1.6 5.5 3.1 5.5 1.1 0 1.5-1.4 1.7-3l.4-2.4c.2-1.3.5-2.2 1.9-2.2s1.7.9 1.9 2.2l.4 2.4c.2 1.6.6 3 1.7 3 1.5 0 2.4-3.3 3.1-5.5l.7-2.1C20.4 11.6 21 10 21 8c0-2.8-1.5-5-4.5-5z"/></svg></span>
     <span class="ticker-item">Web en 7-10 días</span><span class="ticker-star" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:middle"><path d="M16.5 3C14.7 3 13.6 3.6 12 3.6S9.3 3 7.5 3C4.5 3 3 5.2 3 8c0 2 .6 3.6 1.2 5.4l.7 2.1c.7 2.2 1.6 5.5 3.1 5.5 1.1 0 1.5-1.4 1.7-3l.4-2.4c.2-1.3.5-2.2 1.9-2.2s1.7.9 1.9 2.2l.4 2.4c.2 1.6.6 3 1.7 3 1.5 0 2.4-3.3 3.1-5.5l.7-2.1C20.4 11.6 21 10 21 8c0-2.8-1.5-5-4.5-5z"/></svg></span>
-    <span class="ticker-item">Dominio propio a su nombre</span><span class="ticker-star" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:middle"><path d="M16.5 3C14.7 3 13.6 3.6 12 3.6S9.3 3 7.5 3C4.5 3 3 5.2 3 8c0 2 .6 3.6 1.2 5.4l.7 2.1c.7 2.2 1.6 5.5 3.1 5.5 1.1 0 1.5-1.4 1.7-3l.4-2.4c.2-1.3.5-2.2 1.9-2.2s1.7.9 1.9 2.2l.4 2.4c.2 1.6.6 3 1.7 3 1.5 0 2.4-3.3 3.1-5.5l.7-2.1C20.4 11.6 21 10 21 8c0-2.8-1.5-5-4.5-5z"/></svg></span>
+    <span class="ticker-item">Dominio propio a tu nombre</span><span class="ticker-star" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:middle"><path d="M16.5 3C14.7 3 13.6 3.6 12 3.6S9.3 3 7.5 3C4.5 3 3 5.2 3 8c0 2 .6 3.6 1.2 5.4l.7 2.1c.7 2.2 1.6 5.5 3.1 5.5 1.1 0 1.5-1.4 1.7-3l.4-2.4c.2-1.3.5-2.2 1.9-2.2s1.7.9 1.9 2.2l.4 2.4c.2 1.6.6 3 1.7 3 1.5 0 2.4-3.3 3.1-5.5l.7-2.1C20.4 11.6 21 10 21 8c0-2.8-1.5-5-4.5-5z"/></svg></span>
     <span class="ticker-item">Sin contratos</span><span class="ticker-star" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:middle"><path d="M16.5 3C14.7 3 13.6 3.6 12 3.6S9.3 3 7.5 3C4.5 3 3 5.2 3 8c0 2 .6 3.6 1.2 5.4l.7 2.1c.7 2.2 1.6 5.5 3.1 5.5 1.1 0 1.5-1.4 1.7-3l.4-2.4c.2-1.3.5-2.2 1.9-2.2s1.7.9 1.9 2.2l.4 2.4c.2 1.6.6 3 1.7 3 1.5 0 2.4-3.3 3.1-5.5l.7-2.1C20.4 11.6 21 10 21 8c0-2.8-1.5-5-4.5-5z"/></svg></span>
     <span class="ticker-item">Cambios semanales incluidos</span><span class="ticker-star" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:middle"><path d="M16.5 3C14.7 3 13.6 3.6 12 3.6S9.3 3 7.5 3C4.5 3 3 5.2 3 8c0 2 .6 3.6 1.2 5.4l.7 2.1c.7 2.2 1.6 5.5 3.1 5.5 1.1 0 1.5-1.4 1.7-3l.4-2.4c.2-1.3.5-2.2 1.9-2.2s1.7.9 1.9 2.2l.4 2.4c.2 1.6.6 3 1.7 3 1.5 0 2.4-3.3 3.1-5.5l.7-2.1C20.4 11.6 21 10 21 8c0-2.8-1.5-5-4.5-5z"/></svg></span>
     <span class="ticker-item">Cancela cuando quieras</span><span class="ticker-star" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:middle"><path d="M16.5 3C14.7 3 13.6 3.6 12 3.6S9.3 3 7.5 3C4.5 3 3 5.2 3 8c0 2 .6 3.6 1.2 5.4l.7 2.1c.7 2.2 1.6 5.5 3.1 5.5 1.1 0 1.5-1.4 1.7-3l.4-2.4c.2-1.3.5-2.2 1.9-2.2s1.7.9 1.9 2.2l.4 2.4c.2 1.6.6 3 1.7 3 1.5 0 2.4-3.3 3.1-5.5l.7-2.1C20.4 11.6 21 10 21 8c0-2.8-1.5-5-4.5-5z"/></svg></span>
     <span class="ticker-item">Primer mes gratis &middot; Pronto Dental</span><span class="ticker-star" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:middle"><path d="M16.5 3C14.7 3 13.6 3.6 12 3.6S9.3 3 7.5 3C4.5 3 3 5.2 3 8c0 2 .6 3.6 1.2 5.4l.7 2.1c.7 2.2 1.6 5.5 3.1 5.5 1.1 0 1.5-1.4 1.7-3l.4-2.4c.2-1.3.5-2.2 1.9-2.2s1.7.9 1.9 2.2l.4 2.4c.2 1.6.6 3 1.7 3 1.5 0 2.4-3.3 3.1-5.5l.7-2.1C20.4 11.6 21 10 21 8c0-2.8-1.5-5-4.5-5z"/></svg></span>
     <span class="ticker-item">Web en 7-10 días</span><span class="ticker-star" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:middle"><path d="M16.5 3C14.7 3 13.6 3.6 12 3.6S9.3 3 7.5 3C4.5 3 3 5.2 3 8c0 2 .6 3.6 1.2 5.4l.7 2.1c.7 2.2 1.6 5.5 3.1 5.5 1.1 0 1.5-1.4 1.7-3l.4-2.4c.2-1.3.5-2.2 1.9-2.2s1.7.9 1.9 2.2l.4 2.4c.2 1.6.6 3 1.7 3 1.5 0 2.4-3.3 3.1-5.5l.7-2.1C20.4 11.6 21 10 21 8c0-2.8-1.5-5-4.5-5z"/></svg></span>
-    <span class="ticker-item">Dominio propio a su nombre</span><span class="ticker-star" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:middle"><path d="M16.5 3C14.7 3 13.6 3.6 12 3.6S9.3 3 7.5 3C4.5 3 3 5.2 3 8c0 2 .6 3.6 1.2 5.4l.7 2.1c.7 2.2 1.6 5.5 3.1 5.5 1.1 0 1.5-1.4 1.7-3l.4-2.4c.2-1.3.5-2.2 1.9-2.2s1.7.9 1.9 2.2l.4 2.4c.2 1.6.6 3 1.7 3 1.5 0 2.4-3.3 3.1-5.5l.7-2.1C20.4 11.6 21 10 21 8c0-2.8-1.5-5-4.5-5z"/></svg></span>
+    <span class="ticker-item">Dominio propio a tu nombre</span><span class="ticker-star" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:middle"><path d="M16.5 3C14.7 3 13.6 3.6 12 3.6S9.3 3 7.5 3C4.5 3 3 5.2 3 8c0 2 .6 3.6 1.2 5.4l.7 2.1c.7 2.2 1.6 5.5 3.1 5.5 1.1 0 1.5-1.4 1.7-3l.4-2.4c.2-1.3.5-2.2 1.9-2.2s1.7.9 1.9 2.2l.4 2.4c.2 1.6.6 3 1.7 3 1.5 0 2.4-3.3 3.1-5.5l.7-2.1C20.4 11.6 21 10 21 8c0-2.8-1.5-5-4.5-5z"/></svg></span>
     <span class="ticker-item">Sin contratos</span><span class="ticker-star" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:middle"><path d="M16.5 3C14.7 3 13.6 3.6 12 3.6S9.3 3 7.5 3C4.5 3 3 5.2 3 8c0 2 .6 3.6 1.2 5.4l.7 2.1c.7 2.2 1.6 5.5 3.1 5.5 1.1 0 1.5-1.4 1.7-3l.4-2.4c.2-1.3.5-2.2 1.9-2.2s1.7.9 1.9 2.2l.4 2.4c.2 1.6.6 3 1.7 3 1.5 0 2.4-3.3 3.1-5.5l.7-2.1C20.4 11.6 21 10 21 8c0-2.8-1.5-5-4.5-5z"/></svg></span>
     <span class="ticker-item">Cambios semanales incluidos</span><span class="ticker-star" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:middle"><path d="M16.5 3C14.7 3 13.6 3.6 12 3.6S9.3 3 7.5 3C4.5 3 3 5.2 3 8c0 2 .6 3.6 1.2 5.4l.7 2.1c.7 2.2 1.6 5.5 3.1 5.5 1.1 0 1.5-1.4 1.7-3l.4-2.4c.2-1.3.5-2.2 1.9-2.2s1.7.9 1.9 2.2l.4 2.4c.2 1.6.6 3 1.7 3 1.5 0 2.4-3.3 3.1-5.5l.7-2.1C20.4 11.6 21 10 21 8c0-2.8-1.5-5-4.5-5z"/></svg></span>
     <span class="ticker-item">Cancela cuando quieras</span><span class="ticker-star" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:middle"><path d="M16.5 3C14.7 3 13.6 3.6 12 3.6S9.3 3 7.5 3C4.5 3 3 5.2 3 8c0 2 .6 3.6 1.2 5.4l.7 2.1c.7 2.2 1.6 5.5 3.1 5.5 1.1 0 1.5-1.4 1.7-3l.4-2.4c.2-1.3.5-2.2 1.9-2.2s1.7.9 1.9 2.2l.4 2.4c.2 1.6.6 3 1.7 3 1.5 0 2.4-3.3 3.1-5.5l.7-2.1C20.4 11.6 21 10 21 8c0-2.8-1.5-5-4.5-5z"/></svg></span>
@@ -1101,12 +1105,12 @@
 </section>
 
 <!-- VEA LOS SITIOS EN VIVO (horizontal, con tabs) -->
-<section class="reveal" id="portafolio">
+<section id="portafolio">
   <div class="container">
     <p class="section-label">Ve en vivo</p>
-    <h2 style="text-align:center">Navegue los sitios en vivo</h2>
+    <h2 style="text-align:center">Navega los sitios en vivo</h2>
     <p style="text-align:center; color:var(--text-muted); max-width:560px; margin:0 auto 0">
-      Haga scroll, haga click, explore. Estos son sitios reales funcionando ahora mismo.
+      Haz scroll, haz click, explora. Estos son sitios reales funcionando ahora mismo.
     </p>
     <div class="demo-controls">
       <div class="demo-selector">
@@ -1213,7 +1217,7 @@
             <li>Grabación de sesiones para mejorar la conversión (Microsoft Clarity)</li>
             <li>Hasta 3 cambios menores al mes (extras con costo aparte)</li>
             <li>Soporte WhatsApp ante problemas técnicos (24-48h hábiles)</li>
-            <li>Análisis comparativo de su web actual: fallas detectadas y cómo las solucionamos</li>
+            <li>Análisis comparativo de tu web actual: fallas detectadas y cómo las solucionamos</li>
           </ul>
         </div>
         <p class="plan-note">Primer mes gratis. Sin contratos. Cancela cuando quieras.</p>
