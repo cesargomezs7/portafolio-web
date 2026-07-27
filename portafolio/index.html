@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Diseños para tu clínica dental · Pronto</title>
 <meta name="description" content="Mira diseños reales de páginas web para clínicas dentales. Navega cada uno en vivo, en computador y en móvil. Hechos por Pronto.">
+<link rel="icon" href="../favicon.svg">
 
 <!-- Open Graph (preview WhatsApp / redes) -->
 <meta property="og:type" content="website">
@@ -23,24 +24,38 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Onest:wght@300..700&family=Geist+Mono:wght@400..500&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
 
 <style>
+  /* ═══════════════════════════════════════════════════════════════
+     PRONTO — Sistema de diseño v2 "Premium" (jul-2026)
+     Fraunces (display serif) + Onest (body) + Geist Mono (datos)
+     Un acento (cyan Pronto), escalera de neutros, hairlines.
+     ═══════════════════════════════════════════════════════════════ */
   :root {
-    --bg: #000000;
-    --surface: #0a0c14;
-    --text: #E6E8F0;
-    --text-muted: #B0B6CC;
-    --text-dim: #8088A6;
+    --bg: #050607;
+    --bg-subtle: rgba(255,255,255,0.02);
+    --surface-1: #0C0E10;
+    --surface-2: #121417;
+    --ink: #F7F8F8;
+    --text: #D0D6E0;
+    --text-muted: #8A8F98;
+    --text-dim: #7E838C;
     --accent-blue: #0891b2;
     --accent-cyan: #22d3ee;
     --border: rgba(255,255,255,0.08);
-    --border-blue: rgba(8,145,178,0.4);
+    --border-strong: rgba(255,255,255,0.14);
+    --border-accent: rgba(34,211,238,0.4);
     --gradient: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
-    --font-display: 'DM Serif Display', Georgia, serif;
-    --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    --font-grotesk: 'Space Grotesk', sans-serif;
+    --font-display: 'Fraunces', Georgia, serif;
+    --font-body: 'Onest', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --font-mono: 'Geist Mono', 'SF Mono', Menlo, monospace;
+    --font-logo: 'Space Grotesk', sans-serif;
+    --radius-sm: 8px;
+    --radius: 12px;
     --radius-lg: 16px;
+    --ease: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    --speed: 160ms;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
@@ -49,26 +64,41 @@
     background: var(--bg);
     color: var(--text);
     min-height: 100vh;
+    line-height: 1.6;
     -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
     overflow-x: hidden;
+    position: relative;
     background-image:
-      radial-gradient(ellipse 800px 500px at 50% -10%, rgba(8,145,178,0.12), transparent 70%),
-      radial-gradient(ellipse 600px 400px at 90% 100%, rgba(34,211,238,0.06), transparent 70%);
+      radial-gradient(ellipse 900px 480px at 50% -8%, rgba(34,211,238,0.09), transparent 60%),
+      radial-gradient(ellipse 700px 500px at 85% 100%, rgba(8,145,178,0.05), transparent 65%);
     background-attachment: fixed;
   }
+  /* Grain sutil sobre el lienzo — tactilidad premium, detrás del contenido */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+    opacity: 0.035;
+    pointer-events: none;
+    z-index: 0;
+  }
+  a { color: inherit; text-decoration: none; }
+  ::selection { background: rgba(34,211,238,0.28); color: #fff; }
+  :focus-visible { outline: 2px solid var(--accent-cyan); outline-offset: 2px; }
 
-  .wrap { max-width: 900px; margin: 0 auto; padding: 0 20px; }
+  .wrap { max-width: 900px; margin: 0 auto; padding: 0 20px; position: relative; z-index: 1; }
 
   /* Header */
   header {
-    padding: 36px 0 20px;
+    padding: 40px 0 20px;
     text-align: center;
   }
   .brand {
-    font-family: var(--font-grotesk);
+    font-family: var(--font-logo);
     font-size: 1.5rem;
-    font-weight: 800;
-    letter-spacing: -0.02em;
+    font-weight: 700;
     background: var(--gradient);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -76,22 +106,20 @@
     display: inline-block;
   }
   h1 {
-    font-family: var(--font-grotesk);
-    font-size: clamp(1.9rem, 5vw, 3rem);
-    font-weight: 700;
-    line-height: 1.12;
-    margin: 26px 0 14px;
+    font-family: var(--font-display);
+    font-variation-settings: 'opsz' 144, 'SOFT' 0, 'WONK' 0;
+    font-size: clamp(2rem, 5vw, 3.1rem);
+    font-weight: 450;
+    line-height: 1.06;
+    margin: 28px 0 16px;
     letter-spacing: -0.02em;
+    color: var(--ink);
+    text-wrap: balance;
   }
-  h1 .accent {
-    background: var(--gradient);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
+  h1 em { font-style: italic; font-weight: 430; }
   .subtitle {
     color: var(--text-muted);
-    font-size: 1.02rem;
+    font-size: 1rem;
     line-height: 1.6;
     max-width: 540px;
     margin: 0 auto;
@@ -103,7 +131,7 @@
     flex-direction: column;
     align-items: center;
     gap: 14px;
-    margin: 34px 0 24px;
+    margin: 36px 0 26px;
   }
   .demo-selector {
     display: inline-flex;
@@ -112,83 +140,80 @@
     padding: 5px;
     border-radius: 999px;
     border: 1px solid var(--border);
-    background: rgba(255,255,255,0.03);
-    backdrop-filter: blur(8px);
+    background: var(--surface-1);
   }
   .demo-arrow {
-    width: 38px; height: 38px;
+    width: 34px; height: 34px;
     border-radius: 50%;
     border: 1px solid var(--border);
     background: rgba(255,255,255,0.04);
     color: var(--text-muted);
     cursor: pointer;
     display: inline-flex; align-items: center; justify-content: center;
-    transition: all 0.25s ease;
-    font-size: 18px;
+    transition: border-color var(--speed) var(--ease), color var(--speed) var(--ease), background var(--speed) var(--ease);
+    font-size: 17px;
+    line-height: 1;
     flex-shrink: 0;
   }
   .demo-arrow:hover {
     border-color: var(--accent-blue);
-    color: var(--text);
-    background: rgba(8,145,178,0.14);
-    transform: scale(1.05);
+    color: var(--ink);
+    background: rgba(8,145,178,0.12);
   }
   .demo-arrow:active { transform: scale(0.95); }
   .demo-name {
     font-family: var(--font-body);
-    font-size: 0.95rem;
-    font-weight: 600;
-    color: var(--text);
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--ink);
     min-width: 230px;
     text-align: center;
-    letter-spacing: -0.2px;
     padding: 0 6px;
   }
   .demo-name .demo-name-counter {
+    font-family: var(--font-mono);
     color: var(--text-dim);
     font-weight: 400;
     margin-right: 8px;
-    font-size: 0.82rem;
+    font-size: 0.78rem;
   }
   .viewport-toggle {
     display: inline-flex;
     border-radius: 999px;
     border: 1px solid var(--border);
-    background: rgba(255,255,255,0.03);
+    background: var(--surface-1);
     padding: 4px;
     gap: 2px;
-    backdrop-filter: blur(8px);
   }
   .viewport-btn {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    padding: 9px 20px;
+    padding: 8px 18px;
     border-radius: 999px;
     border: none;
     background: transparent;
     color: var(--text-muted);
-    font-family: var(--font-grotesk);
+    font-family: var(--font-body);
     font-size: 0.85rem;
-    font-weight: 600;
-    letter-spacing: 0.01em;
+    font-weight: 500;
     cursor: pointer;
-    transition: all 0.25s ease;
+    transition: color var(--speed) var(--ease), background var(--speed) var(--ease);
   }
   .viewport-btn svg { width: 15px; height: 15px; stroke-width: 1.8; }
   .viewport-btn.active { background: var(--gradient); color: #fff; }
-  .viewport-btn:hover:not(.active) { color: var(--text); }
+  .viewport-btn:hover:not(.active) { color: var(--ink); }
 
-  /* Live demo container */
+  /* Live demo container (mecánica acoplada al JS — no alterar dims) */
   .live-demo-container {
     max-width: 820px;
     margin: 0 auto;
     border-radius: var(--radius-lg);
     overflow: hidden;
-    border: 1px solid var(--border);
-    box-shadow: 0 24px 70px rgba(0,0,0,0.5);
+    border: 1px solid var(--border-strong);
+    box-shadow: 0 16px 48px rgba(0,0,0,0.45);
     aspect-ratio: 16 / 9;
-    background: var(--surface);
+    background: var(--bg);
     position: relative;
     transition: max-width 0.45s cubic-bezier(0.65,0,0.35,1),
                 aspect-ratio 0.45s cubic-bezier(0.65,0,0.35,1),
@@ -196,11 +221,11 @@
                 border-width 0.45s cubic-bezier(0.65,0,0.35,1);
   }
   .live-demo-container.mobile {
-    max-width: 290px;
+    max-width: 280px;
     aspect-ratio: 430 / 932;
-    border-radius: 38px;
-    border: 9px solid #0a0a0a;
-    box-shadow: 0 28px 64px rgba(0,0,0,0.6), inset 0 0 0 1px rgba(255,255,255,0.05);
+    border-radius: 36px;
+    border: 8px solid #0a0a0a;
+    box-shadow: 0 24px 60px rgba(0,0,0,0.5), inset 0 0 0 1px rgba(255,255,255,0.04);
   }
   .live-demo-container iframe {
     position: absolute;
@@ -217,27 +242,40 @@
   }
   .demo-hint {
     text-align: center;
-    margin-top: 14px;
-    font-size: 0.82rem;
+    margin-top: 16px;
+  }
+  .demo-hint .demo-note {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 14px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    text-transform: uppercase;
+    letter-spacing: 0.13em;
     color: var(--text-dim);
-    font-style: italic;
   }
 
   /* CTA footer */
   .cta-foot {
     text-align: center;
-    padding: 50px 0 60px;
+    padding: 56px 0 64px;
   }
   .cta-foot h2 {
-    font-family: var(--font-grotesk);
-    font-size: clamp(1.5rem, 4vw, 2.1rem);
-    font-weight: 700;
-    letter-spacing: -0.02em;
+    font-family: var(--font-display);
+    font-variation-settings: 'opsz' 144, 'SOFT' 0, 'WONK' 0;
+    font-size: clamp(1.55rem, 4vw, 2.2rem);
+    font-weight: 500;
+    line-height: 1.12;
+    letter-spacing: -0.015em;
+    color: var(--ink);
     margin-bottom: 12px;
   }
   .cta-foot p {
     color: var(--text-muted);
-    margin-bottom: 26px;
+    margin-bottom: 28px;
     font-size: 0.98rem;
   }
   .cta-btns {
@@ -250,27 +288,27 @@
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    padding: 15px 30px;
-    border-radius: 999px;
-    font-family: var(--font-grotesk);
-    font-size: 0.98rem;
+    padding: 17px 38px;
+    border-radius: var(--radius);
+    font-family: var(--font-body);
+    font-size: 1rem;
     font-weight: 700;
-    letter-spacing: 0.02em;
+    letter-spacing: 0.03em;
     cursor: pointer;
-    transition: all 0.25s ease;
+    transition: filter var(--speed) var(--ease), transform var(--speed) var(--ease), box-shadow var(--speed) var(--ease);
     text-decoration: none;
   }
   .btn-primary {
     background: var(--gradient);
     color: #fff;
+    box-shadow: 0 6px 24px rgba(8,145,178,0.28);
   }
-  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 14px 34px rgba(8,145,178,0.4); }
-  .btn-ghost {
-    background: rgba(255,255,255,0.04);
-    color: var(--text);
-    border: 1px solid var(--border);
+  .btn-primary:hover {
+    filter: brightness(1.09);
+    transform: translateY(-1px);
+    box-shadow: 0 10px 32px rgba(8,145,178,0.36);
   }
-  .btn-ghost:hover { border-color: var(--accent-blue); background: rgba(8,145,178,0.1); }
+  .btn-primary:active { transform: translateY(0) scale(0.98); }
   .btn svg { width: 18px; height: 18px; }
 
   .foot-note {
@@ -278,16 +316,19 @@
     padding-bottom: 40px;
     font-size: 0.8rem;
     color: var(--text-dim);
+    position: relative;
+    z-index: 1;
   }
-  .foot-note a { color: var(--text-muted); text-decoration: none; border-bottom: 1px solid var(--border); }
-  .foot-note a:hover { color: var(--text); }
+  .foot-note a { color: var(--text-muted); text-decoration: none; border-bottom: 1px solid var(--border); transition: color var(--speed) var(--ease); }
+  .foot-note a:hover { color: var(--ink); }
 
   @media (max-width: 600px) {
-    header { padding: 28px 0 14px; }
-    h1 { margin: 20px 0 12px; }
-    .demo-controls { margin: 26px 0 20px; }
-    .demo-name { min-width: 180px; font-size: 0.88rem; }
-    .viewport-btn { padding: 9px 16px; font-size: 0.8rem; }
+    header { padding: 30px 0 14px; }
+    h1 { margin: 22px 0 14px; }
+    .demo-controls { margin: 28px 0 22px; }
+    .demo-name { min-width: 170px; font-size: 0.85rem; }
+    .viewport-btn { padding: 8px 15px; font-size: 0.8rem; }
+    .demo-hint .demo-note { font-size: 0.6rem; }
     .cta-btns { flex-direction: column; width: 100%; }
     .btn { width: 100%; justify-content: center; }
   }
@@ -298,7 +339,7 @@
 <div class="wrap">
   <header>
     <span class="brand">Pronto</span>
-    <h1>Diseños para tu<br><span class="accent">clínica dental</span></h1>
+    <h1>Diseños para tu<br>clínica <em>dental</em></h1>
     <p class="subtitle">Diseños reales funcionando ahora mismo. Navega cada uno en vivo. Haz scroll, haz click. Cámbialo entre computador y móvil. Elige el que más te gusta.</p>
   </header>
 
@@ -323,11 +364,11 @@
   <div class="live-demo-container">
     <iframe id="demo-iframe" src="https://prontoweb.co/clientes-piloto/sonrisa-premium-ember/" title="Demo en vivo del sitio Pronto Dental seleccionado" loading="lazy"></iframe>
   </div>
-  <p class="demo-hint">Ejemplo de implementación · Muestra de capacidad</p>
+  <p class="demo-hint"><span class="demo-note">Ejemplo de implementación &middot; Muestra de capacidad</span></p>
 
   <div class="cta-foot">
     <h2>¿Te gusta lo que ves?</h2>
-    <p>Tu clínica puede tener una web así, lista en 48 horas.</p>
+    <p>Tu clínica puede tener una web así, lista en 7-10 días.</p>
     <div class="cta-btns">
       <a href="https://wa.me/573124672674?text=Hola%20Pronto,%20vi%20los%20dise%C3%B1os%20y%20quiero%20una%20web%20para%20mi%20cl%C3%ADnica" target="_blank" class="btn btn-primary">
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.6 6.3A7.85 7.85 0 0 0 12 4a7.93 7.93 0 0 0-7.93 7.93 7.83 7.83 0 0 0 1.06 3.95L4 20l4.22-1.1a7.94 7.94 0 0 0 3.78.97h.01A7.94 7.94 0 0 0 20 11.97 7.86 7.86 0 0 0 17.6 6.3zm-5.6 12.21h-.01a6.6 6.6 0 0 1-3.36-.92l-.24-.14-2.5.65.67-2.44-.16-.25a6.58 6.58 0 0 1-1-3.49 6.6 6.6 0 0 1 11.27-4.66 6.55 6.55 0 0 1 1.93 4.68 6.6 6.6 0 0 1-6.6 6.57z"/></svg>

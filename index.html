@@ -14,6 +14,11 @@
 <meta property="og:url" content="https://prontoweb.co">
 <meta property="og:site_name" content="Pronto">
 <meta property="og:locale" content="es_CO">
+<meta property="og:image" content="https://prontoweb.co/assets/og-demos.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://prontoweb.co/assets/og-demos.jpg">
 
 <!-- Google Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1303,7 +1308,7 @@
   <div class="footer-bottom">
     &copy; 2026 Pronto · Presencia web profesional para clínicas dentales.
   </div>
-  <p style="text-align:center; font-size:0.72rem; color:var(--text-dim); margin:12px auto 0; max-width:720px; line-height:1.5;"><sup>¹</sup>Conversión 2-3% promedio en sitios dentales. Fuente: <a href="https://www.sixthcitymarketing.com/2024/02/28/dental-marketing-stats/" target="_blank" rel="noopener" style="color:inherit; text-decoration:underline; text-underline-offset:2px;">Sixth City Marketing 2026</a></p>
+  <p style="text-align:center; font-size:0.72rem; color:var(--text-dim); margin:12px auto 0; max-width:720px; line-height:1.5;"><sup>¹</sup>Conversión 2-3% promedio en sitios dentales. Fuente: <a href="https://www.sixthcitymarketing.com/2024/02/28/dental-marketing-stats/" target="_blank" rel="noopener" style="color:inherit; text-decoration:underline; text-underline-offset:2px;">Sixth City Marketing 2024</a></p>
 </footer>
 
 <!-- STICKY CTA MOBILE -->
@@ -1682,6 +1687,8 @@
       iframe.style.transform = 'scale(' + scale + ')';
     });
   }
+
+  scaleAllIframes();
 
   window.addEventListener('resize', scaleAllIframes);
   window.addEventListener('load', function() {
