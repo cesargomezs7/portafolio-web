@@ -535,7 +535,7 @@
   }
 
   /* ── Auto-rotación del equipo (24-jul, v3 · compatible Safari) ─────────────
-     Los 3 especialistas rotan solos cada 5s con crossfade lento. Pausa al pasar
+     Los 3 especialistas rotan solos cada 3s con crossfade lento. Pausa al pasar
      el mouse, al tocar y al usar las flechas; no gira si la tarjeta no está a la
      vista o la pestaña está en segundo plano.
 
@@ -551,7 +551,7 @@
   var teamCard  = document.getElementById('teamCarousel');
   var teamPhoto = document.querySelector('.team-photo img');
   var TEAM_FADE = 750;    // duración de cada lado del crossfade (ms)
-  var TEAM_EVERY = 5000;  // cada cuánto cambia de especialista (ms)
+  var TEAM_EVERY = 3000;  // cada cuánto cambia de especialista (ms)
   var teamBusy = false, teamHover = false, teamPausedUntil = 0, teamLast = Date.now();
   var teamT1 = null, teamT2 = null, teamDog = null;
 
