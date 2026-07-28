@@ -534,26 +534,32 @@
     document.querySelector('.team-book').href = 'https://wa.me/573124672674?text=' + d.wa;
   }
 
-  /* ── Auto-rotación del equipo (24-jul, v3 · compatible Safari) ─────────────
-     Los 3 especialistas rotan solos cada 3s con crossfade lento. Pausa al pasar
-     el mouse, al tocar y al usar las flechas; no gira si la tarjeta no está a la
-     vista o la pestaña está en segundo plano.
+  /* ── Auto-rotación del equipo (28-jul, v4 · compatible Safari) ─────────────
+     Cada especialista queda plenamente visible TEAM_EVERY ms; el crossfade
+     (2×TEAM_FADE ≈ 1.6s) va aparte, así que el cambio real ocurre cada ~4.6s.
+     Pausa al pasar el mouse, al tocar y al usar las flechas; no gira si la
+     tarjeta no está a la vista o la pestaña está en segundo plano.
 
-     POR QUÉ ESTA IMPLEMENTACIÓN: la versión anterior usaba Web Animations API
-     (element.animate + promesa .finished + getAnimations()). En Safari eso fallaba
-     y el carrusel quedaba congelado: si getAnimations() lanzaba excepción, el
-     manejador de error TAMBIÉN la llamaba, así que la bandera "ocupado" nunca se
-     liberaba. Ahora todo es transición CSS por estilo en línea + setTimeout —
-     lo más compatible que existe: sin WAAPI, sin promesas que puedan colgarse,
-     sin transitionend (que se pierde si la pestaña se va al fondo). El reloj es
-     un único intervalo de 1s basado en marcas de tiempo: aunque el navegador lo
-     ralentice, al volver retoma solo. ES5-safe. ───────────────────────────── */
+     POR QUÉ ESTA IMPLEMENTACIÓN: la v2 usaba Web Animations API y en Safari el
+     carrusel quedaba congelado (getAnimations() lanzaba y la bandera "ocupado"
+     nunca se liberaba). La v3 pasó a transición CSS por estilo en línea +
+     setTimeout, pero tenía dos vicios de reloj: (1) el tick reseteaba teamLast
+     mientras la animación corría, así que la cadencia real era TEAM_EVERY+1s y
+     nunca la configurada; (2) el perro guardián era un setTimeout de 2400ms con
+     solo 760ms de margen sobre el fin normal del crossfade (1640ms) — cualquier
+     jank o throttling lo hacía disparar A MITAD del fade-in y la tarjeta
+     aparecía de golpe (transition:none). v4: el contador de TEAM_EVERY arranca
+     al TERMINAR el crossfade, y el perro guardián es por reloj de pared dentro
+     del propio tick, con margen de 2.4s — imposible que pise una animación
+     sana, y si algo de verdad se atasca lo libera en <4.3s. Sin WAAPI, sin
+     promesas, sin transitionend. ES5-safe. ───────────────────────────────── */
   var teamCard  = document.getElementById('teamCarousel');
   var teamPhoto = document.querySelector('.team-photo img');
   var TEAM_FADE = 750;    // duración de cada lado del crossfade (ms)
-  var TEAM_EVERY = 3000;  // cada cuánto cambia de especialista (ms)
+  var TEAM_EVERY = 3000;  // ms que cada especialista queda visible (tras el crossfade)
+  var TEAM_ANIM = TEAM_FADE * 2 + 140;             // duración total del crossfade (out+swap+in)
   var teamBusy = false, teamHover = false, teamPausedUntil = 0, teamLast = Date.now();
-  var teamT1 = null, teamT2 = null, teamDog = null;
+  var teamT1 = null, teamT2 = null, teamSwitchStart = 0;
 
   for (var tp = 0; tp < teamData.length; tp++) { var tImg = new Image(); tImg.src = teamData[tp].img; } // precarga
 
@@ -584,11 +590,11 @@
     var t = on ? ('opacity ' + TEAM_FADE + 'ms ease-in-out, transform ' + TEAM_FADE + 'ms ease-in-out') : 'none';
     for (var i = 0; i < teamNodes.length; i++) teamNodes[i].el.style.transition = t;
   }
-  /* Salida única: pase lo que pase, la tarjeta queda visible y libre. */
+  /* Salida de emergencia: pase lo que pase, la tarjeta queda visible y libre.
+     Solo la usa el perro guardián del tick y los catch — NUNCA el flujo normal. */
   function teamRelease() {
     if (teamT1) { clearTimeout(teamT1); teamT1 = null; }
     if (teamT2) { clearTimeout(teamT2); teamT2 = null; }
-    if (teamDog) { clearTimeout(teamDog); teamDog = null; }
     teamBusy = false;
     try { teamTransition(false); teamApply(true); } catch (e) {}
     teamLast = Date.now();
@@ -596,10 +602,9 @@
   function switchTeam(idx) {
     if (teamBusy) return;
     teamBusy = true;
+    teamSwitchStart = Date.now();       // el perro guardián del tick vigila desde aquí
     if (teamT1) clearTimeout(teamT1);
     if (teamT2) clearTimeout(teamT2);
-    if (teamDog) clearTimeout(teamDog);
-    teamDog = setTimeout(teamRelease, TEAM_FADE * 2 + 900);   // perro guardián: imposible atascarse
     var target = ((idx % teamData.length) + teamData.length) % teamData.length;
     try {
       teamTransition(true);
@@ -607,13 +612,18 @@
       teamApply(false);                 // desvanecer
     } catch (e) { teamRelease(); return; }
     teamT1 = setTimeout(function () {
+      teamT1 = null;
       try {
         teamIdx = target;
         renderTeam();                   // cambio de doctor mientras está invisible
         void teamCard.offsetWidth;      // reflow
         teamApply(true);                // aparecer
       } catch (e) {}
-      teamT2 = setTimeout(function () { teamBusy = false; teamDog && clearTimeout(teamDog); teamDog = null; }, TEAM_FADE + 100);
+      teamT2 = setTimeout(function () {
+        teamT2 = null;
+        teamBusy = false;
+        teamLast = Date.now();          // los 3s visibles cuentan DESDE que termina el crossfade
+      }, TEAM_FADE + 100);
     }, TEAM_FADE + 40);
   }
   /* ¿La tarjeta está a la vista? Con IntersectionObserver, NO con
@@ -650,12 +660,19 @@
 
   setInterval(function () {
     var now = Date.now();
-    if (teamBusy || teamIsHover() || now < teamPausedUntil || document.hidden || !teamVisible()) {
+    if (teamBusy) {
+      // Perro guardián por reloj de pared: solo actúa si el crossfade lleva
+      // 2.4s MÁS de lo que dura (timers perdidos de verdad, no simple jank).
+      // NO toca teamLast ni el conteo: eso lo hace teamT2 al terminar.
+      if (now - teamSwitchStart > TEAM_ANIM + 2400) teamRelease();
+      return;
+    }
+    if (teamIsHover() || now < teamPausedUntil || document.hidden || !teamVisible()) {
       teamLast = now;                   // reinicia el conteo: al volver espera el ciclo completo
       return;
     }
-    if (now - teamLast >= TEAM_EVERY) { teamLast = now; switchTeam(teamIdx + 1); }
-  }, 1000);
+    if (now - teamLast >= TEAM_EVERY) switchTeam(teamIdx + 1);
+  }, 250);
 
   document.getElementById('teamPrev').addEventListener('click', function () { switchTeam(teamIdx - 1); teamPause(12000); });
   document.getElementById('teamNext').addEventListener('click', function () { switchTeam(teamIdx + 1); teamPause(12000); });
