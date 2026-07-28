@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- Microsoft Clarity (interno Pronto) -->
 <script type="text/javascript">(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window, document, "clarity", "script", "wygnitnsj3");</script>
-<title>Califícanos — Sonrisa Premium</title>
+<title>Califícanos — Aristizábal Ortodoncia</title>
 <meta name="robots" content="noindex"><!-- página de reseñas no se indexa -->
 
 <!-- ============================================================
@@ -13,7 +13,7 @@
      ============================================================
      Lógica:
        - Paciente elige estrellas
-       - 5 estrellas  -> redirige a Google a dejar reseña pública
+       - 4 y 5 estrellas -> redirige a Google a dejar reseña pública
        - 1 a 4 estrellas -> form privado que llega al dueño (NO a Google)
 
      PERSONALIZACIÓN POR CLIENTE (editar solo este bloque CONFIG):
@@ -21,12 +21,12 @@
 <script>
   const CONFIG = {
     // Nombre de la clínica (aparece en los textos)
-    clinica: "Sonrisa Premium",
+    clinica: "Aristizábal Ortodoncia",
 
     // URL de "dejar reseña" en Google. Se obtiene del Place ID:
     // https://search.google.com/local/writereview?placeid=PLACE_ID
     // En la DEMO apunta a placeholder. Al personalizar, poner el real del cliente.
-    googleReviewUrl: "https://www.google.com/maps/search/?api=1&query=Sonrisa+Premium+odontolog%C3%ADa+Bogot%C3%A1",
+    googleReviewUrl: "https://www.google.com/maps/search/?api=1&query=Aristizabal+Ortodoncia+Cali",
 
     // Endpoint que recibe el feedback negativo (Cloudflare Worker).
     // En la DEMO es placeholder. Cuando el backend esté listo, poner la URL real.
@@ -218,7 +218,7 @@
   <!-- ===== PASO 1: CALIFICAR ===== -->
   <div id="step-rate">
     <p class="overline">Tu opinión nos importa</p>
-    <h1 id="title-rate">¿Cómo fue tu experiencia en Sonrisa Premium?</h1>
+    <h1 id="title-rate">¿Cómo fue tu experiencia en Aristizábal Ortodoncia?</h1>
     <p class="sub">Califícanos con estrellas. Toma 10 segundos.</p>
 
     <div class="stars" id="stars">
@@ -269,7 +269,7 @@
   document.getElementById('title-rate').textContent =
     `¿Cómo fue tu experiencia en ${CONFIG.clinica}?`;
 
-  // Contadores Pronto (visita + intención de reseña 5★)
+  // Contadores Pronto (visita + intencion de resena publica)
   const TRACK_URL = CONFIG.workerEndpoint.replace('/review-feedback', '/track');
   function track(ev) {
     try { fetch(TRACK_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ event: ev, clinica: CONFIG.clinica }), keepalive: true }); } catch (e) {}
@@ -306,12 +306,12 @@
   });
 
   function handleRating(value) {
-    if (value === 5) {
-      // 5 estrellas -> a Google (reseña pública)
+    if (value >= 4) {
+      // 4 y 5 estrellas -> a Google (reseña publica)
       track('review_5');
       window.location.href = CONFIG.googleReviewUrl;
     } else {
-      // 1-4 estrellas -> form privado al dueño
+      // 1 a 3 estrellas -> form privado al dueno
       document.getElementById('step-rate').style.display = 'none';
       document.getElementById('private-form').classList.add('show');
       // Guardar el rating para enviarlo con el feedback

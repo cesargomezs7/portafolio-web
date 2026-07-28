@@ -13,7 +13,7 @@
      ============================================================
      Lógica:
        - Paciente elige estrellas
-       - 5 estrellas  -> redirige a Google a dejar reseña pública
+       - 4 y 5 estrellas -> redirige a Google a dejar reseña pública
        - 1 a 4 estrellas -> form privado que llega al dueño (NO a Google)
 
      PERSONALIZACIÓN POR CLIENTE (editar solo este bloque CONFIG):
@@ -269,7 +269,7 @@
   document.getElementById('title-rate').textContent =
     `¿Cómo fue tu experiencia en ${CONFIG.clinica}?`;
 
-  // Contadores Pronto (visita + intención de reseña 5★)
+  // Contadores Pronto (visita + intencion de resena publica)
   const TRACK_URL = CONFIG.workerEndpoint.replace('/review-feedback', '/track');
   function track(ev) {
     try { fetch(TRACK_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ event: ev, clinica: CONFIG.clinica }), keepalive: true }); } catch (e) {}
@@ -306,12 +306,12 @@
   });
 
   function handleRating(value) {
-    if (value === 5) {
-      // 5 estrellas -> a Google (reseña pública)
+    if (value >= 4) {
+      // 4 y 5 estrellas -> a Google (reseña publica)
       track('review_5');
       window.location.href = CONFIG.googleReviewUrl;
     } else {
-      // 1-4 estrellas -> form privado al dueño
+      // 1 a 3 estrellas -> form privado al dueno
       document.getElementById('step-rate').style.display = 'none';
       document.getElementById('private-form').classList.add('show');
       // Guardar el rating para enviarlo con el feedback

@@ -16,7 +16,11 @@
   function track(ev) {
     try { fetch(TRACK, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ event: ev, clinica: 'Clínica Smile' }), keepalive: true }); } catch (e) {}
   }
-  track('visit');
+  // 1 visita = 1 sesion, no 1 pagina. Sin esto el numero sale inflado 3-5x
+  // y no cuadra con ninguna otra herramienta de analitica.
+  try {
+    if (!sessionStorage.getItem('pronto_v')) { sessionStorage.setItem('pronto_v', '1'); track('visit'); }
+  } catch (e) { track('visit'); }
   document.addEventListener('click', function (e) {
     if (e.target.closest && e.target.closest('a[href*="wa.me"]')) track('wa_click');
   }, true);
