@@ -13,12 +13,9 @@
      Interactiva: se puede hacer scroll y tocar durante el Loom.
      ============================================================ -->
 <style>
-/* ESCALA VISUAL (20-jun-2026): disenado al 150%; el 100% del visitante se ve asi. Escalonado; movil intacto. */
-@media screen and (min-width: 1880px) { body { zoom: 1.5; } }
-@media screen and (min-width: 1750px) and (max-width: 1879.98px) { body { zoom: 1.4; } }
-@media screen and (min-width: 1550px) and (max-width: 1749.98px) { body { zoom: 1.25; } }
-@media screen and (min-width: 1420px) and (max-width: 1549.98px) { body { zoom: 1.1; } }
-
+/* SIN body{zoom} aqui: esta pagina se auto-escala con fit() para llenar el alto
+   del viewport. El zoom escalonado (20-jun-2026) duplicaba la escala en monitores
+   >=1420px y recortaba el telefono en pantalla completa (bug corregido 28-jul-2026). */
   *{ margin:0; padding:0; box-sizing:border-box; }
   html,body{ height:100%; }
   body{
@@ -49,11 +46,15 @@
     var scaler = document.getElementById('scaler');
     var w = screen.offsetWidth, h = screen.offsetHeight;
     if(!w || !h) return;
-    var s = Math.min((window.innerHeight*0.98)/h, (window.innerWidth*0.98)/w);
+    // Compensa cualquier body{zoom} heredado: Chrome/Safari multiplican el tamano
+    // renderizado por el zoom pero innerWidth/innerHeight y offset* no cambian.
+    var z = parseFloat(getComputedStyle(document.body).zoom) || 1;
+    var s = Math.min((window.innerHeight*0.98)/(h*z), (window.innerWidth*0.98)/(w*z));
     scaler.style.transform = 'scale(' + s + ')';
   }
   window.addEventListener('resize', fit);
   window.addEventListener('load', fit);
+  if (window.ResizeObserver) new ResizeObserver(fit).observe(document.documentElement);
   fit();
 </script>
 </body>
