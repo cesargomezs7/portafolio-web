@@ -45,7 +45,7 @@
   input[type=text], input[type=email], input[type=tel], input[type=url], textarea{
     width:100%; background:var(--panel); color:var(--text);
     border:1px solid var(--border); border-radius:12px; padding:14px 16px;
-    font-family:inherit; font-size:15.5px; transition:border-color .2s, background .2s;
+    font-family:inherit; font-size:16px; transition:border-color .2s, background .2s; /* >=16px: evita auto-zoom iOS Safari */
   }
   input::placeholder, textarea::placeholder{color:#5f6780;}
   input:focus, textarea:focus{outline:none; border-color:var(--cyan); background:var(--panel-2);}
@@ -174,7 +174,7 @@
     <h1>Su clínica</h1>
     <p class="lead">Como no hay de dónde sacarlo, cuéntenos lo básico. Tranquilo, es rápido.</p>
     <label class="q">Nombre de la clínica</label>
-    <input type="text" name="clinica_nombre" placeholder="Ej: Clínica Dental Sonrisa">
+    <input type="text" name="clinica_nombre_b" placeholder="Ej: Clínica Dental Sonrisa">
     <label class="q">Ciudad y dirección(es) / sede(s)</label>
     <textarea name="clinica_direccion" placeholder="Ej: Bogotá, Cra 15 #93-47. (Si tiene varias sedes, póngalas todas con su dirección.)"></textarea>
     <label class="q">Horarios de atención</label>
@@ -375,6 +375,11 @@
   }
   function val(name){ const el=document.querySelector('[name="'+name+'"]'); return el?el.value.trim():''; }
   function radio(name){ const el=document.querySelector('input[name="'+name+'"]:checked'); return el?el.value:''; }
+  function validPhone(v){
+    if(!/^[0-9+\s]+$/.test(v)) return false;           // solo dígitos, + y espacios
+    const d=v.replace(/\D/g,'');                        // cuenta de dígitos
+    return d.length>=7 && d.length<=15;
+  }
 
   function validate(id){
     const e=document.getElementById('e-'+id); if(e) e.textContent='';
@@ -385,11 +390,13 @@
     }
     if(id==='s2a'){ if(!val('clinica_nombre')) return fail('Escriba el nombre de su clínica.'); if(!radio('modo')) return fail('Elija cómo lo hacemos.'); }
     if(id==='s2b'){
-      if(!val('clinica_nombre')||!val('clinica_direccion')||!val('clinica_horarios')||!val('clinica_servicios')||!val('clinica_equipo')) return fail('Complete los campos para poder armar su web.');
+      if(!val('clinica_nombre_b')||!val('clinica_direccion')||!val('clinica_horarios')||!val('clinica_servicios')||!val('clinica_equipo')) return fail('Complete los campos para poder armar su web.');
     }
     if(id==='s3'){
       if(!val('wa_publico')) return fail('Escriba el WhatsApp de la clínica.');
+      if(!validPhone(val('wa_publico'))) return fail('Escriba un WhatsApp válido: solo números, espacios y +, con mínimo 7 dígitos. Ej: +57 300 000 0000.');
       var waOtro=document.getElementById('wa-otro'); if(waOtro&&waOtro.checked&&!val('wa_recepcion')) return fail('Escriba el número para los avisos, o desmarque la opción.');
+      if(waOtro&&waOtro.checked&&!validPhone(val('wa_recepcion'))) return fail('El número para los avisos no es válido: solo números, espacios y +, con mínimo 7 dígitos.');
       if(!val('email_reportes')||!/.+@.+\..+/.test(val('email_reportes'))) return fail('Escriba un correo válido para los reportes.');
       if(!radio('precios')) return fail('Elija si muestra precios.');
       if(!radio('dominio')&&!radio('dominio_tiene')) return fail('Indique si ya tiene dominio.');
@@ -442,7 +449,8 @@
       if(skipSection && el.closest('#'+skipSection)) return;
       if(el.name==='dominio_ideas' && radio('dominio_tiene')!=='no') return;
       if(el.name==='dominio_actual' && radio('dominio_tiene')!=='si') return;
-      fd.append(el.name, el.value.trim());
+      // el Worker espera "clinica_nombre" sin importar el camino: normalizar el campo del camino B
+      fd.append(el.name==='clinica_nombre_b' ? 'clinica_nombre' : el.name, el.value.trim());
     });
     // WhatsApp: si no separó el número de avisos, recepción = el mismo público
     var waOtroChk=document.getElementById('wa-otro');
