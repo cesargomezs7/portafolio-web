@@ -68,6 +68,44 @@
   .filelink{display:inline-block; padding:9px 14px; color:#0891b2; background:rgba(34,211,238,0.12); border:1px solid var(--border); border-radius:8px; font-size:13px; text-decoration:none; font-weight:600;}
   .filelink:hover{background:rgba(34,211,238,0.2);}
   .note{color:var(--dim); font-size:13px; margin-top:8px;}
+  /* Acciones del detalle (editar / borrar) */
+  .det-actions{display:flex; gap:10px; flex-wrap:wrap; margin-top:14px;}
+  .abtn{font-family:'Space Grotesk'; font-weight:600; font-size:13.5px; border:1px solid var(--border); border-radius:999px; padding:9px 18px; cursor:pointer; background:var(--panel2); color:var(--muted);}
+  .abtn:hover{color:var(--text); border-color:var(--cyan);}
+  .abtn.danger{color:#f87171; border-color:rgba(248,113,113,0.35);}
+  .abtn.danger:hover{background:rgba(248,113,113,0.12); border-color:#f87171; color:#f87171;}
+  .editname{display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-top:12px;}
+  .editname input{max-width:420px; font-size:16px; padding:10px 14px;}
+  /* Modal de borrado */
+  .overlay{position:fixed; inset:0; background:rgba(0,0,0,0.72); display:flex; align-items:center; justify-content:center; padding:20px; z-index:50;}
+  .modal{background:#12141c; border:1px solid var(--border); border-radius:var(--radius); max-width:460px; width:100%; padding:24px;}
+  .modal h2{font-family:'Space Grotesk'; font-weight:700; font-size:19px; color:#f87171; margin-bottom:10px;}
+  .modal p{color:var(--muted); font-size:14px; line-height:1.55; margin-bottom:8px;}
+  .modal .name{color:var(--text); font-weight:700; word-break:break-word;}
+  .modal .row{display:flex; gap:10px; justify-content:flex-end; margin-top:18px; flex-wrap:wrap;}
+  .modal .row .btn,.modal .row .abtn{margin-top:0;}
+  .btn.red{background:#dc2626; color:#fff;}
+  .btn[disabled]{opacity:.45; cursor:not-allowed;}
+  .btn[disabled]:hover{transform:none;}
+  /* Badge NUEVO (desaparece para siempre al abrir el detalle) */
+  .badge-new{font-family:'Space Grotesk'; font-size:10.5px; font-weight:700; letter-spacing:.09em; padding:3px 9px; border-radius:999px; background:var(--grad); color:#06121a; vertical-align:2px; margin-left:8px; white-space:nowrap;}
+  /* Toggle de estado: Construyendo | Entregado */
+  .seg{display:inline-flex; background:rgba(255,255,255,0.05); border:1px solid var(--border); border-radius:999px; padding:3px; gap:2px;}
+  .seg button{font-family:'Space Grotesk'; font-weight:600; font-size:11.5px; border:none; border-radius:999px; padding:5px 11px; cursor:pointer; background:transparent; color:var(--dim); transition:background .15s,color .15s; white-space:nowrap;}
+  .seg button:hover{color:var(--muted);}
+  .seg button.on{cursor:default;}
+  .seg button.on.s-cons{background:rgba(251,191,36,0.16); color:#fbbf24;}
+  .seg button.on.s-entr{background:rgba(52,211,153,0.16); color:#34d399;}
+  .seg.lg button{font-size:13px; padding:7px 16px;}
+  /* Botón WhatsApp */
+  .wa-btn{display:inline-flex; align-items:center; gap:6px; color:#25D366; border:1px solid rgba(37,211,102,0.4); background:rgba(37,211,102,0.08); border-radius:999px; padding:5px 12px; font-size:12px; text-decoration:none; font-weight:600; font-family:'Space Grotesk'; white-space:nowrap;}
+  .wa-btn:hover{background:rgba(37,211,102,0.16); border-color:#25D366;}
+  .wa-btn.lg{font-size:13.5px; padding:9px 18px;}
+  /* Notas internas */
+  textarea.notas{width:100%; min-height:110px; resize:vertical; background:var(--panel); color:var(--text); border:1px solid var(--border); border-radius:12px; padding:13px 15px; font-family:'Inter',sans-serif; font-size:14.5px; line-height:1.55;}
+  textarea.notas:focus{outline:none; border-color:var(--cyan); background:var(--panel2);}
+  .notas-foot{display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:10px; flex-wrap:wrap;}
+  .notas-foot .abtn.saved{color:#34d399; border-color:rgba(52,211,153,0.4);}
   .hidden{display:none;}
   @media(max-width:560px){ .field{grid-template-columns:1fr; gap:2px;} .det-head h1{font-size:23px;} }
 </style>
@@ -112,12 +150,40 @@
   </div>
 </div>
 
+<!-- MODAL BORRAR (confirmación escribiendo el nombre exacto) -->
+<div id="delModal" class="overlay hidden" onclick="if(event.target===this)closeDelete()">
+  <div class="modal">
+    <h2>Borrar cliente</h2>
+    <p>Esta acción es <b>irreversible</b>: se elimina toda la información del cliente y sus fotos del servidor. No hay forma de recuperarla.</p>
+    <p>Para confirmar, escribe el nombre exacto:<br><span class="name" id="delName"></span></p>
+    <input type="text" id="delInput" autocomplete="off" placeholder="Nombre exacto" oninput="delCheck()">
+    <div class="err" id="delErr"></div>
+    <div class="row">
+      <button class="abtn" onclick="closeDelete()">Cancelar</button>
+      <button class="btn red" id="delBtn" disabled onclick="doDelete()">Borrar definitivamente</button>
+    </div>
+  </div>
+</div>
+
 <script>
   const WORKER = "https://pronto-forms-worker.cesargomezs711.workers.dev";
   let token = localStorage.getItem('pronto_panel_token') || '';
   let items = [];
 
   function esc(s){ return String(s==null?'':s).replace(/[<>&"']/g,c=>({'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;',"'":'&#39;'}[c])); }
+  // Estado de entrega: solo 2 valores; 'nuevo' legado cuenta como construyendo
+  function estadoOf(it){ return it && it.estado==='entregado' ? 'entregado' : 'construyendo'; }
+  // Teléfono → wa.me: solo dígitos; 10 o menos = celular colombiano sin indicativo → 57XXXXXXXXXX
+  function waNum(t){ var d=String(t||'').replace(/[^0-9]/g,''); if(!d) return ''; return d.length<=10 ? '57'+d : d; }
+  function waHref(it){ var d=waNum(it.wa_publico)||waNum(it.wa_recepcion); return d ? 'https://wa.me/'+d : ''; }
+  // Toggle Construyendo | Entregado (en card y en detalle). data-id para no interpolar JS.
+  function segHtml(it, lg){
+    var e = estadoOf(it);
+    return '<span class="seg'+(lg?' lg':'')+'" onclick="event.stopPropagation()">'+
+      '<button type="button" class="s-cons'+(e==='construyendo'?' on':'')+'" data-id="'+esc(it.id)+'" data-estado="construyendo" onclick="setEstado(this)">🔨 Construyendo</button>'+
+      '<button type="button" class="s-entr'+(e==='entregado'?' on':'')+'" data-id="'+esc(it.id)+'" data-estado="entregado" onclick="setEstado(this)">✓ Entregado</button>'+
+    '</span>';
+  }
   function fmtDate(iso){ if(!iso) return '—'; var d=new Date(iso); if(isNaN(d.getTime())) return esc(iso); return d.toLocaleDateString('es-CO',{day:'2-digit',month:'short',year:'numeric'})+' · '+d.toLocaleTimeString('es-CO',{hour:'2-digit',minute:'2-digit'}); }
   // Archivos: se cargan con fetch + header (el token NUNCA viaja en la URL) y se muestran vía blob local
   let blobUrls = [];
@@ -145,6 +211,16 @@
     if(!r.ok) throw new Error('status '+r.status);
     return r.json();
   }
+  // PATCH / DELETE con el mismo token del panel
+  async function apiSend(path, method, body){
+    const h = { 'X-Panel-Token': token };
+    if(body) h['Content-Type']='application/json';
+    const r = await fetch(WORKER+path, { method:method, headers:h, body: body?JSON.stringify(body):undefined });
+    if(r.status===401){ throw {auth:true}; }
+    const d = await r.json().catch(()=>({}));
+    if(!r.ok) throw new Error(d.error || ('status '+r.status));
+    return d;
+  }
 
   async function doLogin(){
     token = document.getElementById('token').value.trim();
@@ -166,7 +242,7 @@
     document.getElementById('app').classList.remove('hidden');
     showList(); renderList();
   }
-  function showList(){ revokeBlobs(); document.getElementById('listView').classList.remove('hidden'); document.getElementById('detailView').classList.add('hidden'); window.scrollTo(0,0); }
+  function showList(){ revokeBlobs(); document.getElementById('listView').classList.remove('hidden'); document.getElementById('detailView').classList.add('hidden'); window.scrollTo(0,0); renderList(); /* re-render: badge NUEVO y estado pueden haber cambiado en el detalle */ }
 
   function renderList(){
     const q = (document.getElementById('search').value||'').toLowerCase();
@@ -180,17 +256,21 @@
     list.forEach(it=>{
       const el=document.createElement('div'); el.className='card'; el.onclick=()=>openDetail(it.id);
       const nombre = it.clinica_nombre || it.web_url || it.email_reportes || '(sin nombre)';
-      el.innerHTML = '<div class="cn">'+esc(nombre)+'</div>'+
+      const wa = waHref(it);
+      el.innerHTML = '<div class="cn">'+esc(nombre)+(!it.visto?'<span class="badge-new">NUEVO</span>':'')+'</div>'+
+        '<div class="meta">'+segHtml(it,false)+'</div>'+
         '<div class="meta">'+
           '<span class="chip cy">'+(it.path==='B'?'Sin web':'Con web')+'</span>'+
-          '<span class="chip">'+esc(it.estado||'nuevo')+'</span>'+
           (it.n_fotos? '<span class="chip">'+it.n_fotos+' foto'+(it.n_fotos>1?'s':'')+'</span>':'')+
           (it.has_logo? '<span class="chip">logo</span>':'')+
+          (wa? '<a class="wa-btn" href="'+esc(wa)+'" target="_blank" rel="noopener" onclick="event.stopPropagation()">WhatsApp</a>':'')+
         '</div>'+
         '<div class="date">'+fmtDate(it.created_at)+'</div>';
       c.appendChild(el);
     });
   }
+
+  let current = null; // item abierto en el detalle (para editar/borrar)
 
   async function openDetail(id){
     try{
@@ -201,22 +281,46 @@
       document.getElementById('detailView').classList.remove('hidden');
       window.scrollTo(0,0);
       loadDetailImages();
+      markVisto(d.item);
     }catch(e){ if(e&&e.auth){ alert('Tu sesión expiró. Vuelve a entrar.'); logout(); } else { alert('No se pudo abrir el cliente. Revisa tu conexión e inténtalo de nuevo.'); } }
+  }
+
+  // Primera vez que se abre el detalle → el badge NUEVO desaparece PARA SIEMPRE (persistido en D1)
+  function markVisto(it){
+    if(!it || it.visto) return;
+    apiSend('/onboarding/'+it.id, 'PATCH', { visto:true }).then(()=>{
+      it.visto = 1;
+      const li = items.find(x=>x.id===it.id); if(li) li.visto = 1;
+    }).catch(()=>{ /* si falla, el badge sigue hasta el próximo intento */ });
   }
 
   function field(k,v){ if(!v) return ''; return '<div class="field"><div class="k">'+esc(k)+'</div><div class="v">'+esc(v)+'</div></div>'; }
   function linkField(k,u){ if(!u) return ''; var href=/^https?:\/\//.test(u)?u:'https://'+u; return '<div class="field"><div class="k">'+esc(k)+'</div><div class="v"><a href="'+esc(href)+'" target="_blank">'+esc(u)+'</a></div></div>'; }
 
   function renderDetail(it){
+    current = it;
     const nombre = it.clinica_nombre || it.web_url || '(sin nombre)';
     const dominio = it.dominio_tiene==='si' ? ('Conserva: '+(it.dominio_actual||'—')) : ('Nuevo · ideas: '+(it.dominio_ideas||'(las elegimos nosotros)'));
     const fotos = (it.files||[]).filter(f=>f.kind==='foto');
     const logos = (it.files||[]).filter(f=>f.kind==='logo');
 
-    let html = '<div class="det-head"><h1>'+esc(nombre)+'</h1>'+
+    const wa = waHref(it);
+    let html = '<div class="det-head"><h1 id="detName">'+esc(nombre)+'</h1>'+
       '<span class="chip cy">'+(it.path==='B'?'Sin web':'Con web')+'</span>'+
-      '<span class="chip">'+esc(it.estado||'nuevo')+'</span></div>'+
-      '<div class="sub">'+fmtDate(it.created_at)+'</div>';
+      '<span id="detSeg">'+segHtml(it,true)+'</span></div>'+
+      '<div class="sub">'+fmtDate(it.created_at)+'</div>'+
+      '<div id="editBox"></div>'+
+      '<div class="det-actions">'+
+        (wa? '<a class="wa-btn lg" href="'+esc(wa)+'" target="_blank" rel="noopener">💬 WhatsApp</a>':'')+
+        '<button class="abtn" onclick="startEditName()">✏️ Editar nombre</button>'+
+        '<button class="abtn danger" onclick="askDelete()">🗑 Borrar cliente</button>'+
+      '</div>';
+    // Notas internas (el valor se inyecta por .value después del innerHTML — nunca como HTML)
+    html += '<div class="section"><h3>Notas internas</h3>'+
+      '<textarea class="notas" id="notasBox" maxlength="10000" placeholder="Notas solo para ti (acuerdos, pendientes, contexto del cliente)…" oninput="notasDirty()"></textarea>'+
+      '<div class="notas-foot"><span class="note" id="notasStamp"></span>'+
+      '<span><span class="err" id="notasErr" style="margin:0 10px 0 0; min-height:0; display:inline"></span>'+
+      '<button class="abtn" id="notasBtn" onclick="saveNotas()">Guardar nota</button></span></div></div>';
 
     // Links / presencia
     if(it.web_url||it.instagram||it.facebook||it.google_url){
@@ -259,6 +363,118 @@
       field('IP', it.consent_ip||'—')+field('Fecha servidor', fmtDate(it.created_at))+'</div>';
 
     document.getElementById('detailBody').innerHTML = html;
+    document.getElementById('notasBox').value = it.notas || '';
+    notasStamp(it.notas_updated_at);
+  }
+
+  // ── Estado de entrega (toggle Construyendo | Entregado) ──
+  async function setEstado(btn){
+    const id = btn.getAttribute('data-id'), estado = btn.getAttribute('data-estado');
+    const it = items.find(x=>x.id===id) || (current && current.id===id ? current : null);
+    if(it && estadoOf(it)===estado) return; // ya está en ese estado
+    try{
+      const d = await apiSend('/onboarding/'+id, 'PATCH', { estado: estado });
+      const li = items.find(x=>x.id===id); if(li) li.estado = d.estado;
+      if(current && current.id===id){
+        current.estado = d.estado;
+        const seg = document.getElementById('detSeg'); if(seg) seg.innerHTML = segHtml(current,true);
+      }
+      if(!document.getElementById('listView').classList.contains('hidden')) renderList();
+    }catch(e){
+      if(e && e.auth){ alert('Tu sesión expiró. Vuelve a entrar.'); logout(); }
+      else alert('No se pudo cambiar el estado. '+(e.message||''));
+    }
+  }
+
+  // ── Notas internas ──
+  function notasStamp(iso){
+    document.getElementById('notasStamp').textContent = iso ? ('Última edición: '+fmtDate(iso)) : 'Sin notas todavía.';
+  }
+  function notasDirty(){
+    const btn = document.getElementById('notasBtn');
+    btn.classList.remove('saved');
+    const saved = (current && current.notas) || '';
+    btn.textContent = document.getElementById('notasBox').value !== saved ? 'Guardar nota •' : 'Guardar nota';
+  }
+  async function saveNotas(){
+    const btn = document.getElementById('notasBtn'), errEl = document.getElementById('notasErr');
+    const val = document.getElementById('notasBox').value;
+    errEl.textContent=''; btn.disabled = true; btn.textContent = 'Guardando…';
+    try{
+      const d = await apiSend('/onboarding/'+current.id, 'PATCH', { notas: val });
+      current.notas = d.notas; current.notas_updated_at = d.notas_updated_at;
+      notasStamp(d.notas_updated_at);
+      btn.disabled = false; btn.textContent = 'Guardado ✓'; btn.classList.add('saved');
+      setTimeout(()=>{ if(btn.textContent==='Guardado ✓'){ btn.classList.remove('saved'); btn.textContent='Guardar nota'; } }, 2000);
+    }catch(e){
+      btn.disabled = false; btn.textContent = 'Guardar nota •';
+      if(e && e.auth){ alert('Tu sesión expiró. Vuelve a entrar.'); logout(); }
+      else errEl.textContent = 'No se pudo guardar. '+(e.message||'');
+    }
+  }
+
+  // ── Editar nombre (inline) ──
+  function startEditName(){
+    if(document.getElementById('nameInput')) return;
+    const box = document.getElementById('editBox');
+    box.innerHTML = '<div class="editname">'+
+      '<input type="text" id="nameInput" maxlength="200" value="'+esc(current.clinica_nombre||'')+'" placeholder="Nombre de la clínica">'+
+      '<button class="abtn" onclick="saveName()">Guardar</button>'+
+      '<button class="abtn" onclick="cancelEditName()">Cancelar</button>'+
+      '<span class="err" id="nameErr" style="margin:0;min-height:0"></span></div>';
+    const inp = document.getElementById('nameInput');
+    inp.focus(); inp.select();
+    inp.onkeydown = e => { if(e.key==='Enter') saveName(); if(e.key==='Escape') cancelEditName(); };
+  }
+  function cancelEditName(){ document.getElementById('editBox').innerHTML=''; }
+  async function saveName(){
+    const inp = document.getElementById('nameInput');
+    const errEl = document.getElementById('nameErr');
+    const nombre = (inp.value||'').trim();
+    if(!nombre){ errEl.textContent='El nombre no puede quedar vacío.'; return; }
+    errEl.textContent='';
+    try{
+      const d = await apiSend('/onboarding/'+current.id, 'PATCH', { clinica_nombre: nombre });
+      current.clinica_nombre = d.clinica_nombre;
+      const it = items.find(x=>x.id===current.id); if(it) it.clinica_nombre = d.clinica_nombre;
+      document.getElementById('detName').textContent = d.clinica_nombre;
+      cancelEditName();
+    }catch(e){
+      if(e && e.auth){ alert('Tu sesión expiró. Vuelve a entrar.'); logout(); }
+      else errEl.textContent = 'No se pudo guardar. ' + (e.message||'');
+    }
+  }
+
+  // ── Borrar cliente (confirmación con nombre exacto) ──
+  function delTarget(){ return current.clinica_nombre || current.web_url || '(sin nombre)'; }
+  function askDelete(){
+    document.getElementById('delName').textContent = delTarget();
+    document.getElementById('delInput').value='';
+    document.getElementById('delErr').textContent='';
+    const btn = document.getElementById('delBtn');
+    btn.disabled = true; btn.textContent='Borrar definitivamente';
+    document.getElementById('delModal').classList.remove('hidden');
+    const inp = document.getElementById('delInput');
+    inp.focus();
+    inp.onkeydown = e => { if(e.key==='Enter' && !btn.disabled) doDelete(); if(e.key==='Escape') closeDelete(); };
+  }
+  function delCheck(){
+    document.getElementById('delBtn').disabled =
+      document.getElementById('delInput').value.trim() !== delTarget();
+  }
+  function closeDelete(){ document.getElementById('delModal').classList.add('hidden'); }
+  async function doDelete(){
+    const btn = document.getElementById('delBtn');
+    btn.disabled = true; btn.textContent = 'Borrando…';
+    try{
+      await apiSend('/onboarding/'+current.id, 'DELETE');
+      items = items.filter(x=>x.id!==current.id);
+      closeDelete(); showList(); renderList();
+    }catch(e){
+      btn.textContent = 'Borrar definitivamente';
+      if(e && e.auth){ alert('Tu sesión expiró. Vuelve a entrar.'); logout(); }
+      else { document.getElementById('delErr').textContent = 'No se pudo borrar. ' + (e.message||''); delCheck(); }
+    }
   }
 
   // arranque
