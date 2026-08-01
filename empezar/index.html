@@ -257,7 +257,7 @@
     <label class="q">Su logo en alta calidad <span class="opt">(si lo tiene)</span></label>
     <div class="drop" onclick="document.getElementById('f-logo').click()">
       <div class="di">Subir logo</div><div class="ds">SVG, PNG o PDF</div>
-      <input type="file" id="f-logo" accept="image/*,.pdf,.svg">
+      <input type="file" id="f-logo" accept="image/jpeg,image/png,image/webp,image/gif,image/heic,image/heif,application/pdf">
     </div>
     <div class="files" id="files-logo"></div>
 
@@ -342,7 +342,10 @@
     if(!multi) store.length=0;
     var rejected=[];
     for(const f of list){
-      var okType = /^image\//.test(f.type) || f.type==='application/pdf' || (f.type==='' && /\.(jpe?g|png|webp|gif|svg|heic|heif|pdf)$/i.test(f.name));
+      // SVG/HTML/XML NO son imágenes: son documentos con <script> dentro. El servidor los
+      // rechaza igual (content-type + extensión + magic bytes), esto solo avisa antes de subir.
+      var peligroso = /(svg|html|xhtml|xml|javascript)/i.test(f.type) || /\.(svgz?|x?html?|xht|xml|js|mjs|xslt?)$/i.test(f.name);
+      var okType = !peligroso && (/^image\//.test(f.type) || f.type==='application/pdf' || (f.type==='' && /\.(jpe?g|png|webp|gif|heic|heif|pdf)$/i.test(f.name)));
       var okSize = f.size <= 25*1024*1024;
       if(!okType || !okSize){ rejected.push(f.name+(!okSize?' (mayor a 25MB)':' (formato no válido)')); continue; }
       store.push(f);
