@@ -388,6 +388,7 @@
     document.querySelectorAll('.step').forEach(s=>s.classList.remove('active'));
     document.getElementById(id).classList.add('active');
     current=id; updateProgress(); window.scrollTo({top:0,behavior:'smooth'});
+    guardar();
   }
   function val(name){ const el=document.querySelector('[name="'+name+'"]'); return el?el.value.trim():''; }
   function radio(name){ const el=document.querySelector('input[name="'+name+'"]:checked'); return el?el.value:''; }
@@ -435,7 +436,7 @@
   function next(){
     if(!validate(current)) return;
     const n=computeNext(current);
-    if(n){ stack.push(current); show(n); }
+    if(n){ stack.push(current); show(n); avisar(false); }
   }
   function back(){ if(stack.length) show(stack.pop()); }
 
@@ -489,6 +490,7 @@
     fd.append('consent_uso', document.querySelector('[name=consent_uso]').checked);
     fd.append('path', path||'');
     fd.append('submitted_at', new Date().toISOString());
+    if(draftId) fd.append('draft_id', draftId);   // cierra el borrador: sin esto lo reportarían como abandonado
     // files
     logoFiles.forEach(f=>fd.append('logo', f, f.name));
     fotoFiles.forEach(f=>fd.append('fotos', f, f.name));
@@ -500,6 +502,7 @@
       // que subió su logo y nosotros nunca lo tenemos.
       var res=null; try{ res=await r.json(); }catch(_){}
       showDropped(res && res.dropped);
+      enviado=true; borrarBorrador();   // ya llegó: ni se guarda de nuevo ni se avisa que "lo dejó a medias"
       stack.push(current); show('s6');
     }catch(err){
       sending=false;
@@ -514,6 +517,153 @@
     var chk=document.getElementById('wa-otro'), campo=document.getElementById('wa-otro-campo');
     if(chk&&campo){ chk.addEventListener('change', function(){ campo.classList.toggle('show', chk.checked); }); }
   })();
+
+  /* ═══════════════════════════════════════════════════════════════
+     BORRADOR LOCAL + AVISO DE ABANDONO  (3-ago-2026)
+
+     Dos problemas de la misma escena — un cliente que YA PAGÓ llena
+     medio formulario y se va:
+       1. Él perdía TODO lo escrito (una recarga, un toque atrás, una
+          llamada entrante en el celular). Ahora se guarda en SU propio
+          navegador y al volver aparece donde iba.
+       2. César no se enteraba de nada. Ahora el navegador avisa al
+          pasar de paso y al cerrar la pestaña; el servidor guarda lo
+          mínimo para poder rescatarlo por WhatsApp.
+
+     Reglas: nada de esto puede romper el formulario. TODO va dentro de
+     try/catch — si localStorage está bloqueado (modo privado, cookies
+     desactivadas) o el aviso no sale, el formulario funciona igual.
+     Los archivos NO se guardan (el navegador no deja guardar un archivo
+     en localStorage): al volver hay que elegirlos otra vez, y por eso el
+     paso de fotos es opcional.
+     ═══════════════════════════════════════════════════════════════ */
+  const LS_KEY   = 'pronto_empezar_v1';
+  const LS_VENCE = 7*24*3600*1000;                                  // una semana y se descarta
+  const START_URL = ENDPOINT.replace(/\/onboarding$/, '/onboarding/start');
+  const TEXTOS = 'input[type=text],input[type=email],input[type=tel],textarea';
+  let draftId=null, enviado=false, ultimoAviso=0, ultimoLatido=0, guardarT=null;
+
+  function nuevoId(){
+    try{ if(crypto && crypto.randomUUID) return crypto.randomUUID(); }catch(e){}
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g,function(c){
+      var r=Math.random()*16|0; return (c==='x'?r:(r&0x3|0x8)).toString(16);
+    });
+  }
+  function borrarBorrador(){ try{ localStorage.removeItem(LS_KEY); }catch(e){} }
+
+  function guardar(){
+    if(enviado) return;   // ya lo mandó: no dejarle los datos guardados en el navegador
+    try{
+      const campos={}, radios={}, checks={};
+      document.querySelectorAll('#form '+TEXTOS).forEach(function(el){ if(el.name && el.value) campos[el.name]=el.value; });
+      document.querySelectorAll('#form input[type=radio]:checked').forEach(function(el){ if(el.name) radios[el.name]=el.value; });
+      document.querySelectorAll('#form input[type=checkbox]').forEach(function(el){ if(el.name) checks[el.name]=el.checked; });
+      var waChk=document.getElementById('wa-otro');
+      localStorage.setItem(LS_KEY, JSON.stringify({
+        v:1, at:Date.now(), draft:draftId, step:current, path:path, stack:stack.slice(),
+        campos:campos, radios:radios, checks:checks, waOtro: !!(waChk&&waChk.checked),
+      }));
+    }catch(e){}   // cuota llena o almacenamiento bloqueado: seguir como si nada
+  }
+  function guardarPronto(){ clearTimeout(guardarT); guardarT=setTimeout(guardar, 400); latido(); }
+  /* "Sigo aquí": mientras escribe, refresca el rastro como mucho cada 5 min.
+     Sin esto, alguien que se demora 50 minutos en un solo paso (buscando el NIT,
+     preguntándole al socio) saldría reportado como abandonado estando presente. */
+  function latido(){
+    if(!draftId || enviado) return;
+    var ahora=Date.now();
+    if(ahora-ultimoLatido < 5*60*1000) return;
+    ultimoLatido=ahora;
+    avisar(false);
+  }
+
+  function restaurar(){
+    var s=null;
+    try{ s=JSON.parse(localStorage.getItem(LS_KEY)||'null'); }catch(e){ return false; }
+    if(!s || s.v!==1 || !s.at || (Date.now()-s.at)>LS_VENCE || s.step==='s6'){ borrarBorrador(); return false; }
+    var nombreOk=/^[a-z_]+$/i;
+    try{
+      Object.keys(s.campos||{}).forEach(function(n){
+        if(!nombreOk.test(n)) return;
+        var el=document.querySelector('#form [name="'+n+'"]');
+        if(el && el.type!=='radio' && el.type!=='checkbox') el.value=String(s.campos[n]).slice(0,5000);
+      });
+      Object.keys(s.radios||{}).forEach(function(n){
+        if(!nombreOk.test(n)) return;
+        document.querySelectorAll('#form input[type=radio][name="'+n+'"]').forEach(function(el){
+          if(el.value!==s.radios[n]) return;
+          el.checked=true;
+          var c=el.closest('.choice'); if(c) c.classList.add('sel');
+        });
+      });
+      Object.keys(s.checks||{}).forEach(function(n){
+        if(!nombreOk.test(n)) return;
+        var el=document.querySelector('#form input[type=checkbox][name="'+n+'"]');
+        if(!el) return;
+        el.checked=!!s.checks[n];
+        var c=el.closest('.check'); if(c) c.classList.toggle('sel', el.checked);
+      });
+      var waChk=document.getElementById('wa-otro'), waCampo=document.getElementById('wa-otro-campo');
+      if(waChk && s.waOtro){ waChk.checked=true; if(waCampo) waCampo.classList.add('show'); }
+      if(s.radios && s.radios.dominio_tiene) toggleDominio(s.radios.dominio_tiene);
+    }catch(e){}
+    draftId = (typeof s.draft==='string' && s.draft.length===36) ? s.draft : null;
+    path = (s.path==='A'||s.path==='B') ? s.path : null;
+    stack.length=0;
+    (s.stack||[]).forEach(function(x){ if(document.getElementById(x)) stack.push(x); });
+    var paso = (s.step && document.getElementById(s.step)) ? s.step : 's1';
+    if(paso!=="s1"){ show(paso); mostrarCartel(paso); avisar(false); return true; }   // volvió: refresca el rastro para que no lo cuenten como ido
+    return false;
+  }
+  // Cartel: que se note que NO perdió nada, y que pueda empezar de cero si quiere.
+  function mostrarCartel(paso){
+    try{
+      var d=document.createElement('div');
+      d.style.cssText='max-width:640px;margin:0 auto 18px;background:rgba(34,211,238,.10);border:1px solid rgba(34,211,238,.45);border-radius:12px;padding:13px 16px;font-size:14.5px;line-height:1.5;color:#cbd5e1';
+      d.innerHTML='<b style="color:#22d3ee">Retomamos donde iba.</b> Guardamos en este dispositivo lo que ya había escrito'+
+        (paso==='s5'?' (las fotos sí toca volverlas a elegir)':'')+'. '+
+        '<a href="#" id="reset-borrador" style="color:#22d3ee">Prefiero empezar de cero</a>.';
+      var wrap=document.querySelector('.wrap'), form=document.getElementById('form');
+      if(wrap && form) wrap.insertBefore(d, form);
+      var a=document.getElementById('reset-borrador');
+      if(a) a.addEventListener('click', function(ev){ ev.preventDefault(); borrarBorrador(); location.reload(); });
+    }catch(e){}
+  }
+
+  /* Aviso al servidor. Solo desde el paso 2 en adelante: en el paso 1 todavía no
+     hay consentimiento ni intención real, y no queremos una fila por cada visita.
+     sendBeacon manda el cuerpo como text/plain a propósito: application/json
+     obligaría a un preflight que sendBeacon no sabe hacer. */
+  function avisar(salio){
+    try{
+      if(enviado) return;
+      if(!draftId){ draftId=nuevoId(); guardar(); }
+      var ahora=Date.now();
+      if(!salio && ahora-ultimoAviso<4000) return;     // freno anti-repetición
+      ultimoAviso=ahora;
+      var cuerpo=JSON.stringify({
+        id:draftId, paso:current, salio:!!salio,
+        clinica: val('clinica_nombre')||val('clinica_nombre_b'),
+        wa: val('wa_publico'), email: val('email_reportes'),
+      });
+      var blob=new Blob([cuerpo],{type:'text/plain;charset=UTF-8'});
+      if(navigator.sendBeacon && navigator.sendBeacon(START_URL, blob)) return;
+      fetch(START_URL,{method:'POST',body:cuerpo,keepalive:true,headers:{'Content-Type':'text/plain;charset=UTF-8'}}).catch(function(){});
+    }catch(e){}
+  }
+
+  (function(){
+    var form=document.getElementById('form');
+    if(form){ form.addEventListener('input', guardarPronto); form.addEventListener('change', guardarPronto); }
+    // Cierra la pestaña / se va: eso es la señal más fuerte de abandono.
+    window.addEventListener('pagehide', function(){ if(draftId && !enviado) avisar(true); });
+    // Volvió a la pestaña: se corrige el "se fue" para no avisar de alguien que sigue ahí.
+    document.addEventListener('visibilitychange', function(){
+      if(document.visibilityState==='visible' && draftId && !enviado) avisar(false);
+    });
+    try{ restaurar(); }catch(e){}
+  })();
+
   updateProgress();
 </script>
 </body>
