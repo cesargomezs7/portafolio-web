@@ -106,6 +106,12 @@
   .ty .ico svg{width:34px; height:34px; color:#06121a;}
   .ty h1{font-size:32px;}
   .ty p{color:var(--muted); font-size:16px; max-width:440px; margin:14px auto 0;}
+  .ty-drop{max-width:440px; margin:28px auto 0; text-align:left; border:1px solid #f0b429;
+           border-radius:12px; padding:16px 18px; background:rgba(240,180,41,.08);}
+  .ty-drop-t{font-weight:700; font-size:15px; color:#f0b429; margin-bottom:8px;}
+  .ty-drop ul{margin:0; padding-left:20px;}
+  .ty-drop li{font-size:14px; color:var(--muted); margin:4px 0; word-break:break-word;}
+  .ty-drop-f{font-size:13px; color:var(--muted); margin-top:10px;}
   .footer{text-align:center; color:var(--dim); font-size:12px; margin-top:40px;}
   .footer a{color:var(--dim);}
   @media(max-width:520px){ h1{font-size:25px;} .row{grid-template-columns:1fr;} .wrap{padding:22px 16px 70px;} }
@@ -256,7 +262,7 @@
 
     <label class="q">Su logo en alta calidad <span class="opt">(si lo tiene)</span></label>
     <div class="drop" onclick="document.getElementById('f-logo').click()">
-      <div class="di">Subir logo</div><div class="ds">SVG, PNG o PDF</div>
+      <div class="di">Subir logo</div><div class="ds">JPG, PNG, WEBP o PDF · máx 25MB</div>
       <input type="file" id="f-logo" accept="image/jpeg,image/png,image/webp,image/gif,image/heic,image/heif,application/pdf">
     </div>
     <div class="files" id="files-logo"></div>
@@ -285,6 +291,13 @@
       <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg></div>
       <h1>Recibido. Su web está en camino.</h1>
       <p>En los próximos días le vamos mostrando avances por WhatsApp, y en 7-10 días su web queda lista. La ajustamos hasta que quede justo como la imagina, y cuando usted diga "publíquela", queda activa.</p>
+      <!-- Aviso de archivos rechazados por el servidor (formato/tamaño). Antes el cliente veía
+           esta misma pantalla de éxito y NUNCA se enteraba de que su logo no se había guardado. -->
+      <div class="ty-drop" id="ty-drop" hidden>
+        <div class="ty-drop-t">Ojo: estos archivos no se pudieron guardar</div>
+        <ul id="ty-drop-list"></ul>
+        <div class="ty-drop-f">Todo lo demás quedó guardado. Puede mandárnoslos por WhatsApp en otro formato (JPG, PNG, WEBP o PDF, máximo 25MB) y los agregamos.</div>
+      </div>
     </div>
   </section>
 
@@ -436,6 +449,18 @@
     sc.textContent = current==='s6' ? '¡Listo!' : ('Paso '+(i+1)+' de '+order.length);
   }
 
+  // ---- aviso de archivos rechazados en la pantalla de gracias ----
+  function showDropped(lista){
+    var box=document.getElementById('ty-drop'), ul=document.getElementById('ty-drop-list');
+    if(!box||!ul) return;
+    if(!lista || !lista.length){ box.hidden=true; return; }
+    ul.innerHTML='';
+    lista.slice(0,20).forEach(function(txt){
+      var li=document.createElement('li'); li.textContent=String(txt); ul.appendChild(li);  // textContent = nada de HTML del servidor
+    });
+    box.hidden=false;
+  }
+
   // ---- submit ----
   async function submitForm(){
     if(!validate('s3')) { show('s3'); return; } // re-safety (essentials)
@@ -470,6 +495,11 @@
     try{
       const r=await fetch(ENDPOINT, {method:'POST', body:fd});
       if(!r.ok) throw new Error('status '+r.status);
+      // El Worker responde {ok, id, fotos, logo, dropped:[...]} — `dropped` son los archivos
+      // que rechazó (magic bytes / formato / >25MB). Si no se los mostramos, el cliente cree
+      // que subió su logo y nosotros nunca lo tenemos.
+      var res=null; try{ res=await r.json(); }catch(_){}
+      showDropped(res && res.dropped);
       stack.push(current); show('s6');
     }catch(err){
       sending=false;

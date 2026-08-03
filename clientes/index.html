@@ -312,7 +312,28 @@
   }
 
   function field(k,v){ if(!v) return ''; return '<div class="field"><div class="k">'+esc(k)+'</div><div class="v">'+esc(v)+'</div></div>'; }
-  function linkField(k,u){ if(!u) return ''; var href=/^https?:\/\//.test(u)?u:'https://'+u; return '<div class="field"><div class="k">'+esc(k)+'</div><div class="v"><a href="'+esc(href)+'" target="_blank">'+esc(u)+'</a></div></div>'; }
+  // El campo Instagram llega casi siempre como "@miclinica" (así lo pide el form) y el
+  // 'https://'+u de antes generaba `https://@miclinica`, un link muerto. Un @ (o un handle
+  // suelto) se traduce a la URL real de la red; lo demás solo recibe el esquema que le falta.
+  // Devuelve '' cuando el texto no da para un link (p.ej. "hola hola"): en ese caso se
+  // muestra tal cual, sin envolverlo en un <a> que no lleva a ninguna parte.
+  function socialHref(u, red){
+    var v=String(u||'').trim(); if(!v) return '';
+    if(/^https?:\/\//i.test(v)) return v;
+    if(/\s/.test(v)) return '';
+    var host = red==='facebook' ? 'https://www.facebook.com/' : 'https://www.instagram.com/';
+    var h=v.replace(/^\/+/,'');
+    var m=h.match(/^@?([A-Za-z0-9._-]{1,60})$/);
+    if(m && (v.charAt(0)==='@' || (red && h.indexOf('.')<0))) return host+m[1].replace(/^\.+|\.+$/g,'');
+    if(h.indexOf('.')<0) return '';
+    return 'https://'+h;
+  }
+  function linkField(k,u,red){
+    if(!u) return '';
+    var href=socialHref(u,red);
+    if(!href) return field(k,u);   // texto que no es un link: se muestra, no se pierde
+    return '<div class="field"><div class="k">'+esc(k)+'</div><div class="v"><a href="'+esc(href)+'" target="_blank" rel="noopener noreferrer">'+esc(u)+'</a></div></div>';
+  }
 
   function renderDetail(it){
     current = it;
@@ -342,7 +363,7 @@
     // Links / presencia
     if(it.web_url||it.instagram||it.facebook||it.google_url){
       html += '<div class="section"><h3>Presencia online</h3>'+
-        linkField('Web actual', it.web_url)+linkField('Instagram', it.instagram)+linkField('Facebook', it.facebook)+linkField('Google / Maps', it.google_url)+
+        linkField('Web actual', it.web_url)+linkField('Instagram', it.instagram, 'instagram')+linkField('Facebook', it.facebook, 'facebook')+linkField('Google / Maps', it.google_url)+
         field('Modo', it.modo==='todo'?'Saquen todo de mis links':(it.modo==='cambiar'?'Quiere cambiar/agregar cosas':''))+'</div>';
     }
     // Clínica (camino B)
