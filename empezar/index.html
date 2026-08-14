@@ -114,7 +114,20 @@
   .ty-drop-f{font-size:13px; color:var(--muted); margin-top:10px;}
   .footer{text-align:center; color:var(--dim); font-size:12px; margin-top:40px;}
   .footer a{color:var(--dim);}
-  @media(max-width:520px){ h1{font-size:25px;} .row{grid-template-columns:1fr;} .wrap{padding:22px 16px 70px;} }
+  /* Pantalla de revisión (resumen antes de enviar) */
+  .rz{border:1px solid var(--border); border-radius:14px; background:var(--panel); padding:16px 18px; margin-bottom:14px;}
+  .rz-top{display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:4px;}
+  .rz-t{font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:16px;}
+  .rz-edit{background:none; border:1px solid var(--border); color:var(--cyan); border-radius:999px; padding:6px 16px; font-size:13px; cursor:pointer; font-family:'Inter',sans-serif; transition:border-color .2s;}
+  .rz-edit:hover{border-color:var(--cyan);}
+  .rz-row{display:grid; grid-template-columns:38% 1fr; gap:10px; padding:8px 0; border-top:1px solid rgba(255,255,255,0.07); font-size:14.5px;}
+  .rz-row .k{color:var(--dim);}
+  .rz-row .v{color:var(--text); word-break:break-word; white-space:pre-wrap;}
+  .rz-thumbs{display:flex; flex-wrap:wrap; gap:8px;}
+  .rz-thumbs img{width:64px; height:64px; object-fit:cover; border-radius:8px; border:1px solid var(--border); display:block;}
+  .rz-file{width:64px; height:64px; border-radius:8px; border:1px solid var(--border); background:var(--panel-2); color:var(--dim); font-size:10px; text-align:center; padding:4px; display:flex; align-items:center; justify-content:center; overflow:hidden; word-break:break-all;}
+  .rz-warn{margin-top:10px; border:1px solid #f0b429; background:rgba(240,180,41,.08); border-radius:10px; padding:10px 12px; font-size:13px; color:#f0b429; line-height:1.5;}
+  @media(max-width:520px){ h1{font-size:25px;} .row{grid-template-columns:1fr;} .wrap{padding:22px 16px 70px;} .rz-row{grid-template-columns:1fr; gap:2px;} }
 </style>
 </head>
 <body>
@@ -274,14 +287,35 @@
     </div>
     <div class="files" id="files-fotos"></div>
 
+    <label class="q" style="margin-top:24px">¿Con cuál diseño quiere su web? <span class="opt">(<a href="https://prontoweb.co/portafolio" target="_blank" rel="noopener" style="color:var(--cyan)">verlos</a>)</span></label>
+    <div class="choices" data-radio="estilo">
+      <label class="choice sel"><input type="radio" name="estilo" value="demo-master" checked><span class="dot"></span><span class="c-body"><strong>El que le mostré en el video</strong><span>Recomendado, es el que entrego más rápido</span></span></label>
+      <label class="choice"><input type="radio" name="estilo" value="ember"><span class="dot"></span><span class="c-body"><strong>Ember, el oscuro</strong></span></label>
+      <label class="choice"><input type="radio" name="estilo" value="atelier"><span class="dot"></span><span class="c-body"><strong>Atelier, el verde claro</strong></span></label>
+      <label class="choice"><input type="radio" name="estilo" value="ivory"><span class="dot"></span><span class="c-body"><strong>Ivory, el blanco</strong></span></label>
+    </div>
+    <p class="hint" style="margin-top:8px">Si escoge uno distinto lo hablamos al arrancar: puede tomar unos días más.</p>
+
     <label class="q" style="margin-top:24px">¿Algo que quiera cambiar, destacar o agregar? <span class="opt">(opcional)</span></label>
     <textarea name="cambios" placeholder="Ej: Destacar Invisalign. Cambiar el eslogan. Sin cambios, solo modernícenla."></textarea>
 
     <div class="err-msg" role="alert" aria-live="polite" id="e-s5"></div>
     <div class="nav">
       <button type="button" class="btn btn-ghost" onclick="back()">Atrás</button>
+      <button type="button" class="btn btn-primary" onclick="next()">Revisar y enviar</button>
+      <button type="button" class="btn-skip" onclick="next()">Saltar este paso</button>
+    </div>
+  </section>
+
+  <!-- ░░ REVISIÓN — resumen antes de enviar (parte del paso 5, no un paso 6) ░░ -->
+  <section class="step" id="sr">
+    <h1>Revise antes de enviar</h1>
+    <p class="lead">Esto es lo que nos llega para construir su web. Si algo quedó mal, tóquele "Editar" y corríjalo: no pierde nada de lo demás.</p>
+    <div id="resumen"></div>
+    <div class="err-msg" role="alert" aria-live="polite" id="e-sr"></div>
+    <div class="nav">
+      <button type="button" class="btn btn-ghost" onclick="back()">Atrás</button>
       <button type="button" class="btn btn-primary" id="btn-submit" onclick="submitForm()">Enviar</button>
-      <button type="button" class="btn-skip" onclick="submitForm()">Saltar y enviar</button>
     </div>
   </section>
 
@@ -314,6 +348,7 @@
   const stack = [];
   let path = null; // 'A'(s2a) | 'B'(s2b)
   const logoFiles = []; const fotoFiles = [];
+  let editandoDesdeResumen = false, presenciaAlEditar = null;   // "Editar" desde la revisión
 
   // ---- choice / check visual selection ----
   document.querySelectorAll('.choice').forEach(c=>{
@@ -385,6 +420,8 @@
 
   // ---- navigation ----
   function show(id){
+    if(current==='sr' && id!=='sr') limpiarMiniaturas();   // no filtrar memoria al salir de la revisión
+    if(id==='sr'){ editandoDesdeResumen=false; construirResumen(); }
     document.querySelectorAll('.step').forEach(s=>s.classList.remove('active'));
     document.getElementById(id).classList.add('active');
     current=id; updateProgress(); window.scrollTo({top:0,behavior:'smooth'});
@@ -431,18 +468,36 @@
     if(id==='s2a'||id==='s2b') return 's3';
     if(id==='s3') return 's4';
     if(id==='s4') return 's5';
+    if(id==='s5') return 'sr';
     return null;
   }
   function next(){
     if(!validate(current)) return;
+    // Volver directo al resumen tras un "Editar" — SALVO que en s1 haya cambiado
+    // la respuesta de presencia: ahí la rama (2a/2b) es otra y hay que recorrerla.
+    if(editandoDesdeResumen && !(current==='s1' && radio('presencia')!==presenciaAlEditar)){
+      if(stack[stack.length-1]==='sr') stack.pop();
+      show('sr'); avisar(false); return;
+    }
+    if(editandoDesdeResumen){
+      // Cambió la rama: el stack viejo apunta a pasos de la rama anterior — se reinicia
+      editandoDesdeResumen=false; stack.length=0;
+    }
     const n=computeNext(current);
     if(n){ stack.push(current); show(n); avisar(false); }
   }
   function back(){ if(stack.length) show(stack.pop()); }
+  function editar(paso){
+    editandoDesdeResumen=true;
+    presenciaAlEditar=radio('presencia');
+    stack.push('sr');           // así "Atrás" desde el paso editado vuelve al resumen
+    show(paso);
+  }
 
   function updateProgress(){
     const order=['s1', path==='B'?'s2b':'s2a','s3','s4','s5'];
-    let i=order.indexOf(current);
+    // El resumen es la revisión del paso 5, no un paso 6: cuenta como "Paso 5 de 5"
+    let i=order.indexOf(current==='sr' ? 's5' : current);
     if(current==='s6') i=5;
     if(i<0) i=0;
     document.getElementById('pbar').style.width=((i)/(order.length-1)*100)+'%';
@@ -462,12 +517,134 @@
     box.hidden=false;
   }
 
+  /* ---- resumen: la pantalla de revisión antes de enviar ----
+     Se reconstruye ENTERA cada vez que se entra (show('sr')): los valores se leen
+     del propio formulario, así que "Editar" no necesita copiar nada de vuelta.
+     Todo se arma con textContent — jamás innerHTML con datos del cliente. */
+  var urlsMini=[];
+  function limpiarMiniaturas(){ urlsMini.forEach(function(u){ try{URL.revokeObjectURL(u);}catch(e){} }); urlsMini.length=0; }
+  var ETIQ_ESTILO={'demo-master':'El que le mostré en el video','ember':'Ember, el oscuro','atelier':'Atelier, el verde claro','ivory':'Ivory, el blanco'};
+
+  function bloqueR(titulo, pasoDestino){
+    var b=document.createElement('div'); b.className='rz';
+    var top=document.createElement('div'); top.className='rz-top';
+    var t=document.createElement('div'); t.className='rz-t'; t.textContent=titulo;
+    var e=document.createElement('button'); e.type='button'; e.className='rz-edit'; e.textContent='Editar';
+    e.setAttribute('aria-label','Editar '+titulo);
+    e.onclick=function(){ editar(pasoDestino); };
+    top.appendChild(t); top.appendChild(e); b.appendChild(top);
+    return b;
+  }
+  function filaR(b, k, v){
+    if(!v) return null;
+    var r=document.createElement('div'); r.className='rz-row';
+    var kk=document.createElement('div'); kk.className='k'; kk.textContent=k;
+    var vv=document.createElement('div'); vv.className='v';
+    if(typeof v==='string') vv.textContent=v; else vv.appendChild(v);
+    r.appendChild(kk); r.appendChild(vv); b.appendChild(r);
+    return r;
+  }
+  function fichaArchivo(f){
+    var d=document.createElement('div'); d.className='rz-file'; d.textContent=f.name; d.title=f.name; return d;
+  }
+  function miniatura(f){
+    if(/^image\//.test(f.type||'')){
+      var u=null;
+      try{ u=URL.createObjectURL(f); }catch(e){}
+      if(u){
+        urlsMini.push(u);
+        var img=document.createElement('img'); img.alt=f.name; img.src=u;
+        img.onerror=function(){ try{ img.replaceWith(fichaArchivo(f)); }catch(e){} };  // HEIC en Chrome, archivo corrupto…
+        return img;
+      }
+    }
+    return fichaArchivo(f);   // PDF y todo lo que no se pueda previsualizar: ficha con el nombre
+  }
+  function construirResumen(){
+    limpiarMiniaturas();
+    var c=document.getElementById('resumen'); if(!c) return;
+    c.innerHTML='';
+
+    var b1=bloqueR('Punto de partida','s1');
+    filaR(b1,'¿Tiene página web?', radio('presencia')==='si'?'Sí, tengo página web':'No tengo / casi nada');
+    c.appendChild(b1);
+
+    if(path==='B'){
+      var b2=bloqueR('Su clínica','s2b');
+      filaR(b2,'Nombre', val('clinica_nombre_b'));
+      filaR(b2,'Ciudad y sede(s)', val('clinica_direccion'));
+      filaR(b2,'Horarios', val('clinica_horarios'));
+      filaR(b2,'Servicios', val('clinica_servicios'));
+      filaR(b2,'Doctores', val('clinica_equipo'));
+      c.appendChild(b2);
+    }else{
+      var b2a=bloqueR('Su página web','s2a');
+      filaR(b2a,'Nombre', val('clinica_nombre'));
+      filaR(b2a,'Web actual', val('web_url'));
+      filaR(b2a,'Instagram', val('instagram'));
+      filaR(b2a,'Facebook', val('facebook'));
+      filaR(b2a,'¿Cómo lo hacemos?', radio('modo')==='todo'?'Saquen todo de mi web y mejórenla':(radio('modo')==='cambiar'?'Saquen lo de mi web, pero quiero cambiar o agregar cosas':''));
+      c.appendChild(b2a);
+    }
+
+    var b3=bloqueR('Lo esencial','s3');
+    filaR(b3,'WhatsApp de la clínica', val('wa_publico'));
+    var waChk=document.getElementById('wa-otro');
+    if(waChk && waChk.checked) filaR(b3,'WhatsApp para avisos', val('wa_recepcion'));
+    filaR(b3,'Correo para reportes', val('email_reportes'));
+    filaR(b3,'Google / Maps', val('google_url'));
+    filaR(b3,'¿Mostrar precios?', radio('precios')==='si'?'Sí, precios orientativos':(radio('precios')==='no'?'No, solo "consulte por WhatsApp"':''));
+    var dt=radio('dominio_tiene'), domTxt='';
+    if(dt==='si') domTxt='Conserva el suyo: '+(val('dominio_actual')||'—');
+    if(dt==='no') domTxt='Nuevo'+(val('dominio_ideas')?(' · ideas: '+val('dominio_ideas')):' (lo elegimos nosotros)');
+    filaR(b3,'Dominio', domTxt);
+    c.appendChild(b3);
+
+    var b4=bloqueR('Facturación','s4');
+    filaR(b4,'Titular', val('fact_titular'));
+    filaR(b4,'Identificación', ((radio('id_tipo')?radio('id_tipo')+' ':'')+val('id_numero')).trim());
+    c.appendChild(b4);
+
+    var b5=bloqueR('Fotos y extras','s5');
+    filaR(b5,'Diseño', ETIQ_ESTILO[radio('estilo')]||ETIQ_ESTILO['demo-master']);
+    // En el camino B no hay web de dónde sacar nada: el texto no debe prometerlo
+    var sinLogo = path==='B' ? 'No subió' : 'No subió (lo sacamos de su web)';
+    var sinFotos = path==='B' ? 'No subió' : 'No subió (las sacamos de su web)';
+    if(logoFiles.length){
+      var twl=document.createElement('div'); twl.className='rz-thumbs';
+      twl.appendChild(miniatura(logoFiles[0]));
+      filaR(b5,'Logo', twl);
+    }else filaR(b5,'Logo',sinLogo);
+    if(fotoFiles.length){
+      var vf=document.createElement('div');
+      var cnt=document.createElement('div'); cnt.style.marginBottom='6px';
+      cnt.textContent=fotoFiles.length+(fotoFiles.length===1?' foto seleccionada':' fotos seleccionadas');
+      vf.appendChild(cnt);
+      var tw=document.createElement('div'); tw.className='rz-thumbs';
+      fotoFiles.forEach(function(f){ tw.appendChild(miniatura(f)); });
+      vf.appendChild(tw);
+      filaR(b5,'Fotos', vf);
+    }else filaR(b5,'Fotos',sinFotos);
+    filaR(b5,'Cambiar / destacar', val('cambios'));
+    /* Defensa: el servidor descarta en silencio los archivos de más de 25 MB (el
+       selector de arriba ya los frena, pero un archivo puede cambiar en disco
+       después de elegido). Mejor avisar aquí que perder el logo sin que se sepa. */
+    var grandes=[];
+    logoFiles.concat(fotoFiles).forEach(function(f){ if(f.size>25*1024*1024) grandes.push(f.name); });
+    if(grandes.length){
+      var w=document.createElement('div'); w.className='rz-warn';
+      w.textContent='Ojo: '+grandes.join(', ')+(grandes.length===1?' pesa más de 25 MB y no se va a guardar':' pesan más de 25 MB y no se van a guardar')+'. Toque "Editar" y suba una versión más liviana.';
+      b5.appendChild(w);
+    }
+    c.appendChild(b5);
+  }
+
   // ---- submit ----
   async function submitForm(){
     if(!validate('s3')) { show('s3'); return; } // re-safety (essentials)
-    if(sending) return;                          // candado anti doble-envío (cubre "Enviar" y "Saltar y enviar")
+    if(sending) return;                          // candado anti doble-envío
     sending=true;
-    const navBtns=document.querySelectorAll('#s5 .nav button, #s5 .btn-skip');
+    const navBtns=document.querySelectorAll('#sr .nav button');
     navBtns.forEach(b=>b.disabled=true);
     const btn=document.getElementById('btn-submit'); btn.textContent='Enviando…';
     const fd=new FormData();
@@ -485,7 +662,7 @@
     var waOtroChk=document.getElementById('wa-otro');
     if(!waOtroChk || !waOtroChk.checked) fd.set('wa_recepcion', val('wa_publico'));
     // radios + consents
-    ['presencia','modo','precios','dominio_tiene','id_tipo'].forEach(n=>fd.append(n, radio(n)));
+    ['presencia','modo','precios','dominio_tiene','id_tipo','estilo'].forEach(n=>fd.append(n, radio(n)));
     fd.append('consent_ley', document.querySelector('[name=consent_ley]').checked);
     fd.append('consent_uso', document.querySelector('[name=consent_uso]').checked);
     fd.append('path', path||'');
@@ -508,7 +685,7 @@
       sending=false;
       navBtns.forEach(b=>b.disabled=false);
       btn.textContent='Enviar';
-      document.getElementById('e-s5').textContent='No se pudo enviar. Revise su internet e intente de nuevo. (Si sigue, escríbanos por WhatsApp.)';
+      document.getElementById('e-sr').textContent='No se pudo enviar. Revise su internet e intente de nuevo. (Si sigue, escríbanos por WhatsApp.)';
     }
   }
 
@@ -591,9 +768,12 @@
       Object.keys(s.radios||{}).forEach(function(n){
         if(!nombreOk.test(n)) return;
         document.querySelectorAll('#form input[type=radio][name="'+n+'"]').forEach(function(el){
-          if(el.value!==s.radios[n]) return;
+          // Limpiar primero el que NO es: "estilo" viene preseleccionado en el HTML
+          // (con .sel puesta) y sin esto quedarían DOS tarjetas marcadas a la vez.
+          var c=el.closest('.choice');
+          if(el.value!==s.radios[n]){ el.checked=false; if(c) c.classList.remove('sel'); return; }
           el.checked=true;
-          var c=el.closest('.choice'); if(c) c.classList.add('sel');
+          if(c) c.classList.add('sel');
         });
       });
       Object.keys(s.checks||{}).forEach(function(n){
@@ -621,7 +801,7 @@
       var d=document.createElement('div');
       d.style.cssText='max-width:640px;margin:0 auto 18px;background:rgba(34,211,238,.10);border:1px solid rgba(34,211,238,.45);border-radius:12px;padding:13px 16px;font-size:14.5px;line-height:1.5;color:#cbd5e1';
       d.innerHTML='<b style="color:#22d3ee">Retomamos donde iba.</b> Guardamos en este dispositivo lo que ya había escrito'+
-        (paso==='s5'?' (las fotos sí toca volverlas a elegir)':'')+'. '+
+        ((paso==='s5'||paso==='sr')?' (las fotos sí toca volverlas a elegir)':'')+'. '+
         '<a href="#" id="reset-borrador" style="color:#22d3ee">Prefiero empezar de cero</a>.';
       var wrap=document.querySelector('.wrap'), form=document.getElementById('form');
       if(wrap && form) wrap.insertBefore(d, form);
