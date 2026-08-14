@@ -48,8 +48,9 @@
 }
 .nav-dd:hover .nav-sub { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); }
 .nav-sub li { margin: 0; }
-/* La hairline debajo de los links del navbar de Ember no aplica dentro del submenú */
+/* Ni la hairline de los links ni el '•' separador del navbar Ember aplican dentro del submenú */
 .nav-sub a::after { display: none; }
+.nav-sub li::before { display: none; }
 .nav-sub a {
   display: block;
   padding: 11px 14px;
