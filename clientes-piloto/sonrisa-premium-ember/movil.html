@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sonrisa Ember · versión móvil</title>
+<meta name="robots" content="noindex">
+<!-- ============================================================
+     VISTA MÓVIL para el video Loom — SIN marco de celular.
+     Solo "cómo se vería" en el móvil: la demo final (./index.html)
+     a 430px (iPhone 15 Pro Max) = layout móvil real, con esquinas
+     suaves sobre fondo oscuro, escalada para llenar la pantalla.
+     Interactiva: se puede hacer scroll y tocar durante el Loom.
+     ============================================================ -->
+<style>
+/* SIN body{zoom} aqui: esta pagina se auto-escala con fit() para llenar el alto
+   del viewport. El zoom escalonado (20-jun-2026) duplicaba la escala en monitores
+   >=1420px y recortaba el telefono en pantalla completa (bug corregido 28-jul-2026). */
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  html,body{ height:100%; }
+  body{
+    background:#06080d;
+    display:flex; align-items:center; justify-content:center;
+    overflow:hidden;
+  }
+  .scaler{ transform-origin:center center; }
+  .screen{
+    width:430px; height:932px;
+    border-radius:30px; overflow:hidden;
+    background:#3D1308;
+    box-shadow:0 30px 90px rgba(0,0,0,0.55);
+  }
+  .screen iframe{
+    width:430px; height:932px; border:none; display:block;
+  }
+</style>
+</head>
+<body>
+  <div class="scaler" id="scaler">
+    <div class="screen"><iframe src="./index.html" title="Demo Sonrisa Ember en celular" loading="eager"></iframe></div>
+  </div>
+<script>
+  // Escala la pantalla móvil para llenar el alto de cualquier monitor, centrada.
+  function fit(){
+    var screen = document.querySelector('.screen');
+    var scaler = document.getElementById('scaler');
+    var w = screen.offsetWidth, h = screen.offsetHeight;
+    if(!w || !h) return;
+    // Compensa cualquier body{zoom} heredado: Chrome/Safari multiplican el tamano
+    // renderizado por el zoom pero innerWidth/innerHeight y offset* no cambian.
+    var z = parseFloat(getComputedStyle(document.body).zoom) || 1;
+    var s = Math.min((window.innerHeight*0.98)/(h*z), (window.innerWidth*0.98)/(w*z));
+    scaler.style.transform = 'scale(' + s + ')';
+  }
+  window.addEventListener('resize', fit);
+  window.addEventListener('load', fit);
+  if (window.ResizeObserver) new ResizeObserver(fit).observe(document.documentElement);
+  fit();
+</script>
+</body>
+</html>

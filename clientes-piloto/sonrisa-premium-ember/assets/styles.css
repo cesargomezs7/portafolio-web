@@ -1,4 +1,4 @@
-/* ─── Sonrisa Premium · EMBER · Shared CSS ─────────────────
+/* ─── Sonrisa Ember · EMBER · Shared CSS ─────────────────
    Paleta cálida saturada inspirada en Denta (naranja + negro)
    ───────────────────────────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -17,8 +17,8 @@
   --black-2:  #1A1410;
   --white:    #FFFFFF;
   --gray:     #9A8B82;
-  --gray-light: #BFB2A8;
-  --border:   rgba(255,255,255,0.12);
+  --text-gray-light: #BFB2A8;        /* antes --gray-light: es un color de TEXTO (renombrada 14-ago) */
+  --border-ember:  rgba(255,255,255,0.12);  /* antes --border: hairline blanca de la piel Ember (renombrada 14-ago) */
   --border-strong: rgba(255,255,255,0.20);
 
   /* Acento */
@@ -26,6 +26,45 @@
   --green-bright: #4FAD68;
 
   --transition: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* ── Tokens con la SEMÁNTICA del master (14-ago-2026) ──
+     El HTML portado del demo-master usa estas variables inline por todas partes.
+     Aquí valen lo que le corresponde a la piel oscura de Ember:
+     --border = hairline sutil de cards · --gray-light = FONDO de card
+     (⚠️ semántica opuesta a las viejas de Ember, por eso el renombre de arriba). */
+  --border:     rgba(255,255,255,0.10);
+  --gray-light: #1A1410;             /* fondo de card sobre sección negra (= --black-2) */
+  --gray-bg:    #16100C;             /* fondo de inputs / superficies hundidas */
+  --radius-sm:  12px;
+  --radius:     18px;
+  --radius-lg:  24px;                /* radio de card Ember (los cards existentes usan 24px) */
+  --radius-xl:  36px;
+  --shadow-sm:  0 2px 8px rgba(0,0,0,0.35);
+  --shadow-md:  0 8px 30px rgba(0,0,0,0.45);
+  --shadow-lg:  0 20px 60px rgba(0,0,0,0.55);
+  --t:          cubic-bezier(0.4, 0, 0.2, 1);   /* = --transition (el master la llama --t) */
+  --cw:         min(94vw, 1680px);   /* ancho de contenido fluido, igual que el master */
+}
+
+/* ═══ ESCALA VISUAL (14-ago-2026, copiada del master): el sitio se diseñó viéndose
+   al 150%. Estas reglas hacen que el 100% del visitante se vea así en pantallas
+   grandes, escalonado para que el nav no se rompa en portátiles. <1420px intacto. ═══ */
+@media screen and (min-width: 1880px) { body { zoom: 1.5; } :root { --z: 1.5; } }
+@media screen and (min-width: 1750px) and (max-width: 1879.98px) { body { zoom: 1.4; } :root { --z: 1.4; } }
+@media screen and (min-width: 1550px) and (max-width: 1749.98px) { body { zoom: 1.25; } :root { --z: 1.25; } }
+@media screen and (min-width: 1420px) and (max-width: 1549.98px) { body { zoom: 1.1; } :root { --z: 1.1; } }
+
+/* ═══ CORRECCIÓN BLINK (del master): Chrome/Edge NO dividen vh entre el zoom CSS;
+   Safari sí. Sin esto el hero (100vh) mide zoom×pantalla en Chrome.
+   Solo motores Blink (detector @supports -webkit-app-region). El hero de Ember
+   fija height ADEMÁS de min-height, por eso aquí se corrigen los dos. ═══ */
+@supports (-webkit-app-region: drag) {
+  @media screen and (min-width: 1420px) {
+    body .hero-home {
+      min-height: calc(100vh / var(--z, 1)) !important;
+      height: calc(100vh / var(--z, 1)) !important;
+    }
+  }
 }
 
 html { scroll-behavior: smooth; }
@@ -54,7 +93,7 @@ a { color: inherit; text-decoration: none; }
   transition: all 0.4s var(--transition);
   border-bottom: 1px solid transparent;
 }
-.navbar.scrolled { padding: 8px 5%; border-bottom-color: var(--border); }
+.navbar.scrolled { padding: 8px 5%; border-bottom-color: var(--border-ember); }
 .nav-cta { padding: 8px 18px; font-size: 12.5px; }
 
 .nav-logo { display: flex; align-items: center; gap: 12px; color: var(--white); }
@@ -376,7 +415,7 @@ a { color: inherit; text-decoration: none; }
   background: var(--black);
   border-radius: 24px;
   padding: 32px;
-  border: 1px solid var(--border);
+  border: 1px solid var(--border-ember);
   transition: all 0.3s var(--transition);
   display: flex; flex-direction: column;
   text-decoration: none; color: var(--white);
@@ -396,18 +435,18 @@ a { color: inherit; text-decoration: none; }
   margin-bottom: 12px; letter-spacing: -0.015em;
 }
 .servicio-card p {
-  font-size: 14px; color: var(--gray-light); line-height: 1.6;
+  font-size: 14px; color: var(--text-gray-light); line-height: 1.6;
   flex: 1; margin-bottom: 28px;
 }
 .servicio-card .precio {
   font-size: 13px; color: var(--ember-pale);
-  padding-top: 20px; border-top: 1px solid var(--border);
+  padding-top: 20px; border-top: 1px solid var(--border-ember);
   display: flex; align-items: center; justify-content: space-between;
 }
 .servicio-card .precio strong { color: var(--white); font-size: 16px; }
 .servicio-card .arrow {
   width: 36px; height: 36px; border-radius: 50%;
-  border: 1px solid var(--border); display: flex; align-items: center; justify-content: center;
+  border: 1px solid var(--border-ember); display: flex; align-items: center; justify-content: center;
   transition: all 0.3s var(--transition);
 }
 .servicio-card:hover .arrow { background: var(--ember-glow); border-color: var(--ember-glow); }
@@ -417,7 +456,7 @@ a { color: inherit; text-decoration: none; }
 .equipo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
 .equipo-card {
   background: var(--black); border-radius: 24px; overflow: hidden;
-  border: 1px solid var(--border);
+  border: 1px solid var(--border-ember);
   transition: all 0.3s var(--transition);
 }
 .equipo-card:hover { transform: translateY(-4px); border-color: var(--ember-glow); }
@@ -445,7 +484,7 @@ a { color: inherit; text-decoration: none; }
   margin-bottom: 16px;
 }
 .equipo-card p {
-  font-size: 13px; color: var(--gray-light); line-height: 1.6;
+  font-size: 13px; color: var(--text-gray-light); line-height: 1.6;
 }
 
 /* Contacto */
@@ -460,10 +499,10 @@ a { color: inherit; text-decoration: none; }
 
 .contacto-form {
   background: var(--black); border-radius: 24px; padding: 40px;
-  border: 1px solid var(--border);
+  border: 1px solid var(--border-ember);
 }
 .contacto-form-header {
-  margin-bottom: 28px; padding-bottom: 24px; border-bottom: 1px solid var(--border);
+  margin-bottom: 28px; padding-bottom: 24px; border-bottom: 1px solid var(--border-ember);
 }
 .contacto-form-header strong {
   display: block; font-size: 22px; font-weight: 600; margin-bottom: 6px;
@@ -474,7 +513,7 @@ a { color: inherit; text-decoration: none; }
   display: inline-flex; align-items: center; gap: 8px;
 }
 .contacto-form input, .contacto-form select, .contacto-form textarea {
-  width: 100%; background: transparent; border: 1px solid var(--border);
+  width: 100%; background: transparent; border: 1px solid var(--border-ember);
   padding: 14px 18px; border-radius: 12px; color: var(--white);
   font-size: 14px; font-family: inherit; margin-bottom: 14px;
   transition: border-color 0.2s var(--transition);
@@ -531,7 +570,7 @@ footer {
 .footer-grid {
   max-width: 1300px; margin: 0 auto;
   display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px;
-  padding-bottom: 48px; border-bottom: 1px solid var(--border);
+  padding-bottom: 48px; border-bottom: 1px solid var(--border-ember);
 }
 .footer-brand strong { display: block; font-size: 18px; color: var(--white); margin-bottom: 6px; }
 .footer-brand span { font-size: 11px; color: var(--ember-pale); letter-spacing: 0.2em; text-transform: uppercase; }
@@ -592,7 +631,7 @@ footer {
   position: fixed; top: 0; left: 0; right: 0; z-index: 1001;
   background: var(--black); color: var(--ember-cream);
   font-size: 12px; padding: 8px 5%; text-align: center;
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid var(--border-ember);
 }
 .pronto-banner strong { color: var(--ember-pale); }
 .has-banner .navbar { top: 33px; }
@@ -724,7 +763,7 @@ footer {
   color: var(--white);
   padding: 8px 16px; border-radius: 50px;
   font-size: 12px; font-weight: 500;
-  border: 1px solid var(--border);
+  border: 1px solid var(--border-ember);
 }
 
 /* ─── TECNOLOGÍA (cards horizontales) ─────────────────────── */
@@ -734,7 +773,7 @@ footer {
 }
 .tech-card {
   background: var(--black-2);
-  border: 1px solid var(--border);
+  border: 1px solid var(--border-ember);
   border-radius: 24px; overflow: hidden;
   transition: all 0.3s var(--transition);
 }
@@ -755,7 +794,7 @@ footer {
   font-size: 18px; font-weight: 600; color: var(--white);
   margin-bottom: 10px; letter-spacing: -0.015em; line-height: 1.3;
 }
-.tech-card p { font-size: 13.5px; color: var(--gray-light); line-height: 1.6; }
+.tech-card p { font-size: 13.5px; color: var(--text-gray-light); line-height: 1.6; }
 
 /* ─── TESTIMONIOS (cards con foto paciente) ──────────────── */
 .testimonios-grid {
@@ -764,7 +803,7 @@ footer {
 }
 .testimonio-card {
   background: var(--black-2);
-  border: 1px solid var(--border);
+  border: 1px solid var(--border-ember);
   border-radius: 24px; padding: 32px;
   display: flex; flex-direction: column;
   transition: all 0.3s var(--transition);
@@ -775,13 +814,13 @@ footer {
   letter-spacing: 2px; margin-bottom: 16px;
 }
 .testimonio-quote {
-  font-size: 14.5px; color: var(--gray-light); line-height: 1.65;
+  font-size: 14.5px; color: var(--text-gray-light); line-height: 1.65;
   flex: 1; margin-bottom: 24px;
   font-style: italic;
 }
 .testimonio-author {
   display: flex; align-items: center; gap: 14px;
-  padding-top: 20px; border-top: 1px solid var(--border);
+  padding-top: 20px; border-top: 1px solid var(--border-ember);
 }
 .testimonio-author img {
   width: 48px; height: 48px; border-radius: 50%;
@@ -803,4 +842,393 @@ footer {
   }
   .tech-grid { grid-template-columns: 1fr; }
   .testimonios-grid { grid-template-columns: 1fr; }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   PORTADO DEL MASTER (14-ago-2026) · clases que el HTML del
+   demo-master usa y Ember no tenía. MISMA geometría del master,
+   colores traducidos a la piel Ember (secciones oscuras).
+   ═══════════════════════════════════════════════════════════ */
+
+/* Overline (etiqueta pequeña sobre títulos) */
+.overline {
+  font-size: 13px; font-weight: 500;
+  color: var(--ember-pale);
+  margin-bottom: 16px;
+  letter-spacing: -0.005em;
+}
+
+/* H1 hero word-by-word reveal (wrappers de animación) */
+.hero h1 .word { display: inline-block; overflow: hidden; vertical-align: top; }
+.hero h1 .word-inner { display: inline-block; will-change: transform, opacity; }
+
+/* Headers de sección con layout 1fr|auto */
+.clinic-header, .services-header, .team-header {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: end;
+  margin-bottom: 48px;
+  gap: 40px;
+}
+.clinic-since { font-size: 13px; font-weight: 500; color: var(--ember-cream); opacity: 0.7; }
+.services-view-more {
+  display: inline-flex; align-items: center; gap: 8px;
+  color: var(--white);
+  font-size: 14px; font-weight: 600;
+  padding: 12px 20px; border-radius: 50px;
+  background: var(--gray-light);
+  border: 1px solid var(--border);
+  transition: all 0.3s var(--t);
+}
+.services-view-more:hover { background: var(--ember-glow); color: var(--white); }
+
+/* ─── Carrusel de equipo (team-card del master) ─── */
+.team-nav { display: flex; gap: 12px; }
+.team-nav button {
+  width: 52px; height: 52px;
+  border-radius: var(--radius-sm);
+  background: var(--black);
+  border: 1px solid var(--border);
+  color: var(--white);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s var(--t);
+}
+.team-nav button:hover { background: var(--ember-glow); transform: translateY(-2px); }
+.team-nav button svg { width: 18px; height: 18px; }
+.team-nav button:disabled { opacity: 0.4; cursor: default; }
+.team-card {
+  display: grid;
+  grid-template-columns: 0.85fr 1fr;
+  gap: 48px;
+  background: var(--gray-light);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 40px;
+  align-items: stretch;
+}
+.team-photo {
+  background: var(--black);
+  border-radius: var(--radius);
+  overflow: hidden;
+  aspect-ratio: 4/5;
+  max-width: 360px;
+}
+.team-photo img { width: 100%; height: 100%; object-fit: cover; will-change: opacity, transform; }
+.team-info { display: flex; flex-direction: column; padding: 8px 0; }
+.team-info-top {
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: 14px; color: var(--ember-cream); opacity: 0.8;
+  margin-bottom: 24px;
+}
+.team-rating { display: inline-flex; gap: 6px; align-items: center; }
+.team-rating .star { color: var(--ember-glow); font-size: 16px; }
+.team-info h3 {
+  font-size: clamp(1.8rem, 2.6vw, 2.4rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin-bottom: 8px;
+  color: var(--white);
+}
+.team-info .team-exp { font-size: 16px; color: var(--ember-pale); margin-bottom: 24px; }
+.team-info p {
+  font-size: 16px; line-height: 1.65;
+  color: var(--text-gray-light);
+  margin-bottom: 28px;
+}
+.team-book {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  background: var(--ember-glow);
+  color: var(--white);
+  padding: 14px 26px;
+  border-radius: var(--radius);
+  font-size: 14px; font-weight: 600;
+  margin-top: auto;
+  transition: all 0.3s var(--t);
+  box-shadow: 0 4px 16px rgba(232,84,32,0.25);
+}
+.team-book:hover { background: var(--white); color: var(--ember-base); transform: translateY(-2px); }
+
+/* Avatar de testimonio (el master envuelve la foto en .testimonio-avatar) */
+.testimonio-avatar {
+  width: 48px; height: 48px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+  border: 2px solid var(--ember-glow);
+}
+.testimonio-avatar img { width: 100%; height: 100%; object-fit: cover; border: none; }
+
+/* ─── CTA FINAL ─── */
+.cta-final {
+  background: var(--ember-dark);
+  color: var(--white);
+  border: 1px solid var(--border-ember);
+  border-radius: var(--radius-lg);
+  margin: 80px auto;
+  padding: 96px 56px;
+  max-width: calc(var(--cw) - 64px);
+  text-align: center;
+  position: relative; overflow: hidden;
+}
+.cta-final::before {
+  content: ''; position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 600px 400px at 20% 30%, rgba(232,84,32,0.22), transparent 60%),
+    radial-gradient(ellipse 500px 350px at 80% 70%, rgba(245,184,149,0.14), transparent 60%);
+  pointer-events: none;
+}
+.cta-final-inner { position: relative; z-index: 1; max-width: 720px; margin: 0 auto; }
+.cta-final .overline { color: var(--ember-cream); margin-bottom: 14px; }
+.cta-final h2 {
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  font-weight: 500;
+  color: var(--white);
+  letter-spacing: -0.035em;
+  line-height: 1.05;
+  margin-bottom: 20px;
+}
+.cta-final p {
+  font-size: 17px; line-height: 1.55;
+  color: var(--ember-cream);
+  margin-bottom: 36px;
+}
+.cta-final-actions { display: inline-flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
+.cta-final-btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 16px 32px; border-radius: 50px;
+  font-size: 15px; font-weight: 600;
+  letter-spacing: -0.005em;
+  transition: all 0.3s var(--t);
+}
+.cta-final-btn.primary { background: var(--white); color: var(--black); box-shadow: var(--shadow-md); }
+.cta-final-btn.primary:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+  background: var(--ember-glow); color: var(--white);
+}
+.cta-final-btn.secondary {
+  background: transparent; color: var(--white);
+  border: 1px solid rgba(255,255,255,0.4);
+}
+.cta-final-btn.secondary:hover { background: rgba(255,255,255,0.1); border-color: var(--white); }
+
+/* ─── DIFERENCIA (nosotros) ─── */
+.diferencia-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+.diferencia-card {
+  background: var(--gray-light);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 36px;
+  transition: transform 0.4s var(--t), border-color 0.4s var(--t);
+}
+.diferencia-card:hover { transform: translateY(-4px); border-color: var(--ember-glow); }
+.diferencia-num {
+  font-size: 13px; font-weight: 600;
+  letter-spacing: 0.1em;
+  color: var(--ember-glow);
+  margin-bottom: 18px;
+}
+.diferencia-card h3 {
+  font-size: 22px; font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--white);
+  margin-bottom: 12px;
+}
+.diferencia-card p { font-size: 15px; line-height: 1.6; color: var(--text-gray-light); }
+
+/* ─── FAQ (bloque redondeado) ─── */
+.faq {
+  background: var(--ember-deep);
+  color: var(--white);
+  border: 1px solid var(--border-ember);
+  border-radius: var(--radius-lg);
+  margin: 80px auto;
+  padding: 80px 56px;
+  max-width: var(--cw);
+}
+.faq .overline { color: var(--ember-pale); }
+.faq h2 {
+  color: var(--white); margin-bottom: 48px;
+  font-size: clamp(1.9rem, 3vw, 2.6rem);
+  font-weight: 500; letter-spacing: -0.03em;
+}
+.faq-list { display: flex; flex-direction: column; }
+.faq-item { border-bottom: 1px solid rgba(255,255,255,0.12); }
+.faq-item:first-child { border-top: 1px solid rgba(255,255,255,0.12); }
+.faq-question {
+  width: 100%;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 28px 0;
+  font-size: 20px; font-weight: 500;
+  letter-spacing: -0.015em;
+  color: var(--white);
+  text-align: left;
+  cursor: pointer;
+  background: none; border: none; font-family: inherit;
+  transition: color 0.3s var(--t);
+}
+.faq-question:hover { color: var(--ember-pale); }
+.faq-toggle {
+  flex-shrink: 0;
+  width: 32px; height: 32px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--white); opacity: 0.8;
+  transition: transform 0.4s var(--t);
+}
+.faq-item.open .faq-toggle { transform: rotate(45deg); }
+.faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.5s var(--t), padding 0.5s var(--t); }
+.faq-item.open .faq-answer { max-height: 600px; padding: 0 0 32px; }
+.faq-answer-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: start;
+}
+.faq-answer-img {
+  background: var(--gray-light);
+  border-radius: var(--radius);
+  overflow: hidden;
+  aspect-ratio: 16/10;
+}
+.faq-answer-img img { width: 100%; height: 100%; object-fit: cover; }
+.faq-answer p { font-size: 15px; line-height: 1.65; color: var(--ember-cream); }
+.faq-answer p + p { margin-top: 12px; }
+
+/* ─── CTA de reseñas en testimonios ─── */
+.testimonios-review-cta {
+  text-align: center; margin-top: 48px;
+  background: var(--gray-light);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 44px 32px;
+}
+.testimonios-review-cta h3 {
+  font-size: 24px; font-weight: 600;
+  color: var(--white);
+  letter-spacing: -0.02em;
+  margin-bottom: 10px;
+}
+.testimonios-review-cta p { color: var(--text-gray-light); font-size: 15px; margin-bottom: 22px; }
+.review-cta-btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 15px 30px; border-radius: 50px;
+  font-size: 15px; font-weight: 700;
+  background: var(--ember-glow); color: var(--white);
+  border: 1.5px solid var(--ember-glow);
+  box-shadow: var(--shadow-sm);
+  transition: all .3s ease;
+}
+.review-cta-btn .star { color: #FFD27D; font-size: 17px; line-height: 1; transition: all .3s ease; }
+.review-cta-btn:hover {
+  background: var(--white); border-color: var(--white); color: var(--ember-base);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 26px rgba(232,84,32,0.35);
+}
+.review-cta-btn:hover .star { color: var(--ember-glow); transform: scale(1.2) rotate(72deg); }
+
+/* ─── BOOKING BAR (formulario flotante bajo el hero del home) ─── */
+.booking { position: relative; background: var(--black); padding: 0 32px; }
+.booking-bar {
+  position: relative; z-index: 1;
+  max-width: 600px; margin: 0 auto;
+  background: var(--black-2);
+  border: 1px solid var(--border-ember);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  padding: 26px 30px 28px;
+}
+.booking-head {
+  display: flex; justify-content: space-between; align-items: baseline; gap: 16px;
+  margin-bottom: 16px;
+}
+.booking-head strong { font-size: 19px; font-weight: 600; color: var(--white); letter-spacing: -0.02em; }
+.booking-status {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 13px; font-weight: 600; color: var(--green-bright);
+}
+.booking-fields { display: grid; grid-template-columns: 1fr; gap: 12px; }
+.booking-fields input,
+.booking-fields select,
+.booking-fields textarea {
+  width: 100%;
+  background: var(--gray-bg);
+  color: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 15px 18px;
+  font-size: 14px; font-family: inherit;
+}
+.booking-fields input::placeholder, .booking-fields textarea::placeholder { color: var(--gray); }
+.booking-fields select { color-scheme: dark; }
+.booking-fields input:focus,
+.booking-fields select:focus,
+.booking-fields textarea:focus { outline: none; border-color: var(--ember-pale); }
+.booking-fields textarea { min-height: 100px; resize: vertical; }
+.booking-fields button {
+  background: var(--ember-glow); color: var(--white);
+  padding: 15px 26px; border-radius: var(--radius-sm);
+  font-size: 14px; font-weight: 700; border: none; font-family: inherit;
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  white-space: nowrap; cursor: pointer;
+  transition: all 0.3s var(--t);
+  box-shadow: 0 4px 16px rgba(232,84,32,0.25);
+}
+.booking-fields button:hover {
+  background: var(--white); color: var(--ember-base);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+/* ─── Responsive de las clases portadas ─── */
+@media (max-width: 1024px) and (min-width: 769px) {
+  .team-card { grid-template-columns: 0.8fr 1fr; gap: 28px; }
+}
+@media (max-width: 768px) {
+  .clinic-header, .services-header, .team-header {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    align-items: start;
+    margin-bottom: 24px;
+  }
+  .services-view-more { justify-self: start; }
+  .team-card { grid-template-columns: 1fr; padding: 20px; }
+  .team-photo { aspect-ratio: 4/5; }
+  .faq { padding: 56px 24px; margin: 32px 16px; border-radius: var(--radius); }
+  .faq h2 { font-size: clamp(2rem, 9vw, 2.8rem); }
+  .faq-question { font-size: 16px; padding: 22px 0; gap: 16px; }
+  .faq-answer-grid { grid-template-columns: 1fr; gap: 20px; }
+  .cta-final { padding: 64px 24px; margin: 40px 16px; }
+  .cta-final-actions { flex-direction: column; gap: 10px; width: 100%; }
+  .cta-final-btn { width: 100%; justify-content: center; }
+  .diferencia-grid { grid-template-columns: 1fr; }
+  .diferencia-card { padding: 28px; }
+  .booking { padding: 0 16px; }
+  .booking-head { flex-direction: column; align-items: flex-start; gap: 6px; }
+}
+
+/* ─── Footer canónico de 5 columnas (paridad con el master, 14-ago) ─── */
+.footer-grid.footer-grid--5 { grid-template-columns: 2fr 1fr 1fr 1fr 1fr; }
+@media (max-width: 1024px) { .footer-grid.footer-grid--5 { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 640px)  { .footer-grid.footer-grid--5 { grid-template-columns: 1fr; } }
+.footer-social { display: flex; gap: 10px; margin-top: 18px; }
+.footer-social a {
+  width: 38px; height: 38px; border-radius: 50%;
+  border: 1px solid var(--border-ember);
+  display: inline-flex; align-items: center; justify-content: center;
+  color: var(--ember-cream);
+  transition: all 0.3s var(--transition);
+}
+.footer-social a:hover { background: var(--ember-glow); border-color: var(--ember-glow); color: var(--white); }
+.footer-social svg { width: 18px; height: 18px; }
+
+/* ─── Fix 14-ago: cuando a una sección le sigue .cta-final o .faq (bloques con
+   margen sobre el fondo naranja del body), el fade por defecto apuntaba a crema
+   o a deep y dejaba una banda fantasma. Se funde hacia el naranja del body. ─── */
+.section-warm:has(+ .cta-final)::after,
+.section-dark:has(+ .cta-final)::after,
+.section-warm:has(+ .faq)::after,
+.section-dark:has(+ .faq)::after {
+  background: linear-gradient(to bottom, transparent, var(--ember-base));
 }

@@ -1,0 +1,156 @@
+/* ───────────────────────────────────────────────
+   Módulo Pronto · Navegación (dropdowns + menú móvil)
+   Versión piel EMBER (oscura). Se inyecta con nav.js.
+   Reutiliza .navbar/.nav-links/.nav-logo/.nav-cta de
+   styles.css y añade lo nuevo.
+   ⚠️ A PROPÓSITO NO se portaron los bloques del master
+   que retocan el hero (.hero:not(.hero-compact),
+   .hero-photo*, .benefit-card*): el hero de Ember es
+   INTOCABLE y esas reglas con !important lo romperían.
+   ─────────────────────────────────────────────── */
+
+.nav-burger {
+  display: none;
+  background: none;
+  border: none;
+  color: #FFFFFF;
+  cursor: pointer;
+  padding: 4px;
+  line-height: 0;
+}
+
+/* ── Dropdown (desktop) ── */
+.nav-dd { position: relative; }
+.nav-dd > a { display: inline-flex; align-items: center; gap: 5px; }
+.nav-chev { transition: transform .25s ease; opacity: .9; }
+.nav-dd:hover .nav-chev { transform: rotate(180deg); }
+
+/* puente invisible para que el hover no se corte al bajar al submenú */
+.nav-dd::after { content: ""; position: absolute; top: 100%; left: 0; right: 0; height: 16px; }
+
+.nav-sub {
+  position: absolute;
+  top: calc(100% + 12px);
+  left: 50%;
+  transform: translateX(-50%) translateY(8px);
+  background: #1A1410;
+  border: 1px solid var(--border-ember, rgba(255,255,255,0.12));
+  border-radius: 16px;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, .5);
+  padding: 10px;
+  min-width: 234px;
+  list-style: none;
+  margin: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .22s ease, transform .22s ease;
+  z-index: 1200;
+}
+.nav-dd:hover .nav-sub { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); }
+.nav-sub li { margin: 0; }
+/* La hairline debajo de los links del navbar de Ember no aplica dentro del submenú */
+.nav-sub a::after { display: none; }
+.nav-sub a {
+  display: block;
+  padding: 11px 14px;
+  border-radius: 10px;
+  white-space: nowrap;
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  color: var(--ember-cream, #FFE4D1);
+  text-decoration: none;
+  transition: background .15s ease, color .15s ease;
+}
+.nav-sub a:hover { background: rgba(255,255,255,0.06); color: var(--ember-pale, #F5B895); }
+
+/* ── Menú móvil (overlay) ── */
+.mobile-menu {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  background: var(--ember-deep, #3D1308);
+  display: flex;
+  flex-direction: column;
+  padding: 78px 26px 40px;
+  overflow-y: auto;
+  transform: translateX(100%);
+  /* 24-jul: invisible mientras está cerrado — si no, el panel deslizado fuera
+     genera scroll horizontal fantasma en celulares angostos (ej. 320px) */
+  visibility: hidden;
+  transition: transform .3s cubic-bezier(.22, 1, .36, 1), visibility 0s .3s;
+}
+.mobile-menu.open { transform: translateX(0); visibility: visible; transition: transform .3s cubic-bezier(.22, 1, .36, 1); }
+.mm-close {
+  position: absolute; top: 20px; right: 22px;
+  background: none; border: none; font-size: 30px; line-height: 1;
+  color: #FFFFFF; cursor: pointer;
+}
+.mobile-menu ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 1px; }
+.mobile-menu a {
+  display: block; padding: 12px 8px;
+  font-family: 'Inter', sans-serif; font-weight: 500; font-size: 21px;
+  color: #FFFFFF; text-decoration: none;
+}
+.mobile-menu a::after { display: none; }
+.mm-group {
+  font-family: 'Inter', sans-serif; font-weight: 700; font-size: 11px;
+  letter-spacing: .14em; text-transform: uppercase; color: var(--ember-pale, #F5B895);
+  padding: 18px 8px 4px;
+}
+.mobile-menu a.mm-sub { font-family: 'Inter', sans-serif; font-size: 16px; padding: 10px 8px 10px 20px; color: var(--text-gray-light, #BFB2A8); }
+.mm-cta {
+  margin-top: 26px; background: var(--ember-glow, #E85420); color: #fff !important;
+  text-align: center; border-radius: 999px;
+  font-family: 'Inter', sans-serif !important; font-weight: 600 !important;
+  font-size: 16px !important; padding: 16px !important;
+}
+
+/* ── Franja de confianza (debajo del hero) ── */
+.trust-strip {
+  display: flex; flex-wrap: wrap; justify-content: center; align-items: center;
+  gap: 14px 36px;
+  padding: 20px max(24px, calc((100% - 1180px) / 2));
+  /* El hero de Ember se funde a negro en su borde inferior → la franja continúa ese negro */
+  background: var(--black, #0D0D0D);
+}
+.trust-item {
+  display: inline-flex; align-items: center; gap: 9px;
+  font-family: 'Inter', sans-serif; font-weight: 500; font-size: 14px;
+  color: var(--ember-cream, #FFE4D1);
+}
+.trust-item strong { font-weight: 700; color: #fff; }
+.trust-item .ti-star { color: var(--ember-glow, #E85420); font-weight: 700; }
+.trust-sep { width: 1px; height: 18px; background: rgba(255, 255, 255, .22); }
+@media (max-width: 700px) { .trust-sep { display: none; } .trust-strip { gap: 10px 20px; padding: 18px 20px; } .trust-item { font-size: 13px; } }
+
+/* ── Responsive nav ──
+   Menú horizontal con desplegables hasta 860px (laptops y tablets anchas).
+   El ☰ hamburguesa solo aparece en móvil / tablet angosta (≤860px). */
+@media (min-width: 861px) {
+  .navbar .nav-links { display: flex !important; }
+  .nav-burger { display: none !important; }
+  .mobile-menu { display: none !important; }
+}
+/* Apretamos un poco el menú en pantallas medianas para que quepa con holgura */
+@media (max-width: 1180px) and (min-width: 861px) {
+  .navbar .nav-links { gap: 20px !important; }
+  .nav-cta { padding: 10px 18px !important; font-size: 14px !important; }
+}
+@media (max-width: 860px) {
+  .navbar .nav-links { display: none !important; }
+  .nav-burger { display: inline-flex !important; }
+}
+
+/* ───────────────────────────────────────────────
+   CTA primario "Agendar consulta": animación de
+   brillo/pulso tipo notificación (igual que el master,
+   con el anillo adaptado al fondo oscuro de Ember).
+   ─────────────────────────────────────────────── */
+@keyframes ctaShine {
+  0%   { box-shadow: 0 0 0 0 rgba(255, 255, 255, .55),  0 6px 18px rgba(0, 0, 0, .3); }
+  70%  { box-shadow: 0 0 0 13px rgba(255, 255, 255, 0), 0 6px 20px rgba(0, 0, 0, .34); }
+  100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0),    0 6px 18px rgba(0, 0, 0, .3); }
+}
+.nav-cta { animation: ctaShine 2.6s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) { .nav-cta { animation: none; } }

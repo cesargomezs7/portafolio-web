@@ -1,4 +1,4 @@
-/* Sonrisa Premium · EMBER · Animaciones GSAP */
+/* Sonrisa Ember · EMBER · Animaciones GSAP */
 (function () {
   // ─── Sincronizar top del navbar con altura real del banner ─
   // (el banner cambia de altura según viewport — desktop ~33px, mobile ~41px+)
@@ -12,13 +12,27 @@
   window.addEventListener('load', syncNavToBanner);
   window.addEventListener('resize', syncNavToBanner);
 
+  // Contadores al valor final, sin animación. Lo usan el modo reduced-motion y el
+  // fallback sin GSAP (portado del master 14-ago): sin esto, esos visitantes ven "+0".
+  function setCountersToFinal() {
+    document.querySelectorAll('[data-counter]').forEach(el => {
+      const target = parseFloat(el.dataset.counter);
+      const prefix = el.dataset.prefix || '';
+      const suffix = el.dataset.suffix || '';
+      const decimals = parseInt(el.dataset.decimals || '0', 10);
+      el.textContent = prefix + target.toFixed(decimals) + suffix;
+    });
+  }
+
   function init() {
     if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      document.querySelectorAll('.reveal').forEach(el => { el.style.opacity = 1; el.style.transform = 'none'; });
+      document.querySelectorAll('.reveal, .word-inner').forEach(el => { el.style.opacity = 1; el.style.transform = 'none'; });
+      setCountersToFinal();
       return;
     }
     if (!window.gsap || !window.ScrollTrigger) {
-      document.querySelectorAll('.reveal').forEach(el => { el.style.opacity = 1; el.style.transform = 'none'; });
+      document.querySelectorAll('.reveal, .word-inner').forEach(el => { el.style.opacity = 1; el.style.transform = 'none'; });
+      setCountersToFinal();
       return;
     }
     gsap.registerPlugin(ScrollTrigger);
