@@ -1,4 +1,4 @@
-/* ─── Sonrisa Premium · ATELIER (verde sage boutique) ───────────────────── */
+/* ─── Sonrisa Atelier · ATELIER (verde sage boutique) ───────────────────── */
 :root {
   --sage-bg: #d8e1cd;          /* fondo hero verde sage claro */
   --sage-soft: #e4ead9;        /* sage muy claro (about section) */
@@ -21,9 +21,32 @@
   --shadow-sm: 0 2px 6px rgba(26,38,24,0.06);
   --shadow-md: 0 14px 38px rgba(26,38,24,0.10);
   --shadow-lg: 0 30px 70px rgba(26,38,24,0.14);
+
+  /* ── Tokens que el HTML portado del master espera (14-ago-2026) ──
+     Mismos nombres del master, valores de la piel Atelier (tema claro). */
+  --gray-light: #f0ebdc;       /* fondo de card (= cream-deep) */
+  --gray-bg:    #faf8f1;       /* fondo de página / inputs (= cream) */
+  --radius-xl:  40px;
+  --transition: cubic-bezier(0.22, 1, 0.36, 1);   /* = --t (algunos ports lo usan) */
+  --cw:         min(94vw, 1680px);  /* ancho fluido del master (Atelier usaba 1320px fijos) */
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ═══ ESCALA VISUAL (14-ago-2026, copiada del master): zoom escalonado para que
+   el 100% del visitante en pantalla grande se vea como el diseño al 150%. ═══ */
+@media screen and (min-width: 1880px) { body { zoom: 1.5; } :root { --z: 1.5; } }
+@media screen and (min-width: 1750px) and (max-width: 1879.98px) { body { zoom: 1.4; } :root { --z: 1.4; } }
+@media screen and (min-width: 1550px) and (max-width: 1749.98px) { body { zoom: 1.25; } :root { --z: 1.25; } }
+@media screen and (min-width: 1420px) and (max-width: 1549.98px) { body { zoom: 1.1; } :root { --z: 1.1; } }
+
+/* ═══ CORRECCIÓN BLINK (del master): Chrome/Edge no dividen vh entre el zoom;
+   Safari sí. El hero de Atelier usa 82vh (no 100vh como el master). ═══ */
+@supports (-webkit-app-region: drag) {
+  @media screen and (min-width: 1420px) {
+    body .hero:not(.hero-compact) { min-height: calc(82vh / var(--z, 1)) !important; }
+  }
+}
 
 html { scroll-behavior: smooth; }
 
@@ -99,15 +122,8 @@ a { color: inherit; text-decoration: none; }
   box-shadow: 0 1px 0 rgba(26,38,24,0.08);
 }
 
-.nav-burger {
-  display: none;
-  width: 32px; height: 32px;
-  cursor: pointer;
-  align-items: center; justify-content: center;
-  background: transparent; border: none;
-  color: var(--sage-deepest);
-}
-.nav-burger svg { width: 24px; height: 24px; }
+/* (14-ago) El burger y el menú móvil legados se eliminaron: el navbar ahora lo
+   inyecta assets/nav.js — su menú móvil (.mm-*) se viste de Atelier en nav.css. */
 
 .nav-logo {
   font-family: 'Fraunces', Georgia, serif;
@@ -169,32 +185,8 @@ a { color: inherit; text-decoration: none; }
 }
 .nav-cta:hover { background: var(--sage-deep); color: var(--cream); transform: translateY(-1px); }
 
-/* Mobile menu overlay */
-.mobile-menu {
-  position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-  background: linear-gradient(to left, var(--sage-bg) 30%, #ecf0e0 100%);
-  z-index: 1050;
-  display: none;
-  flex-direction: column;
-  padding: 80px 32px 32px;
-}
-.mobile-menu.open { display: flex; }
-.mobile-menu-close {
-  position: absolute; top: 24px; left: 24px;
-  background: none; border: none; cursor: pointer;
-  width: 36px; height: 36px;
-  color: var(--sage-deepest);
-}
-.mobile-menu-close svg { width: 28px; height: 28px; }
-.mobile-menu ul { list-style: none; display: flex; flex-direction: column; gap: 36px; margin-top: 32px; }
-.mobile-menu a {
-  font-family: 'Fraunces', Georgia, serif;
-  font-weight: 400;
-  font-variation-settings: "opsz" 80;
-  font-size: 32px;
-  color: var(--sage-deepest);
-  letter-spacing: -0.01em;
-}
+/* (14-ago) El overlay .mobile-menu legado se eliminó junto con su markup:
+   el menú móvil vigente es el de nav.js, estilizado en nav.css. */
 
 /* ─── HERO ───────────────────────────────────────────────────────────── */
 .hero {
@@ -1043,4 +1035,217 @@ footer {
 
   .stats-row { gap: 36px; padding: 40px 0; margin: 40px 0; }
   .diferencia-card { padding: 28px; }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   PORTADO DEL MASTER (14-ago-2026) · clases que el HTML del
+   demo-master usa y Atelier no tenía. Geometría del master,
+   colores sage/cream/cobre de Atelier.
+   ═══════════════════════════════════════════════════════════ */
+
+/* Headers de sección 1fr|auto */
+.clinic-header, .services-header, .team-header {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: end;
+  margin-bottom: 48px;
+  gap: 40px;
+}
+.clinic-since { font-size: 13px; font-weight: 500; color: var(--text-soft); font-family: 'Manrope', sans-serif; }
+.services-view-more {
+  display: inline-flex; align-items: center; gap: 8px;
+  color: var(--sage-deepest);
+  font-family: 'Manrope', sans-serif;
+  font-size: 14px; font-weight: 600;
+  padding: 12px 20px; border-radius: var(--radius-pill);
+  background: var(--gray-light);
+  transition: all 0.3s var(--t);
+}
+.services-view-more:hover { background: var(--sage-deep); color: var(--cream); }
+
+/* ─── Carrusel de equipo (team-card del master) ─── */
+.team-nav { display: flex; gap: 12px; }
+.team-nav button {
+  width: 52px; height: 52px;
+  border-radius: var(--radius-sm);
+  background: var(--sage-deep);
+  color: var(--cream);
+  border: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.3s var(--t);
+}
+.team-nav button:hover { background: var(--accent); transform: translateY(-2px); }
+.team-nav button svg { width: 18px; height: 18px; }
+.team-nav button:disabled { opacity: 0.4; cursor: default; }
+.team-card {
+  display: grid;
+  grid-template-columns: 0.85fr 1fr;
+  gap: 48px;
+  background: var(--gray-light);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 40px;
+  align-items: stretch;
+}
+.team-photo {
+  background: var(--white);
+  border-radius: var(--radius);
+  overflow: hidden;
+  aspect-ratio: 4/5;
+  max-width: 360px;
+}
+.team-photo img { width: 100%; height: 100%; object-fit: cover; will-change: opacity, transform; }
+.team-info { display: flex; flex-direction: column; padding: 8px 0; }
+.team-info-top {
+  display: flex; justify-content: space-between; align-items: center;
+  font-family: 'Manrope', sans-serif;
+  font-size: 14px; color: var(--text-soft);
+  margin-bottom: 24px;
+}
+.team-rating { display: inline-flex; gap: 6px; align-items: center; }
+.team-rating .star { color: #f5a623; font-size: 16px; }
+.team-info h3 {
+  font-family: 'Fraunces', Georgia, serif;
+  font-variation-settings: "opsz" 144;
+  font-size: clamp(1.8rem, 2.6vw, 2.4rem);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+  margin-bottom: 8px;
+  color: var(--sage-deepest);
+}
+.team-info .team-exp { font-family: 'Manrope', sans-serif; font-size: 16px; color: var(--text-soft); margin-bottom: 24px; }
+.team-info p {
+  font-family: 'Manrope', sans-serif;
+  font-size: 16px; line-height: 1.65;
+  color: var(--text);
+  margin-bottom: 28px;
+}
+.team-book {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  background: var(--sage-deep);
+  color: var(--cream);
+  font-family: 'Manrope', sans-serif;
+  padding: 14px 26px;
+  border-radius: var(--radius-pill);
+  font-size: 14px; font-weight: 600;
+  margin-top: auto;
+  transition: all 0.3s var(--t);
+}
+.team-book:hover { background: var(--accent); transform: translateY(-2px); }
+
+/* ─── CTA de reseñas en testimonios ─── */
+.testimonios-review-cta {
+  text-align: center; margin-top: 48px;
+  background: var(--gray-light);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 44px 32px;
+}
+.testimonios-review-cta h3 {
+  font-family: 'Fraunces', Georgia, serif;
+  font-variation-settings: "opsz" 96;
+  font-size: 24px; font-weight: 400;
+  color: var(--sage-deepest);
+  margin-bottom: 10px;
+}
+.testimonios-review-cta p { font-family: 'Manrope', sans-serif; color: var(--text-soft); font-size: 15px; margin-bottom: 22px; }
+.review-cta-btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 15px 30px; border-radius: var(--radius-pill);
+  font-family: 'Manrope', sans-serif;
+  font-size: 15px; font-weight: 700;
+  background: var(--sage-deep); color: var(--cream);
+  border: 1.5px solid var(--sage-deep);
+  box-shadow: var(--shadow-sm);
+  transition: all .3s ease;
+}
+.review-cta-btn .star { color: #f5a623; font-size: 17px; line-height: 1; transition: all .3s ease; }
+.review-cta-btn:hover {
+  background: #f5a623; border-color: #f5a623; color: var(--sage-deepest);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 26px rgba(245, 166, 35, 0.35);
+}
+.review-cta-btn:hover .star { color: var(--white); transform: scale(1.2) rotate(72deg); }
+
+/* ─── BOOKING BAR (formulario flotante bajo el hero del home) ─── */
+.booking { position: relative; background: var(--cream); padding: 0 32px; }
+.booking::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 84px;
+  background: var(--sage-deep);
+}
+.booking-bar {
+  position: relative; z-index: 1;
+  max-width: 600px; margin: 0 auto;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  padding: 26px 30px 28px;
+}
+.booking-head {
+  display: flex; justify-content: space-between; align-items: baseline; gap: 16px;
+  margin-bottom: 16px;
+}
+.booking-head strong {
+  font-family: 'Fraunces', Georgia, serif;
+  font-variation-settings: "opsz" 96;
+  font-size: 19px; font-weight: 400;
+  color: var(--sage-deepest);
+}
+.booking-status {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: 'Manrope', sans-serif;
+  font-size: 13px; font-weight: 600; color: #2e7d4f;
+}
+.booking-fields { display: grid; grid-template-columns: 1fr; gap: 12px; }
+.booking-fields input,
+.booking-fields select,
+.booking-fields textarea {
+  width: 100%;
+  background: var(--gray-bg);
+  color: var(--sage-deepest);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 15px 18px;
+  font-size: 14px; font-family: 'Manrope', sans-serif;
+}
+.booking-fields input:focus,
+.booking-fields select:focus,
+.booking-fields textarea:focus { outline: none; border-color: var(--accent); }
+.booking-fields textarea { min-height: 100px; resize: vertical; }
+.booking-fields button {
+  background: var(--sage-deep); color: var(--cream);
+  padding: 15px 26px; border-radius: var(--radius-sm);
+  font-family: 'Manrope', sans-serif;
+  font-size: 14px; font-weight: 700; border: none;
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  white-space: nowrap; cursor: pointer;
+  transition: all 0.3s var(--t);
+}
+.booking-fields button:hover {
+  background: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+/* ─── Responsive de lo portado (espeja el master) ─── */
+@media (max-width: 1024px) and (min-width: 769px) {
+  .team-card { grid-template-columns: 0.8fr 1fr; gap: 28px; }
+}
+@media (max-width: 768px) {
+  .clinic-header, .services-header, .team-header {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    align-items: start;
+    margin-bottom: 24px;
+  }
+  .services-view-more { justify-self: start; }
+  .team-card { grid-template-columns: 1fr; padding: 20px; }
+  .team-photo { aspect-ratio: 4/5; }
+  .booking { padding: 0 16px; }
+  .booking-head { flex-direction: column; align-items: flex-start; gap: 6px; }
+  .stats-grid { grid-template-columns: repeat(3, 1fr) !important; gap: 12px !important; }
+  .stats-grid [data-counter] { font-size: clamp(26px, 8vw, 34px) !important; }
+  .stats-grid [data-counter] + div { font-size: 10px !important; letter-spacing: 0.04em !important; margin-top: 8px !important; }
 }

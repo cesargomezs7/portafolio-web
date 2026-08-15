@@ -1,4 +1,4 @@
-/* Sonrisa Premium · ATELIER · Animaciones GSAP (refactored: sin flash inicial) */
+/* Sonrisa Atelier · ATELIER · Animaciones GSAP (refactored: sin flash inicial) */
 (function () {
   // ─── Sync navbar top a banner ─
   function syncNavToBanner() {

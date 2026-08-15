@@ -1,0 +1,58 @@
+/* ───────────────────────────────────────────────
+   Módulo Pronto · Chat widget WhatsApp CONTEXTUAL
+   La burbuja flotante cambia su mensaje según la
+   sección visible. Reusable e independiente del tema:
+   cargar este CSS + wa-widget.js y poner
+   data-wa / data-wa-label en cada <section>.
+   ─────────────────────────────────────────────── */
+.wa-float { overflow: visible; }
+
+.wa-float-label {
+  position: absolute;
+  right: calc(100% + 14px);
+  top: 50%;
+  transform: translateY(-50%) translateX(6px);
+  background: #ffffff;
+  color: #1a2618;
+  font-family: 'Manrope', system-ui, sans-serif;
+  font-weight: 600;
+  font-size: 13px;
+  line-height: 1;
+  white-space: nowrap;
+  padding: 11px 16px;
+  border-radius: 999px;
+  box-shadow: 0 8px 26px rgba(26, 38, 24, 0.20);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .3s ease, transform .3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* flechita que apunta a la burbuja */
+.wa-float-label::after {
+  content: "";
+  position: absolute;
+  right: -4px;
+  top: 50%;
+  width: 10px;
+  height: 10px;
+  background: #ffffff;
+  transform: translateY(-50%) rotate(45deg);
+}
+
+.wa-float:hover .wa-float-label,
+.wa-float.wa-show-label .wa-float-label {
+  opacity: 1;
+  transform: translateY(-50%) translateX(0);
+}
+
+/* Móvil (24-jul): la etiqueta contextual TAMBIÉN se muestra — igual que en desktop,
+   solo más compacta y con tope de ancho para no salirse en pantallas angostas. */
+@media (max-width: 768px) {
+  .wa-float-label {
+    font-size: 12px;
+    padding: 9px 13px;
+    max-width: 62vw;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}

@@ -3,12 +3,32 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Contacto · Sonrisa Premium · Laureles, Medellín</title>
-<meta name="description" content="Escríbenos por WhatsApp o agenda con el formulario. Cra 73 # 33-18, Laureles, Medellín. Respuesta en menos de 2 horas.">
+<title>Contacto · Sonrisa Atelier · Bogotá y Medellín</title>
+<meta name="description" content="Escríbenos por WhatsApp o agenda con el formulario. 3 sedes: Chapinero y Chicó (Bogotá) y El Poblado (Medellín). Te respondemos muy pronto.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/styles.css?v=20260514g">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css?v=20260814a">
+<link rel="stylesheet" href="assets/nav.css?v=20260814a">
+<link rel="stylesheet" href="assets/wa-widget.css?v=20260814a">
+<!-- Microsoft Clarity (interno Pronto) -->
+<script type="text/javascript">(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window, document, "clarity", "script", "wygnitnsj3");</script>
+<style>
+  .sedes-section { background: var(--sage-soft); }
+  .sedes-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:28px; margin-top:8px; }
+  .sede-card { background:#fff; border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow-sm); display:flex; flex-direction:column; transition:transform .4s var(--t), box-shadow .4s var(--t); }
+  .sede-card:hover { transform:translateY(-6px); box-shadow:var(--shadow-md); }
+  .sede-map { aspect-ratio:16/10; background:var(--sage-soft); }
+  .sede-map iframe { width:100%; height:100%; border:0; display:block; }
+  .sede-body { padding:22px 22px 26px; }
+  .sede-ciudad { display:inline-block; font-family:'Manrope',sans-serif; font-weight:600; font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:var(--accent); margin-bottom:8px; }
+  .sede-body h3 { font-family:'Fraunces',serif; font-weight:400; font-size:22px; color:var(--sage-deepest); margin:0 0 8px; }
+  .sede-dir { color:var(--text-soft); font-size:15px; margin:0 0 4px; }
+  .sede-horario { color:var(--text-soft); opacity:.75; font-size:13px; margin:0 0 16px; }
+  .sede-wa { font-family:'Manrope',sans-serif; font-weight:600; font-size:14px; color:var(--accent); text-decoration:none; }
+  .sede-wa:hover { text-decoration:underline; }
+  @media (max-width:768px){ .sedes-grid{ grid-template-columns:1fr; } }
+</style>
 </head>
 <body class="has-banner">
 
@@ -18,55 +38,28 @@
   Ejemplo de implementación · Muestra del plan completo de <strong>Pronto</strong> · Clínica de demostración
 </div>
 
-<nav class="navbar" id="navbar">
-  <button class="nav-burger" id="navBurger" aria-label="Abrir menú">
-    <svg viewBox="0 0 24 24" fill="none"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-  </button>
-  <a href="index.html" class="nav-logo">Sonrisa Premium</a>
-  <ul class="nav-links">
-    <li><a href="index.html">Inicio</a></li>
-    <li><a href="nosotros.html">Nosotros</a></li>
-    <li><a href="index.html#servicios">Servicios</a></li>
-    <li><a href="contacto.html" class="active">Contacto</a></li>
-  </ul>
-  <div class="nav-actions">
-    <a href="tel:+573124672674" class="nav-phone">+57 312 467 2674</a>
-    <a href="contacto.html" class="nav-cta">Agendar consulta</a>
-  </div>
-</nav>
+<div id="site-nav"></div>
 
-<div class="mobile-menu" id="mobileMenu">
-  <button class="mobile-menu-close" id="mobileMenuClose" aria-label="Cerrar menú">
-    <svg viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-  </button>
-  <ul>
-    <li><a href="index.html">Inicio</a></li>
-    <li><a href="nosotros.html">Nosotros</a></li>
-    <li><a href="index.html#servicios">Servicios</a></li>
-    <li><a href="contacto.html">Contacto</a></li>
-    <li><a href="tel:+573124672674">+57 312 467 2674</a></li>
-  </ul>
-</div>
-
+<!-- ─── HERO COMPACT ─────────────────────────────────────── -->
 <section class="hero-compact">
   <div class="hero-compact-inner">
-    <span class="overline">Contacto</span>
+    <span class="overline">Contacto · Atención inmediata</span>
     <h1>Estamos aquí<br>para escucharte</h1>
-    <p>Escríbenos por el medio que prefieras. Te respondemos en menos de 2 horas en horario de atención.</p>
+    <p>Escríbenos por el medio que prefieras. Te respondemos muy pronto en horario de atención.</p>
   </div>
 </section>
 
+<!-- ─── DATOS + FORMULARIO ─────────────────────────────── -->
 <section class="section">
   <div class="contacto-wrap">
     <div class="contacto-info reveal">
       <div class="overline">Datos de contacto</div>
       <h2>Múltiples formas de comunicarte</h2>
-      <p class="lead">Elige el canal que más te acomode. Todos van directo a un humano del equipo Sonrisa Premium.</p>
 
       <div class="contacto-info-list" style="margin-top: 40px;">
         <div class="contacto-info-block">
-          <strong>Dirección</strong>
-          <p>Cra 73 # 33-18<br>Laureles, Medellín</p>
+          <strong>Sedes</strong>
+          <p>Chapinero y Chicó (Bogotá)<br>El Poblado (Medellín)<br><a href="#sedes" style="color:var(--accent);text-decoration:underline">Ver mapas y direcciones ↓</a></p>
         </div>
         <div class="contacto-info-block">
           <strong>WhatsApp</strong>
@@ -78,7 +71,7 @@
         </div>
         <div class="contacto-info-block">
           <strong>Correo</strong>
-          <p><a href="mailto:info@sonrisapremium.com">info@sonrisapremium.com</a></p>
+          <p><a href="mailto:info@sonrisaatelier.com">info@sonrisaatelier.com</a></p>
         </div>
         <div class="contacto-info-block">
           <strong>Horarios</strong>
@@ -87,53 +80,111 @@
       </div>
     </div>
 
-    <form class="contacto-form reveal" onsubmit="event.preventDefault(); const servicio = this.servicio.value ? '%20Servicio%20de%20interés:%20' + encodeURIComponent(this.servicio.value) : ''; window.open('https://wa.me/573124672674?text=Hola%20Sonrisa%20Premium,%20mi%20nombre%20es%20' + encodeURIComponent(this.nombre.value) + '.' + servicio + '%20' + encodeURIComponent(this.mensaje.value || ''), '_blank');">
+    <form class="contacto-form reveal" id="contactForm">
       <div class="contacto-form-header">
         <strong>Agenda tu consulta</strong>
-        <span><span class="status-dot"></span>Respuesta en menos de 2 horas</span>
+        <span><span class="status-dot"></span>Te respondemos muy pronto</span>
       </div>
       <input type="text" name="nombre" placeholder="Nombre completo" required>
       <input type="tel" name="telefono" placeholder="Teléfono / WhatsApp" required>
+      <input type="email" name="email" placeholder="Correo electrónico" required>
       <select name="servicio">
         <option value="">Servicio de interés (opcional)</option>
         <option value="Ortodoncia">Ortodoncia</option>
         <option value="Implantes dentales">Implantes dentales</option>
-        <option value="Blanqueamiento dental">Blanqueamiento</option>
+        <option value="Blanqueamiento dental">Blanqueamiento dental</option>
         <option value="Diseño de sonrisa">Diseño de sonrisa</option>
-        <option value="Limpieza dental">Limpieza dental</option>
+        <option value="Endodoncia">Endodoncia</option>
+        <option value="Limpieza / Odontología general">Limpieza / Odontología general</option>
         <option value="Otro">Otro / No estoy seguro</option>
       </select>
       <textarea name="mensaje" placeholder="Cuéntanos brevemente cómo podemos ayudarte (opcional)"></textarea>
-      <button type="submit">
-        Enviar por WhatsApp
-        <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      <button type="submit" id="contactSubmit">
+        Enviar solicitud
+        <svg viewBox="0 0 24 24" fill="none" width="14" height="14"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
       </button>
+      <p id="contactMsg" style="display:none;margin-top:14px;font-family:'Manrope',sans-serif;font-size:14px;line-height:1.5;color:var(--text-soft)"></p>
     </form>
   </div>
 </section>
 
+<!-- ─── NUESTRAS SEDES ──────────────────────────────────── -->
+<section class="section sedes-section" id="sedes">
+  <div class="clinic-header reveal">
+    <div>
+      <div class="overline">Dónde encontrarnos</div>
+      <h2>Nuestras 3 sedes</h2>
+    </div>
+  </div>
+
+  <div class="sedes-grid">
+    <div class="sede-card reveal">
+      <div class="sede-map">
+        <iframe loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Mapa sede Chapinero" src="https://www.google.com/maps?q=Calle+63+%23+11-45+Chapinero+Bogota&output=embed"></iframe>
+      </div>
+      <div class="sede-body">
+        <span class="sede-ciudad">Bogotá</span>
+        <h3>Sede Chapinero</h3>
+        <p class="sede-dir">Calle 63 # 11-45, Chapinero</p>
+        <p class="sede-horario">Lun–Vie 7:00–19:00 · Sáb 8:00–14:00</p>
+        <a class="sede-wa" href="https://wa.me/573124672674?text=Hola,%20vengo%20de%20su%20página%20web%20y%20quiero%20agendar%20una%20cita." target="_blank">Agendar en esta sede →</a>
+        <a class="sede-wa" href="sede-chapinero.html" style="display:block;margin-top:8px;">Ver sede y cómo llegar →</a>
+      </div>
+    </div>
+
+    <div class="sede-card reveal">
+      <div class="sede-map">
+        <iframe loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Mapa sede Chicó" src="https://www.google.com/maps?q=Carrera+11+%23+93-45+Chico+Bogota&output=embed"></iframe>
+      </div>
+      <div class="sede-body">
+        <span class="sede-ciudad">Bogotá</span>
+        <h3>Sede Chicó</h3>
+        <p class="sede-dir">Carrera 11 # 93-45, Chicó</p>
+        <p class="sede-horario">Lun–Vie 7:00–19:00 · Sáb 8:00–14:00</p>
+        <a class="sede-wa" href="https://wa.me/573124672674?text=Hola,%20vengo%20de%20su%20página%20web%20y%20quiero%20agendar%20una%20cita." target="_blank">Agendar en esta sede →</a>
+        <a class="sede-wa" href="sede-chico.html" style="display:block;margin-top:8px;">Ver sede y cómo llegar →</a>
+      </div>
+    </div>
+
+    <div class="sede-card reveal">
+      <div class="sede-map">
+        <iframe loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Mapa sede El Poblado" src="https://www.google.com/maps?q=Carrera+43A+%23+7-50+El+Poblado+Medellin&output=embed"></iframe>
+      </div>
+      <div class="sede-body">
+        <span class="sede-ciudad">Medellín</span>
+        <h3>Sede El Poblado</h3>
+        <p class="sede-dir">Carrera 43A # 7-50, El Poblado</p>
+        <p class="sede-horario">Lun–Vie 7:00–19:00 · Sáb 8:00–14:00</p>
+        <a class="sede-wa" href="https://wa.me/573124672674?text=Hola,%20vengo%20de%20su%20página%20web%20y%20quiero%20agendar%20una%20cita." target="_blank">Agendar en esta sede →</a>
+        <a class="sede-wa" href="sede-poblado.html" style="display:block;margin-top:8px;">Ver sede y cómo llegar →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ──────────────────────────────────────────── -->
 <footer>
   <div class="footer-inner">
     <div class="footer-brand">
-      <div class="footer-brand-name">Sonrisa Premium</div>
-      <p>Odontología integral con calidez humana en Laureles, Medellín. Prevención, ortodoncia, implantes y diseño de sonrisa.</p>
+      <div class="footer-brand-name">Sonrisa Atelier</div>
+      <p>Prevención, diagnóstico y tratamiento de enfermedades dentales y orales en Bogotá y Medellín.</p>
       <div class="footer-social">
-        <a href="https://wa.me/573124672674" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.6 6.3A7.85 7.85 0 0 0 12 4a7.93 7.93 0 0 0-7.93 7.93 7.83 7.83 0 0 0 1.06 3.95L4 20l4.22-1.1a7.94 7.94 0 0 0 3.78.97h.01A7.94 7.94 0 0 0 20 11.97 7.86 7.86 0 0 0 17.6 6.3z"/></svg></a>
+        <a href="https://wa.me/573124672674" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.6 6.3A7.85 7.85 0 0 0 12 4a7.93 7.93 0 0 0-7.93 7.93 7.83 7.83 0 0 0 1.06 3.95L4 20l4.22-1.1a7.94 7.94 0 0 0 3.78.97h.01A7.94 7.94 0 0 0 20 11.97 7.86 7.86 0 0 0 17.6 6.3zm-5.6 12.21h-.01a6.6 6.6 0 0 1-3.36-.92l-.24-.14-2.5.65.67-2.44-.16-.25a6.58 6.58 0 0 1-1-3.49 6.6 6.6 0 0 1 11.27-4.66 6.55 6.55 0 0 1 1.93 4.68 6.6 6.6 0 0 1-6.6 6.57z"/></svg></a>
         <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="3.5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a>
         <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95z"/></svg></a>
       </div>
     </div>
-
     <div class="footer-col">
       <h4>Servicios</h4>
       <ul>
-        <li><a href="index.html#servicios">Ortodoncia</a></li>
-        <li><a href="index.html#servicios">Implantes</a></li>
-        <li><a href="index.html#servicios">Blanqueamiento</a></li>
-        <li><a href="index.html#servicios">Diseño de sonrisa</a></li>
+        <li><a href="ortodoncia.html">Ortodoncia</a></li>
+        <li><a href="implantes.html">Implantes dentales</a></li>
+        <li><a href="blanqueamiento.html">Blanqueamiento</a></li>
+        <li><a href="diseno-de-sonrisa.html">Diseño de sonrisa</a></li>
+        <li><a href="endodoncia.html">Endodoncia</a></li>
+        <li><a href="odontologia-general.html">Odontología general</a></li>
       </ul>
     </div>
-
     <div class="footer-col">
       <h4>Información</h4>
       <ul>
@@ -142,15 +193,14 @@
         <li><a href="contacto.html">Contacto</a></li>
       </ul>
     </div>
-
     <div class="footer-col">
       <h4>Atención</h4>
       <ul>
         <li><a href="https://wa.me/573124672674">+57 312 467 2674</a></li>
-        <li><a href="mailto:info@sonrisapremium.com">info@sonrisapremium.com</a></li>
+        <li><a href="tel:+573124672674">+57 312 467 2674</a></li>
+        <li><a href="mailto:info@sonrisaatelier.com">info@sonrisaatelier.com</a></li>
       </ul>
     </div>
-
     <div class="footer-col">
       <h4>Legal</h4>
       <ul>
@@ -160,13 +210,11 @@
       </ul>
     </div>
   </div>
-  <div class="footer-bottom">
-    <span>© 2026 Sonrisa Premium · Muestra Pronto</span>
-    <span>Cra 73 # 33-18 · Laureles, Medellín</span>
-  </div>
+  <div class="footer-bottom">© 2026 Sonrisa Atelier · Web por <a href="https://prontoweb.co" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline">Pronto</a> · Bogotá · Medellín</div>
 </footer>
 
-<a href="https://wa.me/573124672674?text=Hola%20Sonrisa%20Premium" target="_blank" class="wa-float" aria-label="WhatsApp">
+<a href="https://wa.me/573124672674?text=Hola,%20vengo%20de%20su%20página%20web%20y%20quiero%20agendar%20una%20cita." target="_blank" class="wa-float" id="waFloat" data-wa-base="https://wa.me/573124672674?text=" aria-label="WhatsApp">
+  <span class="wa-float-label" id="waFloatLabel">Agenda tu cita</span>
   <svg viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.371-.025-.52-.075-.149-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
 </a>
 
@@ -178,19 +226,69 @@
     const onScroll = () => navbar.classList.toggle('scrolled', window.scrollY > 60);
     window.addEventListener('scroll', onScroll, { passive: true });
   }
-  const burger = document.getElementById('navBurger');
-  const menu = document.getElementById('mobileMenu');
-  const menuClose = document.getElementById('mobileMenuClose');
-  if (burger && menu) {
-    burger.addEventListener('click', () => menu.classList.add('open'));
-    menuClose && menuClose.addEventListener('click', () => menu.classList.remove('open'));
-    menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => menu.classList.remove('open')));
-  }
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
-<script src="assets/animations.js?v=20260514g" defer></script>
+<script src="assets/animations.js?v=20260814a" defer></script>
+<script src="assets/wa-widget.js?v=1" defer></script>
+<script src="assets/nav.js?v=1" defer></script>
+
+<!-- Conexión del formulario de contacto al Worker de Pronto -->
+<script>
+(function () {
+  var form = document.getElementById('contactForm');
+  if (!form) return;
+  var ENDPOINT = 'https://pronto-forms-worker.cesargomezs711.workers.dev/contact';
+  var CLINICA = 'Sonrisa Atelier';
+  var WA_CLINICA = '573124672674';
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var nombre = (form.nombre.value || '').trim();
+    var telefono = (form.telefono.value || '').trim();
+    var servicio = form.servicio ? form.servicio.value : '';
+    var mensaje = form.mensaje ? (form.mensaje.value || '').trim() : '';
+    var email = form.email ? (form.email.value || '').trim() : '';
+    // Reescribe los valores ya recortados y deja que la validación nativa avise si un obligatorio
+    // quedó vacío (incluido el caso "solo espacios"): muestra "Completa este campo" y enfoca el campo.
+    form.nombre.value = nombre;
+    form.telefono.value = telefono;
+    if (form.email) form.email.value = email;
+    if (typeof form.reportValidity === 'function' && !form.reportValidity()) return;
+    if (!nombre || !telefono) return;
+    // 1) Abre el WhatsApp del PACIENTE con sus datos ya escritos. Al darle "enviar" nace un chat
+    //    real con la recepción (ve su número y le responde en ese mismo chat). window.open va
+    //    primero, dentro del gesto del clic, para que el navegador no lo bloquee.
+    //    El texto llega como una ficha de lead limpia y clara (viene de la web), lista para atender.
+    var txt = 'Hola, le escribo desde su página web.';
+    txt += '\n\n*Nombre:* ' + nombre;
+    txt += '\n*Teléfono:* ' + telefono;
+    if (email) txt += '\n*Correo:* ' + email;
+    if (servicio) txt += '\n*Servicio de interés:* ' + servicio;
+    if (mensaje) txt += '\n*Comentario:* ' + mensaje;
+    txt += '\n\nEspero su respuesta. ¡Gracias!';
+    var waUrl = 'https://wa.me/' + WA_CLINICA + '?text=' + encodeURIComponent(txt);
+    window.open(waUrl, '_blank');
+    // 2) En segundo plano: confirmación por correo al paciente + conteo para el reporte mensual.
+    try {
+      fetch(ENDPOINT, {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ clinica: CLINICA, nombre: nombre, telefono: telefono, email: email, servicio: servicio, mensaje: mensaje })
+      }).catch(function () {});
+    } catch (e2) {}
+    // 3) Confirmación en la página (con enlace de respaldo si el navegador bloqueó la ventana).
+    var primerNombre = (nombre.split(/\s+/)[0] || nombre);
+    form.innerHTML =
+      '<div style="text-align:center;padding:24px 8px">' +
+      '<style>@keyframes pbPop{0%{transform:scale(.2);opacity:0}60%{transform:scale(1.1)}100%{transform:scale(1);opacity:1}}.pb-check{animation:pbPop .5s cubic-bezier(.2,.8,.2,1) both}</style>' +
+      '<svg class="pb-check" viewBox="0 0 52 52" width="62" height="62" style="display:block;margin:0 auto 16px" aria-hidden="true"><circle cx="26" cy="26" r="26" fill="#25D366"/><path d="M15.5 27l6.5 6.5L36.5 19" fill="none" stroke="#fff" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/></svg>' +
+      '<strong style="display:block;font-family:\'Fraunces\',serif;font-size:22px;color:var(--sage-deepest);margin-bottom:8px">¡Listo, ' + primerNombre + '!</strong>' +
+      '<p style="color:var(--text-soft);font-size:15px;line-height:1.6">Abrimos WhatsApp con tu solicitud lista. Dale <b>enviar</b> y la recepción te responde por ahí mismo.</p>' +
+      '<p style="font-size:13px;margin-top:12px"><a href="' + waUrl + '" target="_blank" style="color:var(--accent);text-decoration:underline">¿No se abrió? Toca aquí para abrir el chat</a></p>' +
+      '</div>';
+  });
+})();
+</script>
 
 </body>
 </html>
