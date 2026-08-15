@@ -1,0 +1,153 @@
+/* ───────────────────────────────────────────────
+   Módulo Pronto · Navegación (dropdowns + menú móvil)
+   Versión piel IVORY (blanco/hielo/tan + Inter).
+   Se inyecta con nav.js. Reutiliza .navbar/.nav-logo/
+   .nav-links/.nav-right/.nav-menu-btn de styles.css.
+   ⚠️ Sin los bloques del master que retocan el hero:
+   el hero de Ivory es INTOCABLE.
+   ─────────────────────────────────────────────── */
+
+.nav-burger {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--black, #212121);
+  cursor: pointer;
+  padding: 4px;
+  line-height: 0;
+}
+
+/* ── Dropdown (desktop) ── */
+.nav-dd { position: relative; }
+.nav-dd > a { display: inline-flex; align-items: center; gap: 5px; }
+.nav-chev { transition: transform .25s ease; opacity: .9; }
+.nav-dd:hover .nav-chev { transform: rotate(180deg); }
+.nav-dd::after { content: ""; position: absolute; top: 100%; left: 0; right: 0; height: 16px; }
+
+.nav-sub {
+  position: absolute;
+  top: calc(100% + 12px);
+  left: 50%;
+  transform: translateX(-50%) translateY(8px);
+  background: var(--white, #fff);
+  border: 1px solid var(--border, #DBE0E8);
+  border-radius: 16px;
+  box-shadow: 0 18px 50px rgba(33, 33, 33, .14);
+  padding: 10px;
+  min-width: 234px;
+  list-style: none;
+  margin: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .22s ease, transform .22s ease;
+  z-index: 1200;
+}
+.nav-dd:hover .nav-sub { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); }
+.nav-sub li { margin: 0; }
+.nav-sub a::after { display: none; }
+.nav-sub li::before { display: none; }
+.nav-sub a {
+  display: block;
+  padding: 11px 14px;
+  border-radius: 10px;
+  white-space: nowrap;
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  color: var(--black, #212121);
+  text-decoration: none;
+  transition: background .15s ease, color .15s ease;
+}
+.nav-sub a:hover { background: var(--ice-soft, #F5F8FB); color: var(--black, #212121); }
+
+/* ── Menú móvil (overlay) — estructura del master, vestida de Ivory ── */
+.mobile-menu {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  background: var(--ice-soft, #F5F8FB);
+  display: flex;
+  flex-direction: column;
+  padding: 78px 26px 40px;
+  overflow-y: auto;
+  transform: translateX(100%);
+  visibility: hidden;
+  transition: transform .3s cubic-bezier(.22, 1, .36, 1), visibility 0s .3s;
+}
+.mobile-menu.open { transform: translateX(0); visibility: visible; transition: transform .3s cubic-bezier(.22, 1, .36, 1); }
+.mm-close {
+  position: absolute; top: 20px; right: 22px;
+  background: none; border: none; font-size: 30px; line-height: 1;
+  color: var(--black, #212121); cursor: pointer;
+}
+.mobile-menu ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 1px; }
+.mobile-menu a {
+  display: block; padding: 12px 8px;
+  font-family: 'Inter', sans-serif; font-weight: 300; font-size: 24px;
+  letter-spacing: -0.02em;
+  color: var(--black, #212121); text-decoration: none;
+}
+.mm-group {
+  font-family: 'Inter', sans-serif; font-weight: 700; font-size: 11px;
+  letter-spacing: .14em; text-transform: uppercase; color: var(--gray, #8A8F99);
+  padding: 18px 8px 4px;
+}
+.mobile-menu a.mm-sub { font-size: 16px; font-weight: 400; padding: 10px 8px 10px 20px; color: var(--gray, #8A8F99); }
+.mm-cta {
+  margin-top: 26px; background: var(--black, #212121); color: #fff !important;
+  text-align: center; border-radius: 999px;
+  font-weight: 600 !important;
+  font-size: 16px !important; padding: 16px !important;
+}
+
+/* ── Franja de confianza (debajo del hero) ── */
+.trust-strip {
+  display: flex; flex-wrap: wrap; justify-content: center; align-items: center;
+  gap: 14px 36px;
+  padding: 20px max(24px, calc((100% - 1180px) / 2));
+  background: var(--black, #212121);
+}
+.trust-item {
+  display: inline-flex; align-items: center; gap: 9px;
+  font-family: 'Inter', sans-serif; font-weight: 500; font-size: 14px;
+  color: rgba(255, 255, 255, .92);
+}
+.trust-item strong { font-weight: 700; color: #fff; }
+.trust-item .ti-star { color: var(--accent, #B5B0A2); font-weight: 700; }
+.trust-sep { width: 1px; height: 18px; background: rgba(255, 255, 255, .22); }
+@media (max-width: 700px) { .trust-sep { display: none; } .trust-strip { gap: 10px 20px; padding: 18px 20px; } .trust-item { font-size: 13px; } }
+
+/* ── Responsive nav ── */
+@media (min-width: 861px) {
+  .navbar .nav-links { display: flex !important; }
+  .nav-burger { display: none !important; }
+  .mobile-menu { display: none !important; }
+}
+@media (max-width: 1180px) and (min-width: 861px) {
+  .navbar .nav-links { gap: 20px !important; }
+  .nav-menu-btn { padding: 10px 18px !important; font-size: 13px !important; }
+  .nav-location { display: none; }
+}
+@media (max-width: 860px) {
+  .navbar .nav-links { display: none !important; }
+  .nav-burger { display: inline-flex !important; }
+  .nav-location { display: none; }
+  /* El subtítulo del logo ("Odontología · Bogotá y Medellín") se partía en dos
+     líneas y chocaba con el botón Agendar en celulares (14-ago). */
+  .nav-logo-text span { display: none; }
+  .nav-logo-text strong { white-space: nowrap; }
+  .nav-menu-btn { white-space: nowrap; }
+}
+@media (max-width: 400px) {
+  .nav-logo-icon { width: 30px; height: 30px; }
+  .nav-menu-btn { padding: 9px 14px !important; font-size: 12px !important; }
+}
+
+/* ── CTA "Agendar" con pulso tipo notificación (anillo neutro Ivory) ── */
+@keyframes ctaShine {
+  0%   { box-shadow: 0 0 0 0 rgba(33, 33, 33, .35),  0 6px 18px rgba(33, 33, 33, .10); }
+  70%  { box-shadow: 0 0 0 13px rgba(33, 33, 33, 0), 0 6px 20px rgba(33, 33, 33, .12); }
+  100% { box-shadow: 0 0 0 0 rgba(33, 33, 33, 0),    0 6px 18px rgba(33, 33, 33, .10); }
+}
+.nav-menu-btn { animation: ctaShine 2.6s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) { .nav-menu-btn { animation: none; } }

@@ -1,218 +1,392 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Nosotros · Sonrisa Premium · Equipo en Laureles, Medellín</title>
-<meta name="description" content="Tres especialistas comprometidos con tu bienestar. Conoce a la Dra. Lucía Restrepo, Dr. Andrés Mejía y Dra. Camila Vargas. +8 años en Laureles.">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nosotros · Sonrisa Ivory · Equipo en Bogotá y Medellín</title>
+<meta name="description" content="Tres especialistas comprometidos con tu bienestar. Conoce a la Dra. Lucía Restrepo, Dr. Andrés Mejía y Dra. Camila Vargas. +8 años en Bogotá y Medellín.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/styles.css">
+<link rel="stylesheet" href="assets/styles.css?v=20260814a">
+<link rel="stylesheet" href="assets/nav.css?v=20260814a">
+<link rel="stylesheet" href="assets/wa-widget.css?v=20260814a">
+<!-- Microsoft Clarity (interno Pronto) -->
+<script type="text/javascript">(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window, document, "clarity", "script", "wygnitnsj3");</script>
+
+<style>
+  /* ── Hero compacto en piel Ivory (estructura del master: hero-compact-inner + hero-tag) ── */
+  .hero-compact {
+    background: var(--ice-soft);
+    border-bottom: 1px solid var(--border);
+    min-height: auto;
+  }
+  .hero-compact-inner,
+  .hero-compact .hero-content { position: relative; z-index: 2; max-width: 1300px; width: 100%; margin: 0 auto; }
+  .hero-compact .hero-tag {
+    display: inline-flex; align-items: center; gap: 12px;
+    font-size: 12px; font-weight: 500;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gray);
+    margin-bottom: 28px;
+  }
+  .hero-compact .hero-tag::before { content: ''; width: 24px; height: 1px; background: var(--gray); }
+  .hero-compact h1 {
+    font-size: clamp(2rem, 3.8vw, 3.3rem);
+    font-weight: 200;
+    letter-spacing: -0.035em;
+    line-height: 1.02;
+    color: var(--black);
+    margin: 0;
+    max-width: 900px;
+  }
+  .hero-compact h1 .b { font-weight: 500; color: var(--black); }
+  .hero-compact h1 .light { color: var(--gray); font-weight: 200; }
+  .hero-compact p {
+    font-size: 19px; line-height: 1.55; font-weight: 300;
+    color: var(--gray);
+    max-width: 680px;
+    margin-top: 24px;
+  }
+
+  /* ── Display h2 de página: Inter 300 con .b 500 (identidad Ivory) ── */
+  .section h2 .b { font-weight: 500; color: var(--black); }
+
+  /* ── Ritmo vertical del master (120px) en las secciones portadas ── */
+  .section.equipo, .section.historia, .section.diferencia { padding: 120px 5%; }
+
+  /* ── Tarjeta de doctor con foto: styles.css deja la card full-bleed y mete el padding
+     en los hijos (.equipo-card-info y .equipo-card p), pero NO en los h4. Se corrige
+     aquí, en el <style> de la página, para no tocar assets/styles.css. ── */
+  .equipo-card .equipo-card-photo ~ h4 { padding: 0 32px; }
+
+  /* ── Sedes (pastillas hairline): las 3 sedes del master, en el lugar donde el Ivory
+     viejo hablaba de una sede única ── */
+  .sedes-pills { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 32px; }
+  .sedes-pills a {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 13px; font-weight: 500; color: var(--black);
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: 50px; padding: 10px 18px;
+    text-decoration: none;
+    transition: all 0.3s var(--t);
+  }
+  .sedes-pills a::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+  .sedes-pills a:hover { border-color: var(--black); transform: translateY(-2px); box-shadow: var(--shadow-sm); }
+
+  /* ── Burbuja WhatsApp del master (Ivory sólo trae .wsp-float; posición aquí) ── */
+  .wa-float {
+    position: fixed; bottom: 28px; right: 28px; z-index: 999;
+    width: 62px; height: 62px; border-radius: 50%;
+    background: #25D366; color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    text-decoration: none;
+    box-shadow: 0 12px 32px rgba(37,211,102,0.4);
+    transition: transform 0.3s var(--t);
+  }
+  .wa-float:hover { transform: scale(1.08); }
+  .wa-float svg { width: 32px; height: 32px; }
+
+  /* ── Barra de progreso de scroll (hairline en acento Ivory) ── */
+  .scroll-progress {
+    position: fixed; top: 0; left: 0; right: 0;
+    height: 2px; z-index: 1100;
+    background: var(--accent);
+    transform: scaleX(0); transform-origin: left center;
+    pointer-events: none;
+    opacity: 0.6;
+  }
+  body.has-banner .scroll-progress { top: 36px; }
+
+  /* ── Footer de 5 columnas (contenido del master en la rejilla Ivory) ── */
+  .footer-grid.footer-grid--5 { grid-template-columns: 2fr 1fr 1fr 1fr 1fr; }
+  .footer-social { display: flex; gap: 10px; margin-top: 18px; }
+  .footer-social a {
+    width: 36px; height: 36px; border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.18);
+    display: inline-flex; align-items: center; justify-content: center;
+    color: var(--text-gray-soft);
+    transition: all 0.3s var(--t);
+  }
+  .footer-social a:hover { background: var(--accent); border-color: var(--accent); color: var(--black); }
+  .footer-social svg { width: 16px; height: 16px; }
+
+  @media (max-width:1024px){
+    .footer-grid.footer-grid--5 { grid-template-columns: 1fr 1fr; }
+    .equipo-grid { grid-template-columns: 1fr 1fr !important; }
+  }
+  /* Solo móvil real apila (12-jun: en la ventana del Mac ~905px debe verse como en monitor) */
+  @media (max-width:768px){
+    .historia-grid { grid-template-columns: 1fr !important; gap: 32px !important; }
+    .equipo-grid { grid-template-columns: 1fr !important; }
+    /* stats-grid: la regla móvil vive en styles.css (24-jul: 3 lado a lado) */
+  }
+  @media (max-width:640px){
+    .footer-grid.footer-grid--5 { grid-template-columns: 1fr; }
+    .section.equipo, .section.historia, .section.diferencia { padding: 80px 5%; }
+  }
+</style>
 </head>
 <body class="has-banner">
+
+<div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
 
 <div class="pronto-banner">
   Ejemplo de implementación · Muestra del plan completo de <strong>Pronto</strong> · Clínica de demostración
 </div>
 
-<nav class="navbar" id="navbar">
-  <a href="index.html" class="nav-logo">
-    <div class="nav-logo-icon"><svg viewBox="0 0 36 36" fill="none"><path d="M11 9 C11 6, 13 4, 16 4 C17 4, 18 5, 18 6 C18 5, 19 4, 20 4 C23 4, 25 6, 25 9 C25 12, 23 16, 22 22 C21 26, 20 28, 19 28 C18 28, 18 25, 18 22 C18 25, 18 28, 17 28 C16 28, 15 26, 14 22 C13 16, 11 12, 11 9 Z" stroke="#212121" stroke-width="1.4" fill="none"/></svg></div>
-    <div class="nav-logo-text"><strong>Sonrisa Premium</strong><span>Odontología · Laureles</span></div>
-  </a>
-  <ul class="nav-links">
-    <li><a href="index.html">Inicio</a></li>
-    <li><a href="nosotros.html" class="active">Nosotros</a></li>
-    <li><a href="servicios/index.html">Servicios</a></li>
-    <li><a href="blog/index.html">Blog</a></li>
-    <li><a href="contacto.html">Contacto</a></li>
-  </ul>
-  <div class="nav-right">
-    <div class="nav-location">Laureles, Medellín</div>
-    <a href="https://wa.me/573124672674" target="_blank" class="nav-menu-btn">Agendar</a>
-  </div>
-</nav>
+<div id="site-nav"></div>
 
+<!-- ─── HERO COMPACT ─────────────────────────────────────── -->
 <section class="hero hero-compact">
-  <div class="hero-content">
-    <div class="hero-breadcrumb"><a href="index.html">Inicio</a> &nbsp;/&nbsp; Nosotros</div>
-    <h1><span class="b">Conoce</span> al equipo<br><span class="light">detrás de</span> tu <span class="b">nueva sonrisa</span></h1>
-    <p class="lead">Tres especialistas comprometidos con tu bienestar. Formación avanzada, empatía genuina y una visión compartida: que cada paciente salga sonriendo.</p>
+  <div class="hero-compact-inner">
+    <span class="hero-tag">Equipo Sonrisa Ivory</span>
+    <h1>Conoce al <span class="b">equipo</span> detrás de tu <span class="b">nueva sonrisa</span></h1>
+    <p>Tres especialistas comprometidos con tu bienestar. Formación universitaria, experiencia clínica probada y un enfoque humano en cada consulta.</p>
   </div>
 </section>
 
-<!-- HISTORIA -->
-<section class="section">
+<!-- ─── EQUIPO ──────────────────────────────────────────── -->
+<section class="section equipo" id="equipo" style="background:var(--white);">
   <div class="section-inner">
-    <div style="display:grid;grid-template-columns:1fr 1.1fr;gap:80px;align-items:center;">
-      <div class="reveal" style="position:relative;">
-        <img src="img/hero-consultorio.jpg" alt="Consultorio Sonrisa Premium en Laureles" style="width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:24px;box-shadow:0 24px 80px rgba(33,33,33,0.12);">
-        <div style="position:absolute;bottom:24px;left:24px;background:var(--white);padding:14px 22px;border-radius:50px;font-size:12px;font-weight:500;display:flex;align-items:center;gap:10px;box-shadow:0 8px 32px rgba(33,33,33,0.1);">
-          <span style="width:8px;height:8px;background:var(--black);border-radius:50%;"></span>
-          Cra 73 # 33-18 · Laureles
-        </div>
-      </div>
-      <div class="reveal">
-        <div class="section-tag">Nuestra historia</div>
-        <h2 class="section-headline" style="font-size:clamp(1.75rem,3.15vw,2.6rem);margin-bottom:32px;">
-          <span class="b">Odontología</span> integral<br>
-          <span class="light">con</span> <span class="b">calidez humana</span>
-        </h2>
-        <p style="font-size:17px;color:var(--gray);line-height:1.75;margin-bottom:24px;">Clínica Sonrisa Premium nació en el corazón de Laureles con un propósito claro: ofrecer odontología integral con calidez humana. Desde el primer día, la Dra. Lucía Restrepo y su equipo se propusieron cambiar la forma en que los pacientes experimentan una visita al odontólogo.</p>
-        <p style="font-size:17px;color:var(--gray);line-height:1.75;">Aquí cada tratamiento comienza con una conversación honesta. Nuestros tres especialistas trabajan de forma coordinada para que usted reciba diagnósticos precisos, presupuestos transparentes y seguimiento real.</p>
-        <div style="display:flex;gap:48px;margin-top:48px;padding-top:32px;border-top:1px solid var(--border);">
-          <div><strong style="font-size:32px;font-weight:200;letter-spacing:-0.03em;display:block;">+8</strong><span style="font-size:12px;color:var(--gray);letter-spacing:0.15em;text-transform:uppercase;">Años en Laureles</span></div>
-          <div><strong style="font-size:32px;font-weight:200;letter-spacing:-0.03em;display:block;">3</strong><span style="font-size:12px;color:var(--gray);letter-spacing:0.15em;text-transform:uppercase;">Especialistas</span></div>
-          <div><strong style="font-size:32px;font-weight:200;letter-spacing:-0.03em;display:block;">4.8 <span style="font-size:20px;">★</span></strong><span style="font-size:12px;color:var(--gray);letter-spacing:0.15em;text-transform:uppercase;">234 reseñas Google</span></div>
-        </div>
+    <div class="clinic-header reveal">
+      <div>
+        <div class="overline">El equipo</div>
+        <h2 style="font-family:'Inter',sans-serif;font-weight:300;font-size:clamp(1.7rem,3vw,2.3rem);letter-spacing:-0.03em;line-height:1.1;color:var(--black);">Tres especialistas, <span class="b">una visión compartida</span></h2>
       </div>
     </div>
-  </div>
-</section>
-
-<!-- EQUIPO -->
-<section class="section section-alt" id="equipo">
-  <div class="section-inner">
-    <div class="section-tag">El equipo</div>
-    <h2 class="section-headline reveal">
-      Tres <span class="b">especialistas,</span><br>
-      <span class="light">una</span> visión <span class="b">compartida</span>
-    </h2>
-    <p class="section-subtitle reveal">Formación universitaria, experiencia clínica probada y un enfoque humano en cada consulta.</p>
 
     <div class="equipo-grid">
       <div class="equipo-card reveal">
         <div class="equipo-card-photo">
-          <img src="img/doctora-lucia-restrepo-ortodoncia.jpg" alt="Dra. Lucía Restrepo, Directora y Ortodoncista" loading="lazy">
+          <img src="img/doctora-lucia-ember.jpg" alt="Dra. Lucía Restrepo" loading="lazy">
         </div>
         <div class="equipo-card-info">
           <strong>Dra. Lucía Restrepo</strong>
           <span>Directora · Ortodoncia</span>
         </div>
         <h4>Formación</h4>
-        <p>Ortodoncista de la Universidad de Antioquia. Más de 10 años de experiencia clínica en ortodoncia con brackets metálicos, estéticos e Invisalign.</p>
+        <p>Ortodoncista de la Universidad de Antioquia. Más de 10 años de experiencia clínica corrigiendo sonrisas con brackets metálicos, estéticos e Invisalign.</p>
         <h4>Filosofía</h4>
-        <p>Apasionada por los tratamientos que combinan función y estética con un enfoque humano. "Escuchar primero, diagnosticar después."</p>
+        <p>Apasionada por los tratamientos que combinan función y estética con un enfoque humano. «Escuchar primero, diagnosticar después.»</p>
       </div>
 
       <div class="equipo-card reveal">
         <div class="equipo-card-photo">
-          <img src="img/doctor-andres-mejia-implantologia.jpg" alt="Dr. Andrés Mejía, Implantólogo y Rehabilitador oral" loading="lazy">
+          <img src="img/doctor-andres-ember.jpg" alt="Dr. Andrés Mejía" loading="lazy">
         </div>
         <div class="equipo-card-info">
           <strong>Dr. Andrés Mejía</strong>
-          <span>Implantología · Rehabilitación oral</span>
+          <span>Cirujano · Implantes y rehabilitación oral</span>
         </div>
         <h4>Especialidad</h4>
-        <p>Especialista en implantes de titanio y rehabilitación oral completa. Cirugía guiada por tomografía 3D y planeación digital.</p>
+        <p>Especialista en implantes de titanio y rehabilitación oral completa. Cirugía guiada por tomografía 3D y planeación digital, con más de 8 años en casos complejos.</p>
         <h4>Filosofía</h4>
-        <p>Su precisión quirúrgica y trato cercano generan confianza desde la primera consulta. Cada implante se planea milimétricamente antes de tocar al paciente.</p>
+        <p>Su precisión quirúrgica y su trato cercano generan confianza desde la primera consulta. Cada implante se planea milimétricamente antes de tocar al paciente.</p>
       </div>
 
       <div class="equipo-card reveal">
         <div class="equipo-card-photo">
-          <img src="img/doctora-camila-vargas-estetica.jpg" alt="Dra. Camila Vargas, especialista en estética dental" loading="lazy">
+          <img src="img/doctora-camila-ember.jpg" alt="Dra. Camila Vargas" loading="lazy">
         </div>
         <div class="equipo-card-info">
           <strong>Dra. Camila Vargas</strong>
-          <span>Estética dental · Blanqueamiento</span>
+          <span>Estética · Diseño de sonrisa y blanqueamiento</span>
         </div>
         <h4>Especialidad</h4>
         <p>Experta en diseño de sonrisa, carillas y blanqueamiento profesional. Técnicas mínimamente invasivas con resultados naturales.</p>
         <h4>Filosofía</h4>
-        <p>Transforma sonrisas respetando la anatomía y el carácter de cada paciente. Diseño digital previo a cualquier intervención.</p>
+        <p>Transforma sonrisas respetando la anatomía y el carácter de cada paciente. Cada caso se previsualiza en digital antes de comenzar.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- VALORES -->
-<section class="section">
+<!-- ─── HISTORIA + STATS ─────────────────────────────────── -->
+<section class="section historia" style="background:var(--ice-soft);">
   <div class="section-inner">
-    <div class="section-tag">Cómo trabajamos</div>
-    <h2 class="section-headline reveal">
-      <span class="light">Lo que</span> nos <span class="b">diferencia</span>
-    </h2>
-    <p class="section-subtitle reveal">Nuestra forma de hacer odontología se resume en cuatro principios no negociables.</p>
+    <div style="display:grid;grid-template-columns:1fr 1.2fr;gap:80px;align-items:start;" class="historia-grid">
+      <div class="reveal">
+        <div class="overline">Nuestra historia</div>
+        <h2 style="font-family:'Inter',sans-serif;font-weight:300;font-size:clamp(1.7rem,3vw,2.4rem);letter-spacing:-0.03em;line-height:1.1;color:var(--black);">Odontología integral <span class="b">con calidez humana</span></h2>
+      </div>
+      <div class="reveal">
+        <p style="font-size:16px;color:var(--black);opacity:0.82;line-height:1.7;margin-bottom:20px;">Sonrisa Ivory nació en Bogotá con un propósito claro: ofrecer odontología integral con calidez humana. Desde el primer día, la Dra. Lucía Restrepo y su equipo se propusieron cambiar la forma en que los pacientes experimentan una visita al odontólogo.</p>
+        <p style="font-size:16px;color:var(--black);opacity:0.82;line-height:1.7;">Aquí cada tratamiento comienza con una conversación honesta. Los tres especialistas trabajan de forma coordinada para que recibas diagnósticos precisos, presupuestos transparentes y seguimiento real. Hoy atendemos en tres sedes: dos en Bogotá y una en Medellín.</p>
+        <div class="sedes-pills">
+          <a href="sede-chapinero.html">Chapinero · Bogotá</a>
+          <a href="sede-chico.html">Chicó · Bogotá</a>
+          <a href="sede-poblado.html">El Poblado · Medellín</a>
+        </div>
+      </div>
+    </div>
 
-    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:32px;">
-      <div class="reveal" style="padding:36px;background:var(--ice-soft);border-radius:24px;">
-        <div style="font-size:13px;letter-spacing:0.3em;color:var(--gray);margin-bottom:16px;">01</div>
-        <h3 style="font-size:22px;font-weight:600;margin-bottom:12px;letter-spacing:-0.02em;">Equipo multidisciplinario</h3>
-        <p style="font-size:15px;color:var(--gray);line-height:1.7;">Tres especialidades bajo el mismo techo. No referimos a externos: ortodoncia, implantes y estética se coordinan aquí.</p>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:64px;padding-top:48px;border-top:1px solid var(--border);" class="stats-grid">
+      <div class="reveal">
+        <div data-counter="8" data-prefix="+" style="font-size:56px;font-weight:200;color:var(--black);letter-spacing:-0.04em;line-height:1;">+0</div>
+        <div style="font-size:13px;color:var(--gray);letter-spacing:0.05em;text-transform:uppercase;margin-top:12px;font-weight:500;">Años de experiencia</div>
       </div>
-      <div class="reveal" style="padding:36px;background:var(--ice-soft);border-radius:24px;">
-        <div style="font-size:13px;letter-spacing:0.3em;color:var(--gray);margin-bottom:16px;">02</div>
-        <h3 style="font-size:22px;font-weight:600;margin-bottom:12px;letter-spacing:-0.02em;">Tecnología digital</h3>
-        <p style="font-size:15px;color:var(--gray);line-height:1.7;">Radiografía 3D, escáner intraoral y simulación digital previa a cada tratamiento. Diagnósticos más precisos y resultados predecibles.</p>
+      <div class="reveal">
+        <div data-counter="3" style="font-size:56px;font-weight:200;color:var(--black);letter-spacing:-0.04em;line-height:1;">0</div>
+        <div style="font-size:13px;color:var(--gray);letter-spacing:0.05em;text-transform:uppercase;margin-top:12px;font-weight:500;">Especialistas</div>
       </div>
-      <div class="reveal" style="padding:36px;background:var(--ice-soft);border-radius:24px;">
-        <div style="font-size:13px;letter-spacing:0.3em;color:var(--gray);margin-bottom:16px;">03</div>
-        <h3 style="font-size:22px;font-weight:600;margin-bottom:12px;letter-spacing:-0.02em;">Presupuestos por escrito</h3>
-        <p style="font-size:15px;color:var(--gray);line-height:1.7;">Antes de iniciar cualquier procedimiento, recibes el plan y los costos por escrito. Sin letra pequeña, sin sorpresas.</p>
-      </div>
-      <div class="reveal" style="padding:36px;background:var(--ice-soft);border-radius:24px;">
-        <div style="font-size:13px;letter-spacing:0.3em;color:var(--gray);margin-bottom:16px;">04</div>
-        <h3 style="font-size:22px;font-weight:600;margin-bottom:12px;letter-spacing:-0.02em;">Seguimiento por WhatsApp</h3>
-        <p style="font-size:15px;color:var(--gray);line-height:1.7;">Después de cualquier procedimiento, mantenemos contacto contigo por WhatsApp. Responde tu doctor, no un bot.</p>
+      <div class="reveal">
+        <div data-counter="4.8" data-decimals="1" data-suffix=" ★" style="font-size:56px;font-weight:200;color:var(--black);letter-spacing:-0.04em;line-height:1;">0.0 ★</div>
+        <div style="font-size:13px;color:var(--gray);letter-spacing:0.05em;text-transform:uppercase;margin-top:12px;font-weight:500;">234 reseñas Google</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- CTA -->
-<section class="cta-section">
-  <h2>Conversemos<br><span class="light">sobre</span> <span class="b">tu sonrisa</span></h2>
-  <p>Escríbenos y agendamos tu consulta inicial. Sin compromiso, con diagnóstico personalizado y presupuesto por escrito.</p>
-  <div class="buttons">
-    <a href="https://wa.me/573124672674?text=Hola%20Sonrisa%20Premium,%20quiero%20agendar%20una%20consulta&utm_source=web&utm_medium=cta&utm_campaign=nosotros" target="_blank" class="btn-pill">Escríbenos por WhatsApp</a>
-    <a href="tel:+573124672674" class="btn-pill outline">+57 312 467 2674</a>
+<!-- ─── DIFERENCIA ──────────────────────────────────────── -->
+<section class="section diferencia" style="background:var(--white);">
+  <div class="section-inner">
+    <div class="clinic-header reveal">
+      <div>
+        <div class="overline">Cómo trabajamos</div>
+        <h2 style="font-family:'Inter',sans-serif;font-weight:300;font-size:clamp(1.7rem,3vw,2.3rem);letter-spacing:-0.03em;line-height:1.1;color:var(--black);">Lo que <span class="b">nos diferencia</span></h2>
+      </div>
+    </div>
+
+    <div class="diferencia-grid">
+      <div class="diferencia-card reveal">
+        <div class="diferencia-num">01</div>
+        <h3>Equipo multidisciplinario</h3>
+        <p>Tres especialistas bajo un mismo techo. Tu plan se coordina entre ortodoncia, implantología y estética sin duplicar consultas.</p>
+      </div>
+      <div class="diferencia-card reveal">
+        <div class="diferencia-num">02</div>
+        <h3>Tecnología digital</h3>
+        <p>Tomografía 3D, escáner intraoral y diseño digital previo a cualquier intervención. Diagnósticos precisos en menos tiempo.</p>
+      </div>
+      <div class="diferencia-card reveal">
+        <div class="diferencia-num">03</div>
+        <h3>Presupuestos por escrito</h3>
+        <p>Antes de iniciar cualquier procedimiento recibes el presupuesto detallado por escrito. Sin sorpresas.</p>
+      </div>
+      <div class="diferencia-card reveal">
+        <div class="diferencia-num">04</div>
+        <h3>Seguimiento por WhatsApp</h3>
+        <p>Después de cualquier procedimiento, mantenemos contacto contigo por WhatsApp. Responde tu doctor, no un bot.</p>
+      </div>
+    </div>
   </div>
 </section>
 
-<!-- FOOTER -->
+<!-- ─── FOOTER ──────────────────────────────────────────── -->
 <footer>
   <div class="footer-grid">
     <div class="footer-brand">
-      <strong>Sonrisa Premium</strong>
-      <span>Odontología · Laureles</span>
-      <p>Odontología premium en el corazón de Laureles, Medellín. Más de 8 años dedicados a sonrisas que duran toda la vida.</p>
+      <strong>Sonrisa Ivory</strong>
+      <span>Odontología · Bogotá y Medellín</span>
+      <p>Prevención, diagnóstico y tratamiento de enfermedades dentales y orales en Bogotá y Medellín.</p>
     </div>
-    <div class="footer-col"><h4>Tratamientos</h4><ul>
-      <li><a href="servicios/ortodoncia.html">Ortodoncia</a></li>
-      <li><a href="servicios/implantes.html">Implantes</a></li>
-      <li><a href="servicios/blanqueamiento.html">Blanqueamiento</a></li>
-      <li><a href="servicios/index.html">Ver todos</a></li>
-    </ul></div>
-    <div class="footer-col"><h4>Clínica</h4><ul>
-      <li><a href="nosotros.html">Nuestro equipo</a></li>
-      <li><a href="blog/index.html">Blog</a></li>
-      <li><a href="contacto.html">Contacto</a></li>
-    </ul></div>
-    <div class="footer-col"><h4>Contacto</h4><ul>
-      <li>Cra 73 # 33-18</li>
-      <li>Laureles, Medellín</li>
-      <li><a href="https://wa.me/573124672674">+57 312 467 2674</a></li>
-      <li><a href="mailto:info@sonrisapremium.com">info@sonrisapremium.com</a></li>
-    </ul></div>
+    <div class="footer-col">
+      <h4>Servicios</h4>
+      <ul>
+        <li><a href="ortodoncia.html">Ortodoncia</a></li>
+        <li><a href="implantes.html">Implantes dentales</a></li>
+        <li><a href="blanqueamiento.html">Blanqueamiento</a></li>
+        <li><a href="diseno-de-sonrisa.html">Diseño de sonrisa</a></li>
+        <li><a href="endodoncia.html">Endodoncia</a></li>
+        <li><a href="odontologia-general.html">Odontología general</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Información</h4>
+      <ul>
+        <li><a href="nosotros.html">Nosotros</a></li>
+        <li><a href="index.html#equipo">Equipo</a></li>
+        <li><a href="blog/index.html">Blog</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Atención</h4>
+      <ul>
+        <li><a href="https://wa.me/573124672674">+57 312 467 2674</a></li>
+        <li><a href="tel:+573124672674">+57 312 467 2674</a></li>
+        <li><a href="mailto:info@sonrisaivory.com">info@sonrisaivory.com</a></li>
+      </ul>
+    </div>
   </div>
   <div class="footer-bottom">
-    <p>© 2026 Sonrisa Premium. Todos los derechos reservados.</p>
-    <p>Diseño y desarrollo · <strong style="color:var(--accent);">Pronto Web Design</strong></p>
+    <p>© 2026 Sonrisa Ivory · Web por <a href="https://prontoweb.co" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline">Pronto</a></p>
+    <p>Bogotá · Medellín</p>
   </div>
 </footer>
 
-<a href="https://wa.me/573124672674" target="_blank" class="wsp-float" aria-label="WhatsApp">
+<a href="https://wa.me/573124672674?text=Hola,%20vengo%20de%20su%20página%20web%20y%20quiero%20agendar%20una%20cita%20con%20un%20especialista." target="_blank" class="wa-float" id="waFloat" data-wa-base="https://wa.me/573124672674?text=" aria-label="WhatsApp">
+  <span class="wa-float-label" id="waFloatLabel">Agenda con el equipo</span>
   <svg viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.371-.025-.52-.075-.149-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
 </a>
 
-<!-- Navbar scroll y reveal animations ahora manejados por assets/animations.js (GSAP) -->
-
-<!-- ANIMACIONES GSAP -->
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
-<script src="assets/animations.js" defer></script>
+<script src="assets/animations.js?v=20260814a" defer></script>
+<script src="assets/wa-widget.js?v=1" defer></script>
+<script src="assets/nav.js?v=1" defer></script>
+
+<script>
+  if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; }
+  window.addEventListener('beforeunload', () => window.scrollTo(0, 0));
+  const navbar = document.getElementById('navbar');
+  if (navbar) {
+    const onScroll = () => navbar.classList.toggle('scrolled', window.scrollY > 60);
+    window.addEventListener('scroll', onScroll, { passive: true });
+  }
+</script>
+
+<!-- Propio de Ivory: contadores [data-counter] + barra de progreso.
+     El animations.js de Ivory (intacto, mejor que el del master) no maneja contadores
+     ni #scrollProgress; esto los cubre sin GSAP y sin tocar assets/. -->
+<script>
+(function () {
+  var counters = Array.prototype.slice.call(document.querySelectorAll('[data-counter]'));
+  function fmt(el, v) {
+    var d = parseInt(el.getAttribute('data-decimals') || '0', 10);
+    return (el.getAttribute('data-prefix') || '') + v.toFixed(d) + (el.getAttribute('data-suffix') || '');
+  }
+  function finish(el) { el.textContent = fmt(el, parseFloat(el.getAttribute('data-counter'))); }
+  var reduce = false;
+  try { reduce = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches); } catch (e) {}
+  function run(el) {
+    if (el.__prontoCounted) return;
+    el.__prontoCounted = true;
+    var target = parseFloat(el.getAttribute('data-counter')), t0 = null, DUR = 1800;
+    if (reduce || !window.requestAnimationFrame) { finish(el); return; }
+    function step(ts) {
+      if (t0 === null) t0 = ts;
+      var p = Math.min(1, (ts - t0) / DUR);
+      p = 1 - Math.pow(1 - p, 3);
+      el.textContent = fmt(el, target * p);
+      if (p < 1) requestAnimationFrame(step); else finish(el);
+    }
+    requestAnimationFrame(step);
+  }
+  if (counters.length) {
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) { if (e.isIntersecting) { run(e.target); io.unobserve(e.target); } });
+      }, { rootMargin: '0px 0px -80px 0px' });
+      counters.forEach(function (el) { io.observe(el); });
+    } else { counters.forEach(finish); }
+  }
+
+  var bar = document.getElementById('scrollProgress');
+  if (bar) {
+    var onScroll = function () {
+      var h = document.documentElement;
+      var max = (h.scrollHeight - h.clientHeight) || 1;
+      var y = window.pageYOffset || h.scrollTop || 0;
+      bar.style.transform = 'scaleX(' + Math.min(1, Math.max(0, y / max)) + ')';
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    onScroll();
+  }
+})();
+</script>
 
 </body>
 </html>

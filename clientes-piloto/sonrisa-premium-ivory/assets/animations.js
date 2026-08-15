@@ -1,9 +1,22 @@
-/* Sonrisa Premium · Ivory · Animaciones GSAP
+/* Sonrisa Ivory · Ivory · Animaciones GSAP
    Estrategia: animar ANTES de que el elemento entre al viewport
    + animaciones cortas (0.3-0.4s) para que estén completas cuando llegan a ojo.
    ───────────────────────────────────────────────────── */
 
 (function () {
+  /* Contadores al valor final, sin animación (14-ago-2026).
+     Lo usan el modo reduced-motion y el fallback sin GSAP: sin esto esos
+     visitantes veían "+0 AÑOS DE EXPERIENCIA" para siempre. */
+  function setCountersToFinal() {
+    document.querySelectorAll('[data-counter]').forEach((el) => {
+      const target = parseFloat(el.dataset.counter);
+      const prefix = el.dataset.prefix || '';
+      const suffix = el.dataset.suffix || '';
+      const decimals = parseInt(el.dataset.decimals || '0', 10);
+      el.textContent = prefix + target.toFixed(decimals) + suffix;
+    });
+  }
+
   function init() {
     // Navbar shadow on scroll
     const navbar = document.getElementById('navbar');
@@ -19,6 +32,7 @@
         el.style.opacity = 1;
         el.style.transform = 'none';
       });
+      setCountersToFinal();
       return;
     }
 
@@ -27,6 +41,7 @@
         el.style.opacity = 1;
         el.style.transform = 'none';
       });
+      setCountersToFinal();
       return;
     }
 
@@ -238,6 +253,36 @@
         }
       );
     }
+
+    // ───────────────────────────────────────────────────
+    // CONTADORES (14-ago-2026): los números cuentan al entrar
+    // al viewport. Sin esto las cifras del index portado del
+    // master ("+8 años", "3 especialistas", "4.8 ★") se
+    // quedaban clavadas en 0 para TODO el mundo.
+    // ───────────────────────────────────────────────────
+    gsap.utils.toArray('[data-counter]').forEach((el) => {
+      const target = parseFloat(el.dataset.counter);
+      const prefix = el.dataset.prefix || '';
+      const suffix = el.dataset.suffix || '';
+      const decimals = parseInt(el.dataset.decimals || '0', 10);
+      const obj = { val: 0 };
+      el.textContent = prefix + (0).toFixed(decimals) + suffix;
+      ScrollTrigger.create({
+        trigger: el,
+        start: 'top bottom-=80',
+        once: true,
+        onEnter: () => {
+          gsap.to(obj, {
+            val: target,
+            duration: 1.6,
+            ease: 'power2.out',
+            onUpdate: () => {
+              el.textContent = prefix + obj.val.toFixed(decimals) + suffix;
+            },
+          });
+        },
+      });
+    });
 
     // ───────────────────────────────────────────────────
     // FAILSAFE: forzar revelado de cualquier .reveal que

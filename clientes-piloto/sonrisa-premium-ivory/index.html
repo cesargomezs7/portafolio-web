@@ -1,446 +1,304 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Sonrisa Premium · Odontología en Laureles, Medellín</title>
-<meta name="description" content="Odontología premium en el corazón de Laureles. Ortodoncia, implantes y diseño de sonrisa con respaldo Universidad de Antioquia. +8 años, 4.8★ (234 reseñas).">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Microsoft Clarity (interno Pronto) -->
+<script type="text/javascript">(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window, document, "clarity", "script", "wygnitnsj3");</script>
+<title>Sonrisa Ivory · Odontología en Bogotá y Medellín</title>
+<meta name="description" content="Odontología premium en Bogotá y Medellín. Ortodoncia, implantes y diseño de sonrisa. 3 sedes, +8 años, 4.8★ (234 reseñas).">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/styles.css">
+<link rel="stylesheet" href="assets/styles.css?v=20260814a">
+<link rel="stylesheet" href="assets/nav.css?v=20260814a">
+<link rel="stylesheet" href="assets/wa-widget.css?v=20260814a">
+
+<!-- SEO: FAQPage schema → rich snippets en Google (debe coincidir con las FAQ visibles) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "¿El dolor de muelas puede desaparecer solo?",
+      "acceptedAnswer": { "@type": "Answer", "text": "El dolor puede ceder momentáneamente, pero suele indicar un problema que sigue avanzando (caries, infección, fractura). Lo más seguro es agendar una valoración apenas notes molestia: detectar a tiempo evita tratamientos más invasivos." }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Qué es la caries y cómo se previene?",
+      "acceptedAnswer": { "@type": "Answer", "text": "La caries es la destrucción del esmalte y la dentina causada por bacterias que descomponen los restos de alimento y forman ácidos. Se previene con cepillado tres veces al día, uso de seda dental, limpieza profesional cada 6 meses y reduciendo el consumo frecuente de azúcares y bebidas ácidas." }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Qué son los implantes dentales y cuánto duran?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Un implante dental es una raíz artificial de titanio que reemplaza un diente perdido. Bien colocados y con higiene adecuada, los implantes pueden durar toda la vida. En Sonrisa Ivory planeamos cada cirugía con tomografía 3D antes de tocar al paciente." }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Manejan el dolor durante los procedimientos?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Usamos anestesia local de última generación y, para procedimientos más complejos, sedación consciente supervisada. El 92% de nuestros pacientes reporta sentir nada o solo presión leve. Si tienes ansiedad dental, lo conversamos antes de cualquier procedimiento." }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Qué incluye la primera valoración?",
+      "acceptedAnswer": { "@type": "Answer", "text": "La primera valoración incluye examen, diagnóstico inicial y un plan de tratamiento con presupuesto por escrito, sin compromiso." }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Qué formas de pago manejan?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Aceptamos efectivo, tarjetas débito y crédito. Para los tratamientos más grandes manejamos facilidades de pago; pregúntanos por las opciones." }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Dónde quedan y qué horarios tienen?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Tenemos 3 sedes: Chapinero y Chicó en Bogotá, y El Poblado en Medellín. Atendemos de lunes a viernes de 7:00 a 19:00 y sábados de 8:00 a 14:00." }
+    }
+  ]
+}
+</script>
+
 <style>
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+/* ═══ Portado del index del master (15-ago-2026) · piel Ivory ═══
+   Solo lo que assets/styles.css (consolidado 14-ago) no cubre.
+   Geometría del demo-master traducida: azul-dark→--black · azul→--accent ·
+   estrellas doradas→--accent · Inter en todo · hairlines --border · radius 20-28. */
 
-:root {
-  --black:   #212121;
-  --ice:     #EAEFF5;
-  --ice-soft:#F5F8FB;
-  --white:   #FFFFFF;
-  --gray:    #8A8F99;
-  --gray-light: #C8CDD4;
-  --border: #DBE0E8;
-  --accent: #B5B0A2;  /* warm tan sutil tipo Ivory */
-  --transition: cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-html { scroll-behavior: smooth; }
-
-body {
-  font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  color: var(--black);
-  background: linear-gradient(110deg, #EAEFF5 0%, #F2F5F9 35%, #FAFBFC 70%, #FFFFFF 100%);
-  background-attachment: fixed;
-  min-height: 100vh;
-  font-size: 16px;
-  line-height: 1.55;
-  letter-spacing: -0.011em;
-  -webkit-font-smoothing: antialiased;
-  font-feature-settings: 'cv11', 'ss01';
-}
-
-/* ─── NAVBAR ───────────────────────────────────────────────── */
-.navbar {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-  background: rgba(255,255,255,0.92);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  padding: 18px 5%;
-  display: flex; align-items: center; justify-content: space-between;
-  border-bottom: 1px solid transparent;
-  transition: all 0.4s var(--transition);
-}
-.navbar.scrolled { border-bottom-color: var(--border); padding: 14px 5%; }
-
-.nav-logo {
-  display: flex; align-items: center; gap: 10px;
-  text-decoration: none; color: var(--black);
-}
-.nav-logo-icon {
-  width: 36px; height: 36px;
-  display: flex; align-items: center; justify-content: center;
-}
-.nav-logo-icon svg { width: 100%; height: 100%; }
-.nav-logo-text strong { display: block; font-size: 14px; font-weight: 700; letter-spacing: -0.02em; color: var(--black); }
-.nav-logo-text span { font-size: 9.5px; font-weight: 500; color: var(--gray); letter-spacing: 0.18em; text-transform: uppercase; }
-
-.nav-links { list-style: none; display: flex; align-items: center; gap: 36px; }
-.nav-links a {
-  color: var(--black); text-decoration: none;
-  font-size: 14px; font-weight: 400; letter-spacing: -0.005em;
-  transition: color 0.2s var(--transition); position: relative; padding-bottom: 4px;
-}
-.nav-links a::after {
-  content: ''; position: absolute; left: 0; bottom: 0;
-  height: 1px; width: 0; background: var(--black);
-  transition: width 0.3s var(--transition);
-}
-.nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
-
-.nav-right { display: flex; align-items: center; gap: 16px; }
-.nav-location { font-size: 13px; color: var(--gray); display: flex; align-items: center; gap: 6px; }
-.nav-location::before { content: '◉'; color: var(--black); font-size: 8px; }
-.nav-menu-btn {
-  background: var(--ice); border: none; padding: 11px 22px; border-radius: 50px;
-  font-size: 13.5px; font-weight: 500; color: var(--black); cursor: pointer;
-  transition: all 0.25s var(--transition); font-family: inherit;
-}
-.nav-menu-btn:hover { background: var(--black); color: var(--white); }
-
-/* ─── HERO ────────────────────────────────────────────────── */
-.hero {
-  min-height: 100vh;
-  background: transparent;
-  padding: 130px 5% 80px;
-  position: relative; overflow: hidden;
-}
-
-.hero-number { display: none; }
-
-.hero-content {
-  max-width: 1300px; margin: 0 auto;
-  display: grid; grid-template-columns: 1.2fr 1fr; gap: 60px;
-  align-items: center; position: relative;
-}
-
-.hero-text h1 {
-  font-size: clamp(2.3rem, 5.1vw, 4.75rem);
-  font-weight: 200;
-  line-height: 0.98;
+/* Títulos de sección del master (overline + h2 planos) — display Ivory: ligero */
+.section h2 {
+  font-size: clamp(2rem, 4vw, 3.6rem);
+  font-weight: 300;
+  line-height: 1;
   letter-spacing: -0.035em;
   color: var(--black);
-  margin-bottom: 56px;
+  margin: 0;
 }
-.hero-text h1 .b { font-weight: 500; color: var(--black); }
-.hero-text h1 .light { color: var(--gray); font-weight: 200; }
+/* Ritmo vertical de las secciones portadas (el master usa 120px; Ivory genérico 160px) */
+.section.clinic, .section.services, .section.team, .section.testimonios { padding: 120px 5%; }
+.section.services { padding-top: 40px; }
+/* La tarjeta FAQ se alinea con el ancho de contenido de Ivory (section-inner 1300 + 5%) */
+.faq { max-width: min(1300px, 90vw); }
 
-.hero-cta {
-  display: inline-flex; align-items: center; gap: 12px;
-  background: var(--black); color: var(--white); text-decoration: none;
-  padding: 18px 42px; border-radius: 50px;
-  font-size: 15px; font-weight: 500; letter-spacing: -0.005em;
-  transition: all 0.3s var(--transition);
-  font-family: inherit; border: none; cursor: pointer;
+/* Barra de progreso de scroll (id scrollProgress). El master la mueve con GSAP en su
+   animations.js; el de Ivory se conserva intacto, así que la mueve el script inline. */
+.scroll-progress {
+  position: fixed; top: 0; left: 0; right: 0;
+  height: 2px; z-index: 1100;
+  background: var(--accent);
+  transform: scaleX(0); transform-origin: left center;
+  pointer-events: none;
 }
-.hero-cta:hover { background: var(--accent); color: var(--black); transform: translateY(-2px); }
-.hero-cta svg { width: 16px; height: 16px; }
+body.has-banner .scroll-progress { top: 36px; }
 
-.hero-visual {
-  position: relative; aspect-ratio: 16/10; max-width: 620px; margin-left: auto;
-}
-.hero-visual-img {
-  width: 100%; height: 100%; object-fit: cover; border-radius: 24px;
-  filter: contrast(0.96) brightness(1.02);
-  box-shadow: 0 24px 80px rgba(33,33,33,0.12);
-}
-.hero-float {
-  position: absolute; background: var(--white);
-  border: 1px solid var(--border);
-  padding: 12px 18px; border-radius: 50px;
-  font-size: 12px; font-weight: 500; color: var(--black);
-  display: flex; align-items: center; gap: 8px;
-  box-shadow: 0 8px 32px rgba(33,33,33,0.06);
-}
-.hero-float::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--black); }
-.hero-float-1 { top: 8%; left: -8%; }
-.hero-float-2 { bottom: 12%; right: -6%; }
-
-.hero-bottom {
-  max-width: 1300px; margin: 80px auto 0;
-  display: flex; justify-content: space-between; align-items: flex-end;
-}
-.hero-stat-big strong {
-  display: block; font-size: clamp(3rem, 6vw, 5rem); font-weight: 200;
-  letter-spacing: -0.04em; line-height: 1; color: var(--black);
-}
-.hero-stat-big strong::after { content: '+'; color: var(--accent); }
-.hero-stat-big p {
-  font-size: 13px; color: var(--gray); max-width: 340px; line-height: 1.5;
-  margin-top: 16px;
-}
-.hero-scroll {
-  width: 44px; height: 44px; border: 1px solid var(--border); border-radius: 50%;
-  display: flex; align-items: center; justify-content: center; cursor: pointer;
-  transition: all 0.3s var(--transition);
-}
-.hero-scroll:hover { background: var(--black); border-color: var(--black); color: var(--white); }
-.hero-scroll svg { width: 16px; height: 16px; }
-
-/* ─── SECCIONES GENÉRICAS ─────────────────────────────────── */
-.section {
-  padding: 160px 5%;
-  position: relative;
-  background: transparent;
-}
-.section-alt { background: transparent; }
-.section-dark { background: var(--black); color: var(--white); }
-
-.section-inner { max-width: 1300px; margin: 0 auto; }
-.section-tag {
-  font-size: 11px; font-weight: 500; letter-spacing: 0.3em;
-  text-transform: uppercase; color: var(--gray); margin-bottom: 24px;
-  display: flex; align-items: center; gap: 12px;
-}
-.section-tag::before { content: ''; width: 24px; height: 1px; background: var(--gray); }
-
-.section-headline {
-  font-size: clamp(1.9rem, 3.95vw, 3.5rem); font-weight: 200;
-  letter-spacing: -0.035em; line-height: 1; color: var(--black);
-  margin-bottom: 16px; max-width: 900px;
-}
-.section-headline .b { font-weight: 500; color: var(--black); }
-.section-headline .light { color: var(--gray); }
-.section-dark .section-headline { color: var(--white); }
-.section-dark .section-headline .light { color: var(--gray-light); }
-
-.section-subtitle {
-  font-size: 17px; color: var(--gray); max-width: 600px; line-height: 1.6;
-  margin-bottom: 80px;
-}
-
-/* ─── EQUIPO (estilo User Research) ───────────────────────── */
-.equipo-grid {
-  display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
-}
-.equipo-card {
-  background: var(--ice); border-radius: 24px; padding: 36px;
-  transition: all 0.3s var(--transition);
-}
-.equipo-card:hover { transform: translateY(-4px); }
-.equipo-card.dark { background: var(--black); color: var(--white); }
-
-.equipo-card-head { display: flex; align-items: center; gap: 16px; margin-bottom: 32px; }
-.equipo-avatar {
-  width: 56px; height: 56px; border-radius: 50%;
-  background: var(--white); border: 1px solid var(--border);
-  display: flex; align-items: center; justify-content: center;
-  font-weight: 600; font-size: 18px; color: var(--black);
-  flex-shrink: 0; letter-spacing: 0;
-}
-.equipo-card.dark .equipo-avatar { background: var(--ice); }
-.equipo-card-name strong { display: block; font-size: 18px; font-weight: 600; color: var(--black); margin-bottom: 2px; }
-.equipo-card.dark .equipo-card-name strong { color: var(--white); }
-.equipo-card-name span { font-size: 13px; color: var(--gray); }
-.equipo-card h4 { font-size: 16px; font-weight: 600; margin: 24px 0 10px; color: var(--black); }
-.equipo-card.dark h4 { color: var(--white); }
-.equipo-card p { font-size: 14px; color: var(--gray); line-height: 1.65; }
-.equipo-card.dark p { color: var(--gray-light); }
-.equipo-card ul { list-style: none; padding: 0; margin-top: 16px; }
-.equipo-card ul li {
-  font-size: 14px; line-height: 1.6; color: var(--gray-light); margin-bottom: 14px;
-  padding-left: 18px; position: relative;
-}
-.equipo-card ul li::before { content: '•'; position: absolute; left: 0; color: var(--white); }
-
-/* ─── SERVICIOS (estilo lista Ivory Expert care) ─────────── */
-.servicios-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
-.servicios-list { display: flex; flex-direction: column; }
-.servicio-item {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 28px 0; border-bottom: 1px solid var(--border);
-  cursor: pointer; transition: all 0.25s var(--transition);
-  text-decoration: none; color: var(--black);
-}
-.servicio-item:hover { padding-left: 8px; }
-.servicio-item:first-child { border-top: 1px solid var(--border); }
-.servicio-name { font-size: 22px; font-weight: 400; letter-spacing: -0.018em; color: var(--black); }
-.servicio-arrow {
-  width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--border);
-  display: flex; align-items: center; justify-content: center;
-  transition: all 0.3s var(--transition);
-}
-.servicio-arrow svg { width: 14px; height: 14px; }
-.servicio-item:hover .servicio-arrow { background: var(--black); border-color: var(--black); color: var(--white); }
-
-.servicio-destacado {
-  background: var(--white); border-radius: 24px; padding: 40px;
-  box-shadow: 0 4px 32px rgba(33,33,33,0.06);
-  border: 1px solid var(--border);
-}
-.servicio-destacado h3 { font-size: 24px; font-weight: 600; margin-bottom: 8px; letter-spacing: -0.02em; }
-.servicio-destacado .tag { font-size: 11px; font-weight: 500; letter-spacing: 0.25em; color: var(--gray); text-transform: uppercase; margin-bottom: 16px; }
-.servicio-destacado p { font-size: 15px; color: var(--gray); line-height: 1.7; margin-bottom: 24px; }
-.servicio-destacado .precio { font-size: 13px; color: var(--gray); margin-bottom: 24px; }
-.servicio-destacado .precio strong { color: var(--black); font-size: 16px; font-weight: 600; }
-.servicio-destacado .btn-pill {
-  display: inline-flex; align-items: center; gap: 10px; background: var(--black); color: var(--white);
-  text-decoration: none; padding: 14px 28px; border-radius: 50px;
-  font-size: 13.5px; font-weight: 500; transition: all 0.3s var(--transition);
-}
-.servicio-destacado .btn-pill:hover { background: var(--accent); color: var(--black); }
-.servicio-img { width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: 16px; margin-bottom: 28px; }
-
-/* ─── RESULTADOS (galería before/after estilo Ivory) ─────── */
-.resultados-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 64px; }
-.resultados-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-.resultado-card { position: relative; overflow: hidden; border-radius: 16px; aspect-ratio: 3/4; cursor: pointer; }
-.resultado-card img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(0.6); transition: all 0.5s var(--transition); }
-.resultado-card:hover img { filter: grayscale(0); transform: scale(1.03); }
-.resultado-card .label {
-  position: absolute; bottom: 16px; left: 16px; right: 16px;
-  background: var(--white); padding: 10px 20px; border-radius: 50px;
-  font-size: 13px; color: var(--black); text-align: center; font-weight: 500;
-  backdrop-filter: blur(8px); background: rgba(255,255,255,0.92);
-}
-.resultados-nav { display: flex; gap: 10px; }
-.resultados-nav button {
-  width: 44px; height: 44px; border: 1px solid var(--border); background: transparent;
-  border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center;
-  transition: all 0.3s var(--transition); font-family: inherit;
-}
-.resultados-nav button:hover { background: var(--black); border-color: var(--black); color: var(--white); }
-.resultados-nav svg { width: 14px; height: 14px; }
-
-/* ─── TESTIMONIOS ──────────────────────────────────────── */
-.testimonios-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-.testimonio {
-  background: var(--ice-soft); border-radius: 20px; padding: 32px;
-  border: 1px solid transparent; transition: all 0.3s var(--transition);
-}
-.testimonio:hover { border-color: var(--border); background: var(--white); }
-.testimonio .stars { font-size: 14px; color: var(--black); letter-spacing: 3px; margin-bottom: 16px; }
-.testimonio p { font-size: 15px; line-height: 1.65; color: var(--black); margin-bottom: 24px; min-height: 100px; }
-.testimonio .who { display: flex; align-items: center; gap: 12px; }
-.testimonio .who-avatar { width: 40px; height: 40px; background: var(--ice); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 14px; }
-.testimonio .who-name { font-size: 13px; font-weight: 600; color: var(--black); }
-.testimonio .who-svc { font-size: 12px; color: var(--gray); }
-
-/* ─── CONTACTO ─────────────────────────────────────────── */
-.contacto-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
-.contacto-info-list { display: flex; flex-direction: column; gap: 28px; margin-top: 40px; }
-.contacto-info-block strong { display: block; font-size: 13px; color: var(--gray); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 8px; font-weight: 500; }
-.contacto-info-block p { font-size: 16px; color: var(--black); line-height: 1.5; }
-.contacto-socials { display: flex; gap: 12px; margin-top: 32px; }
-.contacto-socials a {
-  width: 44px; height: 44px; border-radius: 50%; background: var(--black); color: var(--white);
-  display: flex; align-items: center; justify-content: center;
-  transition: all 0.3s var(--transition); text-decoration: none;
-}
-.contacto-socials a:hover { background: var(--accent); color: var(--black); }
-.contacto-socials svg { width: 16px; height: 16px; }
-
-.contacto-form {
-  background: var(--ice-soft); border-radius: 24px; padding: 40px;
-}
-.contacto-form-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 28px; }
-.contacto-form-header span { font-size: 13px; color: var(--gray); }
-.contacto-form input, .contacto-form textarea {
-  width: 100%; background: var(--white); border: 1px solid var(--border);
-  padding: 14px 18px; border-radius: 12px; font-size: 14px; font-family: inherit;
-  color: var(--black); margin-bottom: 14px; transition: all 0.25s var(--transition);
-}
-.contacto-form input:focus, .contacto-form textarea:focus { outline: none; border-color: var(--black); }
-.contacto-form textarea { resize: vertical; min-height: 100px; }
-.contacto-form button {
-  background: var(--black); color: var(--white); border: none; padding: 16px 32px;
-  border-radius: 50px; font-size: 14px; font-weight: 500; cursor: pointer;
-  transition: all 0.3s var(--transition); font-family: inherit;
-  display: inline-flex; align-items: center; gap: 10px;
-}
-.contacto-form button:hover { background: var(--accent); color: var(--black); }
-
-/* ─── FOOTER ───────────────────────────────────────────── */
-footer {
-  padding: 64px 5% 32px; background: var(--black); color: var(--white);
-}
-.footer-grid { max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; padding-bottom: 48px; border-bottom: 1px solid #333; }
-.footer-brand strong { font-size: 18px; display: block; margin-bottom: 6px; }
-.footer-brand span { font-size: 11px; color: var(--gray-light); letter-spacing: 0.2em; text-transform: uppercase; }
-.footer-brand p { font-size: 14px; color: var(--gray-light); line-height: 1.65; margin-top: 18px; max-width: 320px; }
-.footer-col h4 { font-size: 12px; font-weight: 600; color: var(--white); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 20px; }
-.footer-col ul { list-style: none; }
-.footer-col li { margin-bottom: 10px; }
-.footer-col a { color: var(--gray-light); text-decoration: none; font-size: 14px; transition: color 0.2s var(--transition); }
-.footer-col a:hover { color: var(--white); }
-.footer-bottom { max-width: 1300px; margin: 0 auto; padding-top: 24px; display: flex; justify-content: space-between; font-size: 12px; color: var(--gray); }
-
-/* ─── WHATSAPP FLOAT ───────────────────────────────────── */
-.wsp-float {
-  position: fixed; bottom: 28px; right: 28px; z-index: 100;
+/* Burbuja WhatsApp del master (id waFloat) — misma geometría que la burbuja vieja de Ivory */
+.wa-float {
+  position: fixed; bottom: 28px; right: 28px; z-index: 999;
   width: 62px; height: 62px; border-radius: 50%; background: #25D366;
   display: flex; align-items: center; justify-content: center;
-  color: white; text-decoration: none; box-shadow: 0 12px 32px rgba(37,211,102,0.4);
-  transition: all 0.3s var(--transition);
+  color: #fff; text-decoration: none; box-shadow: 0 12px 32px rgba(37,211,102,0.4);
+  transition: transform 0.3s var(--transition);
 }
-.wsp-float:hover { transform: scale(1.08); }
-.wsp-float svg { width: 32px; height: 32px; }
+.wa-float:hover { transform: scale(1.08); }
+.wa-float svg { width: 32px; height: 32px; }
 
-/* ─── BANNER PRONTO (sólo demo) ─────────────────────────── */
-.pronto-banner {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 2000;
-  background: var(--black); color: var(--white);
-  padding: 9px 5%; font-size: 12px; text-align: center;
-  letter-spacing: 0.02em;
+/* ── Clínica: foto principal + 2 secundarias asimétricas ── */
+.clinic-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.8fr;
+  gap: 56px;
+  margin-bottom: 80px;
+  align-items: center;
 }
-.pronto-banner strong { color: var(--accent); font-weight: 600; }
-body.has-banner { padding-top: 36px; }
-body.has-banner .navbar { top: 36px; }
+.clinic-photo-main {
+  background: var(--gray-light);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  aspect-ratio: 5/4;
+  max-height: 440px;
+  width: 100%;
+  box-shadow: 0 24px 80px rgba(33,33,33,0.12);
+}
+.clinic-photo-main img { width: 100%; height: 100%; object-fit: cover; }
+.clinic-photo-secondary {
+  display: flex; flex-direction: column;
+  gap: 32px;
+}
+.clinic-photo-secondary > div {
+  background: var(--gray-light);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  filter: grayscale(0.6);
+  transition: filter 0.5s var(--t), transform 0.5s var(--t);
+  aspect-ratio: 4/3;
+  width: 75%;
+}
+.clinic-photo-secondary > div:first-child { align-self: flex-start; margin-top: 32px; }
+.clinic-photo-secondary > div:last-child { align-self: flex-end; margin-bottom: 16px; }
+.clinic-photo-secondary > div:hover { filter: grayscale(0); transform: translateY(-4px); }
+.clinic-photo-secondary img { width: 100%; height: 100%; object-fit: cover; }
+.clinic-bottom {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 120px;
+  padding-top: 48px;
+  border-top: 1px solid var(--border);
+}
+.clinic-bottom h3 {
+  font-size: 16px; font-weight: 600;
+  color: var(--black);
+  margin-bottom: 14px;
+  letter-spacing: -0.01em;
+}
+.clinic-bottom p {
+  font-size: 15px; line-height: 1.6;
+  color: var(--gray);
+}
 
-/* ─── REVEAL ANIMATIONS ─────────────────────────────────── */
-.reveal { opacity: 0; transform: translateY(20px); transition: all 0.8s var(--transition); }
-.reveal.visible { opacity: 1; transform: translateY(0); }
+/* ── Servicios: cards con foto ── */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.service-card {
+  position: relative;
+  border-radius: var(--radius);
+  overflow: hidden;
+  aspect-ratio: 4/3;
+  display: flex; flex-direction: column; justify-content: flex-end;
+  padding: 22px;
+  text-decoration: none;
+  color: var(--white);
+  transition: box-shadow 0.5s var(--t);
+}
+.service-card:hover { box-shadow: var(--shadow-md); }
+.service-card.with-photo { background: var(--gray-light); }
+.service-card.with-photo img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%; object-fit: cover;
+  z-index: 1;
+  transition: transform 0.6s var(--t);
+}
+.service-card.with-photo:hover img { transform: scale(1.04); }
+.service-card.with-photo::before {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(to bottom, transparent 35%, rgba(33,33,33,0.68));
+  z-index: 2;
+}
+.service-card-arrow {
+  position: absolute; top: 14px; right: 14px;
+  width: 32px; height: 32px;
+  background: rgba(255,255,255,0.2);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  z-index: 3;
+  color: var(--white);
+  transition: all 0.3s var(--t);
+}
+.service-card:hover .service-card-arrow {
+  background: var(--white); color: var(--black);
+  transform: rotate(-45deg);
+}
+.service-card-title {
+  position: relative; z-index: 3;
+  font-size: 20px; font-weight: 500;
+  color: var(--white);
+  letter-spacing: -0.015em;
+}
+.service-card-price {
+  position: relative; z-index: 3;
+  font-size: 13px; color: rgba(255,255,255,0.92);
+  margin-top: 4px;
+}
+.service-card-price strong { font-weight: 600; color: var(--white); }
 
-/* ─── RESPONSIVE ─────────────────────────────────────────── */
+/* ── Testimonios: header + tarjeta del master (idioma de card Ivory: blanco + hairline) ── */
+.testimonios-header {
+  display: grid; grid-template-columns: 1fr; gap: 24px;
+  margin-bottom: 56px;
+}
+.testimonio-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 32px;
+  display: flex; flex-direction: column;
+  transition: box-shadow 0.4s var(--t), border-color 0.3s var(--t);
+}
+.testimonio-card:hover {
+  box-shadow: var(--shadow-md);
+  border-color: var(--text-gray-soft);
+}
+.testimonio-stars {
+  color: var(--accent); font-size: 18px;
+  letter-spacing: 2px;
+  margin-bottom: 18px;
+}
+.testimonio-quote {
+  font-size: 15.5px; line-height: 1.6;
+  color: var(--black);
+  margin-bottom: 24px;
+  flex: 1;
+}
+.testimonio-author {
+  display: flex; gap: 14px; align-items: center;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+}
+.testimonio-author strong {
+  display: block;
+  font-size: 15px; font-weight: 600;
+  color: var(--black);
+  margin-bottom: 2px;
+}
+.testimonio-author span {
+  font-size: 13px; color: var(--gray);
+}
+
+/* Responsive (paridad con el master) */
 @media (max-width: 1024px) {
-  .hero-content { grid-template-columns: 1fr; gap: 60px; }
-  .hero-visual { max-width: 360px; margin: 0 auto; }
-  .hero-float-1 { left: 5%; } .hero-float-2 { right: 5%; }
-  .servicios-wrap { grid-template-columns: 1fr; gap: 40px; }
-  .equipo-grid { grid-template-columns: 1fr; }
-  .resultados-grid { grid-template-columns: 1fr 1fr; }
-  .testimonios-grid { grid-template-columns: 1fr; }
-  .contacto-wrap { grid-template-columns: 1fr; }
-  .footer-grid { grid-template-columns: 1fr 1fr; }
-  .nav-links { display: none; }
-  .nav-location { display: none; }
-  .hero-number { display: none; }
+  .clinic-grid { grid-template-columns: 1fr; gap: 20px; margin-bottom: 32px; }
+  .clinic-photo-main { aspect-ratio: 4/3; }
+  .clinic-photo-secondary { gap: 20px; }
+  .clinic-photo-secondary > div {
+    width: 100%;
+    filter: none;
+    align-self: stretch;
+    margin: 0;
+    aspect-ratio: 16/10;
+  }
+  .clinic-photo-secondary > div:first-child,
+  .clinic-photo-secondary > div:last-child { align-self: stretch; margin: 0; }
+  .services-grid { grid-template-columns: 1fr 1fr; }
+  .clinic-bottom { gap: 40px; }
+}
+@media (max-width: 768px) {
+  .section h2 { font-size: clamp(2rem, 9vw, 2.8rem); }
+  .services-grid { grid-template-columns: 1fr; }
+  .clinic-bottom { grid-template-columns: 1fr; gap: 24px; }
+  .testimonio-card { padding: 24px; }
 }
 @media (max-width: 640px) {
-  .section { padding: 100px 5%; }
-  .hero { padding: 110px 5% 60px; }
-  .hero-bottom { flex-direction: column; align-items: flex-start; gap: 32px; }
-  .resultados-header { flex-direction: column; align-items: flex-start; gap: 24px; }
-  .resultados-grid { grid-template-columns: 1fr; }
-  .footer-grid { grid-template-columns: 1fr; }
-  .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
+  .section.clinic, .section.services, .section.team, .section.testimonios { padding: 80px 5%; }
+  .section.services { padding-top: 24px; }
 }
 </style>
 </head>
 <body class="has-banner">
+
+<div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
 
 <!-- Banner Pronto (sólo en este piloto de muestra) -->
 <div class="pronto-banner">
   Ejemplo de implementación · Muestra del plan completo de <strong>Pronto</strong> · Clínica de demostración
 </div>
 
-<!-- ─── NAVBAR ─────────────────────────────────────────────── -->
-<nav class="navbar" id="navbar">
-  <a href="index.html" class="nav-logo">
-    <div class="nav-logo-icon">
-      <svg viewBox="0 0 36 36" fill="none">
-        <path d="M11 9 C11 6, 13 4, 16 4 C17 4, 18 5, 18 6 C18 5, 19 4, 20 4 C23 4, 25 6, 25 9 C25 12, 23 16, 22 22 C21 26, 20 28, 19 28 C18 28, 18 25, 18 22 C18 25, 18 28, 17 28 C16 28, 15 26, 14 22 C13 16, 11 12, 11 9 Z" stroke="#212121" stroke-width="1.4" fill="none"/>
-      </svg>
-    </div>
-    <div class="nav-logo-text">
-      <strong>Sonrisa Premium</strong>
-      <span>Odontología · Laureles</span>
-    </div>
-  </a>
-  <ul class="nav-links">
-    <li><a href="index.html" class="active">Inicio</a></li>
-    <li><a href="nosotros.html">Nosotros</a></li>
-    <li><a href="servicios/index.html">Servicios</a></li>
-    <li><a href="blog/index.html">Blog</a></li>
-    <li><a href="contacto.html">Contacto</a></li>
-  </ul>
-  <div class="nav-right">
-    <div class="nav-location">Laureles, Medellín</div>
-    <a href="https://wa.me/573124672674" target="_blank" class="nav-menu-btn">Agendar</a>
-  </div>
-</nav>
+<div id="site-nav"></div>
 
-<!-- ─── HERO ───────────────────────────────────────────────── -->
-<section class="hero">
+<!-- ─── HERO (Ivory, intocable) ─────────────────────────────── -->
+<section class="hero" data-wa="Hola, vengo de su página web y quiero agendar una cita." data-wa-label="Agenda tu cita">
   <div class="hero-number">
     <span>01</span>
     <span>02</span>
@@ -454,23 +312,23 @@ body.has-banner .navbar { top: 36px; }
         <span class="light">para una</span> sonrisa<br>
         que dura <span class="b">toda la vida</span>
       </h1>
-      <a href="https://wa.me/573124672674?text=Hola%20Sonrisa%20Premium,%20quiero%20agendar%20una%20consulta&utm_source=web&utm_medium=hero&utm_campaign=agendar" target="_blank" class="hero-cta">
+      <a href="https://wa.me/573124672674?text=Hola%20Sonrisa%20Ivory,%20quiero%20agendar%20una%20consulta&utm_source=web&utm_medium=hero&utm_campaign=agendar" target="_blank" class="hero-cta">
         Agendar consulta
         <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
     </div>
 
     <div class="hero-visual">
-      <img src="img/hero-consultorio.jpg" alt="Consultorio Sonrisa Premium" class="hero-visual-img">
+      <img src="img/hero-consultorio.jpg" alt="Consultorio Sonrisa Ivory" class="hero-visual-img">
       <div class="hero-float hero-float-1">4.8 ★ · 234 reseñas Google</div>
-      <div class="hero-float hero-float-2">+8 años en Laureles</div>
+      <div class="hero-float hero-float-2">+8 años</div>
     </div>
   </div>
 
   <div class="hero-bottom">
     <div class="hero-stat-big">
       <strong>234</strong>
-      <p>Reseñas verificadas en Google con 4.8 estrellas promedio. Pacientes que confiaron en nosotros para ortodoncia, implantes y rehabilitación oral en Laureles, Medellín.</p>
+      <p>Reseñas verificadas en Google con 4.8 estrellas promedio. Pacientes que confiaron en nosotros para ortodoncia, implantes y rehabilitación oral en Bogotá y Medellín.</p>
     </div>
     <a href="#nosotros" class="hero-scroll">
       <svg viewBox="0 0 24 24" fill="none"><path d="M12 5v14M6 13l6 6 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -478,242 +336,303 @@ body.has-banner .navbar { top: 36px; }
   </div>
 </section>
 
-<!-- ─── NOSOTROS (estilo User Research) ────────────────────── -->
-<section class="section" id="nosotros">
-  <div class="section-inner">
-    <div class="section-tag">02 · Nuestro enfoque</div>
-    <h2 class="section-headline reveal">
-      <span class="b">Escuchar</span> antes <span class="light">de</span> diagnosticar.<br>
-      Diseñar <span class="b">tratamientos</span> <span class="light">a la medida</span> de tu boca,<br>
-      no <span class="light">de un</span> protocolo genérico.
-    </h2>
-    <p class="section-subtitle reveal">Llevamos más de 8 años en Laureles atendiendo personas que buscan claridad, transparencia y resultados duraderos. Esto nos diferencia.</p>
+<!-- ─── FRANJA DE CONFIANZA ─────────────────────────────── -->
+<div class="trust-strip">
+  <span class="trust-item"><span class="ti-star">★&nbsp;4.8</span>&nbsp;·&nbsp;<strong>234 reseñas</strong>&nbsp;en Google</span>
+  <span class="trust-sep"></span>
+  <span class="trust-item"><strong>+8 años</strong>&nbsp;de experiencia</span>
+  <span class="trust-sep"></span>
+  <span class="trust-item"><strong>3 sedes</strong>&nbsp;·&nbsp;Bogotá y Medellín</span>
+</div>
 
-    <div class="equipo-grid">
-      <div class="equipo-card reveal">
-        <div class="equipo-card-head">
-          <div class="equipo-avatar">LR</div>
-          <div class="equipo-card-name">
-            <strong>Dra. Lucía Restrepo</strong>
-            <span>Directora · Ortodoncia</span>
-          </div>
-        </div>
-        <h4>Perfil</h4>
-        <p>Especialista en ortodoncia con respaldo Universidad de Antioquia. Más de 15 años tratando casos complejos con brackets metálicos, estéticos e Invisalign.</p>
-        <h4>Filosofía</h4>
-        <p>Antes de diagnosticar, escucha. Cada plan se diseña explicando paso a paso, con presupuesto por escrito y sin letra pequeña.</p>
-      </div>
-
-      <div class="equipo-card reveal">
-        <div class="equipo-card-head">
-          <div class="equipo-avatar">DM</div>
-          <div class="equipo-card-name">
-            <strong>Dr. Mejía</strong>
-            <span>Implantología</span>
-          </div>
-        </div>
-        <h4>Perfil</h4>
-        <p>Especialista en implantes dentales con titanio de grado médico y coronas de porcelana. Diagnóstico digital con tomografía 3D.</p>
-        <h4>Filosofía</h4>
-        <p>Resultados naturales que duran décadas. Cada implante se planea milimétricamente antes de tocar al paciente.</p>
-      </div>
-
-      <div class="equipo-card dark reveal">
-        <h4 style="margin-top: 0; font-size: 18px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gray-light);">Por qué nos eligen</h4>
-        <ul>
-          <li>Presupuesto por escrito antes de iniciar cualquier tratamiento</li>
-          <li>Bioseguridad certificada y protocolos visibles</li>
-          <li>Seguimiento por WhatsApp después de cada procedimiento</li>
-          <li>Respaldo académico Universidad de Antioquia</li>
-          <li>Invisalign Provider certificado</li>
-        </ul>
-      </div>
+<!-- ─── AGENDA TU CONSULTA (booking bar flotante bajo el hero) ─── -->
+<section class="booking" id="agendar">
+  <form class="booking-bar reveal" id="contactForm">
+    <div class="booking-head">
+      <strong>Agenda tu consulta</strong>
+      <span class="booking-status"><span class="status-dot"></span>Te respondemos muy pronto</span>
     </div>
-  </div>
-</section>
-
-<!-- ─── SERVICIOS (estilo lista Ivory) ─────────────────────── -->
-<section class="section section-alt" id="servicios">
-  <div class="section-inner">
-    <div class="section-tag">03 · Tratamientos</div>
-    <h2 class="section-headline reveal">
-      <span class="b">Atención</span> experta<br>
-      <span class="light">para cada</span> <span class="b">sonrisa</span>
-    </h2>
-    <p class="section-subtitle reveal">Servicios integrales con tecnología moderna y un equipo que combina experiencia clínica y trato humano.</p>
-
-    <div class="servicios-wrap">
-      <div class="servicios-list">
-        <a href="servicios/ortodoncia.html" class="servicio-item reveal">
-          <span class="servicio-name">Ortodoncia</span>
-          <div class="servicio-arrow"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
-        </a>
-        <a href="servicios/implantes.html" class="servicio-item reveal">
-          <span class="servicio-name">Implantes dentales</span>
-          <div class="servicio-arrow"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
-        </a>
-        <a href="servicios/blanqueamiento.html" class="servicio-item reveal">
-          <span class="servicio-name">Blanqueamiento</span>
-          <div class="servicio-arrow"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
-        </a>
-        <a href="contacto.html?servicio=Limpieza+dental" class="servicio-item reveal">
-          <span class="servicio-name">Limpieza dental</span>
-          <div class="servicio-arrow"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
-        </a>
-        <a href="contacto.html?servicio=Endodoncia" class="servicio-item reveal">
-          <span class="servicio-name">Endodoncia</span>
-          <div class="servicio-arrow"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
-        </a>
-        <a href="contacto.html?servicio=Dise%C3%B1o+de+sonrisa" class="servicio-item reveal">
-          <span class="servicio-name">Diseño de sonrisa</span>
-          <div class="servicio-arrow"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
-        </a>
-      </div>
-
-      <div class="servicio-destacado reveal">
-        <img src="img/implante-3d.jpg" alt="Implante dental titanio" class="servicio-img">
-        <div class="tag">Servicio destacado</div>
-        <h3>Implantes dentales</h3>
-        <p>Rehabilitación con implantes de titanio grado médico y coronas de porcelana. Diagnóstico 3D, planeación digital y resultado que se ve y se siente natural.</p>
-        <div class="precio">Inversión estimada <strong>desde $4.500.000 COP</strong> por unidad · plan de pagos disponible</div>
-        <a href="servicios/implantes.html" class="btn-pill">
-          Ver detalles del tratamiento
-          <svg viewBox="0 0 24 24" fill="none" width="14" height="14"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-        </a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ─── RESULTADOS ────────────────────────────────────────── -->
-<section class="section" id="resultados">
-  <div class="section-inner">
-    <div class="section-tag">04 · Resultados</div>
-    <div class="resultados-header reveal">
-      <h2 class="section-headline" style="margin-bottom:0;">
-        <span class="b">Descubre</span> el poder<br>
-        <span class="light">del</span> <span class="b">cambio</span>
-      </h2>
-      <a href="contacto.html?servicio=Otro" class="btn-pill outline" style="font-family:inherit;">
-        Agendar tu caso
+    <div class="booking-fields">
+      <input type="text" name="nombre" placeholder="Nombre completo" required>
+      <input type="tel" name="telefono" placeholder="Teléfono / WhatsApp" required>
+      <input type="email" name="email" placeholder="Correo electrónico" required>
+      <select name="servicio">
+        <option value="">Servicio de interés (opcional)</option>
+        <option value="Ortodoncia">Ortodoncia</option>
+        <option value="Implantes dentales">Implantes dentales</option>
+        <option value="Blanqueamiento dental">Blanqueamiento dental</option>
+        <option value="Diseño de sonrisa">Diseño de sonrisa</option>
+        <option value="Endodoncia">Endodoncia</option>
+        <option value="Limpieza / Odontología general">Limpieza / Odontología general</option>
+        <option value="Otro">Otro / No estoy seguro</option>
+      </select>
+      <textarea name="mensaje" placeholder="Cuéntanos brevemente cómo podemos ayudarte (opcional)"></textarea>
+      <button type="submit" id="contactSubmit">
+        Agendar valoración
         <svg viewBox="0 0 24 24" fill="none" width="14" height="14"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+    <p id="contactMsg" style="display:none;margin-top:12px;font-family:'Inter',sans-serif;font-size:14px;line-height:1.5;color:var(--gray)"></p>
+  </form>
+</section>
+
+<!-- ─── OUR CLINIC ──────────────────────────────────────── -->
+<section class="section clinic" id="clinica">
+  <div class="section-inner">
+    <div class="clinic-header reveal">
+      <div>
+        <div class="overline">Nuestro espacio</div>
+        <h2>Nuestra clínica</h2>
+      </div>
+    </div>
+
+    <div class="clinic-grid reveal">
+      <div class="clinic-photo-main">
+        <img src="img/clinica-consultorio.jpg" alt="Consultorio principal Sonrisa Ivory" loading="lazy">
+      </div>
+      <div class="clinic-photo-secondary">
+        <div><img src="img/clinica-sala-espera.jpg" alt="Sala de espera" loading="lazy"></div>
+        <div><img src="img/clinica-recepcion.jpg" alt="Recepción" loading="lazy"></div>
+      </div>
+    </div>
+
+    <div class="clinic-bottom reveal">
+      <div>
+        <h3>Experiencia</h3>
+        <p>Tres especialistas con formación universitaria y más de 8 años atendiendo pacientes en Bogotá y Medellín. Cada caso es revisado por el equipo antes de iniciar tratamiento.</p>
+      </div>
+      <div>
+        <h3>Cuidado</h3>
+        <p>Cuidamos tu salud y hacemos lo necesario para que cada visita sea cómoda, transparente y enfocada en resultados duraderos para tu sonrisa.</p>
+      </div>
+    </div>
+
+    <!-- Stats animados (mismos contadores que nosotros.html — los anima el script inline de esta página) -->
+    <div class="stats-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:64px;padding-top:48px;border-top:1px solid var(--border);">
+      <div class="reveal">
+        <div data-counter="8" data-prefix="+" style="font-size:56px;font-weight:200;color:var(--black);letter-spacing:-0.04em;line-height:1;">+0</div>
+        <div style="font-size:13px;color:var(--gray);letter-spacing:0.05em;text-transform:uppercase;margin-top:12px;font-weight:500;">Años de experiencia</div>
+      </div>
+      <div class="reveal">
+        <div data-counter="3" style="font-size:56px;font-weight:200;color:var(--black);letter-spacing:-0.04em;line-height:1;">0</div>
+        <div style="font-size:13px;color:var(--gray);letter-spacing:0.05em;text-transform:uppercase;margin-top:12px;font-weight:500;">Especialistas</div>
+      </div>
+      <div class="reveal">
+        <div data-counter="4.8" data-decimals="1" data-suffix=" ★" style="font-size:56px;font-weight:200;color:var(--black);letter-spacing:-0.04em;line-height:1;">0.0 ★</div>
+        <div style="font-size:13px;color:var(--gray);letter-spacing:0.05em;text-transform:uppercase;margin-top:12px;font-weight:500;">234 reseñas Google</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── SERVICES ────────────────────────────────────────── -->
+<section class="section section-alt services" id="servicios" data-wa="Hola, vengo de su página web y me gustaría saber más sobre sus tratamientos." data-wa-label="¿Dudas sobre un tratamiento?">
+  <div class="section-inner">
+    <div class="services-header reveal">
+      <div>
+        <div class="overline">Amplia gama de tratamientos</div>
+        <h2>Servicios</h2>
+      </div>
+      <a href="contacto.html" class="services-view-more">
+        Ver más
+        <svg viewBox="0 0 24 24" fill="none" width="14" height="14"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
       </a>
     </div>
 
-    <div class="resultados-grid">
-      <div class="resultado-card reveal">
-        <img src="img/paciente-1.jpg" alt="Caso Carolina M.">
-        <div class="label">Carolina M. · Ortodoncia</div>
+    <div class="services-grid">
+      <a href="ortodoncia.html" class="service-card with-photo reveal">
+        <img src="img/servicio-ortodoncia.jpg" alt="Ortodoncia">
+        <div class="service-card-arrow"><svg viewBox="0 0 24 24" fill="none" width="14" height="14"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+        <div class="service-card-title">Ortodoncia</div>
+        <div class="service-card-price">Desde <strong>$4.200.000 COP</strong></div>
+      </a>
+
+      <a href="implantes.html" class="service-card with-photo reveal">
+        <img src="img/servicio-implantes.jpg" alt="Implantes dentales">
+        <div class="service-card-arrow"><svg viewBox="0 0 24 24" fill="none" width="14" height="14"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+        <div class="service-card-title">Implantes dentales</div>
+        <div class="service-card-price">Desde <strong>$4.500.000 COP</strong></div>
+      </a>
+
+      <a href="blanqueamiento.html" class="service-card with-photo reveal">
+        <img src="img/servicio-blanqueamiento.jpg" alt="Blanqueamiento">
+        <div class="service-card-arrow"><svg viewBox="0 0 24 24" fill="none" width="14" height="14"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+        <div class="service-card-title">Blanqueamiento</div>
+        <div class="service-card-price">Desde <strong>$650.000 COP</strong></div>
+      </a>
+
+      <a href="diseno-de-sonrisa.html" class="service-card with-photo reveal">
+        <img src="img/servicio-diseno-sonrisa.jpg" alt="Diseño de sonrisa">
+        <div class="service-card-arrow"><svg viewBox="0 0 24 24" fill="none" width="14" height="14"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+        <div class="service-card-title">Diseño de sonrisa</div>
+        <div class="service-card-price">Plan personalizado</div>
+      </a>
+
+      <a href="endodoncia.html" class="service-card with-photo reveal">
+        <img src="img/servicio-endodoncia.jpg" alt="Endodoncia">
+        <div class="service-card-arrow"><svg viewBox="0 0 24 24" fill="none" width="14" height="14"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+        <div class="service-card-title">Endodoncia</div>
+        <div class="service-card-price">Desde $700.000 COP</div>
+      </a>
+
+      <a href="odontologia-general.html" class="service-card with-photo reveal">
+        <img src="img/servicio-odontologia-general.jpg" alt="Odontología general">
+        <div class="service-card-arrow"><svg viewBox="0 0 24 24" fill="none" width="14" height="14"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+        <div class="service-card-title">Odontología general</div>
+        <div class="service-card-price">Limpieza desde $120.000</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── TEAM ────────────────────────────────────────────── -->
+<section class="section team" id="equipo" data-wa="Hola, vengo de su página web y quiero agendar una cita con un especialista." data-wa-label="Agenda con un especialista">
+  <div class="section-inner">
+    <div class="team-header reveal">
+      <div>
+        <div class="overline">Nuestros expertos</div>
+        <h2>Equipo</h2>
       </div>
-      <div class="resultado-card reveal">
-        <img src="img/paciente-2.jpg" alt="Caso Roberto A.">
-        <div class="label">Roberto A. · Implantes</div>
+      <div class="team-nav">
+        <button id="teamPrev" aria-label="Anterior"><svg viewBox="0 0 24 24" fill="none"><path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+        <button id="teamNext" aria-label="Siguiente"><svg viewBox="0 0 24 24" fill="none"><path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
       </div>
-      <div class="resultado-card reveal">
-        <img src="img/paciente-3.jpg" alt="Caso Laura G.">
-        <div class="label">Laura G. · Blanqueamiento</div>
+    </div>
+
+    <div class="team-card reveal" id="teamCarousel">
+      <div class="team-photo">
+        <img src="img/doctora-lucia-ember.jpg" alt="Dra. Lucía Restrepo">
+      </div>
+      <div class="team-info">
+        <div class="team-info-top">
+          <span class="team-counter"><span id="teamIndex">1</span>/3</span>
+          <span class="team-rating"><span class="star">★</span> 5.0</span>
+        </div>
+        <h3 id="teamName">Dra. Lucía Restrepo</h3>
+        <div class="team-exp" id="teamExp">Más de 10 años de experiencia</div>
+        <p id="teamBio">Especialista en ortodoncia formada en la Universidad de Antioquia. Más de 10 años corrigiendo sonrisas con brackets metálicos, estéticos e Invisalign. "Escuchar primero, diagnosticar después."</p>
+        <a href="https://wa.me/573124672674?text=Hola,%20vengo%20de%20su%20página%20web%20y%20quiero%20agendar%20una%20cita%20con%20un%20especialista." target="_blank" class="team-book">
+          Agendar cita
+          <svg viewBox="0 0 24 24" fill="none" width="14" height="14"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ─── TESTIMONIOS ────────────────────────────────────────── -->
-<section class="section section-alt">
+<!-- ─── TESTIMONIOS ─────────────────────────────────────── -->
+<section class="section section-alt testimonios" id="testimonios">
   <div class="section-inner">
-    <div class="section-tag">05 · Testimonios</div>
-    <h2 class="section-headline reveal">
-      Lo que <span class="light">dicen</span> <span class="b">nuestros pacientes</span>
-    </h2>
-    <p class="section-subtitle reveal">4.8 ★ promedio en 234 reseñas verificadas de Google.</p>
+    <div class="testimonios-header reveal">
+      <div>
+        <div class="overline">234 reseñas · Google 4.8 ★</div>
+        <h2>Lo que dicen<br>nuestros pacientes</h2>
+      </div>
+      <a href="https://www.google.com/maps/search/?api=1&query=Sonrisa+Ivory+Bogot%C3%A1" target="_blank" rel="noopener" class="reveal" style="display:inline-flex;align-items:center;gap:10px;margin-top:18px;background:#fff;border:1px solid var(--border);border-radius:999px;padding:12px 22px;text-decoration:none;box-shadow:var(--shadow-sm);">
+        <span style="font-family:'Inter',sans-serif;font-weight:700;color:var(--accent);font-size:16px;">★ 4.8</span>
+        <span style="font-family:'Inter',sans-serif;font-weight:600;color:var(--black);font-size:14px;">234 reseñas · Ver todas en Google Maps →</span>
+      </a>
+    </div>
 
     <div class="testimonios-grid">
-      <div class="testimonio reveal">
-        <div class="stars">★★★★★</div>
-        <p>"La Dra. me explicó todo con calma, sin afán. Brackets en 45 minutos y el seguimiento por WhatsApp ha sido excelente. Siento que aquí sí me escuchan."</p>
-        <div class="who">
-          <div class="who-avatar">CM</div>
+      <article class="testimonio-card reveal">
+        <div class="testimonio-stars" aria-label="5 estrellas">★★★★★</div>
+        <p class="testimonio-quote">"Llevaba años con miedo al dentista. La Dra. Lucía me explicó cada paso del tratamiento de ortodoncia con paciencia. Hoy tengo mi sonrisa alineada y voy tranquila."</p>
+        <div class="testimonio-author">
+          <div class="testimonio-avatar"><img src="img/paciente-carolina.jpg" alt="Carolina M."></div>
           <div>
-            <div class="who-name">Carolina M.</div>
-            <div class="who-svc">Ortodoncia · Brackets</div>
+            <strong>Carolina M.</strong>
+            <span>Ortodoncia · 18 meses</span>
           </div>
         </div>
-      </div>
+      </article>
 
-      <div class="testimonio reveal">
-        <div class="stars">★★★★★</div>
-        <p>"El Dr. Mejía es excepcional. Me dieron presupuesto transparente desde el inicio y el resultado del implante quedó muy natural. Lo recomiendo a todo el que me pregunte."</p>
-        <div class="who">
-          <div class="who-avatar">RA</div>
+      <article class="testimonio-card reveal">
+        <div class="testimonio-stars" aria-label="5 estrellas">★★★★★</div>
+        <p class="testimonio-quote">"Perdí 3 dientes en un accidente. El Dr. Mejía me hizo los implantes con cirugía guiada por tomografía. Hoy mastico y sonrío como antes. Cero molestias."</p>
+        <div class="testimonio-author">
+          <div class="testimonio-avatar"><img src="img/paciente-roberto.jpg" alt="Roberto A."></div>
           <div>
-            <div class="who-name">Roberto A.</div>
-            <div class="who-svc">Implante dental</div>
+            <strong>Roberto A.</strong>
+            <span>Implantes · 6 meses</span>
           </div>
         </div>
-      </div>
+      </article>
 
-      <div class="testimonio reveal">
-        <div class="stars">★★★★★</div>
-        <p>"La Dra. Vargas fue muy cuidadosa con la sensibilidad. Aplicó un gel especial y mi sonrisa cambió ese mismo día. Sin dolor, sin sorpresas."</p>
-        <div class="who">
-          <div class="who-avatar">LG</div>
+      <article class="testimonio-card reveal">
+        <div class="testimonio-stars" aria-label="5 estrellas">★★★★★</div>
+        <p class="testimonio-quote">"A mis 62 años pensé que era tarde para mejorar mi sonrisa. La Dra. Camila me hizo blanqueamiento y carillas. Me siento 10 años más joven."</p>
+        <div class="testimonio-author">
+          <div class="testimonio-avatar"><img src="img/paciente-mercedes.jpg" alt="Mercedes L."></div>
           <div>
-            <div class="who-name">Laura G.</div>
-            <div class="who-svc">Blanqueamiento</div>
+            <strong>Mercedes L.</strong>
+            <span>Diseño de sonrisa · 3 meses</span>
           </div>
         </div>
-      </div>
+      </article>
+    </div>
+    <div class="testimonios-review-cta reveal">
+      <h3>Tu opinión ayuda a otros a sonreír</h3>
+      <p>Comparte tu experiencia: a ti te toma un minuto y a otro paciente le da la confianza para dar el primer paso.</p>
+      <a href="reviews.html" class="review-cta-btn"><span class="star">★</span>Déjanos tu reseña en Google</a>
     </div>
   </div>
 </section>
 
-<!-- ─── CONTACTO ──────────────────────────────────────────── -->
-<section class="section" id="contacto">
-  <div class="section-inner">
-    <div class="section-tag">06 · Contacto</div>
+<!-- ─── FAQ ─────────────────────────────────────────────── -->
+<section class="faq reveal" data-wa="Hola, vengo de su página web y tengo una pregunta sobre sus servicios." data-wa-label="¿Tienes otra duda?">
+  <div class="overline">Resolvemos todas tus dudas</div>
+  <h2>Preguntas frecuentes</h2>
 
-    <div class="contacto-wrap">
-      <div class="reveal">
-        <h2 class="section-headline" style="margin-bottom:0;">
-          <span class="b">Estamos</span> aquí<br>
-          <span class="light">para</span> <span class="b">ayudarte</span>
-        </h2>
+  <div class="faq-list">
+    <div class="faq-item">
+      <button class="faq-question">
+        <span>¿El dolor de muelas puede desaparecer solo?</span>
+        <span class="faq-toggle"><svg viewBox="0 0 24 24" fill="none" width="20" height="20"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span>
+      </button>
+      <div class="faq-answer"><p>El dolor puede ceder momentáneamente, pero suele indicar un problema que sigue avanzando (caries, infección, fractura). Lo más seguro es agendar una valoración apenas notes molestia: detectar a tiempo evita tratamientos más invasivos.</p></div>
+    </div>
 
-        <div class="contacto-info-list">
-          <div class="contacto-info-block">
-            <strong>Dirección</strong>
-            <p>Cra 73 # 33-18<br>Laureles, Medellín</p>
-          </div>
-          <div class="contacto-info-block">
-            <strong>WhatsApp</strong>
-            <p>+57 312 467 2674</p>
-          </div>
-          <div class="contacto-info-block">
-            <strong>Horario</strong>
-            <p>Lunes a viernes 7:00 am – 7:00 pm<br>Sábados 8:00 am – 2:00 pm</p>
-          </div>
-        </div>
-
-        <div class="contacto-socials">
-          <a href="https://wa.me/573124672674" target="_blank" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.371-.025-.52-.075-.149-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg></a>
-          <a href="https://www.instagram.com/sonrisapremium" target="_blank" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
-          <a href="https://www.google.com/search?q=Sonrisa+Premium+Laureles+Medellin+rese%C3%B1as" target="_blank" aria-label="Google reviews"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22.501 12.233c0-.819-.069-1.605-.196-2.36H12.214v4.464h5.778c-.245 1.341-1.004 2.476-2.139 3.241v2.69h3.466c2.029-1.867 3.182-4.612 3.182-7.835zM12.214 23c2.892 0 5.317-.962 7.092-2.59l-3.466-2.69c-.962.643-2.196 1.026-3.626 1.026-2.787 0-5.146-1.882-5.99-4.408H2.643v2.778C4.41 19.985 8.052 23 12.214 23zM6.224 14.338c-.214-.643-.336-1.331-.336-2.038s.122-1.395.336-2.038V7.484H2.643C1.92 8.93 1.5 10.527 1.5 12.3s.42 3.37 1.143 4.816l3.581-2.778zm5.99-9.054c1.575 0 2.99.541 4.103 1.605l3.073-3.073C18.527 1.962 15.106 1 12.214 1 8.052 1 4.41 4.015 2.643 7.484l3.581 2.778c.844-2.526 3.203-4.408 5.99-4.408z"/></svg></a>
-        </div>
+    <div class="faq-item">
+      <button class="faq-question">
+        <span>¿Qué es la caries y cómo se previene?</span>
+        <span class="faq-toggle"><svg viewBox="0 0 24 24" fill="none" width="20" height="20"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span>
+      </button>
+      <div class="faq-answer">
+        <p>La caries es la destrucción del esmalte y la dentina causada por bacterias que descomponen los restos de alimento y forman ácidos.</p>
+        <p>Se previene con cepillado tres veces al día, uso de seda dental, limpieza profesional cada 6 meses y reduciendo el consumo frecuente de azúcares y bebidas ácidas.</p>
       </div>
+    </div>
 
-      <form class="contacto-form reveal" onsubmit="event.preventDefault(); window.open('https://wa.me/573124672674?text=Hola%20Sonrisa%20Premium,%20mi%20nombre%20es%20' + encodeURIComponent(this.nombre.value) + '%20y%20quiero%20agendar%20una%20consulta.%20' + encodeURIComponent(this.mensaje.value), '_blank');">
-        <div class="contacto-form-header">
-          <strong>Agenda tu consulta</strong>
-          <span style="display:inline-flex;align-items:center;gap:8px;"><span class="status-dot"></span>Respuesta en menos de 2 horas</span>
-        </div>
-        <input type="text" name="nombre" placeholder="Nombre completo" required>
-        <input type="tel" name="telefono" placeholder="Teléfono o WhatsApp" required>
-        <input type="text" name="motivo" placeholder="Motivo de consulta (opcional)">
-        <textarea name="mensaje" placeholder="Cuéntanos brevemente cómo te podemos ayudar"></textarea>
-        <button type="submit">
-          Enviar por WhatsApp
-          <svg viewBox="0 0 24 24" fill="none" width="14" height="14"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-        </button>
-      </form>
+    <div class="faq-item">
+      <button class="faq-question">
+        <span>¿Qué son los implantes dentales y cuánto duran?</span>
+        <span class="faq-toggle"><svg viewBox="0 0 24 24" fill="none" width="20" height="20"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span>
+      </button>
+      <div class="faq-answer"><p>Un implante dental es una raíz artificial de titanio que reemplaza un diente perdido. Bien colocados y con higiene adecuada, los implantes pueden durar toda la vida. En Sonrisa Ivory planeamos cada cirugía con tomografía 3D antes de tocar al paciente.</p></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        <span>¿Manejan el dolor durante los procedimientos?</span>
+        <span class="faq-toggle"><svg viewBox="0 0 24 24" fill="none" width="20" height="20"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span>
+      </button>
+      <div class="faq-answer"><p>Usamos anestesia local de última generación y, para procedimientos más complejos, sedación consciente supervisada. El 92% de nuestros pacientes reporta sentir nada o solo presión leve. Si tienes ansiedad dental, lo conversamos antes de cualquier procedimiento.</p></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question"><span>¿Qué incluye la primera valoración?</span><span class="faq-toggle"><svg viewBox="0 0 24 24" fill="none" width="20" height="20"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span></button>
+      <div class="faq-answer"><p>La primera valoración incluye examen, diagnóstico inicial y un plan de tratamiento con presupuesto por escrito, sin compromiso.</p></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question"><span>¿Qué formas de pago manejan?</span><span class="faq-toggle"><svg viewBox="0 0 24 24" fill="none" width="20" height="20"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span></button>
+      <div class="faq-answer"><p>Aceptamos efectivo, tarjetas débito y crédito. Para los tratamientos más grandes manejamos facilidades de pago; pregúntanos por las opciones.</p></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question"><span>¿Dónde quedan y qué horarios tienen?</span><span class="faq-toggle"><svg viewBox="0 0 24 24" fill="none" width="20" height="20"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span></button>
+      <div class="faq-answer"><p>Tenemos 3 sedes: Chapinero y Chicó en Bogotá, y El Poblado en Medellín. Atendemos de lunes a viernes de 7:00 a 19:00 y sábados de 8:00 a 14:00.</p></div>
     </div>
   </div>
 </section>
@@ -722,54 +641,394 @@ body.has-banner .navbar { top: 36px; }
 <footer>
   <div class="footer-grid">
     <div class="footer-brand">
-      <strong>Sonrisa Premium</strong>
-      <span>Odontología · Laureles</span>
-      <p>Odontología premium en el corazón de Laureles, Medellín. Más de 8 años dedicados a sonrisas que duran toda la vida.</p>
+      <strong>Sonrisa Ivory</strong>
+      <span>Odontología · Bogotá y Medellín</span>
+      <p>Prevención, diagnóstico y tratamiento de enfermedades dentales y orales en Bogotá y Medellín.</p>
     </div>
     <div class="footer-col">
-      <h4>Tratamientos</h4>
+      <h4>Servicios</h4>
       <ul>
-        <li><a href="servicios/ortodoncia.html">Ortodoncia</a></li>
-        <li><a href="servicios/implantes.html">Implantes</a></li>
-        <li><a href="servicios/blanqueamiento.html">Blanqueamiento</a></li>
-        <li><a href="servicios/index.html">Ver todos</a></li>
+        <li><a href="ortodoncia.html">Ortodoncia</a></li>
+        <li><a href="implantes.html">Implantes dentales</a></li>
+        <li><a href="blanqueamiento.html">Blanqueamiento</a></li>
+        <li><a href="diseno-de-sonrisa.html">Diseño de sonrisa</a></li>
+        <li><a href="endodoncia.html">Endodoncia</a></li>
+        <li><a href="odontologia-general.html">Odontología general</a></li>
       </ul>
     </div>
     <div class="footer-col">
-      <h4>Clínica</h4>
+      <h4>Información</h4>
       <ul>
-        <li><a href="nosotros.html">Nuestro equipo</a></li>
+        <li><a href="nosotros.html">Nosotros</a></li>
+        <li><a href="index.html#equipo">Equipo</a></li>
         <li><a href="blog/index.html">Blog</a></li>
         <li><a href="contacto.html">Contacto</a></li>
       </ul>
     </div>
     <div class="footer-col">
-      <h4>Contacto</h4>
+      <h4>Atención</h4>
       <ul>
-        <li>Cra 73 # 33-18</li>
-        <li>Laureles, Medellín</li>
         <li><a href="https://wa.me/573124672674">+57 312 467 2674</a></li>
+        <li><a href="tel:+573124672674">+57 312 467 2674</a></li>
+        <li><a href="mailto:info@sonrisaivory.com">info@sonrisaivory.com</a></li>
       </ul>
     </div>
   </div>
   <div class="footer-bottom">
-    <p>© 2026 Sonrisa Premium. Todos los derechos reservados.</p>
-    <p>Diseño y desarrollo · <strong style="color:var(--accent);">Pronto Web Design</strong></p>
+    <p>© 2026 Sonrisa Ivory · Web por <a href="https://prontoweb.co" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline">Pronto</a></p>
+    <p>Bogotá · Medellín</p>
   </div>
 </footer>
 
-<!-- ─── WHATSAPP FLOAT ───────────────────────────────────── -->
-<a href="https://wa.me/573124672674?text=Hola%20Sonrisa%20Premium,%20quiero%20agendar%20una%20consulta" target="_blank" class="wsp-float" aria-label="WhatsApp">
+<a href="https://wa.me/573124672674?text=Hola,%20vengo%20de%20su%20página%20web%20y%20quiero%20agendar%20una%20cita." target="_blank" class="wa-float" id="waFloat" data-wa-base="https://wa.me/573124672674?text=" aria-label="WhatsApp">
+  <span class="wa-float-label" id="waFloatLabel">Agenda tu cita</span>
   <svg viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.371-.025-.52-.075-.149-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
 </a>
 
-<!-- Navbar scroll y reveal animations ahora manejados por assets/animations.js (GSAP) -->
-
-
-<!-- ANIMACIONES GSAP -->
+<!-- ANIMACIONES GSAP + módulos Pronto (animations.js de Ivory: intacto) -->
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
-<script src="assets/animations.js" defer></script>
+<script src="assets/animations.js?v=20260814a" defer></script>
+<script src="assets/wa-widget.js?v=1" defer></script>
+<script src="assets/nav.js?v=1" defer></script>
+
+<!-- Inline del master: reloj (guardado, el hero Ivory no lo usa), FAQ accordion y carrusel del equipo -->
+<script>
+  if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; }
+  window.addEventListener('beforeunload', () => window.scrollTo(0, 0));
+
+  // Reloj live + día
+  const dayName = document.getElementById('dayName');
+  const clockEl = document.getElementById('liveClock');
+  const days = ['domingo','lunes','martes','miércoles','jueves','viernes','sábado'];
+  function tickClock() {
+    const now = new Date();
+    const opts = { timeZone: 'America/Bogota', hour: '2-digit', minute: '2-digit', hour12: false };
+    if (clockEl) clockEl.textContent = now.toLocaleTimeString('es-CO', opts);
+    if (dayName) dayName.textContent = days[new Date().getDay()];
+  }
+  tickClock(); setInterval(tickClock, 1000);
+
+  // Navbar scroll
+  const navbar = document.getElementById('navbar');
+  if (navbar) {
+    const onScroll = () => navbar.classList.toggle('scrolled', window.scrollY > 60);
+    window.addEventListener('scroll', onScroll, { passive: true });
+  }
+
+  // FAQ accordion
+  document.querySelectorAll('.faq-item').forEach(item => {
+    const btn = item.querySelector('.faq-question');
+    btn.addEventListener('click', () => {
+      const wasOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!wasOpen) item.classList.add('open');
+    });
+  });
+
+  // Team carrusel
+  const teamData = [
+    {
+      name: 'Dra. Lucía Restrepo',
+      exp: 'Más de 10 años de experiencia',
+      bio: 'Especialista en ortodoncia formada en la Universidad de Antioquia. Más de 10 años corrigiendo sonrisas con brackets metálicos, estéticos e Invisalign. "Escuchar primero, diagnosticar después."',
+      img: 'img/doctora-lucia-ember.jpg',
+      wa: 'Hola,%20vengo%20de%20su%20página%20web%20y%20quiero%20agendar%20una%20cita%20con%20un%20especialista.'
+    },
+    {
+      name: 'Dr. Andrés Mejía',
+      exp: 'Implantes · Rehabilitación oral',
+      bio: 'Especialista en implantes de titanio y cirugía guiada por tomografía 3D. Cada implante se planea milimétricamente antes de tocar al paciente. Más de 8 años en rehabilitación oral compleja.',
+      img: 'img/doctor-andres-ember.jpg',
+      wa: 'Hola,%20vengo%20de%20su%20página%20web%20y%20quiero%20agendar%20una%20cita%20con%20un%20especialista.'
+    },
+    {
+      name: 'Dra. Camila Vargas',
+      exp: 'Diseño de sonrisa · Estética dental',
+      bio: 'Experta en carillas, blanqueamiento profesional y diseño digital de sonrisa. Técnicas mínimamente invasivas con resultados naturales. Cada caso se previsualiza antes de comenzar.',
+      img: 'img/doctora-camila-ember.jpg',
+      wa: 'Hola,%20vengo%20de%20su%20página%20web%20y%20quiero%20agendar%20una%20cita%20con%20un%20especialista.'
+    }
+  ];
+  let teamIdx = 0;
+  function renderTeam() {
+    const d = teamData[teamIdx];
+    document.getElementById('teamName').textContent = d.name;
+    document.getElementById('teamExp').textContent = d.exp;
+    document.getElementById('teamBio').textContent = d.bio;
+    document.getElementById('teamIndex').textContent = teamIdx + 1;
+    const ph = document.querySelector('.team-photo img');
+    ph.src = d.img; ph.alt = d.name;
+    document.querySelector('.team-book').href = 'https://wa.me/573124672674?text=' + d.wa;
+  }
+
+  /* ── Auto-rotación del equipo (28-jul, v4 · compatible Safari) ─────────────
+     Cada especialista queda plenamente visible TEAM_EVERY ms; el crossfade
+     (2×TEAM_FADE ≈ 1.6s) va aparte, así que el cambio real ocurre cada ~4.6s.
+     Pausa al pasar el mouse, al tocar y al usar las flechas; no gira si la
+     tarjeta no está a la vista o la pestaña está en segundo plano.
+
+     POR QUÉ ESTA IMPLEMENTACIÓN: la v2 usaba Web Animations API y en Safari el
+     carrusel quedaba congelado (getAnimations() lanzaba y la bandera "ocupado"
+     nunca se liberaba). La v3 pasó a transición CSS por estilo en línea +
+     setTimeout, pero tenía dos vicios de reloj: (1) el tick reseteaba teamLast
+     mientras la animación corría, así que la cadencia real era TEAM_EVERY+1s y
+     nunca la configurada; (2) el perro guardián era un setTimeout de 2400ms con
+     solo 760ms de margen sobre el fin normal del crossfade (1640ms) — cualquier
+     jank o throttling lo hacía disparar A MITAD del fade-in y la tarjeta
+     aparecía de golpe (transition:none). v4: el contador de TEAM_EVERY arranca
+     al TERMINAR el crossfade, y el perro guardián es por reloj de pared dentro
+     del propio tick, con margen de 2.4s — imposible que pise una animación
+     sana, y si algo de verdad se atasca lo libera en <4.3s. Sin WAAPI, sin
+     promesas, sin transitionend. ES5-safe. ───────────────────────────────── */
+  var teamCard  = document.getElementById('teamCarousel');
+  var teamPhoto = document.querySelector('.team-photo img');
+  var TEAM_FADE = 750;    // duración de cada lado del crossfade (ms)
+  var TEAM_EVERY = 3000;  // ms que cada especialista queda visible (tras el crossfade)
+  var TEAM_ANIM = TEAM_FADE * 2 + 140;             // duración total del crossfade (out+swap+in)
+  var teamBusy = false, teamHover = false, teamPausedUntil = 0, teamLast = Date.now();
+  var teamT1 = null, teamT2 = null, teamSwitchStart = 0;
+
+  for (var tp = 0; tp < teamData.length; tp++) { var tImg = new Image(); tImg.src = teamData[tp].img; } // precarga
+
+  /* Cada nodo guarda SU opacidad de diseño (la foto 1, el subtítulo 0.7, la bio
+     0.85). Al reaparecer se devuelve a ese valor, no a 1: así el fundido nunca
+     altera el diseño original de la tarjeta. */
+  var teamNodes = [];
+  function teamReg(el, oculto) {
+    if (!el) return;
+    var op = 1;
+    try { op = parseFloat(window.getComputedStyle(el).opacity); } catch (e) {}
+    if (!(op > 0)) op = 1;
+    teamNodes.push({ el: el, op: op, hid: oculto });
+  }
+  teamReg(teamPhoto, 'scale(1.02)');
+  teamReg(document.getElementById('teamName'), 'translateY(8px)');
+  teamReg(document.getElementById('teamExp'),  'translateY(8px)');
+  teamReg(document.getElementById('teamBio'),  'translateY(8px)');
+
+  function teamApply(visible) {
+    for (var i = 0; i < teamNodes.length; i++) {
+      var n = teamNodes[i];
+      n.el.style.opacity   = visible ? String(n.op) : '0';
+      n.el.style.transform = visible ? 'none' : n.hid;
+    }
+  }
+  function teamTransition(on) {
+    var t = on ? ('opacity ' + TEAM_FADE + 'ms ease-in-out, transform ' + TEAM_FADE + 'ms ease-in-out') : 'none';
+    for (var i = 0; i < teamNodes.length; i++) teamNodes[i].el.style.transition = t;
+  }
+  /* Salida de emergencia: pase lo que pase, la tarjeta queda visible y libre.
+     Solo la usa el perro guardián del tick y los catch — NUNCA el flujo normal. */
+  function teamRelease() {
+    if (teamT1) { clearTimeout(teamT1); teamT1 = null; }
+    if (teamT2) { clearTimeout(teamT2); teamT2 = null; }
+    teamBusy = false;
+    try { teamTransition(false); teamApply(true); } catch (e) {}
+    teamLast = Date.now();
+  }
+  function switchTeam(idx) {
+    if (teamBusy) return;
+    teamBusy = true;
+    teamSwitchStart = Date.now();       // el perro guardián del tick vigila desde aquí
+    if (teamT1) clearTimeout(teamT1);
+    if (teamT2) clearTimeout(teamT2);
+    var target = ((idx % teamData.length) + teamData.length) % teamData.length;
+    try {
+      teamTransition(true);
+      void teamCard.offsetWidth;        // reflow: garantiza que la transición arranque
+      teamApply(false);                 // desvanecer
+    } catch (e) { teamRelease(); return; }
+    teamT1 = setTimeout(function () {
+      teamT1 = null;
+      try {
+        teamIdx = target;
+        renderTeam();                   // cambio de doctor mientras está invisible
+        void teamCard.offsetWidth;      // reflow
+        teamApply(true);                // aparecer
+      } catch (e) {}
+      teamT2 = setTimeout(function () {
+        teamT2 = null;
+        teamBusy = false;
+        teamLast = Date.now();          // los 3s visibles cuentan DESDE que termina el crossfade
+      }, TEAM_FADE + 100);
+    }, TEAM_FADE + 40);
+  }
+  /* ¿La tarjeta está a la vista? Con IntersectionObserver, NO con
+     getBoundingClientRect(): el <body> lleva zoom CSS y Safari calcula mal esas
+     coordenadas cuando hay zoom (devolvía "fuera de pantalla" con la tarjeta
+     perfectamente visible, y por eso el carrusel no rotaba en Safari).
+     Por defecto asumimos visible: si el observador falla, rota igual. */
+  var teamOnScreen = true;
+  if ('IntersectionObserver' in window) {
+    try {
+      new IntersectionObserver(function (entries) {
+        for (var i = 0; i < entries.length; i++) {
+          var vis = entries[i].isIntersecting;
+          if (vis && !teamOnScreen) teamLast = Date.now();  // al entrar, ciclo completo
+          teamOnScreen = vis;
+        }
+      }, { threshold: 0.15 }).observe(teamCard);
+    } catch (e) { teamOnScreen = true; }
+  }
+  function teamVisible() { return teamOnScreen; }
+  function teamPause(ms) { teamPausedUntil = Date.now() + ms; }
+
+  /* Hover: se le pregunta al DOM en vez de confiar solo en la bandera, porque
+     WebKit no siempre dispara mouseleave cuando el contenido se mueve por scroll
+     sin mover el mouse (la bandera se quedaba pegada en true). En pantallas
+     táctiles ni se consulta. */
+  var teamFinePointer = true;
+  try { teamFinePointer = !window.matchMedia || window.matchMedia('(hover: hover)').matches; } catch (e) {}
+  function teamIsHover() {
+    if (!teamFinePointer) return false;
+    try { if (teamCard.matches) return teamCard.matches(':hover'); } catch (e) {}
+    return teamHover;
+  }
+
+  setInterval(function () {
+    var now = Date.now();
+    if (teamBusy) {
+      // Perro guardián por reloj de pared: solo actúa si el crossfade lleva
+      // 2.4s MÁS de lo que dura (timers perdidos de verdad, no simple jank).
+      // NO toca teamLast ni el conteo: eso lo hace teamT2 al terminar.
+      if (now - teamSwitchStart > TEAM_ANIM + 2400) teamRelease();
+      return;
+    }
+    if (teamIsHover() || now < teamPausedUntil || document.hidden || !teamVisible()) {
+      teamLast = now;                   // reinicia el conteo: al volver espera el ciclo completo
+      return;
+    }
+    if (now - teamLast >= TEAM_EVERY) switchTeam(teamIdx + 1);
+  }, 250);
+
+  document.getElementById('teamPrev').addEventListener('click', function () { switchTeam(teamIdx - 1); teamPause(12000); });
+  document.getElementById('teamNext').addEventListener('click', function () { switchTeam(teamIdx + 1); teamPause(12000); });
+  teamCard.addEventListener('mouseenter', function () { teamHover = true; });
+  teamCard.addEventListener('mouseleave', function () { teamHover = false; teamLast = Date.now(); });
+  teamCard.addEventListener('touchstart', function () { teamPause(10000); }, { passive: true });
+</script>
+
+<!-- Conexión del formulario del home al Worker de Pronto (mismo endpoint que contacto.html) -->
+<script>
+(function () {
+  var form = document.getElementById('contactForm');
+  if (!form) return;
+  var ENDPOINT = 'https://pronto-forms-worker.cesargomezs711.workers.dev/contact';
+  var CLINICA = 'Sonrisa Ivory';
+  var WA_CLINICA = '573124672674';
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var nombre = (form.nombre.value || '').trim();
+    var telefono = (form.telefono.value || '').trim();
+    var servicio = form.servicio ? form.servicio.value : '';
+    var mensaje = form.mensaje ? (form.mensaje.value || '').trim() : '';
+    var email = form.email ? (form.email.value || '').trim() : '';
+    // Reescribe los valores ya recortados y deja que la validación nativa avise si un obligatorio
+    // quedó vacío (incluido el caso "solo espacios"): muestra "Completa este campo" y enfoca el campo.
+    form.nombre.value = nombre;
+    form.telefono.value = telefono;
+    if (form.email) form.email.value = email;
+    if (typeof form.reportValidity === 'function' && !form.reportValidity()) return;
+    if (!nombre || !telefono) return;
+    // 1) Abre el WhatsApp del PACIENTE con sus datos ya escritos. Al darle "enviar" nace un chat
+    //    real con la recepción (ve su número y le responde en ese mismo chat). window.open va
+    //    primero, dentro del gesto del clic, para que el navegador no lo bloquee.
+    //    El texto llega como una ficha de lead limpia y clara (viene de la web), lista para atender.
+    var txt = 'Hola, le escribo desde su página web.';
+    txt += '\n\n*Nombre:* ' + nombre;
+    txt += '\n*Teléfono:* ' + telefono;
+    if (email) txt += '\n*Correo:* ' + email;
+    if (servicio) txt += '\n*Servicio de interés:* ' + servicio;
+    if (mensaje) txt += '\n*Comentario:* ' + mensaje;
+    txt += '\n\nEspero su respuesta. ¡Gracias!';
+    var waUrl = 'https://wa.me/' + WA_CLINICA + '?text=' + encodeURIComponent(txt);
+    window.open(waUrl, '_blank');
+    // 2) En segundo plano: confirmación por correo al paciente + conteo para el reporte mensual.
+    try {
+      fetch(ENDPOINT, {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ clinica: CLINICA, nombre: nombre, telefono: telefono, email: email, servicio: servicio, mensaje: mensaje })
+      }).catch(function () {});
+    } catch (e2) {}
+    // 3) Confirmación en la página (con enlace de respaldo si el navegador bloqueó la ventana).
+    var primerNombre = (nombre.split(/\s+/)[0] || nombre);
+    form.innerHTML =
+      '<div style="text-align:center;padding:24px 8px">' +
+      '<style>@keyframes pbPop{0%{transform:scale(.2);opacity:0}60%{transform:scale(1.1)}100%{transform:scale(1);opacity:1}}.pb-check{animation:pbPop .5s cubic-bezier(.2,.8,.2,1) both}</style>' +
+      '<svg class="pb-check" viewBox="0 0 52 52" width="62" height="62" style="display:block;margin:0 auto 16px" aria-hidden="true"><circle cx="26" cy="26" r="26" fill="#25D366"/><path d="M15.5 27l6.5 6.5L36.5 19" fill="none" stroke="#fff" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/></svg>' +
+      '<strong style="display:block;font-family:\'Inter\',sans-serif;font-size:22px;font-weight:500;letter-spacing:-0.02em;color:var(--black);margin-bottom:8px">¡Listo, ' + primerNombre + '!</strong>' +
+      '<p style="color:var(--gray);font-size:15px;line-height:1.6">Abrimos WhatsApp con tu solicitud lista. Dale <b>enviar</b> y la recepción te responde por ahí mismo.</p>' +
+      '<p style="font-size:13px;margin-top:12px"><a href="' + waUrl + '" target="_blank" style="color:var(--black);text-decoration:underline">¿No se abrió? Toca aquí para abrir el chat</a></p>' +
+      '</div>';
+  });
+})();
+</script>
+
+<!-- Propio de Ivory: contadores [data-counter] + barra de progreso + flecha del hero.
+     El animations.js de Ivory (intacto, mejor que el del master) no maneja contadores ni
+     #scrollProgress; esto los cubre sin GSAP y sin tocar assets/. -->
+<script>
+(function () {
+  // Contadores de la clínica: cuentan al entrar en pantalla (valor final directo si no hay
+  // IntersectionObserver o el usuario prefiere menos movimiento).
+  var counters = Array.prototype.slice.call(document.querySelectorAll('[data-counter]'));
+  function fmt(el, v) {
+    var d = parseInt(el.getAttribute('data-decimals') || '0', 10);
+    return (el.getAttribute('data-prefix') || '') + v.toFixed(d) + (el.getAttribute('data-suffix') || '');
+  }
+  function finish(el) { el.textContent = fmt(el, parseFloat(el.getAttribute('data-counter'))); }
+  var reduce = false;
+  try { reduce = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches); } catch (e) {}
+  function run(el) {
+    if (el.__prontoCounted) return;
+    el.__prontoCounted = true;
+    var target = parseFloat(el.getAttribute('data-counter')), t0 = null, DUR = 1800;
+    if (reduce || !window.requestAnimationFrame) { finish(el); return; }
+    function step(ts) {
+      if (t0 === null) t0 = ts;
+      var p = Math.min(1, (ts - t0) / DUR);
+      p = 1 - Math.pow(1 - p, 3);
+      el.textContent = fmt(el, target * p);
+      if (p < 1) requestAnimationFrame(step); else finish(el);
+    }
+    requestAnimationFrame(step);
+  }
+  if (counters.length) {
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) { if (e.isIntersecting) { run(e.target); io.unobserve(e.target); } });
+      }, { rootMargin: '0px 0px -80px 0px' });
+      counters.forEach(function (el) { io.observe(el); });
+    } else { counters.forEach(finish); }
+  }
+
+  // Barra de progreso de scroll
+  var bar = document.getElementById('scrollProgress');
+  if (bar) {
+    var onScroll = function () {
+      var h = document.documentElement;
+      var max = (h.scrollHeight - h.clientHeight) || 1;
+      var y = window.pageYOffset || h.scrollTop || 0;
+      bar.style.transform = 'scaleX(' + Math.min(1, Math.max(0, y / max)) + ')';
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    onScroll();
+  }
+
+  // La flecha del hero (intocable) apunta a #nosotros, sección que ya no existe: baja a la clínica.
+  var hs = document.querySelector('.hero-scroll[href="#nosotros"]');
+  if (hs && !document.getElementById('nosotros')) {
+    hs.addEventListener('click', function (e) {
+      var t = document.getElementById('clinica');
+      if (!t) return;
+      e.preventDefault();
+      t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  }
+})();
+</script>
 
 </body>
 </html>
