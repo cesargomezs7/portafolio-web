@@ -435,6 +435,21 @@
         d.querySelectorAll('.reveal, .word-inner').forEach(function (el) {
           el.style.opacity = '1'; el.style.transform = 'none';
         });
+        // Ivory pisa el opacity desde el CSS, así que el inline no alcanza:
+        // se inyecta una regla con !important dentro del propio iframe.
+        if (!d.getElementById('pronto-despertar')) {
+          var st = d.createElement('style');
+          st.id = 'pronto-despertar';
+          st.textContent = '.reveal,.word-inner{opacity:1 !important;transform:none !important;animation:none !important;}';
+          (d.head || d.documentElement).appendChild(st);
+        }
+        // Contadores: sin rAF se quedan en 0 y se lee "+0 Años de experiencia".
+        d.querySelectorAll('[data-counter]').forEach(function (el) {
+          var v = parseFloat(el.dataset.counter);
+          if (isNaN(v)) return;
+          var dec = parseInt(el.dataset.decimals || '0', 10);
+          el.textContent = (el.dataset.prefix || '') + v.toFixed(dec) + (el.dataset.suffix || '');
+        });
       } catch (e) {}
     }, 450);
   }
