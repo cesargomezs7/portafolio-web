@@ -143,6 +143,41 @@
   .s-inter .inter{display:flex;flex-direction:column;gap:26px;}
   .s-inter .inter-item{display:flex;align-items:center;gap:20px;font-family:var(--font-body);font-weight:500;font-size:30px;letter-spacing:-0.01em;color:var(--ink);max-width:1050px;}
   .s-inter .inter-item .ck{width:44px;height:44px;border-radius:var(--radius);background:var(--gradient);color:#06121a;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:22px;flex:none;}
+
+  /* ── Slide de contacto (20): cierra el video B ───────────────────────────
+     El prospecto oye el número al final y no alcanza a anotarlo: le toca
+     devolver el video. Esta slide lo deja en pantalla unos segundos, con el
+     número en mono y grande para que se lea de una o se capture. */
+  .s-contacto{justify-content:center;align-items:center;text-align:center;}
+  .s-contacto .ct-eyebrow{
+    font-family:var(--font-mono);font-size:12px;letter-spacing:.22em;
+    text-transform:uppercase;color:var(--text-dim);margin-bottom:26px;}
+  .s-contacto h1{font-size:44px;margin-bottom:44px;}
+  .s-contacto .ct-card{
+    display:flex;flex-direction:column;align-items:center;gap:6px;
+    padding:38px 76px;border-radius:var(--radius-lg);
+    border:1px solid var(--border-strong);background:var(--surface-1);
+    box-shadow:0 20px 60px rgba(0,0,0,.45);}
+  .s-contacto .ct-nombre{
+    font-family:var(--font-display);font-variation-settings:'opsz' 144;
+    font-size:38px;font-weight:450;color:var(--ink);letter-spacing:-.01em;}
+  .s-contacto .ct-rol{
+    font-family:var(--font-body);font-size:15px;color:var(--text-muted);
+    margin-bottom:24px;}
+  .s-contacto .ct-tel{
+    font-family:var(--font-mono);font-size:52px;font-weight:500;
+    letter-spacing:.02em;line-height:1.1;
+    background:var(--gradient);-webkit-background-clip:text;background-clip:text;
+    -webkit-text-fill-color:transparent;}
+  .s-contacto .ct-tel-lbl{
+    font-family:var(--font-mono);font-size:11px;letter-spacing:.2em;
+    text-transform:uppercase;color:var(--text-dim);margin-bottom:8px;}
+  .s-contacto .ct-web{
+    margin-top:30px;padding-top:22px;border-top:1px solid var(--border);
+    width:100%;font-family:var(--font-mono);font-size:16px;color:var(--text);}
+  .s-contacto .ct-web span{color:var(--text-dim);}
+  .s-contacto .ct-foot{
+    margin-top:38px;font-family:var(--font-body);font-size:15px;color:var(--text-muted);}
 </style>
 </head>
 <body>
@@ -272,6 +307,21 @@
     </div>
   </section>
 
+  <!-- CONTACTO — última slide del video B -->
+  <section class="slide s-contacto" data-s="20">
+    <div class="logo">Pronto</div>
+    <div class="ct-eyebrow">Cualquier duda</div>
+    <h1>Escríbame por aquí</h1>
+    <div class="ct-card">
+      <div class="ct-nombre">César Gómez</div>
+      <div class="ct-rol">Pronto · Páginas web para clínicas dentales</div>
+      <div class="ct-tel-lbl">WhatsApp</div>
+      <div class="ct-tel">312 467 2674</div>
+      <div class="ct-web">prontoweb.co<span>/portafolio</span></div>
+    </div>
+    <div class="ct-foot">Los 4 diseños quedan ahí, sin vencimiento.</div>
+  </section>
+
 </div>
 <script>
   /* fit() — 24-jul: el lienzo se ADAPTA al aspecto de la pantalla en vez de quedarse
@@ -328,7 +378,7 @@
     var s=window._s||1;
     if(e.key==='ArrowRight'){
       if(s===10 && precioStep<2){ setPrecio(precioStep+1); return; }
-      var ns=Math.min(s+1,19); if(ns===10) precioStep=0; show(ns);
+      var ns=Math.min(s+1,20); if(ns===10) precioStep=0; show(ns);
     }
     if(e.key==='ArrowLeft'){
       if(s===10 && precioStep>0){ setPrecio(precioStep-1); return; }
