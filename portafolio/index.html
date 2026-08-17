@@ -432,17 +432,21 @@
             });
           }
         }
-        d.querySelectorAll('.reveal, .word-inner').forEach(function (el) {
-          el.style.opacity = '1'; el.style.transform = 'none';
-        });
         // Ivory pisa el opacity desde el CSS, así que el inline no alcanza:
         // se inyecta una regla con !important dentro del propio iframe.
         if (!d.getElementById('pronto-despertar')) {
           var st = d.createElement('style');
           st.id = 'pronto-despertar';
-          st.textContent = '.reveal,.word-inner{opacity:1 !important;transform:none !important;animation:none !important;}';
+          // transition:none es CLAVE, no cosmético: Ivory anima el opacity con una
+          // transición de 0.8s, y las transiciones también avanzan por rAF. Con rAF
+          // pausado la transición se congela en su valor inicial (0) y el elemento
+          // nunca aparece, aunque el inline diga opacity:1.
+          st.textContent = '.reveal,.word-inner{opacity:1 !important;transform:none !important;animation:none !important;transition:none !important;}';
           (d.head || d.documentElement).appendChild(st);
         }
+        d.querySelectorAll('.reveal, .word-inner').forEach(function (el) {
+          el.style.opacity = '1'; el.style.transform = 'none';
+        });
         // Contadores: sin rAF se quedan en 0 y se lee "+0 Años de experiencia".
         d.querySelectorAll('[data-counter]').forEach(function (el) {
           var v = parseFloat(el.dataset.counter);
