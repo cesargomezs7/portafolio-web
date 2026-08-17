@@ -213,6 +213,10 @@
     border: 1px solid var(--border-strong);
     box-shadow: 0 16px 48px rgba(0,0,0,0.45);
     aspect-ratio: 16 / 9;
+    /* content-box para que el aspect-ratio describa el hueco interior y no el
+       marco: con border-box el borde del celular robaba alto y dejaba una franja
+       negra debajo del sitio. */
+    box-sizing: content-box;
     background: var(--bg);
     position: relative;
     transition: max-width 0.45s cubic-bezier(0.65,0,0.35,1),
@@ -389,7 +393,16 @@
     { name: 'Sonrisa Ivory',   url: 'https://prontoweb.co/clientes-piloto/sonrisa-premium-ivory/' },
     { name: 'Sonrisa Atelier', url: 'https://prontoweb.co/clientes-piloto/sonrisa-premium-atelier/' }
   ];
-  var demoState = { idx: 0, viewport: 'desktop' };
+  // Arranca en el modo del aparato con que abren: 8 de cada 10 prospectos entran
+  // por celular y veían el sitio encogido al 23%, ilegible en los primeros segundos.
+  function modoInicial() {
+    try {
+      var angosto = window.matchMedia('(max-width: 820px)').matches;
+      var tactil = ('ontouchstart' in window) || navigator.maxTouchPoints > 0;
+      return (angosto || (tactil && window.innerWidth < 1024)) ? 'mobile' : 'desktop';
+    } catch (e) { return 'desktop'; }
+  }
+  var demoState = { idx: 0, viewport: modoInicial() };
 
   function scaleIframe() {
     var c = document.querySelector('.live-demo-container');
@@ -398,7 +411,10 @@
     if (!iframe) return;
     var isMobile = c.classList.contains('mobile');
     var baseWidth = isMobile ? 430 : 1440;
-    var scale = c.offsetWidth / baseWidth;
+    // clientWidth, NO offsetWidth: offsetWidth incluye el borde de 8px del marco
+    // del celular, así que el iframe quedaba 16px más ancho que su hueco y se comía
+    // el botón flotante de WhatsApp por la derecha. (arreglado 17-ago-2026)
+    var scale = c.clientWidth / baseWidth;
     iframe.style.transform = 'scale(' + scale + ')';
   }
 
@@ -458,7 +474,15 @@
 
   window.addEventListener('resize', scaleIframe);
   window.addEventListener('load', scaleIframe);
-  scaleIframe();
+  // Pinta de una el modo detectado (marco + botón activo) sin animación de entrada.
+  (function sincronizarModoInicial() {
+    var c = document.querySelector('.live-demo-container');
+    if (c) c.classList.toggle('mobile', demoState.viewport === 'mobile');
+    document.querySelectorAll('.viewport-btn').forEach(function(b) {
+      b.classList.toggle('active', b.dataset.viewport === demoState.viewport);
+    });
+    scaleIframe();
+  })();
 </script>
 
 </body>
