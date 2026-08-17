@@ -404,6 +404,41 @@
   }
   var demoState = { idx: 0, viewport: modoInicial() };
 
+  // ── Despertar las animaciones del sitio embebido ──────────────────────────
+  // Las demos animan su entrada con GSAP, que vive de requestAnimationFrame.
+  // Algunos navegadores PAUSAN rAF dentro de un iframe escalado con transform:
+  // GSAP no corre nunca y el sitio queda con los textos en opacity 0, o sea el
+  // hero en blanco. Se detecta midiendo si rAF late; si no late, se saltan las
+  // animaciones a su estado final. Es exactamente el mismo fallback que los
+  // propios sitios traen para cuando GSAP no carga (animations.js:34).
+  // Si rAF sí late, no se toca nada y las animaciones corren normales.
+  function despertarDemo(iframe) {
+    var w, d;
+    try { w = iframe.contentWindow; d = iframe.contentDocument; } catch (e) { return; }
+    if (!w || !d) return;
+    var ticks = 0, t0 = Date.now();
+    function latido() { ticks++; if (Date.now() - t0 < 350) { try { w.requestAnimationFrame(latido); } catch (e) {} } }
+    try { w.requestAnimationFrame(latido); } catch (e) { return; }
+    setTimeout(function () {
+      if (ticks > 3) return; // rAF vivo → las animaciones se disparan solas
+      try {
+        if (w.gsap) {
+          w.gsap.globalTimeline.getChildren(true, true, true).forEach(function (tw) {
+            try { tw.progress(1); } catch (e) {}
+          });
+          if (w.ScrollTrigger) {
+            w.ScrollTrigger.getAll().forEach(function (st) {
+              try { if (st.animation) st.animation.progress(1); } catch (e) {}
+            });
+          }
+        }
+        d.querySelectorAll('.reveal, .word-inner').forEach(function (el) {
+          el.style.opacity = '1'; el.style.transform = 'none';
+        });
+      } catch (e) {}
+    }, 450);
+  }
+
   function scaleIframe() {
     var c = document.querySelector('.live-demo-container');
     if (!c) return;
@@ -452,6 +487,7 @@
       if (iframe.src !== demo.url) iframe.src = demo.url;
       scaleIframe();
       iframe.style.opacity = '1';
+      despertarDemo(iframe);
     }, delay);
   }
 
@@ -482,6 +518,11 @@
       b.classList.toggle('active', b.dataset.viewport === demoState.viewport);
     });
     scaleIframe();
+    var ifr = document.getElementById('demo-iframe');
+    if (ifr) {
+      ifr.addEventListener('load', function () { despertarDemo(ifr); });
+      if (ifr.contentDocument && ifr.contentDocument.readyState === 'complete') despertarDemo(ifr);
+    }
   })();
 </script>
 
