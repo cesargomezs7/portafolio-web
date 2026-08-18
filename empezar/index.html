@@ -294,7 +294,7 @@
     </div>
     <div class="files" id="files-fotos"></div>
 
-    <label class="q" style="margin-top:24px">¿Con cuál diseño quiere su web? <span class="opt">(<a href="https://prontoweb.co/portafolio" target="_blank" rel="noopener" style="color:var(--cyan)">verlos</a>)</span></label>
+    <label class="q" style="margin-top:24px">¿Con cuál diseño quiere su web? <span class="opt">(<a href="https://prontoweb.co/portafolio/" target="_blank" rel="noopener" style="color:var(--cyan)">verlos en vivo</a>)</span></label>
     <div class="choices" data-radio="estilo">
       <label class="choice sel"><input type="radio" name="estilo" value="demo-master" checked><span class="dot"></span><span class="thumb"><img decoding="async" src="disenos/azul.jpg" alt="Vista del diseño Sonrisa Azul" width="360" height="270"></span><span class="c-body"><strong>Sonrisa Azul</strong><span>Recomendado: el azul es el color que la gente asocia con odontología</span></span></label>
       <label class="choice"><input type="radio" name="estilo" value="ember"><span class="dot"></span><span class="thumb"><img decoding="async" src="disenos/ember.jpg" alt="Vista del diseño Sonrisa Ember" width="360" height="270"></span><span class="c-body"><strong>Sonrisa Ember</strong><span>Oscuro y cálido</span></span></label>
@@ -672,7 +672,15 @@
     var waOtroChk=document.getElementById('wa-otro');
     if(!waOtroChk || !waOtroChk.checked) fd.set('wa_recepcion', val('wa_publico'));
     // radios + consents
-    ['presencia','modo','precios','dominio_tiene','id_tipo','estilo'].forEach(n=>fd.append(n, radio(n)));
+    // Los radios pasan por el MISMO filtro de camino que los textos de arriba: 'modo'
+    // vive en s2a, así que quien probó "sí tengo web", volvió atrás y terminó por el
+    // camino B mandaba igual un 'modo' que nunca eligió, y en el panel aparecía un
+    // cliente sin web pidiendo "saquen todo de mis links".
+    ['presencia','modo','precios','dominio_tiene','id_tipo','estilo'].forEach(n=>{
+      var el = document.querySelector('#form [name="'+n+'"]');
+      if(skipSection && el && el.closest('#'+skipSection)) return;
+      fd.append(n, radio(n));
+    });
     fd.append('consent_ley', document.querySelector('[name=consent_ley]').checked);
     fd.append('consent_uso', document.querySelector('[name=consent_uso]').checked);
     fd.append('path', path||'');

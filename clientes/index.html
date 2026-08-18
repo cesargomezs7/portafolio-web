@@ -279,7 +279,7 @@
         '<div class="meta">'+segHtml(it,false)+'</div>'+
         '<div class="meta">'+
           '<span class="chip cy">'+(it.path==='B'?'Sin web':'Con web')+'</span>'+
-          (it.estilo && it.estilo!=='demo-master' ? '<span class="chip am">'+esc(ESTILO_HUMANO[it.estilo]||it.estilo)+'</span>':'')+
+          (it.estilo ? '<span class="chip'+(it.estilo!=='demo-master'?' am':'')+'">'+esc(ESTILO_HUMANO[it.estilo]||it.estilo)+'</span>':'')+
           (it.n_fotos? '<span class="chip">'+it.n_fotos+' foto'+(it.n_fotos>1?'s':'')+'</span>':'')+
           (it.has_logo? '<span class="chip">logo</span>':'')+
           (wa? '<a class="wa-btn" href="'+esc(wa)+'" target="_blank" rel="noopener" onclick="event.stopPropagation()">WhatsApp</a>':'')+
@@ -314,11 +314,15 @@
   }
 
   function field(k,v){ if(!v) return ''; return '<div class="field"><div class="k">'+esc(k)+'</div><div class="v">'+esc(v)+'</div></div>'; }
-  // Diseño elegido en /empezar. Vacío (envíos anteriores al 14-ago-2026) = el master del video.
-  var ESTILO_HUMANO = { 'demo-master':'El del video (master)', 'ember':'Ember (oscuro)', 'atelier':'Atelier (verde claro)', 'ivory':'Ivory (blanco)' };
+  // Los mismos nombres que el cliente vio y confirmó en /empezar/.
+  // ⚠️ Duplicado a mano en empezar/index.html (tarjetas y ETIQ_ESTILO) y en
+  //    backend/forms-worker/src/index.js. Si renombras aquí, renómbralo en los tres.
+  // Ya NO se marca "distinto al master": desde la paridad del 14-ago los cuatro tienen
+  // las mismas 16 páginas y el mismo plazo.
+  var ESTILO_HUMANO = { 'demo-master':'Sonrisa Azul', 'ember':'Sonrisa Ember', 'atelier':'Sonrisa Atelier', 'ivory':'Sonrisa Ivory' };
   function estiloTxt(v){
-    var t = ESTILO_HUMANO[v] || (v ? String(v) : ESTILO_HUMANO['demo-master']);
-    return (v && v !== 'demo-master') ? (t + ' ⚠️ distinto al master: hablarlo al arrancar') : t;
+    // Sin dato (envíos anteriores al 14-ago-2026) no se inventa una elección.
+    return ESTILO_HUMANO[v] || (v ? String(v) : 'Sonrisa Azul (por defecto, no eligió)');
   }
   // El campo Instagram llega casi siempre como "@miclinica" (así lo pide el form) y el
   // 'https://'+u de antes generaba `https://@miclinica`, un link muerto. Un @ (o un handle
@@ -369,7 +373,9 @@
       '<button class="abtn" id="notasBtn" onclick="saveNotas()">Guardar nota</button></span></div></div>';
 
     // Links / presencia
-    if(it.web_url||it.instagram||it.facebook||it.google_url){
+    // it.modo entra al gate: es obligatorio en el paso 2a y define el plan de entrega,
+    // así que se perdía justo en el caso de quien dice tener web pero no pega el link.
+    if(it.web_url||it.instagram||it.facebook||it.google_url||it.modo){
       html += '<div class="section"><h3>Presencia online</h3>'+
         linkField('Web actual', it.web_url)+linkField('Instagram', it.instagram, 'instagram')+linkField('Facebook', it.facebook, 'facebook')+linkField('Google / Maps', it.google_url)+
         field('Modo', it.modo==='todo'?'Saquen todo de mis links':(it.modo==='cambiar'?'Quiere cambiar/agregar cosas':''))+'</div>';
@@ -382,7 +388,7 @@
     // Esenciales
     html += '<div class="section"><h3>Esenciales</h3>'+
       field('WhatsApp público', it.wa_publico)+field('WhatsApp recepción', it.wa_recepcion)+field('Correo reportes', it.email_reportes)+
-      field('¿Mostrar precios?', it.precios)+field('Dominio', dominio)+field('Diseño elegido', estiloTxt(it.estilo))+'</div>';
+      field('¿Mostrar precios?', it.precios==='si'?'Sí, precios orientativos':(it.precios==='no'?'No, solo consulte por WhatsApp':it.precios))+field('Dominio', dominio)+field('Diseño elegido', estiloTxt(it.estilo))+'</div>';
     // Facturación (solo si hay datos)
     var fact = field('Titular', it.fact_titular)+field('Identificación', (it.id_tipo?it.id_tipo+' ':'')+(it.id_numero||''));
     if(fact.trim()) html += '<div class="section"><h3>Facturación</h3>'+fact+'</div>';
