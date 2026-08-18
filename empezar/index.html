@@ -63,6 +63,13 @@
   .choice.sel .dot::after{content:''; position:absolute; inset:3px; border-radius:50%; background:var(--grad);}
   .choice .c-body strong{display:block; font-weight:600; font-size:15.5px;}
   .choice .c-body span{display:block; color:var(--dim); font-size:13.5px; margin-top:2px;}
+  /* Miniatura del diseño. Nadie se aprende los nombres: la imagen es la que
+     decide, y evita que el cliente tenga que salir al portafolio y volver. */
+  .choice .thumb{flex:none; width:104px; height:78px; border-radius:9px; overflow:hidden;
+    border:1px solid var(--border); background:var(--panel-2);}
+  .choice .thumb img{width:100%; height:100%; object-fit:cover; object-position:top center; display:block;}
+  .choice.sel .thumb{border-color:var(--cyan);}
+  @media (max-width:420px){ .choice .thumb{width:82px; height:62px;} }
   /* Checkboxes (consent) */
   .check{display:flex; gap:13px; align-items:flex-start; padding:15px 16px; border:1px solid var(--border);
     border-radius:12px; cursor:pointer; background:var(--panel); transition:all .2s; margin-bottom:12px;}
@@ -289,12 +296,12 @@
 
     <label class="q" style="margin-top:24px">¿Con cuál diseño quiere su web? <span class="opt">(<a href="https://prontoweb.co/portafolio" target="_blank" rel="noopener" style="color:var(--cyan)">verlos</a>)</span></label>
     <div class="choices" data-radio="estilo">
-      <label class="choice sel"><input type="radio" name="estilo" value="demo-master" checked><span class="dot"></span><span class="c-body"><strong>El que le mostré en el video</strong><span>Recomendado, es el que entrego más rápido</span></span></label>
-      <label class="choice"><input type="radio" name="estilo" value="ember"><span class="dot"></span><span class="c-body"><strong>Ember, el oscuro</strong></span></label>
-      <label class="choice"><input type="radio" name="estilo" value="atelier"><span class="dot"></span><span class="c-body"><strong>Atelier, el verde claro</strong></span></label>
-      <label class="choice"><input type="radio" name="estilo" value="ivory"><span class="dot"></span><span class="c-body"><strong>Ivory, el blanco</strong></span></label>
+      <label class="choice sel"><input type="radio" name="estilo" value="demo-master" checked><span class="dot"></span><span class="thumb"><img decoding="async" src="disenos/azul.jpg" alt="Vista del diseño Sonrisa Azul" width="360" height="270"></span><span class="c-body"><strong>Sonrisa Azul</strong><span>Recomendado: el azul es el color que la gente asocia con odontología</span></span></label>
+      <label class="choice"><input type="radio" name="estilo" value="ember"><span class="dot"></span><span class="thumb"><img decoding="async" src="disenos/ember.jpg" alt="Vista del diseño Sonrisa Ember" width="360" height="270"></span><span class="c-body"><strong>Sonrisa Ember</strong><span>Oscuro y cálido</span></span></label>
+      <label class="choice"><input type="radio" name="estilo" value="atelier"><span class="dot"></span><span class="thumb"><img decoding="async" src="disenos/atelier.jpg" alt="Vista del diseño Sonrisa Atelier" width="360" height="270"></span><span class="c-body"><strong>Sonrisa Atelier</strong><span>Verde salvia, sobrio</span></span></label>
+      <label class="choice"><input type="radio" name="estilo" value="ivory"><span class="dot"></span><span class="thumb"><img decoding="async" src="disenos/ivory.jpg" alt="Vista del diseño Sonrisa Ivory" width="360" height="270"></span><span class="c-body"><strong>Sonrisa Ivory</strong><span>Blanco y luminoso</span></span></label>
     </div>
-    <p class="hint" style="margin-top:8px">Si escoge uno distinto lo hablamos al arrancar: puede tomar unos días más.</p>
+    <p class="hint" style="margin-top:8px">Los cuatro tienen las mismas páginas y las mismas funciones, solo cambia el estilo. Escoja el que más le guste.</p>
 
     <label class="q" style="margin-top:24px">¿Algo que quiera cambiar, destacar o agregar? <span class="opt">(opcional)</span></label>
     <textarea name="cambios" placeholder="Ej: Destacar Invisalign. Cambiar el eslogan. Sin cambios, solo modernícenla."></textarea>
@@ -358,6 +365,9 @@
       c.classList.add('sel');
       c.querySelector('input').checked = true;
       if(name==='dominio_tiene') toggleDominio(c.querySelector('input').value);
+      // Marcar por código no dispara input/change, así que el autoguardado no se
+      // enteraba: había que pedirlo a mano o el dato esperaba a la siguiente acción.
+      guardarPronto();
     });
   });
   document.querySelectorAll('.check').forEach(c=>{
@@ -523,7 +533,7 @@
      Todo se arma con textContent — jamás innerHTML con datos del cliente. */
   var urlsMini=[];
   function limpiarMiniaturas(){ urlsMini.forEach(function(u){ try{URL.revokeObjectURL(u);}catch(e){} }); urlsMini.length=0; }
-  var ETIQ_ESTILO={'demo-master':'El que le mostré en el video','ember':'Ember, el oscuro','atelier':'Atelier, el verde claro','ivory':'Ivory, el blanco'};
+  var ETIQ_ESTILO={'demo-master':'Sonrisa Azul','ember':'Sonrisa Ember','atelier':'Sonrisa Atelier','ivory':'Sonrisa Ivory'};
 
   function bloqueR(titulo, pasoDestino){
     var b=document.createElement('div'); b.className='rz';
@@ -806,7 +816,11 @@
       var wrap=document.querySelector('.wrap'), form=document.getElementById('form');
       if(wrap && form) wrap.insertBefore(d, form);
       var a=document.getElementById('reset-borrador');
-      if(a) a.addEventListener('click', function(ev){ ev.preventDefault(); borrarBorrador(); location.reload(); });
+      if(a) a.addEventListener('click', function(ev){
+        ev.preventDefault();
+        if(!confirm('Se borra todo lo que ya había llenado y no se puede recuperar. ¿Seguro?')) return;
+        borrarBorrador(); location.reload();
+      });
     }catch(e){}
   }
 
@@ -836,7 +850,10 @@
     var form=document.getElementById('form');
     if(form){ form.addEventListener('input', guardarPronto); form.addEventListener('change', guardarPronto); }
     // Cierra la pestaña / se va: eso es la señal más fuerte de abandono.
-    window.addEventListener('pagehide', function(){ if(draftId && !enviado) avisar(true); });
+    window.addEventListener('pagehide', function(){
+      guardar();  // el debounce de 400 ms se perdería lo último escrito
+      if(draftId && !enviado) avisar(true);
+    });
     // Volvió a la pestaña: se corrige el "se fue" para no avisar de alguien que sigue ahí.
     document.addEventListener('visibilitychange', function(){
       if(document.visibilityState==='visible' && draftId && !enviado) avisar(false);
