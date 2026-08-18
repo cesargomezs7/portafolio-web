@@ -1,3 +1,7 @@
+/* ⚠️ El nombre NO puede empezar con guion bajo: GitHub Pages corre Jekyll y
+   Jekyll no publica los archivos que empiezan por "_". Con "_estilo.css" las
+   tres páginas salían sin estilos en producción (404 en el CSS) aunque en local
+   se vieran bien. Verificado el 18-ago-2026. */
 /* Estilo compartido de las páginas de apoyo del video B.
    Mismo fondo, tipografías y acentos que el deck, para que al cambiar de
    pestaña en medio de la grabación no se note el salto. */
