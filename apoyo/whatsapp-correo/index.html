@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Lo que recibe la recepción y el paciente · Pronto</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💬</text></svg>">
+<link rel="stylesheet" href="../_estilo.css">
+<style>
+  /* ── Burbuja de WhatsApp tal como la ve la recepción ── */
+  .wa{
+    width:clamp(300px,27vw,420px); background:#0b141a;
+    border-radius:16px; overflow:hidden;
+    border:1px solid var(--border-strong);
+    box-shadow:0 24px 70px rgba(0,0,0,.6);
+  }
+  .wa-top{
+    background:#202c33; padding:11px 14px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .wa-ava{
+    width:34px; height:34px; border-radius:50%; flex:none;
+    background:#6a7175; display:flex; align-items:center; justify-content:center;
+    color:#cfd6db; font-size:15px; font-weight:600;
+  }
+  .wa-nom{color:#e9edef; font-size:14.5px; font-weight:500; line-height:1.25;}
+  .wa-est{color:#8696a0; font-size:11.5px;}
+  .wa-cuerpo{
+    padding:16px 12px 12px;
+    background:#0b141a;
+    background-image:radial-gradient(rgba(255,255,255,.022) 1px, transparent 1px);
+    background-size:14px 14px;
+    min-height:200px;
+  }
+  .burbuja{
+    background:#202c33; color:#e9edef;
+    border-radius:0 8px 8px 8px;
+    padding:9px 11px 7px; max-width:92%;
+    font-size:13.6px; line-height:1.48;
+    box-shadow:0 1px 1px rgba(0,0,0,.25);
+    position:relative;
+  }
+  .burbuja b{font-weight:600;}
+  .burbuja .hora{
+    float:right; font-size:10.5px; color:#8696a0;
+    margin:6px 0 0 10px; line-height:1;
+  }
+  .wa-barra{
+    padding:9px 12px; background:#202c33;
+    display:flex; align-items:center; gap:9px;
+  }
+  .wa-input{
+    flex:1; background:#2a3942; border-radius:20px;
+    padding:8px 13px; color:#8696a0; font-size:12.8px;
+  }
+  .wa-send{
+    width:31px; height:31px; border-radius:50%; flex:none;
+    background:#00a884; display:flex; align-items:center; justify-content:center;
+  }
+
+  /* ── Correo tal como le llega al paciente ── */
+  .mail{
+    width:clamp(300px,27vw,420px); background:#ffffff;
+    border-radius:16px; overflow:hidden;
+    border:1px solid var(--border-strong);
+    box-shadow:0 24px 70px rgba(0,0,0,.6);
+  }
+  .mail-top{
+    padding:13px 16px; background:#f6f8fa;
+    border-bottom:1px solid #e6ebf0;
+  }
+  .mail-de{color:#15293c; font-size:12.6px; font-weight:600; line-height:1.4;}
+  .mail-de span{color:#8aa0b2; font-weight:400;}
+  .mail-asunto{color:#15293c; font-size:13.4px; font-weight:600; margin-top:3px;}
+  .mail-cuerpo{padding:22px 20px 20px; font-family:Arial,Helvetica,sans-serif; color:#15293c; line-height:1.6;}
+  .mail-cuerpo h2{color:#1e3a52; font-size:19px; margin-bottom:11px; font-weight:700; font-family:Arial,Helvetica,sans-serif;}
+  .mail-cuerpo p{font-size:13.6px; margin-bottom:0;}
+  .mail-cuerpo p b{font-weight:700;}
+  .mail-nota{color:#4a5a6e; font-size:12.6px; margin-top:15px !important;}
+  .mail-hr{border:none; border-top:1px solid #e0e7ee; margin:19px 0 10px;}
+  .mail-pie{font-size:11px; color:#8aa0b2;}
+</style>
+</head>
+<body>
+
+<div class="rotulo">Objetivo 4 · La recepción no pierde ni un mensaje</div>
+<h1>Un formulario lleno se vuelve <em>una conversación abierta</em></h1>
+
+<div class="escena">
+
+  <div class="panel">
+    <div class="wa">
+      <div class="wa-top">
+        <div class="wa-ava">M</div>
+        <div>
+          <div class="wa-nom">María Fernanda Gómez</div>
+          <div class="wa-est">+57 310 555 4433</div>
+        </div>
+      </div>
+      <div class="wa-cuerpo">
+        <div class="burbuja">
+          Hola, le escribo desde su página web.<br><br>
+          <b>Nombre:</b> María Fernanda Gómez<br>
+          <b>Teléfono:</b> 310 555 4433<br>
+          <b>Correo:</b> mariafgomez@gmail.com<br>
+          <b>Servicio de interés:</b> Ortodoncia<br>
+          <b>Comentario:</b> Quisiera saber el valor de los brackets y si tienen cita esta semana.<br><br>
+          Espero su respuesta. ¡Gracias!
+          <span class="hora">10:42</span>
+        </div>
+      </div>
+      <div class="wa-barra">
+        <div class="wa-input">Escribe un mensaje</div>
+        <div class="wa-send">
+          <svg viewBox="0 0 24 24" width="15" height="15" fill="#0b141a"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+        </div>
+      </div>
+    </div>
+    <div class="pie">Le entra a la recepción</div>
+  </div>
+
+  <div class="flecha" id="flecha">
+    <svg viewBox="0 0 100 40" fill="none" aria-hidden="true">
+      <path d="M4 20 H82" stroke="#22d3ee" stroke-width="3.4" stroke-linecap="round"/>
+      <path d="M74 9 L92 20 L74 31" stroke="#22d3ee" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    </svg>
+  </div>
+
+  <div class="panel oculto" id="paso2">
+    <div class="mail">
+      <div class="mail-top">
+        <div class="mail-de">Notificaciones de tu web <span>&lt;notificaciones@send.prontoweb.co&gt;</span></div>
+        <div class="mail-asunto">Recibimos tu solicitud · Sonrisa Premium</div>
+      </div>
+      <div class="mail-cuerpo">
+        <h2>¡Gracias, María Fernanda!</h2>
+        <p>Recibimos tu solicitud sobre <b>Ortodoncia</b> y te contactaremos muy pronto en horario de atención.</p>
+        <p class="mail-nota">Te responderemos por WhatsApp.</p>
+        <hr class="mail-hr">
+        <div class="mail-pie">Sonrisa Premium · Web por Pronto</div>
+      </div>
+    </div>
+    <div class="pie">Y al paciente le llega esto</div>
+  </div>
+
+</div>
+
+<div class="pista" id="pista">→ para el correo</div>
+
+<script>
+  // Un solo paso: la flecha derecha (o clic) trae el correo. La izquierda lo devuelve,
+  // por si toca repetir la toma sin recargar.
+  var paso2 = document.getElementById('paso2');
+  var flecha = document.getElementById('flecha');
+  var pista = document.getElementById('pista');
+  function mostrar(si){
+    paso2.classList.toggle('oculto', !si);
+    flecha.classList.toggle('visible', si);
+    pista.classList.toggle('ida', si);
+    // Se reinicia la animación de entrada para que también corra si se va y
+    // se vuelve, que es lo que pasa al repetir una toma.
+    paso2.classList.remove('entra');
+    if (si) { void paso2.offsetWidth; paso2.classList.add('entra'); }
+  }
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown'){ e.preventDefault(); mostrar(true); }
+    if(e.key === 'ArrowLeft' || e.key === 'PageUp'){ e.preventDefault(); mostrar(false); }
+  });
+  document.addEventListener('click', function(){ mostrar(paso2.classList.contains('oculto')); });
+</script>
+
+</body>
+</html>

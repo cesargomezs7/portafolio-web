@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Del botón al formulario · Pronto</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>➡️</text></svg>">
+<link rel="stylesheet" href="../_estilo.css">
+<style>
+  /* Las dos capturas comparten alto para que la flecha quede a media altura
+     de ambas y la transición se lea de un vistazo. */
+  .marco img{max-height:66vh;}
+  .flecha svg{width:clamp(46px,6vw,96px);}
+</style>
+</head>
+<body>
+
+<div class="rotulo">Paso 2 · Aquí es donde a la gente se le pasa</div>
+<h1>Ese botón azul lo lleva <em>al formulario</em></h1>
+
+<div class="escena">
+
+  <div class="panel">
+    <div class="marco">
+      <img src="mp-boton.png" alt="Pantalla de Mercado Pago confirmando la suscripción, con el botón Volver al sitio del vendedor señalado.">
+    </div>
+    <div class="pie">Apenas registra la tarjeta</div>
+  </div>
+
+  <div class="flecha" id="flecha">
+    <svg viewBox="0 0 120 46" fill="none" aria-hidden="true">
+      <path d="M5 23 H98" stroke="#22d3ee" stroke-width="4" stroke-linecap="round"/>
+      <path d="M89 10 L110 23 L89 36" stroke="#22d3ee" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    </svg>
+  </div>
+
+  <div class="panel oculto" id="paso2">
+    <div class="marco">
+      <img src="formulario.png" alt="Primera pantalla del formulario: los dos permisos y la pregunta de si ya tiene página web.">
+    </div>
+    <div class="pie">Le sale esto · son dos minutos</div>
+  </div>
+
+</div>
+
+<div class="pista" id="pista">→ para el formulario</div>
+
+<script>
+  // La derecha trae el formulario y la flecha de transición; la izquierda lo
+  // devuelve, por si hay que repetir la toma sin recargar la página.
+  var paso2 = document.getElementById('paso2');
+  var flecha = document.getElementById('flecha');
+  var pista = document.getElementById('pista');
+  function mostrar(si){
+    paso2.classList.toggle('oculto', !si);
+    flecha.classList.toggle('visible', si);
+    pista.classList.toggle('ida', si);
+    // Se reinicia la animación de entrada para que también corra si se va y
+    // se vuelve, que es lo que pasa al repetir una toma.
+    paso2.classList.remove('entra');
+    if (si) { void paso2.offsetWidth; paso2.classList.add('entra'); }
+  }
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown'){ e.preventDefault(); mostrar(true); }
+    if(e.key === 'ArrowLeft' || e.key === 'PageUp'){ e.preventDefault(); mostrar(false); }
+  });
+  document.addEventListener('click', function(){ mostrar(paso2.classList.contains('oculto')); });
+</script>
+
+</body>
+</html>
