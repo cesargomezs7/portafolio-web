@@ -1,1 +1,4 @@
 mvps/sonrisa-premium-medellin
+
+.wrangler/
+*.bak-*
