@@ -736,7 +736,7 @@
   const LS_VENCE = 7*24*3600*1000;                                  // una semana y se descarta
   const START_URL = ENDPOINT.replace(/\/onboarding$/, '/onboarding/start');
   const TEXTOS = 'input[type=text],input[type=email],input[type=tel],textarea';
-  let draftId=null, enviado=false, ultimoAviso=0, ultimoLatido=0, guardarT=null;
+  let draftId=null, enviado=false, ultimoAviso=0, ultimoLatido=0, guardarT=null, borrando=false;
 
   function nuevoId(){
     try{ if(crypto && crypto.randomUUID) return crypto.randomUUID(); }catch(e){}
@@ -747,7 +747,10 @@
   function borrarBorrador(){ try{ localStorage.removeItem(LS_KEY); }catch(e){} }
 
   function guardar(){
-    if(enviado) return;   // ya lo mandó: no dejarle los datos guardados en el navegador
+    // 'borrando' existe porque location.reload() dispara pagehide, y el guardado
+    // de pagehide volvía a escribir el borrador que se acababa de borrar: el
+    // cliente pedía empezar de cero y la página lo devolvía al mismo paso.
+    if(enviado || borrando) return;   // ya lo mandó: no dejarle los datos guardados en el navegador
     try{
       const campos={}, radios={}, checks={};
       document.querySelectorAll('#form '+TEXTOS).forEach(function(el){ if(el.name && el.value) campos[el.name]=el.value; });
@@ -827,7 +830,10 @@
       if(a) a.addEventListener('click', function(ev){
         ev.preventDefault();
         if(!confirm('Se borra todo lo que ya había llenado y no se puede recuperar. ¿Seguro?')) return;
-        borrarBorrador(); location.reload();
+        borrando = true;
+        clearTimeout(guardarT);   // un guardado con el debounce a medias también lo resucitaría
+        borrarBorrador();
+        location.reload();
       });
     }catch(e){}
   }
