@@ -15,19 +15,23 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&family=Manrope:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
-/* ESCALA VISUAL (20-jun-2026): disenado al 150%; el 100% del visitante se ve asi. Escalonado; movil intacto. */
-@media screen and (min-width: 1880px) { body { zoom: 1.5; } }
-@media screen and (min-width: 1750px) and (max-width: 1879.98px) { body { zoom: 1.4; } }
-@media screen and (min-width: 1550px) and (max-width: 1749.98px) { body { zoom: 1.25; } }
-@media screen and (min-width: 1420px) and (max-width: 1549.98px) { body { zoom: 1.1; } }
+/* SIN zoom a propósito. El resto del sitio lo usa para verse al 150%, pero esto
+   es un documento A4 de tamaño fijo: el zoom lo sacaba de la pantalla (en un
+   monitor de 1920 quedaba en 1191x1685 y tocaba hacer scroll para verlo).
+   Acá se hace lo contrario: se encoge lo justo para que quepa entero. */
 
   :root{ --azul-dark:#1e3a52; --azul:#3a7ca5; --gold:#f5a623; --text:#15293c; }
   *{ margin:0; padding:0; box-sizing:border-box; }
-  body{ font-family:'Manrope',sans-serif; background:#e8eef3; color:var(--text); display:flex; flex-direction:column; align-items:center; padding:24px; }
+  body{ font-family:'Manrope',sans-serif; background:#e8eef3; color:var(--text); display:flex; flex-direction:column; align-items:center; padding:16px; }
+  /* El lienzo reserva el alto que ocupa el afiche YA escalado: sin esto, el
+     transform encoge el dibujo pero el hueco original sigue ahí y deja una
+     franja vacía enorme debajo. */
+  .lienzo{ position:relative; width:100%; display:flex; justify-content:center; }
   .toolbar{ margin-bottom:16px; }
   .toolbar button{ background:var(--azul-dark); color:#fff; border:none; font-family:'Manrope',sans-serif; font-weight:600; font-size:14px; padding:11px 22px; border-radius:999px; cursor:pointer; }
   .afiche{
-    width:794px; min-height:1123px; /* A4 a 96dpi */
+    width:794px; height:1123px; /* A4 a 96dpi */
+    transform-origin:top center;   /* el JS le pone el scale que haga falta */
     background:linear-gradient(170deg,#ffffff 0%,#eef4f9 100%);
     border-radius:20px; box-shadow:0 20px 60px rgba(30,58,82,.18);
     padding:80px 70px; text-align:center;
@@ -45,7 +49,8 @@
     @page{ margin:8mm; }
     body{ background:#fff; padding:0; }
     .toolbar{ display:none; }
-    .afiche{ box-shadow:none; border-radius:0; width:100%; min-height:auto; padding:18px 40px; justify-content:flex-start; }
+    .lienzo{ display:block; height:auto !important; }
+    .afiche{ box-shadow:none; border-radius:0; width:100%; height:auto; min-height:auto; padding:18px 40px; justify-content:flex-start; transform:none !important; }
     .afiche .clinica{ margin-bottom:26px; }
     .afiche h1{ margin-bottom:16px; }
     .afiche .sub{ margin-bottom:24px; }
@@ -58,7 +63,8 @@
 <body>
   <div class="toolbar"><button onclick="window.print()">📄 Guardar como PDF</button></div>
 
-  <div class="afiche">
+  <div class="lienzo" id="lienzo">
+  <div class="afiche" id="afiche">
     <div class="clinica" id="clinica">Sonrisa Premium</div>
     <h1>¿Te gustó<br>tu visita?</h1>
     <p class="sub">Una reseña tuya en Google nos ayuda muchísimo. Solo te toma 10 segundos.</p>
@@ -66,8 +72,30 @@
     <div class="qr-box"><img id="qr" alt="Código QR para dejar tu reseña"></div>
     <div class="scan">Escanea con la cámara de tu celular<span>Apunta y toca el enlace que aparece</span></div>
   </div>
+  </div>
 
 <script>
+  // Encoge el afiche lo justo para que se vea ENTERO sin scroll. Nunca lo
+  // agranda: a pantalla grande se queda en su tamaño real (794x1123).
+  (function () {
+    var afiche = document.getElementById('afiche');
+    var lienzo = document.getElementById('lienzo');
+    var ANCHO = 794, ALTO = 1123;
+    function encajar() {
+      var barra = document.querySelector('.toolbar');
+      var alto = window.innerHeight - (barra ? barra.offsetHeight + 16 : 0) - 32;
+      var ancho = window.innerWidth - 32;
+      var k = Math.min(1, alto / ALTO, ancho / ANCHO);
+      afiche.style.transform = 'scale(' + k + ')';
+      lienzo.style.height = (ALTO * k) + 'px';
+    }
+    encajar();
+    window.addEventListener('resize', encajar);
+    // Las tipografías cambian el alto de la barra al cargar tarde.
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(encajar);
+    window.addEventListener('load', encajar);
+  })();
+
   // ===== PERSONALIZACIÓN POR CLIENTE =====
   const CONFIG = {
     clinica: "Sonrisa Premium",
