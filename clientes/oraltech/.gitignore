@@ -1,0 +1,7 @@
+# Los videos del cliente (21 MB) NO se publican todavía:
+# hoy no los usa ninguna página, y son videotestimonios de pacientes reales.
+# Meter material de pacientes en un repo PÚBLICO sin que ninguna página lo
+# muestre es riesgo sin beneficio. Se versionarán cuando una página los use
+# y el cliente autorice por escrito.
+# Los originales y las versiones recodificadas viven en el scratchpad.
+video/

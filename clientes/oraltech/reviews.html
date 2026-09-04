@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Califícanos — OralTech</title>
+<meta name="robots" content="noindex"><!-- página de reseñas no se indexa -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<!-- ============================================================
+     MÓDULO PRONTO: SISTEMA FILTRO DE RESEÑAS GOOGLE
+     ============================================================
+     Lógica (4-sep-2026):
+       - El paciente elige estrellas.
+       - SOLO 5 estrellas -> se le ofrece dejar la reseña pública en Google.
+       - De 1 a 4 estrellas -> formulario privado que llega a la clínica,
+         NO a Google.
+
+     ⚠ CAMBIO RESPECTO A LA PLANTILLA: la plantilla mandaba a Google también
+     las de 4 estrellas (`value >= 4`). Lo que se le prometió por escrito al
+     cliente es "las de 5 estrellas van a Google". Se corrigió el código para
+     que cumpla lo prometido, no al revés.
+
+     ⚠ OralTech tiene DOS fichas de Google independientes, una por sede. Un
+     paciente de Medellín no puede acabar reseñando la ficha de Cúcuta: por
+     eso, tras las 5 estrellas, se le pregunta en cuál sede lo atendieron.
+============================================================ -->
+<script>
+  const CONFIG = {
+    // Nombre de la clínica (aparece en los textos y en los contadores)
+    clinica: "OralTech",
+
+    // Umbral que va a Google. 5 = solo la calificación máxima.
+    umbralGoogle: 5,
+
+    // Fichas de Google reales de OralTech. Los Place ID se derivaron del
+    // identificador de cada ficha y se comprobó que resuelven a la sede
+    // correcta (Cúcuta verificada abriendo la ficha; ambas responden 200).
+    sedes: [
+      {
+        id: "cucuta",
+        nombre: "Cúcuta",
+        detalle: "Quinta Oriental · Cl. 2 #9 Este-156",
+        reviewUrl: "https://search.google.com/local/writereview?placeid=ChIJJ4Hg8JtFZo4RQRf_-tb1Jnk",
+      },
+      {
+        id: "medellin",
+        nombre: "Medellín",
+        detalle: "El Poblado · Cra. 43A #7-50",
+        reviewUrl: "https://search.google.com/local/writereview?placeid=ChIJqwtH7IODRo4RDGVF5QqzdLY",
+      },
+    ],
+
+    // Endpoint que recibe el feedback privado (Cloudflare Worker).
+    // ⚠ NO ACTIVADO: la clínica todavía no ha confirmado que quiere el
+    // sistema encendido, y el worker aún no acepta este dominio (CORS).
+    // Mientras `activo` sea false, el feedback no se envía a ninguna parte.
+    workerEndpoint: "https://pronto-forms-worker.cesargomezs711.workers.dev/review-feedback",
+    activo: false,
+  };
+</script>
+
+<style>
+/* ESCALA VISUAL (20-jun-2026): disenado al 150%; el 100% del visitante se ve asi. Escalonado; movil intacto. */
+@media screen and (min-width: 1880px) { body { zoom: 1.5; } :root { --z: 1.5; } }
+@media screen and (min-width: 1750px) and (max-width: 1879.98px) { body { zoom: 1.4; } :root { --z: 1.4; } }
+@media screen and (min-width: 1550px) and (max-width: 1749.98px) { body { zoom: 1.25; } :root { --z: 1.25; } }
+@media screen and (min-width: 1420px) and (max-width: 1549.98px) { body { zoom: 1.1; } :root { --z: 1.1; } }
+
+  /* ===== PALETA IVORY (página autocontenida: los tokens van inline) ===== */
+  :root {
+    --black:   #212121;
+    --ice:     #EAEFF5;
+    --ice-soft:#F5F8FB;
+    --white:   #FFFFFF;
+    --gray:    #8A8F99;
+    --text-gray-soft: #C8CDD4;
+    --border:  #DBE0E8;
+    --accent:  #B5B0A2;
+    --gray-bg: #F5F8FB;
+    --radius-sm:   12px;
+    --radius:      20px;
+    --radius-lg:   28px;
+    --radius-pill: 999px;
+    --shadow-sm: 0 2px 8px rgba(33,33,33,0.06);
+    --shadow-md: 0 8px 30px rgba(33,33,33,0.10);
+    --shadow-lg: 0 20px 60px rgba(33,33,33,0.16);
+    --t: cubic-bezier(0.4, 0, 0.2, 1);
+    --transition: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background: linear-gradient(110deg, #EAEFF5 0%, #F2F5F9 35%, #FAFBFC 70%, #FFFFFF 100%);
+    background-attachment: fixed;
+    color: var(--black);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    line-height: 1.55;
+    letter-spacing: -0.011em;
+    -webkit-font-smoothing: antialiased;
+    font-feature-settings: 'cv11', 'ss01';
+  }
+
+  .card {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    max-width: 540px;
+    width: 100%;
+    padding: 48px 40px;
+    text-align: center;
+    border: 1px solid var(--border);
+  }
+
+  .overline {
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--black);
+    opacity: 0.55;
+    margin-bottom: 16px;
+  }
+
+  h1 {
+    font-weight: 200;
+    font-size: clamp(1.8rem, 4.5vw, 2.4rem);
+    line-height: 1.08;
+    letter-spacing: -0.035em;
+    color: var(--black);
+    margin-bottom: 14px;
+  }
+  h1 .b { font-weight: 500; color: var(--black); }
+
+  .sub {
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 1.6;
+    color: var(--gray);
+    margin-bottom: 36px;
+  }
+
+  /* ===== ESTRELLAS ===== */
+  .stars {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+  .star {
+    font-size: 46px;
+    color: var(--border);
+    cursor: pointer;
+    transition: transform 0.15s var(--t), color 0.15s var(--t);
+    line-height: 1;
+    user-select: none;
+  }
+  .star:hover { transform: scale(1.18); }
+  .star.lit { color: var(--accent); }
+
+  .star-hint {
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--gray);
+    min-height: 20px;
+    margin-bottom: 8px;
+  }
+
+  /* ===== SELECTOR DE SEDE (tras 5 estrellas) =====
+     OralTech tiene una ficha de Google por sede: hay que preguntar cuál. */
+  .sede-grid { display: grid; gap: 12px; margin-top: 8px; }
+  .sede-btn {
+    display: block;
+    padding: 18px 20px;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    text-decoration: none;
+    color: var(--black);
+    background: var(--white);
+    transition: border-color .18s var(--t), transform .18s var(--t), box-shadow .18s var(--t);
+  }
+  .sede-btn:hover {
+    border-color: var(--black);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 22px rgba(33, 33, 33, .08);
+  }
+  .sede-btn strong { display: block; font-size: 17px; font-weight: 600; letter-spacing: -0.01em; }
+  .sede-btn span   { display: block; font-size: 13px; font-weight: 300; color: var(--gray); margin-top: 3px; }
+
+  /* ===== FORM PRIVADO (1 a 4 estrellas) ===== */
+  .private-form { display: none; text-align: left; margin-top: 8px; }
+  .private-form.show { display: block; animation: fade 0.4s var(--t); }
+  @keyframes fade { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+  .field { margin-bottom: 18px; }
+  .field label {
+    display: block;
+    font-weight: 500;
+    font-size: 13px;
+    color: var(--black);
+    margin-bottom: 6px;
+  }
+  .field input, .field textarea {
+    width: 100%;
+    padding: 13px 15px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 400;
+    color: var(--black);
+    background: var(--gray-bg);
+    transition: border-color 0.2s var(--t);
+  }
+  .field input::placeholder, .field textarea::placeholder { color: var(--gray); }
+  .field input:focus, .field textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+  }
+  .field textarea { resize: vertical; min-height: 90px; }
+
+  .btn {
+    display: inline-block;
+    width: 100%;
+    padding: 15px 28px;
+    background: var(--black);
+    color: var(--white);
+    border: none;
+    border-radius: var(--radius-pill);
+    font-family: inherit;
+    font-weight: 500;
+    font-size: 15px;
+    letter-spacing: -0.005em;
+    cursor: pointer;
+    transition: background 0.3s var(--t), color 0.3s var(--t), transform 0.15s var(--t);
+  }
+  .btn:hover { background: var(--accent); color: var(--black); transform: translateY(-2px); }
+
+  /* ===== PANTALLA DE GRACIAS ===== */
+  .thanks { display: none; text-align: center; }
+  .thanks.show { display: block; animation: fade 0.4s var(--t); }
+  .thanks .check {
+    font-size: 56px;
+    margin-bottom: 16px;
+  }
+
+  .footer-note {
+    margin-top: 28px;
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    color: var(--gray);
+    opacity: 0.8;
+  }
+
+  @media (max-width: 520px) {
+    .card { padding: 36px 24px; }
+    .star { font-size: 40px; gap: 6px; }
+  }
+
+@supports (-webkit-app-region: drag) {
+  @media screen and (min-width: 1420px) {
+    body { min-height: calc(100vh / var(--z, 1)); }
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="card">
+
+  <!-- ===== PASO 1: CALIFICAR ===== -->
+  <div id="step-rate">
+    <p class="overline">Tu opinión nos importa</p>
+    <h1 id="title-rate">¿Cómo fue tu experiencia en OralTech?</h1>
+    <p class="sub">Califícanos con estrellas. Toma 10 segundos.</p>
+
+    <div class="stars" id="stars">
+      <span class="star" data-v="1">★</span>
+      <span class="star" data-v="2">★</span>
+      <span class="star" data-v="3">★</span>
+      <span class="star" data-v="4">★</span>
+      <span class="star" data-v="5">★</span>
+    </div>
+    <p class="star-hint" id="hint">Pasa el cursor y elige</p>
+  </div>
+
+  <!-- ===== PASO 2: FORM PRIVADO (1-4 estrellas) ===== -->
+  <div class="private-form" id="private-form">
+    <p class="overline">Queremos mejorar</p>
+    <h1>Lamentamos que tu experiencia no fue perfecta</h1>
+    <p class="sub">Cuéntanos qué pasó. Tu mensaje llega directo a la dirección de la clínica, de forma privada.</p>
+
+    <form id="feedback-form">
+      <div class="field">
+        <label>Tu nombre (opcional)</label>
+        <input type="text" name="nombre" placeholder="Cómo te llamas">
+      </div>
+      <div class="field">
+        <label>Tu email o WhatsApp (opcional)</label>
+        <input type="text" name="contacto" placeholder="Para poder responderte">
+      </div>
+      <div class="field">
+        <label>¿Qué podemos mejorar?</label>
+        <textarea name="feedback" placeholder="Cuéntanos con confianza" required></textarea>
+      </div>
+      <button type="submit" class="btn">Enviar a la clínica</button>
+    </form>
+  </div>
+
+  <!-- ===== PASO 3: GRACIAS ===== -->
+  <div class="thanks" id="thanks">
+    <div class="check">🦷</div>
+    <h1 id="thanks-title">¡Gracias por tu opinión!</h1>
+    <p class="sub" id="thanks-msg">La dirección de la clínica revisará tu mensaje personalmente.</p>
+  </div>
+
+  <p class="footer-note">Sistema de reseñas por Pronto</p>
+</div>
+
+<script>
+  // Insertar nombre de clínica en los textos
+  document.getElementById('title-rate').textContent =
+    `¿Cómo fue tu experiencia en ${CONFIG.clinica}?`;
+
+  // Contadores Pronto (visita + intencion de resena publica)
+  const TRACK_URL = CONFIG.workerEndpoint.replace('/review-feedback', '/track');
+  function track(ev) {
+    try { fetch(TRACK_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ event: ev, clinica: CONFIG.clinica }), keepalive: true }); } catch (e) {}
+  }
+  track('visit');
+
+  const hints = {
+    1: "Muy insatisfecho",
+    2: "Insatisfecho",
+    3: "Regular",
+    4: "Bueno",
+    5: "¡Excelente!"
+  };
+
+  const stars = document.querySelectorAll('.star');
+  const hint = document.getElementById('hint');
+
+  // Hover: iluminar hasta donde pasa el cursor
+  stars.forEach(star => {
+    star.addEventListener('mouseenter', () => {
+      const v = +star.dataset.v;
+      stars.forEach(s => s.classList.toggle('lit', +s.dataset.v <= v));
+      hint.textContent = hints[v];
+    });
+    star.addEventListener('click', () => {
+      const v = +star.dataset.v;
+      handleRating(v);
+    });
+  });
+
+  document.getElementById('stars').addEventListener('mouseleave', () => {
+    stars.forEach(s => s.classList.remove('lit'));
+    hint.textContent = "Pasa el cursor y elige";
+  });
+
+  function handleRating(value) {
+    if (value >= CONFIG.umbralGoogle) {
+      // SOLO 5 estrellas -> reseña pública en Google, en la ficha de SU sede
+      track('review_5');
+      mostrarSelectorSede();
+    } else {
+      // 1 a 4 estrellas -> formulario privado, llega a la clínica y NO a Google
+      document.getElementById('step-rate').style.display = 'none';
+      document.getElementById('private-form').classList.add('show');
+      // Guardar el rating para enviarlo con el feedback
+      document.getElementById('feedback-form').dataset.rating = value;
+    }
+  }
+
+  /* OralTech tiene una ficha de Google por sede. Mandar a un paciente de
+     Medellín a reseñar la ficha de Cúcuta ensucia los datos de las dos, así
+     que se le pregunta antes de sacarlo del sitio. */
+  function mostrarSelectorSede() {
+    var paso = document.getElementById('step-rate');
+    var botones = CONFIG.sedes.map(function (s) {
+      return '<a class="sede-btn" href="' + s.reviewUrl + '" target="_blank" rel="noopener" data-sede="' + s.id + '">' +
+               '<strong>' + s.nombre + '</strong><span>' + s.detalle + '</span>' +
+             '</a>';
+    }).join('');
+    paso.innerHTML =
+      '<h1>¡Gracias! Nos alegra mucho.</h1>' +
+      '<p class="sub">¿En cuál de nuestras sedes te atendimos?</p>' +
+      '<div class="sede-grid">' + botones + '</div>';
+    paso.querySelectorAll('.sede-btn').forEach(function (b) {
+      b.addEventListener('click', function () { track('review_5_' + b.dataset.sede); });
+    });
+  }
+
+  // Enviar feedback negativo al Worker (privado, no va a Google)
+  document.getElementById('feedback-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const payload = {
+      clinica: CONFIG.clinica,
+      rating: form.dataset.rating,
+      nombre: form.nombre.value,
+      contacto: form.contacto.value,
+      feedback: form.feedback.value,
+    };
+
+    // El envío está APAGADO hasta que la clínica confirme que quiere el
+    // sistema activo (CONFIG.activo). Mientras tanto no se manda nada a
+    // ningún servidor: el paciente ve la pantalla de gracias igual, pero
+    // no se recoge ni se almacena su dato en ninguna parte.
+    if (CONFIG.activo) {
+      try {
+        await fetch(CONFIG.workerEndpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+      } catch (err) {
+        console.log('[reseñas] endpoint no respondió:', err);
+      }
+    } else {
+      console.log('[reseñas] sistema en preview: envío desactivado', payload);
+    }
+
+    document.getElementById('private-form').classList.remove('show');
+    document.getElementById('private-form').style.display = 'none';
+    document.getElementById('thanks').classList.add('show');
+  });
+</script>
+
+</body>
+</html>

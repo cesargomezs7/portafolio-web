@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow"><!-- PREVIEW: quitar al pasar a dominio del cliente -->
+<title>Ortodoncia en Cúcuta y Medellín | OralTech</title>
+<meta name="description" content="Ortodoncia en OralTech, Cúcuta y Medellín: convencional, en zafiro e invisible. Te explicamos las tres modalidades y cuál se ajusta a tu caso.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css?v=20260814a">
+<link rel="stylesheet" href="assets/nav.css?v=20260814a">
+<link rel="stylesheet" href="assets/wa-widget.css?v=20260814a">
+
+<!-- SEO: Servicio (MedicalProcedure + Dentist como proveedor).
+     Sin duración ni número de controles: el cliente no los ha confirmado. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "MedicalProcedure",
+  "name": "Ortodoncia",
+  "alternateName": "Ortodoncia convencional, en zafiro e invisible",
+  "howPerformed": "Corrección de la posición de los dientes, de la forma de las arcadas dentarias y de la posición de los maxilares, en tres modalidades: ortodoncia convencional, brackets de cristal de zafiro y ortodoncia invisible con alineadores transparentes y removibles.",
+  "provider": {
+    "@type": "Dentist",
+    "name": "OralTech",
+    "legalName": "ORAL TECH CLINICA DENTAL",
+    "url": "https://oraltechodontologia.com",
+    "telephone": "+573224130747",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Cl. 2 #9 Este-156, Local 1, Quinta Oriental",
+      "addressLocality": "Cúcuta",
+      "addressRegion": "Norte de Santander",
+      "addressCountry": "CO"
+    },
+    "areaServed": ["Cúcuta", "Medellín"],
+    "sameAs": [
+      "https://www.instagram.com/oraltech_clinicadental/",
+      "https://web.facebook.com/profile.php?id=61559206031650",
+      "https://www.tiktok.com/@oraltechclinicadental"
+    ]
+  }
+}
+</script>
+<!-- SEO: FAQPage — mismas preguntas y respuestas que el bloque visible de abajo -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    { "@type": "Question", "name": "¿Qué tipos de ortodoncia manejan?", "acceptedAnswer": { "@type": "Answer", "text": "Tres modalidades: convencional, en zafiro e invisible. La convencional corrige las alteraciones del desarrollo, la forma de las arcadas dentarias y la posición de los maxilares. La de zafiro usa brackets de cristal de zafiro, transparentes. La invisible funciona con alineadores transparentes y removibles, sin brackets visibles." } },
+    { "@type": "Question", "name": "¿Los brackets de zafiro se ponen amarillos?", "acceptedAnswer": { "@type": "Answer", "text": "No. Están fabricados con cristal de zafiro, uno de los materiales más resistentes, y son transparentes: no se tiñen ni se vuelven amarillos como puede ocurrir con otro tipo de ortodoncia. Además son tan efectivos como los brackets convencionales." } },
+    { "@type": "Question", "name": "¿La ortodoncia invisible me obliga a cambiar mi rutina?", "acceptedAnswer": { "@type": "Answer", "text": "No. Los alineadores son transparentes y removibles, así que no hay brackets visibles ni restricciones al hablar, comer o sonreír. Es la opción pensada para transformar tu sonrisa sin interferir con tu estilo de vida." } },
+    { "@type": "Question", "name": "¿Cuánto dura y cuánto cuesta la ortodoncia?", "acceptedAnswer": { "@type": "Answer", "text": "Depende de tu caso y de la modalidad que elijas, así que preferimos no publicar una cifra ni un tiempo genéricos que después no correspondan a lo tuyo. Escríbenos por WhatsApp, cuéntanos qué quieres corregir y te damos la información concreta." } },
+    { "@type": "Question", "name": "¿Dónde quedan sus sedes?", "acceptedAnswer": { "@type": "Answer", "text": "OralTech tiene dos sedes: Quinta Oriental en Cúcuta (Cl. 2 #9 Este-156, Local 1) y El Poblado en Medellín (Cra. 43A #7-50). Escríbenos por WhatsApp y te confirmamos horarios y disponibilidad de ortodoncia en la sede que te quede mejor." } }
+  ]
+}
+</script>
+
+<style>
+  /* ── Piel Ivory · complementos de esta página (14-ago-2026) ──
+     Todo lo que Ivory aún no define en assets/ va aquí con :where()
+     (especificidad 0): si luego se consolida en styles.css, gana assets. */
+
+  /* Hero compacto: Ivory define la geometría (.hero-compact) pero no el
+     peso del h1 → display Inter 200 con .b 500, igual que el hero del index. */
+  .hero-compact h1 { font-weight: 200; line-height: 0.98; letter-spacing: -0.035em; color: var(--black); max-width: 900px; }
+  .hero-compact h1 .b { font-weight: 500; color: var(--black); }
+  .hero-compact h1 .light { color: var(--gray); font-weight: 200; }
+  :where(.hero-compact .hero-tag) {
+    display: flex; align-items: center; gap: 12px;
+    font-size: 12px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gray); margin-bottom: 32px;
+  }
+  :where(.hero-compact .hero-tag)::before { content: ''; width: 24px; height: 1px; background: var(--gray); }
+
+  /* Footer de 5 columnas (Servicios · Información · Atención · Legal) + redes.
+     Sin :where(): debe ganarle al .footer-grid de 4 columnas de assets. */
+  .footer-grid.footer-grid--5 { grid-template-columns: 2fr 1fr 1fr 1fr 1fr; }
+  :where(.footer-social) { display: flex; gap: 10px; margin-top: 18px; }
+  :where(.footer-social a) {
+    width: 38px; height: 38px; border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.18);
+    display: inline-flex; align-items: center; justify-content: center;
+    color: var(--text-gray-soft);
+    transition: all 0.3s var(--transition);
+  }
+  :where(.footer-social a):hover { background: var(--white); border-color: var(--white); color: var(--black); }
+  :where(.footer-social svg) { width: 18px; height: 18px; }
+
+  /* Burbuja WhatsApp del master (.wa-float): misma geometría que la .wsp-float
+     de Ivory. wa-widget.css cuelga la etiqueta de este posicionamiento. */
+  :where(.wa-float) {
+    position: fixed; bottom: 28px; right: 28px; z-index: 100;
+    width: 62px; height: 62px; border-radius: 50%; background: #25D366;
+    display: flex; align-items: center; justify-content: center;
+    color: #fff; text-decoration: none; box-shadow: 0 12px 32px rgba(37,211,102,0.4);
+    transition: transform 0.3s var(--transition);
+  }
+  :where(.wa-float):hover { transform: scale(1.08); }
+  :where(.wa-float svg) { width: 32px; height: 32px; }
+
+  /* Responsive del master (tal cual) */
+  @media (max-width:1024px){
+    .footer-grid.footer-grid--5{ grid-template-columns:1fr 1fr; }
+    .landing-cards{ grid-template-columns:1fr !important; }
+    .landing-steps{ grid-template-columns:1fr 1fr !important; }
+  }
+  @media (max-width:768px){
+    .landing-split{ grid-template-columns:1fr !important; gap:32px !important; }
+  }
+  @media (max-width:640px){
+    .footer-grid.footer-grid--5{ grid-template-columns:1fr; }
+  }
+  @media (max-width:600px){
+    .landing-steps{ grid-template-columns:1fr !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
+<div id="site-nav"></div>
+
+<!-- ─── HERO COMPACT ─────────────────────────────────────── -->
+<section class="hero hero-compact">
+  <div class="hero-content">
+    <span class="hero-tag">Servicios · Ortodoncia</span>
+    <h1><span class="b">Ortodoncia</span> convencional,<br>en zafiro <span class="light">e</span> <span class="b">invisible</span></h1>
+    <p class="lead">Tres formas de alinear tus dientes y tu mordida. Te explicamos en qué se diferencian para que elijas con criterio, en Cúcuta y en Medellín.</p>
+  </div>
+</section>
+
+<!-- ─── QUÉ ES ───────────────────────────────────────────── -->
+<section class="section">
+  <div class="section-inner">
+    <div style="display:grid;grid-template-columns:1.1fr 0.9fr;gap:64px;align-items:center;" class="landing-split">
+      <div class="reveal">
+        <div class="section-tag">Por qué importa</div>
+        <h2 class="section-headline" style="font-size:clamp(1.7rem,3vw,2.3rem);margin-bottom:18px;">Alinea los dientes <span class="b">y también la mordida</span></h2>
+        <p style="font-size:16px;color:var(--black);opacity:0.82;line-height:1.7;margin-bottom:16px;">La ortodoncia es la especialidad odontológica que estudia, previene y corrige las alteraciones del desarrollo, la forma de las arcadas dentarias y la posición de los maxilares.</p>
+        <p style="font-size:16px;color:var(--black);opacity:0.82;line-height:1.7;">El fin es restablecer el equilibrio morfológico y funcional de la boca y de la cara, mejorando también la estética facial. Lo que cambia de una modalidad a otra es el aparato: brackets convencionales, brackets de cristal de zafiro o alineadores transparentes y removibles.</p>
+      </div>
+      <div class="reveal" style="border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-md);">
+        <!-- PENDIENTE: fotos reales de OralTech para esta página (esta es de archivo) -->
+        <img src="img/servicio-ortodoncia.jpg" alt="Alineadores transparentes de ortodoncia invisible" style="width:100%;height:100%;object-fit:cover;display:block;aspect-ratio:4/5;" loading="lazy">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── LAS TRES MODALIDADES ─────────────────────────────── -->
+<section class="section" style="background:var(--ice-soft);">
+  <div class="section-inner">
+    <div class="clinic-header reveal">
+      <div>
+        <div class="section-tag">Las tres modalidades</div>
+        <h2 class="section-headline" style="font-size:clamp(1.7rem,3vw,2.3rem);margin-bottom:0;">Convencional, zafiro <span class="b">o invisible</span></h2>
+      </div>
+    </div>
+
+    <div class="tipos-grid">
+      <!-- CONVENCIONAL -->
+      <div class="tipo-card reveal">
+        <h3>Ortodoncia convencional</h3>
+        <p>Estudia, previene y corrige las alteraciones del desarrollo, la forma de las arcadas dentarias y la posición de los maxilares.</p>
+        <div style="font-family:'Inter',sans-serif;font-weight:600;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--black);margin-bottom:12px;">Qué busca</div>
+        <ul>
+          <li>Restablecer el equilibrio morfológico de la boca y de la cara</li>
+          <li>Restablecer el equilibrio funcional</li>
+          <li>Mejorar también la estética facial</li>
+        </ul>
+        <div style="padding-top:20px;border-top:1px solid var(--border);font-size:14px;color:var(--black);line-height:1.6;"><strong style="font-weight:600;">Qué corrige</strong> las alteraciones del desarrollo, la forma de las arcadas dentarias y la posición de los maxilares.</div>
+      </div>
+
+      <!-- ZAFIRO -->
+      <div class="tipo-card reveal">
+        <h3>Ortodoncia en zafiro</h3>
+        <p>Brackets fabricados con cristal de zafiro, uno de los materiales más resistentes.</p>
+        <div style="font-family:'Inter',sans-serif;font-weight:600;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--black);margin-bottom:12px;">Beneficios</div>
+        <ul>
+          <li>Tan efectivos como los brackets convencionales</li>
+          <li>Cristal de zafiro, uno de los materiales más resistentes</li>
+          <li>Transparentes</li>
+          <li>No se tiñen ni se vuelven amarillos</li>
+        </ul>
+        <div style="padding-top:20px;border-top:1px solid var(--border);font-size:14px;color:var(--black);line-height:1.6;"><strong style="font-weight:600;">Qué la distingue</strong> es transparente y no cambia de color como puede ocurrir con otro tipo de ortodoncia.</div>
+      </div>
+
+      <!-- INVISIBLE -->
+      <div class="tipo-card reveal">
+        <h3>Ortodoncia invisible</h3>
+        <p>Alineadores transparentes y removibles que transforman tu sonrisa sin interferir con tu estilo de vida.</p>
+        <div style="font-family:'Inter',sans-serif;font-weight:600;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--black);margin-bottom:12px;">Beneficios</div>
+        <ul>
+          <li>Alineadores transparentes y removibles</li>
+          <li>Sin brackets visibles</li>
+          <li>Sin restricciones al hablar, comer o sonreír</li>
+          <li>Resultados estéticos y funcionales</li>
+        </ul>
+        <div style="padding-top:20px;border-top:1px solid var(--border);font-size:14px;color:var(--black);line-height:1.6;"><strong style="font-weight:600;">Ideal para</strong> quienes buscan resultados estéticos y funcionales sin brackets visibles.</div>
+      </div>
+    </div>
+
+    <!-- PENDIENTE: paso a paso real de la ortodoncia (cuántas citas, cada cuánto son los
+         controles, si hay retención al final). El bloque de 4 pasos de la plantilla se eliminó
+         por describir un proceso y unos plazos que el cliente no ha confirmado. -->
+  </div>
+</section>
+
+<!-- ─── ANTES / DESPUÉS ──────────────────────────────────────────────────────────
+     PENDIENTE: fotos reales de antes/después de casos de ortodoncia de OralTech,
+     con autorización escrita del paciente para publicarlas. Su web actual
+     (oraltechodontologia.com) sí tiene esta comparación en esta página, así que
+     el bloque hace falta — pero NO se monta con fotos de archivo, porque serían
+     resultados clínicos falsos atribuidos a la clínica.
+
+     Cuando lleguen las fotos: guardarlas en img/ como antes-ortodoncia-1.jpg y
+     despues-ortodoncia-1.jpg, descomentar este bloque y ajustar el alt.
+
+<section class="section">
+  <div class="section-inner">
+    <div class="clinic-header reveal">
+      <div>
+        <div class="section-tag">Antes y después</div>
+        <h2 class="section-headline" style="font-size:clamp(1.7rem,3vw,2.3rem);margin-bottom:0;">Casos <span class="b">de nuestros pacientes</span></h2>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;" class="landing-split">
+      <figure class="reveal" style="margin:0;border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-md);">
+        <img src="img/antes-ortodoncia-1.jpg" alt="Sonrisa antes del tratamiento de ortodoncia" style="width:100%;display:block;aspect-ratio:4/3;object-fit:cover;" loading="lazy">
+        <figcaption style="padding:14px 18px;font-family:'Inter',sans-serif;font-weight:600;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--gray);background:var(--white);">Antes</figcaption>
+      </figure>
+      <figure class="reveal" style="margin:0;border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-md);">
+        <img src="img/despues-ortodoncia-1.jpg" alt="Sonrisa después del tratamiento de ortodoncia" style="width:100%;display:block;aspect-ratio:4/3;object-fit:cover;" loading="lazy">
+        <figcaption style="padding:14px 18px;font-family:'Inter',sans-serif;font-weight:600;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--gray);background:var(--white);">Después</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+────────────────────────────────────────────────────────────────────────────── -->
+
+<!-- ─── LO QUE DICEN EN GOOGLE ───────────────────────────── -->
+<section class="section">
+  <div class="section-inner">
+    <div class="clinic-header reveal">
+      <div>
+        <div class="section-tag">Lo que dicen en Google</div>
+        <h2 class="section-headline" style="font-size:clamp(1.7rem,3vw,2.3rem);margin-bottom:0;">Reseñas <span class="b">de nuestros pacientes</span></h2>
+      </div>
+      <div class="clinic-since">
+        <span style="color:var(--accent);letter-spacing:3px;">★★★★★</span><br>
+        <a href="https://www.google.com/maps?cid=8729935231387113281" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;">5,0 · 25 opiniones · sede Cúcuta</a>
+      </div>
+    </div>
+
+    <div class="testimonios-grid">
+      <div class="testimonio reveal">
+        <p>"Excelente atención y servicios prestados, trabajos de la mejor calidad. Súper recomendados."</p>
+        <div class="who">
+          <div class="who-avatar">A</div>
+          <div>
+            <div class="who-name">Andrea Cruz</div>
+            <div class="who-svc">Reseña en Google</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonio reveal">
+        <p>"Excelente trabajo. Súper recomendados."</p>
+        <div class="who">
+          <div class="who-avatar">N</div>
+          <div>
+            <div class="who-name">Nai Alvarado</div>
+            <div class="who-svc">Reseña en Google</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonio reveal">
+        <p>"Quedé muy feliz con el resultado de mi diseño de sonrisa. Desde el primer momento recibí una atención excelente, con mucho profesionalismo, dedicación y cuidado en cada detalle. El resultado superó mis expectativas."</p>
+        <div class="who">
+          <div class="who-avatar">A</div>
+          <div>
+            <div class="who-name">Andreina Rangel</div>
+            <div class="who-svc">Reseña en Google · Diseño de sonrisa</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PENDIENTE: horario real confirmado por el cliente -->
+    <div class="reveal" style="margin-top:48px;background:var(--black);border-radius:var(--radius-lg);padding:36px 40px;display:flex;flex-wrap:wrap;gap:20px;align-items:center;justify-content:space-between;">
+      <div>
+        <div style="font-family:'Inter',sans-serif;font-weight:600;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:var(--text-gray-soft);margin-bottom:6px;">Ortodoncia · Cúcuta y Medellín</div>
+        <div style="font-family:'Inter',sans-serif;font-weight:300;font-size:26px;letter-spacing:-0.02em;color:#fff;">Escríbenos por WhatsApp y te confirmamos horarios</div>
+      </div>
+      <a href="https://wa.me/573224130747?text=Hola,%20vengo%20de%20su%20página%20web%20y%20quiero%20agendar%20una%20cita%20para%20ortodoncia." target="_blank" style="background:#fff;color:var(--black);font-family:'Inter',sans-serif;font-weight:500;font-size:15px;padding:15px 30px;border-radius:999px;text-decoration:none;white-space:nowrap;">Escribir por WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FAQ ──────────────────────────────────────────────── -->
+<section class="faq reveal">
+  <div class="overline">Preguntas sobre ortodoncia</div>
+  <h2>Lo que más nos preguntan</h2>
+  <div class="faq-list">
+    <div class="faq-item">
+      <button class="faq-question"><span>¿Qué tipos de ortodoncia manejan?</span><span class="faq-toggle"><svg viewBox="0 0 24 24" fill="none" width="20" height="20"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span></button>
+      <div class="faq-answer"><p>Tres modalidades: convencional, en zafiro e invisible. La convencional corrige las alteraciones del desarrollo, la forma de las arcadas dentarias y la posición de los maxilares. La de zafiro usa brackets de cristal de zafiro, transparentes. La invisible funciona con alineadores transparentes y removibles, sin brackets visibles.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question"><span>¿Los brackets de zafiro se ponen amarillos?</span><span class="faq-toggle"><svg viewBox="0 0 24 24" fill="none" width="20" height="20"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span></button>
+      <div class="faq-answer"><p>No. Están fabricados con cristal de zafiro, uno de los materiales más resistentes, y son transparentes: no se tiñen ni se vuelven amarillos como puede ocurrir con otro tipo de ortodoncia. Además son tan efectivos como los brackets convencionales.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question"><span>¿La ortodoncia invisible me obliga a cambiar mi rutina?</span><span class="faq-toggle"><svg viewBox="0 0 24 24" fill="none" width="20" height="20"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span></button>
+      <div class="faq-answer"><p>No. Los alineadores son transparentes y removibles, así que no hay brackets visibles ni restricciones al hablar, comer o sonreír. Es la opción pensada para transformar tu sonrisa sin interferir con tu estilo de vida.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question"><span>¿Cuánto dura y cuánto cuesta la ortodoncia?</span><span class="faq-toggle"><svg viewBox="0 0 24 24" fill="none" width="20" height="20"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span></button>
+      <div class="faq-answer"><p>Depende de tu caso y de la modalidad que elijas, así que preferimos no publicar una cifra ni un tiempo genéricos que después no correspondan a lo tuyo. Escríbenos por WhatsApp, cuéntanos qué quieres corregir y te damos la información concreta.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question"><span>¿Dónde quedan sus sedes?</span><span class="faq-toggle"><svg viewBox="0 0 24 24" fill="none" width="20" height="20"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span></button>
+      <!-- PENDIENTE: confirmar con el cliente si la ortodoncia se atiende en las DOS sedes o solo en una.
+           Mientras tanto la respuesta no lo afirma: solo dice dónde quedan las sedes y remite a WhatsApp. -->
+      <div class="faq-answer"><p>OralTech tiene dos sedes: Quinta Oriental en Cúcuta (Cl. 2 #9 Este-156, Local 1) y El Poblado en Medellín (Cra. 43A #7-50). Escríbenos por WhatsApp y te confirmamos horarios y disponibilidad de ortodoncia en la sede que te quede mejor.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CTA FINAL ──────────────────────────────────────── -->
+<section class="cta-final reveal">
+  <div class="cta-final-inner">
+    <div class="overline">Próximos pasos</div>
+    <h2>¿Listo para empezar <span class="b">tu ortodoncia</span>?</h2>
+    <p>Cuéntanos qué quieres corregir y te decimos si la convencional, la de zafiro o la invisible es la que se ajusta a tu caso.</p>
+    <div class="cta-final-actions">
+      <a href="https://wa.me/573224130747?text=Hola,%20vengo%20de%20su%20página%20web%20y%20quiero%20agendar%20una%20cita%20para%20ortodoncia." target="_blank" class="cta-final-btn primary">
+        Escribir por WhatsApp
+        <svg viewBox="0 0 24 24" fill="none" width="16" height="16"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </a>
+      <a href="contacto.html" class="cta-final-btn secondary">Ver sedes y contacto</a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ──────────────────────────────────────────── -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <strong>OralTech</strong>
+      <span>Odontología · Cúcuta y Medellín</span>
+      <p>Prevención, diagnóstico y tratamiento de enfermedades dentales y orales en Cúcuta y Medellín.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Servicios</h4>
+      <ul>
+        <li><a href="diseno-de-sonrisa.html">Diseño de sonrisa</a></li>
+        <li><a href="microdiseno.html">Microdiseño</a></li>
+        <li><a href="ortodoncia.html">Ortodoncia</a></li>
+        <li><a href="blanqueamiento.html">Blanqueamiento</a></li>
+        <li><a href="limpieza-dental.html">Limpieza dental</a></li>
+        <li><a href="implantes.html">Implantes dentales</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Información</h4>
+      <ul>
+        <li><a href="casos.html">Casos reales</a></li>
+        <li><a href="nosotros.html">Nosotros</a></li>
+        <li><a href="sede-cucuta.html">Sede Cúcuta</a></li>
+        <li><a href="sede-medellin.html">Sede Medellín</a></li>
+        <li><a href="blog/index.html">Blog</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Atención</h4>
+      <!-- PENDIENTE: horario real confirmado por el cliente -->
+      <ul>
+        <li><a href="https://wa.me/573224130747">Cúcuta · +57 322 413 0747</a></li>
+        <li><a href="https://wa.me/573016184618">Medellín · +57 301 618 4618</a></li>
+        <li><a href="mailto:PENDIENTE-CORREO@oraltechodontologia.com">PENDIENTE-CORREO@oraltechodontologia.com</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 OralTech · Web por <a href="https://prontoweb.co" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline">Pronto</a></p>
+    <p>Cúcuta · Medellín</p>
+  </div>
+</footer>
+
+<a href="https://wa.me/573224130747?text=Hola,%20vengo%20de%20su%20página%20web%20y%20me%20interesa%20la%20ortodoncia." target="_blank" class="wa-float" id="waFloat" data-wa-base="https://wa.me/573224130747?text=" aria-label="WhatsApp">
+  <span class="wa-float-label" id="waFloatLabel">¿Dudas sobre ortodoncia?</span>
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.371-.025-.52-.075-.149-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+</a>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
+<script src="assets/animations.js?v=20260814a" defer></script>
+<script src="assets/wa-widget.js?v=1" defer></script>
+<script src="assets/nav.js?v=1" defer></script>
+
+<script>
+  if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; }
+  const navbar = document.getElementById('navbar');
+  if (navbar) {
+    const onScroll = () => navbar.classList.toggle('scrolled', window.scrollY > 60);
+    window.addEventListener('scroll', onScroll, { passive: true });
+  }
+  document.querySelectorAll('.faq-item').forEach(item => {
+    const btn = item.querySelector('.faq-question');
+    btn.addEventListener('click', () => {
+      const wasOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!wasOpen) item.classList.add('open');
+    });
+  });
+</script>
+</body>
+</html>

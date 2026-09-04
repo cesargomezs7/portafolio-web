@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow"><!-- PREVIEW: quitar al pasar a dominio del cliente -->
+<title>Nosotros · OralTech · Clínica dental en Cúcuta y Medellín</title>
+<meta name="description" content="OralTech: clínica dental con dos sedes, Quinta Oriental en Cúcuta y El Poblado en Medellín. 36 opiniones en Google. Escríbenos por WhatsApp.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css?v=20260814a">
+<link rel="stylesheet" href="assets/nav.css?v=20260814a">
+<link rel="stylesheet" href="assets/wa-widget.css?v=20260814a">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Dentist",
+  "name": "OralTech · Clínica Dental",
+  "url": "https://oraltechodontologia.com/",
+  "image": "https://oraltechodontologia.com/img/logo-oraltech-navy.png",
+  "telephone": "+573224130747",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Cl. 2 #9 Este-156, Local 1, Quinta Oriental",
+    "addressLocality": "Cúcuta",
+    "addressRegion": "Norte de Santander",
+    "addressCountry": "CO"
+  },
+  "sameAs": [
+    "https://www.instagram.com/oraltech_clinicadental/",
+    "https://web.facebook.com/profile.php?id=61559206031650",
+    "https://www.tiktok.com/@oraltechclinicadental"
+  ],
+  "department": [
+    {
+      "@type": "Dentist",
+      "name": "OralTech · Sede Cúcuta",
+      "telephone": "+573224130747",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Cl. 2 #9 Este-156, Local 1, Quinta Oriental",
+        "addressLocality": "Cúcuta",
+        "addressRegion": "Norte de Santander",
+        "addressCountry": "CO"
+      },
+      "geo": { "@type": "GeoCoordinates", "latitude": 7.8978502, "longitude": -72.4907164 }
+    },
+    {
+      "@type": "Dentist",
+      "name": "OralTech · Sede Medellín",
+      "telephone": "+573016184618",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Cra. 43A #7-50, El Poblado",
+        "addressLocality": "Medellín",
+        "addressRegion": "Antioquia",
+        "addressCountry": "CO"
+      },
+      "geo": { "@type": "GeoCoordinates", "latitude": 6.206822, "longitude": -75.5712404 }
+    }
+  ]
+}
+</script>
+<!-- PENDIENTE: horario real confirmado por el cliente (sin él no se puede escribir openingHoursSpecification) -->
+
+<style>
+  /* ── Hero compacto (estructura del master: hero-compact-inner + hero-tag) ── */
+  .hero-compact {
+    background: var(--ice-soft);
+    border-bottom: 1px solid var(--border);
+    min-height: auto;
+  }
+  .hero-compact-inner,
+  .hero-compact .hero-content { position: relative; z-index: 2; max-width: 1300px; width: 100%; margin: 0 auto; }
+  .hero-compact .hero-tag {
+    display: inline-flex; align-items: center; gap: 12px;
+    font-size: 12px; font-weight: 500;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gray);
+    margin-bottom: 28px;
+  }
+  .hero-compact .hero-tag::before { content: ''; width: 24px; height: 1px; background: var(--gray); }
+  .hero-compact h1 {
+    font-size: clamp(2rem, 3.8vw, 3.3rem);
+    font-weight: 200;
+    letter-spacing: -0.035em;
+    line-height: 1.02;
+    color: var(--black);
+    margin: 0;
+    max-width: 900px;
+  }
+  .hero-compact h1 .b { font-weight: 500; color: var(--black); }
+  .hero-compact h1 .light { color: var(--gray); font-weight: 200; }
+  .hero-compact p {
+    font-size: 19px; line-height: 1.55; font-weight: 300;
+    color: var(--gray);
+    max-width: 680px;
+    margin-top: 24px;
+  }
+
+  /* ── Display h2 de página: Inter 300 con .b 500 ── */
+  .section h2 .b { font-weight: 500; color: var(--black); }
+
+  /* ── Ritmo vertical del master (120px) en las secciones portadas ── */
+  .section.equipo, .section.historia, .section.diferencia, .section.opiniones { padding: 120px 5%; }
+
+  /* ── Tarjeta con foto: styles.css deja la card full-bleed y mete el padding
+     en los hijos (.equipo-card-info y .equipo-card p), pero NO en los h4. Se corrige
+     aquí, en el <style> de la página, para no tocar assets/styles.css. ── */
+  .equipo-card .equipo-card-photo ~ h4 { padding: 0 32px; }
+
+  /* ── La rejilla de la plantilla es de 3 columnas; OralTech tiene DOS sedes,
+     así que esta página la usa a 2 sin tocar assets/styles.css. ── */
+  .equipo-grid.equipo-grid--2 {
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 960px;
+    margin-left: auto; margin-right: auto;
+  }
+
+  /* ── Las fotos reales de las sedes son apaisadas; la tarjeta de la plantilla
+     venía en 4/5 (retrato, pensada para una persona) y recortaba la fachada. ── */
+  #sedes .equipo-card-photo { aspect-ratio: 16 / 10; }
+  #sedes .equipo-card-photo img { object-position: center center; }
+
+  /* ── Sedes (pastillas hairline): las DOS sedes reales ── */
+  .sedes-pills { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 32px; }
+  .sedes-pills a {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 13px; font-weight: 500; color: var(--black);
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: 50px; padding: 10px 18px;
+    text-decoration: none;
+    transition: all 0.3s var(--t);
+  }
+  .sedes-pills a::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+  .sedes-pills a:hover { border-color: var(--black); transform: translateY(-2px); box-shadow: var(--shadow-sm); }
+
+  /* ── Enlace de texto dentro de tarjetas ── */
+  .card-link { color: var(--black); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+  .card-link:hover { color: var(--accent); }
+
+  /* ── Burbuja WhatsApp del master (styles.css sólo trae .wsp-float; posición aquí) ── */
+  .wa-float {
+    position: fixed; bottom: 28px; right: 28px; z-index: 999;
+    width: 62px; height: 62px; border-radius: 50%;
+    background: #25D366; color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    text-decoration: none;
+    box-shadow: 0 12px 32px rgba(37,211,102,0.4);
+    transition: transform 0.3s var(--t);
+  }
+  .wa-float:hover { transform: scale(1.08); }
+  .wa-float svg { width: 32px; height: 32px; }
+
+  /* ── Barra de progreso de scroll (hairline en color de acento) ── */
+  .scroll-progress {
+    position: fixed; top: 0; left: 0; right: 0;
+    height: 2px; z-index: 1100;
+    background: var(--accent);
+    transform: scaleX(0); transform-origin: left center;
+    pointer-events: none;
+    opacity: 0.6;
+  }
+  body.has-banner .scroll-progress { top: 36px; }
+
+  @media (max-width:1024px){
+    .equipo-grid { grid-template-columns: 1fr 1fr !important; }
+  }
+  /* Solo móvil real apila (12-jun: en la ventana del Mac ~905px debe verse como en monitor) */
+  @media (max-width:768px){
+    .historia-grid { grid-template-columns: 1fr !important; gap: 32px !important; }
+    .equipo-grid { grid-template-columns: 1fr !important; }
+    /* stats-grid: la regla móvil vive en styles.css (24-jul: 3 lado a lado) */
+  }
+  @media (max-width:640px){
+    .section.equipo, .section.historia, .section.diferencia, .section.opiniones { padding: 80px 5%; }
+  }
+</style>
+</head>
+<body>
+
+<div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
+<div id="site-nav"></div>
+
+<!-- ─── HERO COMPACT ─────────────────────────────────────── -->
+<section class="hero hero-compact">
+  <div class="hero-compact-inner">
+    <span class="hero-tag">Sobre OralTech</span>
+    <h1>Una <span class="b">clínica dental</span> <span class="light">con dos sedes:</span> <span class="b">Cúcuta y Medellín</span></h1>
+    <p>Quinta Oriental, en Cúcuta, y El Poblado, en Medellín. Entre las dos fichas de Google suman 36 opiniones. Aquí puedes ver dónde quedamos, qué tratamientos hacemos y cómo escribirnos.</p>
+  </div>
+</section>
+
+<!-- ─── SEDES ───────────────────────────────────────────────
+     PENDIENTE: nombres y perfiles del equipo confirmados por el cliente
+     ──────────────────────────────────────────────────────── -->
+<section class="section equipo" id="sedes" style="background:var(--white);">
+  <div class="section-inner">
+    <div class="clinic-header reveal">
+      <div>
+        <div class="overline">Dónde estamos</div>
+        <h2 style="font-family:'Inter',sans-serif;font-weight:300;font-size:clamp(1.7rem,3vw,2.3rem);letter-spacing:-0.03em;line-height:1.1;color:var(--black);">Dos sedes, <span class="b">dos ciudades</span></h2>
+      </div>
+    </div>
+
+    <div class="equipo-grid equipo-grid--2">
+      <div class="equipo-card reveal">
+        <div class="equipo-card-photo">
+          <img src="img/sede-cucuta.webp" alt="Fachada de OralTech en Quinta Oriental, Cúcuta" loading="lazy">
+        </div>
+        <div class="equipo-card-info">
+          <strong>Sede Cúcuta</strong>
+          <span>Quinta Oriental · Norte de Santander</span>
+        </div>
+        <h4>Dirección</h4>
+        <p>Cl. 2 #9 Este-156, Local 1, Quinta Oriental, Cúcuta, Norte de Santander.</p>
+        <h4>En Google</h4>
+        <p>5,0 estrellas con 25 opiniones. <a class="card-link" href="https://www.google.com/maps?cid=8729935231387113281" target="_blank" rel="noopener">Ver la ficha</a></p>
+        <h4>Cómo agendar</h4>
+        <!-- PENDIENTE: horario real confirmado por el cliente -->
+        <p>Escríbenos por WhatsApp al <a class="card-link" href="https://wa.me/573224130747?text=Hola,%20vengo%20de%20su%20página%20web%20y%20quiero%20agendar%20una%20cita%20en%20la%20sede%20de%20Cúcuta." target="_blank" rel="noopener">+57 322 413 0747</a> y te confirmamos horarios. <a class="card-link" href="sede-cucuta.html">Ver la sede</a></p>
+      </div>
+
+      <div class="equipo-card reveal">
+        <div class="equipo-card-photo">
+          <img src="img/sede-medellin.webp" alt="Sala de espera de OralTech en El Poblado, Medellín" loading="lazy">
+        </div>
+        <div class="equipo-card-info">
+          <strong>Sede Medellín</strong>
+          <span>El Poblado · Antioquia</span>
+        </div>
+        <h4>Dirección</h4>
+        <p>Cra. 43A #7-50, El Poblado, Medellín, Antioquia.</p>
+        <h4>En Google</h4>
+        <p>4,6 estrellas con 11 opiniones. <a class="card-link" href="https://www.google.com/maps?cid=13147330071578895628" target="_blank" rel="noopener">Ver la ficha</a></p>
+        <h4>Cómo agendar</h4>
+        <!-- PENDIENTE: horario real confirmado por el cliente -->
+        <p>Escríbenos por WhatsApp al <a class="card-link" href="https://wa.me/573016184618?text=Hola,%20vengo%20de%20su%20página%20web%20y%20quiero%20agendar%20una%20cita%20en%20la%20sede%20de%20Medellín." target="_blank" rel="noopener">+57 301 618 4618</a> y te confirmamos horarios. <a class="card-link" href="sede-medellin.html">Ver la sede</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── QUIÉNES SOMOS + STATS ────────────────────────────── -->
+<section class="section historia" style="background:var(--ice-soft);">
+  <div class="section-inner">
+    <div style="display:grid;grid-template-columns:1fr 1.2fr;gap:80px;align-items:start;" class="historia-grid">
+      <div class="reveal">
+        <div class="overline">Quiénes somos</div>
+        <h2 style="font-family:'Inter',sans-serif;font-weight:300;font-size:clamp(1.7rem,3vw,2.4rem);letter-spacing:-0.03em;line-height:1.1;color:var(--black);">Dos sedes y <span class="b">seis tratamientos</span></h2>
+      </div>
+      <div class="reveal">
+        <!-- PENDIENTE: fundación y trayectoria confirmadas por el cliente -->
+        <p style="font-size:16px;color:var(--black);opacity:0.82;line-height:1.7;margin-bottom:20px;">OralTech es una clínica dental que atiende en dos ciudades: Cúcuta, en el barrio Quinta Oriental, y Medellín, en El Poblado. Su trabajo se concentra en seis tratamientos: diseño de sonrisa, microdiseño, ortodoncia, blanqueamiento, limpieza dental e implantes dentales.</p>
+        <p style="font-size:16px;color:var(--black);opacity:0.82;line-height:1.7;">Entre las dos fichas de Google suman 36 opiniones: 25 en la sede de Cúcuta, con 5,0 estrellas, y 11 en la de Medellín, con 4,6. Si quieres saber si tu caso se puede tratar, escríbenos por WhatsApp y te confirmamos horarios y disponibilidad.</p>
+        <div class="sedes-pills">
+          <a href="sede-cucuta.html">Quinta Oriental · Cúcuta</a>
+          <a href="sede-medellin.html">El Poblado · Medellín</a>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:64px;padding-top:48px;border-top:1px solid var(--border);" class="stats-grid">
+      <div class="reveal">
+        <div data-counter="2" style="font-size:56px;font-weight:200;color:var(--black);letter-spacing:-0.04em;line-height:1;">0</div>
+        <div style="font-size:13px;color:var(--gray);letter-spacing:0.05em;text-transform:uppercase;margin-top:12px;font-weight:500;">Sedes · Cúcuta y Medellín</div>
+      </div>
+      <div class="reveal">
+        <div data-counter="6" style="font-size:56px;font-weight:200;color:var(--black);letter-spacing:-0.04em;line-height:1;">0</div>
+        <div style="font-size:13px;color:var(--gray);letter-spacing:0.05em;text-transform:uppercase;margin-top:12px;font-weight:500;">Tratamientos</div>
+      </div>
+      <div class="reveal">
+        <div data-counter="36" style="font-size:56px;font-weight:200;color:var(--black);letter-spacing:-0.04em;line-height:1;">0</div>
+        <div style="font-size:13px;color:var(--gray);letter-spacing:0.05em;text-transform:uppercase;margin-top:12px;font-weight:500;">Opiniones en Google</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── TRATAMIENTOS ─────────────────────────────────────── -->
+<section class="section diferencia" style="background:var(--white);">
+  <div class="section-inner">
+    <div class="clinic-header reveal">
+      <div>
+        <div class="overline">Qué hacemos</div>
+        <h2 style="font-family:'Inter',sans-serif;font-weight:300;font-size:clamp(1.7rem,3vw,2.3rem);letter-spacing:-0.03em;line-height:1.1;color:var(--black);">Nuestros <span class="b">seis tratamientos</span></h2>
+      </div>
+    </div>
+
+    <div class="diferencia-grid">
+      <div class="diferencia-card reveal">
+        <div class="diferencia-num">01</div>
+        <h3>Diseño de sonrisa</h3>
+        <p>En resina, en ceromero o en cerámica. La resina es la opción más económica, conservadora con el diente y de fácil mantenimiento. El ceromero combina la estética de la cerámica con la flexibilidad de la resina. La cerámica es la de mayor durabilidad y estética. <a class="card-link" href="diseno-de-sonrisa.html">Ver diseño de sonrisa</a></p>
+      </div>
+      <div class="diferencia-card reveal">
+        <div class="diferencia-num">02</div>
+        <h3>Microdiseño</h3>
+        <p>Técnica estética mínimamente invasiva para mejorar detalles de tu sonrisa: forma, tamaño, color o alineación. Con resina o ceromero, sin desgastar el diente y preservando su estructura. <a class="card-link" href="microdiseno.html">Ver microdiseño</a></p>
+      </div>
+      <div class="diferencia-card reveal">
+        <div class="diferencia-num">03</div>
+        <h3>Ortodoncia</h3>
+        <p>Convencional, en zafiro o invisible. Corrige la posición de los dientes y los maxilares. Los brackets de zafiro son transparentes y no se tiñen; los alineadores invisibles son transparentes y removibles. <a class="card-link" href="ortodoncia.html">Ver ortodoncia</a></p>
+      </div>
+      <div class="diferencia-card reveal">
+        <div class="diferencia-num">04</div>
+        <h3>Blanqueamiento</h3>
+        <p>Procedimiento de odontología estética que busca aclarar el diente eliminando manchas dentales. Es indoloro y preserva la salud oral. <a class="card-link" href="blanqueamiento.html">Ver blanqueamiento</a></p>
+      </div>
+      <div class="diferencia-card reveal">
+        <div class="diferencia-num">05</div>
+        <h3>Limpieza dental</h3>
+        <p>También llamada profilaxis. Remueve la placa bacteriana y el sarro de los dientes y las encías. <a class="card-link" href="limpieza-dental.html">Ver limpieza dental</a></p>
+      </div>
+      <div class="diferencia-card reveal">
+        <div class="diferencia-num">06</div>
+        <h3>Implantes dentales</h3>
+        <p>Un dispositivo médico en forma de tornillo que se inserta en el hueso maxilar para reemplazar la raíz de un diente perdido y sostener la corona. <a class="card-link" href="implantes.html">Ver implantes dentales</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── OPINIONES REALES DE GOOGLE ──────────────────────── -->
+<section class="section opiniones" style="background:var(--ice-soft);">
+  <div class="section-inner">
+    <div class="clinic-header reveal">
+      <div>
+        <div class="overline">Sede Cúcuta · 5,0 en Google con 25 opiniones</div>
+        <h2 style="font-family:'Inter',sans-serif;font-weight:300;font-size:clamp(1.7rem,3vw,2.3rem);letter-spacing:-0.03em;line-height:1.1;color:var(--black);">Lo que escriben <span class="b">los pacientes</span></h2>
+      </div>
+      <a href="https://www.google.com/maps?cid=8729935231387113281" target="_blank" rel="noopener" class="reveal" style="display:inline-flex;align-items:center;gap:10px;margin-top:18px;background:var(--white);border:1px solid var(--border);border-radius:999px;padding:12px 22px;text-decoration:none;box-shadow:var(--shadow-sm);">
+        <span style="font-weight:700;color:var(--accent);font-size:16px;">★ 5,0</span>
+        <span style="font-weight:600;color:var(--black);font-size:14px;">Ver las 25 opiniones en Google →</span>
+      </a>
+    </div>
+
+    <div class="testimonios-grid">
+      <div class="testimonio reveal">
+        <p>"Quedé muy feliz con el resultado de mi diseño de sonrisa. Desde el primer momento recibí una atención excelente, con mucho profesionalismo, dedicación y cuidado en cada detalle. El resultado superó mis expectativas."</p>
+        <div class="who">
+          <div class="who-avatar">AR</div>
+          <div>
+            <div class="who-name">Andreina Rangel</div>
+            <div class="who-svc">Opinión en Google · Sede Cúcuta</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonio reveal">
+        <p>"Excelente trabajo. Súper recomendados."</p>
+        <div class="who">
+          <div class="who-avatar">NA</div>
+          <div>
+            <div class="who-name">Nai Alvarado</div>
+            <div class="who-svc">Opinión en Google · Sede Cúcuta</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonio reveal">
+        <p>"Excelente atención y servicios prestados, trabajos de la mejor calidad. Súper recomendados."</p>
+        <div class="who">
+          <div class="who-avatar">AC</div>
+          <div>
+            <div class="who-name">Andrea Cruz</div>
+            <div class="who-svc">Opinión en Google · Sede Cúcuta</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CTA FINAL ───────────────────────────────────────── -->
+<section class="cta-final reveal">
+  <div class="cta-final-inner">
+    <div class="overline">Escríbenos</div>
+    <h2>Cuéntanos <span class="b">qué necesitas</span></h2>
+    <p>Escoge la sede que te quede más cerca. Por WhatsApp resolvemos tus dudas y te confirmamos horarios.</p>
+    <!-- PENDIENTE: horario real confirmado por el cliente -->
+    <div class="cta-final-actions">
+      <a href="https://wa.me/573224130747?text=Hola,%20vengo%20de%20su%20página%20web%20y%20quiero%20agendar%20una%20cita." target="_blank" rel="noopener" class="cta-final-btn primary">
+        WhatsApp Cúcuta
+        <svg viewBox="0 0 24 24" fill="none" width="16" height="16"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </a>
+      <a href="contacto.html" class="cta-final-btn secondary">Ver sedes y contacto</a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ──────────────────────────────────────────── -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <strong>OralTech</strong>
+      <span>Odontología · Cúcuta y Medellín</span>
+      <p>Prevención, diagnóstico y tratamiento de enfermedades dentales y orales en Cúcuta y Medellín.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Servicios</h4>
+      <ul>
+        <li><a href="diseno-de-sonrisa.html">Diseño de sonrisa</a></li>
+        <li><a href="microdiseno.html">Microdiseño</a></li>
+        <li><a href="ortodoncia.html">Ortodoncia</a></li>
+        <li><a href="blanqueamiento.html">Blanqueamiento</a></li>
+        <li><a href="limpieza-dental.html">Limpieza dental</a></li>
+        <li><a href="implantes.html">Implantes dentales</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Información</h4>
+      <ul>
+        <li><a href="casos.html">Casos reales</a></li>
+        <li><a href="nosotros.html">Nosotros</a></li>
+        <li><a href="sede-cucuta.html">Sede Cúcuta</a></li>
+        <li><a href="sede-medellin.html">Sede Medellín</a></li>
+        <li><a href="blog/index.html">Blog</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Atención</h4>
+      <ul>
+        <li><a href="https://wa.me/573224130747">Cúcuta · +57 322 413 0747</a></li>
+        <li><a href="https://wa.me/573016184618">Medellín · +57 301 618 4618</a></li>
+        <li><a href="mailto:PENDIENTE-CORREO@oraltechodontologia.com">PENDIENTE-CORREO@oraltechodontologia.com</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 OralTech · Web por <a href="https://prontoweb.co" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline">Pronto</a></p>
+    <p>Cúcuta · Medellín</p>
+  </div>
+</footer>
+
+<a href="https://wa.me/573224130747?text=Hola,%20vengo%20de%20su%20página%20web%20y%20quiero%20agendar%20una%20cita." target="_blank" class="wa-float" id="waFloat" data-wa-base="https://wa.me/573224130747?text=" aria-label="WhatsApp">
+  <span class="wa-float-label" id="waFloatLabel">Escríbenos por WhatsApp</span>
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.371-.025-.52-.075-.149-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+</a>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
+<script src="assets/animations.js?v=20260814a" defer></script>
+<script src="assets/wa-widget.js?v=1" defer></script>
+<script src="assets/nav.js?v=1" defer></script>
+
+<script>
+  if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; }
+  window.addEventListener('beforeunload', () => window.scrollTo(0, 0));
+  const navbar = document.getElementById('navbar');
+  if (navbar) {
+    const onScroll = () => navbar.classList.toggle('scrolled', window.scrollY > 60);
+    window.addEventListener('scroll', onScroll, { passive: true });
+  }
+</script>
+
+<!-- Contadores [data-counter] + barra de progreso.
+     assets/animations.js no maneja contadores ni #scrollProgress;
+     esto los cubre sin GSAP y sin tocar assets/. -->
+<script>
+(function () {
+  var counters = Array.prototype.slice.call(document.querySelectorAll('[data-counter]'));
+  function fmt(el, v) {
+    var d = parseInt(el.getAttribute('data-decimals') || '0', 10);
+    return (el.getAttribute('data-prefix') || '') + v.toFixed(d) + (el.getAttribute('data-suffix') || '');
+  }
+  function finish(el) { el.textContent = fmt(el, parseFloat(el.getAttribute('data-counter'))); }
+  var reduce = false;
+  try { reduce = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches); } catch (e) {}
+  function run(el) {
+    if (el.__prontoCounted) return;
+    el.__prontoCounted = true;
+    var target = parseFloat(el.getAttribute('data-counter')), t0 = null, DUR = 1800;
+    if (reduce || !window.requestAnimationFrame) { finish(el); return; }
+    function step(ts) {
+      if (t0 === null) t0 = ts;
+      var p = Math.min(1, (ts - t0) / DUR);
+      p = 1 - Math.pow(1 - p, 3);
+      el.textContent = fmt(el, target * p);
+      if (p < 1) requestAnimationFrame(step); else finish(el);
+    }
+    requestAnimationFrame(step);
+  }
+  if (counters.length) {
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) { if (e.isIntersecting) { run(e.target); io.unobserve(e.target); } });
+      }, { rootMargin: '0px 0px -80px 0px' });
+      counters.forEach(function (el) { io.observe(el); });
+    } else { counters.forEach(finish); }
+  }
+
+  var bar = document.getElementById('scrollProgress');
+  if (bar) {
+    var onScroll = function () {
+      var h = document.documentElement;
+      var max = (h.scrollHeight - h.clientHeight) || 1;
+      var y = window.pageYOffset || h.scrollTop || 0;
+      bar.style.transform = 'scaleX(' + Math.min(1, Math.max(0, y / max)) + ')';
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    onScroll();
+  }
+})();
+</script>
+
+</body>
+</html>

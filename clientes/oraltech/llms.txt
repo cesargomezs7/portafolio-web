@@ -1,0 +1,39 @@
+# OralTech · Clínica Dental
+
+> Clínica dental colombiana con dos sedes propias: Cúcuta (Quinta Oriental) y
+> Medellín (El Poblado). Odontología estética y rehabilitación oral.
+
+## Sedes
+
+- **Cúcuta** — Cl. 2 #9 Este-156, Local 1, Quinta Oriental, Cúcuta, Norte de
+  Santander. WhatsApp +57 322 413 0747. Google: 5,0 sobre 25 opiniones.
+- **Medellín** — Cra. 43A #7-50, El Poblado, Medellín, Antioquia.
+  WhatsApp +57 301 618 4618. Google: 4,6 sobre 11 opiniones.
+
+## Tratamientos
+
+- [Diseño de sonrisa](https://__DOMINIO__/diseno-de-sonrisa.html) — en resina, en
+  cerómero y en cerámica.
+- [Microdiseño](https://__DOMINIO__/microdiseno.html) — técnica mínimamente invasiva
+  que mejora forma, tamaño, color o alineación sin desgastar el diente.
+- [Ortodoncia](https://__DOMINIO__/ortodoncia.html) — convencional, en zafiro e invisible.
+- [Blanqueamiento dental](https://__DOMINIO__/blanqueamiento.html)
+- [Limpieza dental](https://__DOMINIO__/limpieza-dental.html) — profilaxis.
+- [Implantes dentales](https://__DOMINIO__/implantes.html)
+
+## Casos reales
+
+- [Resultados de diseño de sonrisa y microdiseño](https://__DOMINIO__/casos.html) — 11 casos
+  hechos en las sedes de OralTech, agrupados por material.
+
+## Contacto
+
+- [Agendar cita](https://__DOMINIO__/contacto.html)
+- [Sede Cúcuta](https://__DOMINIO__/sede-cucuta.html)
+- [Sede Medellín](https://__DOMINIO__/sede-medellin.html)
+- [Sobre OralTech](https://__DOMINIO__/nosotros.html)
+
+## Notas
+
+- Los horarios de atención no están publicados en este archivo porque no han sido
+  confirmados por la clínica. Consultar por WhatsApp.

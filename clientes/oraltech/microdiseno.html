@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow"><!-- PREVIEW: quitar al pasar a dominio del cliente -->
+<title>Microdiseño dental en Cúcuta y Medellín · OralTech</title>
+<meta name="description" content="Microdiseño en OralTech: técnica estética mínimamente invasiva que mejora forma, tamaño, color o alineación sin desgastar el diente. Cúcuta y Medellín.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css?v=20260814a">
+<link rel="stylesheet" href="assets/nav.css?v=20260814a">
+<link rel="stylesheet" href="assets/wa-widget.css?v=20260814a">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "MedicalProcedure",
+  "name": "Microdiseño",
+  "alternateName": "Microdiseño dental",
+  "howPerformed": "Técnica estética mínimamente invasiva que mejora la forma, el tamaño, el color o la alineación de los dientes con materiales como resina o ceromero, sin desgastar el diente.",
+  "provider": {
+    "@type": "Dentist",
+    "name": "OralTech",
+    "legalName": "ORAL TECH CLINICA DENTAL",
+    "url": "https://oraltechodontologia.com",
+    "telephone": "+573224130747",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Cl. 2 #9 Este-156, Local 1, Quinta Oriental",
+      "addressLocality": "Cúcuta",
+      "addressRegion": "Norte de Santander",
+      "addressCountry": "CO"
+    },
+    "areaServed": ["Cúcuta", "Medellín"],
+    "sameAs": [
+      "https://www.instagram.com/oraltech_clinicadental/",
+      "https://web.facebook.com/profile.php?id=61559206031650",
+      "https://www.tiktok.com/@oraltechclinicadental"
+    ]
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    { "@type": "Question", "name": "¿Qué es exactamente el microdiseño?", "acceptedAnswer": { "@type": "Answer", "text": "Es una técnica estética mínimamente invasiva que busca mejorar pequeños detalles de tu sonrisa: la forma, el tamaño, el color o la alineación de los dientes. Se trabaja con materiales como resina o ceromero, buscando un resultado natural y armónico." } },
+    { "@type": "Question", "name": "¿El microdiseño desgasta mis dientes?", "acceptedAnswer": { "@type": "Answer", "text": "No. La técnica busca justamente lo contrario: lograr resultados naturales y armónicos sin desgastar el diente, preservando su estructura." } },
+    { "@type": "Question", "name": "¿Con qué materiales se hace?", "acceptedAnswer": { "@type": "Answer", "text": "Con resina o ceromero. La resina es un material versátil y accesible, conservador con el diente y de fácil mantenimiento. El ceromero es un material híbrido que combina la estética de la cerámica con la flexibilidad de la resina: aspecto natural, alta resistencia y mínima abrasión al diente." } },
+    { "@type": "Question", "name": "¿En qué se diferencia del diseño de sonrisa?", "acceptedAnswer": { "@type": "Answer", "text": "El microdiseño trabaja pequeños detalles y es mínimamente invasivo. El diseño de sonrisa es un cambio más amplio y se puede hacer en resina, ceromero o cerámica. Si no sabes cuál necesitas, escríbenos por WhatsApp y te orientamos según tu caso." } },
+    { "@type": "Question", "name": "¿Dónde me pueden atender?", "acceptedAnswer": { "@type": "Answer", "text": "Tenemos dos sedes: Quinta Oriental en Cúcuta (Cl. 2 #9 Este-156, Local 1) y El Poblado en Medellín (Cra. 43A #7-50). Escríbenos por WhatsApp a la que te quede más cerca y te confirmamos horarios y disponibilidad." } }
+  ]
+}
+</script>
+<!-- PENDIENTE: horario real confirmado por el cliente (sin él no se puede escribir openingHoursSpecification) -->
+<style>
+  /* ── Hero compacto (hero-compact-inner + hero-tag) ── */
+  .hero-compact {
+    background: var(--ice-soft);
+    border-bottom: 1px solid var(--border);
+    min-height: auto;
+  }
+  .hero-compact-inner,
+  .hero-compact .hero-content { position: relative; z-index: 2; max-width: 1300px; width: 100%; margin: 0 auto; }
+  .hero-compact .hero-tag {
+    display: inline-flex; align-items: center; gap: 12px;
+    font-size: 12px; font-weight: 500;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gray);
+    margin-bottom: 28px;
+  }
+  .hero-compact .hero-tag::before { content: ''; width: 24px; height: 1px; background: var(--gray); }
+  .hero-compact h1 {
+    font-size: clamp(2rem, 3.8vw, 3.3rem);
+    font-weight: 200;
+    letter-spacing: -0.035em;
+    line-height: 1.02;
+    color: var(--black);
+    margin: 0;
+    max-width: 900px;
+  }
+  .hero-compact h1 .b { font-weight: 500; color: var(--black); }
+  .hero-compact h1 .light { color: var(--gray); font-weight: 200; }
+  .hero-compact p {
+    font-size: 19px; line-height: 1.55; font-weight: 300;
+    color: var(--gray);
+    max-width: 680px;
+    margin-top: 24px;
+  }
+
+  /* ── Display h2 de página: Inter 200 con .b 500 ── */
+  .section h2 .b { font-weight: 500; color: var(--black); }
+
+  /* ── Burbuja flotante de WhatsApp ── */
+  .wa-float {
+    position: fixed; bottom: 28px; right: 28px; z-index: 999;
+    width: 62px; height: 62px; border-radius: 50%;
+    background: #25D366; color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    text-decoration: none;
+    box-shadow: 0 12px 32px rgba(37,211,102,0.4);
+    transition: transform 0.3s var(--t);
+  }
+  .wa-float:hover { transform: scale(1.08); }
+  .wa-float svg { width: 32px; height: 32px; }
+
+  /* ── Barra de progreso de scroll ── */
+  .scroll-progress {
+    position: fixed; top: 0; left: 0; right: 0;
+    height: 2px; z-index: 1100;
+    background: var(--accent);
+    transform: scaleX(0); transform-origin: left center;
+    pointer-events: none;
+    opacity: 0.6;
+  }
+
+  /* ── Footer de 5 columnas ── */
+  .footer-grid.footer-grid--5 { grid-template-columns: 2fr 1fr 1fr 1fr 1fr; }
+  .footer-social { display: flex; gap: 10px; margin-top: 18px; }
+  .footer-social a {
+    width: 36px; height: 36px; border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.18);
+    display: inline-flex; align-items: center; justify-content: center;
+    color: var(--text-gray-soft);
+    transition: all 0.3s var(--t);
+  }
+  .footer-social a:hover { background: var(--accent); border-color: var(--accent); color: var(--black); }
+  .footer-social svg { width: 16px; height: 16px; }
+
+  @media (max-width:1024px){
+    .footer-grid.footer-grid--5 { grid-template-columns: 1fr 1fr; }
+    .landing-cards{ grid-template-columns:1fr !important; }
+  }
+  @media (max-width:768px){
+    .landing-split{ grid-template-columns:1fr !important; gap:32px !important; }
+  }
+  @media (max-width:640px){
+    .footer-grid.footer-grid--5 { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
+<div id="site-nav"></div>
+
+<!-- ─── HERO COMPACTO ───────────────────────────────────── -->
+<section class="hero hero-compact">
+  <div class="hero-compact-inner hero-content">
+    <span class="hero-tag">Servicios · Microdiseño</span>
+    <h1>Microdiseño dental <span class="b">sin desgastar tu diente</span></h1>
+    <p>Técnica estética mínimamente invasiva para mejorar la forma, el tamaño, el color o la alineación de tus dientes, con resultados naturales y armónicos. En Cúcuta y en Medellín.</p>
+  </div>
+</section>
+
+<!-- ─── POR QUÉ IMPORTA ─────────────────────────────────── -->
+<section class="section">
+  <div class="section-inner">
+    <div style="display:grid;grid-template-columns:1.1fr 0.9fr;gap:64px;align-items:center;" class="landing-split">
+      <div class="reveal">
+        <div class="overline">Por qué importa</div>
+        <h2 style="font-family:'Inter',sans-serif;font-weight:200;font-size:clamp(1.7rem,3vw,2.3rem);letter-spacing:-0.03em;line-height:1.05;color:var(--black);margin-bottom:18px;">No siempre hace falta <span class="b">un cambio completo</span></h2>
+        <p style="font-size:16px;color:var(--black);opacity:0.82;line-height:1.7;margin-bottom:16px;">El microdiseño es una técnica estética mínimamente invasiva que busca mejorar pequeños detalles de tu sonrisa: forma, tamaño, color o alineación de los dientes. Utilizando materiales como resina o ceromero, logramos resultados naturales y armónicos sin desgastar el diente, preservando su estructura.</p>
+        <p style="font-size:16px;color:var(--black);opacity:0.82;line-height:1.7;">Si lo que buscas es un cambio más amplio, la técnica indicada es el <a href="diseno-de-sonrisa.html" style="color:inherit;text-decoration:underline;">diseño de sonrisa</a>, que además del ceromero y la resina se puede hacer en cerámica. Escríbenos por WhatsApp, cuéntanos qué te gustaría cambiar y te decimos cuál de las dos tiene sentido para ti.</p>
+      </div>
+      <div class="reveal" style="border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-md);">
+        <!-- PENDIENTE: confirmar con la clínica que esta imagen (tomada de su propia web) es de un caso suyo y que autoriza publicarla; si no, reemplazar por foto de consultorio -->
+        <img src="img/micro-1.webp" alt="Primer plano de una sonrisa: forma, tamaño, color y alineación son los detalles que trabaja el microdiseño" style="width:100%;height:100%;object-fit:cover;display:block;aspect-ratio:4/3;" loading="lazy">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── QUÉ MEJORA ──────────────────────────────────────── -->
+<section class="section" style="background:var(--gray-bg);">
+  <div class="section-inner">
+    <div class="clinic-header reveal">
+      <div>
+        <div class="overline">Qué mejora</div>
+        <h2 style="font-family:'Inter',sans-serif;font-weight:200;font-size:clamp(1.7rem,3vw,2.3rem);letter-spacing:-0.03em;line-height:1.05;color:var(--black);">Los detalles que <span class="b">sí se notan</span></h2>
+      </div>
+      <div class="clinic-since">
+        <span style="color:var(--accent);letter-spacing:3px;">★★★★★</span><br>
+        <a href="https://www.google.com/maps?cid=8729935231387113281" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;">5,0 · 25 opiniones · sede Cúcuta</a>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;" class="landing-cards">
+      <div class="reveal" style="background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:30px 26px;">
+        <h3 style="font-family:'Inter',sans-serif;font-weight:500;font-size:21px;letter-spacing:-0.02em;color:var(--black);margin-bottom:10px;">Forma y tamaño</h3>
+        <p style="color:var(--gray);font-size:15px;line-height:1.7;">Ajustamos la forma y el tamaño de los dientes que rompen la armonía de tu sonrisa, preservando la estructura del diente.</p>
+      </div>
+      <div class="reveal" style="background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:30px 26px;">
+        <h3 style="font-family:'Inter',sans-serif;font-weight:500;font-size:21px;letter-spacing:-0.02em;color:var(--black);margin-bottom:10px;">Color</h3>
+        <p style="color:var(--gray);font-size:15px;line-height:1.7;">Trabajamos el color de los dientes que desentonan con el resto, con resina o ceromero, buscando un acabado natural.</p>
+      </div>
+      <div class="reveal" style="background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:30px 26px;">
+        <h3 style="font-family:'Inter',sans-serif;font-weight:500;font-size:21px;letter-spacing:-0.02em;color:var(--black);margin-bottom:10px;">Alineación</h3>
+        <p style="color:var(--gray);font-size:15px;line-height:1.7;">Mejoramos pequeñas diferencias de alineación. Si lo que necesitas es mover los dientes, eso es <a href="ortodoncia.html" style="color:inherit;text-decoration:underline;">ortodoncia</a>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CON QUÉ MATERIALES ──────────────────────────────── -->
+<section class="section">
+  <div class="section-inner">
+    <div class="clinic-header reveal">
+      <div>
+        <div class="overline">Con qué se hace</div>
+        <h2 style="font-family:'Inter',sans-serif;font-weight:200;font-size:clamp(1.7rem,3vw,2.3rem);letter-spacing:-0.03em;line-height:1.05;color:var(--black);">Resina <span class="b">o ceromero</span></h2>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:24px;" class="landing-cards">
+      <!-- RESINA -->
+      <div class="tipo-card reveal">
+        <h3>Microdiseño en resina</h3>
+        <p>Material versátil y accesible que permite modificaciones estéticas rápidas y poco invasivas.</p>
+        <div style="font-family:'Inter',sans-serif;font-weight:600;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--black);margin-bottom:12px;">Beneficios</div>
+        <ul>
+          <li>Procedimiento más económico</li>
+          <li>Conservador con el diente</li>
+          <li>De fácil mantenimiento</li>
+        </ul>
+        <div style="padding-top:20px;border-top:1px solid var(--border);font-size:14px;color:var(--black);line-height:1.6;"><strong style="font-weight:600;">Ideal para</strong> cambios sutiles o temporales.</div>
+      </div>
+
+      <!-- CEROMERO -->
+      <div class="tipo-card reveal">
+        <h3>Microdiseño en ceromero</h3>
+        <p>Material híbrido que combina la estética de la cerámica con la flexibilidad de la resina.</p>
+        <div style="font-family:'Inter',sans-serif;font-weight:600;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--black);margin-bottom:12px;">Beneficios</div>
+        <ul>
+          <li>Aspecto natural</li>
+          <li>Alta resistencia</li>
+          <li>Mínima abrasión al diente</li>
+          <li>Excelente adaptación</li>
+        </ul>
+        <div style="padding-top:20px;border-top:1px solid var(--border);font-size:14px;color:var(--black);line-height:1.6;"><strong style="font-weight:600;">Ideal para</strong> quienes buscan un equilibrio entre durabilidad y estética.</div>
+      </div>
+    </div>
+
+    <!-- PENDIENTE: paso a paso real del microdiseño (cuántas citas, qué se hace en cada una, si hay
+         prueba previa del resultado). El bloque de 4 pasos de la plantilla se eliminó porque
+         describía un proceso que el cliente no ha confirmado. -->
+
+    <!-- ─── TÉCNICA HERMANA: DISEÑO DE SONRISA ─── -->
+    <div style="display:grid;grid-template-columns:1.1fr 0.9fr;gap:64px;align-items:center;margin-top:64px;" class="landing-split">
+      <div class="reveal">
+        <div class="overline">Técnica hermana</div>
+        <h2 style="font-family:'Inter',sans-serif;font-weight:200;font-size:clamp(1.7rem,3vw,2.3rem);letter-spacing:-0.03em;line-height:1.05;color:var(--black);margin-bottom:18px;">¿Y si quieres cambiar <span class="b">toda la sonrisa?</span></h2>
+        <p style="font-size:16px;color:var(--black);opacity:0.82;line-height:1.7;margin-bottom:28px;">El diseño de sonrisa es el cambio amplio, y se puede hacer en tres materiales: resina, ceromero o cerámica. La cerámica es la de mayor durabilidad y estética, y su apariencia se asemeja casi a la de un diente natural.</p>
+        <a href="diseno-de-sonrisa.html" class="btn-pill outline">Ver diseño de sonrisa</a>
+      </div>
+      <a href="diseno-de-sonrisa.html" class="catalog-card reveal">
+        <h3>Diseño de sonrisa</h3>
+        <p>Rediseño estético de la sonrisa en resina, ceromero o cerámica, cada material con su caso ideal.</p>
+        <div class="precio-row">
+          <span class="precio-label">Técnica hermana</span>
+          <span class="arrow">→</span>
+        </div>
+      </a>
+    </div>
+
+    <!-- PENDIENTE: horario real confirmado por el cliente -->
+    <div class="reveal" style="margin-top:48px;background:var(--black);border-radius:var(--radius-lg);padding:36px 40px;display:flex;flex-wrap:wrap;gap:20px;align-items:center;justify-content:space-between;">
+      <div>
+        <div style="font-family:'Inter',sans-serif;font-weight:600;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:var(--text-gray-soft);margin-bottom:6px;">Microdiseño · Cúcuta y Medellín</div>
+        <div style="font-family:'Inter',sans-serif;font-weight:300;font-size:26px;letter-spacing:-0.02em;color:#fff;">Escríbenos por WhatsApp y te confirmamos horarios</div>
+      </div>
+      <a href="https://wa.me/573224130747?text=Hola,%20vengo%20de%20su%20p%C3%A1gina%20web%20y%20quiero%20agendar%20una%20cita%20para%20microdise%C3%B1o." target="_blank" rel="noopener" style="background:var(--white);color:var(--black);font-family:'Inter',sans-serif;font-weight:500;font-size:15px;padding:15px 30px;border-radius:999px;text-decoration:none;white-space:nowrap;">Escribir por WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FAQ ─────────────────────────────────────────────── -->
+<section class="faq reveal">
+  <div class="overline">Preguntas sobre microdiseño</div>
+  <h2>Lo que más nos preguntan</h2>
+  <div class="faq-list">
+    <div class="faq-item">
+      <button class="faq-question"><span>¿Qué es exactamente el microdiseño?</span><span class="faq-toggle"><svg viewBox="0 0 24 24" fill="none" width="20" height="20"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span></button>
+      <div class="faq-answer"><p>Es una técnica estética mínimamente invasiva que busca mejorar pequeños detalles de tu sonrisa: la forma, el tamaño, el color o la alineación de los dientes. Se trabaja con materiales como resina o ceromero, buscando un resultado natural y armónico.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question"><span>¿El microdiseño desgasta mis dientes?</span><span class="faq-toggle"><svg viewBox="0 0 24 24" fill="none" width="20" height="20"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span></button>
+      <div class="faq-answer"><p>No. La técnica busca justamente lo contrario: lograr resultados naturales y armónicos sin desgastar el diente, preservando su estructura.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question"><span>¿Con qué materiales se hace?</span><span class="faq-toggle"><svg viewBox="0 0 24 24" fill="none" width="20" height="20"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span></button>
+      <div class="faq-answer"><p>Con resina o ceromero. La resina es un material versátil y accesible, conservador con el diente y de fácil mantenimiento. El ceromero es un material híbrido que combina la estética de la cerámica con la flexibilidad de la resina: aspecto natural, alta resistencia y mínima abrasión al diente.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question"><span>¿En qué se diferencia del diseño de sonrisa?</span><span class="faq-toggle"><svg viewBox="0 0 24 24" fill="none" width="20" height="20"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span></button>
+      <div class="faq-answer"><p>El microdiseño trabaja pequeños detalles y es mínimamente invasivo. El <a href="diseno-de-sonrisa.html">diseño de sonrisa</a> es un cambio más amplio y se puede hacer en resina, ceromero o cerámica. Si no sabes cuál necesitas, escríbenos por WhatsApp y te orientamos según tu caso.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question"><span>¿Dónde me pueden atender?</span><span class="faq-toggle"><svg viewBox="0 0 24 24" fill="none" width="20" height="20"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span></button>
+      <!-- PENDIENTE: horario real confirmado por el cliente -->
+      <div class="faq-answer"><p>Tenemos dos sedes: <a href="sede-cucuta.html">Quinta Oriental en Cúcuta</a> (Cl. 2 #9 Este-156, Local 1) y <a href="sede-medellin.html">El Poblado en Medellín</a> (Cra. 43A #7-50). Escríbenos por WhatsApp a la que te quede más cerca y te confirmamos horarios y disponibilidad.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CTA FINAL ───────────────────────────────────────── -->
+<section class="cta-final reveal">
+  <div class="cta-final-inner">
+    <div class="overline">Próximos pasos</div>
+    <h2>¿Hay un detalle <span class="b">que te gustaría cambiar?</span></h2>
+    <p>Cuéntanos qué te incomoda de tu sonrisa y te decimos si el microdiseño es la técnica indicada para tu caso.</p>
+    <div class="cta-final-actions">
+      <a href="https://wa.me/573224130747?text=Hola,%20vengo%20de%20su%20p%C3%A1gina%20web%20y%20quiero%20agendar%20una%20cita%20para%20microdise%C3%B1o." target="_blank" rel="noopener" class="cta-final-btn primary">
+        Escribir por WhatsApp
+        <svg viewBox="0 0 24 24" fill="none" width="16" height="16"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </a>
+      <a href="contacto.html" class="cta-final-btn secondary">Ver sedes y contacto</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <strong>OralTech</strong>
+      <span>Odontología · Cúcuta y Medellín</span>
+      <p>Prevención, diagnóstico y tratamiento de enfermedades dentales y orales en Cúcuta y Medellín.</p>
+      <div class="footer-social">
+        <a href="https://www.instagram.com/oraltech_clinicadental/" target="_blank" rel="noopener" aria-label="Instagram de OralTech">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.2c3.2 0 3.6 0 4.9.07 1.2.06 1.8.25 2.2.42.6.22 1 .48 1.4.9.42.4.68.8.9 1.4.17.4.36 1 .42 2.2.06 1.3.07 1.7.07 4.9s0 3.6-.07 4.9c-.06 1.2-.25 1.8-.42 2.2-.22.6-.48 1-.9 1.4-.4.42-.8.68-1.4.9-.4.17-1 .36-2.2.42-1.3.06-1.7.07-4.9.07s-3.6 0-4.9-.07c-1.2-.06-1.8-.25-2.2-.42-.6-.22-1-.48-1.4-.9-.42-.4-.68-.8-.9-1.4-.17-.4-.36-1-.42-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.07-4.9c.06-1.2.25-1.8.42-2.2.22-.6.48-1 .9-1.4.4-.42.8-.68 1.4-.9.4-.17 1-.36 2.2-.42C8.4 2.2 8.8 2.2 12 2.2zm0 3.4a6.4 6.4 0 100 12.8 6.4 6.4 0 000-12.8zm0 10.6a4.2 4.2 0 110-8.4 4.2 4.2 0 010 8.4zm6.6-10.9a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z"/></svg>
+        </a>
+        <a href="https://web.facebook.com/profile.php?id=61559206031650" target="_blank" rel="noopener" aria-label="Facebook de OralTech">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22 12a10 10 0 10-11.6 9.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.4h-1.2c-1.2 0-1.6.8-1.6 1.6V12h2.7l-.43 2.9h-2.3v7A10 10 0 0022 12z"/></svg>
+        </a>
+        <a href="https://www.tiktok.com/@oraltechclinicadental" target="_blank" rel="noopener" aria-label="TikTok de OralTech">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.6 2h2.6c.2 1.5 1 2.7 2.2 3.5.7.45 1.5.72 2.4.8v2.6c-1.7-.05-3.2-.6-4.5-1.5v6.4c0 1.5-.5 2.8-1.5 3.8-1 1-2.3 1.5-3.8 1.5s-2.8-.5-3.8-1.5c-1-1-1.5-2.3-1.5-3.8s.5-2.8 1.5-3.8c1-1 2.3-1.5 3.8-1.5.3 0 .6.02.9.07v2.7a2.9 2.9 0 00-.9-.14c-.8 0-1.45.3-2 .82-.5.52-.8 1.2-.8 2s.3 1.45.8 2c.55.52 1.2.82 2 .82s1.45-.3 2-.82c.5-.55.8-1.2.8-2V2z"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Servicios</h4>
+      <ul>
+        <li><a href="diseno-de-sonrisa.html">Diseño de sonrisa</a></li>
+        <li><a href="microdiseno.html">Microdiseño</a></li>
+        <li><a href="ortodoncia.html">Ortodoncia</a></li>
+        <li><a href="blanqueamiento.html">Blanqueamiento</a></li>
+        <li><a href="limpieza-dental.html">Limpieza dental</a></li>
+        <li><a href="implantes.html">Implantes dentales</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Información</h4>
+      <ul>
+        <li><a href="casos.html">Casos reales</a></li>
+        <li><a href="nosotros.html">Nosotros</a></li>
+        <li><a href="sede-cucuta.html">Sede Cúcuta</a></li>
+        <li><a href="sede-medellin.html">Sede Medellín</a></li>
+        <li><a href="blog/index.html">Blog</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Atención</h4>
+      <ul>
+        <li><a href="https://wa.me/573224130747">WhatsApp Cúcuta · +57 322 413 0747</a></li>
+        <li><a href="https://wa.me/573016184618">WhatsApp Medellín · +57 301 618 4618</a></li>
+        <li><a href="mailto:PENDIENTE-CORREO@oraltechodontologia.com">PENDIENTE-CORREO@oraltechodontologia.com</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 OralTech · Web por <a href="https://prontoweb.co" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline">Pronto</a></p>
+    <p>Cúcuta · Medellín</p>
+  </div>
+</footer>
+
+<a href="https://wa.me/573224130747?text=Hola,%20vengo%20de%20su%20p%C3%A1gina%20web%20y%20me%20interesa%20el%20microdise%C3%B1o." target="_blank" rel="noopener" class="wa-float" id="waFloat" data-wa-base="https://wa.me/573224130747?text=" aria-label="WhatsApp">
+  <span class="wa-float-label" id="waFloatLabel">¿Dudas sobre microdiseño?</span>
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.371-.025-.52-.075-.149-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+</a>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
+<script src="assets/animations.js?v=20260814a" defer></script>
+<script src="assets/wa-widget.js?v=1" defer></script>
+<script src="assets/nav.js?v=1" defer></script>
+
+<script>
+  if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; }
+  const navbar = document.getElementById('navbar');
+  if (navbar) {
+    const onScroll = () => navbar.classList.toggle('scrolled', window.scrollY > 60);
+    window.addEventListener('scroll', onScroll, { passive: true });
+  }
+  document.querySelectorAll('.faq-item').forEach(item => {
+    const btn = item.querySelector('.faq-question');
+    btn.addEventListener('click', () => {
+      const wasOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!wasOpen) item.classList.add('open');
+    });
+  });
+</script>
+</body>
+</html>

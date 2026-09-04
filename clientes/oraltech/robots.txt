@@ -1,0 +1,33 @@
+# OralTech · Clínica Dental — Cúcuta y Medellín
+# El contrato promete SEO para Google y para las IA: aquí se permiten
+# explícitamente los rastreadores de IA, no solo los de buscadores.
+
+User-agent: *
+Allow: /
+
+# Rastreadores de IA (ChatGPT, Claude, Perplexity, Gemini, AI Overviews)
+User-agent: GPTBot
+Allow: /
+User-agent: OAI-SearchBot
+Allow: /
+User-agent: ChatGPT-User
+Allow: /
+User-agent: ClaudeBot
+Allow: /
+User-agent: Claude-Web
+Allow: /
+User-agent: anthropic-ai
+Allow: /
+User-agent: PerplexityBot
+Allow: /
+User-agent: Google-Extended
+Allow: /
+User-agent: Applebot-Extended
+Allow: /
+
+# Páginas internas: útiles para el paciente, pero no para el índice
+Disallow: /afiche-resenas.html
+Disallow: /guia-activacion.html
+Disallow: /movil.html
+
+Sitemap: https://__DOMINIO__/sitemap.xml
