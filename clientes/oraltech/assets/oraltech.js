@@ -276,6 +276,22 @@
     if (!g) return;
     var botones = [].slice.call(g.querySelectorAll('.gal-tab'));
     var paneles = [].slice.call(g.querySelectorAll('.gal-panel'));
+
+    /* Las fotos de la sede que NO está a la vista van con loading="lazy" y,
+       al estar en un panel con display:none, el navegador no las descarga
+       nunca. Al pulsar la otra sede aparecían huecos vacíos un instante.
+       Medido: 0 imágenes cargadas 600 ms después de cambiar de pestaña.
+       Se precargan las dos en cuanto la galería entra en pantalla: son seis
+       fotos y unos 250 KB, y el cambio de sede queda instantáneo. */
+    function precargar() {
+      g.querySelectorAll('.gal-panel img').forEach(function (i) { i.loading = 'eager'; });
+    }
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (es) {
+        if (es[0].isIntersecting) { precargar(); io.disconnect(); }
+      }, { rootMargin: '400px' });
+      io.observe(g);
+    } else { precargar(); }
     botones.forEach(function (b) {
       b.addEventListener('click', function () {
         var sede = b.getAttribute('data-sede');

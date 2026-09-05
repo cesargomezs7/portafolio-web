@@ -339,6 +339,7 @@
   // Contadores Pronto (visita + intencion de resena publica)
   const TRACK_URL = CONFIG.workerEndpoint.replace('/review-feedback', '/track');
   function track(ev) {
+    if (!CONFIG.activo) return;   // sin el OK de la clínica no se cuenta nada
     try { fetch(TRACK_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ event: ev, clinica: CONFIG.clinica }), keepalive: true }); } catch (e) {}
   }
   track('visit');

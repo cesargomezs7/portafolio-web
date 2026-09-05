@@ -1152,6 +1152,10 @@ body.has-banner .scroll-progress { top: 36px; }
 (function () {
   var form = document.getElementById('contactForm');
   if (!form) return;
+// ⚠ APAGADO: OralTech todavía no ha dicho que sí. Hasta entonces la web no
+  // manda datos de sus pacientes a ningún servidor. El WhatsApp (que es de
+  // ellos) sí funciona; lo único apagado es el envío en segundo plano.
+  var ENVIO_ACTIVO = false;
   var ENDPOINT = 'https://pronto-forms-worker.cesargomezs711.workers.dev/contact';
   var CLINICA = 'OralTech';
   // Cada sede tiene su propio WhatsApp: el lead se abre en el número de la que eligió
@@ -1190,7 +1194,7 @@ body.has-banner .scroll-progress { top: 36px; }
     window.open(waUrl, '_blank');
     // 2) En segundo plano: confirmación por correo al paciente + conteo para el reporte mensual.
     try {
-      fetch(ENDPOINT, {
+      if (ENVIO_ACTIVO) fetch(ENDPOINT, {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ clinica: CLINICA, sede: sede, nombre: nombre, telefono: telefono, email: email, servicio: servicio, mensaje: mensaje })
       }).catch(function () {});

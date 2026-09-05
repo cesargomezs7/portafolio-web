@@ -485,7 +485,7 @@
    2 · CIFRAS CON ESTRELLA DORADA Y ENTRADA ANIMADA
    ─────────────────────────────────────────────── */
 .estrella-oro {
-  background: linear-gradient(150deg, #F7D774 0%, #E0A32E 55%, #B8801C 100%);
+  background: linear-gradient(150deg, #B8801C 0%, #96681A 55%, #7A5210 100%);
   -webkit-background-clip: text; background-clip: text;
   color: transparent;
   font-size: 1.06em;
@@ -503,7 +503,7 @@
 .stats-grid > div::before {
   content: ''; position: absolute; left: 0; top: -1px;
   width: 0; height: 2px; border-radius: 2px;
-  background: linear-gradient(90deg, #E0A32E, #F7D774);
+  background: linear-gradient(90deg, #B8801C, #D9A441);
   transition: width .9s cubic-bezier(.22,1,.36,1) .15s;
 }
 .stats-grid > div.vista::before { width: 44px; }
@@ -569,6 +569,10 @@
 .gal-panel.activo { display: block; animation: galEntra .5s cubic-bezier(.22,1,.36,1); }
 @keyframes galEntra { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
 @media (prefers-reduced-motion: reduce) { .gal-panel.activo { animation: none; } }
+
+/* El mosaico no necesita todo el ancho de la sección: a pantalla completa
+   la foto principal salía a 767x542 y dominaba la página. */
+.gal-mosaico { max-width: 980px; }
 
 /* Mosaico SIN proporción impuesta: cada foto conserva la suya.
    Con las filas forzadas a 1fr y un 16/9 general, la recepción de Cúcuta
@@ -641,9 +645,11 @@
 }
 @media (max-width: 659px)  { .op-card { flex-basis: 100%; } }
 
+/* Dorado para fondo CLARO: el de la franja azul (más brillante) daba 2,2:1
+   sobre blanco, ilegible. Este llega a 4,0:1 y sigue leyéndose como oro. */
 .op-estrellas {
   font-size: 15px; letter-spacing: 2px; margin-bottom: 14px;
-  background: linear-gradient(150deg, #F7D774 0%, #E0A32E 55%, #B8801C 100%);
+  background: linear-gradient(150deg, #B8801C 0%, #96681A 55%, #7A5210 100%);
   -webkit-background-clip: text; background-clip: text; color: transparent;
 }
 .op-texto {
@@ -703,26 +709,33 @@
 @media (max-width: 900px) { .section { padding: 64px 5%; } }
 @media (max-width: 560px) { .section { padding: 52px 6%; } }
 
-/* ── Titulares: un escalón por debajo ── */
-.section-headline {
-  font-size: clamp(1.6rem, 2.9vw, 2.55rem);
-  line-height: 1.06;
+/* ── Titulares ──
+   ⚠ El <style> interno de cada página define `.section h2`, que pesa (0,1,1)
+   y le gana a `.section-headline` (0,1,0) por mucho que este CSS cargue
+   después. Medido: el titular salía a 57,6 px en vez de los 40 de aquí.
+   Por eso todas las reglas de abajo llevan un selector de MÁS peso. */
+body .section-headline,
+body .section h2,
+body h2.section-headline {
+  font-size: clamp(1.5rem, 2.5vw, 2.15rem);
+  line-height: 1.08;
   letter-spacing: -0.03em;
-  margin-bottom: 14px;
+  margin-bottom: 12px;
 }
-.hero-text h1, .hero-compact h1 {
-  font-size: clamp(1.9rem, 3.6vw, 3.1rem);
-  line-height: 1.07;
+body .hero-text h1, body .hero-compact h1, body .hero-compact-inner h1 {
+  font-size: clamp(1.75rem, 3.1vw, 2.6rem);
+  line-height: 1.08;
 }
-.hero-compact-inner h1 { font-size: clamp(1.8rem, 3.3vw, 2.8rem); }
-h2 { font-size: clamp(1.5rem, 2.6vw, 2.2rem); letter-spacing: -0.028em; }
-h3 { font-size: clamp(1.05rem, 1.5vw, 1.28rem); letter-spacing: -0.02em; }
+body .section h3, body h3 { font-size: clamp(1rem, 1.35vw, 1.18rem); letter-spacing: -0.02em; }
+body .cta-final h2, body .cta-section h2 { font-size: clamp(1.5rem, 2.6vw, 2.2rem); }
 
-/* ── Texto corrido: más pequeño y más aireado ── */
-body { font-size: 15px; }
-.section-subtitle, .lead { font-size: 15.5px; line-height: 1.68; }
-.section-tag, .overline {
-  font-size: 10.5px; letter-spacing: 0.2em; margin-bottom: 14px;
+/* ── Texto corrido ── */
+body { font-size: 14.5px; }
+body .section-subtitle, body .lead, body .section-inner > p {
+  font-size: 15px; line-height: 1.7;
+}
+body .section-tag, body .overline {
+  font-size: 10px; letter-spacing: 0.2em; margin-bottom: 16px;
 }
 
 /* ── Aire ENTRE bloques, que es lo que faltaba ── */
@@ -1056,4 +1069,96 @@ figure.reveal img { height: auto; }
   .ico-orto .bracket { transform: none; }
   .ico-micro .eje { stroke-dashoffset: 0; opacity: 1; }
   .ico-implante .corona { transform: none; }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   BLOQUE 8 · NAV QUE NO SE PISA
+   ───────────────────────────────────────────────────────────────
+   Medido: a 1550 px el último ítem del menú terminaba en 1076 y el
+   selector de idioma empezaba en 1076 — el botón quedaba ENCIMA de
+   "Contacto". Además "Cúcuta · Medellín" se partía en dos líneas y
+   repetía lo que ya dice el tagline del logo, así que se eliminó.
+   La estructura pasa a ser: logo fijo · menú flexible · derecha fija,
+   con hueco real entre las tres zonas y nada que pueda solaparse.
+   ═══════════════════════════════════════════════════════════════ */
+.navbar {
+  display: flex !important;
+  align-items: center;
+  gap: 28px;
+}
+.nav-logo { flex: 0 0 auto; }
+.nav-logo-tag { white-space: nowrap; }
+.navbar .nav-links {
+  flex: 1 1 auto;
+  justify-content: center;
+  min-width: 0;
+  gap: 26px;
+}
+.nav-right {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-left: auto;
+}
+
+/* Selector de idioma con bandera */
+.idioma { gap: 2px; }
+.idioma-op {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 6px 11px 6px 8px;
+}
+.idioma-op .bandera {
+  width: 19px; height: auto; display: block; flex: 0 0 auto;
+  border-radius: 3px;
+  box-shadow: 0 0 0 1px rgba(31,35,79,.14);
+}
+.idioma-op span { line-height: 1; }
+
+/* A partir de aquí el menú aprieta antes de que nada se toque */
+@media (max-width: 1560px) and (min-width: 1181px) {
+  .navbar { gap: 20px; }
+  .navbar .nav-links { gap: 20px; }
+  .nav-right { gap: 10px; }
+}
+@media (max-width: 1180px) and (min-width: 861px) {
+  .navbar { gap: 14px; }
+  .navbar .nav-links { gap: 14px !important; }
+  .navbar .nav-links a { font-size: 12.5px; }
+  .idioma-op { padding: 5px 8px 5px 6px; gap: 4px; }
+  .idioma-op .bandera { width: 16px; }
+}
+@media (max-width: 860px) {
+  .navbar { gap: 12px; }
+  .nav-right { gap: 8px; }
+  .idioma-op span { display: none; }      /* en celular basta la bandera */
+  .idioma-op { padding: 6px 7px; }
+  .idioma-op .bandera { width: 20px; }
+}
+
+
+/* ═══ Elementos más contenidos ═══
+   Medido a 1440: hero 1034x589 · tarjeta de servicio 417x313 · video del
+   carrusel 302x537 · foto de testimonio 417x522 · galería 767x542 ·
+   mapa 631x330. Todo baja un escalón y gana aire alrededor. */
+.hv-wrap { width: min(84vw, 860px); }
+body .service-card { aspect-ratio: 4 / 2.85; padding: 16px; }
+body .service-card-title { font-size: 16px; }
+body .service-card-price { font-size: 12px; margin-top: 3px; }
+.vt-anillo { --vt-ancho: 760px; --vt-hueco: 20px; }
+/* Sus retratos son 968x1363 = 0,71. Con un marco de 0,93 se perdía el 23%
+   de cada uno (medido). A 3/4 = 0,75 el recorte baja al 5% y la tarjeta
+   sigue siendo más baja que la foto original. */
+body .tf-card img { aspect-ratio: 3 / 4; }
+body .tf-card .tf-frase { font-size: 14.5px; }
+body .op-card { padding: 22px 20px 18px; }
+body .op-texto { font-size: 14.2px; line-height: 1.62; }
+body .sede-card iframe, body .sedes-grid iframe {
+  aspect-ratio: 16 / 9 !important;
+  max-height: 250px !important;
+}
+@media (max-width: 760px) {
+  .hv-wrap { width: 92vw; }
+  .vt-anillo { --vt-ancho: 100%; }
+  body .sede-card iframe, body .sedes-grid iframe { max-height: 190px !important; }
 }

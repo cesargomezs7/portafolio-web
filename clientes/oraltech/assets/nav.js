@@ -102,6 +102,23 @@
     mensaje:   'Hola,%20vengo%20de%20su%20p%C3%A1gina%20web%20y%20quiero%20agendar%20una%20cita.'
   };
 
+  /* Banderas dibujadas, no emoji: en Windows el emoji de bandera se
+     muestra como dos letras ("CO", "US") y se ve roto. */
+  var BANDERA_CO = '<svg class="bandera" viewBox="0 0 24 16" aria-hidden="true">' +
+    '<rect width="24" height="16" rx="2.5" fill="#FCD116"/>' +
+    '<rect y="8" width="24" height="4" fill="#003893"/>' +
+    '<rect y="12" width="24" height="4" rx="2.5" fill="#CE1126"/>' +
+    '<rect y="12" width="24" height="2" fill="#CE1126"/></svg>';
+  var BANDERA_US = '<svg class="bandera" viewBox="0 0 24 16" aria-hidden="true">' +
+    '<rect width="24" height="16" rx="2.5" fill="#fff"/>' +
+    '<g fill="#B22234"><rect width="24" height="1.6"/><rect y="3.2" width="24" height="1.6"/>' +
+    '<rect y="6.4" width="24" height="1.6"/><rect y="9.6" width="24" height="1.6"/>' +
+    '<rect y="12.8" width="24" height="1.6"/></g>' +
+    '<rect width="11" height="8.8" rx="2.5" fill="#3C3B6E"/><rect x="8" width="3" height="8.8" fill="#3C3B6E"/>' +
+    '<g fill="#fff"><circle cx="2.4" cy="2" r=".7"/><circle cx="5.5" cy="2" r=".7"/><circle cx="8.6" cy="2" r=".7"/>' +
+    '<circle cx="3.9" cy="4.4" r=".7"/><circle cx="7" cy="4.4" r=".7"/>' +
+    '<circle cx="2.4" cy="6.8" r=".7"/><circle cx="5.5" cy="6.8" r=".7"/><circle cx="8.6" cy="6.8" r=".7"/></g></svg>';
+
   var WA = 'https://wa.me/573224130747';
   var chev = '<svg class="nav-chev" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
   var logo =
@@ -141,11 +158,10 @@
         '<li><a href="' + BASE + 'contacto.html" data-nav="contacto">' + T.contacto + '</a></li>' +
       '</ul>' +
       '<div class="nav-right">' +
-        '<div class="idioma" role="group" aria-label="\' + T.idiomaLbl + \'">' +
-          '<a class="idioma-op' + (enIngles ? '' : ' activo') + '" href="' + gemela(false) + '" hreflang="es" lang="es"' + (enIngles ? '' : ' aria-current="true"') + '>ES</a>' +
-          '<a class="idioma-op' + (enIngles ? ' activo' : '') + '" href="' + gemela(true) + '" hreflang="en" lang="en"' + (enIngles ? ' aria-current="true"' : '') + '>EN</a>' +
+        '<div class="idioma" role="group" aria-label="' + T.idiomaLbl + '">' +
+          '<a class="idioma-op' + (enIngles ? '' : ' activo') + '" href="' + gemela(false) + '" hreflang="es" lang="es"' + (enIngles ? '' : ' aria-current="true"') + ' title="Español">' + BANDERA_CO + '<span>ES</span></a>' +
+          '<a class="idioma-op' + (enIngles ? ' activo' : '') + '" href="' + gemela(true) + '" hreflang="en" lang="en"' + (enIngles ? ' aria-current="true"' : '') + ' title="English">' + BANDERA_US + '<span>EN</span></a>' +
         '</div>' +
-        '<div class="nav-location">' + T.ciudades + '</div>' +
         '<a href="' + WA + '?text=' + T.mensaje + '" target="_blank" class="nav-menu-btn">' + T.agendar + '</a>' +
       '</div>' +
     '</nav>';

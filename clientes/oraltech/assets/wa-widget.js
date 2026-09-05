@@ -11,9 +11,18 @@
    burbuja simplemente conserva su href por defecto.
    ─────────────────────────────────────────────── */
 (function () {
-  // ── Contadores Pronto: visita + clics a WhatsApp ──
-  var TRACK = 'https://pronto-forms-worker.cesargomezs711.workers.dev/track';
+  // ── Contadores: visita + clics a WhatsApp ──
+  // APAGADO a propósito. Mientras OralTech no diga que sí, la web no manda
+  // NADA a ningún servidor: ni el formulario, ni las reseñas, ni esto.
+  // Enviar visitas de sus pacientes a un endpoint de Pronto antes de que sean
+  // clientes es dato de terceros que nadie autorizó, y el repositorio es
+  // público (el endpoint iba escrito aquí en claro).
+  // Para encenderlo el día de la entrega: ACTIVO = true y poner el endpoint
+  // propio de la clínica.
+  var ACTIVO = false;
+  var TRACK = '';
   function track(ev) {
+    if (!ACTIVO || !TRACK) return;
     try { fetch(TRACK, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ event: ev, clinica: 'OralTech' }), keepalive: true }); } catch (e) {}
   }
   // 1 visita = 1 sesion, no 1 pagina. Sin esto el numero sale inflado 3-5x
