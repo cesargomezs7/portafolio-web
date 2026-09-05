@@ -16,7 +16,7 @@
 <link rel="stylesheet" href="assets/styles.css?v=20260814a">
 <link rel="stylesheet" href="assets/nav.css?v=20260814a">
 <link rel="stylesheet" href="assets/wa-widget.css?v=20260814a">
-<link rel="stylesheet" href="assets/oraltech.css?v=1">
+<link rel="stylesheet" href="assets/oraltech.css?v=2">
 
 <!-- SEO: ficha de negocio local, una por sede. Sin openingHoursSpecification: el
      horario aún no está confirmado por el cliente y no se inventa.
@@ -439,78 +439,43 @@ body.has-banner .scroll-progress { top: 36px; }
 <!-- Banner Pronto (sólo en este piloto de muestra) -->
 <div id="site-nav"></div>
 
-<!-- ─── HERO (Ivory, intocable) ─────────────────────────────── -->
-<section class="hero" data-wa="Hola, vengo de su página web y quiero agendar una cita." data-wa-label="Agenda tu cita">
-  <div class="hero-number">
-    <span>01</span>
-    <span>02</span>
-    <span>03</span>
-  </div>
+<!-- ─── HERO · su video, con marco ────────────────────────────────
+     Sin titular visible, como su web: el video manda. El <h1> se
+     conserva SOLO para buscadores y lectores de pantalla (su web
+     actual no tiene ninguno y eso es parte de lo que corregimos).
+     El video arranca solo, en silencio —lo exigen todos los
+     navegadores para el autoplay— con un botón para activar sonido.
+──────────────────────────────────────────────────────────────── -->
+<section class="hero hero-video" data-wa="Hola, vengo de su página web y quiero agendar una cita." data-wa-label="Agenda tu cita">
+  <h1 class="solo-lectores">OralTech · Clínica dental en Cúcuta y Medellín: diseño de sonrisa, microdiseño, ortodoncia, blanqueamiento, limpieza dental e implantes</h1>
 
-  <div class="hero-content">
-    <div class="hero-text">
-      <h1>
-        Diseño de sonrisa, <span class="b">ortodoncia</span><br>
-        <span class="light">e implantes en</span><br>
-        Cúcuta <span class="light">y</span> <span class="b">Medellín</span>
-      </h1>
-      <!-- Panel de WhatsApp con las DOS sedes.
-     Su web actual ya pregunta Cúcuta o Medellín antes de abrir el chat.
-     Sin esto, un paciente de Medellín le escribiría a Cúcuta. -->
-<div class="wa-panel" id="waPanel" role="dialog" aria-label="Elige la sede para escribir por WhatsApp">
-  <div class="wa-panel-head">
-    <strong>Escríbenos por WhatsApp</strong>
-    <span>Tenemos dos sedes. Elige en cuál quieres que te atendamos.</span>
-  </div>
-  <div class="wa-panel-body">
-    <a class="wa-sede" data-wa-base="https://wa.me/573224130747?text=" href="https://wa.me/573224130747?text=Hola,%20vengo%20de%20su%20p%C3%A1gina%20web%20y%20quiero%20agendar%20una%20cita." target="_blank" rel="noopener">
-      <span class="wa-sede-ico"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.371-.025-.52-.075-.149-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg></span>
-      <span class="wa-sede-txt"><strong>Cúcuta</strong><span>Quinta Oriental · +57 322 413 0747</span></span>
-    </a>
-    <a class="wa-sede" data-wa-base="https://wa.me/573016184618?text=" href="https://wa.me/573016184618?text=Hola,%20vengo%20de%20su%20p%C3%A1gina%20web%20y%20quiero%20agendar%20una%20cita." target="_blank" rel="noopener">
-      <span class="wa-sede-ico"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.371-.025-.52-.075-.149-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg></span>
-      <span class="wa-sede-txt"><strong>Medellín</strong><span>El Poblado · +57 301 618 4618</span></span>
-    </a>
-  </div>
-</div>
-
-<a href="https://wa.me/573224130747?text=Hola%20OralTech,%20vengo%20de%20su%20p%C3%A1gina%20web%20y%20quiero%20agendar%20una%20cita&utm_source=web&utm_medium=hero&utm_campaign=agendar" target="_blank" class="hero-cta">
-        Agendar por WhatsApp
-        <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </a>
-    </div>
-
-    <!-- Su video de presentación (1:21), el mismo que abre su web actual.
-         Va con póster y preload="none": la portada no descarga los 5,7 MB
-         hasta que alguien pulsa play. Su web hoy lo carga entero de golpe. -->
-    <div class="hero-visual">
-      <div class="video-hero">
-        <video
-          class="hero-visual-img"
-          preload="none"
-          playsinline
-          poster="video/presentacion-oraltech-poster.jpg"
-          aria-label="Video de presentación de OralTech">
+  <div class="hv-wrap">
+    <div class="hv-marco">
+      <div class="hv-pantalla">
+        <video id="heroVideo" class="hv-video" data-src-movil="video/presentacion-oraltech-movil.mp4"
+               autoplay muted loop playsinline preload="metadata"
+               poster="video/presentacion-oraltech-poster.jpg"
+               aria-label="Video de presentación de OralTech">
           <source src="video/presentacion-oraltech.mp4" type="video/mp4">
-          Tu navegador no reproduce este video.
         </video>
-        <button type="button" class="video-hero-play" aria-label="Reproducir el video de presentación de OralTech">
-          <span class="vp-circle"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
-          <span class="vp-text">Conoce OralTech en 1 minuto</span>
+
+        <button type="button" class="hv-sonido" id="heroSonido" aria-pressed="false">
+          <span class="hv-sonido-ico" aria-hidden="true">
+            <svg class="ico-mudo" viewBox="0 0 24 24" fill="currentColor"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3a4.5 4.5 0 0 0-2.5-4v8a4.5 4.5 0 0 0 2.5-4zM19 12a7 7 0 0 1-3 5.7v2.2A9 9 0 0 0 21 12a9 9 0 0 0-5-8v2.3A7 7 0 0 1 19 12z"/><path d="M2 2l20 20" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" fill="none"/></svg>
+            <svg class="ico-suena" viewBox="0 0 24 24" fill="currentColor"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3a4.5 4.5 0 0 0-2.5-4v8a4.5 4.5 0 0 0 2.5-4zM19 12a7 7 0 0 1-3 5.7v2.2A9 9 0 0 0 21 12a9 9 0 0 0-5-8v2.3A7 7 0 0 1 19 12z"/></svg>
+          </span>
+          <span class="hv-sonido-txt">Activar sonido</span>
         </button>
       </div>
-      <div class="hero-float hero-float-1">5,0 ★ en Google · Cúcuta</div>
-      <div class="hero-float hero-float-2">4,6 ★ en Google · Medellín</div>
     </div>
-  </div>
 
-  <div class="hero-bottom">
-    <div class="hero-stat-big">
-      <strong>36</strong>
-      <p>Opiniones en Google entre nuestras dos sedes: 25 en Cúcuta, con 5,0 estrellas, y 11 en Medellín, con 4,6.</p>
-    </div>
-    <a href="#clinica" class="hero-scroll">
-      <svg viewBox="0 0 24 24" fill="none"><path d="M12 5v14M6 13l6 6 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <div class="hv-chip hv-chip-1"><span class="chip-estrella">★</span> 5,0 <span class="chip-sub">en Google · Cúcuta</span></div>
+    <div class="hv-chip hv-chip-2"><span class="chip-estrella">★</span> 4,6 <span class="chip-sub">en Google · Medellín</span></div>
+
+    <a href="https://wa.me/573224130747?text=Hola%20OralTech,%20vengo%20de%20su%20p%C3%A1gina%20web%20y%20quiero%20agendar%20una%20cita&utm_source=web&utm_medium=hero&utm_campaign=agendar"
+       target="_blank" class="hero-cta hv-cta">
+      Agendar por WhatsApp
+      <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </a>
   </div>
 </section>
@@ -583,8 +548,6 @@ body.has-banner .scroll-progress { top: 36px; }
         <img class="ba-antes"   src="img/3-1.webp" alt="La misma sonrisa antes del tratamiento en OralTech" loading="lazy" width="1000" height="500">
         <span class="ba-linea"></span>
         <span class="ba-tirador"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l-5 6 5 6M15 6l5 6-5 6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-        <span class="ba-etiqueta izq">Antes</span>
-        <span class="ba-etiqueta der">Después</span>
         <input class="ba-rango" type="range" min="0" max="100" value="50" step="0.1" aria-label="Comparar antes y después del primer caso">
       </div>
 
@@ -593,8 +556,6 @@ body.has-banner .scroll-progress { top: 36px; }
         <img class="ba-antes"   src="img/2.1.webp" alt="La misma sonrisa antes del tratamiento en OralTech" loading="lazy" width="1600" height="800">
         <span class="ba-linea"></span>
         <span class="ba-tirador"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l-5 6 5 6M15 6l5 6-5 6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-        <span class="ba-etiqueta izq">Antes</span>
-        <span class="ba-etiqueta der">Después</span>
         <input class="ba-rango" type="range" min="0" max="100" value="50" step="0.1" aria-label="Comparar antes y después del segundo caso">
       </div>
 
@@ -603,8 +564,6 @@ body.has-banner .scroll-progress { top: 36px; }
         <img class="ba-antes"   src="img/4.1.webp" alt="La misma sonrisa antes del tratamiento en OralTech" loading="lazy" width="1000" height="500">
         <span class="ba-linea"></span>
         <span class="ba-tirador"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l-5 6 5 6M15 6l5 6-5 6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-        <span class="ba-etiqueta izq">Antes</span>
-        <span class="ba-etiqueta der">Después</span>
         <input class="ba-rango" type="range" min="0" max="100" value="50" step="0.1" aria-label="Comparar antes y después del tercer caso">
       </div>
     </div>
@@ -632,7 +591,7 @@ body.has-banner .scroll-progress { top: 36px; }
     </h2>
     <p class="reveal" style="font-size:16px;color:var(--black);opacity:.75;max-width:600px;line-height:1.65;">
       Pacientes que vinieron desde otros países a tratarse con nosotros.
-      Toca cualquiera para escucharlo.
+      Van en silencio: toca uno para escucharlo. Pasa el cursor y se detienen.
     </p>
   </div>
 
@@ -721,18 +680,58 @@ body.has-banner .scroll-progress { top: 36px; }
       </div>
     </div>
 
-    <!-- Foto real de la clínica (de su propio material). Solo tenemos dos fotos limpias
-         del espacio: la fachada de Cúcuta y la sala de espera de Medellín (esta última
-         va en el hero). Por eso la rejilla queda a una sola columna en vez de rellenar
-         el hueco con banco de imágenes.
-         PENDIENTE: más fotos reales de los consultorios de Cúcuta y de Medellín. -->
-    <div class="clinic-grid reveal">
-      <div class="clinic-photo-main">
-        <img src="img/sede-cucuta.webp" alt="Fachada de OralTech en la sede de Cúcuta, Quinta Oriental" loading="lazy">
+    <!-- ── Galería con cambio de sede ──────────────────────────────
+         Ocho fotos reales de sus consultorios. Estaban dentro de dos
+         collages que ellos publican (oraltech-sede-cucuta.png y
+         -medellin.png): se separaron pieza por pieza. Quien va a
+         Medellín ve Medellín y quien va a Cúcuta ve Cúcuta.
+    ─────────────────────────────────────────────────────────────── -->
+    <div class="gal reveal">
+      <div class="gal-tabs" role="tablist" aria-label="Elige la sede que quieres ver">
+        <button class="gal-tab activo" type="button" role="tab" aria-selected="true" data-sede="cucuta">
+          Cúcuta<span class="gal-tab-sub">Quinta Oriental</span>
+        </button>
+        <button class="gal-tab" type="button" role="tab" aria-selected="false" data-sede="medellin">
+          Medellín<span class="gal-tab-sub">El Poblado</span>
+        </button>
+      </div>
+
+      <div class="gal-panel activo" data-sede="cucuta" role="tabpanel">
+        <div class="gal-mosaico">
+          <figure class="gal-foto">
+            <img src="img/sede-cucuta-recepcion.webp" alt="Recepción de OralTech en la sede de Cúcuta, con el logo en la pared y mostrador de mármol" loading="lazy" width="1034" height="730">
+            <figcaption>Recepción · Quinta Oriental</figcaption>
+          </figure>
+          <figure class="gal-foto">
+            <img src="img/sede-cucuta.webp" alt="Fachada de OralTech en Cúcuta, Calle 2 #9E-156 Local 1" loading="lazy" width="1600" height="1017">
+            <figcaption>Fachada · Cl. 2 #9 Este-156</figcaption>
+          </figure>
+          <figure class="gal-foto">
+            <img src="img/sede-cucuta-espera.webp" alt="Sala de espera de OralTech en Cúcuta" loading="lazy" width="804" height="454">
+            <figcaption>Sala de espera</figcaption>
+          </figure>
+        </div>
+      </div>
+
+      <div class="gal-panel" data-sede="medellin" role="tabpanel">
+        <div class="gal-mosaico">
+          <figure class="gal-foto">
+            <img src="img/sede-medellin-recepcion.webp" alt="Recepción de OralTech en El Poblado, Medellín, con el logo sobre la pared de listones de madera" loading="lazy" width="1130" height="798">
+            <figcaption>Recepción · El Poblado</figcaption>
+          </figure>
+          <figure class="gal-foto">
+            <img src="img/sede-medellin-consultorio.webp" alt="Consultorio de OralTech en Medellín, con unidad odontológica azul" loading="lazy" width="732" height="495">
+            <figcaption>Consultorio</figcaption>
+          </figure>
+          <figure class="gal-foto">
+            <img src="img/sede-medellin-unidad.webp" alt="Unidad odontológica de OralTech en la sede de Medellín" loading="lazy" width="412" height="550">
+            <figcaption>Unidad odontológica</figcaption>
+          </figure>
+        </div>
       </div>
     </div>
 
-    <div class="clinic-bottom reveal">
+<div class="clinic-bottom reveal">
       <div>
         <h3>Dos sedes</h3>
         <p>Atendemos en Quinta Oriental, Cúcuta, y en El Poblado, Medellín. Escríbenos por WhatsApp a la que te quede más cerca y te confirmamos horarios y disponibilidad.</p>
@@ -884,62 +883,102 @@ body.has-banner .scroll-progress { top: 36px; }
 </section>
 
 <!-- ─── TESTIMONIOS ─────────────────────────────────────── -->
-<section class="section section-alt testimonios" id="testimonios">
+<!-- ─── OPINIONES REALES DE GOOGLE ────────────────────────────────
+     Carrusel con flechas y puntos. Las opiniones son literales de sus
+     dos fichas de Google, comprobadas el 4-sep-2026.
+
+     PARA ACTUALIZARLAS no hay que tocar el HTML de abajo: basta con
+     copiar una tarjeta .op-card y cambiar texto, nombre y sede. Se
+     dejó así a propósito para que añadir una opinión nueva sea un
+     minuto y no una tarea de programación.
+
+     ⚠ PENDIENTE (para traerlas solas): la ficha de Cúcuta tiene 25
+     opiniones y la de Medellín 11; aquí van las que Google muestra
+     públicamente sin iniciar sesión. Traerlas todas y al día exige la
+     API de Google Places, que necesita cuenta de facturación. Decidir
+     si se monta.
+──────────────────────────────────────────────────────────────── -->
+<section class="section section-alt testimonios" id="testimonios" data-wa="Hola, vi sus opiniones en Google y quiero agendar una cita." data-wa-label="¿Agendamos?">
   <div class="section-inner">
-    <div class="testimonios-header reveal">
-      <div>
-        <div class="overline">Opiniones reales en Google</div>
-        <h2>Lo que dicen<br>nuestros pacientes</h2>
+    <div class="section-tag">Opiniones reales en Google</div>
+    <h2 class="section-headline reveal" style="margin-bottom:10px;">
+      <span class="light">Lo que dicen</span><br><span class="b">nuestros pacientes</span>
+    </h2>
+    <p class="reveal" style="font-size:16px;color:var(--black);opacity:.75;max-width:600px;line-height:1.65;">
+      <span class="estrella-oro">★</span> <strong>5,0</strong> con 25 opiniones en Cúcuta y
+      <span class="estrella-oro">★</span> <strong>4,6</strong> con 11 en Medellín. Estas son textuales,
+      tal como están publicadas en Google.
+    </p>
+
+    <div class="op-carrusel reveal" id="opCarrusel">
+      <div class="op-ventana">
+        <div class="op-pista">
+
+          <article class="op-card">
+            <div class="op-estrellas" aria-label="5 de 5 estrellas">★★★★★</div>
+            <p class="op-texto">“Quedé muy feliz con el resultado de mi diseño de sonrisa. Desde el primer momento recibí una atención excelente, con mucho profesionalismo, dedicación y cuidado en cada detalle. El resultado superó mis expectativas.”</p>
+            <div class="op-pie">
+              <span class="op-avatar" aria-hidden="true">A</span>
+              <span>
+                <span class="op-nombre">Andreina Rangel</span>
+                <span class="op-meta"><span class="op-g">Google</span> · Sede Cúcuta</span>
+              </span>
+            </div>
+          </article>
+
+          <article class="op-card">
+            <div class="op-estrellas" aria-label="5 de 5 estrellas">★★★★★</div>
+            <p class="op-texto">“El diseño quedó espectacular, y la doctora es una profesional maravillosa. ¡Recomiendo este consultorio al 100%!”</p>
+            <div class="op-pie">
+              <span class="op-avatar" aria-hidden="true">L</span>
+              <span>
+                <span class="op-nombre">Luna Luma</span>
+                <span class="op-meta"><span class="op-g">Google</span> · Sede Medellín</span>
+              </span>
+            </div>
+          </article>
+
+          <article class="op-card">
+            <div class="op-estrellas" aria-label="5 de 5 estrellas">★★★★★</div>
+            <p class="op-texto">“Excelente atención y servicios prestados, trabajos de la mejor calidad. Súper recomendados.”</p>
+            <div class="op-pie">
+              <span class="op-avatar" aria-hidden="true">A</span>
+              <span>
+                <span class="op-nombre">Andrea Cruz</span>
+                <span class="op-meta"><span class="op-g">Google</span> · Sede Cúcuta</span>
+              </span>
+            </div>
+          </article>
+
+          <article class="op-card">
+            <div class="op-estrellas" aria-label="5 de 5 estrellas">★★★★★</div>
+            <p class="op-texto">“Excelente trabajo. Súper recomendados. Luce una sonrisa hermosa.”</p>
+            <div class="op-pie">
+              <span class="op-avatar" aria-hidden="true">N</span>
+              <span>
+                <span class="op-nombre">Nai Alvarado</span>
+                <span class="op-meta"><span class="op-g">Google</span> · Sede Cúcuta</span>
+              </span>
+            </div>
+          </article>
+
+        </div>
       </div>
-      <a href="https://www.google.com/maps?cid=8729935231387113281" target="_blank" rel="noopener" class="reveal" style="display:inline-flex;align-items:center;gap:10px;margin-top:18px;background:#fff;border:1px solid var(--border);border-radius:999px;padding:12px 22px;text-decoration:none;box-shadow:var(--shadow-sm);">
-        <span style="font-weight:700;color:var(--accent);font-size:16px;">★ 5,0</span>
-        <span style="font-weight:600;color:var(--black);font-size:14px;">25 opiniones en Cúcuta · Ver todas en Google Maps →</span>
-      </a>
-    </div>
 
-    <!-- Reseñas textuales de la ficha de Google de la sede de Cúcuta. Sin foto de avatar:
-         son personas reales y ponerles un rostro de banco de imágenes sería inventarlo. -->
-    <div class="testimonios-grid">
-      <article class="testimonio-card reveal">
-        <div class="testimonio-stars" aria-label="5 estrellas">★★★★★</div>
-        <p class="testimonio-quote">"Quedé muy feliz con el resultado de mi diseño de sonrisa. Desde el primer momento recibí una atención excelente, con mucho profesionalismo, dedicación y cuidado en cada detalle. El resultado superó mis expectativas."</p>
-        <div class="testimonio-author">
-          <div class="testimonio-avatar initial" aria-hidden="true">A</div>
-          <div>
-            <strong>Andreina Rangel</strong>
-            <span>Reseña en Google · Sede Cúcuta</span>
-          </div>
+      <div class="op-controles">
+        <button class="op-nav prev" type="button" aria-label="Opinión anterior">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M15 18l-6-6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button class="op-nav sig" type="button" aria-label="Opinión siguiente">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="op-puntos">
+          <button class="op-punto activo" type="button" aria-label="Ir al grupo 1 de opiniones"></button>
+          <button class="op-punto" type="button" aria-label="Ir al grupo 2 de opiniones"></button>
+          <button class="op-punto" type="button" aria-label="Ir al grupo 3 de opiniones"></button>
         </div>
-      </article>
-
-      <article class="testimonio-card reveal">
-        <div class="testimonio-stars" aria-label="5 estrellas">★★★★★</div>
-        <p class="testimonio-quote">"Excelente trabajo. Súper recomendados."</p>
-        <div class="testimonio-author">
-          <div class="testimonio-avatar initial" aria-hidden="true">N</div>
-          <div>
-            <strong>Nai Alvarado</strong>
-            <span>Reseña en Google · Sede Cúcuta</span>
-          </div>
-        </div>
-      </article>
-
-      <article class="testimonio-card reveal">
-        <div class="testimonio-stars" aria-label="5 estrellas">★★★★★</div>
-        <p class="testimonio-quote">"Excelente atención y servicios prestados, trabajos de la mejor calidad. Súper recomendados."</p>
-        <div class="testimonio-author">
-          <div class="testimonio-avatar initial" aria-hidden="true">A</div>
-          <div>
-            <strong>Andrea Cruz</strong>
-            <span>Reseña en Google · Sede Cúcuta</span>
-          </div>
-        </div>
-      </article>
-    </div>
-    <div class="testimonios-review-cta reveal">
-      <h3>Tu opinión ayuda a otros a sonreír</h3>
-      <p>Comparte tu experiencia: a ti te toma un minuto y a otro paciente le da la confianza para dar el primer paso.</p>
-      <a href="reviews.html" class="review-cta-btn"><span class="star">★</span>Déjanos tu reseña en Google</a>
+        <a class="op-enlace btn-pill outline" href="https://www.google.com/maps?cid=8729935231387113281" target="_blank" rel="noopener">Ver todas en Google</a>
+      </div>
     </div>
   </div>
 </section>
@@ -1054,6 +1093,27 @@ body.has-banner .scroll-progress { top: 36px; }
   </div>
 </footer>
 
+<!-- Panel de WhatsApp con las DOS sedes.
+     Su web actual ya pregunta Cúcuta o Medellín antes de abrir el chat.
+     Sin esto, un paciente de Medellín le escribiría a Cúcuta. -->
+<div class="wa-panel" id="waPanel" role="dialog" aria-label="Elige la sede para escribir por WhatsApp">
+  <div class="wa-panel-head">
+    <strong>Escríbenos por WhatsApp</strong>
+    <span>Tenemos dos sedes. Elige en cuál quieres que te atendamos.</span>
+  </div>
+  <div class="wa-panel-body">
+    <a class="wa-sede" data-wa-base="https://wa.me/573224130747?text=" href="https://wa.me/573224130747?text=Hola,%20vengo%20de%20su%20p%C3%A1gina%20web%20y%20quiero%20agendar%20una%20cita." target="_blank" rel="noopener">
+      <span class="wa-sede-ico"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.371-.025-.52-.075-.149-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg></span>
+      <span class="wa-sede-txt"><strong>Cúcuta</strong><span>Quinta Oriental · +57 322 413 0747</span></span>
+    </a>
+    <a class="wa-sede" data-wa-base="https://wa.me/573016184618?text=" href="https://wa.me/573016184618?text=Hola,%20vengo%20de%20su%20p%C3%A1gina%20web%20y%20quiero%20agendar%20una%20cita." target="_blank" rel="noopener">
+      <span class="wa-sede-ico"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.371-.025-.52-.075-.149-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg></span>
+      <span class="wa-sede-txt"><strong>Medellín</strong><span>El Poblado · +57 301 618 4618</span></span>
+    </a>
+  </div>
+</div>
+
+
 <a href="https://wa.me/573224130747?text=Hola,%20vengo%20de%20su%20página%20web%20y%20quiero%20agendar%20una%20cita." target="_blank" class="wa-float" id="waFloat" aria-expanded="false" aria-controls="waPanel" data-wa-base="https://wa.me/573224130747?text=" aria-label="WhatsApp">
   <span class="wa-float-label" id="waFloatLabel">Agenda tu cita</span>
   <svg viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.371-.025-.52-.075-.149-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
@@ -1065,7 +1125,7 @@ body.has-banner .scroll-progress { top: 36px; }
 <script src="assets/animations.js?v=20260814a" defer></script>
 <script src="assets/wa-widget.js?v=1" defer></script>
 <script src="assets/nav.js?v=1" defer></script>
-<script src="assets/oraltech.js?v=1" defer></script>
+<script src="assets/oraltech.js?v=2" defer></script>
 
 <!-- Inline: FAQ accordion.
      Se retiró el reloj del master (buscaba #liveClock y #dayName, que esta página no tiene:

@@ -322,3 +322,342 @@
   #casos.section { padding-top: 70px; padding-bottom: 50px; }
   #testimonios-video.section { padding-top: 60px; padding-bottom: 70px; }
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   BLOQUE 2 · correcciones del 4-sep (tarde)
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Titular solo para buscadores y lectores de pantalla.
+   Su web no lleva título sobre el video y la nuestra tampoco, pero
+   una página sin <h1> es justo el fallo que venimos a corregirles. */
+.solo-lectores {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%);
+  white-space: nowrap; border: 0;
+}
+
+/* ───────────────────────────────────────────────
+   1 · HERO DE VIDEO CON MARCO
+   El video manda. El marco es un anillo degradado sobre una sombra
+   en tres capas: el borde no se pinta con `border`, se pinta con un
+   gradiente en el propio contenedor y la pantalla se recorta dentro.
+   ─────────────────────────────────────────────── */
+.hero.hero-video {
+  padding-top: 128px;
+  padding-bottom: 92px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 0;
+}
+.hv-wrap {
+  position: relative;
+  width: min(92vw, 1120px);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* El anillo: degradado del azul de marca al azul claro, con brillo. */
+.hv-marco {
+  position: relative;
+  width: 100%;
+  padding: 10px;                       /* grosor del anillo */
+  border-radius: 30px;
+  background:
+    linear-gradient(145deg, #2C3270 0%, #1F234F 34%, #12152F 66%, #3A4183 100%);
+  box-shadow:
+    0 1px 0 rgba(255,255,255,.28) inset,        /* filo superior */
+    0 0 0 1px rgba(31,35,79,.10),
+    0 18px 40px -18px rgba(31,35,79,.45),
+    0 48px 90px -40px rgba(31,35,79,.55);
+  transition: transform .5s var(--t), box-shadow .5s var(--t);
+}
+.hv-marco::after {                     /* halo suave detrás */
+  content: '';
+  position: absolute; inset: -14% -6% -22%;
+  border-radius: 40px;
+  background: radial-gradient(60% 60% at 50% 60%, rgba(31,35,79,.16), transparent 70%);
+  z-index: -1;
+  filter: blur(18px);
+}
+.hv-wrap:hover .hv-marco {
+  transform: translateY(-3px);
+  box-shadow:
+    0 1px 0 rgba(255,255,255,.32) inset,
+    0 0 0 1px rgba(31,35,79,.12),
+    0 24px 50px -20px rgba(31,35,79,.5),
+    0 60px 110px -44px rgba(31,35,79,.6);
+}
+
+.hv-pantalla {
+  position: relative;
+  border-radius: 21px;
+  overflow: hidden;
+  background: #000;
+  aspect-ratio: 16 / 9;
+  box-shadow: 0 0 0 1px rgba(0,0,0,.5) inset;
+}
+.hv-video { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+/* Botón de sonido: el autoplay obliga a arrancar en silencio. */
+.hv-sonido {
+  position: absolute; right: 16px; bottom: 16px; z-index: 3;
+  display: inline-flex; align-items: center; gap: 9px;
+  padding: 10px 16px 10px 12px;
+  border: 1px solid rgba(255,255,255,.28);
+  border-radius: 999px;
+  background: rgba(18,21,47,.58);
+  -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+  color: #fff; cursor: pointer;
+  font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 500;
+  letter-spacing: -.01em;
+  transition: background .2s var(--t), border-color .2s var(--t), transform .2s var(--t);
+}
+.hv-sonido:hover { background: rgba(18,21,47,.78); border-color: rgba(255,255,255,.45); transform: translateY(-1px); }
+.hv-sonido-ico { display: inline-flex; width: 18px; height: 18px; }
+.hv-sonido-ico svg { width: 18px; height: 18px; }
+.hv-sonido .ico-suena { display: none; }
+.hv-sonido[aria-pressed="true"] .ico-mudo  { display: none; }
+.hv-sonido[aria-pressed="true"] .ico-suena { display: block; }
+
+/* Chips de calificación, flotando sobre las esquinas del marco */
+.hv-chip {
+  position: absolute; z-index: 4;
+  display: inline-flex; align-items: baseline; gap: 6px;
+  padding: 11px 18px;
+  border-radius: 999px;
+  background: #fff;
+  box-shadow: 0 10px 30px -8px rgba(31,35,79,.28), 0 0 0 1px rgba(31,35,79,.06);
+  font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 700;
+  color: var(--black); letter-spacing: -.02em;
+  animation: chipFlota 6s ease-in-out infinite;
+}
+.hv-chip .chip-sub { font-size: 12px; font-weight: 400; color: var(--gray); letter-spacing: 0; }
+.hv-chip .chip-estrella {
+  font-size: 15px;
+  background: linear-gradient(150deg, #F7D774 0%, #E0A32E 55%, #B8801C 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  text-shadow: 0 1px 0 rgba(224,163,46,.18);
+}
+.hv-chip-1 { top: -18px; left: 4%; animation-delay: -1.2s; }
+.hv-chip-2 { bottom: 64px; right: 3%; animation-delay: -3.6s; }
+@keyframes chipFlota { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
+@media (prefers-reduced-motion: reduce) { .hv-chip { animation: none; } }
+
+.hv-cta { margin-top: 34px; }
+
+@media (max-width: 900px) {
+  .hero.hero-video { padding-top: 104px; padding-bottom: 64px; }
+  .hv-marco { padding: 7px; border-radius: 24px; }
+  .hv-pantalla { border-radius: 17px; }
+  .hv-chip { font-size: 13px; padding: 9px 14px; }
+  .hv-chip .chip-sub { font-size: 11px; }
+  .hv-chip-1 { top: -14px; left: 0; }
+  .hv-chip-2 { bottom: -14px; right: 0; }
+  .hv-sonido { right: 10px; bottom: 10px; padding: 8px 13px 8px 10px; font-size: 12px; }
+}
+@media (max-width: 520px) {
+  .hv-chip-2 .chip-sub, .hv-chip-1 .chip-sub { display: none; }
+}
+
+/* ───────────────────────────────────────────────
+   2 · CIFRAS CON ESTRELLA DORADA Y ENTRADA ANIMADA
+   ─────────────────────────────────────────────── */
+.estrella-oro {
+  background: linear-gradient(150deg, #F7D774 0%, #E0A32E 55%, #B8801C 100%);
+  -webkit-background-clip: text; background-clip: text;
+  color: transparent;
+  font-size: 1.06em;
+}
+.trust-strip .ti-star {
+  background: linear-gradient(150deg, #F7D774 0%, #E8B44A 55%, #D09A2C 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  font-weight: 800;
+}
+.stats-grid [data-counter] {
+  background: linear-gradient(160deg, var(--black) 0%, #3A4183 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.stats-grid > div { position: relative; }
+.stats-grid > div::before {
+  content: ''; position: absolute; left: 0; top: -1px;
+  width: 0; height: 2px; border-radius: 2px;
+  background: linear-gradient(90deg, #E0A32E, #F7D774);
+  transition: width .9s cubic-bezier(.22,1,.36,1) .15s;
+}
+.stats-grid > div.vista::before { width: 44px; }
+
+/* ───────────────────────────────────────────────
+   3 · COMPARADOR: tirador transparente, sin etiquetas
+   Como en su web: un círculo calado, no un botón lleno.
+   ─────────────────────────────────────────────── */
+.ba-etiqueta { display: none; }
+.ba-tirador {
+  width: 46px; height: 46px;
+  background: transparent;
+  border: 2.5px solid #fff;
+  box-shadow: 0 2px 10px rgba(0,0,0,.28), 0 0 0 1px rgba(0,0,0,.10) inset;
+  color: #fff;
+}
+.ba-tirador svg { width: 22px; height: 22px; filter: drop-shadow(0 1px 2px rgba(0,0,0,.45)); }
+.ba-linea { width: 3px; box-shadow: 0 0 6px rgba(0,0,0,.35); }
+
+/* ───────────────────────────────────────────────
+   4 · CARRUSEL: las dos filas van en el MISMO sentido
+   La de abajo va media vuelta desfasada, así el testimonio que
+   está saliendo por la izquierda arriba aparece abajo, y el JS
+   mantiene ambas copias en el mismo segundo de reproducción.
+   ─────────────────────────────────────────────── */
+.vt-fila-b { animation: vtScrollA 46s linear infinite; animation-delay: -23s; }
+
+/* ───────────────────────────────────────────────
+   5 · GALERÍA DE LA CLÍNICA · una sede u otra
+   Mosaico asimétrico: la foto principal manda y las otras dos la
+   acompañan. Las fotos salen del collage que ellos publican.
+   ─────────────────────────────────────────────── */
+.gal-tabs {
+  display: inline-flex;
+  padding: 5px;
+  border-radius: 999px;
+  background: var(--ice);
+  box-shadow: 0 1px 0 rgba(255,255,255,.6) inset, 0 2px 10px -4px rgba(31,35,79,.18);
+  margin-top: 22px;
+}
+.gal-tab {
+  position: relative;
+  border: none; cursor: pointer;
+  padding: 11px 24px;
+  border-radius: 999px;
+  background: transparent;
+  font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 500;
+  letter-spacing: -.01em; color: var(--gray);
+  transition: color .22s var(--t);
+}
+.gal-tab .gal-tab-sub { display: block; font-size: 11px; font-weight: 400; opacity: .75; margin-top: 1px; }
+/* El fondo va en el propio botón. Con ::before y z-index:-1 quedaba
+   DETRÁS del contenedor .gal-tabs y la píldora no se veía: el texto
+   blanco sobre fondo claro era ilegible. */
+.gal-tab.activo {
+  color: #fff;
+  background: linear-gradient(140deg, #2C3270, #1F234F 60%, #151936);
+  box-shadow: 0 6px 18px -6px rgba(31,35,79,.55), 0 1px 0 rgba(255,255,255,.22) inset;
+}
+.gal-tab.activo .gal-tab-sub { color: rgba(255,255,255,.72); opacity: 1; }
+.gal-tab:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+
+.gal-panel { display: none; }
+.gal-panel.activo { display: block; animation: galEntra .5s cubic-bezier(.22,1,.36,1); }
+@keyframes galEntra { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .gal-panel.activo { animation: none; } }
+
+.gal-mosaico {
+  display: grid;
+  grid-template-columns: 1.55fr 1fr;
+  grid-template-rows: repeat(2, 1fr);
+  gap: 18px;
+  margin-top: 30px;
+  aspect-ratio: 16 / 9;
+}
+.gal-foto {
+  position: relative;
+  margin: 0;
+  overflow: hidden;
+  border-radius: var(--radius);
+  background: var(--ice);
+  box-shadow: 0 10px 30px -14px rgba(31,35,79,.35);
+}
+.gal-foto:first-child { grid-row: span 2; }
+.gal-foto img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+  transition: transform .8s cubic-bezier(.22,1,.36,1);
+}
+.gal-foto:hover img { transform: scale(1.045); }
+.gal-foto figcaption {
+  position: absolute; left: 0; right: 0; bottom: 0;
+  padding: 26px 20px 15px;
+  background: linear-gradient(to top, rgba(21,25,54,.82), transparent);
+  color: #fff;
+  font-family: 'Inter', sans-serif; font-size: 12.5px; font-weight: 500;
+  letter-spacing: .01em;
+}
+@media (max-width: 760px) {
+  .gal-mosaico { grid-template-columns: 1fr; grid-template-rows: none; aspect-ratio: auto; gap: 14px; }
+  .gal-foto:first-child { grid-row: auto; }
+  .gal-foto { aspect-ratio: 3 / 2; }
+  .gal-tab { padding: 10px 18px; font-size: 13px; }
+}
+
+/* ───────────────────────────────────────────────
+   6 · CARRUSEL DE OPINIONES DE GOOGLE
+   ─────────────────────────────────────────────── */
+.op-carrusel { position: relative; margin-top: 34px; }
+.op-ventana { overflow: hidden; }
+.op-pista {
+  display: flex; gap: 22px;
+  transition: transform .6s cubic-bezier(.22,1,.36,1);
+  will-change: transform;
+}
+.op-card {
+  /* DOS por vista, no tres: con 4 opiniones verificadas, a tres por vista
+     el carrusel solo tenía un paso y no se sentía vivo. A dos, la tarjeta
+     además respira y el texto se lee mejor. */
+  flex: 0 0 calc((100% - 22px) / 2);
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 28px 26px 24px;
+  display: flex; flex-direction: column;
+  box-shadow: 0 12px 34px -22px rgba(31,35,79,.35);
+}
+@media (max-width: 659px)  { .op-card { flex-basis: 100%; } }
+
+.op-estrellas {
+  font-size: 15px; letter-spacing: 2px; margin-bottom: 14px;
+  background: linear-gradient(150deg, #F7D774 0%, #E0A32E 55%, #B8801C 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.op-texto {
+  font-family: 'Inter', sans-serif; font-size: 15.5px; font-weight: 300;
+  line-height: 1.62; color: var(--black); letter-spacing: -.011em;
+  flex: 1;
+}
+.op-pie { display: flex; align-items: center; gap: 12px; margin-top: 22px; }
+.op-avatar {
+  width: 40px; height: 40px; flex: 0 0 auto; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(140deg, #2C3270, #1F234F);
+  color: #fff; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 15px;
+}
+.op-nombre { font-family: 'Inter', sans-serif; font-size: 14.5px; font-weight: 600; letter-spacing: -.01em; }
+.op-meta   { font-family: 'Inter', sans-serif; font-size: 12px; color: var(--gray); margin-top: 1px; }
+.op-meta .op-g { font-weight: 600; color: #4285F4; }
+
+.op-controles { display: flex; align-items: center; gap: 14px; margin-top: 26px; }
+.op-nav {
+  width: 46px; height: 46px; border-radius: 50%;
+  border: 1px solid var(--border); background: var(--white);
+  color: var(--black); cursor: pointer;
+  display: inline-flex; align-items: center; justify-content: center;
+  transition: border-color .2s var(--t), transform .2s var(--t), box-shadow .2s var(--t), opacity .2s var(--t);
+}
+.op-nav svg { width: 18px; height: 18px; }
+.op-nav:hover:not(:disabled) { border-color: var(--black); transform: translateY(-2px); box-shadow: 0 8px 20px -10px rgba(31,35,79,.5); }
+.op-nav:disabled { opacity: .32; cursor: default; }
+.op-puntos { display: flex; gap: 7px; margin-left: 4px; }
+.op-punto {
+  width: 7px; height: 7px; border-radius: 50%; padding: 0;
+  border: none; background: var(--border); cursor: pointer;
+  transition: background .25s var(--t), width .25s var(--t);
+}
+.op-punto.activo { background: var(--black); width: 22px; border-radius: 999px; }
+.op-enlace { margin-left: auto; }
+
+/* La tarjeta que está sonando se marca con un anillo dorado */
+.vt-card.con-sonido {
+  box-shadow: 0 0 0 3px #E0A32E, 0 14px 34px -12px rgba(31,35,79,.45);
+}
+.vt-card.con-sonido .vt-overlay { background: linear-gradient(180deg, rgba(0,0,0,0) 40%, rgba(0,0,0,.8) 100%); }
