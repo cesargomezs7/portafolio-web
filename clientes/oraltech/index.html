@@ -3,6 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="theme-color" content="#1F234F">
 <meta name="robots" content="noindex,nofollow"><!-- PREVIEW: quitar al pasar a dominio del cliente -->
 <title>Diseño de sonrisa en Cúcuta y Medellín | OralTech</title>
 <meta name="description" content="Diseño de sonrisa, ortodoncia, implantes, blanqueamiento y limpieza dental en Cúcuta y Medellín. Escríbenos por WhatsApp y agenda tu cita en OralTech.">
@@ -12,6 +16,7 @@
 <link rel="stylesheet" href="assets/styles.css?v=20260814a">
 <link rel="stylesheet" href="assets/nav.css?v=20260814a">
 <link rel="stylesheet" href="assets/wa-widget.css?v=20260814a">
+<link rel="stylesheet" href="assets/oraltech.css?v=1">
 
 <!-- SEO: ficha de negocio local, una por sede. Sin openingHoursSpecification: el
      horario aún no está confirmado por el cliente y no se inventa.
@@ -179,7 +184,7 @@ body.has-banner .scroll-progress { top: 36px; }
   aspect-ratio: 5/4;
   max-height: 440px;
   width: 100%;
-  box-shadow: 0 24px 80px rgba(33,33,33,0.12);
+  box-shadow: 0 24px 80px rgba(31,35,79,0.12);
 }
 .clinic-photo-main img { width: 100%; height: 100%; object-fit: cover; }
 /* La fachada de Cúcuta lleva el aviso con el nombre pegado al borde de arriba. En la
@@ -247,13 +252,28 @@ body.has-banner .scroll-progress { top: 36px; }
   transition: transform 0.6s var(--t);
 }
 .service-card.with-photo:hover img { transform: scale(1.04); }
-/* La foto de ortodoncia es cuadrada y en la tarjeta 4:3 el recorte centrado dejaba los
-   brackets casi encima del título. Se sube el encuadre para que la boca quede a la vista. */
-.service-card.card-ortodoncia img { object-position: center 38%; }
 .service-card.with-photo::before {
   content: ''; position: absolute; inset: 0;
-  background: linear-gradient(to bottom, transparent 35%, rgba(33,33,33,0.68));
+  background: linear-gradient(to bottom, transparent 35%, rgba(31,35,79,0.68));
   z-index: 2;
+}
+
+/* ── Tarjetas con el ICONO propio del cliente ──
+   Cinco de sus seis servicios tienen icono de línea en su azul de marca
+   sobre transparente (los tomamos de su propia portada). Sobre la tarjeta
+   azul se invierten a blanco: brightness(0) los vuelve negros y invert(1)
+   blancos, sin importar el color de origen. El sexto (implantes) es una
+   foto clínica real suya y se queda con recorte de foto. */
+.service-card.con-icono { background: var(--black); }
+.service-card.con-icono img {
+  object-fit: contain;
+  padding: 16% 20% 26%;
+  filter: brightness(0) invert(1);
+  opacity: .92;
+}
+.service-card.con-icono:hover img { transform: scale(1.06); }
+.service-card.con-icono::before {
+  background: linear-gradient(to bottom, transparent 45%, rgba(31,35,79,0.75));
 }
 .service-card-arrow {
   position: absolute; top: 14px; right: 14px;
@@ -434,14 +454,51 @@ body.has-banner .scroll-progress { top: 36px; }
         <span class="light">e implantes en</span><br>
         Cúcuta <span class="light">y</span> <span class="b">Medellín</span>
       </h1>
-      <a href="https://wa.me/573224130747?text=Hola%20OralTech,%20vengo%20de%20su%20p%C3%A1gina%20web%20y%20quiero%20agendar%20una%20cita&utm_source=web&utm_medium=hero&utm_campaign=agendar" target="_blank" class="hero-cta">
+      <!-- Panel de WhatsApp con las DOS sedes.
+     Su web actual ya pregunta Cúcuta o Medellín antes de abrir el chat.
+     Sin esto, un paciente de Medellín le escribiría a Cúcuta. -->
+<div class="wa-panel" id="waPanel" role="dialog" aria-label="Elige la sede para escribir por WhatsApp">
+  <div class="wa-panel-head">
+    <strong>Escríbenos por WhatsApp</strong>
+    <span>Tenemos dos sedes. Elige en cuál quieres que te atendamos.</span>
+  </div>
+  <div class="wa-panel-body">
+    <a class="wa-sede" data-wa-base="https://wa.me/573224130747?text=" href="https://wa.me/573224130747?text=Hola,%20vengo%20de%20su%20p%C3%A1gina%20web%20y%20quiero%20agendar%20una%20cita." target="_blank" rel="noopener">
+      <span class="wa-sede-ico"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.371-.025-.52-.075-.149-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg></span>
+      <span class="wa-sede-txt"><strong>Cúcuta</strong><span>Quinta Oriental · +57 322 413 0747</span></span>
+    </a>
+    <a class="wa-sede" data-wa-base="https://wa.me/573016184618?text=" href="https://wa.me/573016184618?text=Hola,%20vengo%20de%20su%20p%C3%A1gina%20web%20y%20quiero%20agendar%20una%20cita." target="_blank" rel="noopener">
+      <span class="wa-sede-ico"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.371-.025-.52-.075-.149-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg></span>
+      <span class="wa-sede-txt"><strong>Medellín</strong><span>El Poblado · +57 301 618 4618</span></span>
+    </a>
+  </div>
+</div>
+
+<a href="https://wa.me/573224130747?text=Hola%20OralTech,%20vengo%20de%20su%20p%C3%A1gina%20web%20y%20quiero%20agendar%20una%20cita&utm_source=web&utm_medium=hero&utm_campaign=agendar" target="_blank" class="hero-cta">
         Agendar por WhatsApp
         <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
     </div>
 
+    <!-- Su video de presentación (1:21), el mismo que abre su web actual.
+         Va con póster y preload="none": la portada no descarga los 5,7 MB
+         hasta que alguien pulsa play. Su web hoy lo carga entero de golpe. -->
     <div class="hero-visual">
-      <img src="img/sede-medellin.webp" alt="Sala de espera de OralTech en la sede de Medellín" class="hero-visual-img">
+      <div class="video-hero">
+        <video
+          class="hero-visual-img"
+          preload="none"
+          playsinline
+          poster="video/presentacion-oraltech-poster.jpg"
+          aria-label="Video de presentación de OralTech">
+          <source src="video/presentacion-oraltech.mp4" type="video/mp4">
+          Tu navegador no reproduce este video.
+        </video>
+        <button type="button" class="video-hero-play" aria-label="Reproducir el video de presentación de OralTech">
+          <span class="vp-circle"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+          <span class="vp-text">Conoce OralTech en 1 minuto</span>
+        </button>
+      </div>
       <div class="hero-float hero-float-1">5,0 ★ en Google · Cúcuta</div>
       <div class="hero-float hero-float-2">4,6 ★ en Google · Medellín</div>
     </div>
@@ -500,6 +557,158 @@ body.has-banner .scroll-progress { top: 36px; }
     </div>
     <p id="contactMsg" style="display:none;margin-top:12px;font-family:'Inter',sans-serif;font-size:14px;line-height:1.5;color:var(--gray)"></p>
   </form>
+</section>
+
+<!-- ─── CAMBIOS REALES · comparadores antes/después ───────────────
+     Los tres pares que ya están en su portada, con el mismo titular
+     que ellos usan ("Cambios reales · Porque cada sonrisa merece
+     brillar"). Cada par es antes → después de un mismo paciente.
+     ⚠ PENDIENTE: autorización escrita de estos pacientes (dato de
+     salud identificable, Ley 1581). Hoy ya están públicos en su web.
+──────────────────────────────────────────────────────────────── -->
+<section class="section" id="casos" data-wa="Hola, vi sus casos en la página web y quiero una valoración." data-wa-label="¿Quieres un cambio así?">
+  <div class="section-inner">
+    <div class="section-tag">Cambios reales</div>
+    <h2 class="section-headline reveal" style="margin-bottom:6px;">
+      <span class="light">Porque cada sonrisa</span><br><span class="b">merece brillar</span>
+    </h2>
+    <p class="reveal" style="font-size:16px;color:var(--black);opacity:.75;max-width:560px;line-height:1.65;">
+      Mueve el control de cada imagen para ver el antes y el después. Son
+      pacientes nuestros, no fotos de banco de imágenes.
+    </p>
+
+    <div class="ba-grid">
+      <div class="ba reveal">
+        <img class="ba-despues" src="img/3-2.webp" alt="Sonrisa después del tratamiento en OralTech: dientes alineados y de color uniforme" loading="lazy" width="1000" height="500">
+        <img class="ba-antes"   src="img/3-1.webp" alt="La misma sonrisa antes del tratamiento en OralTech" loading="lazy" width="1000" height="500">
+        <span class="ba-linea"></span>
+        <span class="ba-tirador"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l-5 6 5 6M15 6l5 6-5 6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <span class="ba-etiqueta izq">Antes</span>
+        <span class="ba-etiqueta der">Después</span>
+        <input class="ba-rango" type="range" min="0" max="100" value="50" step="0.1" aria-label="Comparar antes y después del primer caso">
+      </div>
+
+      <div class="ba reveal">
+        <img class="ba-despues" src="img/2.2.webp" alt="Sonrisa después del tratamiento en OralTech, con los dientes más claros y parejos" loading="lazy" width="1600" height="800">
+        <img class="ba-antes"   src="img/2.1.webp" alt="La misma sonrisa antes del tratamiento en OralTech" loading="lazy" width="1600" height="800">
+        <span class="ba-linea"></span>
+        <span class="ba-tirador"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l-5 6 5 6M15 6l5 6-5 6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <span class="ba-etiqueta izq">Antes</span>
+        <span class="ba-etiqueta der">Después</span>
+        <input class="ba-rango" type="range" min="0" max="100" value="50" step="0.1" aria-label="Comparar antes y después del segundo caso">
+      </div>
+
+      <div class="ba reveal">
+        <img class="ba-despues" src="img/4.2.webp" alt="Sonrisa después del tratamiento en OralTech" loading="lazy" width="1000" height="500">
+        <img class="ba-antes"   src="img/4.1.webp" alt="La misma sonrisa antes del tratamiento en OralTech" loading="lazy" width="1000" height="500">
+        <span class="ba-linea"></span>
+        <span class="ba-tirador"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l-5 6 5 6M15 6l5 6-5 6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <span class="ba-etiqueta izq">Antes</span>
+        <span class="ba-etiqueta der">Después</span>
+        <input class="ba-rango" type="range" min="0" max="100" value="50" step="0.1" aria-label="Comparar antes y después del tercer caso">
+      </div>
+    </div>
+
+    <div class="reveal" style="margin-top:30px;">
+      <a href="casos.html" class="btn-pill outline">Ver todos los casos</a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── TESTIMONIOS QUE HABLAN POR NOSOTROS ──────────────────────
+     Réplica de lo que su web ya tiene, con más fuerza: arriba el
+     carrusel de sus SEIS videotestimonios en DOS líneas (seis a la
+     vista, moviéndose en sentidos opuestos), y debajo los tres
+     testimonios con foto, con su frase textual.
+     ⚠ PENDIENTE: confirmar con la clínica quiénes son las personas
+     de los videos. El nombre y el país salen de SUS nombres de
+     archivo, no de una fuente confirmada.
+──────────────────────────────────────────────────────────────── -->
+<section class="section section-alt" id="testimonios-video" data-wa="Hola, vi los testimonios en su página web y quiero agendar una valoración." data-wa-label="¿Quieres un resultado así?">
+  <div class="section-inner">
+    <div class="section-tag">Testimonios</div>
+    <h2 class="section-headline reveal" style="margin-bottom:6px;">
+      <span class="light">Testimonios que</span><br><span class="b">hablan por nosotros</span>
+    </h2>
+    <p class="reveal" style="font-size:16px;color:var(--black);opacity:.75;max-width:600px;line-height:1.65;">
+      Pacientes que vinieron desde otros países a tratarse con nosotros.
+      Toca cualquiera para escucharlo.
+    </p>
+  </div>
+
+  <div class="vt-wrap reveal">
+    <!-- Las tarjetas son PÓSTERS, no <video>: 36 elementos de video en la
+         portada sería un derroche. El <video> se crea al pulsar (oraltech.js).
+         Cada fila lleva los seis testimonios repetidos TRES veces para que el
+         bucle de -33,3333% cierre sin costura en cualquier ancho de pantalla. -->
+    <div class="vt-fila vt-fila-a">
+      <button class="vt-card" type="button" data-video="video/testimonio-sean-inglaterra.mp4" aria-label="Reproducir el testimonio de Sean"><img class="vt-poster" src="video/testimonio-sean-inglaterra-poster.jpg" alt="Testimonio en video de Sean, paciente de OralTech, desde Inglaterra" loading="lazy" width="720" height="1280"><span class="vt-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span class="vt-overlay"><span class="vt-lugar">Sean</span><span class="vt-sub">Inglaterra</span></span></button>
+      <button class="vt-card" type="button" data-video="video/testimonio-marcelo-panama.mp4" aria-label="Reproducir el testimonio de Marcelo"><img class="vt-poster" src="video/testimonio-marcelo-panama-poster.jpg" alt="Testimonio en video de Marcelo, paciente de OralTech, desde Panamá" loading="lazy" width="720" height="1280"><span class="vt-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span class="vt-overlay"><span class="vt-lugar">Marcelo</span><span class="vt-sub">Panamá</span></span></button>
+      <button class="vt-card" type="button" data-video="video/testimonio-alemania.mp4" aria-label="Reproducir el testimonio de Paciente"><img class="vt-poster" src="video/testimonio-alemania-poster.jpg" alt="Testimonio en video de Paciente, paciente de OralTech, desde Alemania" loading="lazy" width="720" height="1280"><span class="vt-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span class="vt-overlay"><span class="vt-lugar">Paciente</span><span class="vt-sub">Alemania</span></span></button>
+      <button class="vt-card" type="button" data-video="video/testimonio-sherlyn-costa-rica.mp4" aria-label="Reproducir el testimonio de Sherlyn"><img class="vt-poster" src="video/testimonio-sherlyn-costa-rica-poster.jpg" alt="Testimonio en video de Sherlyn, paciente de OralTech, desde Costa Rica" loading="lazy" width="720" height="1280"><span class="vt-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span class="vt-overlay"><span class="vt-lugar">Sherlyn</span><span class="vt-sub">Costa Rica</span></span></button>
+      <button class="vt-card" type="button" data-video="video/testimonio-jordan-estados-unidos.mp4" aria-label="Reproducir el testimonio de Jordan"><img class="vt-poster" src="video/testimonio-jordan-estados-unidos-poster.jpg" alt="Testimonio en video de Jordan, paciente de OralTech, desde Estados Unidos" loading="lazy" width="720" height="1280"><span class="vt-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span class="vt-overlay"><span class="vt-lugar">Jordan</span><span class="vt-sub">Estados Unidos</span></span></button>
+      <button class="vt-card" type="button" data-video="video/testimonio-daniel-paris.mp4" aria-label="Reproducir el testimonio de Daniel"><img class="vt-poster" src="video/testimonio-daniel-paris-poster.jpg" alt="Testimonio en video de Daniel, paciente de OralTech, desde París" loading="lazy" width="720" height="1280"><span class="vt-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span class="vt-overlay"><span class="vt-lugar">Daniel</span><span class="vt-sub">París</span></span></button>
+      <button class="vt-card" type="button" data-video="video/testimonio-sean-inglaterra.mp4" aria-label="Reproducir el testimonio de Sean" aria-hidden="true" tabindex="-1"><img class="vt-poster" src="video/testimonio-sean-inglaterra-poster.jpg" alt="Testimonio en video de Sean, paciente de OralTech, desde Inglaterra" loading="lazy" width="720" height="1280"><span class="vt-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span class="vt-overlay"><span class="vt-lugar">Sean</span><span class="vt-sub">Inglaterra</span></span></button>
+      <button class="vt-card" type="button" data-video="video/testimonio-marcelo-panama.mp4" aria-label="Reproducir el testimonio de Marcelo" aria-hidden="true" tabindex="-1"><img class="vt-poster" src="video/testimonio-marcelo-panama-poster.jpg" alt="Testimonio en video de Marcelo, paciente de OralTech, desde Panamá" loading="lazy" width="720" height="1280"><span class="vt-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span class="vt-overlay"><span class="vt-lugar">Marcelo</span><span class="vt-sub">Panamá</span></span></button>
+      <button class="vt-card" type="button" data-video="video/testimonio-alemania.mp4" aria-label="Reproducir el testimonio de Paciente" aria-hidden="true" tabindex="-1"><img class="vt-poster" src="video/testimonio-alemania-poster.jpg" alt="Testimonio en video de Paciente, paciente de OralTech, desde Alemania" loading="lazy" width="720" height="1280"><span class="vt-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span class="vt-overlay"><span class="vt-lugar">Paciente</span><span class="vt-sub">Alemania</span></span></button>
+      <button class="vt-card" type="button" data-video="video/testimonio-sherlyn-costa-rica.mp4" aria-label="Reproducir el testimonio de Sherlyn" aria-hidden="true" tabindex="-1"><img class="vt-poster" src="video/testimonio-sherlyn-costa-rica-poster.jpg" alt="Testimonio en video de Sherlyn, paciente de OralTech, desde Costa Rica" loading="lazy" width="720" height="1280"><span class="vt-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span class="vt-overlay"><span class="vt-lugar">Sherlyn</span><span class="vt-sub">Costa Rica</span></span></button>
+      <button class="vt-card" type="button" data-video="video/testimonio-jordan-estados-unidos.mp4" aria-label="Reproducir el testimonio de Jordan" aria-hidden="true" tabindex="-1"><img class="vt-poster" src="video/testimonio-jordan-estados-unidos-poster.jpg" alt="Testimonio en video de Jordan, paciente de OralTech, desde Estados Unidos" loading="lazy" width="720" height="1280"><span class="vt-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span class="vt-overlay"><span class="vt-lugar">Jordan</span><span class="vt-sub">Estados Unidos</span></span></button>
+      <button class="vt-card" type="button" data-video="video/testimonio-daniel-paris.mp4" aria-label="Reproducir el testimonio de Daniel" aria-hidden="true" tabindex="-1"><img class="vt-poster" src="video/testimonio-daniel-paris-poster.jpg" alt="Testimonio en video de Daniel, paciente de OralTech, desde París" loading="lazy" width="720" height="1280"><span class="vt-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span class="vt-overlay"><span class="vt-lugar">Daniel</span><span class="vt-sub">París</span></span></button>
+      <button class="vt-card" type="button" data-video="video/testimonio-sean-inglaterra.mp4" aria-label="Reproducir el testimonio de Sean" aria-hidden="true" tabindex="-1"><img class="vt-poster" src="video/testimonio-sean-inglaterra-poster.jpg" alt="Testimonio en video de Sean, paciente de OralTech, desde Inglaterra" loading="lazy" width="720" height="1280"><span class="vt-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span class="vt-overlay"><span class="vt-lugar">Sean</span><span class="vt-sub">Inglaterra</span></span></button>
+      <button class="vt-card" type="button" data-video="video/testimonio-marcelo-panama.mp4" aria-label="Reproducir el testimonio de Marcelo" aria-hidden="true" tabindex="-1"><img class="vt-poster" src="video/testimonio-marcelo-panama-poster.jpg" alt="Testimonio en video de Marcelo, paciente de OralTech, desde Panamá" loading="lazy" width="720" height="1280"><span class="vt-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span class="vt-overlay"><span class="vt-lugar">Marcelo</span><span class="vt-sub">Panamá</span></span></button>
+      <button class="vt-card" type="button" data-video="video/testimonio-alemania.mp4" aria-label="Reproducir el testimonio de Paciente" aria-hidden="true" tabindex="-1"><img class="vt-poster" src="video/testimonio-alemania-poster.jpg" alt="Testimonio en video de Paciente, paciente de OralTech, desde Alemania" loading="lazy" width="720" height="1280"><span class="vt-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span class="vt-overlay"><span class="vt-lugar">Paciente</span><span class="vt-sub">Alemania</span></span></button>
+      <button class="vt-card" type="button" data-video="video/testimonio-sherlyn-costa-rica.mp4" aria-label="Reproducir el testimonio de Sherlyn" aria-hidden="true" tabindex="-1"><img class="vt-poster" src="video/testimonio-sherlyn-costa-rica-poster.jpg" alt="Testimonio en video de Sherlyn, paciente de OralTech, desde Costa Rica" loading="lazy" width="720" height="1280"><span class="vt-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span class="vt-overlay"><span class="vt-lugar">Sherlyn</span><span class="vt-sub">Costa Rica</span></span></button>
+      <button class="vt-card" type="button" data-video="video/testimonio-jordan-estados-unidos.mp4" aria-label="Reproducir el testimonio de Jordan" aria-hidden="true" tabindex="-1"><img class="vt-poster" src="video/testimonio-jordan-estados-unidos-poster.jpg" alt="Testimonio en video de Jordan, paciente de OralTech, desde Estados Unidos" loading="lazy" width="720" height="1280"><span class="vt-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span class="vt-overlay"><span class="vt-lugar">Jordan</span><span class="vt-sub">Estados Unidos</span></span></button>
+      <button class="vt-card" type="button" data-video="video/testimonio-daniel-paris.mp4" aria-label="Reproducir el testimonio de Daniel" aria-hidden="true" tabindex="-1"><img class="vt-poster" src="video/testimonio-daniel-paris-poster.jpg" alt="Testimonio en video de Daniel, paciente de OralTech, desde París" loading="lazy" width="720" height="1280"><span class="vt-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span class="vt-overlay"><span class="vt-lugar">Daniel</span><span class="vt-sub">París</span></span></button>
+    </div>
+
+    <div class="vt-fila vt-fila-b">
+      <button class="vt-card" type="button" data-video="video/testimonio-daniel-paris.mp4" aria-label="Reproducir el testimonio de Daniel"><img class="vt-poster" src="video/testimonio-daniel-paris-poster.jpg" alt="Testimonio en video de Daniel, paciente de OralTech, desde París" loading="lazy" width="720" height="1280"><span class="vt-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span class="vt-overlay"><span class="vt-lugar">Daniel</span><span class="vt-sub">París</span></span></button>
+      <button class="vt-card" type="button" data-video="video/testimonio-jordan-estados-unidos.mp4" aria-label="Reproducir el testimonio de Jordan"><img class="vt-poster" src="video/testimonio-jordan-estados-unidos-poster.jpg" alt="Testimonio en video de Jordan, paciente de OralTech, desde Estados Unidos" loading="lazy" width="720" height="1280"><span class="vt-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span class="vt-overlay"><span class="vt-lugar">Jordan</span><span class="vt-sub">Estados Unidos</span></span></button>
+      <button class="vt-card" type="button" data-video="video/testimonio-sherlyn-costa-rica.mp4" aria-label="Reproducir el testimonio de Sherlyn"><img class="vt-poster" src="video/testimonio-sherlyn-costa-rica-poster.jpg" alt="Testimonio en video de Sherlyn, paciente de OralTech, desde Costa Rica" loading="lazy" width="720" height="1280"><span class="vt-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span class="vt-overlay"><span class="vt-lugar">Sherlyn</span><span class="vt-sub">Costa Rica</span></span></button>
+      <button class="vt-card" type="button" data-video="video/testimonio-alemania.mp4" aria-label="Reproducir el testimonio de Paciente"><img class="vt-poster" src="video/testimonio-alemania-poster.jpg" alt="Testimonio en video de Paciente, paciente de OralTech, desde Alemania" loading="lazy" width="720" height="1280"><span class="vt-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span class="vt-overlay"><span class="vt-lugar">Paciente</span><span class="vt-sub">Alemania</span></span></button>
+      <button class="vt-card" type="button" data-video="video/testimonio-marcelo-panama.mp4" aria-label="Reproducir el testimonio de Marcelo"><img class="vt-poster" src="video/testimonio-marcelo-panama-poster.jpg" alt="Testimonio en video de Marcelo, paciente de OralTech, desde Panamá" loading="lazy" width="720" height="1280"><span class="vt-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span class="vt-overlay"><span class="vt-lugar">Marcelo</span><span class="vt-sub">Panamá</span></span></button>
+      <button class="vt-card" type="button" data-video="video/testimonio-sean-inglaterra.mp4" aria-label="Reproducir el testimonio de Sean"><img class="vt-poster" src="video/testimonio-sean-inglaterra-poster.jpg" alt="Testimonio en video de Sean, paciente de OralTech, desde Inglaterra" loading="lazy" width="720" height="1280"><span class="vt-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span class="vt-overlay"><span class="vt-lugar">Sean</span><span class="vt-sub">Inglaterra</span></span></button>
+      <button class="vt-card" type="button" data-video="video/testimonio-daniel-paris.mp4" aria-label="Reproducir el testimonio de Daniel" aria-hidden="true" tabindex="-1"><img class="vt-poster" src="video/testimonio-daniel-paris-poster.jpg" alt="Testimonio en video de Daniel, paciente de OralTech, desde París" loading="lazy" width="720" height="1280"><span class="vt-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span class="vt-overlay"><span class="vt-lugar">Daniel</span><span class="vt-sub">París</span></span></button>
+      <button class="vt-card" type="button" data-video="video/testimonio-jordan-estados-unidos.mp4" aria-label="Reproducir el testimonio de Jordan" aria-hidden="true" tabindex="-1"><img class="vt-poster" src="video/testimonio-jordan-estados-unidos-poster.jpg" alt="Testimonio en video de Jordan, paciente de OralTech, desde Estados Unidos" loading="lazy" width="720" height="1280"><span class="vt-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span class="vt-overlay"><span class="vt-lugar">Jordan</span><span class="vt-sub">Estados Unidos</span></span></button>
+      <button class="vt-card" type="button" data-video="video/testimonio-sherlyn-costa-rica.mp4" aria-label="Reproducir el testimonio de Sherlyn" aria-hidden="true" tabindex="-1"><img class="vt-poster" src="video/testimonio-sherlyn-costa-rica-poster.jpg" alt="Testimonio en video de Sherlyn, paciente de OralTech, desde Costa Rica" loading="lazy" width="720" height="1280"><span class="vt-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span class="vt-overlay"><span class="vt-lugar">Sherlyn</span><span class="vt-sub">Costa Rica</span></span></button>
+      <button class="vt-card" type="button" data-video="video/testimonio-alemania.mp4" aria-label="Reproducir el testimonio de Paciente" aria-hidden="true" tabindex="-1"><img class="vt-poster" src="video/testimonio-alemania-poster.jpg" alt="Testimonio en video de Paciente, paciente de OralTech, desde Alemania" loading="lazy" width="720" height="1280"><span class="vt-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span class="vt-overlay"><span class="vt-lugar">Paciente</span><span class="vt-sub">Alemania</span></span></button>
+      <button class="vt-card" type="button" data-video="video/testimonio-marcelo-panama.mp4" aria-label="Reproducir el testimonio de Marcelo" aria-hidden="true" tabindex="-1"><img class="vt-poster" src="video/testimonio-marcelo-panama-poster.jpg" alt="Testimonio en video de Marcelo, paciente de OralTech, desde Panamá" loading="lazy" width="720" height="1280"><span class="vt-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span class="vt-overlay"><span class="vt-lugar">Marcelo</span><span class="vt-sub">Panamá</span></span></button>
+      <button class="vt-card" type="button" data-video="video/testimonio-sean-inglaterra.mp4" aria-label="Reproducir el testimonio de Sean" aria-hidden="true" tabindex="-1"><img class="vt-poster" src="video/testimonio-sean-inglaterra-poster.jpg" alt="Testimonio en video de Sean, paciente de OralTech, desde Inglaterra" loading="lazy" width="720" height="1280"><span class="vt-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span class="vt-overlay"><span class="vt-lugar">Sean</span><span class="vt-sub">Inglaterra</span></span></button>
+      <button class="vt-card" type="button" data-video="video/testimonio-daniel-paris.mp4" aria-label="Reproducir el testimonio de Daniel" aria-hidden="true" tabindex="-1"><img class="vt-poster" src="video/testimonio-daniel-paris-poster.jpg" alt="Testimonio en video de Daniel, paciente de OralTech, desde París" loading="lazy" width="720" height="1280"><span class="vt-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span class="vt-overlay"><span class="vt-lugar">Daniel</span><span class="vt-sub">París</span></span></button>
+      <button class="vt-card" type="button" data-video="video/testimonio-jordan-estados-unidos.mp4" aria-label="Reproducir el testimonio de Jordan" aria-hidden="true" tabindex="-1"><img class="vt-poster" src="video/testimonio-jordan-estados-unidos-poster.jpg" alt="Testimonio en video de Jordan, paciente de OralTech, desde Estados Unidos" loading="lazy" width="720" height="1280"><span class="vt-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span class="vt-overlay"><span class="vt-lugar">Jordan</span><span class="vt-sub">Estados Unidos</span></span></button>
+      <button class="vt-card" type="button" data-video="video/testimonio-sherlyn-costa-rica.mp4" aria-label="Reproducir el testimonio de Sherlyn" aria-hidden="true" tabindex="-1"><img class="vt-poster" src="video/testimonio-sherlyn-costa-rica-poster.jpg" alt="Testimonio en video de Sherlyn, paciente de OralTech, desde Costa Rica" loading="lazy" width="720" height="1280"><span class="vt-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span class="vt-overlay"><span class="vt-lugar">Sherlyn</span><span class="vt-sub">Costa Rica</span></span></button>
+      <button class="vt-card" type="button" data-video="video/testimonio-alemania.mp4" aria-label="Reproducir el testimonio de Paciente" aria-hidden="true" tabindex="-1"><img class="vt-poster" src="video/testimonio-alemania-poster.jpg" alt="Testimonio en video de Paciente, paciente de OralTech, desde Alemania" loading="lazy" width="720" height="1280"><span class="vt-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span class="vt-overlay"><span class="vt-lugar">Paciente</span><span class="vt-sub">Alemania</span></span></button>
+      <button class="vt-card" type="button" data-video="video/testimonio-marcelo-panama.mp4" aria-label="Reproducir el testimonio de Marcelo" aria-hidden="true" tabindex="-1"><img class="vt-poster" src="video/testimonio-marcelo-panama-poster.jpg" alt="Testimonio en video de Marcelo, paciente de OralTech, desde Panamá" loading="lazy" width="720" height="1280"><span class="vt-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span class="vt-overlay"><span class="vt-lugar">Marcelo</span><span class="vt-sub">Panamá</span></span></button>
+      <button class="vt-card" type="button" data-video="video/testimonio-sean-inglaterra.mp4" aria-label="Reproducir el testimonio de Sean" aria-hidden="true" tabindex="-1"><img class="vt-poster" src="video/testimonio-sean-inglaterra-poster.jpg" alt="Testimonio en video de Sean, paciente de OralTech, desde Inglaterra" loading="lazy" width="720" height="1280"><span class="vt-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span class="vt-overlay"><span class="vt-lugar">Sean</span><span class="vt-sub">Inglaterra</span></span></button>
+    </div>
+  </div>
+
+  <div class="section-inner">
+    <div class="tf-grid">
+      <figure class="tf-card reveal">
+        <img src="img/MICHELL.webp" alt="Michell, paciente de OralTech" loading="lazy" width="968" height="1363">
+        <figcaption class="tf-texto">
+          <p class="tf-frase">“Nunca imaginé volver a sonreír con tanta seguridad”</p>
+          <p class="tf-nombre">Michell</p>
+        </figcaption>
+      </figure>
+      <figure class="tf-card reveal">
+        <img src="img/DANNA.webp" alt="Danna, paciente de OralTech" loading="lazy" width="967" height="1363">
+        <figcaption class="tf-texto">
+          <p class="tf-frase">“El cambio fue increíble, ahora mi sonrisa habla por mí”</p>
+          <p class="tf-nombre">Danna</p>
+        </figcaption>
+      </figure>
+      <figure class="tf-card reveal">
+        <img src="img/KARLA.webp" alt="Karla, paciente de OralTech" loading="lazy" width="968" height="1363">
+        <figcaption class="tf-texto">
+          <p class="tf-frase">“Me hicieron sentir cómoda en todo el proceso, ¡feliz con mi resultado!”</p>
+          <p class="tf-nombre">Karla</p>
+        </figcaption>
+      </figure>
+    </div>
+  </div>
 </section>
 
 <!-- ─── OUR CLINIC ──────────────────────────────────────── -->
@@ -571,48 +780,48 @@ body.has-banner .scroll-progress { top: 36px; }
       </a>
     </div>
 
-    <!-- PENDIENTE: precios de los 6 tratamientos (el cliente no los ha entregado; no se inventan)
-         PENDIENTE: fotos propias de blanqueamiento, limpieza e implantes. Esas tres tarjetas
-         siguen con imagen de archivo (genérica, sin rostro de profesional); las otras tres
-         ya usan casos reales del material del cliente. -->
+    <!-- Las 6 tarjetas usan los iconos y la foto que el propio cliente tiene en su
+         portada: cinco iconos de línea en su azul de marca y, en implantes, su foto
+         clínica real. Cero imágenes de banco.
+         PENDIENTE: precios de los 6 tratamientos (el cliente no los ha entregado). -->
     <div class="services-grid">
-      <a href="diseno-de-sonrisa.html" class="service-card with-photo reveal">
-        <img src="img/ceramica-1.webp" alt="Resultado de un diseño de sonrisa en cerámica">
+      <a href="diseno-de-sonrisa.html" class="service-card with-photo con-icono reveal">
+        <img src="img/diseno-de-sonrisa.webp" alt="Diseño de sonrisa" loading="lazy" width="521" height="521">
         <div class="service-card-arrow"><svg viewBox="0 0 24 24" fill="none" width="14" height="14"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
         <div class="service-card-title">Diseño de sonrisa</div>
         <div class="service-card-price">En resina, ceromero o cerámica</div>
       </a>
 
-      <a href="microdiseno.html" class="service-card with-photo reveal">
-        <img src="img/micro-1.webp" alt="Resultado de un microdiseño de sonrisa">
+      <a href="microdiseno.html" class="service-card with-photo con-icono reveal">
+        <img src="img/microdiseno.webp" alt="Microdiseño de sonrisa" loading="lazy" width="521" height="521">
         <div class="service-card-arrow"><svg viewBox="0 0 24 24" fill="none" width="14" height="14"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
         <div class="service-card-title">Microdiseño</div>
         <div class="service-card-price">Mínimamente invasivo, sin desgastar el diente</div>
       </a>
 
-      <a href="ortodoncia.html" class="service-card with-photo card-ortodoncia reveal">
-        <img src="img/oraltech.webp" alt="Paciente con brackets de ortodoncia">
+      <a href="ortodoncia.html" class="service-card with-photo con-icono reveal">
+        <img src="img/ortodoncia.webp" alt="Ortodoncia" loading="lazy" width="521" height="521">
         <div class="service-card-arrow"><svg viewBox="0 0 24 24" fill="none" width="14" height="14"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
         <div class="service-card-title">Ortodoncia</div>
         <div class="service-card-price">Convencional, en zafiro o invisible</div>
       </a>
 
-      <a href="blanqueamiento.html" class="service-card with-photo reveal">
-        <img src="img/servicio-blanqueamiento.jpg" alt="Blanqueamiento dental">
+      <a href="blanqueamiento.html" class="service-card with-photo con-icono reveal">
+        <img src="img/blanqueamiento.webp" alt="Blanqueamiento dental" loading="lazy" width="521" height="521">
         <div class="service-card-arrow"><svg viewBox="0 0 24 24" fill="none" width="14" height="14"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
         <div class="service-card-title">Blanqueamiento</div>
         <div class="service-card-price">Aclara los dientes eliminando manchas</div>
       </a>
 
-      <a href="limpieza-dental.html" class="service-card with-photo reveal">
-        <img src="img/equipo-bandeja.jpg" alt="Limpieza dental">
+      <a href="limpieza-dental.html" class="service-card with-photo con-icono reveal">
+        <img src="img/limpieza-dental.webp" alt="Limpieza dental" loading="lazy" width="521" height="521">
         <div class="service-card-arrow"><svg viewBox="0 0 24 24" fill="none" width="14" height="14"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
         <div class="service-card-title">Limpieza dental</div>
         <div class="service-card-price">Profilaxis: retira placa bacteriana y sarro</div>
       </a>
 
       <a href="implantes.html" class="service-card with-photo reveal">
-        <img src="img/servicio-implantes.jpg" alt="Implantes dentales">
+        <img src="img/implante-dental.webp" alt="Corona sobre implante dental colocada en OralTech" loading="lazy" width="1080" height="1080" style="object-position:center bottom;">
         <div class="service-card-arrow"><svg viewBox="0 0 24 24" fill="none" width="14" height="14"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
         <div class="service-card-title">Implantes dentales</div>
         <div class="service-card-price">Reemplazan la raíz del diente perdido</div>
@@ -845,7 +1054,7 @@ body.has-banner .scroll-progress { top: 36px; }
   </div>
 </footer>
 
-<a href="https://wa.me/573224130747?text=Hola,%20vengo%20de%20su%20página%20web%20y%20quiero%20agendar%20una%20cita." target="_blank" class="wa-float" id="waFloat" data-wa-base="https://wa.me/573224130747?text=" aria-label="WhatsApp">
+<a href="https://wa.me/573224130747?text=Hola,%20vengo%20de%20su%20página%20web%20y%20quiero%20agendar%20una%20cita." target="_blank" class="wa-float" id="waFloat" aria-expanded="false" aria-controls="waPanel" data-wa-base="https://wa.me/573224130747?text=" aria-label="WhatsApp">
   <span class="wa-float-label" id="waFloatLabel">Agenda tu cita</span>
   <svg viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.371-.025-.52-.075-.149-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
 </a>
@@ -856,6 +1065,7 @@ body.has-banner .scroll-progress { top: 36px; }
 <script src="assets/animations.js?v=20260814a" defer></script>
 <script src="assets/wa-widget.js?v=1" defer></script>
 <script src="assets/nav.js?v=1" defer></script>
+<script src="assets/oraltech.js?v=1" defer></script>
 
 <!-- Inline: FAQ accordion.
      Se retiró el reloj del master (buscaba #liveClock y #dayName, que esta página no tiene:

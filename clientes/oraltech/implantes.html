@@ -3,6 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="theme-color" content="#1F234F">
 <meta name="robots" content="noindex,nofollow"><!-- PREVIEW: quitar al pasar a dominio del cliente -->
 <title>Implantes dentales en Cúcuta y Medellín | OralTech</title>
 <meta name="description" content="¿Te falta un diente? El implante dental reemplaza la raíz y sostiene la corona. Escríbenos por WhatsApp: OralTech, Cúcuta y Medellín.">
@@ -12,6 +16,7 @@
 <link rel="stylesheet" href="assets/styles.css?v=20260814a">
 <link rel="stylesheet" href="assets/nav.css?v=20260814a">
 <link rel="stylesheet" href="assets/wa-widget.css?v=20260814a">
+<link rel="stylesheet" href="assets/oraltech.css?v=1">
 
 <script type="application/ld+json">
 {
@@ -126,8 +131,13 @@
       <p style="font-size:16px;color:var(--black);opacity:0.82;line-height:1.7;margin-bottom:16px;">Cuando se pierde un diente, lo que se pierde no es solo la parte que se ve: también desaparece la raíz que lo sostenía dentro del hueso. El implante es un tornillo que se inserta en el hueso maxilar y ocupa ese lugar, para servir de anclaje al diente artificial que va encima.</p>
       <p style="font-size:16px;color:var(--black);opacity:0.82;line-height:1.7;">Por eso el implante no se apoya en la encía ni obliga a tallar los dientes de al lado: se sostiene solo, dentro del hueso. Si te falta un diente y no sabes por dónde empezar, escríbenos y cuéntanos cuál es y hace cuánto lo perdiste.</p>
     </div>
-    <div class="reveal" style="border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-md);">
-      <img src="img/servicio-implantes.jpg" alt="Modelo de un implante dental: el tornillo dentro del hueso y la corona que va encima" style="width:100%;height:100%;object-fit:cover;display:block;aspect-ratio:4/5;" loading="lazy">
+    <!-- Foto propia de OralTech: son DOS fotos apiladas del mismo caso (implante arriba, corona abajo).
+         Va entera y con pie porque acompaña al texto que explica el procedimiento. -->
+    <div class="reveal" style="border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-md);background:var(--white);">
+      <figure style="margin:0;">
+        <img src="img/implante-dental.webp" width="1080" height="1080" alt="Caso de OralTech en dos momentos: arriba, la pieza metálica del implante asomando en la encía, en el espacio donde faltaba el diente; abajo, la misma zona con la corona ya puesta, que se ve como un diente más" style="width:100%;height:auto;display:block;aspect-ratio:1/1;object-fit:cover;object-position:center;" loading="lazy">
+        <figcaption style="padding:16px 20px;color:var(--gray);font-size:13px;line-height:1.6;border-top:1px solid var(--border);">Caso de OralTech. <strong style="color:var(--black);font-weight:500;">Arriba:</strong> el implante colocado, asomando en la encía, antes de la corona. <strong style="color:var(--black);font-weight:500;">Abajo:</strong> la misma zona con la corona instalada encima.</figcaption>
+      </figure>
     </div>
   </div>
   </div>
@@ -181,7 +191,27 @@
       <div style="font-family:'Inter',sans-serif;font-weight:600;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:var(--text-gray-soft);margin-bottom:6px;">Implantes dentales</div>
       <div style="font-family:'Inter',sans-serif;font-weight:300;font-size:26px;letter-spacing:-0.02em;color:#fff;">Escríbenos por WhatsApp y <span style="font-weight:500;">te confirmamos horarios</span> y disponibilidad</div>
     </div>
-    <a href="https://wa.me/573224130747?text=Hola,%20vengo%20de%20su%20página%20web%20y%20quiero%20agendar%20una%20cita%20para%20implantes%20dentales." target="_blank" rel="noopener" style="background:#fff;color:var(--black);font-family:'Inter',sans-serif;font-weight:500;font-size:15px;padding:15px 30px;border-radius:999px;text-decoration:none;white-space:nowrap;">Escribir a Cúcuta</a>
+    <!-- Panel de WhatsApp con las DOS sedes.
+     Su web actual ya pregunta Cúcuta o Medellín antes de abrir el chat.
+     Sin esto, un paciente de Medellín le escribiría a Cúcuta. -->
+<div class="wa-panel" id="waPanel" role="dialog" aria-label="Elige la sede para escribir por WhatsApp">
+  <div class="wa-panel-head">
+    <strong>Escríbenos por WhatsApp</strong>
+    <span>Tenemos dos sedes. Elige en cuál quieres que te atendamos.</span>
+  </div>
+  <div class="wa-panel-body">
+    <a class="wa-sede" data-wa-base="https://wa.me/573224130747?text=" href="https://wa.me/573224130747?text=Hola,%20vengo%20de%20su%20p%C3%A1gina%20web%20y%20quiero%20agendar%20una%20cita." target="_blank" rel="noopener">
+      <span class="wa-sede-ico"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.371-.025-.52-.075-.149-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg></span>
+      <span class="wa-sede-txt"><strong>Cúcuta</strong><span>Quinta Oriental · +57 322 413 0747</span></span>
+    </a>
+    <a class="wa-sede" data-wa-base="https://wa.me/573016184618?text=" href="https://wa.me/573016184618?text=Hola,%20vengo%20de%20su%20p%C3%A1gina%20web%20y%20quiero%20agendar%20una%20cita." target="_blank" rel="noopener">
+      <span class="wa-sede-ico"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.371-.025-.52-.075-.149-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg></span>
+      <span class="wa-sede-txt"><strong>Medellín</strong><span>El Poblado · +57 301 618 4618</span></span>
+    </a>
+  </div>
+</div>
+
+<a href="https://wa.me/573224130747?text=Hola,%20vengo%20de%20su%20página%20web%20y%20quiero%20agendar%20una%20cita%20para%20implantes%20dentales." target="_blank" rel="noopener" style="background:#fff;color:var(--black);font-family:'Inter',sans-serif;font-weight:500;font-size:15px;padding:15px 30px;border-radius:999px;text-decoration:none;white-space:nowrap;">Escribir a Cúcuta</a>
   </div>
   </div>
 </section>
@@ -280,7 +310,7 @@
   </div>
 </footer>
 
-<a href="https://wa.me/573224130747?text=Hola,%20vengo%20de%20su%20página%20web%20y%20me%20interesan%20los%20implantes%20dentales." target="_blank" class="wa-float" id="waFloat" data-wa-base="https://wa.me/573224130747?text=" aria-label="WhatsApp">
+<a href="https://wa.me/573224130747?text=Hola,%20vengo%20de%20su%20página%20web%20y%20me%20interesan%20los%20implantes%20dentales." target="_blank" class="wa-float" id="waFloat" aria-expanded="false" aria-controls="waPanel" data-wa-base="https://wa.me/573224130747?text=" aria-label="WhatsApp">
   <span class="wa-float-label" id="waFloatLabel">¿Dudas sobre implantes?</span>
   <svg viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.371-.025-.52-.075-.149-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
 </a>
@@ -290,6 +320,7 @@
 <script src="assets/animations.js?v=20260814a" defer></script>
 <script src="assets/wa-widget.js?v=1" defer></script>
 <script src="assets/nav.js?v=1" defer></script>
+<script src="assets/oraltech.js?v=1" defer></script>
 
 <script>
   if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; }

@@ -2,14 +2,14 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --black:   #212121;
+  --black:   #1F234F;   /* azul de marca de OralTech (sacado de su propio CSS) */
   --ice:     #EAEFF5;
   --ice-soft:#F5F8FB;
   --white:   #FFFFFF;
-  --gray:    #8A8F99;
+  --gray:    #6B7186;
   --text-gray-soft: #C8CDD4;  /* antes se llamaba gray-light; es TEXTO gris claro (renombrada 14-ago) */
   --border: #DBE0E8;
-  --accent: #B5B0A2;
+  --accent: #52589C;   /* azul secundario de OralTech */
   --transition: cubic-bezier(0.4, 0, 0.2, 1);
 
   /* ── Tokens que el HTML portado del master espera (14-ago-2026) ──
@@ -21,9 +21,9 @@
   --radius:     20px;
   --radius-lg:  28px;
   --radius-xl:  40px;
-  --shadow-sm:  0 2px 8px rgba(33,33,33,0.06);
-  --shadow-md:  0 8px 30px rgba(33,33,33,0.10);
-  --shadow-lg:  0 20px 60px rgba(33,33,33,0.16);
+  --shadow-sm:  0 2px 8px rgba(31,35,79,0.06);
+  --shadow-md:  0 8px 30px rgba(31,35,79,0.10);
+  --shadow-lg:  0 20px 60px rgba(31,35,79,0.16);
   --cw:         min(94vw, 1680px);
 }
 
@@ -143,7 +143,7 @@ body {
 .hero-visual-img {
   width: 100%; height: 100%; object-fit: cover; border-radius: 24px;
   filter: contrast(0.96) brightness(1.02);
-  box-shadow: 0 24px 80px rgba(33,33,33,0.12);
+  box-shadow: 0 24px 80px rgba(31,35,79,0.12);
 }
 .hero-float {
   position: absolute; background: var(--white);
@@ -151,7 +151,7 @@ body {
   padding: 12px 18px; border-radius: 50px;
   font-size: 12px; font-weight: 500; color: var(--black);
   display: flex; align-items: center; gap: 8px;
-  box-shadow: 0 8px 32px rgba(33,33,33,0.06);
+  box-shadow: 0 8px 32px rgba(31,35,79,0.06);
 }
 .hero-float::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--black); }
 .hero-float-1 { top: 8%; left: -8%; }
@@ -234,7 +234,7 @@ body {
 }
 /* Variante con foto (nosotros.html): conserva el full-bleed original */
 .equipo-card:has(.equipo-card-photo) { padding: 0; }
-.equipo-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(33,33,33,0.08); }
+.equipo-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(31,35,79,0.08); }
 .equipo-card.dark { background: var(--black); color: var(--white); }
 .equipo-card-photo {
   width: 100%;
@@ -297,7 +297,7 @@ body {
 .servicio-arrow svg { width: 14px; height: 14px; }
 .servicio-item:hover .servicio-arrow { background: var(--black); border-color: var(--black); color: var(--white); }
 
-.servicio-destacado { background: var(--white); border-radius: 24px; padding: 40px; box-shadow: 0 4px 32px rgba(33,33,33,0.06); border: 1px solid var(--border); }
+.servicio-destacado { background: var(--white); border-radius: 24px; padding: 40px; box-shadow: 0 4px 32px rgba(31,35,79,0.06); border: 1px solid var(--border); }
 .servicio-destacado h3 { font-size: 24px; font-weight: 600; margin-bottom: 8px; letter-spacing: -0.02em; }
 .servicio-destacado .tag { font-size: 11px; font-weight: 500; letter-spacing: 0.25em; color: var(--gray); text-transform: uppercase; margin-bottom: 16px; }
 .servicio-destacado p { font-size: 15px; color: var(--gray); line-height: 1.7; margin-bottom: 24px; }
@@ -308,9 +308,9 @@ body {
   text-decoration: none; padding: 14px 28px; border-radius: 50px;
   font-size: 13.5px; font-weight: 500;
   transition: transform 0.35s cubic-bezier(0.34, 1.4, 0.64, 1), box-shadow 0.35s ease, background 0.3s ease, color 0.3s ease;
-  box-shadow: 0 4px 16px rgba(33,33,33,0.08);
+  box-shadow: 0 4px 16px rgba(31,35,79,0.08);
 }
-.btn-pill:hover { transform: translateY(-2px) scale(1.02); box-shadow: 0 12px 32px rgba(33,33,33,0.18); }
+.btn-pill:hover { transform: translateY(-2px) scale(1.02); box-shadow: 0 12px 32px rgba(31,35,79,0.18); }
 .btn-pill:active { transform: translateY(0) scale(0.98); transition-duration: 0.1s; }
 .btn-pill:hover { background: var(--accent); color: var(--black); }
 .btn-pill.outline { background: transparent; color: var(--black); border: 1px solid var(--black); }
@@ -330,7 +330,7 @@ body {
   background: var(--white); border: 1px solid var(--border); border-radius: 24px; padding: 36px;
   transition: all 0.3s var(--transition); text-decoration: none; color: var(--black); display: block;
 }
-.catalog-card:hover { border-color: var(--black); transform: translateY(-4px); box-shadow: 0 24px 60px rgba(33,33,33,0.08); }
+.catalog-card:hover { border-color: var(--black); transform: translateY(-4px); box-shadow: 0 24px 60px rgba(31,35,79,0.08); }
 .catalog-card h3 { font-size: 22px; font-weight: 600; margin-bottom: 10px; letter-spacing: -0.02em; }
 .catalog-card p { font-size: 14.5px; color: var(--gray); line-height: 1.65; margin-bottom: 24px; }
 .catalog-card .precio-row { display: flex; justify-content: space-between; align-items: center; padding-top: 20px; border-top: 1px solid var(--border); }
@@ -435,7 +435,7 @@ body {
 }
 .blog-card * { text-decoration: none; }
 .blog-card.published { background: var(--ice-soft); }
-.blog-card:hover { transform: translateY(-4px); box-shadow: 0 24px 60px rgba(33,33,33,0.08); }
+.blog-card:hover { transform: translateY(-4px); box-shadow: 0 24px 60px rgba(31,35,79,0.08); }
 .blog-card-img { aspect-ratio: 16/10; background: var(--ice); display: flex; align-items: center; justify-content: center; }
 .blog-card-img-placeholder { font-size: 48px; color: var(--text-gray-soft); }
 .blog-card-content { padding: 28px; flex: 1; display: flex; flex-direction: column; }
@@ -562,12 +562,12 @@ body.has-banner .navbar { top: 36px; }
 }
 .catalog-card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 16px 48px rgba(33,33,33,0.1);
+  box-shadow: 0 16px 48px rgba(31,35,79,0.1);
   border-color: var(--text-gray-soft);
 }
 .testimonio:hover {
   transform: translateY(-3px);
-  box-shadow: 0 8px 28px rgba(33,33,33,0.08);
+  box-shadow: 0 8px 28px rgba(31,35,79,0.08);
 }
 
 /* Servicio item arrow micro-rotación en hover */
@@ -623,7 +623,7 @@ body.has-banner .navbar { top: 36px; }
 /* ═══════════════════════════════════════════════════════════
    CLASES PORTADAS DEL MASTER (14-ago-2026) · piel Ivory
    Geometría del demo-master traducida con la tabla de la guía:
-   azul-dark→#212121 · azul→--accent · azul-soft→--text-gray-soft
+   azul-dark→#1F234F · azul→--accent · azul-soft→--text-gray-soft
    (oscuro) / --gray (claro) · estrellas doradas→--accent ·
    Inter en todo · hairlines --border · radius 20-28.
    ═══════════════════════════════════════════════════════════ */

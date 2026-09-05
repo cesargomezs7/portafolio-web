@@ -3,6 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="theme-color" content="#1F234F">
 <meta name="robots" content="noindex,nofollow"><!-- PREVIEW: quitar al pasar a dominio del cliente -->
 <title>Limpieza dental en Cúcuta y Medellín | OralTech</title>
 <meta name="description" content="Limpieza dental o profilaxis en OralTech, Cúcuta y Medellín: removemos la placa bacteriana y el sarro de dientes y encías. Escríbenos por WhatsApp.">
@@ -12,6 +16,7 @@
 <link rel="stylesheet" href="assets/styles.css?v=20260814a">
 <link rel="stylesheet" href="assets/nav.css?v=20260814a">
 <link rel="stylesheet" href="assets/wa-widget.css?v=20260814a">
+<link rel="stylesheet" href="assets/oraltech.css?v=1">
 
 <script type="application/ld+json">
 {
@@ -176,9 +181,13 @@
         <p style="font-size:16px;color:var(--black);opacity:0.82;line-height:1.7;margin-bottom:16px;">Una limpieza dental, o profilaxis dental, es un procedimiento profesional realizado por un odontólogo o higienista dental para remover la placa bacteriana —una sustancia blanda y pegajosa— y el sarro —placa endurecida y mineralizada— de los dientes y las encías.</p>
         <p style="font-size:16px;color:var(--black);opacity:0.82;line-height:1.7;">En OralTech la hacemos en las dos sedes, Cúcuta y Medellín. Si tienes dudas sobre tu caso, escríbenos por WhatsApp antes de agendar y te orientamos.</p>
       </div>
-      <div class="reveal" style="border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-md);">
-        <img src="img/equipo-bandeja.jpg" alt="Bandeja con instrumental odontológico para una limpieza dental" style="width:100%;height:100%;object-fit:cover;display:block;aspect-ratio:4/5;" loading="lazy">
-      </div>
+      <!-- Foto propia de OralTech: antes/después real de una limpieza (1233x1233).
+           Va completa y sin recortar (height:auto, sin object-fit) porque es una imagen
+           de dos fotos apiladas: cualquier recorte parte el antes o el después. -->
+      <figure class="reveal" style="margin:0;border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-md);background:var(--white);">
+        <img src="img/limpieza-dental-medellin-cucuta.webp" width="1233" height="1233" alt="Caso de OralTech: arriba, dientes con sarro y manchas en el borde de la encía; abajo, los mismos dientes después de la limpieza dental." style="width:100%;height:auto;display:block;" loading="lazy">
+        <figcaption style="font-size:13px;line-height:1.6;color:var(--gray);padding:16px 20px;border-top:1px solid var(--border);">Antes y después de una limpieza dental en OralTech: arriba el sarro acumulado en el borde de la encía, abajo los mismos dientes ya limpios.</figcaption>
+      </figure>
     </div>
   </div>
 </section>
@@ -289,7 +298,27 @@
         <div style="font-family:'Inter',sans-serif;font-weight:600;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:var(--text-gray-soft);margin-bottom:6px;">Limpieza dental · Cúcuta y Medellín</div>
         <div style="font-family:'Inter',sans-serif;font-weight:300;font-size:26px;letter-spacing:-0.02em;color:#fff;">Escríbenos por WhatsApp y te confirmamos horarios</div>
       </div>
-      <a href="https://wa.me/573224130747?text=Hola,%20vengo%20de%20su%20página%20web%20y%20quiero%20agendar%20una%20cita%20para%20limpieza%20dental." target="_blank" style="background:var(--white);color:var(--black);font-family:'Inter',sans-serif;font-weight:500;font-size:15px;padding:15px 30px;border-radius:999px;text-decoration:none;white-space:nowrap;">Escribir por WhatsApp</a>
+      <!-- Panel de WhatsApp con las DOS sedes.
+     Su web actual ya pregunta Cúcuta o Medellín antes de abrir el chat.
+     Sin esto, un paciente de Medellín le escribiría a Cúcuta. -->
+<div class="wa-panel" id="waPanel" role="dialog" aria-label="Elige la sede para escribir por WhatsApp">
+  <div class="wa-panel-head">
+    <strong>Escríbenos por WhatsApp</strong>
+    <span>Tenemos dos sedes. Elige en cuál quieres que te atendamos.</span>
+  </div>
+  <div class="wa-panel-body">
+    <a class="wa-sede" data-wa-base="https://wa.me/573224130747?text=" href="https://wa.me/573224130747?text=Hola,%20vengo%20de%20su%20p%C3%A1gina%20web%20y%20quiero%20agendar%20una%20cita." target="_blank" rel="noopener">
+      <span class="wa-sede-ico"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.371-.025-.52-.075-.149-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg></span>
+      <span class="wa-sede-txt"><strong>Cúcuta</strong><span>Quinta Oriental · +57 322 413 0747</span></span>
+    </a>
+    <a class="wa-sede" data-wa-base="https://wa.me/573016184618?text=" href="https://wa.me/573016184618?text=Hola,%20vengo%20de%20su%20p%C3%A1gina%20web%20y%20quiero%20agendar%20una%20cita." target="_blank" rel="noopener">
+      <span class="wa-sede-ico"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.371-.025-.52-.075-.149-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg></span>
+      <span class="wa-sede-txt"><strong>Medellín</strong><span>El Poblado · +57 301 618 4618</span></span>
+    </a>
+  </div>
+</div>
+
+<a href="https://wa.me/573224130747?text=Hola,%20vengo%20de%20su%20página%20web%20y%20quiero%20agendar%20una%20cita%20para%20limpieza%20dental." target="_blank" style="background:var(--white);color:var(--black);font-family:'Inter',sans-serif;font-weight:500;font-size:15px;padding:15px 30px;border-radius:999px;text-decoration:none;white-space:nowrap;">Escribir por WhatsApp</a>
     </div>
   </div>
 </section>
@@ -388,7 +417,7 @@
   </div>
 </footer>
 
-<a href="https://wa.me/573224130747?text=Hola,%20vengo%20de%20su%20página%20web%20y%20me%20interesa%20la%20limpieza%20dental." target="_blank" class="wa-float" id="waFloat" data-wa-base="https://wa.me/573224130747?text=" aria-label="WhatsApp">
+<a href="https://wa.me/573224130747?text=Hola,%20vengo%20de%20su%20página%20web%20y%20me%20interesa%20la%20limpieza%20dental." target="_blank" class="wa-float" id="waFloat" aria-expanded="false" aria-controls="waPanel" data-wa-base="https://wa.me/573224130747?text=" aria-label="WhatsApp">
   <span class="wa-float-label" id="waFloatLabel">¿Dudas sobre la limpieza dental?</span>
   <svg viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.371-.025-.52-.075-.149-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
 </a>
@@ -398,6 +427,7 @@
 <script src="assets/animations.js?v=20260814a" defer></script>
 <script src="assets/wa-widget.js?v=1" defer></script>
 <script src="assets/nav.js?v=1" defer></script>
+<script src="assets/oraltech.js?v=1" defer></script>
 
 <script>
   if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; }

@@ -11,7 +11,7 @@
   display: none;
   background: none;
   border: none;
-  color: var(--black, #212121);
+  color: var(--black, #1F234F);
   cursor: pointer;
   padding: 4px;
   line-height: 0;
@@ -32,7 +32,7 @@
   background: var(--white, #fff);
   border: 1px solid var(--border, #DBE0E8);
   border-radius: 16px;
-  box-shadow: 0 18px 50px rgba(33, 33, 33, .14);
+  box-shadow: 0 18px 50px rgba(31,35,79, .14);
   padding: 10px;
   min-width: 234px;
   list-style: none;
@@ -54,11 +54,11 @@
   font-family: 'Inter', sans-serif;
   font-weight: 500;
   font-size: 14px;
-  color: var(--black, #212121);
+  color: var(--black, #1F234F);
   text-decoration: none;
   transition: background .15s ease, color .15s ease;
 }
-.nav-sub a:hover { background: var(--ice-soft, #F5F8FB); color: var(--black, #212121); }
+.nav-sub a:hover { background: var(--ice-soft, #F5F8FB); color: var(--black, #1F234F); }
 
 /* ── Menú móvil (overlay) — estructura del master, vestida de Ivory ── */
 .mobile-menu {
@@ -78,23 +78,23 @@
 .mm-close {
   position: absolute; top: 20px; right: 22px;
   background: none; border: none; font-size: 30px; line-height: 1;
-  color: var(--black, #212121); cursor: pointer;
+  color: var(--black, #1F234F); cursor: pointer;
 }
 .mobile-menu ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 1px; }
 .mobile-menu a {
   display: block; padding: 12px 8px;
   font-family: 'Inter', sans-serif; font-weight: 300; font-size: 24px;
   letter-spacing: -0.02em;
-  color: var(--black, #212121); text-decoration: none;
+  color: var(--black, #1F234F); text-decoration: none;
 }
 .mm-group {
   font-family: 'Inter', sans-serif; font-weight: 700; font-size: 11px;
-  letter-spacing: .14em; text-transform: uppercase; color: var(--gray, #8A8F99);
+  letter-spacing: .14em; text-transform: uppercase; color: var(--gray, #6B7186);
   padding: 18px 8px 4px;
 }
-.mobile-menu a.mm-sub { font-size: 16px; font-weight: 400; padding: 10px 8px 10px 20px; color: var(--gray, #8A8F99); }
+.mobile-menu a.mm-sub { font-size: 16px; font-weight: 400; padding: 10px 8px 10px 20px; color: var(--gray, #6B7186); }
 .mm-cta {
-  margin-top: 26px; background: var(--black, #212121); color: #fff !important;
+  margin-top: 26px; background: var(--black, #1F234F); color: #fff !important;
   text-align: center; border-radius: 999px;
   font-weight: 600 !important;
   font-size: 16px !important; padding: 16px !important;
@@ -105,7 +105,7 @@
   display: flex; flex-wrap: wrap; justify-content: center; align-items: center;
   gap: 14px 36px;
   padding: 20px max(24px, calc((100% - 1180px) / 2));
-  background: var(--black, #212121);
+  background: var(--black, #1F234F);
 }
 .trust-item {
   display: inline-flex; align-items: center; gap: 9px;
@@ -113,7 +113,7 @@
   color: rgba(255, 255, 255, .92);
 }
 .trust-item strong { font-weight: 700; color: #fff; }
-.trust-item .ti-star { color: var(--accent, #B5B0A2); font-weight: 700; }
+.trust-item .ti-star { color: var(--accent, #52589C); font-weight: 700; }
 .trust-sep { width: 1px; height: 18px; background: rgba(255, 255, 255, .22); }
 @media (max-width: 700px) { .trust-sep { display: none; } .trust-strip { gap: 10px 20px; padding: 18px 20px; } .trust-item { font-size: 13px; } }
 
@@ -134,7 +134,7 @@
 .nav-logo-tag {
   font-size: 9.5px;
   font-weight: 500;
-  color: var(--gray, #6b6b6b);
+  color: var(--gray, #6B7186);
   letter-spacing: 0.18em;
   text-transform: uppercase;
   line-height: 1;
@@ -146,10 +146,19 @@
   .nav-burger { display: none !important; }
   .mobile-menu { display: none !important; }
 }
-@media (max-width: 1180px) and (min-width: 861px) {
-  .navbar .nav-links { gap: 20px !important; }
-  .nav-menu-btn { padding: 10px 18px !important; font-size: 13px !important; }
+/* Con la entrada "Casos" el menú dejó de caber: a 1440 px (donde además
+   styles.css aplica body{zoom:1.1}) la última entrada quedaba debajo del
+   botón Agendar y "Contacto" salía cortado. Se aprieta antes. */
+@media (max-width: 1460px) and (min-width: 1181px) {
+  .navbar .nav-links { gap: 26px !important; }
   .nav-location { display: none; }
+}
+@media (max-width: 1180px) and (min-width: 861px) {
+  .navbar .nav-links { gap: 16px !important; font-size: 13px; }
+  .navbar .nav-links a { font-size: 13px; }
+  .nav-menu-btn { padding: 10px 16px !important; font-size: 13px !important; }
+  .nav-location { display: none; }
+  .nav-logo-tag { display: none; }
 }
 @media (max-width: 860px) {
   .navbar .nav-links { display: none !important; }
@@ -171,9 +180,9 @@
 
 /* ── CTA "Agendar" con pulso tipo notificación (anillo neutro Ivory) ── */
 @keyframes ctaShine {
-  0%   { box-shadow: 0 0 0 0 rgba(33, 33, 33, .35),  0 6px 18px rgba(33, 33, 33, .10); }
-  70%  { box-shadow: 0 0 0 13px rgba(33, 33, 33, 0), 0 6px 20px rgba(33, 33, 33, .12); }
-  100% { box-shadow: 0 0 0 0 rgba(33, 33, 33, 0),    0 6px 18px rgba(33, 33, 33, .10); }
+  0%   { box-shadow: 0 0 0 0 rgba(31,35,79, .35),  0 6px 18px rgba(31,35,79, .10); }
+  70%  { box-shadow: 0 0 0 13px rgba(31,35,79, 0), 0 6px 20px rgba(31,35,79, .12); }
+  100% { box-shadow: 0 0 0 0 rgba(31,35,79, 0),    0 6px 18px rgba(31,35,79, .10); }
 }
 .nav-menu-btn { animation: ctaShine 2.6s ease-in-out infinite; }
 @media (prefers-reduced-motion: reduce) { .nav-menu-btn { animation: none; } }

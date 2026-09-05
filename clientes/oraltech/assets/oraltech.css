@@ -1,0 +1,324 @@
+/* ═══════════════════════════════════════════════════════════════
+   OralTech · componentes propios que la plantilla Ivory no traía
+   ───────────────────────────────────────────────────────────────
+   Se construyeron para replicar lo que su web actual sí tiene y
+   nosotros no teníamos: el video de presentación, los comparadores
+   antes/después deslizables, el carrusel de videotestimonios y los
+   testimonios con foto.
+
+   ⚠ TRAMPA CONOCIDA (memoria zoom-css-safari-chrome): styles.css
+   aplica body{zoom} en pantallas grandes. Bajo zoom, Safari miente
+   en getBoundingClientRect. Por eso el comparador NO calcula
+   posiciones a mano: usa un <input type="range"> nativo encima, y
+   el navegador resuelve las coordenadas. Y el carrusel se anima
+   SOLO con CSS, nunca con GSAP, para no tener dos motores sobre el
+   mismo nodo.
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ───────────────────────────────────────────────
+   1 · VIDEO DE PRESENTACIÓN (hero)
+   Su video dura 1:21 y lleva narración: no es un fondo en bucle,
+   es un video para ver. Por eso va con póster, preload="none" y
+   botón de play propio: la portada no descarga 5,7 MB hasta que
+   alguien decide verlo.
+   ─────────────────────────────────────────────── */
+.video-hero {
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  background: #000;
+  aspect-ratio: 16 / 9;
+}
+.video-hero video {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+.video-hero-play {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 14px;
+  border: none;
+  cursor: pointer;
+  background: linear-gradient(180deg, rgba(31,35,79,.18) 0%, rgba(31,35,79,.52) 100%);
+  color: #fff;
+  font-family: 'Inter', sans-serif;
+  transition: background .25s var(--t);
+}
+.video-hero-play:hover { background: linear-gradient(180deg, rgba(31,35,79,.10) 0%, rgba(31,35,79,.46) 100%); }
+.video-hero-play[hidden] { display: none; }
+.video-hero-play .vp-circle {
+  width: 76px; height: 76px; border-radius: 50%;
+  background: rgba(255,255,255,.94);
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 10px 34px rgba(0,0,0,.28);
+  transition: transform .25s var(--t);
+}
+.video-hero-play:hover .vp-circle { transform: scale(1.07); }
+.video-hero-play .vp-circle svg { width: 26px; height: 26px; fill: var(--black); margin-left: 4px; }
+.video-hero-play .vp-text {
+  font-size: 13px; font-weight: 500; letter-spacing: .04em;
+  text-shadow: 0 2px 12px rgba(0,0,0,.45);
+}
+
+/* ───────────────────────────────────────────────
+   2 · COMPARADOR ANTES / DESPUÉS
+   Tres en su portada. La imagen "después" va debajo y la de
+   "antes" encima recortada: al mover el control se descubre.
+   ─────────────────────────────────────────────── */
+.ba-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+  margin-top: 34px;
+}
+.ba {
+  position: relative;
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  background: var(--ice);
+  aspect-ratio: 1000 / 500;
+  touch-action: pan-y;         /* el arrastre horizontal es nuestro; el vertical, del scroll */
+  user-select: none;
+}
+.ba img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+  pointer-events: none;
+}
+.ba .ba-antes { z-index: 2; clip-path: inset(0 calc(100% - var(--pos, 50%)) 0 0); }
+.ba .ba-despues { z-index: 1; }
+
+.ba-linea {
+  position: absolute; top: 0; bottom: 0;
+  left: var(--pos, 50%);
+  width: 2px; background: #fff; z-index: 3;
+  transform: translateX(-1px);
+  box-shadow: 0 0 0 1px rgba(31,35,79,.18);
+  pointer-events: none;
+}
+.ba-tirador {
+  position: absolute; top: 50%; left: var(--pos, 50%);
+  transform: translate(-50%, -50%);
+  width: 42px; height: 42px; border-radius: 50%;
+  background: #fff; z-index: 4;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 4px 16px rgba(31,35,79,.28);
+  pointer-events: none;
+  color: var(--black);
+}
+.ba-tirador svg { width: 20px; height: 20px; }
+
+.ba-etiqueta {
+  position: absolute; bottom: 12px; z-index: 5;
+  padding: 5px 12px; border-radius: 999px;
+  font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 700;
+  letter-spacing: .16em; text-transform: uppercase;
+  background: rgba(31,35,79,.82); color: #fff;
+  pointer-events: none;
+}
+.ba-etiqueta.izq { left: 12px; }
+.ba-etiqueta.der { right: 12px; }
+
+/* El control real: invisible, encima de todo. El navegador resuelve
+   las coordenadas, así que el body{zoom} de Safari no lo rompe. */
+.ba-rango {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  margin: 0; padding: 0;
+  opacity: 0; cursor: ew-resize; z-index: 6;
+  -webkit-appearance: none; appearance: none; background: transparent;
+}
+.ba-rango::-webkit-slider-thumb { -webkit-appearance: none; width: 46px; height: 100%; cursor: ew-resize; }
+.ba-rango::-moz-range-thumb { width: 46px; height: 999px; border: 0; background: transparent; cursor: ew-resize; }
+.ba-rango:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; opacity: 1; }
+
+@media (max-width: 900px) { .ba-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; } }
+@media (max-width: 620px) { .ba-grid { grid-template-columns: 1fr; } }
+
+/* ───────────────────────────────────────────────
+   3 · CARRUSEL DE VIDEOTESTIMONIOS · DOS LÍNEAS
+   Seis a la vista, en movimiento continuo y en sentidos opuestos.
+   La lista se duplica en el HTML para que el bucle no tenga costura.
+   Animación 100% CSS (nunca GSAP sobre estos nodos).
+   ─────────────────────────────────────────────── */
+.vt-wrap { margin-top: 34px; overflow: hidden; }
+.vt-fila {
+  display: flex;
+  gap: 18px;
+  width: max-content;
+  will-change: transform;
+}
+.vt-fila + .vt-fila { margin-top: 18px; }
+.vt-fila-a { animation: vtScrollA 46s linear infinite; }
+.vt-fila-b { animation: vtScrollB 46s linear infinite; }
+/* -50% porque la lista va duplicada: al llegar a la mitad, reinicia sin salto */
+/* La lista se repite TRES veces en el HTML y el recorrido es de -33.3333%,
+   que es exactamente un tercio: al terminar, la posición coincide con la de
+   partida y el bucle no tiene costura. Con solo dos copias quedaba un hueco
+   en pantallas anchas (medido: fila de 1472 px sobre un viewport de 1440). */
+@keyframes vtScrollA { from { transform: translateX(0); }           to { transform: translateX(-33.3333%); } }
+@keyframes vtScrollB { from { transform: translateX(-33.3333%); }   to { transform: translateX(0); } }
+.vt-wrap:hover .vt-fila { animation-play-state: paused; }
+@media (prefers-reduced-motion: reduce) {
+  .vt-fila { animation: none; }
+  .vt-wrap { overflow-x: auto; }
+}
+
+.vt-card {
+  position: relative;
+  flex: 0 0 auto;
+  width: 208px;
+  aspect-ratio: 9 / 16;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: #000;
+  box-shadow: var(--shadow-md);
+  cursor: pointer;
+  border: none; padding: 0;
+}
+.vt-card video, .vt-card img.vt-poster {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%; object-fit: cover; display: block;
+}
+.vt-card video { z-index: 2; background: #000; }
+.vt-card .vt-play { transition: opacity .2s var(--t); }
+.vt-card.reproduciendo .vt-play { opacity: 0; pointer-events: none; }
+.vt-card .vt-overlay {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column; justify-content: flex-end;
+  padding: 14px;
+  background: linear-gradient(180deg, rgba(0,0,0,0) 45%, rgba(0,0,0,.72) 100%);
+  color: #fff; text-align: left;
+  transition: opacity .2s var(--t);
+}
+.vt-card .vt-play {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+  width: 48px; height: 48px; border-radius: 50%;
+  background: rgba(255,255,255,.92);
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 6px 20px rgba(0,0,0,.3);
+}
+.vt-card .vt-play svg { width: 17px; height: 17px; fill: var(--black); margin-left: 3px; }
+.vt-card .vt-lugar {
+  font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600;
+  letter-spacing: -.01em; line-height: 1.25;
+}
+.vt-card .vt-sub {
+  font-family: 'Inter', sans-serif; font-size: 10.5px; font-weight: 400;
+  opacity: .82; margin-top: 2px; letter-spacing: .04em;
+}
+.vt-card.reproduciendo .vt-overlay { opacity: 0; pointer-events: none; }
+
+/* El bucle avanza exactamente una repetición (seis tarjetas). Para que nunca
+   se vea un hueco, esa repetición tiene que ser MÁS ANCHA que el viewport.
+   Con 208 px medía 1356 px y a 1419 px de ancho —el máximo antes de que
+   styles.css active body{zoom}— se abría un vacío. A 240 px mide 1548 px,
+   por encima de cualquier ancho efectivo posible. Medido, no estimado. */
+@media (min-width: 1024px) { .vt-card { width: 240px; } }
+@media (max-width: 760px) { .vt-card { width: 158px; } }
+@media (max-width: 460px) { .vt-card { width: 138px; } }
+
+/* ───────────────────────────────────────────────
+   4 · TESTIMONIOS CON FOTO
+   Los tres que ya tienen en su web, con su frase textual.
+   ─────────────────────────────────────────────── */
+.tf-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+  margin-top: 34px;
+}
+.tf-card {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--white);
+  box-shadow: var(--shadow-md);
+}
+/* ⚠ NO poner display:flex aquí. Con el contenedor en flex, la <img> pasa a
+   ser un elemento flexible y el navegador le asigna su ALTURA INTRÍNSECA
+   (1363 px) ignorando el aspect-ratio: medido, salía a 416x1499. */
+.tf-card img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: center 26%;
+}
+.tf-card .tf-texto { padding: 22px 24px 26px; }
+.tf-card .tf-frase {
+  font-family: 'Inter', sans-serif; font-size: 16px; font-weight: 300;
+  line-height: 1.55; color: var(--black); letter-spacing: -.012em;
+}
+.tf-card .tf-nombre {
+  margin-top: 14px;
+  font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 700;
+  letter-spacing: .18em; text-transform: uppercase; color: var(--gray);
+}
+@media (max-width: 860px) { .tf-grid { grid-template-columns: 1fr; max-width: 420px; margin-left: auto; margin-right: auto; } }
+
+/* ───────────────────────────────────────────────
+   5 · BURBUJA DE WHATSAPP CON LAS DOS SEDES
+   Su web tiene un widget que pregunta Cúcuta o Medellín antes de
+   abrir el chat. Sin esto, un paciente de Medellín escribe a Cúcuta.
+   ─────────────────────────────────────────────── */
+.wa-panel {
+  position: fixed;
+  right: 28px; bottom: 104px;
+  width: min(340px, calc(100vw - 40px));
+  background: var(--white);
+  border-radius: 18px;
+  box-shadow: 0 20px 60px rgba(31,35,79,.28);
+  overflow: hidden;
+  z-index: 101;
+  opacity: 0; visibility: hidden; transform: translateY(12px) scale(.98);
+  transition: opacity .22s var(--t), transform .22s var(--t), visibility 0s .22s;
+}
+.wa-panel.open { opacity: 1; visibility: visible; transform: translateY(0) scale(1); transition: opacity .22s var(--t), transform .22s var(--t); }
+.wa-panel-head {
+  background: #25D366; color: #fff; padding: 20px 22px;
+  font-family: 'Inter', sans-serif;
+}
+.wa-panel-head strong { display: block; font-size: 17px; font-weight: 600; letter-spacing: -.02em; }
+.wa-panel-head span { display: block; font-size: 13px; font-weight: 300; opacity: .95; margin-top: 5px; line-height: 1.45; }
+.wa-panel-body { padding: 14px; }
+.wa-sede {
+  display: flex; align-items: center; gap: 13px;
+  padding: 13px 14px; border-radius: 12px;
+  text-decoration: none; color: var(--black);
+  border-left: 3px solid #25D366;
+  background: var(--ice-soft);
+  transition: background .16s var(--t), transform .16s var(--t);
+}
+.wa-sede + .wa-sede { margin-top: 10px; }
+.wa-sede:hover { background: var(--ice); transform: translateX(2px); }
+.wa-sede .wa-sede-ico { width: 38px; height: 38px; flex: 0 0 auto; border-radius: 50%; background: #25D366; display: flex; align-items: center; justify-content: center; }
+.wa-sede .wa-sede-ico svg { width: 21px; height: 21px; fill: #fff; }
+.wa-sede-txt strong { display: block; font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 600; letter-spacing: -.01em; }
+.wa-sede-txt span   { display: block; font-family: 'Inter', sans-serif; font-size: 12.5px; font-weight: 300; color: var(--gray); margin-top: 1px; }
+@media (max-width: 520px) { .wa-panel { right: 16px; bottom: 96px; } }
+
+
+/* ───────────────────────────────────────────────
+   6 · RITMO VERTICAL DE LAS SECCIONES NUEVAS
+   Medido: "Cambios reales" y "Testimonios" quedaban con 160 px de
+   relleno arriba y abajo cada una, o sea 320 px de aire entre las
+   dos. Con el contenido que llevan (comparadores y carrusel, ambos
+   muy altos) sobraba muchísimo. Se aprieta solo en estas dos.
+   ─────────────────────────────────────────────── */
+#casos.section { padding-top: 110px; padding-bottom: 80px; }
+#testimonios-video.section { padding-top: 90px; padding-bottom: 110px; }
+@media (max-width: 760px) {
+  #casos.section { padding-top: 70px; padding-bottom: 50px; }
+  #testimonios-video.section { padding-top: 60px; padding-bottom: 70px; }
+}

@@ -13,7 +13,7 @@
   top: 50%;
   transform: translateY(-50%) translateX(6px);
   background: #ffffff;
-  color: #212121;
+  color: #1F234F;
   font-family: 'Inter', system-ui, sans-serif;
   font-weight: 600;
   font-size: 13px;
@@ -21,7 +21,7 @@
   white-space: nowrap;
   padding: 11px 16px;
   border-radius: 999px;
-  box-shadow: 0 8px 26px rgba(33, 33, 33, 0.16);
+  box-shadow: 0 8px 26px rgba(31,35,79, 0.16);
   opacity: 0;
   pointer-events: none;
   transition: opacity .3s ease, transform .3s cubic-bezier(0.22, 1, 0.36, 1);
