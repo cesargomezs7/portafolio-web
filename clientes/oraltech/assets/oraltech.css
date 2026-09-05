@@ -1626,3 +1626,72 @@ body .gal-mosaico-espejo { max-width: 940px; gap: 40px; }
    ancho en 16:9. Se deja margen para que no toque los bordes. */
 body .hv-wrap { width: min(86vw, 1040px); }
 @media (max-width: 900px) { body .hv-wrap { width: 92vw; } }
+
+/* ══════════════════════════════════════════════════════════════════
+   BLOQUE 16 · MÓVIL · lo que salió de probar 26 páginas en 17 anchos
+   (de iPhone SE a 2K). 442 comprobaciones.
+   ══════════════════════════════════════════════════════════════════ */
+
+/* 1 · A 320 px el bloque derecho del menú medía de 186 a 350 en una
+   pantalla de 320: el botón "Agendar" quedaba CORTADO (30 de sus 76 px
+   fuera) y sin scroll horizontal para alcanzarlo. Pasa en iPhone SE y
+   en los Android pequeños, o sea el 25 de las páginas. */
+@media (max-width: 430px) {
+  /* ⚠ La barra es position:fixed, así que NADIE la recorta: si su
+     contenido no cabe, la caja crece y con ella el ancho del documento
+     (medido: 379 px en una pantalla de 320, con scroll horizontal en
+     toda la web). Se la ata al ancho de la ventana y se deja que sus
+     piezas encojan. */
+  body .navbar {
+    width: 100vw; max-width: 100vw; box-sizing: border-box;
+    gap: 8px; padding-left: 12px; padding-right: 12px;
+  }
+  body .nav-logo { min-width: 0; flex: 0 1 auto; overflow: hidden; }
+  body .nav-right { min-width: 0; }
+  body .nav-logo-tag { display: none; }         /* el nombre ya se lee en el logo */
+  body .idioma-op { padding: 8px 7px; gap: 0; }
+  body .nav-right { gap: 8px; }
+  /* En pantallas de 430 o menos NO cabe: sumando botón de menú (44),
+     logo (112), las dos banderas (76) y "Agendar" (76) con sus huecos y
+     el relleno de la barra salen 348 px sobre 320 disponibles. Se quita
+     "Agendar" de la barra: sigue dentro del menú desplegable y además
+     está la burbuja de WhatsApp, que en celular es el camino real. */
+  body .nav-menu-btn { display: none; }
+}
+
+/* 2 · Zonas tocables. Medido en móvil: el botón de menú 34x34, cada
+   píldora de idioma 34x25 y los enlaces del pie de 15 a 22 px de alto.
+   El mínimo cómodo con el dedo son 44 px; se llega con relleno, sin
+   agrandar el dibujo ni descuadrar la barra. */
+@media (max-width: 767px) {
+  body .nav-burger {
+    width: 44px; height: 44px;
+    display: inline-flex; align-items: center; justify-content: center;
+    margin-left: -5px;                 /* compensa el relleno nuevo */
+  }
+  body .idioma-op { min-height: 40px; padding-top: 10px; padding-bottom: 10px; }
+  body .hv-sonido { min-height: 44px; }
+  /* Los enlaces del pie iban en filas de 15 px: imposible acertar. */
+  body footer .footer-col li { margin-bottom: 2px; }
+  body footer .footer-col a,
+  body footer .contacto-socials a {
+    display: inline-flex; align-items: center;
+    min-height: 44px; padding: 2px 0;
+  }
+  body .gal-tab { min-height: 44px; }
+  body .op-punto, body .op-nav { min-width: 40px; min-height: 40px; }
+}
+
+/* 3 · Letra por debajo de lo legible. La coletilla del logo salía a
+   9,5 px y la ciudad de cada sede a 10. Nada baja ya de 11. */
+body .nav-logo-tag { font-size: 11px; }
+body .sede-ciudad  { font-size: 11.5px; }
+
+/* El botón "Ver todas en Google" iba en la misma fila que las flechas y
+   los puntos del carrusel, sin envolver: a 320 px llegaba hasta el 379 y
+   era él quien metía scroll horizontal en TODA la portada (medido: el
+   documento salía a 379 sobre una ventana de 320). */
+@media (max-width: 520px) {
+  body .op-controles { flex-wrap: wrap; gap: 12px; }
+  body .op-enlace { margin-left: 0; width: 100%; justify-content: center; }
+}
