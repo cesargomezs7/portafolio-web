@@ -351,10 +351,14 @@
    gradiente en el propio contenedor y la pantalla se recorta dentro.
    ─────────────────────────────────────────────── */
 .hero.hero-video {
-  /* Más arriba y más pequeño: así el video entra ENTERO en la primera
-     pantalla, sin que haya que bajar para verlo completo. */
-  padding-top: 96px;
-  padding-bottom: 64px;
+  /* El video entra ENTERO en la primera pantalla. Al quitar el botón de
+     "Agendar por WhatsApp" que iba debajo (redundante con la burbuja
+     flotante y con el "Agendar" del menú), el hueco de arriba y el de abajo
+     se igualan y el video queda centrado de verdad entre la barra del menú
+     y la franja azul de las opiniones. El nav mide 83 px y es fijo, así que
+     el relleno de arriba lo lleva sumado. */
+  padding-top: 140px;
+  padding-bottom: 57px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -422,7 +426,9 @@
 
 /* Botón de sonido: el autoplay obliga a arrancar en silencio. */
 .hv-sonido {
-  position: absolute; right: 16px; bottom: 16px; z-index: 3;
+  /* Arriba a la derecha, no abajo: abajo competía con los subtítulos
+     quemados del propio video y se veía mucho menos. */
+  position: absolute; right: 16px; top: 16px; z-index: 3;
   display: inline-flex; align-items: center; gap: 9px;
   padding: 10px 16px 10px 12px;
   border: 1px solid rgba(255,255,255,.28);
@@ -468,14 +474,14 @@
 .hv-cta { margin-top: 26px; }
 
 @media (max-width: 900px) {
-  .hero.hero-video { padding-top: 104px; padding-bottom: 64px; }
+  .hero.hero-video { padding-top: 128px; padding-bottom: 52px; }
   .hv-marco { padding: 7px; border-radius: 24px; }
   .hv-pantalla { border-radius: 17px; }
   .hv-chip { font-size: 13px; padding: 9px 14px; }
   .hv-chip .chip-sub { font-size: 11px; }
   .hv-chip-1 { top: -14px; left: 0; }
   .hv-chip-2 { bottom: -14px; right: 0; }
-  .hv-sonido { right: 10px; bottom: 10px; padding: 8px 13px 8px 10px; font-size: 12px; }
+  .hv-sonido { right: 10px; top: 10px; padding: 8px 13px 8px 10px; font-size: 12px; }
 }
 @media (max-width: 520px) {
   .hv-chip-2 .chip-sub, .hv-chip-1 .chip-sub { display: none; }
@@ -996,92 +1002,80 @@ figure.reveal img { height: auto; }
 @media (max-width: 860px)  { .idioma-op { padding: 6px 10px; font-size: 11px; } }
 
 /* ═══════════════════════════════════════════════════════════════
-   BLOQUE 7 · ICONOS DE SERVICIO, DIBUJADOS Y ANIMADOS
+   BLOQUE 7 · ICONOS DE SERVICIO · LOS DE ELLOS, ANIMADOS
    ───────────────────────────────────────────────────────────────
-   SEGUNDA VERSIÓN (5-sep). La primera la rechazó el cliente: "los
-   dibujos están horribles", "no se intuye qué son". Tenía razón —
-   los molares eran manchas sin raíces, la boca parecía un cuenco y
-   el microdiseño un paraguas con dientes colgando.
-   Estos se dibujaron mirando los suyos, que sí se entienden:
-   · el molar lleva corona ancha con hendidura y DOS raíces;
-   · la sonrisa lleva el labio superior macizo, que es lo que la
-     hace leerse como boca al instante;
-   · el microdiseño es una arcada cerrada con la encía en V, no
-     dientes sueltos;
-   · las chispas son rombos de lados cóncavos, como los suyos, y
-     ahora TODAS miden lo mismo (5,6 la grande, 3,4 la pequeña):
-     antes iban de 3,1 a 11 y en fila no parecían el mismo juego.
-   Siguen pesando poco y siguen animándose, y en REPOSO cada icono
-   se ve COMPLETO: nada oculto, nada a opacidad 0, nada desplazado.
-   Quien nunca pasa el cursor —o sea, todo el que entra por
-   celular— ve el icono entero y correcto.
+   Los dibujos son los de la web actual de OralTech, tal cual: se
+   probaron dos juegos propios y el cliente prefirió los suyos.
+   Aquí solo se les cambia el color y se les añade movimiento.
+
+   · Vienen en azul marino sobre transparente. Las tarjetas son
+     azul marino, así que en crudo serían invisibles: el filtro
+     `brightness(0) invert(1)` los pone en blanco puro sin tocar
+     el archivo y sin depender de mask-image, que en algún
+     navegador viejo dejaría un cuadrado blanco.
+   · El sexto no existe en su web: ahí tienen una FOTO CLÍNICA de
+     un tornillo en la encía, que es la que rompe el juego y la
+     que más asusta al paciente. Se dibujó uno midiendo los
+     suyos: lienzo 521, trazo 14 px y caja de tinta 441x464,
+     dentro del rango de los cinco reales (12-17 px, ~450x460).
+   · En REPOSO el icono se ve completo y quieto. Lo que añade el
+     cursor es movimiento y brillo, nada más.
    ═══════════════════════════════════════════════════════════════ */
-.service-card .ico {
+/* ⚠ El <style> de la propia página trae `.service-card.con-icono img`
+   con `padding: 16% 20% 26%`, pensado para cuando el icono ocupaba la
+   tarjeta entera. Los porcentajes se miden contra el ANCHO DE LA TARJETA
+   (417 px), así que con el icono a 167 px el relleno lateral sumaba 166 px
+   y el contenido se quedaba en CERO de ancho: los seis iconos se cargaban
+   bien y no se veía ninguno. Hay que anularlo, y con tres clases para
+   ganarle a esa regla, que va después en la cascada. */
+body .service-card.con-icono .ico,
+body .service-card .ico {
   position: absolute;
   left: 50%; top: 42%;
-  transform: translate(-50%, -50%);
-  width: 42%; height: auto;
-  color: #fff;
+  width: 40%; height: auto;
+  max-width: none;
+  padding: 0;
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
   z-index: 2;
+  display: block;
   opacity: .95;
-  transition: transform .5s cubic-bezier(.34,1.3,.5,1), opacity .3s var(--t);
+  /* de su azul marino a blanco puro, sin tocar el archivo */
+  filter: brightness(0) invert(1);
+  transform: translate(-50%, -50%);
+  transition: transform .55s cubic-bezier(.34,1.3,.5,1), filter .45s var(--t);
 }
-.service-card:hover .ico { transform: translate(-50%, -50%) scale(1.06); opacity: 1; }
+/* la regla vieja también escalaba la imagen al pasar el cursor y peleaba
+   con la animación nueva */
+body .service-card.con-icono:hover .ico { transform: translate(-50%, -50%); }
 
-/* ---- iconos de servicio: animacion al pasar el cursor sobre la tarjeta ----
-   En reposo el icono se ve COMPLETO. Ninguna regla oculta, desplaza ni recorta
-   nada: solo se anaden movimientos cuando hay hover. */
-.ico{display:block;width:100%;height:100%}
-.ico g,.ico path,.ico rect{transform-box:fill-box;transform-origin:center;
-  transition:transform .45s cubic-bezier(.34,1.4,.64,1)}
-
-/* chispas: giran y crecen (sonrisa, micro, blanqueamiento) */
-@keyframes ico-destello{
-  0%,100%{transform:rotate(0deg) scale(1)}
-  45%    {transform:rotate(90deg) scale(1.35)}
+/* Brillo: un halo blanco que crece y se apaga, como si la pieza
+   reflejara la luz. Va en el filtro, después del invert, para que
+   no se coma el color. */
+@keyframes ico-brillo {
+  0%   { filter: brightness(0) invert(1) drop-shadow(0 0 0 rgba(255,255,255,0)); }
+  40%  { filter: brightness(0) invert(1) drop-shadow(0 0 14px rgba(255,255,255,.85)); }
+  100% { filter: brightness(0) invert(1) drop-shadow(0 0 6px rgba(255,255,255,.35)); }
 }
-.service-card:hover .ico .chispa{animation:ico-destello 1.1s ease-in-out}
-.service-card:hover .ico .chispa.c2{animation-delay:.14s}
-
-/* ortodoncia: el alambre vibra y los brackets aprietan */
-@keyframes ico-alambre{
-  0%,100%{transform:translateY(0)}
-  25%{transform:translateY(-1.2px)}
-  75%{transform:translateY(1.2px)}
+/* Movimiento: sube un poco, crece y se balancea una vez. */
+@keyframes ico-vaiven {
+  0%   { transform: translate(-50%,-50%) scale(1)    rotate(0deg); }
+  35%  { transform: translate(-50%,-54%) scale(1.09) rotate(-2.2deg); }
+  70%  { transform: translate(-50%,-52%) scale(1.07) rotate(1.4deg); }
+  100% { transform: translate(-50%,-53%) scale(1.08) rotate(0deg); }
 }
-.service-card:hover .ico-orto .o-alambre{animation:ico-alambre .5s ease-in-out 2}
-.service-card:hover .ico-orto .o-brackets rect{transform:scale(1.14)}
-
-/* microdiseno: el eje de simetria avanza y los dientes se separan un pelo */
-@keyframes ico-eje{to{stroke-dashoffset:-12.2}}
-.service-card:hover .ico-micro .m-eje{animation:ico-eje 1s linear infinite}
-.service-card:hover .ico-micro .m-arcada{transform:scale(1.05)}
-
-/* blanqueamiento: el molar respira */
-.service-card:hover .ico-blanq .b-molar{transform:scale(1.06)}
-
-/* limpieza: el instrumento ya toca el diente en reposo (los jueces vieron
-   que antes flotaba suelto) y al pasar el cursor lo raspa un poco mas.
-   El reposo va AQUI y no como atributo transform del <g>: cualquier
-   transform de CSS pisa al atributo, y en :hover el instrumento pegaba
-   un salto hacia atras. */
-.ico-limpieza .l-tool{transform:translate(2.6px,-1.2px)}
-.service-card:hover .ico-limpieza .l-tool{transform:translate(4.6px,-3.4px)}
-.service-card:hover .ico-limpieza .l-molar{transform:translateX(1.4px)}
-
-/* implante: el tornillo baja y gira como si se enroscara */
-@keyframes ico-enroscar{
-  0%  {transform:translateY(0) rotate(0deg)}
-  60% {transform:translateY(2.4px) rotate(-5deg)}
-  100%{transform:translateY(1.6px) rotate(0deg)}
+body .service-card:hover .ico,
+body .service-card:focus-within .ico {
+  animation: ico-vaiven .85s cubic-bezier(.34,1.25,.5,1) forwards,
+             ico-brillo 1.1s ease-out forwards;
 }
-.service-card:hover .ico-implante .i-post{animation:ico-enroscar .7s ease-out forwards}
-.service-card:hover .ico-implante .i-corona{transform:translateY(-1.6px)}
 
-@media (prefers-reduced-motion:reduce){
-  .ico g,.ico path,.ico rect{transition:none}
-  .service-card:hover .ico *{animation:none!important;transform:none!important}
+@media (prefers-reduced-motion: reduce) {
+  .service-card .ico { transition: none; }
+  .service-card:hover .ico,
+  .service-card:focus-within .ico { animation: none; }
 }
+
 
 /* ═══════════════════════════════════════════════════════════════
    BLOQUE 8 · NAV QUE NO SE PISA
@@ -1224,35 +1218,51 @@ body .tf-card .tf-texto { padding: 15px 17px 18px; }
 body .tf-card .tf-frase { font-size: 13.5px; line-height: 1.5; }
 body .tf-card .tf-nombre { margin-top: 10px; font-size: 10px; }
 
-/* ── 2 · Galería de la clínica ── más pequeña, más aire y de verdad
-   asimétrica: la columna derecha baja un escalón y sus dos fotos no
-   miden lo mismo entre sí. */
+/* ── 2 · Galería de la clínica ── compuesta como el demo-master:
+   la principal manda, y las dos secundarias tienen ANCHOS DISTINTOS y van
+   pegadas a bordes contrarios (una a la derecha, otra a la izquierda), con
+   un desnivel vertical. Eso es lo que hace que se lea como composición y
+   no como una rejilla de tres huecos iguales. */
 body .gal-mosaico {
-  max-width: 820px;
-  /* 1,9fr no es capricho: con 1,66 la columna derecha de Medellín (que
-     lleva una foto vertical) quedaba 190 px más alta que la principal y
-     el hueco a la izquierda parecía un error, no un diseño. Con 1,9 las
-     dos pestañas cierran con menos de 65 px de diferencia. */
-  grid-template-columns: 1.9fr 1fr;
-  gap: 26px;
+  max-width: 880px;
+  grid-template-columns: 1.45fr 0.75fr;
+  gap: 42px;
+  align-items: center;
   margin-top: 22px;
 }
-body .gal-mosaico > .gal-foto:nth-child(2),
-body .gal-mosaico > .gal-foto:nth-child(3) { margin-left: 6px; }
-body .gal-mosaico > .gal-foto:nth-child(2) { margin-top: 34px; }  /* el escalón */
+body .gal-mosaico > .gal-foto:first-child  { grid-row: 1 / span 2; }
+body .gal-mosaico > .gal-foto:nth-child(2) { grid-row: 1; width: 84%; justify-self: end;   margin: 0; }
+body .gal-mosaico > .gal-foto:nth-child(3) { grid-row: 2; width: 100%; justify-self: start; margin: 20px 0 0; }
 body .gal-foto figcaption { font-size: 11.5px; padding: 22px 15px 11px; }
+
+/* Medellín tiene DOS horizontales y UNA vertical; con la rejilla de arriba
+   la columna derecha quedaba 212 px más alta que la principal y el hueco de
+   la izquierda parecía un fallo. Esa pestaña va espejada: las dos
+   horizontales apiladas a la izquierda (de anchos distintos, también
+   desplazadas) y la vertical entera a la derecha. Más estrecha a propósito,
+   para que las dos pestañas midan casi lo mismo y el bloque no pegue un
+   salto al cambiar de sede. */
+body .gal-mosaico-espejo {
+  max-width: 730px;
+  grid-template-columns: 1fr 0.92fr;
+  gap: 34px;
+}
+body .gal-mosaico-espejo > .gal-foto:first-child  { grid-column: 1; grid-row: 1; width: 100%; justify-self: start; margin: 0; }
+body .gal-mosaico-espejo > .gal-foto:nth-child(2) { grid-column: 1; grid-row: 2; width: 82%;  justify-self: end;   margin: 20px 0 0; }
+body .gal-mosaico-espejo > .gal-foto:nth-child(3) { grid-column: 2; grid-row: 1 / span 2; width: 100%; margin: 0; }
+
 @media (max-width: 760px) {
-  /* ⚠ Hace falta repetir aquí grid-template-columns. La regla de móvil que
-     ya existía es `.gal-mosaico` (0,1,0) y la de arriba es `body .gal-mosaico`
-     (0,1,1): la de escritorio ganaba también dentro de esta media query y el
-     celular se quedaba con DOS columnas de 212 y 112 px (medido a 390). */
-  body .gal-mosaico { grid-template-columns: 1fr; gap: 14px; max-width: 100%; }
-  body .gal-mosaico > .gal-foto:first-child,
-  body .gal-mosaico > .gal-foto:nth-child(2),
-  body .gal-mosaico > .gal-foto:nth-child(3) { grid-row: auto; grid-column: 1; }
-  body .gal-mosaico > .gal-foto:nth-child(2) { margin-top: 0; }
-  body .gal-mosaico > .gal-foto:nth-child(2),
-  body .gal-mosaico > .gal-foto:nth-child(3) { margin-left: 0; }
+  /* ⚠ Hace falta repetir aquí grid-template-columns Y los anchos. Las reglas
+     de móvil que ya existían son `.gal-mosaico` (0,1,0) y las de arriba
+     `body .gal-mosaico` (0,1,1): la de escritorio ganaba también dentro de
+     esta media query y el celular se quedaba con DOS columnas de 212 y
+     112 px (medido a 390). */
+  body .gal-mosaico,
+  body .gal-mosaico-espejo { grid-template-columns: 1fr; gap: 14px; max-width: 100%; }
+  body .gal-mosaico > .gal-foto,
+  body .gal-mosaico-espejo > .gal-foto {
+    grid-row: auto; grid-column: 1; width: 100%; margin: 0; justify-self: stretch;
+  }
 }
 
 /* ── 3 · Sedes ── la sección medía 980 px de alto CSS y no cabía en
@@ -1344,4 +1354,177 @@ body .gal-mosaico-espejo > .gal-foto:nth-child(3) { grid-column: 2; grid-row: 1 
   body .gal-mosaico-espejo > .gal-foto:first-child,
   body .gal-mosaico-espejo > .gal-foto:nth-child(2),
   body .gal-mosaico-espejo > .gal-foto:nth-child(3) { grid-column: 1; grid-row: auto; margin-top: 0; }
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   BLOQUE 11 · LA BURBUJA DE WHATSAPP, EN LA HOJA COMPARTIDA
+   ──────────────────────────────────────────────────────────────────
+   El tamaño de `.wa-float` estaba escrito en el <style> de CADA
+   página, y a casos.html se le olvidó: ahí el botón salía como un
+   enlace suelto con el SVG a 1440x1440 px y en el azul por defecto
+   del navegador (medido, no estimado). Se pasa a esta hoja para que
+   ninguna página pueda quedarse sin él. Las reglas de cada página
+   siguen ganando por orden de carga, así que esto solo actúa de red.
+   ══════════════════════════════════════════════════════════════════ */
+.wa-float {
+  position: fixed; bottom: 28px; right: 28px; z-index: 999;
+  width: 62px; height: 62px; border-radius: 50%;
+  background: #25D366;
+  display: flex; align-items: center; justify-content: center;
+  color: #fff; text-decoration: none;
+  box-shadow: 0 12px 32px rgba(37,211,102,.4);
+  transition: transform .3s var(--t);
+}
+.wa-float:hover { transform: scale(1.08); }
+.wa-float svg { width: 32px; height: 32px; flex: 0 0 auto; }
+
+/* El panel de las dos sedes tiene que colgar del <body>. Está pegado
+   dentro del contenido en 11 de las 12 páginas, y `position: fixed`
+   dentro de un ancestro con `transform` (que es lo que hace .reveal)
+   deja de referirse a la ventana y pasa a referirse a ese ancestro.
+   Mientras siga ahí, esto lo mantiene anclado a la ventana igual. */
+.wa-panel { position: fixed !important; }
+
+/* El aviso de copyright iba en el gris de texto sobre el azul marino del
+   pie: 3,07:1, por debajo del mínimo legible (4,5:1 para texto pequeño).
+   Sube a 7,0:1 y sigue siendo discreto. */
+body footer p,
+body .footer-bottom p,
+body .site-footer p { color: rgba(255,255,255,.72); }
+body footer a { color: rgba(255,255,255,.82); }
+
+/* ══════════════════════════════════════════════════════════════════
+   BLOQUE 12 · CONTRASTE · fallos encontrados midiendo, no a ojo
+   ══════════════════════════════════════════════════════════════════ */
+
+/* Los enlaces dentro de las respuestas del FAQ no tenían NINGÚN estilo:
+   salían en el azul por defecto del navegador (#0000EE) sobre el azul
+   marino del bloque. Medido: 1,58:1, es decir, ilegible. */
+body .faq a,
+body .faq-answer a,
+body .faq-a a {
+  color: #fff;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+  text-decoration-color: rgba(255,255,255,.45);
+  transition: text-decoration-color .2s var(--t);
+}
+body .faq a:hover { text-decoration-color: #fff; }
+
+/* Pestaña de sede sin seleccionar: 4,19:1, justo por debajo del mínimo
+   de 4,5:1 para texto pequeño. */
+body .gal-tab { color: #565C74; }
+body .gal-tab .gal-tab-sub { color: #565C74; }
+body .gal-tab.activo, body .gal-tab.activo .gal-tab-sub { color: #fff; }
+
+/* La palabra "Google" iba en el azul de marca (#4285F4) sobre blanco:
+   3,56:1. Se oscurece lo justo para pasar de 4,5:1 y que se siga
+   reconociendo como Google. */
+body .op-g { color: #1A62D6; }
+
+/* ══════════════════════════════════════════════════════════════════
+   BLOQUE 13 · COMPACTACIÓN DE LAS PÁGINAS INTERIORES
+   ──────────────────────────────────────────────────────────────────
+   Vale para las 6 de servicio, casos, nosotros y las 2 de sede. El
+   encargo: "todo más pequeño, con espacios, que se vea premium; si
+   está amontonado y con la letra inmensa no se entiende nada".
+   Los titulares de sección llevaban el tamaño en el atributo `style`
+   de cada <h2>, así que ninguna hoja podía tocarlos: esos se
+   cambiaron uno a uno en el HTML (80 en 22 páginas). Aquí va todo lo
+   demás, con prefijo `body` porque el <style> de cada página se
+   carga DESPUÉS de esta hoja.
+   ══════════════════════════════════════════════════════════════════ */
+
+/* ── Titular de página ── 41,6 px era casi el doble de lo necesario */
+body .hero h1,
+body .hero-compact h1 {
+  font-size: clamp(1.55rem, 2.9vw, 2.05rem);
+  line-height: 1.08;
+  letter-spacing: -0.035em;
+  margin-bottom: 14px;
+}
+body .hero.hero-compact { padding-top: 118px; padding-bottom: 40px; }
+body .hero-compact .hero-sub,
+body .hero-compact > .section-inner > p,
+body .hero-compact p { font-size: 15px; line-height: 1.6; max-width: 620px; }
+
+/* ── Texto corrido ── */
+body .section p { font-size: 14.5px; line-height: 1.65; }
+body .section .section-tag,
+body .overline { font-size: 10.5px; letter-spacing: .19em; }
+
+/* ── Aire ENTRE bloques, que es lo que hace que respire ── */
+body .section { padding-top: 54px; padding-bottom: 54px; }
+body .section + .section { padding-top: 48px; }
+body .clinic-header { margin-bottom: 26px; }
+
+/* ── Tarjetas y rejillas interiores ── */
+body .tipo-card, body .paso-card, body .landing-cards > * { padding: 20px 22px; }
+body .tipo-card h3, body .paso-card h3 { font-size: 16.5px; margin-bottom: 7px; }
+body .tipo-card p,  body .paso-card p  { font-size: 13.5px; line-height: 1.6; }
+
+/* ── Bloque final oscuro ── medía 424 px de alto para tres líneas */
+body .cta-final { padding-top: 44px; padding-bottom: 44px; }
+body .cta-final-inner { max-width: 660px; }
+body .cta-final h2 { font-size: clamp(1.35rem, 2.3vw, 1.8rem); line-height: 1.12; margin-bottom: 12px; }
+body .cta-final p  { font-size: 14.5px; line-height: 1.6; margin-bottom: 22px; }
+body .cta-final-btn { padding: 11px 20px; font-size: 13.5px; }
+body .cta-final-actions { gap: 12px; }
+
+/* ── Reseñas de las páginas interiores ── mismo aire que la portada */
+body .testimonios-grid { gap: 20px; margin-top: 26px; }
+body .testimonio { padding: 22px 22px 18px; }
+body .testimonio p { font-size: 13.5px; line-height: 1.6; }
+body .testimonio .who-name { font-size: 13px; }
+body .testimonio .who-svc  { font-size: 11.5px; }
+body .testimonio .who-avatar { width: 34px; height: 34px; font-size: 13px; }
+body .clinic-since { font-size: 12.5px; }
+
+@media (max-width: 760px) {
+  body .hero.hero-compact { padding-top: 96px; padding-bottom: 30px; }
+  body .section { padding-top: 40px; padding-bottom: 40px; }
+  body .cta-final { padding-top: 34px; padding-bottom: 34px; }
+}
+
+/* ── Casos por material ── antes eran nueve fotos sueltas en una rejilla y
+   cada una repetía su propio pie: "Caso real · Resina" salía tres veces
+   seguidas, "Caso real · Cerómero" otras tres. Ahora manda el material:
+   un título y debajo sus fotos. Y las fotos, más pequeñas. */
+/* Ancho topado: sin esto las fotos salían a 378 px y dominaban la página. */
+body .casos-materiales { margin-top: 26px; max-width: 760px; }
+body .caso-grupo + .caso-grupo { margin-top: 34px; }
+body .caso-grupo-tit {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px; font-weight: 700;
+  letter-spacing: .2em; text-transform: uppercase;
+  color: var(--gray);
+  margin-bottom: 12px;
+  display: flex; align-items: center; gap: 12px;
+}
+body .caso-grupo-tit::after {
+  content: ''; flex: 1 1 auto; height: 1px;
+  background: var(--border);
+}
+/* TRES columnas fijas, no auto-fit: el grupo de cerámica tiene dos fotos
+   (les falta un caso) y con auto-fit se estiraban al doble de ancho que
+   las de resina y cerómero. Con tres columnas, la foto mide lo mismo en
+   los tres grupos y el hueco que falta se nota como lo que es. */
+body .caso-grupo-fotos {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+body .caso-foto { margin: 0; border-radius: var(--radius); overflow: hidden; background: var(--ice); }
+body .caso-foto img {
+  width: 100%; height: auto; display: block;
+  transition: transform .7s cubic-bezier(.22,1,.36,1);
+}
+body .caso-foto:hover img { transform: scale(1.04); }
+
+/* Las fotos sueltas de limpieza e implantes salían a 501x501 */
+body .section figure > img { max-width: 100%; height: auto; }
+body .comparador-vertical, body .antes-despues-vert { max-width: 380px; }
+@media (max-width: 760px) {
+  body .caso-grupo-fotos { grid-template-columns: repeat(2, minmax(0,1fr)); gap: 12px; }
 }
