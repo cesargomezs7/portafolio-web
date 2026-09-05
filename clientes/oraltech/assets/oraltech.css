@@ -1162,3 +1162,156 @@ body .sede-card iframe, body .sedes-grid iframe {
   .vt-anillo { --vt-ancho: 100%; }
   body .sede-card iframe, body .sedes-grid iframe { max-height: 190px !important; }
 }
+
+/* ══════════════════════════════════════════════════════════════════
+   BLOQUE 9 · PORTADA DE "CAMBIOS REALES"
+   Foto suya de tres pacientes, recortada sobre transparente. Entra
+   antes del titular, como en su web. Dos difuminados:
+     · abajo lo trae la propia imagen (se desvanece a transparente)
+     · a los lados lo pone una máscara, porque el recorte termina en
+       seco contra el borde y se notaba el corte
+   ══════════════════════════════════════════════════════════════════ */
+.casos-portada {
+  margin: 0 auto -18px;          /* el -18 mete el titular dentro del desvanecido */
+  max-width: 660px;
+  padding: 0 20px;
+  line-height: 0;
+  pointer-events: none;          /* decorativa: no roba clics ni foco */
+}
+.casos-portada img {
+  width: 100%;
+  height: auto;
+  display: block;
+  /* El recorte acaba a filo de borde: sin esto se ve la línea del corte. */
+  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 9%, #000 91%, transparent 100%);
+          mask-image: linear-gradient(to right, transparent 0, #000 9%, #000 91%, transparent 100%);
+}
+@media (max-width: 760px) {
+  .casos-portada { max-width: 420px; margin-bottom: -10px; padding: 0 14px; }
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   BLOQUE 10 · SEGUNDA COMPACTACIÓN (petición del 5-sep)
+   "más pequeño, con más separación, que quepa en pantalla".
+   Todo lleva prefijo `body`: el <style> propio de cada página se carga
+   DESPUÉS de esta hoja y .section h2 (0,1,1) le gana a un selector de
+   una sola clase. Sin el prefijo estas reglas no se aplican.
+   Medidas de partida tomadas a 1440 (zoom 1,1) y 1920 (zoom 1,5).
+   ══════════════════════════════════════════════════════════════════ */
+
+/* ── 1 · Testimonios con foto ── 379x623 era casi una columna entera.
+   Se limita la rejilla, no la tarjeta: así las 3 encogen a la vez y el
+   aire entre ellas crece. */
+body .tf-grid {
+  max-width: 860px;
+  margin-left: auto; margin-right: auto;
+  gap: 26px;
+  margin-top: 30px;
+}
+body .tf-card .tf-texto { padding: 15px 17px 18px; }
+body .tf-card .tf-frase { font-size: 13.5px; line-height: 1.5; }
+body .tf-card .tf-nombre { margin-top: 10px; font-size: 10px; }
+
+/* ── 2 · Galería de la clínica ── más pequeña, más aire y de verdad
+   asimétrica: la columna derecha baja un escalón y sus dos fotos no
+   miden lo mismo entre sí. */
+body .gal-mosaico {
+  max-width: 820px;
+  /* 1,9fr no es capricho: con 1,66 la columna derecha de Medellín (que
+     lleva una foto vertical) quedaba 190 px más alta que la principal y
+     el hueco a la izquierda parecía un error, no un diseño. Con 1,9 las
+     dos pestañas cierran con menos de 65 px de diferencia. */
+  grid-template-columns: 1.9fr 1fr;
+  gap: 26px;
+  margin-top: 22px;
+}
+body .gal-mosaico > .gal-foto:nth-child(2),
+body .gal-mosaico > .gal-foto:nth-child(3) { margin-left: 6px; }
+body .gal-mosaico > .gal-foto:nth-child(2) { margin-top: 34px; }  /* el escalón */
+body .gal-foto figcaption { font-size: 11.5px; padding: 22px 15px 11px; }
+@media (max-width: 760px) {
+  body .gal-mosaico > .gal-foto:nth-child(2) { margin-top: 0; }
+  body .gal-mosaico > .gal-foto:nth-child(2),
+  body .gal-mosaico > .gal-foto:nth-child(3) { margin-left: 0; }
+}
+
+/* ── 3 · Sedes ── la sección medía 980 px de alto CSS y no cabía en
+   pantalla. El mapa es lo que más ocupa y es lo que menos aporta a ese
+   tamaño: quien quiere el mapa entra a la página de la sede. */
+body #sedes { padding-top: 44px; padding-bottom: 46px; }
+body #sedes .clinic-header { margin-bottom: 20px; }
+/* 140 px CSS: a zoom 1,5 son 210 px reales en pantalla, suficiente para
+   ubicarse. Quien quiera el mapa de verdad entra a la página de la sede.
+   ⚠ El envoltorio .sede-map lleva aspect-ratio 16/10 en el <style> de la
+   propia página: si solo se limita el iframe, el envoltorio se queda a
+   358 px y deja 218 px de hueco gris debajo del mapa (pasó, medido).
+   Hay que anular el aspect-ratio y fijar el mismo alto en los dos. */
+body .sede-map { aspect-ratio: auto !important; height: 178px; }
+body .sede-card iframe,
+body .sede-map iframe,
+body .sedes-grid iframe { height: 178px !important; max-height: 178px !important; }
+body .sede-body { padding: 17px 20px 19px; }
+body .sede-body h3 { font-size: 19px; margin-bottom: 5px; }
+body .sede-ciudad { font-size: 10px; }
+body .sede-dir { font-size: 13px; line-height: 1.45; margin-bottom: 7px; }
+body .sede-nota { font-size: 12px; margin-bottom: 9px; }
+body .sede-wa { padding: 8px 13px; font-size: 12px; }
+body .sede-link { font-size: 12.5px; margin-top: 8px; }
+
+/* ── 4 · Opiniones de Google ── tres por vista, no dos.
+   ⚠ El carrusel calcula el paso con offsetLeft entre tarjetas
+   consecutivas (assets/oraltech.js), así que cambiar flex-basis y gap
+   aquí es suficiente: el JS se entera solo. No tocar el JS. */
+body .op-card {
+  flex: 0 0 calc((100% - 40px) / 3);
+  padding: 20px 19px 17px;
+}
+body .op-pista { gap: 20px; }
+body .op-frase { font-size: 13.5px; line-height: 1.6; }
+body .op-estrellas { font-size: 13px; margin-bottom: 10px; }
+body .op-nombre { font-size: 12.5px; }
+body .op-carrusel { margin-top: 26px; }
+@media (max-width: 1023px) { body .op-card { flex-basis: calc((100% - 20px) / 2); } }
+@media (max-width: 659px)  { body .op-card { flex-basis: 100%; } }
+
+/* ── 5 · Preguntas frecuentes ── 1016 px de alto: no cabía. Se recorta
+   la caja, el titular y cada fila, sin tocar el contenido. */
+body .faq { padding: 44px 40px; margin: 56px auto; }
+body .faq h2 {
+  font-size: clamp(1.4rem, 2.1vw, 1.85rem);
+  margin-bottom: 22px;
+  letter-spacing: -0.03em;
+}
+body .faq .overline { font-size: 10.5px; }
+body .faq-question { padding: 15px 0; font-size: 15px; }
+body .faq-toggle { width: 26px; height: 26px; }
+body .faq-answer p, body .faq-a p { font-size: 13.5px; line-height: 1.65; padding-bottom: 16px; }
+@media (max-width: 760px) {
+  body .sede-map { height: 190px; }
+  body .sede-map iframe, body .sede-card iframe, body .sedes-grid iframe {
+    height: 190px !important; max-height: 190px !important; }
+  body .faq { padding: 34px 22px; margin: 40px auto; }
+  body .faq-question { font-size: 14px; }
+}
+
+/* Medellín tiene DOS fotos horizontales y UNA vertical; Cúcuta tiene tres
+   horizontales. Con la misma rejilla para las dos, la columna derecha de
+   Medellín acababa 212 px más alta que la principal y el hueco de la
+   izquierda parecía un fallo. Esa pestaña usa la composición espejada: las
+   dos horizontales apiladas a la izquierda y la vertical entera a la
+   derecha. Columnas casi iguales, porque así las dos alturas coinciden
+   (medido: 538 px las dos). Sigue siendo asimétrica, y distinta de la otra
+   pestaña, que era lo pedido. */
+/* Más estrecho que la otra pestaña a propósito: la foto vertical manda la
+   altura, y a 820 px de ancho el mosaico de Medellín salía 147 px más alto
+   que el de Cúcuta. Al cambiar de pestaña el bloque pegaba un salto. */
+body .gal-mosaico-espejo { max-width: 690px; grid-template-columns: 1fr 1.03fr; }
+body .gal-mosaico-espejo > .gal-foto:first-child  { grid-column: 1; grid-row: 1; }
+body .gal-mosaico-espejo > .gal-foto:nth-child(2) { grid-column: 1; grid-row: 2; margin-top: 0; margin-left: 0; }
+body .gal-mosaico-espejo > .gal-foto:nth-child(3) { grid-column: 2; grid-row: 1 / span 2; margin-top: 26px; margin-left: 0; }
+@media (max-width: 760px) {
+  body .gal-mosaico-espejo { grid-template-columns: 1fr; }
+  body .gal-mosaico-espejo > .gal-foto:first-child,
+  body .gal-mosaico-espejo > .gal-foto:nth-child(2),
+  body .gal-mosaico-espejo > .gal-foto:nth-child(3) { grid-column: 1; grid-row: auto; margin-top: 0; }
+}

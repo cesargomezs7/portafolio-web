@@ -320,12 +320,27 @@
 
     var i = 0, porVista = 1, auto = null;
 
+    /* ⚠ NO fijar aquí cuántas caben. Estaba escrito a mano ("2 si mide más
+       de 660") y cuando el CSS pasó a tres por vista, el carrusel siguió
+       creyendo que eran dos: dejaba avanzar un paso de más y la última
+       posición enseñaba hueco vacío. Se deduce del propio ancho medido, así
+       el JS se entera solo de cualquier cambio de flex-basis o de gap. */
     function calcularPorVista() {
-      var a = caja.clientWidth;
-      porVista = a >= 660 ? 2 : 1;
-      return porVista;
+      if (!paso) medirPaso();
+      porVista = paso ? Math.max(1, Math.round(caja.clientWidth / paso)) : 1;
+      return Math.min(porVista, tarjetas.length);
     }
     function maxIndice() { return Math.max(0, tarjetas.length - calcularPorVista()); }
+
+    /* Los puntos están escritos en el HTML (tres). Si hay menos posiciones
+       que puntos, sobran: se ocultan en vez de dejar puntos que no llevan
+       a ninguna parte. */
+    function ajustarPuntos() {
+      var n = maxIndice() + 1;
+      caja.querySelectorAll('.op-punto').forEach(function (p, k) {
+        p.hidden = k >= n;
+      });
+    }
 
     /* ⚠ El paso NO se calcula como ancho + gap: styles.css aplica
        body{zoom} en pantallas grandes, así que getBoundingClientRect
@@ -393,9 +408,10 @@
       pista.style.transform = 'translateX(0px)';
       medirPaso();
       pista.style.transition = previo;
+      ajustarPuntos();
       ir(i);
     });
-    pintar(); reiniciarAuto();
+    medirPaso(); ajustarPuntos(); pintar(); reiniciarAuto();
   })();
 
   /* ── 7 · Cifras: subrayado dorado al entrar en pantalla ──── */

@@ -573,69 +573,18 @@ body.has-banner .scroll-progress { top: 36px; }
      health data, Law 1581). They are already public on their site today.
 ──────────────────────────────────────────────────────────────── -->
 <section class="section" id="casos" data-wa="Hi, I saw your cases on your website and would like a consultation." data-wa-label="Want a change like this?">
+  <!-- Their own cutout of three patients, the same image they use to open
+       this section. Fades out at the bottom (baked into the image) and at
+       the sides with a mask, so it blends instead of looking pasted on. -->
+  <figure class="casos-portada reveal" aria-hidden="true">
+    <img src="../img/pacientes-oraltech.webp" alt="" loading="lazy" decoding="async" width="1240" height="573">
+  </figure>
   <div class="section-inner">
     <div class="section-tag">Real changes</div>
     <h2 class="section-headline reveal" style="margin-bottom:6px;">
       <span class="light">Because every smile</span><br><span class="b">deserves to shine</span>
     </h2>
-    <p class="reveal" style="font-size:16px;color:var(--black);opacity:.75;max-width:560px;line-height:1.65;">
-      Drag the handle on each image to see the before and the after. These are
-      our own patients, not stock photos.
-    </p>
-
-    <div class="ba-grid">
-      <div class="ba reveal">
-        <img class="ba-despues" src="../img/3-2.webp" alt="Smile after treatment at OralTech: straight teeth in an even shade" loading="lazy" width="1000" height="500">
-        <img class="ba-antes"   src="../img/3-1.webp" alt="The same smile before treatment at OralTech" loading="lazy" width="1000" height="500">
-        <span class="ba-linea"></span>
-        <span class="ba-tirador"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l-5 6 5 6M15 6l5 6-5 6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-        <input class="ba-rango" type="range" min="0" max="100" value="50" step="0.1" aria-label="Compare before and after, first case">
-      </div>
-
-      <div class="ba reveal">
-        <img class="ba-despues" src="../img/2.2.webp" alt="Smile after treatment at OralTech, with brighter and more even teeth" loading="lazy" width="1600" height="800">
-        <img class="ba-antes"   src="../img/2.1.webp" alt="The same smile before treatment at OralTech" loading="lazy" width="1600" height="800">
-        <span class="ba-linea"></span>
-        <span class="ba-tirador"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l-5 6 5 6M15 6l5 6-5 6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-        <input class="ba-rango" type="range" min="0" max="100" value="50" step="0.1" aria-label="Compare before and after, second case">
-      </div>
-
-      <div class="ba reveal">
-        <img class="ba-despues" src="../img/4.2.webp" alt="Smile after treatment at OralTech" loading="lazy" width="1000" height="500">
-        <img class="ba-antes"   src="../img/4.1.webp" alt="The same smile before treatment at OralTech" loading="lazy" width="1000" height="500">
-        <span class="ba-linea"></span>
-        <span class="ba-tirador"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l-5 6 5 6M15 6l5 6-5 6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-        <input class="ba-rango" type="range" min="0" max="100" value="50" step="0.1" aria-label="Compare before and after, third case">
-      </div>
     </div>
-
-    <div class="reveal" style="margin-top:30px;">
-      <a href="casos.html" class="btn-pill outline">See all cases</a>
-    </div>
-  </div>
-</section>
-
-<!-- ─── TESTIMONIALS THAT SPEAK FOR US ────────────────────────────
-     A stronger version of what their site already has: on top, the
-     carousel with their SIX video testimonials in TWO rows (six in
-     view, moving in opposite directions), and below, the three photo
-     testimonials with the patient's own words.
-     ⚠ PENDING: confirm with the clinic who the people in the videos
-     are. The name and the country come from THEIR file names, not
-     from a confirmed source.
-──────────────────────────────────────────────────────────────── -->
-<section class="section section-alt" id="testimonios-video" data-wa="Hi, I watched the testimonials on your website and would like to book a consultation." data-wa-label="Want a result like this?">
-  <div class="section-inner">
-    <div class="section-tag">Testimonials</div>
-    <h2 class="section-headline reveal" style="margin-bottom:6px;">
-      <span class="light">Testimonials that</span><br><span class="b">speak for us</span>
-    </h2>
-    <p class="reveal" style="font-size:16px;color:var(--black);opacity:.75;max-width:600px;line-height:1.65;">
-      Patients who traveled here from England, Germany, France, the United States,
-      Panama and Costa Rica to be treated with us.
-      They play on their own, with the sound off. Hover over any one of them and everything else stops: that video gives you the controls to hear it, skip ahead or turn the volume up.
-    </p>
-  </div>
 
   <div class="vt-wrap reveal">
     <!-- SEIS tarjetas, ni una más: tres arriba y tres abajo, todas enteras.
@@ -723,20 +672,20 @@ body.has-banner .scroll-progress { top: 36px; }
             <figcaption>Storefront · Cl. 2 #9 Este-156</figcaption>
           </figure>
           <figure class="gal-foto">
-            <img src="../img/sede-cucuta-espera.webp" alt="Waiting area at the OralTech Cúcuta location" loading="lazy" width="804" height="454">
+            <img src="../img/sede-cucuta-espera.webp" alt="Waiting area at the OralTech Cúcuta location" loading="lazy" width="656" height="458">
             <figcaption>Waiting area</figcaption>
           </figure>
         </div>
       </div>
 
       <div class="gal-panel" data-sede="medellin" role="tabpanel">
-        <div class="gal-mosaico">
+        <div class="gal-mosaico gal-mosaico-espejo">
           <figure class="gal-foto">
             <img src="../img/sede-medellin-recepcion.webp" alt="Front desk at OralTech in El Poblado, Medellín, with the logo on a slatted wood wall" loading="lazy" width="1130" height="798">
             <figcaption>Front desk · El Poblado</figcaption>
           </figure>
           <figure class="gal-foto">
-            <img src="../img/sede-medellin-consultorio.webp" alt="Treatment room at OralTech in Medellín, with a blue dental chair" loading="lazy" width="732" height="495">
+            <img src="../img/sede-medellin-consultorio.webp" alt="Treatment room at OralTech in Medellín, with a blue dental chair" loading="lazy" width="735" height="444">
             <figcaption>Treatment room</figcaption>
           </figure>
           <figure class="gal-foto">
