@@ -37,8 +37,14 @@
   }
   .caso img {
     width: 100%;
+    /* height:auto NO es decorativo: sin él, el atributo height="566" del
+       HTML actúa como height:566px y el navegador IGNORA el aspect-ratio.
+       Medido: las 11 fotos salían en un marco 0,67 (vertical) siendo 1,59
+       (horizontales) y se perdía el 58% de cada una: solo se veía la franja
+       central de dientes. */
+    height: auto;
     display: block;
-    aspect-ratio: 1.59 / 1;
+    aspect-ratio: 898 / 566;   /* la proporción exacta de sus fotos */
     object-fit: cover;
   }
   .caso figcaption {

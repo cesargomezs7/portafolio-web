@@ -24,6 +24,17 @@
        <source media>. Hacerlo por JS provocaba una descarga doble (medido:
        16,7 MB en celular en vez de 5). */
 
+    /* El marco toma la proporción REAL del video en cuanto se conoce.
+       El de escritorio es 1280x720 (16:9) y el de celular 720x450 (1,60):
+       con un 16/9 fijo, al de celular le cortaba los lados. */
+    var ajustarProporcion = function () {
+      if (!v.videoWidth || !v.videoHeight) return;
+      var caja = v.closest('.hv-pantalla');
+      if (caja) caja.style.setProperty('--ratio-video', v.videoWidth + ' / ' + v.videoHeight);
+    };
+    v.addEventListener('loadedmetadata', ajustarProporcion);
+    ajustarProporcion();
+
     var intento = v.play();
     if (intento && intento.catch) {
       intento.catch(function () {
@@ -73,148 +84,144 @@
          segundo exacto de reproducción, así el que va saliendo
          por arriba va igual de avanzado que su gemelo de abajo;
        · al pasar el ratón, la cinta y los videos se detienen.  */
-  (function carrusel() {
-    var wrap = document.querySelector('.vt-wrap');
-    if (!wrap) return;
-    var tarjetas = [].slice.call(wrap.querySelectorAll('.vt-card'));
-    if (!tarjetas.length) return;
+  (function anilloTestimonios() {
+    /* Seis testimonios en seis posiciones. Cada tanto, todos avanzan
+       una posición siguiendo el anillo:
 
-    var reloj = {};   // segundo compartido por cada testimonio
+            arriba   [2] <- [1] <- [0]
+                      |              ^
+            abajo    [3] -> [4] -> [5]
 
+       Ninguna tarjeta queda cortada por el borde: se mueven de una
+       posición a otra, siempre enteras. Un video a medias no se puede
+       ver, que es justo lo que fallaba con la cinta continua. */
+    var anillo = document.getElementById('vtAnillo');
+    if (!anillo) return;
+    var tarjetas = [].slice.call(anillo.querySelectorAll('.vt-card'));
+    if (tarjetas.length !== 6) return;
+
+    var PASOS = 6, giro = 0, detenido = false, reloj = null;
+
+    /* posición -> columna y fila, en el orden en que viajan */
+    function coordenadas(slot) {
+      return slot < 3 ? { col: 2 - slot, fila: 0 } : { col: slot - 3, fila: 1 };
+    }
+
+    function colocar(animado) {
+      /* ⚠ NO leer --vt-card con getComputedStyle: es un calc() y el navegador
+         devuelve la cadena literal sin resolver, así que parseFloat da NaN y
+         el transform queda inválido (medido: las 6 tarjetas apiladas en 0,0).
+         Se mide la geometría real. Y con offsetWidth/offsetHeight, no con
+         getBoundingClientRect: bajo body{zoom} el rect viene escalado y el
+         transform se aplica en píxeles CSS. */
+      var ancho = tarjetas[0].offsetWidth;
+      var alto  = tarjetas[0].offsetHeight;
+      var hueco = parseFloat(getComputedStyle(anillo).getPropertyValue('--vt-hueco')) || 18;
+      if (!ancho || !alto) return;
+      anillo.style.height = (alto * 2 + hueco) + 'px';
+      tarjetas.forEach(function (c, i) {
+        var s = (i + giro) % PASOS;
+        var p = coordenadas(s);
+        if (!animado) c.style.transition = 'none';
+        c.style.setProperty('--x', (p.col * (ancho + hueco)) + 'px');
+        c.style.setProperty('--y', (p.fila * (alto + hueco)) + 'px');
+        if (!animado) { c.offsetHeight; c.style.transition = ''; }
+      });
+    }
+
+    function avanzar() { if (!detenido) { giro = (giro + 1) % PASOS; colocar(true); } }
+
+    function arrancarReloj() {
+      if (reloj) clearInterval(reloj);
+      if (!reducido) reloj = setInterval(avanzar, 4200);
+    }
+
+    /* ── el video de cada tarjeta ── */
     function crearVideo(card) {
-      if (card.querySelector('video')) return card.querySelector('video');
+      var v = card.querySelector('video');
+      if (v) return v;
       var src = card.getAttribute('data-video');
       if (!src) return null;
-      var v = document.createElement('video');
-      v.muted = true;                 // requisito del autoplay
-      v.defaultMuted = true;
-      v.loop = true;
+      v = document.createElement('video');
+      v.muted = true; v.defaultMuted = true; v.loop = true;
       v.playsInline = true;
-      v.setAttribute('playsinline', '');
-      v.setAttribute('muted', '');
+      v.setAttribute('playsinline', ''); v.setAttribute('muted', '');
       v.preload = 'auto';
       var poster = card.querySelector('.vt-poster');
       if (poster) v.poster = poster.getAttribute('src');
       v.src = src;
       card.insertBefore(v, card.firstChild);
-      // se engancha al segundo que lleve su gemelo
-      var t = reloj[src] || 0;
-      v.addEventListener('loadedmetadata', function () {
-        if (v.duration && t) { try { v.currentTime = t % v.duration; } catch (e) {} }
-      });
       return v;
     }
 
-    function soltar(card) {
-      var v = card.querySelector('video');
-      if (!v) return;
-      reloj[card.getAttribute('data-video')] = v.currentTime;
-      v.pause(); v.removeAttribute('src'); v.load(); v.remove();
-      card.classList.remove('reproduciendo');
+    function reproducirTodos() {
+      tarjetas.forEach(function (c) {
+        var v = crearVideo(c);
+        if (v && v.paused) { var p = v.play(); if (p && p.catch) p.catch(function () {}); }
+      });
+    }
+    function pausarTodos() {
+      tarjetas.forEach(function (c) {
+        var v = c.querySelector('video');
+        if (v && !v.paused) v.pause();
+      });
     }
 
-    var pausado = false;
+    /* Solo se crean y reproducen cuando la sección está a la vista */
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (es) {
+        es.forEach(function (e) {
+          if (e.isIntersecting) { if (!reducido) reproducirTodos(); arrancarReloj(); }
+          else { pausarTodos(); if (reloj) { clearInterval(reloj); reloj = null; } }
+        });
+      }, { threshold: 0.12 }).observe(anillo);
+    } else { reproducirTodos(); arrancarReloj(); }
 
-    function arrancar(card) {
+    /* ── enfoque: cursor encima = se detiene el anillo y salen los
+          controles del video (avance, tiempo y volumen) ── */
+    function enfocar(card) {
+      detenido = true;
+      tarjetas.forEach(function (o) {
+        if (o === card) return;
+        var ov = o.querySelector('video');
+        o.classList.remove('enfoque');
+        if (ov) { ov.controls = false; ov.muted = true; ov.loop = true; }
+      });
       var v = crearVideo(card);
       if (!v) return;
-      card.classList.add('reproduciendo');
-      if (!pausado) { var p = v.play(); if (p && p.catch) p.catch(function () {}); }
+      card.classList.add('enfoque');
+      v.controls = true; v.loop = false; v.muted = false;
+      var p = v.play(); if (p && p.catch) p.catch(function () { v.muted = true; v.play(); });
+    }
+    function soltar(card) {
+      var v = card.querySelector('video');
+      card.classList.remove('enfoque');
+      if (v) { v.controls = false; v.muted = true; v.loop = true;
+               var p = v.play(); if (p && p.catch) p.catch(function () {}); }
+      detenido = false;
     }
 
-    if (reducido) {
-      /* Quien pidió menos movimiento no recibe autoplay. Pero la tarjeta
-         no puede quedarse muerta: al pulsarla, se reproduce. */
-      tarjetas.forEach(function (c) {
-        c.addEventListener('click', function () {
-          var v = c.querySelector('video');
-          if (v) { soltar(c); return; }
-          v = crearVideo(c);
-          if (!v) return;
-          v.muted = false; v.controls = true; v.loop = false;
-          c.classList.add('reproduciendo');
-          var pr = v.play(); if (pr && pr.catch) pr.catch(function () {});
-        });
+    tarjetas.forEach(function (c) {
+      c.addEventListener('mouseenter', function () { enfocar(c); });
+      c.addEventListener('mouseleave', function () { soltar(c); });
+      c.addEventListener('click', function (e) {
+        if (c.classList.contains('enfoque')) return;   // el clic va a los controles
+        e.preventDefault(); enfocar(c);
       });
-    }
-
-    if ('IntersectionObserver' in window && !reducido) {
-      var obs = new IntersectionObserver(function (es) {
-        es.forEach(function (e) {
-          if (e.isIntersecting) arrancar(e.target);
-          else soltar(e.target);
-        });
-      }, { root: null, rootMargin: '120px', threshold: 0.25 });
-      tarjetas.forEach(function (c) { obs.observe(c); });
-    }
-
-    /* Sincronía: cada segundo, todas las copias de un mismo
-       testimonio se alinean con la que va más adelantada. Sin
-       esto, las dos filas se van separando con el tiempo. */
-    setInterval(function () {
-      var lider = {};
-      tarjetas.forEach(function (c) {
-        var v = c.querySelector('video');
-        if (!v || v.readyState < 2) return;
-        var k = c.getAttribute('data-video');
-        if (lider[k] === undefined || v.currentTime > lider[k]) lider[k] = v.currentTime;
-      });
-      tarjetas.forEach(function (c) {
-        var v = c.querySelector('video');
-        if (!v || v.readyState < 2 || !v.duration) return;
-        var k = c.getAttribute('data-video');
-        var meta = lider[k];
-        if (meta !== undefined && Math.abs(v.currentTime - meta) > 0.2) {
-          try { v.currentTime = meta % v.duration; } catch (e) {}
-        }
-        reloj[k] = meta;
-      });
-    }, 700);
-
-    /* Tocar una tarjeta le pone sonido (y silencia las demás). Los
-       videos van en silencio porque el autoplay lo exige, así que
-       este es el único modo de oír a un paciente. */
-    if (!reducido) {
-      tarjetas.forEach(function (c) {
-        c.addEventListener('click', function () {
-          var v = c.querySelector('video');
-          if (!v) return;
-          var eraMudo = v.muted;
-          tarjetas.forEach(function (o) {
-            var ov = o.querySelector('video');
-            if (ov) { ov.muted = true; }
-            o.classList.remove('con-sonido');
-          });
-          if (eraMudo) {
-            v.muted = false;
-            c.classList.add('con-sonido');
-            if (v.paused) { var pr = v.play(); if (pr && pr.catch) pr.catch(function () {}); }
-          }
-        });
-      });
-    }
-
-    /* Al pasar el ratón se detiene todo: la cinta (CSS) y los videos. */
-    function congelar(si) {
-      pausado = si;
-      wrap.querySelectorAll('.vt-fila').forEach(function (f) {
-        f.style.animationPlayState = si ? 'paused' : '';
-      });
-      tarjetas.forEach(function (c) {
-        var v = c.querySelector('video');
-        if (!v) return;
-        if (si) v.pause();
-        else { var p = v.play(); if (p && p.catch) p.catch(function () {}); }
-      });
-    }
-    wrap.addEventListener('mouseenter', function () { congelar(true); });
-    wrap.addEventListener('mouseleave', function () { congelar(false); });
-
-    // Con la pestaña en segundo plano, nada de gastar batería.
-    document.addEventListener('visibilitychange', function () {
-      if (document.hidden) congelar(true);
-      else if (!wrap.matches(':hover')) congelar(false);
     });
+    document.addEventListener('click', function (e) {
+      if (!anillo.contains(e.target)) {
+        tarjetas.forEach(function (c) { if (c.classList.contains('enfoque')) soltar(c); });
+      }
+    });
+
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden) { pausarTodos(); if (reloj) { clearInterval(reloj); reloj = null; } }
+      else { reproducirTodos(); arrancarReloj(); }
+    });
+
+    window.addEventListener('resize', function () { colocar(false); });
+    colocar(false);
   })();
 
   /* ── 4 · Burbuja de WhatsApp con las dos sedes ───────────── */

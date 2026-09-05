@@ -291,11 +291,25 @@
         <input type="text" name="nombre" placeholder="Nombre completo" required>
         <input type="tel" name="telefono" placeholder="Teléfono / WhatsApp" required>
         <input type="email" name="email" placeholder="Correo electrónico" required>
-        <select name="sede" required>
-          <option value="">¿En qué sede quieres tu cita?</option>
-          <option value="Cúcuta">Cúcuta · Quinta Oriental</option>
-          <option value="Medellín">Medellín · El Poblado</option>
-        </select>
+        <div class="campo-sede">
+              <span class="campo-sede-titulo">¿En cuál sede quieres que te atendamos?</span>
+              <div class="sede-ops">
+                <label class="sede-op">
+                  <input type="radio" name="sede" value="Cúcuta" checked required>
+                  <span class="sede-op-caja">
+                    <span class="sede-chulo" aria-hidden="true"></span>
+                    <span class="sede-op-txt"><strong>Cúcuta</strong><span>Quinta Oriental</span></span>
+                  </span>
+                </label>
+                <label class="sede-op">
+                  <input type="radio" name="sede" value="Medellín">
+                  <span class="sede-op-caja">
+                    <span class="sede-chulo" aria-hidden="true"></span>
+                    <span class="sede-op-txt"><strong>Medellín</strong><span>El Poblado</span></span>
+                  </span>
+                </label>
+              </div>
+        </div>
         <select name="servicio">
           <option value="">Tratamiento de interés (opcional)</option>
           <option value="Diseño de sonrisa">Diseño de sonrisa</option>

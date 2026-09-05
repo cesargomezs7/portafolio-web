@@ -474,9 +474,6 @@ body.has-banner .scroll-progress { top: 36px; }
       </div>
     </div>
 
-    <div class="hv-chip hv-chip-1"><span class="chip-estrella">★</span> 5,0 <span class="chip-sub">en Google · Cúcuta</span></div>
-    <div class="hv-chip hv-chip-2"><span class="chip-estrella">★</span> 4,6 <span class="chip-sub">en Google · Medellín</span></div>
-
     <a href="https://wa.me/573224130747?text=Hola%20OralTech,%20vengo%20de%20su%20p%C3%A1gina%20web%20y%20quiero%20agendar%20una%20cita&utm_source=web&utm_medium=hero&utm_campaign=agendar"
        target="_blank" class="hero-cta hv-cta">
       Agendar por WhatsApp
@@ -505,10 +502,25 @@ body.has-banner .scroll-progress { top: 36px; }
       <input type="text" name="nombre" placeholder="Nombre completo" required>
       <input type="tel" name="telefono" placeholder="Teléfono / WhatsApp" required>
       <input type="email" name="email" placeholder="Correo electrónico" required>
-      <select name="sede">
-        <option value="Cúcuta">Sede Cúcuta · Quinta Oriental</option>
-        <option value="Medellín">Sede Medellín · El Poblado</option>
-      </select>
+      <div class="campo-sede">
+        <span class="campo-sede-titulo">¿En cuál sede quieres que te atendamos?</span>
+        <div class="sede-ops">
+          <label class="sede-op">
+            <input type="radio" name="sede" value="Cúcuta" checked required>
+            <span class="sede-op-caja">
+              <span class="sede-chulo" aria-hidden="true"></span>
+              <span class="sede-op-txt"><strong>Cúcuta</strong><span>Quinta Oriental</span></span>
+            </span>
+          </label>
+          <label class="sede-op">
+            <input type="radio" name="sede" value="Medellín">
+            <span class="sede-op-caja">
+              <span class="sede-chulo" aria-hidden="true"></span>
+              <span class="sede-op-txt"><strong>Medellín</strong><span>El Poblado</span></span>
+            </span>
+          </label>
+        </div>
+      </div>
       <select name="servicio">
         <option value="">Servicio de interés (opcional)</option>
         <option value="Diseño de sonrisa">Diseño de sonrisa</option>
@@ -596,56 +608,27 @@ body.has-banner .scroll-progress { top: 36px; }
     </h2>
     <p class="reveal" style="font-size:16px;color:var(--black);opacity:.75;max-width:600px;line-height:1.65;">
       Pacientes que vinieron desde otros países a tratarse con nosotros.
-      Van en silencio: toca uno para escucharlo. Pasa el cursor y se detienen.
+      Van solos y en silencio. Pon el cursor sobre cualquiera y se detiene todo: ese te muestra los controles para oírlo, adelantarlo o subirle el volumen.
     </p>
   </div>
 
   <div class="vt-wrap reveal">
-    <!-- Las tarjetas son PÓSTERS, no <video>: 36 elementos de video en la
-         portada sería un derroche. El <video> se crea al pulsar (oraltech.js).
-         Cada fila lleva los seis testimonios repetidos TRES veces para que el
-         bucle de -33,3333% cierre sin costura en cualquier ancho de pantalla. -->
-    <div class="vt-fila vt-fila-a">
-      <button class="vt-card" type="button" data-video="video/testimonio-sean-inglaterra.mp4" aria-label="Reproducir el testimonio de Sean"><img class="vt-poster" src="video/testimonio-sean-inglaterra-poster.jpg" alt="Testimonio en video de Sean, paciente de OralTech, desde Inglaterra" loading="lazy" width="720" height="1280"><span class="vt-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span class="vt-overlay"><span class="vt-lugar">Sean</span><span class="vt-sub">Inglaterra</span></span></button>
-      <button class="vt-card" type="button" data-video="video/testimonio-marcelo-panama.mp4" aria-label="Reproducir el testimonio de Marcelo"><img class="vt-poster" src="video/testimonio-marcelo-panama-poster.jpg" alt="Testimonio en video de Marcelo, paciente de OralTech, desde Panamá" loading="lazy" width="720" height="1280"><span class="vt-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span class="vt-overlay"><span class="vt-lugar">Marcelo</span><span class="vt-sub">Panamá</span></span></button>
-      <button class="vt-card" type="button" data-video="video/testimonio-alemania.mp4" aria-label="Reproducir el testimonio de Paciente"><img class="vt-poster" src="video/testimonio-alemania-poster.jpg" alt="Testimonio en video de Paciente, paciente de OralTech, desde Alemania" loading="lazy" width="720" height="1280"><span class="vt-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span class="vt-overlay"><span class="vt-lugar">Paciente</span><span class="vt-sub">Alemania</span></span></button>
-      <button class="vt-card" type="button" data-video="video/testimonio-sherlyn-costa-rica.mp4" aria-label="Reproducir el testimonio de Sherlyn"><img class="vt-poster" src="video/testimonio-sherlyn-costa-rica-poster.jpg" alt="Testimonio en video de Sherlyn, paciente de OralTech, desde Costa Rica" loading="lazy" width="720" height="1280"><span class="vt-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span class="vt-overlay"><span class="vt-lugar">Sherlyn</span><span class="vt-sub">Costa Rica</span></span></button>
-      <button class="vt-card" type="button" data-video="video/testimonio-jordan-estados-unidos.mp4" aria-label="Reproducir el testimonio de Jordan"><img class="vt-poster" src="video/testimonio-jordan-estados-unidos-poster.jpg" alt="Testimonio en video de Jordan, paciente de OralTech, desde Estados Unidos" loading="lazy" width="720" height="1280"><span class="vt-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span class="vt-overlay"><span class="vt-lugar">Jordan</span><span class="vt-sub">Estados Unidos</span></span></button>
-      <button class="vt-card" type="button" data-video="video/testimonio-daniel-paris.mp4" aria-label="Reproducir el testimonio de Daniel"><img class="vt-poster" src="video/testimonio-daniel-paris-poster.jpg" alt="Testimonio en video de Daniel, paciente de OralTech, desde París" loading="lazy" width="720" height="1280"><span class="vt-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span class="vt-overlay"><span class="vt-lugar">Daniel</span><span class="vt-sub">París</span></span></button>
-      <button class="vt-card" type="button" data-video="video/testimonio-sean-inglaterra.mp4" aria-label="Reproducir el testimonio de Sean" aria-hidden="true" tabindex="-1"><img class="vt-poster" src="video/testimonio-sean-inglaterra-poster.jpg" alt="Testimonio en video de Sean, paciente de OralTech, desde Inglaterra" loading="lazy" width="720" height="1280"><span class="vt-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span class="vt-overlay"><span class="vt-lugar">Sean</span><span class="vt-sub">Inglaterra</span></span></button>
-      <button class="vt-card" type="button" data-video="video/testimonio-marcelo-panama.mp4" aria-label="Reproducir el testimonio de Marcelo" aria-hidden="true" tabindex="-1"><img class="vt-poster" src="video/testimonio-marcelo-panama-poster.jpg" alt="Testimonio en video de Marcelo, paciente de OralTech, desde Panamá" loading="lazy" width="720" height="1280"><span class="vt-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span class="vt-overlay"><span class="vt-lugar">Marcelo</span><span class="vt-sub">Panamá</span></span></button>
-      <button class="vt-card" type="button" data-video="video/testimonio-alemania.mp4" aria-label="Reproducir el testimonio de Paciente" aria-hidden="true" tabindex="-1"><img class="vt-poster" src="video/testimonio-alemania-poster.jpg" alt="Testimonio en video de Paciente, paciente de OralTech, desde Alemania" loading="lazy" width="720" height="1280"><span class="vt-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span class="vt-overlay"><span class="vt-lugar">Paciente</span><span class="vt-sub">Alemania</span></span></button>
-      <button class="vt-card" type="button" data-video="video/testimonio-sherlyn-costa-rica.mp4" aria-label="Reproducir el testimonio de Sherlyn" aria-hidden="true" tabindex="-1"><img class="vt-poster" src="video/testimonio-sherlyn-costa-rica-poster.jpg" alt="Testimonio en video de Sherlyn, paciente de OralTech, desde Costa Rica" loading="lazy" width="720" height="1280"><span class="vt-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span class="vt-overlay"><span class="vt-lugar">Sherlyn</span><span class="vt-sub">Costa Rica</span></span></button>
-      <button class="vt-card" type="button" data-video="video/testimonio-jordan-estados-unidos.mp4" aria-label="Reproducir el testimonio de Jordan" aria-hidden="true" tabindex="-1"><img class="vt-poster" src="video/testimonio-jordan-estados-unidos-poster.jpg" alt="Testimonio en video de Jordan, paciente de OralTech, desde Estados Unidos" loading="lazy" width="720" height="1280"><span class="vt-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span class="vt-overlay"><span class="vt-lugar">Jordan</span><span class="vt-sub">Estados Unidos</span></span></button>
-      <button class="vt-card" type="button" data-video="video/testimonio-daniel-paris.mp4" aria-label="Reproducir el testimonio de Daniel" aria-hidden="true" tabindex="-1"><img class="vt-poster" src="video/testimonio-daniel-paris-poster.jpg" alt="Testimonio en video de Daniel, paciente de OralTech, desde París" loading="lazy" width="720" height="1280"><span class="vt-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span class="vt-overlay"><span class="vt-lugar">Daniel</span><span class="vt-sub">París</span></span></button>
-      <button class="vt-card" type="button" data-video="video/testimonio-sean-inglaterra.mp4" aria-label="Reproducir el testimonio de Sean" aria-hidden="true" tabindex="-1"><img class="vt-poster" src="video/testimonio-sean-inglaterra-poster.jpg" alt="Testimonio en video de Sean, paciente de OralTech, desde Inglaterra" loading="lazy" width="720" height="1280"><span class="vt-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span class="vt-overlay"><span class="vt-lugar">Sean</span><span class="vt-sub">Inglaterra</span></span></button>
-      <button class="vt-card" type="button" data-video="video/testimonio-marcelo-panama.mp4" aria-label="Reproducir el testimonio de Marcelo" aria-hidden="true" tabindex="-1"><img class="vt-poster" src="video/testimonio-marcelo-panama-poster.jpg" alt="Testimonio en video de Marcelo, paciente de OralTech, desde Panamá" loading="lazy" width="720" height="1280"><span class="vt-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span class="vt-overlay"><span class="vt-lugar">Marcelo</span><span class="vt-sub">Panamá</span></span></button>
-      <button class="vt-card" type="button" data-video="video/testimonio-alemania.mp4" aria-label="Reproducir el testimonio de Paciente" aria-hidden="true" tabindex="-1"><img class="vt-poster" src="video/testimonio-alemania-poster.jpg" alt="Testimonio en video de Paciente, paciente de OralTech, desde Alemania" loading="lazy" width="720" height="1280"><span class="vt-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span class="vt-overlay"><span class="vt-lugar">Paciente</span><span class="vt-sub">Alemania</span></span></button>
-      <button class="vt-card" type="button" data-video="video/testimonio-sherlyn-costa-rica.mp4" aria-label="Reproducir el testimonio de Sherlyn" aria-hidden="true" tabindex="-1"><img class="vt-poster" src="video/testimonio-sherlyn-costa-rica-poster.jpg" alt="Testimonio en video de Sherlyn, paciente de OralTech, desde Costa Rica" loading="lazy" width="720" height="1280"><span class="vt-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span class="vt-overlay"><span class="vt-lugar">Sherlyn</span><span class="vt-sub">Costa Rica</span></span></button>
-      <button class="vt-card" type="button" data-video="video/testimonio-jordan-estados-unidos.mp4" aria-label="Reproducir el testimonio de Jordan" aria-hidden="true" tabindex="-1"><img class="vt-poster" src="video/testimonio-jordan-estados-unidos-poster.jpg" alt="Testimonio en video de Jordan, paciente de OralTech, desde Estados Unidos" loading="lazy" width="720" height="1280"><span class="vt-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span class="vt-overlay"><span class="vt-lugar">Jordan</span><span class="vt-sub">Estados Unidos</span></span></button>
-      <button class="vt-card" type="button" data-video="video/testimonio-daniel-paris.mp4" aria-label="Reproducir el testimonio de Daniel" aria-hidden="true" tabindex="-1"><img class="vt-poster" src="video/testimonio-daniel-paris-poster.jpg" alt="Testimonio en video de Daniel, paciente de OralTech, desde París" loading="lazy" width="720" height="1280"><span class="vt-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span class="vt-overlay"><span class="vt-lugar">Daniel</span><span class="vt-sub">París</span></span></button>
+    <!-- SEIS tarjetas, ni una más: tres arriba y tres abajo, todas enteras.
+         No es una cinta continua (ahí las tarjetas quedan cortadas por el
+         borde y un video a medias no se puede ver). Es un anillo de seis
+         posiciones: la fila de arriba corre a la izquierda, la que sale baja
+         a la izquierda de abajo, la de abajo corre a la derecha y la que
+         llega al final sube a la derecha de arriba. assets/oraltech.js -->
+    <div class="vt-anillo" id="vtAnillo">
+      <button class="vt-card" type="button" data-i="0" data-video="video/testimonio-sean-inglaterra.mp4" aria-label="Ver el testimonio de Sean"><img class="vt-poster" src="video/testimonio-sean-inglaterra-poster.jpg" alt="Testimonio en video de Sean, paciente de OralTech, desde Inglaterra" loading="lazy" width="720" height="1280"><span class="vt-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span class="vt-overlay"><span class="vt-lugar">Sean</span><span class="vt-sub">Inglaterra</span></span></button>
+      <button class="vt-card" type="button" data-i="1" data-video="video/testimonio-marcelo-panama.mp4" aria-label="Ver el testimonio de Marcelo"><img class="vt-poster" src="video/testimonio-marcelo-panama-poster.jpg" alt="Testimonio en video de Marcelo, paciente de OralTech, desde Panamá" loading="lazy" width="720" height="1280"><span class="vt-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span class="vt-overlay"><span class="vt-lugar">Marcelo</span><span class="vt-sub">Panamá</span></span></button>
+      <button class="vt-card" type="button" data-i="2" data-video="video/testimonio-alemania.mp4" aria-label="Ver el testimonio de Paciente"><img class="vt-poster" src="video/testimonio-alemania-poster.jpg" alt="Testimonio en video de Paciente, paciente de OralTech, desde Alemania" loading="lazy" width="720" height="1280"><span class="vt-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span class="vt-overlay"><span class="vt-lugar">Paciente</span><span class="vt-sub">Alemania</span></span></button>
+      <button class="vt-card" type="button" data-i="3" data-video="video/testimonio-sherlyn-costa-rica.mp4" aria-label="Ver el testimonio de Sherlyn"><img class="vt-poster" src="video/testimonio-sherlyn-costa-rica-poster.jpg" alt="Testimonio en video de Sherlyn, paciente de OralTech, desde Costa Rica" loading="lazy" width="720" height="1280"><span class="vt-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span class="vt-overlay"><span class="vt-lugar">Sherlyn</span><span class="vt-sub">Costa Rica</span></span></button>
+      <button class="vt-card" type="button" data-i="4" data-video="video/testimonio-jordan-estados-unidos.mp4" aria-label="Ver el testimonio de Jordan"><img class="vt-poster" src="video/testimonio-jordan-estados-unidos-poster.jpg" alt="Testimonio en video de Jordan, paciente de OralTech, desde Estados Unidos" loading="lazy" width="720" height="1280"><span class="vt-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span class="vt-overlay"><span class="vt-lugar">Jordan</span><span class="vt-sub">Estados Unidos</span></span></button>
+      <button class="vt-card" type="button" data-i="5" data-video="video/testimonio-daniel-paris.mp4" aria-label="Ver el testimonio de Daniel"><img class="vt-poster" src="video/testimonio-daniel-paris-poster.jpg" alt="Testimonio en video de Daniel, paciente de OralTech, desde París" loading="lazy" width="720" height="1280"><span class="vt-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span class="vt-overlay"><span class="vt-lugar">Daniel</span><span class="vt-sub">París</span></span></button>
     </div>
-
-    <div class="vt-fila vt-fila-b">
-      <button class="vt-card" type="button" data-video="video/testimonio-daniel-paris.mp4" aria-label="Reproducir el testimonio de Daniel"><img class="vt-poster" src="video/testimonio-daniel-paris-poster.jpg" alt="Testimonio en video de Daniel, paciente de OralTech, desde París" loading="lazy" width="720" height="1280"><span class="vt-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span class="vt-overlay"><span class="vt-lugar">Daniel</span><span class="vt-sub">París</span></span></button>
-      <button class="vt-card" type="button" data-video="video/testimonio-jordan-estados-unidos.mp4" aria-label="Reproducir el testimonio de Jordan"><img class="vt-poster" src="video/testimonio-jordan-estados-unidos-poster.jpg" alt="Testimonio en video de Jordan, paciente de OralTech, desde Estados Unidos" loading="lazy" width="720" height="1280"><span class="vt-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span class="vt-overlay"><span class="vt-lugar">Jordan</span><span class="vt-sub">Estados Unidos</span></span></button>
-      <button class="vt-card" type="button" data-video="video/testimonio-sherlyn-costa-rica.mp4" aria-label="Reproducir el testimonio de Sherlyn"><img class="vt-poster" src="video/testimonio-sherlyn-costa-rica-poster.jpg" alt="Testimonio en video de Sherlyn, paciente de OralTech, desde Costa Rica" loading="lazy" width="720" height="1280"><span class="vt-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span class="vt-overlay"><span class="vt-lugar">Sherlyn</span><span class="vt-sub">Costa Rica</span></span></button>
-      <button class="vt-card" type="button" data-video="video/testimonio-alemania.mp4" aria-label="Reproducir el testimonio de Paciente"><img class="vt-poster" src="video/testimonio-alemania-poster.jpg" alt="Testimonio en video de Paciente, paciente de OralTech, desde Alemania" loading="lazy" width="720" height="1280"><span class="vt-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span class="vt-overlay"><span class="vt-lugar">Paciente</span><span class="vt-sub">Alemania</span></span></button>
-      <button class="vt-card" type="button" data-video="video/testimonio-marcelo-panama.mp4" aria-label="Reproducir el testimonio de Marcelo"><img class="vt-poster" src="video/testimonio-marcelo-panama-poster.jpg" alt="Testimonio en video de Marcelo, paciente de OralTech, desde Panamá" loading="lazy" width="720" height="1280"><span class="vt-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span class="vt-overlay"><span class="vt-lugar">Marcelo</span><span class="vt-sub">Panamá</span></span></button>
-      <button class="vt-card" type="button" data-video="video/testimonio-sean-inglaterra.mp4" aria-label="Reproducir el testimonio de Sean"><img class="vt-poster" src="video/testimonio-sean-inglaterra-poster.jpg" alt="Testimonio en video de Sean, paciente de OralTech, desde Inglaterra" loading="lazy" width="720" height="1280"><span class="vt-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span class="vt-overlay"><span class="vt-lugar">Sean</span><span class="vt-sub">Inglaterra</span></span></button>
-      <button class="vt-card" type="button" data-video="video/testimonio-daniel-paris.mp4" aria-label="Reproducir el testimonio de Daniel" aria-hidden="true" tabindex="-1"><img class="vt-poster" src="video/testimonio-daniel-paris-poster.jpg" alt="Testimonio en video de Daniel, paciente de OralTech, desde París" loading="lazy" width="720" height="1280"><span class="vt-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span class="vt-overlay"><span class="vt-lugar">Daniel</span><span class="vt-sub">París</span></span></button>
-      <button class="vt-card" type="button" data-video="video/testimonio-jordan-estados-unidos.mp4" aria-label="Reproducir el testimonio de Jordan" aria-hidden="true" tabindex="-1"><img class="vt-poster" src="video/testimonio-jordan-estados-unidos-poster.jpg" alt="Testimonio en video de Jordan, paciente de OralTech, desde Estados Unidos" loading="lazy" width="720" height="1280"><span class="vt-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span class="vt-overlay"><span class="vt-lugar">Jordan</span><span class="vt-sub">Estados Unidos</span></span></button>
-      <button class="vt-card" type="button" data-video="video/testimonio-sherlyn-costa-rica.mp4" aria-label="Reproducir el testimonio de Sherlyn" aria-hidden="true" tabindex="-1"><img class="vt-poster" src="video/testimonio-sherlyn-costa-rica-poster.jpg" alt="Testimonio en video de Sherlyn, paciente de OralTech, desde Costa Rica" loading="lazy" width="720" height="1280"><span class="vt-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span class="vt-overlay"><span class="vt-lugar">Sherlyn</span><span class="vt-sub">Costa Rica</span></span></button>
-      <button class="vt-card" type="button" data-video="video/testimonio-alemania.mp4" aria-label="Reproducir el testimonio de Paciente" aria-hidden="true" tabindex="-1"><img class="vt-poster" src="video/testimonio-alemania-poster.jpg" alt="Testimonio en video de Paciente, paciente de OralTech, desde Alemania" loading="lazy" width="720" height="1280"><span class="vt-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span class="vt-overlay"><span class="vt-lugar">Paciente</span><span class="vt-sub">Alemania</span></span></button>
-      <button class="vt-card" type="button" data-video="video/testimonio-marcelo-panama.mp4" aria-label="Reproducir el testimonio de Marcelo" aria-hidden="true" tabindex="-1"><img class="vt-poster" src="video/testimonio-marcelo-panama-poster.jpg" alt="Testimonio en video de Marcelo, paciente de OralTech, desde Panamá" loading="lazy" width="720" height="1280"><span class="vt-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span class="vt-overlay"><span class="vt-lugar">Marcelo</span><span class="vt-sub">Panamá</span></span></button>
-      <button class="vt-card" type="button" data-video="video/testimonio-sean-inglaterra.mp4" aria-label="Reproducir el testimonio de Sean" aria-hidden="true" tabindex="-1"><img class="vt-poster" src="video/testimonio-sean-inglaterra-poster.jpg" alt="Testimonio en video de Sean, paciente de OralTech, desde Inglaterra" loading="lazy" width="720" height="1280"><span class="vt-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span class="vt-overlay"><span class="vt-lugar">Sean</span><span class="vt-sub">Inglaterra</span></span></button>
-      <button class="vt-card" type="button" data-video="video/testimonio-daniel-paris.mp4" aria-label="Reproducir el testimonio de Daniel" aria-hidden="true" tabindex="-1"><img class="vt-poster" src="video/testimonio-daniel-paris-poster.jpg" alt="Testimonio en video de Daniel, paciente de OralTech, desde París" loading="lazy" width="720" height="1280"><span class="vt-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span class="vt-overlay"><span class="vt-lugar">Daniel</span><span class="vt-sub">París</span></span></button>
-      <button class="vt-card" type="button" data-video="video/testimonio-jordan-estados-unidos.mp4" aria-label="Reproducir el testimonio de Jordan" aria-hidden="true" tabindex="-1"><img class="vt-poster" src="video/testimonio-jordan-estados-unidos-poster.jpg" alt="Testimonio en video de Jordan, paciente de OralTech, desde Estados Unidos" loading="lazy" width="720" height="1280"><span class="vt-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span class="vt-overlay"><span class="vt-lugar">Jordan</span><span class="vt-sub">Estados Unidos</span></span></button>
-      <button class="vt-card" type="button" data-video="video/testimonio-sherlyn-costa-rica.mp4" aria-label="Reproducir el testimonio de Sherlyn" aria-hidden="true" tabindex="-1"><img class="vt-poster" src="video/testimonio-sherlyn-costa-rica-poster.jpg" alt="Testimonio en video de Sherlyn, paciente de OralTech, desde Costa Rica" loading="lazy" width="720" height="1280"><span class="vt-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span class="vt-overlay"><span class="vt-lugar">Sherlyn</span><span class="vt-sub">Costa Rica</span></span></button>
-      <button class="vt-card" type="button" data-video="video/testimonio-alemania.mp4" aria-label="Reproducir el testimonio de Paciente" aria-hidden="true" tabindex="-1"><img class="vt-poster" src="video/testimonio-alemania-poster.jpg" alt="Testimonio en video de Paciente, paciente de OralTech, desde Alemania" loading="lazy" width="720" height="1280"><span class="vt-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span class="vt-overlay"><span class="vt-lugar">Paciente</span><span class="vt-sub">Alemania</span></span></button>
-      <button class="vt-card" type="button" data-video="video/testimonio-marcelo-panama.mp4" aria-label="Reproducir el testimonio de Marcelo" aria-hidden="true" tabindex="-1"><img class="vt-poster" src="video/testimonio-marcelo-panama-poster.jpg" alt="Testimonio en video de Marcelo, paciente de OralTech, desde Panamá" loading="lazy" width="720" height="1280"><span class="vt-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span class="vt-overlay"><span class="vt-lugar">Marcelo</span><span class="vt-sub">Panamá</span></span></button>
-      <button class="vt-card" type="button" data-video="video/testimonio-sean-inglaterra.mp4" aria-label="Reproducir el testimonio de Sean" aria-hidden="true" tabindex="-1"><img class="vt-poster" src="video/testimonio-sean-inglaterra-poster.jpg" alt="Testimonio en video de Sean, paciente de OralTech, desde Inglaterra" loading="lazy" width="720" height="1280"><span class="vt-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span class="vt-overlay"><span class="vt-lugar">Sean</span><span class="vt-sub">Inglaterra</span></span></button>
-    </div>
+  </div>
+    <span class="vt-pista-uso">Pon el cursor sobre un testimonio para escucharlo · en celular, tócalo</span>
   </div>
 
   <div class="section-inner">
@@ -747,26 +730,7 @@ body.has-banner .scroll-progress { top: 36px; }
       </div>
     </div>
 
-    <!-- Stats animados. Solo cifras verificables: las dos sedes y el número de opiniones
-         públicas de Google de cada una (4-sep-2026). Nada de años ni de pacientes.
-         Van SIN decimales a propósito: quien anima estos contadores es assets/animations.js,
-         que formatea con toFixed() y siempre pinta punto ("5.0"), nunca la coma decimal
-         colombiana. Con enteros el problema no existe; las calificaciones 5,0 y 4,6 se
-         escriben como texto en la franja de confianza, el hero y los testimonios. -->
-    <div class="stats-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:64px;padding-top:48px;border-top:1px solid var(--border);">
-      <div class="reveal">
-        <div data-counter="2" style="font-size:56px;font-weight:200;color:var(--black);letter-spacing:-0.04em;line-height:1;">0</div>
-        <div style="font-size:13px;color:var(--gray);letter-spacing:0.05em;text-transform:uppercase;margin-top:12px;font-weight:500;">Sedes · Cúcuta y Medellín</div>
-      </div>
-      <div class="reveal">
-        <div data-counter="25" style="font-size:56px;font-weight:200;color:var(--black);letter-spacing:-0.04em;line-height:1;">0</div>
-        <div style="font-size:13px;color:var(--gray);letter-spacing:0.05em;text-transform:uppercase;margin-top:12px;font-weight:500;">Opiniones en Google · Cúcuta 5,0 ★</div>
-      </div>
-      <div class="reveal">
-        <div data-counter="11" style="font-size:56px;font-weight:200;color:var(--black);letter-spacing:-0.04em;line-height:1;">0</div>
-        <div style="font-size:13px;color:var(--gray);letter-spacing:0.05em;text-transform:uppercase;margin-top:12px;font-weight:500;">Opiniones en Google · Medellín 4,6 ★</div>
-      </div>
-    </div>
+    
   </div>
 </section>
 
@@ -909,11 +873,6 @@ body.has-banner .scroll-progress { top: 36px; }
     <h2 class="section-headline reveal" style="margin-bottom:10px;">
       <span class="light">Lo que dicen</span><br><span class="b">nuestros pacientes</span>
     </h2>
-    <p class="reveal" style="font-size:16px;color:var(--black);opacity:.75;max-width:600px;line-height:1.65;">
-      <span class="estrella-oro">★</span> <strong>5,0</strong> con 25 opiniones en Cúcuta y
-      <span class="estrella-oro">★</span> <strong>4,6</strong> con 11 en Medellín. Estas son textuales,
-      tal como están publicadas en Google.
-    </p>
 
     <div class="op-carrusel reveal" id="opCarrusel">
       <div class="op-ventana">
