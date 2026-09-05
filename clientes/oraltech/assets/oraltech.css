@@ -1492,7 +1492,7 @@ body .clinic-since { font-size: 12.5px; }
    seguidas, "Caso real · Cerómero" otras tres. Ahora manda el material:
    un título y debajo sus fotos. Y las fotos, más pequeñas. */
 /* Ancho topado: sin esto las fotos salían a 378 px y dominaban la página. */
-body .casos-materiales { margin-top: 26px; max-width: 760px; }
+body .casos-materiales { margin-top: 26px; max-width: 900px; }
 body .caso-grupo + .caso-grupo { margin-top: 34px; }
 body .caso-grupo-tit {
   font-family: 'Inter', sans-serif;
@@ -1528,3 +1528,72 @@ body .comparador-vertical, body .antes-despues-vert { max-width: 380px; }
 @media (max-width: 760px) {
   body .caso-grupo-fotos { grid-template-columns: repeat(2, minmax(0,1fr)); gap: 12px; }
 }
+
+/* ══════════════════════════════════════════════════════════════════
+   BLOQUE 14 · LO QUE SALIÓ DE REVISAR LAS 22 PÁGINAS UNA POR UNA
+   Todo comprobado midiendo en el navegador, no a ojo.
+   ══════════════════════════════════════════════════════════════════ */
+
+/* 1 · Los rótulos RESINA / CERÓMERO / CERÁMICA salían a 18,9 px en
+   negrita cuando el CSS pedía 11: `body .caso-grupo-tit` es (0,1,1) y
+   pierde contra `body .section h3, body h3` (0,1,2). Con la clase del
+   grupo delante pasa a (0,2,1) y gana. Eran la letra que más gritaba
+   de toda la página, justo lo contrario de lo pedido. */
+body .caso-grupo .caso-grupo-tit {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .2em;
+  line-height: 1.2;
+  margin-bottom: 12px;
+}
+
+/* 2 · El párrafo de entrada seguía en 19 px en ortodoncia,
+   blanqueamiento e implantes: `.hero-compact .lead` de styles.css es
+   (0,2,0) y le ganaba a `body .hero-compact p` (0,1,2). */
+body .hero-compact .lead,
+body .hero .lead {
+  font-size: 15px;
+  line-height: 1.6;
+  max-width: 620px;
+}
+
+/* 3 · Los antetítulos de sección van con opacity .55 desde styles.css
+   y ninguna regla los corregía: 3,41:1 medido, por debajo del mínimo
+   de 4,5:1 para texto pequeño. Se quita la opacidad y se pone el color
+   ya calculado, que da 5,3:1 y se ve igual de discreto. */
+body .overline,
+body .section .overline { opacity: 1; color: #5C6280; }
+body .faq .overline,
+body .cta-final .overline { opacity: 1; color: rgba(255,255,255,.78); }
+
+/* 4 · La ficha de reseñas de Google tenía el MISMO problema, y ahí hay
+   un enlace de verdad (lleva a su ficha): 3,5:1. */
+body .clinic-since { opacity: 1; color: #5C6280; }
+body .clinic-since a { color: #3B4160; text-decoration: underline; }
+body .clinic-since a:hover { color: var(--black); }
+
+/* 5 · Fotos de contenido demasiado grandes. Las cuadradas salían a
+   501x501 (el 42% del ancho útil) y las bandas de apertura a 1178 de
+   ancho, o sea el 100%. */
+/* ⚠ Esta regla llevaba cinco :not() encadenados y eso la subía a (0,6,3):
+   se comía la que topa las fotos cuadradas más abajo, que es (0,3,2).
+   Como `max-width: 100%` ya es el comportamiento por defecto aquí, se
+   quita y deja de estorbar. */
+body .section figure:not(.caso-foto):not(.gal-foto) > img { max-height: 360px; width: auto; }
+body .banda-apertura img,
+body .hero-banda img { max-height: 220px; object-fit: cover; }
+
+/* Las fotos cuadradas de las páginas de servicio salían a 501x501, el 42%
+   del ancho útil. Llevan `width:100%` en el atributo style, que ninguna
+   hoja puede pisar; pero `max-width` es OTRA propiedad, así que la topa
+   sin necesidad de !important. */
+/* SOLO las fotos de las columnas .landing-split. La versión anterior de
+   esta regla llegaba también a las bandas de apertura (las aplastó de
+   1178x258 a 430x94) y a las fotos de casos.html, que crecieron. */
+/* Las tres variantes de envoltorio que usan estas páginas: la foto puede
+   colgar del div, de una <figure> hermana o de una <figure> dentro del div. */
+body .landing-split > div > img,
+body .landing-split > figure > img,
+body .landing-split > div > figure > img,
+body .landing-split > div > div > img { max-width: 430px; height: auto; }
+body .landing-split > div:has(> img) { align-self: start; }
