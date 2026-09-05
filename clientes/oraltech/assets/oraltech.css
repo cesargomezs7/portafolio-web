@@ -1695,3 +1695,82 @@ body .sede-ciudad  { font-size: 11.5px; }
   body .op-controles { flex-wrap: wrap; gap: 12px; }
   body .op-enlace { margin-left: 0; width: 100%; justify-content: center; }
 }
+
+/* ── Segunda vuelta del estudio de pantallas ──────────────────────
+   Ya no queda nada fuera de pantalla, ni scroll horizontal, ni
+   imágenes rotas, ni errores de JS. Quedaban dos cosas. */
+
+@media (max-width: 767px) {
+  /* Las banderas medían 34 px de ancho: alto ya corregido, ancho no. */
+  body .idioma-op { min-width: 44px; justify-content: center; }
+  /* El logo es un enlace de 28 px de alto: se le da altura de dedo sin
+     tocar el dibujo. */
+  body .nav-logo { min-height: 44px; display: inline-flex; align-items: center; }
+  /* Quedaban enlaces de 15 px de alto en el pie que la regla anterior no
+     alcanzaba (no todos cuelgan de .footer-col). */
+  body footer a { display: inline-flex; align-items: center; min-height: 44px; }
+  body footer .footer-brand a,
+  body footer .footer-legal a { min-height: 40px; }
+
+  /* Las etiquetas pequeñas (antetítulos, pies de foto, la coletilla del
+     logo, el país de cada testimonio) iban a 11 px. En pantalla de mano
+     eso ya cuesta leerlo: suben a 12, que es el suelo que se fijó. */
+  body .nav-logo-tag, body .overline, body .hero-tag, body .precio-label,
+  body .vt-sub, body .campo-sede-titulo, body .sede-ciudad,
+  body .footer-note, body figcaption, body .section-tag,
+  body .caso-grupo .caso-grupo-tit, body .op-nombre, body .gal-tab-sub {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 767px) {
+  /* Estos tres se resistían: sus reglas de escritorio tienen más peso de
+     selector que la lista de arriba. Se repiten con el mismo peso. */
+  body .tf-card .tf-nombre { font-size: 12px; }
+  body .vt-card .vt-sub { font-size: 12px; }
+  body .campo-sede .campo-sede-titulo,
+  body form .campo-sede-titulo { font-size: 12px; }
+
+  /* Los dos enlaces de la ficha de sede: el de WhatsApp medía 35 px de
+     alto y el "Ver la sede" 19. Con el dedo eso no se acierta. */
+  body .sede-wa { min-height: 44px; padding-top: 11px; padding-bottom: 11px; }
+  body .sede-link { display: inline-flex; align-items: center; min-height: 44px; }
+}
+
+@media (max-width: 767px) {
+  body .gal-tab .gal-tab-sub { font-size: 12px; }
+  body .gal-foto figcaption, body .caso-foto figcaption,
+  body figure figcaption { font-size: 12px; }
+  body .trust-strip span, body .hv-chip span,
+  body .footer-brand span, body .who-svc { font-size: 12px; }
+  /* Los iconos de redes del pie medían 29 y 36 px de ancho. */
+  body .contacto-socials a, body footer .socials a,
+  body footer a[aria-label] { min-width: 44px; justify-content: center; }
+}
+
+@media (max-width: 767px) {
+  /* Enlaces de fila propia (no van dentro de una frase): "Ver más",
+     "Ver la sede", los datos de contacto. Medían 20 px de alto. */
+  body .card-link, body .contacto-link, body .op-enlace,
+  body .landing-cards a, body .tipo-card a {
+    display: inline-flex; align-items: center; min-height: 44px;
+  }
+  /* Los dos que quedaban a 11 px */
+  body .casos-grid figcaption, body .caso figcaption { font-size: 12px; }
+  body .precio-label { font-size: 12px; }
+}
+
+@media (max-width: 767px) {
+  /* Últimos enlaces de fila propia: la calificación de Google de cada
+     sede y el "Ver nuestra otra sede". Medían 17-20 px de alto. */
+  body .sede-rating a, body .clinic-since a, body .sede-otras a {
+    display: inline-flex; align-items: center; min-height: 44px;
+  }
+  /* Los enlaces que van DENTRO de una frase se dejan como están: son
+     texto corrido, y estirarlos rompería el párrafo. La norma de tamaño
+     mínimo (WCAG 2.5.8) los exceptúa justo por eso. */
+}
+/* Este se resistía a la regla de móvil por peso de selector. */
+@media (max-width: 767px) {
+  body .tipo-card .precio-label, body .section .precio-label { font-size: 12px; }
+}
