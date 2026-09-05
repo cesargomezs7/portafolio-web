@@ -20,14 +20,9 @@
     var v = document.getElementById('heroVideo');
     if (!v) return;
 
-    // Fuente ligera para pantallas pequeñas: su propio video de móvil.
-    if (window.innerWidth < 760) {
-      var movil = v.getAttribute('data-src-movil');
-      if (movil) {
-        var s = v.querySelector('source');
-        if (s) { s.src = movil; v.load(); }
-      }
-    }
+    /* La fuente de celular NO se cambia aquí: va declarada en el HTML con
+       <source media>. Hacerlo por JS provocaba una descarga doble (medido:
+       16,7 MB en celular en vez de 5). */
 
     var intento = v.play();
     if (intento && intento.catch) {

@@ -452,10 +452,15 @@ body.has-banner .scroll-progress { top: 36px; }
   <div class="hv-wrap">
     <div class="hv-marco">
       <div class="hv-pantalla">
-        <video id="heroVideo" class="hv-video" data-src-movil="video/presentacion-oraltech-movil.mp4"
+        <!-- Dos fuentes con `media`: el navegador elige ANTES de empezar a
+             descargar. Con el cambio hecho desde JS bajaba el archivo de
+             escritorio y después el de móvil: 16,7 MB en celular, medido.
+             Declarándolo aquí, el celular baja solo su versión (5 MB). -->
+        <video id="heroVideo" class="hv-video"
                autoplay muted loop playsinline preload="metadata"
                poster="video/presentacion-oraltech-poster.jpg"
                aria-label="Video de presentación de OralTech">
+          <source src="video/presentacion-oraltech-movil.mp4" type="video/mp4" media="(max-width: 759px)">
           <source src="video/presentacion-oraltech.mp4" type="video/mp4">
         </video>
 
