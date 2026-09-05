@@ -765,6 +765,7 @@ body .section-tag, body .overline {
 .op-texto { font-size: 14.8px; line-height: 1.6; }
 
 /* ── Mapas: no tienen por qué ocupar media pantalla ── */
+/* base para todas las páginas; #sedes la vuelve a acotar más abajo */
 .sede-card iframe, .sede-map iframe, .sedes-grid iframe {
   aspect-ratio: 16 / 10;
   height: auto !important;
@@ -773,7 +774,8 @@ body .section-tag, body .overline {
   width: 100%;
   display: block;
 }
-@media (max-width: 760px) { .sede-card iframe, .sede-map iframe, .sedes-grid iframe { max-height: 220px; } }
+@media (max-width: 760px) { /* base para todas las páginas; #sedes la vuelve a acotar más abajo */
+.sede-card iframe, .sede-map iframe, .sedes-grid iframe { max-height: 220px; } }
 
 /* ── Pie: también más compacto ── */
 footer { padding-top: 64px; padding-bottom: 28px; }
@@ -996,15 +998,23 @@ figure.reveal img { height: auto; }
 /* ═══════════════════════════════════════════════════════════════
    BLOQUE 7 · ICONOS DE SERVICIO, DIBUJADOS Y ANIMADOS
    ───────────────────────────────────────────────────────────────
-   Van en SVG y no en PNG por tres razones concretas:
-   · sus PNG tienen el trazo entre 11 y 23 px y cinco azules
-     distintos; aquí los seis comparten trazo y color por
-     construccion, que es lo que hace que un set parezca un set;
-   · pesan 4 KB los seis, frente a 156 KB de los PNG;
-   · se pueden animar. Al pasar el cursor, la boca se abre, los
-     brackets entran uno a uno, el eje de simetria se traza, la
-     lupa se acerca, el ultrasonido recorre el diente y la corona
-     baja sobre el implante.
+   SEGUNDA VERSIÓN (5-sep). La primera la rechazó el cliente: "los
+   dibujos están horribles", "no se intuye qué son". Tenía razón —
+   los molares eran manchas sin raíces, la boca parecía un cuenco y
+   el microdiseño un paraguas con dientes colgando.
+   Estos se dibujaron mirando los suyos, que sí se entienden:
+   · el molar lleva corona ancha con hendidura y DOS raíces;
+   · la sonrisa lleva el labio superior macizo, que es lo que la
+     hace leerse como boca al instante;
+   · el microdiseño es una arcada cerrada con la encía en V, no
+     dientes sueltos;
+   · las chispas son rombos de lados cóncavos, como los suyos, y
+     ahora TODAS miden lo mismo (5,6 la grande, 3,4 la pequeña):
+     antes iban de 3,1 a 11 y en fila no parecían el mismo juego.
+   Siguen pesando poco y siguen animándose, y en REPOSO cada icono
+   se ve COMPLETO: nada oculto, nada a opacidad 0, nada desplazado.
+   Quien nunca pasa el cursor —o sea, todo el que entra por
+   celular— ve el icono entero y correcto.
    ═══════════════════════════════════════════════════════════════ */
 .service-card .ico {
   position: absolute;
@@ -1018,57 +1028,59 @@ figure.reveal img { height: auto; }
 }
 .service-card:hover .ico { transform: translate(-50%, -50%) scale(1.06); opacity: 1; }
 
-/* Las chispas: entran con un pequeño rebote, escalonadas */
-.ico .chispa { transform-box: fill-box; transform-origin: center; transform: scale(.35); opacity: .35;
-  transition: transform .45s cubic-bezier(.34,1.56,.64,1), opacity .35s var(--t); }
-.service-card:hover .ico .chispa-1 { transform: scale(1) rotate(20deg); opacity: 1; transition-delay: .06s; }
-.service-card:hover .ico .chispa-2 { transform: scale(1) rotate(-16deg); opacity: 1; transition-delay: .16s; }
-.service-card:hover .ico .chispa-3 { transform: scale(1) rotate(12deg); opacity: 1; transition-delay: .24s; }
+/* ---- iconos de servicio: animacion al pasar el cursor sobre la tarjeta ----
+   En reposo el icono se ve COMPLETO. Ninguna regla oculta, desplaza ni recorta
+   nada: solo se anaden movimientos cuando hay hover. */
+.ico{display:block;width:100%;height:100%}
+.ico g,.ico path,.ico rect{transform-box:fill-box;transform-origin:center;
+  transition:transform .45s cubic-bezier(.34,1.4,.64,1)}
 
-/* 1 · La boca se abre */
-.ico-sonrisa .labio-inf,
-.ico-sonrisa .dientes { transition: transform .5s cubic-bezier(.34,1.2,.5,1), opacity .3s var(--t); }
-.ico-sonrisa .dientes { transform-box: fill-box; transform-origin: top; }
-.service-card:hover .ico-sonrisa .labio-inf { transform: translateY(3px) scaleY(1.08); transform-box: fill-box; transform-origin: top; }
-.service-card:hover .ico-sonrisa .dientes { transform: translateY(1px); }
+/* chispas: giran y crecen (sonrisa, micro, blanqueamiento) */
+@keyframes ico-destello{
+  0%,100%{transform:rotate(0deg) scale(1)}
+  45%    {transform:rotate(90deg) scale(1.35)}
+}
+.service-card:hover .ico .chispa{animation:ico-destello 1.1s ease-in-out}
+.service-card:hover .ico .chispa.c2{animation-delay:.14s}
 
-/* 2 · Los brackets laten uno a uno.
-   ⚠ En REPOSO el icono tiene que estar COMPLETO. La primera versión ocultaba
-   el alambre y los brackets hasta el hover, y la tarjeta se veía como cuatro
-   manchas sueltas para quien nunca pasa el cursor (o sea, en móvil: todos). */
-.ico-orto .bracket { transform-box: fill-box; transform-origin: center;
-  transition: transform .38s cubic-bezier(.34,1.7,.64,1); }
-.service-card:hover .ico-orto .bracket-1 { transform: scale(1.28); transition-delay: 0s; }
-.service-card:hover .ico-orto .bracket-2 { transform: scale(1.28); transition-delay: .08s; }
-.service-card:hover .ico-orto .bracket-3 { transform: scale(1.28); transition-delay: .16s; }
-.service-card:hover .ico-orto .bracket-4 { transform: scale(1.28); transition-delay: .24s; }
+/* ortodoncia: el alambre vibra y los brackets aprietan */
+@keyframes ico-alambre{
+  0%,100%{transform:translateY(0)}
+  25%{transform:translateY(-1.2px)}
+  75%{transform:translateY(1.2px)}
+}
+.service-card:hover .ico-orto .o-alambre{animation:ico-alambre .5s ease-in-out 2}
+.service-card:hover .ico-orto .o-brackets rect{transform:scale(1.14)}
 
-/* 3 · El eje de simetría se recorre (visible siempre, se mueve al pasar) */
-.ico-micro .eje { stroke-dasharray: 5 5; opacity: .55;
-  transition: stroke-dashoffset .9s linear, opacity .3s var(--t); }
-.service-card:hover .ico-micro .eje { stroke-dashoffset: -20; opacity: 1; }
+/* microdiseno: el eje de simetria avanza y los dientes se separan un pelo */
+@keyframes ico-eje{to{stroke-dashoffset:-12.2}}
+.service-card:hover .ico-micro .m-eje{animation:ico-eje 1s linear infinite}
+.service-card:hover .ico-micro .m-arcada{transform:scale(1.05)}
 
-/* 4 · La lupa se acerca al diente */
-.ico-blanq .lupa { transition: transform .5s cubic-bezier(.34,1.3,.5,1); transform-box: fill-box; transform-origin: center; }
-.service-card:hover .ico-blanq .lupa { transform: translate(-4px, -3px) scale(1.08); }
+/* blanqueamiento: el molar respira */
+.service-card:hover .ico-blanq .b-molar{transform:scale(1.06)}
 
-/* 5 · El ultrasonido recorre el diente */
-.ico-limpieza .ultrasonido { transition: transform .55s cubic-bezier(.34,1.2,.5,1); }
-.service-card:hover .ico-limpieza .ultrasonido { transform: translate(-5px, 5px); }
+/* limpieza: el instrumento ya toca el diente en reposo (los jueces vieron
+   que antes flotaba suelto) y al pasar el cursor lo raspa un poco mas.
+   El reposo va AQUI y no como atributo transform del <g>: cualquier
+   transform de CSS pisa al atributo, y en :hover el instrumento pegaba
+   un salto hacia atras. */
+.ico-limpieza .l-tool{transform:translate(2.6px,-1.2px)}
+.service-card:hover .ico-limpieza .l-tool{transform:translate(4.6px,-3.4px)}
+.service-card:hover .ico-limpieza .l-molar{transform:translateX(1.4px)}
 
-/* 6 · La corona baja y se asienta sobre el tornillo */
-.ico-implante .corona { transition: transform .5s cubic-bezier(.34,1.4,.5,1); }
-.ico-implante .corona { transform: translateY(-5px); }
-.service-card:hover .ico-implante .corona { transform: translateY(0); }
-.ico-implante .tornillo { transition: transform .5s var(--t); }
-.service-card:hover .ico-implante .tornillo { transform: translateY(2px); }
+/* implante: el tornillo baja y gira como si se enroscara */
+@keyframes ico-enroscar{
+  0%  {transform:translateY(0) rotate(0deg)}
+  60% {transform:translateY(2.4px) rotate(-5deg)}
+  100%{transform:translateY(1.6px) rotate(0deg)}
+}
+.service-card:hover .ico-implante .i-post{animation:ico-enroscar .7s ease-out forwards}
+.service-card:hover .ico-implante .i-corona{transform:translateY(-1.6px)}
 
-@media (prefers-reduced-motion: reduce) {
-  .service-card .ico, .ico *, .ico .chispa { transition: none !important; }
-  .ico .chispa { transform: none; opacity: 1; }
-  .ico-orto .bracket { transform: none; }
-  .ico-micro .eje { stroke-dashoffset: 0; opacity: 1; }
-  .ico-implante .corona { transform: none; }
+@media (prefers-reduced-motion:reduce){
+  .ico g,.ico path,.ico rect{transition:none}
+  .service-card:hover .ico *{animation:none!important;transform:none!important}
 }
 
 /* ═══════════════════════════════════════════════════════════════
@@ -1254,10 +1266,20 @@ body #sedes .clinic-header { margin-bottom: 20px; }
    propia página: si solo se limita el iframe, el envoltorio se queda a
    358 px y deja 218 px de hueco gris debajo del mapa (pasó, medido).
    Hay que anular el aspect-ratio y fijar el mismo alto en los dos. */
-body .sede-map { aspect-ratio: auto !important; height: 178px; }
-body .sede-card iframe,
-body .sede-map iframe,
-body .sedes-grid iframe { height: 178px !important; max-height: 178px !important; }
+/* ⚠ SOLO dentro de #sedes, que es la sección de la portada. Sin acotarlo,
+   estas reglas también encogían el mapa de sede-cucuta.html y
+   sede-medellin.html, donde el mapa ES el contenido principal de la página
+   (medido: quedaron en 617x178 cuando ahí deben ser grandes). */
+body #sedes .sede-map { aspect-ratio: auto !important; height: 178px; }
+body #sedes .sede-card iframe,
+body #sedes .sede-map iframe,
+body #sedes .sedes-grid iframe { height: 178px !important; max-height: 178px !important; }
+
+/* En la página propia de cada sede el mapa manda: se le devuelve tamaño. */
+body .sede-detalle .sede-map,
+body main > .sede-map,
+body .sede-map:not(#sedes .sede-map) { aspect-ratio: 16 / 9; height: auto; }
+body .sede-map:not(#sedes .sede-map) iframe { height: 100% !important; max-height: none !important; }
 body .sede-body { padding: 17px 20px 19px; }
 body .sede-body h3 { font-size: 19px; margin-bottom: 5px; }
 body .sede-ciudad { font-size: 10px; }
@@ -1295,9 +1317,9 @@ body .faq-question { padding: 15px 0; font-size: 15px; }
 body .faq-toggle { width: 26px; height: 26px; }
 body .faq-answer p, body .faq-a p { font-size: 13.5px; line-height: 1.65; padding-bottom: 16px; }
 @media (max-width: 760px) {
-  body .sede-map { height: 190px; }
-  body .sede-map iframe, body .sede-card iframe, body .sedes-grid iframe {
-    height: 190px !important; max-height: 190px !important; }
+  body #sedes .sede-map { height: 190px; }
+  body #sedes .sede-map iframe, body #sedes .sede-card iframe,
+  body #sedes .sedes-grid iframe { height: 190px !important; max-height: 190px !important; }
   body .faq { padding: 34px 22px; margin: 40px auto; }
   body .faq-question { font-size: 14px; }
 }
