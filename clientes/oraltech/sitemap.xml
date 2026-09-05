@@ -1,87 +1,256 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://__DOMINIO__/index.html</loc>
+    <xhtml:link rel="alternate" hreflang="es-CO" href="https://__DOMINIO__/index.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://__DOMINIO__/en/index.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://__DOMINIO__/index.html"/>
     <lastmod>2026-09-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://__DOMINIO__/diseno-de-sonrisa.html</loc>
+    <xhtml:link rel="alternate" hreflang="es-CO" href="https://__DOMINIO__/diseno-de-sonrisa.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://__DOMINIO__/en/diseno-de-sonrisa.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://__DOMINIO__/diseno-de-sonrisa.html"/>
     <lastmod>2026-09-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://__DOMINIO__/microdiseno.html</loc>
+    <xhtml:link rel="alternate" hreflang="es-CO" href="https://__DOMINIO__/microdiseno.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://__DOMINIO__/en/microdiseno.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://__DOMINIO__/microdiseno.html"/>
     <lastmod>2026-09-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://__DOMINIO__/ortodoncia.html</loc>
+    <xhtml:link rel="alternate" hreflang="es-CO" href="https://__DOMINIO__/ortodoncia.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://__DOMINIO__/en/ortodoncia.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://__DOMINIO__/ortodoncia.html"/>
     <lastmod>2026-09-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://__DOMINIO__/blanqueamiento.html</loc>
+    <xhtml:link rel="alternate" hreflang="es-CO" href="https://__DOMINIO__/blanqueamiento.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://__DOMINIO__/en/blanqueamiento.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://__DOMINIO__/blanqueamiento.html"/>
     <lastmod>2026-09-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://__DOMINIO__/limpieza-dental.html</loc>
+    <xhtml:link rel="alternate" hreflang="es-CO" href="https://__DOMINIO__/limpieza-dental.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://__DOMINIO__/en/limpieza-dental.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://__DOMINIO__/limpieza-dental.html"/>
     <lastmod>2026-09-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://__DOMINIO__/implantes.html</loc>
+    <xhtml:link rel="alternate" hreflang="es-CO" href="https://__DOMINIO__/implantes.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://__DOMINIO__/en/implantes.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://__DOMINIO__/implantes.html"/>
     <lastmod>2026-09-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
+    <loc>https://__DOMINIO__/casos.html</loc>
+    <xhtml:link rel="alternate" hreflang="es-CO" href="https://__DOMINIO__/casos.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://__DOMINIO__/en/casos.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://__DOMINIO__/casos.html"/>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://__DOMINIO__/sede-cucuta.html</loc>
+    <xhtml:link rel="alternate" hreflang="es-CO" href="https://__DOMINIO__/sede-cucuta.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://__DOMINIO__/en/sede-cucuta.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://__DOMINIO__/sede-cucuta.html"/>
     <lastmod>2026-09-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://__DOMINIO__/sede-medellin.html</loc>
+    <xhtml:link rel="alternate" hreflang="es-CO" href="https://__DOMINIO__/sede-medellin.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://__DOMINIO__/en/sede-medellin.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://__DOMINIO__/sede-medellin.html"/>
     <lastmod>2026-09-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://__DOMINIO__/nosotros.html</loc>
+    <xhtml:link rel="alternate" hreflang="es-CO" href="https://__DOMINIO__/nosotros.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://__DOMINIO__/en/nosotros.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://__DOMINIO__/nosotros.html"/>
     <lastmod>2026-09-04</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://__DOMINIO__/contacto.html</loc>
+    <xhtml:link rel="alternate" hreflang="es-CO" href="https://__DOMINIO__/contacto.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://__DOMINIO__/en/contacto.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://__DOMINIO__/contacto.html"/>
     <lastmod>2026-09-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://__DOMINIO__/blog/index.html</loc>
+    <xhtml:link rel="alternate" hreflang="es-CO" href="https://__DOMINIO__/blog/index.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://__DOMINIO__/en/blog/index.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://__DOMINIO__/blog/index.html"/>
     <lastmod>2026-09-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://__DOMINIO__/blog/cuanto-cuesta-ortodoncia-medellin.html</loc>
+    <xhtml:link rel="alternate" hreflang="es-CO" href="https://__DOMINIO__/blog/cuanto-cuesta-ortodoncia-medellin.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://__DOMINIO__/en/blog/cuanto-cuesta-ortodoncia-medellin.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://__DOMINIO__/blog/cuanto-cuesta-ortodoncia-medellin.html"/>
     <lastmod>2026-09-04</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://__DOMINIO__/casos.html</loc>
+    <loc>https://__DOMINIO__/en/index.html</loc>
+    <xhtml:link rel="alternate" hreflang="es-CO" href="https://__DOMINIO__/index.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://__DOMINIO__/en/index.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://__DOMINIO__/index.html"/>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://__DOMINIO__/en/diseno-de-sonrisa.html</loc>
+    <xhtml:link rel="alternate" hreflang="es-CO" href="https://__DOMINIO__/diseno-de-sonrisa.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://__DOMINIO__/en/diseno-de-sonrisa.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://__DOMINIO__/diseno-de-sonrisa.html"/>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://__DOMINIO__/en/microdiseno.html</loc>
+    <xhtml:link rel="alternate" hreflang="es-CO" href="https://__DOMINIO__/microdiseno.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://__DOMINIO__/en/microdiseno.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://__DOMINIO__/microdiseno.html"/>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://__DOMINIO__/en/ortodoncia.html</loc>
+    <xhtml:link rel="alternate" hreflang="es-CO" href="https://__DOMINIO__/ortodoncia.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://__DOMINIO__/en/ortodoncia.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://__DOMINIO__/ortodoncia.html"/>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://__DOMINIO__/en/blanqueamiento.html</loc>
+    <xhtml:link rel="alternate" hreflang="es-CO" href="https://__DOMINIO__/blanqueamiento.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://__DOMINIO__/en/blanqueamiento.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://__DOMINIO__/blanqueamiento.html"/>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://__DOMINIO__/en/limpieza-dental.html</loc>
+    <xhtml:link rel="alternate" hreflang="es-CO" href="https://__DOMINIO__/limpieza-dental.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://__DOMINIO__/en/limpieza-dental.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://__DOMINIO__/limpieza-dental.html"/>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://__DOMINIO__/en/implantes.html</loc>
+    <xhtml:link rel="alternate" hreflang="es-CO" href="https://__DOMINIO__/implantes.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://__DOMINIO__/en/implantes.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://__DOMINIO__/implantes.html"/>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://__DOMINIO__/en/casos.html</loc>
+    <xhtml:link rel="alternate" hreflang="es-CO" href="https://__DOMINIO__/casos.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://__DOMINIO__/en/casos.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://__DOMINIO__/casos.html"/>
     <lastmod>2026-09-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://__DOMINIO__/en/sede-cucuta.html</loc>
+    <xhtml:link rel="alternate" hreflang="es-CO" href="https://__DOMINIO__/sede-cucuta.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://__DOMINIO__/en/sede-cucuta.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://__DOMINIO__/sede-cucuta.html"/>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://__DOMINIO__/en/sede-medellin.html</loc>
+    <xhtml:link rel="alternate" hreflang="es-CO" href="https://__DOMINIO__/sede-medellin.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://__DOMINIO__/en/sede-medellin.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://__DOMINIO__/sede-medellin.html"/>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://__DOMINIO__/en/nosotros.html</loc>
+    <xhtml:link rel="alternate" hreflang="es-CO" href="https://__DOMINIO__/nosotros.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://__DOMINIO__/en/nosotros.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://__DOMINIO__/nosotros.html"/>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://__DOMINIO__/en/contacto.html</loc>
+    <xhtml:link rel="alternate" hreflang="es-CO" href="https://__DOMINIO__/contacto.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://__DOMINIO__/en/contacto.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://__DOMINIO__/contacto.html"/>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://__DOMINIO__/en/blog/index.html</loc>
+    <xhtml:link rel="alternate" hreflang="es-CO" href="https://__DOMINIO__/blog/index.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://__DOMINIO__/en/blog/index.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://__DOMINIO__/blog/index.html"/>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://__DOMINIO__/en/blog/cuanto-cuesta-ortodoncia-medellin.html</loc>
+    <xhtml:link rel="alternate" hreflang="es-CO" href="https://__DOMINIO__/blog/cuanto-cuesta-ortodoncia-medellin.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://__DOMINIO__/en/blog/cuanto-cuesta-ortodoncia-medellin.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://__DOMINIO__/blog/cuanto-cuesta-ortodoncia-medellin.html"/>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
   </url>
 </urlset>

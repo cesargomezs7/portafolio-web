@@ -3,6 +3,11 @@
 > Clínica dental colombiana con dos sedes propias: Cúcuta (Quinta Oriental) y
 > Medellín (El Poblado). Odontología estética y rehabilitación oral.
 
+## Idiomas
+
+- Español (por defecto): https://__DOMINIO__/
+- English: https://__DOMINIO__/en/
+
 ## Sedes
 
 - **Cúcuta** — Cl. 2 #9 Este-156, Local 1, Quinta Oriental, Cúcuta, Norte de

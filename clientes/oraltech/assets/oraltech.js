@@ -12,6 +12,14 @@
 
   var reducido = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  /* Los textos que este archivo escribe también tienen que respetar el
+     idioma de la página: si no, en /en/ el botón del hero salta a
+     "Silenciar" al primer clic. */
+  var EN = /\/en\//.test(location.pathname);
+  var TXT = EN
+    ? { sonidoOn: 'Turn on sound', sonidoOff: 'Mute' }
+    : { sonidoOn: 'Activar sonido', sonidoOff: 'Silenciar' };
+
   /* ── 1 · Video del hero ───────────────────────────────────
      Arranca solo. Todos los navegadores exigen que el autoplay
      vaya en silencio, así que se ofrece un botón para el sonido.
@@ -50,7 +58,7 @@
       var encendido = v.muted;
       v.muted = !encendido;
       btn.setAttribute('aria-pressed', encendido ? 'true' : 'false');
-      btn.querySelector('.hv-sonido-txt').textContent = encendido ? 'Silenciar' : 'Activar sonido';
+      btn.querySelector('.hv-sonido-txt').textContent = encendido ? TXT.sonidoOff : TXT.sonidoOn;
       if (encendido && v.paused) v.play();
     });
 

@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="../favicon.ico" sizes="any">
+<link rel="icon" href="../favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta name="theme-color" content="#1F234F">
+<meta name="robots" content="noindex,nofollow"><!-- PREVIEW: quitar al pasar a dominio del cliente -->
+<link rel="alternate" hreflang="es-CO" href="https://__DOMINIO__/blanqueamiento.html">
+<link rel="alternate" hreflang="en" href="https://__DOMINIO__/en/blanqueamiento.html">
+<link rel="alternate" hreflang="x-default" href="https://__DOMINIO__/blanqueamiento.html">
+<title>Teeth Whitening in Cúcuta and Medellín | OralTech</title>
+<meta name="description" content="Teeth whitening at OralTech in Cúcuta and Medellín: lighten your shade by removing stains. It is painless. Message us on WhatsApp.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/styles.css?v=20260814a">
+<link rel="stylesheet" href="../assets/nav.css?v=20260814a">
+<link rel="stylesheet" href="../assets/wa-widget.css?v=20260814a">
+<link rel="stylesheet" href="../assets/oraltech.css?v=2">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "MedicalProcedure",
+  "name": "Teeth whitening",
+  "procedureType": "https://schema.org/NoninvasiveProcedure",
+  "howPerformed": "A cosmetic dentistry procedure that lightens the shade of the teeth by removing stains.",
+  "provider": {
+    "@type": "Dentist",
+    "name": "OralTech",
+    "legalName": "ORAL TECH CLINICA DENTAL",
+    "url": "https://oraltechodontologia.com",
+    "telephone": "+573224130747",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Cl. 2 #9 Este-156, Local 1, Quinta Oriental",
+      "addressLocality": "Cúcuta",
+      "addressRegion": "Norte de Santander",
+      "addressCountry": "CO"
+    },
+    "areaServed": ["Cúcuta", "Medellín"],
+    "sameAs": [
+      "https://www.instagram.com/oraltech_clinicadental/",
+      "https://web.facebook.com/profile.php?id=61559206031650",
+      "https://www.tiktok.com/@oraltechclinicadental"
+    ]
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    { "@type": "Question", "name": "What exactly is teeth whitening?", "acceptedAnswer": { "@type": "Answer", "text": "It is a cosmetic dentistry procedure that lightens the shade of your teeth by removing stains. Its benefits include a better-looking smile, support for your oral health and a good dose of confidence." } },
+    { "@type": "Question", "name": "Does whitening hurt?", "acceptedAnswer": { "@type": "Answer", "text": "No. It is a painless procedure, and that is one of the benefits we point out about the treatment. If you have any questions about your own case, message us on WhatsApp and we will answer them before you book." } },
+    { "@type": "Question", "name": "Is it the same as a dental cleaning?", "acceptedAnswer": { "@type": "Answer", "text": "No. Whitening lightens the shade of your teeth by removing stains. A dental cleaning, or prophylaxis, is a professional procedure to remove plaque and tartar from the teeth and gums. They are two different treatments and each one has its own page." } },
+    { "@type": "Question", "name": "How much does teeth whitening cost?", "acceptedAnswer": { "@type": "Answer", "text": "We would rather not publish a generic figure that later turns out not to match your case. Message us on WhatsApp, tell us what you want to achieve and we will give you the specific information." } },
+    { "@type": "Question", "name": "Where are you located?", "acceptedAnswer": { "@type": "Answer", "text": "We have two locations: Quinta Oriental in Cúcuta (Cl. 2 #9 Este-156, Local 1) and El Poblado in Medellín (Cra. 43A #7-50). Message us on WhatsApp and we will confirm hours and availability at whichever location works best for you." } }
+  ]
+}
+</script>
+<style>
+  /* ── Responsive del master (tal cual) ── */
+  @media (max-width:768px){
+    .landing-split{ grid-template-columns:1fr !important; gap:32px !important; }
+  }
+  @media (max-width:1024px){
+    .landing-cards{ grid-template-columns:1fr !important; }
+    .landing-steps{ grid-template-columns:1fr 1fr !important; }
+  }
+  @media (max-width:600px){
+    .landing-steps{ grid-template-columns:1fr !important; }
+  }
+
+  /* ── Hero compacto: styles.css ya define .hero-compact / .hero-content / .lead
+        (transparente sobre el degradado del body). Aquí solo lo que falta:
+        peso 200 del h1 con .b 500, el tag superior y la alineación con .section-inner. ── */
+  .hero-compact .hero-content { max-width: 1300px; }
+  .hero-compact .hero-tag {
+    display: flex; align-items: center; gap: 12px;
+    font-size: 11px; font-weight: 500; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--gray); margin-bottom: 28px;
+  }
+  .hero-compact .hero-tag::before { content: ''; width: 24px; height: 1px; background: var(--gray); }
+  .hero-compact h1 {
+    font-weight: 200; line-height: 0.98; letter-spacing: -0.035em;
+    color: var(--black); max-width: 900px;
+  }
+  .hero-compact h1 .b, .section h2 .b { font-weight: 500; color: var(--black); }
+
+  /* ── FALLBACK: .wa-float (burbuja) aún no existe en assets/styles.css
+        (solo .wsp-float). Borrar cuando se consolide en el CSS compartido. ── */
+  .wa-float {
+    position: fixed; bottom: 24px; right: 24px; z-index: 999;
+    width: 56px; height: 56px; border-radius: 50%;
+    background: #25D366; color: var(--white);
+    display: flex; align-items: center; justify-content: center;
+    text-decoration: none;
+    box-shadow: 0 8px 24px rgba(37,211,102,0.35);
+    transition: transform 0.3s var(--t);
+  }
+  .wa-float:hover { transform: scale(1.08); }
+  .wa-float svg { width: 30px; height: 30px; }
+  /* el selector [class*="wa-float"] de styles.css le pegaba el pulso verde a la etiqueta blanca */
+  .wa-float-label { animation: none; }
+</style>
+</head>
+<body>
+
+<div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
+<div id="site-nav"></div>
+
+<!-- ─── HERO COMPACTO ──────────────────────────────────── -->
+<section class="hero hero-compact">
+  <div class="hero-content hero-compact-inner">
+    <span class="hero-tag">Services · Teeth whitening</span>
+    <h1>Teeth whitening <span class="b">in Cúcuta and Medellín</span></h1>
+    <p class="lead">A cosmetic dentistry procedure that lightens the shade of your teeth by removing stains. It is painless. We see patients in Cúcuta and Medellín.</p>
+  </div>
+</section>
+
+<!-- ─── QUÉ ES ──────────────────────────────────────────── -->
+<section class="section">
+  <div class="section-inner">
+    <!-- Banda propia de OralTech (1600x350). Va a todo lo ancho y con su proporción
+         real: metida en un marco vertical o cuadrado se destroza. -->
+    <div class="reveal" style="border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-md);margin-bottom:64px;">
+      <img src="../img/oraltech-blanqueamiento-dental-scaled.webp"
+           alt="OralTech photo: three close-ups of smiles with white teeth"
+           width="1600" height="350"
+           style="width:100%;height:auto;display:block;" decoding="async">
+    </div>
+
+    <div style="display:grid;grid-template-columns:1.1fr 0.9fr;gap:64px;align-items:center;" class="landing-split">
+      <div class="reveal">
+        <div class="overline">What it is</div>
+        <h2 style="font-family:'Inter',sans-serif;font-weight:300;font-size:clamp(1.7rem,3vw,2.3rem);letter-spacing:-0.03em;line-height:1.1;color:var(--black);margin-bottom:18px;">Cosmetic dentistry to <span class="b">lighten your shade</span></h2>
+        <p style="font-size:16px;color:var(--black);opacity:0.82;line-height:1.7;margin-bottom:16px;">Teeth whitening is a cosmetic dentistry procedure that lightens the shade of your teeth by removing stains.</p>
+        <p style="font-size:16px;color:var(--black);opacity:0.82;line-height:1.7;margin-bottom:16px;">The photo shows a before and after from a whitening done at OralTech: on top, the yellowish shade at the start; below, the same teeth once lightened.</p>
+        <p style="font-size:16px;color:var(--black);opacity:0.82;line-height:1.7;">If the color of your teeth is what holds you back from smiling, message us on WhatsApp, tell us about your case and we will let you know whether whitening is right for you.</p>
+      </div>
+      <!-- Antes/después REAL del cliente (1233x1233, comparación apilada arriba/abajo).
+           Va completa: cualquier recorte 4:3 o 4:5 parte la comparación por la mitad. -->
+      <div class="reveal">
+        <div style="border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-md);">
+          <img src="../img/blanqueamiento-dental-medellin-cucuta.webp"
+               alt="Before and after of a teeth whitening at OralTech: on top the teeth with their original yellowish shade, below the same teeth now white"
+               width="1233" height="1233"
+               style="width:100%;height:auto;display:block;" loading="lazy" decoding="async">
+        </div>
+        <p style="font-family:'Inter',sans-serif;font-size:13px;color:var(--gray);line-height:1.6;margin-top:14px;">An OralTech case. On top, the shade before whitening; below, the result.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── LOS CINCO BENEFICIOS (los que ellos listan) ──────── -->
+<section class="section" style="background:var(--ice-soft);">
+  <div class="section-inner">
+    <div class="clinic-header reveal">
+      <div>
+        <div class="overline">Benefits</div>
+        <h2 style="font-family:'Inter',sans-serif;font-weight:300;font-size:clamp(1.7rem,3vw,2.3rem);letter-spacing:-0.03em;line-height:1.1;color:var(--black);">Five reasons to <span class="b">whiten</span></h2>
+      </div>
+    </div>
+
+    <div class="tipos-grid">
+      <div class="tipo-card reveal">
+        <div style="font-family:'Inter',sans-serif;font-weight:600;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--gray);margin-bottom:12px;">Benefit 01</div>
+        <h3>Removes tooth stains</h3>
+      </div>
+      <div class="tipo-card reveal">
+        <div style="font-family:'Inter',sans-serif;font-weight:600;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--gray);margin-bottom:12px;">Benefit 02</div>
+        <h3>A better-looking smile</h3>
+      </div>
+      <div class="tipo-card reveal">
+        <div style="font-family:'Inter',sans-serif;font-weight:600;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--gray);margin-bottom:12px;">Benefit 03</div>
+        <h3>A good dose of confidence</h3>
+      </div>
+      <div class="tipo-card reveal">
+        <div style="font-family:'Inter',sans-serif;font-weight:600;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--gray);margin-bottom:12px;">Benefit 04</div>
+        <h3>Preserves your oral health</h3>
+      </div>
+      <div class="tipo-card reveal">
+        <div style="font-family:'Inter',sans-serif;font-weight:600;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--gray);margin-bottom:12px;">Benefit 05</div>
+        <h3>It is painless</h3>
+      </div>
+      <div class="tipo-card featured reveal">
+        <div style="font-family:'Inter',sans-serif;font-weight:600;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--text-gray-soft);margin-bottom:12px;">Is it right for you?</div>
+        <h3>Ask us on WhatsApp</h3>
+        <p>Tell us about your case and we will let you know whether whitening is right for you.</p>
+        <!-- Panel de WhatsApp con las DOS sedes.
+     Su web actual ya pregunta Cúcuta o Medellín antes de abrir el chat.
+     Sin esto, un paciente de Medellín le escribiría a Cúcuta. -->
+<div class="wa-panel" id="waPanel" role="dialog" aria-label="Choose a location to message on WhatsApp">
+  <div class="wa-panel-head">
+    <strong>Message us on WhatsApp</strong>
+    <span>We have two locations. Choose the one where you would like to be seen.</span>
+  </div>
+  <div class="wa-panel-body">
+    <a class="wa-sede" data-wa-base="https://wa.me/573224130747?text=" href="https://wa.me/573224130747?text=Hi,%20I%20came%20from%20your%20website%20and%20I%20would%20like%20to%20book%20an%20appointment." target="_blank" rel="noopener">
+      <span class="wa-sede-ico"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.371-.025-.52-.075-.149-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg></span>
+      <span class="wa-sede-txt"><strong>Cúcuta</strong><span>Quinta Oriental · +57 322 413 0747</span></span>
+    </a>
+    <a class="wa-sede" data-wa-base="https://wa.me/573016184618?text=" href="https://wa.me/573016184618?text=Hi,%20I%20came%20from%20your%20website%20and%20I%20would%20like%20to%20book%20an%20appointment." target="_blank" rel="noopener">
+      <span class="wa-sede-ico"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.371-.025-.52-.075-.149-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg></span>
+      <span class="wa-sede-txt"><strong>Medellín</strong><span>El Poblado · +57 301 618 4618</span></span>
+    </a>
+  </div>
+</div>
+
+<a href="https://wa.me/573224130747?text=Hi,%20I%20came%20from%20your%20website%20and%20I%20would%20like%20information%20about%20teeth%20whitening." target="_blank" rel="noopener" style="display:inline-block;background:#fff;color:var(--black);font-family:'Inter',sans-serif;font-weight:500;font-size:14px;padding:12px 24px;border-radius:999px;text-decoration:none;">Message us on WhatsApp</a>
+      </div>
+    </div>
+
+    <!-- PENDING: the real step-by-step of the whitening (how many sessions, what happens in each one,
+         how long the result lasts and what aftercare is needed). The 4-step block and the one with the three
+         formats -in-office / at-home / combined- came from the template and described a
+         protocol the client has not confirmed: they were removed. -->
+  </div>
+</section>
+
+<!-- ─── LO QUE DICEN EN GOOGLE ──────────────────────────── -->
+<section class="section">
+  <div class="section-inner">
+    <div class="clinic-header reveal">
+      <div>
+        <div class="overline">What they say on Google</div>
+        <h2 style="font-family:'Inter',sans-serif;font-weight:300;font-size:clamp(1.7rem,3vw,2.3rem);letter-spacing:-0.03em;line-height:1.1;color:var(--black);">Reviews <span class="b">from our patients</span></h2>
+      </div>
+      <div class="clinic-since">
+        <span style="color:var(--accent);letter-spacing:3px;">★★★★★</span>
+        <a href="https://www.google.com/maps?cid=8729935231387113281" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;">5.0 · 25 reviews · Cúcuta location</a><br>
+        <a href="https://www.google.com/maps?cid=13147330071578895628" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;">4.6 · 11 reviews · Medellín location</a>
+      </div>
+    </div>
+
+    <div class="testimonios-grid">
+      <div class="testimonio reveal">
+        <p>"I was so happy with the result of my smile design. From the very first moment I got excellent care, with a lot of professionalism, dedication and attention to every detail. The result went beyond what I expected."</p>
+        <p style="font-family:'Inter',sans-serif;font-size:12px;font-style:italic;color:var(--gray);">Translated from Spanish</p>
+        <div class="who">
+          <div class="who-avatar">A</div>
+          <div>
+            <div class="who-name">Andreina Rangel</div>
+            <div class="who-svc">Google review · Smile design</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonio reveal">
+        <p>"Excellent work. Highly recommended."</p>
+        <p style="font-family:'Inter',sans-serif;font-size:12px;font-style:italic;color:var(--gray);">Translated from Spanish</p>
+        <div class="who">
+          <div class="who-avatar">N</div>
+          <div>
+            <div class="who-name">Nai Alvarado</div>
+            <div class="who-svc">Google review</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonio reveal">
+        <p>"Excellent care and service, top-quality work. Highly recommended."</p>
+        <p style="font-family:'Inter',sans-serif;font-size:12px;font-style:italic;color:var(--gray);">Translated from Spanish</p>
+        <div class="who">
+          <div class="who-avatar">A</div>
+          <div>
+            <div class="who-name">Andrea Cruz</div>
+            <div class="who-svc">Google review</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PENDING: real hours confirmed by the client -->
+    <div class="reveal" style="margin-top:48px;background:var(--black);border-radius:var(--radius-lg);padding:36px 40px;display:flex;flex-wrap:wrap;gap:20px;align-items:center;justify-content:space-between;">
+      <div>
+        <div style="font-family:'Inter',sans-serif;font-weight:600;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:var(--text-gray-soft);margin-bottom:6px;">Teeth whitening · Cúcuta and Medellín</div>
+        <div style="font-family:'Inter',sans-serif;font-weight:300;font-size:26px;letter-spacing:-0.02em;color:#fff;">Message us on WhatsApp and we will confirm our hours</div>
+      </div>
+      <a href="https://wa.me/573224130747?text=Hi,%20I%20came%20from%20your%20website%20and%20I%20would%20like%20to%20book%20an%20appointment%20for%20teeth%20whitening." target="_blank" rel="noopener" class="btn-pill" style="background:var(--white);color:var(--black);font-family:'Inter',sans-serif;font-weight:500;font-size:15px;padding:15px 30px;border-radius:999px;text-decoration:none;white-space:nowrap;">Message on WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── TRATAMIENTOS QUE NO SON BLANQUEAMIENTO ──────────── -->
+<section class="section" style="background:var(--ice-soft);">
+  <div class="section-inner">
+    <div class="clinic-header reveal">
+      <div>
+        <div class="overline">Other treatments</div>
+        <h2 style="font-family:'Inter',sans-serif;font-weight:300;font-size:clamp(1.7rem,3vw,2.3rem);letter-spacing:-0.03em;line-height:1.1;color:var(--black);margin-bottom:18px;">Dental cleaning <span class="b">and implants</span></h2>
+        <p style="font-size:16px;color:var(--black);opacity:0.82;line-height:1.7;max-width:640px;">Whitening lightens the shade of your teeth by removing stains. If what you need is to remove plaque and tartar, or to replace the root of a missing tooth, these are the right treatments and each one has its own page.</p>
+      </div>
+    </div>
+
+    <div class="catalog-grid">
+      <a href="limpieza-dental.html" class="catalog-card reveal">
+        <h3>Dental cleaning</h3>
+        <p>A professional procedure to remove plaque and tartar from the teeth and gums.</p>
+        <div class="precio-row">
+          <span class="precio-label">See treatment</span>
+          <span class="arrow">→</span>
+        </div>
+      </a>
+      <a href="implantes.html" class="catalog-card reveal">
+        <h3>Dental implants</h3>
+        <p>A screw-shaped medical device placed in the jawbone to replace the root of a missing tooth.</p>
+        <div class="precio-row">
+          <span class="precio-label">See treatment</span>
+          <span class="arrow">→</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FAQ ─────────────────────────────────────────────── -->
+<!-- PENDING: how long the result lasts, how many sessions it takes and what aftercare is needed.
+     It is the question people ask most and today we do not have the answer from the client,
+     so the page does not answer it. -->
+<section class="faq reveal">
+  <div class="overline">Questions about whitening</div>
+  <h2>What people ask us most</h2>
+  <div class="faq-list">
+    <div class="faq-item">
+      <button class="faq-question"><span>What exactly is teeth whitening?</span><span class="faq-toggle"><svg viewBox="0 0 24 24" fill="none" width="20" height="20"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span></button>
+      <div class="faq-answer"><p>It is a cosmetic dentistry procedure that lightens the shade of your teeth by removing stains. Its benefits include a better-looking smile, support for your oral health and a good dose of confidence.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question"><span>Does whitening hurt?</span><span class="faq-toggle"><svg viewBox="0 0 24 24" fill="none" width="20" height="20"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span></button>
+      <div class="faq-answer"><p>No. It is a painless procedure, and that is one of the benefits we point out about the treatment. If you have any questions about your own case, message us on WhatsApp and we will answer them before you book.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question"><span>Is it the same as a dental cleaning?</span><span class="faq-toggle"><svg viewBox="0 0 24 24" fill="none" width="20" height="20"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span></button>
+      <div class="faq-answer"><p>No. Whitening lightens the shade of your teeth by removing stains. A <a href="limpieza-dental.html">dental cleaning</a>, or prophylaxis, is a professional procedure to remove plaque and tartar from the teeth and gums. They are two different treatments and each one has its own page.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question"><span>How much does teeth whitening cost?</span><span class="faq-toggle"><svg viewBox="0 0 24 24" fill="none" width="20" height="20"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span></button>
+      <div class="faq-answer"><p>We would rather not publish a generic figure that later turns out not to match your case. Message us on WhatsApp, tell us what you want to achieve and we will give you the specific information.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question"><span>Where are you located?</span><span class="faq-toggle"><svg viewBox="0 0 24 24" fill="none" width="20" height="20"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span></button>
+      <div class="faq-answer"><p>We have two locations: <a href="sede-cucuta.html">Quinta Oriental in Cúcuta</a> (Cl. 2 #9 Este-156, Local 1) and <a href="sede-medellin.html">El Poblado in Medellín</a> (Cra. 43A #7-50). Message us on WhatsApp and we will confirm hours and availability at whichever location works best for you.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CTA FINAL ───────────────────────────────────────── -->
+<section class="cta-final reveal">
+  <div class="cta-final-inner">
+    <div class="overline">Next steps</div>
+    <h2>Ready for a <span class="b">whiter smile</span>?</h2>
+    <p>Message us on WhatsApp, tell us what you would like to change and we will let you know whether whitening is the right treatment for you.</p>
+    <div class="cta-final-actions">
+      <a href="https://wa.me/573224130747?text=Hi,%20I%20came%20from%20your%20website%20and%20I%20would%20like%20to%20book%20an%20appointment%20for%20teeth%20whitening." target="_blank" rel="noopener" class="cta-final-btn primary">
+        Message on WhatsApp
+        <svg viewBox="0 0 24 24" fill="none" width="16" height="16"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </a>
+      <a href="contacto.html" class="cta-final-btn secondary">See locations and contact</a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ──────────────────────────────────────────── -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <strong>OralTech</strong>
+      <span>Dentistry · Cúcuta and Medellín</span>
+      <p>Smile design, micro smile design, orthodontics, teeth whitening, dental cleaning and dental implants in Cúcuta and Medellín.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="diseno-de-sonrisa.html">Smile design</a></li>
+        <li><a href="microdiseno.html">Micro smile design</a></li>
+        <li><a href="ortodoncia.html">Orthodontics</a></li>
+        <li><a href="blanqueamiento.html">Teeth whitening</a></li>
+        <li><a href="limpieza-dental.html">Dental cleaning</a></li>
+        <li><a href="implantes.html">Dental implants</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Information</h4>
+      <ul>
+        <li><a href="casos.html">Real cases</a></li>
+        <li><a href="nosotros.html">About us</a></li>
+        <li><a href="sede-cucuta.html">Cúcuta location</a></li>
+        <li><a href="sede-medellin.html">Medellín location</a></li>
+        <li><a href="blog/index.html">Blog</a></li>
+        <li><a href="contacto.html">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Get in touch</h4>
+      <!-- PENDING: real hours confirmed by the client -->
+      <ul>
+        <li><a href="https://wa.me/573224130747">Cúcuta · +57 322 413 0747</a></li>
+        <li><a href="https://wa.me/573016184618">Medellín · +57 301 618 4618</a></li>
+        <li><a href="mailto:PENDIENTE-CORREO@oraltechodontologia.com">PENDIENTE-CORREO@oraltechodontologia.com</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 OralTech · Website by <a href="https://prontoweb.co" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline">Pronto</a></p>
+    <p>Cúcuta · Medellín</p>
+  </div>
+</footer>
+
+<a href="https://wa.me/573224130747?text=Hi,%20I%20came%20from%20your%20website%20and%20I%20am%20interested%20in%20teeth%20whitening." target="_blank" rel="noopener" class="wa-float" id="waFloat" aria-expanded="false" aria-controls="waPanel" data-wa-base="https://wa.me/573224130747?text=" aria-label="WhatsApp">
+  <span class="wa-float-label" id="waFloatLabel">Questions about whitening?</span>
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.371-.025-.52-.075-.149-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+</a>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
+<script src="../assets/animations.js?v=20260814a" defer></script>
+<script src="../assets/wa-widget.js?v=1" defer></script>
+<script src="../assets/nav.js?v=1" defer></script>
+<script src="../assets/oraltech.js?v=2" defer></script>
+
+<script>
+  if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; }
+  const navbar = document.getElementById('navbar');
+  if (navbar) {
+    const onScroll = () => navbar.classList.toggle('scrolled', window.scrollY > 60);
+    window.addEventListener('scroll', onScroll, { passive: true });
+  }
+  document.querySelectorAll('.faq-item').forEach(item => {
+    const btn = item.querySelector('.faq-question');
+    btn.addEventListener('click', () => {
+      const wasOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!wasOpen) item.classList.add('open');
+    });
+  });
+</script>
+</body>
+</html>

@@ -938,3 +938,122 @@ figure.reveal img { height: auto; }
   margin-top: 16px;
   font-family: 'Inter', sans-serif; font-size: 12.5px; color: var(--gray);
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   BLOQUE 6 · SELECTOR DE IDIOMA
+   ───────────────────────────────────────────────────────────────
+   Clínica con pacientes de Inglaterra, Alemania, Francia, EE.UU.,
+   Panamá y Costa Rica: el inglés no es un adorno.
+   Patrón segmentado ES|EN, que es el estándar cuando son solo dos
+   idiomas: un desplegable con dos opciones es un clic de más y
+   esconde la información. Lleva a la MISMA página traducida.
+   ═══════════════════════════════════════════════════════════════ */
+.idioma {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px;
+  border-radius: 999px;
+  background: var(--ice);
+  box-shadow: inset 0 0 0 1px rgba(31,35,79,.07);
+}
+.idioma-op {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-family: 'Inter', sans-serif;
+  font-size: 11.5px; font-weight: 600;
+  letter-spacing: .06em;
+  color: var(--gray);
+  text-decoration: none !important;
+  transition: color .2s var(--t), background .2s var(--t), box-shadow .2s var(--t);
+  line-height: 1;
+}
+.idioma-op::after { display: none !important; }   /* el subrayado del nav no aplica aquí */
+.idioma-op:hover { color: var(--black); }
+.idioma-op.activo {
+  color: #fff;
+  background: linear-gradient(140deg, #2C3270, #1F234F 60%, #151936);
+  box-shadow: 0 3px 10px -4px rgba(31,35,79,.55), inset 0 1px 0 rgba(255,255,255,.2);
+}
+.idioma-op:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+
+@media (max-width: 1180px) { .idioma { margin-right: 4px; } }
+@media (max-width: 860px)  { .idioma-op { padding: 6px 10px; font-size: 11px; } }
+
+/* ═══════════════════════════════════════════════════════════════
+   BLOQUE 7 · ICONOS DE SERVICIO, DIBUJADOS Y ANIMADOS
+   ───────────────────────────────────────────────────────────────
+   Van en SVG y no en PNG por tres razones concretas:
+   · sus PNG tienen el trazo entre 11 y 23 px y cinco azules
+     distintos; aquí los seis comparten trazo y color por
+     construccion, que es lo que hace que un set parezca un set;
+   · pesan 4 KB los seis, frente a 156 KB de los PNG;
+   · se pueden animar. Al pasar el cursor, la boca se abre, los
+     brackets entran uno a uno, el eje de simetria se traza, la
+     lupa se acerca, el ultrasonido recorre el diente y la corona
+     baja sobre el implante.
+   ═══════════════════════════════════════════════════════════════ */
+.service-card .ico {
+  position: absolute;
+  left: 50%; top: 42%;
+  transform: translate(-50%, -50%);
+  width: 42%; height: auto;
+  color: #fff;
+  z-index: 2;
+  opacity: .95;
+  transition: transform .5s cubic-bezier(.34,1.3,.5,1), opacity .3s var(--t);
+}
+.service-card:hover .ico { transform: translate(-50%, -50%) scale(1.06); opacity: 1; }
+
+/* Las chispas: entran con un pequeño rebote, escalonadas */
+.ico .chispa { transform-box: fill-box; transform-origin: center; transform: scale(.35); opacity: .35;
+  transition: transform .45s cubic-bezier(.34,1.56,.64,1), opacity .35s var(--t); }
+.service-card:hover .ico .chispa-1 { transform: scale(1) rotate(20deg); opacity: 1; transition-delay: .06s; }
+.service-card:hover .ico .chispa-2 { transform: scale(1) rotate(-16deg); opacity: 1; transition-delay: .16s; }
+.service-card:hover .ico .chispa-3 { transform: scale(1) rotate(12deg); opacity: 1; transition-delay: .24s; }
+
+/* 1 · La boca se abre */
+.ico-sonrisa .labio-inf,
+.ico-sonrisa .dientes { transition: transform .5s cubic-bezier(.34,1.2,.5,1), opacity .3s var(--t); }
+.ico-sonrisa .dientes { transform-box: fill-box; transform-origin: top; }
+.service-card:hover .ico-sonrisa .labio-inf { transform: translateY(3px) scaleY(1.08); transform-box: fill-box; transform-origin: top; }
+.service-card:hover .ico-sonrisa .dientes { transform: translateY(1px); }
+
+/* 2 · Los brackets laten uno a uno.
+   ⚠ En REPOSO el icono tiene que estar COMPLETO. La primera versión ocultaba
+   el alambre y los brackets hasta el hover, y la tarjeta se veía como cuatro
+   manchas sueltas para quien nunca pasa el cursor (o sea, en móvil: todos). */
+.ico-orto .bracket { transform-box: fill-box; transform-origin: center;
+  transition: transform .38s cubic-bezier(.34,1.7,.64,1); }
+.service-card:hover .ico-orto .bracket-1 { transform: scale(1.28); transition-delay: 0s; }
+.service-card:hover .ico-orto .bracket-2 { transform: scale(1.28); transition-delay: .08s; }
+.service-card:hover .ico-orto .bracket-3 { transform: scale(1.28); transition-delay: .16s; }
+.service-card:hover .ico-orto .bracket-4 { transform: scale(1.28); transition-delay: .24s; }
+
+/* 3 · El eje de simetría se recorre (visible siempre, se mueve al pasar) */
+.ico-micro .eje { stroke-dasharray: 5 5; opacity: .55;
+  transition: stroke-dashoffset .9s linear, opacity .3s var(--t); }
+.service-card:hover .ico-micro .eje { stroke-dashoffset: -20; opacity: 1; }
+
+/* 4 · La lupa se acerca al diente */
+.ico-blanq .lupa { transition: transform .5s cubic-bezier(.34,1.3,.5,1); transform-box: fill-box; transform-origin: center; }
+.service-card:hover .ico-blanq .lupa { transform: translate(-4px, -3px) scale(1.08); }
+
+/* 5 · El ultrasonido recorre el diente */
+.ico-limpieza .ultrasonido { transition: transform .55s cubic-bezier(.34,1.2,.5,1); }
+.service-card:hover .ico-limpieza .ultrasonido { transform: translate(-5px, 5px); }
+
+/* 6 · La corona baja y se asienta sobre el tornillo */
+.ico-implante .corona { transition: transform .5s cubic-bezier(.34,1.4,.5,1); }
+.ico-implante .corona { transform: translateY(-5px); }
+.service-card:hover .ico-implante .corona { transform: translateY(0); }
+.ico-implante .tornillo { transition: transform .5s var(--t); }
+.service-card:hover .ico-implante .tornillo { transform: translateY(2px); }
+
+@media (prefers-reduced-motion: reduce) {
+  .service-card .ico, .ico *, .ico .chispa { transition: none !important; }
+  .ico .chispa { transform: none; opacity: 1; }
+  .ico-orto .bracket { transform: none; }
+  .ico-micro .eje { stroke-dashoffset: 0; opacity: 1; }
+  .ico-implante .corona { transform: none; }
+}
