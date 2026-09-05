@@ -1230,6 +1230,14 @@ body .gal-mosaico > .gal-foto:nth-child(3) { margin-left: 6px; }
 body .gal-mosaico > .gal-foto:nth-child(2) { margin-top: 34px; }  /* el escalón */
 body .gal-foto figcaption { font-size: 11.5px; padding: 22px 15px 11px; }
 @media (max-width: 760px) {
+  /* ⚠ Hace falta repetir aquí grid-template-columns. La regla de móvil que
+     ya existía es `.gal-mosaico` (0,1,0) y la de arriba es `body .gal-mosaico`
+     (0,1,1): la de escritorio ganaba también dentro de esta media query y el
+     celular se quedaba con DOS columnas de 212 y 112 px (medido a 390). */
+  body .gal-mosaico { grid-template-columns: 1fr; gap: 14px; max-width: 100%; }
+  body .gal-mosaico > .gal-foto:first-child,
+  body .gal-mosaico > .gal-foto:nth-child(2),
+  body .gal-mosaico > .gal-foto:nth-child(3) { grid-row: auto; grid-column: 1; }
   body .gal-mosaico > .gal-foto:nth-child(2) { margin-top: 0; }
   body .gal-mosaico > .gal-foto:nth-child(2),
   body .gal-mosaico > .gal-foto:nth-child(3) { margin-left: 0; }
