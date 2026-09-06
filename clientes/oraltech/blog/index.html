@@ -33,6 +33,21 @@
   }
   .wa-float:hover { transform: scale(1.08); }
   .wa-float svg { width: 32px; height: 32px; }
+
+  /* ── Tarjetas del blog: las TRES llevan foto propia de OralTech ──
+     Antes solo la publicada tenía imagen y las otras dos un glifo (✦ y ·),
+     que además no era ni el mismo glifo. Ahora las tres llevan foto.
+     El marco de styles.css es 16/10 y las tres fotos del cliente son
+     cuadradas (800x800 y 1233x1233): en 16/10 se les recorta el 37% de alto,
+     que en los antes/después parte la comparación por la mitad (la misma
+     trampa que ya está anotada en blanqueamiento.html). Por eso aquí el
+     marco pasa a 1/1: las tres entran completas y sin recorte. */
+  .blog-card-img { aspect-ratio: 1 / 1; }
+  .blog-card-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  /* Las dos tarjetas sin publicar van con la foto a plena fidelidad: probado
+     con filter+opacity y las fotos clínicas se volvían grises y parecían rotas.
+     Lo que las distingue es que no llevan el enlace "Leer artículo" y sí la
+     etiqueta "Próximamente". */
 </style>
 </head>
 <body>
@@ -60,7 +75,7 @@
     <div class="blog-grid">
       <a href="cuanto-cuesta-ortodoncia-medellin.html" class="blog-card published reveal">
         <div class="blog-card-img" style="background:none;">
-          <img src="../img/resultados-ortodoncia-oraltech.webp" alt="Paciente de OralTech sonriendo tras su tratamiento de ortodoncia" style="width:100%;height:100%;object-fit:cover;object-position:center 32%;">
+          <img src="../img/resultados-ortodoncia-oraltech.webp" width="800" height="800" alt="Hombre joven sonriendo con los dientes alineados, sobre fondo oscuro. Foto de la sección de ortodoncia de OralTech." loading="lazy" decoding="async">
         </div>
         <div class="blog-card-content">
           <div class="cat">Ortodoncia</div>
@@ -73,8 +88,8 @@
       </a>
 
       <div class="blog-card reveal">
-        <div class="blog-card-img">
-          <div class="blog-card-img-placeholder">✦</div>
+        <div class="blog-card-img" style="background:none;">
+          <img src="../img/blanqueamiento-dental-medellin-cucuta.webp" width="1233" height="1233" alt="Antes y después de un blanqueamiento dental en OralTech: arriba los dientes con el tono amarillento inicial, abajo los mismos dientes ya blancos" loading="lazy" decoding="async">
         </div>
         <div class="blog-card-content">
           <div class="cat">Estética</div>
@@ -85,8 +100,8 @@
       </div>
 
       <div class="blog-card reveal">
-        <div class="blog-card-img">
-          <div class="blog-card-img-placeholder">·</div>
+        <div class="blog-card-img" style="background:none;">
+          <img src="../img/limpieza-dental-medellin-cucuta.webp" width="1233" height="1233" alt="Caso de OralTech: arriba, dientes con sarro y manchas en el borde de la encía; abajo, los mismos dientes después de la limpieza dental." loading="lazy" decoding="async">
         </div>
         <div class="blog-card-content">
           <div class="cat">Prevención</div>

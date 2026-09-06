@@ -40,27 +40,31 @@
   }
   .caso img {
     width: 100%;
-    /* height:auto NO es decorativo: sin él, el atributo height="566" del
-       HTML actúa como height:566px y el navegador IGNORA el aspect-ratio.
-       Medido: las 11 fotos salían en un marco 0,67 (vertical) siendo 1,59
-       (horizontales) y se perdía el 58% de cada una: solo se veía la franja
-       central de dientes. */
+    /* height:auto NO es decorativo: sin él, el atributo height del HTML
+       actúa como altura fija en píxeles y el navegador IGNORA el
+       aspect-ratio. Medido: las fotos salían en un marco 0,67 (vertical)
+       siendo 1,59 (horizontales) y se perdía el 58% de cada una: solo se
+       veía la franja central de dientes. */
     height: auto;
     display: block;
     aspect-ratio: 898 / 566;   /* la proporción exacta de sus fotos */
     object-fit: cover;
   }
-  .caso figcaption {
-    padding: 13px 18px;
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--gray);
-  }
-  .caso-grupo + .caso-grupo { margin-top: 64px; }
+  /* Sin pie de foto: el rótulo iba repetido tres veces por grupo y decía lo
+     mismo que el título del grupo. El único texto de cada bloque es el título. */
+
+  /* ⚠ El selector lleva `body` a propósito. oraltech.css trae
+     `body .caso-grupo + .caso-grupo { margin-top: 34px }` (0,2,1), que le gana
+     por especificidad a `.caso-grupo + .caso-grupo` (0,2,0) aunque esté antes.
+     Medido: los grupos quedaban a 34 px y el hueco título→foto era de 40 px,
+     o sea que cada bloque se veía MENOS separado del siguiente que por dentro.
+     Al quitar el párrafo descriptivo ese aire hay que reponerlo aquí. */
+  body .caso-grupo + .caso-grupo { margin-top: 72px; }
   @media (max-width: 900px) { .casos-grid { grid-template-columns: repeat(2, 1fr); } }
-  @media (max-width: 560px) { .casos-grid { grid-template-columns: 1fr; } }
+  @media (max-width: 560px) {
+    .casos-grid { grid-template-columns: 1fr; }
+    body .caso-grupo + .caso-grupo { margin-top: 52px; }
+  }
 </style>
 </head>
 <body>
@@ -79,13 +83,18 @@
 </section>
 
 <!-- ─── THE CASES ───────────────────────────────────────────
-     The 11 photos are the ones the clinic already publishes on its own site,
+     The 12 photos are the ones the clinic already publishes on its own site,
      under /antes-y-despues/. Each one is a final result, not a comparison:
      that is why the copy does not promise a "before and after" the photos
      do not show.
-     ⚠ PENDING: the second porcelain case is missing. On their site that slot
-     is filled by a 450x284 image (casos-oraltech.png), half the resolution of
-     the other eleven, which looks blurry when enlarged. Ask them for the original.
+     ORDER: the same as their current site, four groups of three —
+     resin 1·2·3 · ceromer 1·2·3 · porcelain 1·2·3 · micro design 1·2·3.
+     Do not reorder or mix the groups.
+     No captions and no description paragraph: at the client's request each
+     group carries its title only.
+     ⚠ PENDING: high-resolution original of ceramica-2. It is the same case they
+     publish, but their site only has it at 450x284 (half the resolution of the
+     other eleven) and it looks blurry when enlarged. Ask them for the original file.
      ⚠ PENDING: written patient consent to publish these photos (they are
      identifiable health data, Ley 1581).
 ──────────────────────────────────────────────────────────── -->
@@ -96,14 +105,13 @@
       <div class="clinic-header reveal">
         <div>
           <div class="section-tag">Smile design</div>
-          <h2 class="section-headline" style="font-family:'Inter',sans-serif;font-size:clamp(1.4rem,2.3vw,1.85rem);line-height:1.1;margin-bottom:8px;">In <span class="b">composite resin</span></h2>
-          <p style="font-size:15px;color:var(--black);opacity:0.72;max-width:620px;">The most affordable material, and the gentlest on your natural tooth. Ideal for subtle or temporary changes.</p>
+          <h2 class="section-headline" style="font-family:'Inter',sans-serif;font-size:clamp(1.4rem,2.3vw,1.85rem);line-height:1.1;">In <span class="b">composite resin</span></h2>
         </div>
       </div>
       <div class="casos-grid">
-        <figure class="caso reveal"><img src="../img/resina-1.webp" alt="Composite resin smile design done at OralTech: upper front teeth reshaped with an even shape and color" loading="lazy" width="898" height="566"><figcaption>Composite resin design</figcaption></figure>
-        <figure class="caso reveal"><img src="../img/resina-2.webp" alt="Close-up of a finished composite resin smile design done at OralTech" loading="lazy" width="898" height="566"><figcaption>Composite resin design</figcaption></figure>
-        <figure class="caso reveal"><img src="../img/resina-3.webp" alt="Smile rebuilt with composite resin at an OralTech location" loading="lazy" width="899" height="566"><figcaption>Composite resin design</figcaption></figure>
+        <figure class="caso reveal"><img src="../img/resina-1.webp" alt="Composite resin smile design done at OralTech: upper front teeth reshaped with an even shape and color" loading="lazy" width="898" height="566"></figure>
+        <figure class="caso reveal"><img src="../img/resina-2.webp" alt="Close-up of a finished composite resin smile design done at OralTech" loading="lazy" width="898" height="566"></figure>
+        <figure class="caso reveal"><img src="../img/resina-3.webp" alt="Smile rebuilt with composite resin at an OralTech location" loading="lazy" width="899" height="566"></figure>
       </div>
     </div>
 
@@ -111,14 +119,13 @@
       <div class="clinic-header reveal">
         <div>
           <div class="section-tag">Smile design</div>
-          <h2 class="section-headline" style="font-family:'Inter',sans-serif;font-size:clamp(1.4rem,2.3vw,1.85rem);line-height:1.1;margin-bottom:8px;">In <span class="b">ceromer</span></h2>
-          <p style="font-size:15px;color:var(--black);opacity:0.72;max-width:620px;">A hybrid material: the look of porcelain with the flexibility of composite resin. The middle ground between durability and a natural appearance.</p>
+          <h2 class="section-headline" style="font-family:'Inter',sans-serif;font-size:clamp(1.4rem,2.3vw,1.85rem);line-height:1.1;">In <span class="b">ceromer</span></h2>
         </div>
       </div>
       <div class="casos-grid">
-        <figure class="caso reveal"><img src="../img/ceromero-1.webp" alt="Ceromer smile design done at OralTech" loading="lazy" width="898" height="566"><figcaption>Ceromer design</figcaption></figure>
-        <figure class="caso reveal"><img src="../img/ceromero-2.webp" alt="Close-up of a finished ceromer smile design done at OralTech" loading="lazy" width="899" height="566"><figcaption>Ceromer design</figcaption></figure>
-        <figure class="caso reveal"><img src="../img/ceromero-3.webp" alt="Smile rebuilt with ceromer at an OralTech location" loading="lazy" width="898" height="566"><figcaption>Ceromer design</figcaption></figure>
+        <figure class="caso reveal"><img src="../img/ceromero-1.webp" alt="Ceromer smile design done at OralTech" loading="lazy" width="898" height="566"></figure>
+        <figure class="caso reveal"><img src="../img/ceromero-2.webp" alt="Close-up of a finished ceromer smile design done at OralTech" loading="lazy" width="899" height="566"></figure>
+        <figure class="caso reveal"><img src="../img/ceromero-3.webp" alt="Smile rebuilt with ceromer at an OralTech location" loading="lazy" width="898" height="566"></figure>
       </div>
     </div>
 
@@ -126,15 +133,16 @@
       <div class="clinic-header reveal">
         <div>
           <div class="section-tag">Smile design</div>
-          <h2 class="section-headline" style="font-family:'Inter',sans-serif;font-size:clamp(1.4rem,2.3vw,1.85rem);line-height:1.1;margin-bottom:8px;">In <span class="b">porcelain</span></h2>
-          <p style="font-size:15px;color:var(--black);opacity:0.72;max-width:620px;">The most durable and the most lifelike. It does not stain easily and looks almost exactly like a natural tooth.</p>
+          <h2 class="section-headline" style="font-family:'Inter',sans-serif;font-size:clamp(1.4rem,2.3vw,1.85rem);line-height:1.1;">In <span class="b">porcelain</span></h2>
         </div>
       </div>
       <div class="casos-grid">
-        <figure class="caso reveal"><img src="../img/ceramica-1.webp" alt="Porcelain smile design done at OralTech" loading="lazy" width="898" height="566"><figcaption>Porcelain design</figcaption></figure>
-        <figure class="caso reveal"><img src="../img/ceramica-3.webp" alt="Close-up of a finished porcelain smile design done at OralTech" loading="lazy" width="898" height="566"><figcaption>Porcelain design</figcaption></figure>
-        <!-- PENDING: third porcelain case. On their current site this slot is filled
-             by a 450x284 px image, half the resolution of the others. -->
+        <figure class="caso reveal"><img src="../img/ceramica-1.webp" alt="Porcelain smile design done at OralTech" loading="lazy" width="898" height="566"></figure>
+        <!-- ceramica-2 carries 450x284 because that is the real size of the file: it
+             is the only one of the twelve their site publishes at half resolution.
+             width/height must match the file, NOT 898x566, or the browser scales it wrong. -->
+        <figure class="caso reveal"><img src="../img/ceramica-2.webp" alt="Second porcelain smile design case done at OralTech" loading="lazy" width="450" height="284"></figure>
+        <figure class="caso reveal"><img src="../img/ceramica-3.webp" alt="Close-up of a finished porcelain smile design done at OralTech" loading="lazy" width="898" height="566"></figure>
       </div>
     </div>
 
@@ -142,14 +150,13 @@
       <div class="clinic-header reveal">
         <div>
           <div class="section-tag">Micro smile design</div>
-          <h2 class="section-headline" style="font-family:'Inter',sans-serif;font-size:clamp(1.4rem,2.3vw,1.85rem);line-height:1.1;margin-bottom:8px;">Micro <span class="b">smile design</span></h2>
-          <p style="font-size:15px;color:var(--black);opacity:0.72;max-width:620px;">A minimally invasive technique: it improves shape, size, color or alignment without filing down the tooth.</p>
+          <h2 class="section-headline" style="font-family:'Inter',sans-serif;font-size:clamp(1.4rem,2.3vw,1.85rem);line-height:1.1;">Micro <span class="b">smile design</span></h2>
         </div>
       </div>
       <div class="casos-grid">
-        <figure class="caso reveal"><img src="../img/micro-1.webp" alt="Micro smile design done at OralTech, with subtle changes to the shape and color of the teeth" loading="lazy" width="898" height="566"><figcaption>Micro smile design</figcaption></figure>
-        <figure class="caso reveal"><img src="../img/micro-2.webp" alt="Close-up of a finished micro smile design done at OralTech" loading="lazy" width="899" height="566"><figcaption>Micro smile design</figcaption></figure>
-        <figure class="caso reveal"><img src="../img/micro-3.webp" alt="Smile treated with micro smile design at an OralTech location" loading="lazy" width="898" height="566"><figcaption>Micro smile design</figcaption></figure>
+        <figure class="caso reveal"><img src="../img/micro-1.webp" alt="Micro smile design done at OralTech, with subtle changes to the shape and color of the teeth" loading="lazy" width="898" height="566"></figure>
+        <figure class="caso reveal"><img src="../img/micro-2.webp" alt="Close-up of a finished micro smile design done at OralTech" loading="lazy" width="899" height="566"></figure>
+        <figure class="caso reveal"><img src="../img/micro-3.webp" alt="Smile treated with micro smile design at an OralTech location" loading="lazy" width="898" height="566"></figure>
       </div>
     </div>
 

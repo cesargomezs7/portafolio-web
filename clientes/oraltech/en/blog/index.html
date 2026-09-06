@@ -33,6 +33,16 @@
   }
   .wa-float:hover { transform: scale(1.08); }
   .wa-float svg { width: 32px; height: 32px; }
+
+  /* ── Tarjetas del blog: las TRES llevan foto propia de OralTech ──
+     Mismo cambio que en /blog/index.html. El marco de styles.css es 16/10 y
+     las tres fotos del cliente son cuadradas (800x800 y 1233x1233): en 16/10
+     se les recorta el 37% de alto y eso parte por la mitad los antes/después.
+     Aquí el marco pasa a 1/1: las tres entran completas y sin recorte. */
+  .blog-card-img { aspect-ratio: 1 / 1; }
+  .blog-card-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  /* Sin filter/opacity en las no publicadas: probado y las fotos clínicas se
+     volvían grises y parecían rotas. Las distingue "Coming soon". */
 </style>
 </head>
 <body>
@@ -60,7 +70,7 @@
     <div class="blog-grid">
       <a href="cuanto-cuesta-ortodoncia-medellin.html" class="blog-card published reveal">
         <div class="blog-card-img" style="background:none;">
-          <img src="../../img/resultados-ortodoncia-oraltech.webp" alt="OralTech patient smiling after orthodontic treatment" style="width:100%;height:100%;object-fit:cover;object-position:center 32%;">
+          <img src="../../img/resultados-ortodoncia-oraltech.webp" width="800" height="800" alt="Young man smiling with straight teeth against a dark background. Photo from OralTech's orthodontics section." loading="lazy" decoding="async">
         </div>
         <div class="blog-card-content">
           <div class="cat">Orthodontics</div>
@@ -73,8 +83,8 @@
       </a>
 
       <div class="blog-card reveal">
-        <div class="blog-card-img">
-          <div class="blog-card-img-placeholder">✦</div>
+        <div class="blog-card-img" style="background:none;">
+          <img src="../../img/blanqueamiento-dental-medellin-cucuta.webp" width="1233" height="1233" alt="Before and after of a teeth whitening at OralTech: on top the teeth with their original yellowish shade, below the same teeth now white" loading="lazy" decoding="async">
         </div>
         <div class="blog-card-content">
           <div class="cat">Cosmetic</div>
@@ -85,8 +95,8 @@
       </div>
 
       <div class="blog-card reveal">
-        <div class="blog-card-img">
-          <div class="blog-card-img-placeholder">·</div>
+        <div class="blog-card-img" style="background:none;">
+          <img src="../../img/limpieza-dental-medellin-cucuta.webp" width="1233" height="1233" alt="OralTech case: on top, teeth with tartar and staining along the gumline; below, the same teeth after a dental cleaning." loading="lazy" decoding="async">
         </div>
         <div class="blog-card-content">
           <div class="cat">Prevention</div>

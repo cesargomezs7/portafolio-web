@@ -174,6 +174,55 @@
   .footer-social a:hover { background: var(--accent); border-color: var(--accent); color: var(--black); }
   .footer-social svg { width: 16px; height: 16px; }
 
+  /* ── Galería de la sede (collage) ──────────────────────────────
+     Gemela de la de sede-cucuta.html: filas de alto uniforme y de
+     anchos distintos, cada foto crece en proporción a SU relación
+     de aspecto (flex-grow = ancho/alto con flex-basis 0). El tope
+     de cada fila está calculado para que la foto más ancha no pase
+     de 430 px en escritorio.
+  ─────────────────────────────────────────────────────────────── */
+  /* El aire de arriba lo pone la hoja compartida con
+     body .section + .section { padding-top: 48px }, que es el ritmo
+     del resto de la página. No hace falta tocarlo aquí. */
+  .sg-galeria { max-width: 830px; margin-top: 30px; }
+  .sg-fila { display: flex; gap: 22px; align-items: flex-start; }
+  .sg-fila + .sg-fila { margin-top: 22px; }
+  .sg-fila--sangrada { width: 80.7%; margin-left: auto; }   /* 670 de 830 */
+  .sg-foto {
+    position: relative; margin: 0; min-width: 0; max-width: 430px;
+    border-radius: var(--radius); overflow: hidden;
+    background: var(--ice);
+    box-shadow: 0 10px 30px -14px rgba(31,35,79,.35);
+  }
+  .sg-foto img {
+    display: block; width: 100%; height: auto;
+    transition: transform .8s cubic-bezier(.22,1,.36,1);
+  }
+  .sg-foto:hover img { transform: scale(1.04); }
+  .sg-foto figcaption {
+    position: absolute; left: 0; right: 0; bottom: 0;
+    padding: 26px 18px 13px;
+    background: linear-gradient(to top, rgba(21,25,54,.82), transparent);
+    color: #fff;
+    font-family: 'Inter', sans-serif; font-size: 12.5px; font-weight: 500;
+    letter-spacing: .01em;
+  }
+  /* flex-grow = ancho/alto real de cada archivo */
+  .sg-foto--fachada     { flex: 1.5733 1 0px; }  /* 1600x1017 */
+  .sg-foto--recepcion   { flex: 1.4164 1 0px; }  /* 1034x730  */
+  .sg-foto--consultorio { flex: 0.7490 1 0px; }  /* 376x502   */
+  .sg-foto--espera      { flex: 1.4323 1 0px; }  /* 656x458   */
+
+  @media (max-width:760px){
+    .sg-galeria { margin-top: 22px; }
+    .sg-fila { flex-direction: column; gap: 14px; }
+    .sg-fila + .sg-fila { margin-top: 14px; }
+    .sg-fila--sangrada { width: 100%; margin-left: 0; }
+    .sg-foto { flex: 0 0 auto; width: 100%; max-width: 100%; }
+    .sg-foto--vertical { max-width: 74%; align-self: flex-end; }
+    .sg-foto figcaption { font-size: 12px; padding: 22px 15px 11px; }
+  }
+
   @media (max-width:1024px){
     .footer-grid.footer-grid--5 { grid-template-columns: 1fr 1fr; }
     .landing-cards{ grid-template-columns:1fr 1fr !important; }
@@ -234,6 +283,44 @@
       </div>
       <div class="reveal sede-map">
         <iframe loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Map of the Cúcuta location · Quinta Oriental" src="https://maps.google.com/maps?q=ORAL%20TECH%20CLINICA%20DENTAL%20SEDE%20CUCUTA&t=m&z=16&output=embed&iwloc=near"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Galería de la sede ────────────────────────────────────────
+     Gemela en inglés de la de sede-cucuta.html: las CUATRO fotos de
+     Cúcuta recortadas del collage que el cliente publica hoy en su
+     página de ubicación.
+──────────────────────────────────────────────────────────────── -->
+<section class="section sg-seccion">
+  <div class="section-inner">
+    <div class="clinic-header reveal">
+      <div>
+        <div class="overline">Our space</div>
+        <h2 style="font-family:'Inter',sans-serif;font-weight:200;font-size:clamp(1.45rem,2.45vw,1.95rem);letter-spacing:-0.03em;line-height:1.05;color:var(--black);">Inside our <span class="b">Cúcuta clinic</span></h2>
+      </div>
+    </div>
+    <div class="sg-galeria reveal">
+      <div class="sg-fila">
+        <figure class="sg-foto sg-foto--fachada">
+          <img src="../img/sede-cucuta.webp" alt="The OralTech storefront in Quinta Oriental, Cúcuta: blue sign with the logo above the glass entrance" loading="lazy" width="1600" height="1017">
+          <figcaption>Storefront · Cl. 2 #9 Este-156</figcaption>
+        </figure>
+        <figure class="sg-foto sg-foto--recepcion">
+          <img src="../img/sede-cucuta-recepcion.webp" alt="Front desk at the OralTech Cúcuta location, with the logo on the wall and a marble counter" loading="lazy" width="1034" height="730">
+          <figcaption>Front desk</figcaption>
+        </figure>
+      </div>
+      <div class="sg-fila sg-fila--sangrada">
+        <figure class="sg-foto sg-foto--consultorio sg-foto--vertical">
+          <img src="../img/sede-cucuta-consultorio.webp" alt="Treatment room at the OralTech Cúcuta location, with the covered dental chair, stool and instrument tray" loading="lazy" width="376" height="502">
+          <figcaption>Treatment room</figcaption>
+        </figure>
+        <figure class="sg-foto sg-foto--espera">
+          <img src="../img/sede-cucuta-espera.webp" alt="Waiting area at the OralTech Cúcuta location, with four wooden chairs and three black and white portraits on the wall" loading="lazy" width="656" height="458">
+          <figcaption>Waiting area</figcaption>
+        </figure>
       </div>
     </div>
   </div>

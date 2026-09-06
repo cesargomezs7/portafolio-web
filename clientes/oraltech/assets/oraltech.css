@@ -1792,3 +1792,21 @@ body .tf-grid { max-width: 960px; gap: 24px; }
   body .vt-anillo { --vt-ancho: 92vw; --vt-hueco: 16px; }
   body .tf-grid { max-width: 92vw; gap: 16px; }
 }
+
+/* ── Cierre de la revisión de las páginas de sede, contacto y blog ──
+   Los verificadores midieron tres cosas más que había que cerrar. */
+
+/* 1 · Entre 490 y 760 px de ancho, la regla de móvil de las galerías de
+   sede pone las fotos al 100% y anula el tope de 430: en tableta salían
+   a 700+. Se topa también en esa franja. */
+@media (min-width: 480px) and (max-width: 900px) {
+  body .sg-foto, body .sg-foto img { max-width: 430px; }
+  body .sg-fila { justify-content: center; }
+}
+
+/* 2 · Etiquetas de la ficha de sede ("Dirección", "Horarios", "WhatsApp",
+   "Opiniones en Google") a 11 px en móvil. */
+@media (max-width: 767px) {
+  body .sede-meta-label { font-size: 12px; }
+  body .blog-card .cat, body .blog-card-cat { font-size: 12px; }
+}

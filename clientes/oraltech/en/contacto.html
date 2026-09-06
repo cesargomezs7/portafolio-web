@@ -120,6 +120,30 @@
   /* ── Mensaje de estado del formulario ── */
   #contactMsg { font-family: 'Inter', sans-serif; font-size: 14px; line-height: 1.5; color: var(--gray); }
 
+  /* ── PACIENTES: el collage que ellos ya tenían en su página de contacto ──
+       Va sobre fondo blanco porque las cuatro fotos traen fondo negro propio y
+       el archivo es transparente: sobre claro la silueta escalonada se lee y
+       sobre el navy de marca se empastaría. ── */
+  .pacientes-band { border-top: 1px solid var(--border); }
+  .pacientes-grid {
+    display: grid; grid-template-columns: 1fr auto;
+    gap: 72px; align-items: center;
+  }
+  .pacientes-txt { max-width: 560px; }
+  .pacientes-txt p {
+    color: var(--gray); font-size: 16px; line-height: 1.6;
+    margin: 14px 0 0; max-width: 520px;
+  }
+  .pacientes-cta {
+    display: inline-block; margin-top: 22px;
+    font-family: 'Inter', sans-serif; font-weight: 500; font-size: 14px;
+    color: var(--black); text-decoration: none;
+    transition: color 0.25s var(--t);
+  }
+  .pacientes-cta:hover { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .pacientes-foto { width: min(430px, 100%); max-width: 100%; min-width: 0; }
+  .pacientes-foto img { display: block; width: 100%; height: auto; }
+
   /* ── SEDES (bloque .sedes-* del master traducido a Ivory) ──
        Sin mapa embebido: por regla de Pronto los mapas viven en el index y en
        cada página de sede; aquí manda el formulario. ── */
@@ -195,9 +219,16 @@
 
   @media (max-width:1024px){
     .footer-grid.footer-grid--5 { grid-template-columns: 1fr 1fr; }
+    .pacientes-grid { gap: 44px; }
+    .pacientes-foto { width: min(360px, 100%); }
   }
   @media (max-width:768px){
     .sedes-grid { grid-template-columns: 1fr; }
+    .pacientes-grid { grid-template-columns: minmax(0, 1fr); gap: 34px; }
+    /* ⚠ Ancho fijo NO: dentro de una rejilla, la columna toma el
+       min-content del hijo y la ensancha por encima de la pantalla.
+       Medido: scroll horizontal en toda la página a 320px. */
+    .pacientes-foto { width: min(320px, 100%); max-width: 100%; margin: 0 auto; }
   }
   @media (max-width:640px){
     .footer-grid.footer-grid--5 { grid-template-columns: 1fr; }
@@ -312,6 +343,23 @@
         </button>
         <p id="contactMsg" style="display:none;margin-top:14px;"></p>
       </form>
+    </div>
+  </div>
+</section>
+
+<!-- ─── PACIENTES (collage propio de OralTech) ──────────── -->
+<section class="section pacientes-band" data-wa="Hi, I found you on your website and I would like to know which treatment is right for me." data-wa-label="Talk to us">
+  <div class="section-inner">
+    <div class="pacientes-grid">
+      <div class="pacientes-txt reveal">
+        <div class="overline">Real patients</div>
+        <h2 style="font-family:'Inter',sans-serif;font-weight:200;font-size:clamp(1.45rem,2.45vw,2rem);letter-spacing:-0.035em;line-height:1.05;color:var(--black);">Smiles from <span class="b">our own patients</span></h2>
+        <p>These are photos of real OralTech patients. If you want a smile like these, message us and we will tell you which treatment fits you.</p>
+        <a class="pacientes-cta" href="casos.html">See real cases →</a>
+      </div>
+      <div class="pacientes-foto reveal">
+        <img src="../img/pacientes-collage-oraltech.webp" width="860" height="1207" loading="lazy" decoding="async" alt="Collage of photos of four real OralTech patients smiling">
+      </div>
     </div>
   </div>
 </section>

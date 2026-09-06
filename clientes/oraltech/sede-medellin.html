@@ -175,6 +175,66 @@
   .footer-social a:hover { background: var(--accent); border-color: var(--accent); color: var(--black); }
   .footer-social svg { width: 16px; height: 16px; }
 
+  /* ── Galería de la sede (collage) ──────────────────────────────
+     Filas de alto uniforme y de anchos distintos: dentro de cada
+     fila la foto crece en proporción a SU relación de aspecto
+     (flex-grow = ancho/alto, con flex-basis 0), así ninguna se
+     recorta ni se estira y no queda una rejilla de cajas iguales.
+     El tope de cada fila está calculado para que la foto más ancha
+     no pase de 430 px de ancho en escritorio.
+     Medellín tiene TRES fotos: la sala de espera y la vertical
+     arriba, y el consultorio solo abajo corrido a la derecha. Con
+     la vertical abajo el hueco de la izquierda se comía media
+     sección y parecía un fallo, no un collage. Son los recortes
+     individuales del collage que el cliente publica hoy en su
+     página de ubicación (img/oraltech-sede-medellin.webp, que
+     queda sólo de referencia).
+     ⚠ La foto del archivo sede-medellin-recepcion.webp NO es una
+     recepción: es la SALA DE ESPERA (sofá azul, sin mostrador). El
+     nombre del archivo se queda como está porque ya se usa en la
+     portada; el pie y el alt dicen lo correcto.
+  ─────────────────────────────────────────────────────────────── */
+  /* El aire de arriba lo pone la hoja compartida con
+     body .section + .section { padding-top: 48px }, que es el ritmo
+     del resto de la página. No hace falta tocarlo aquí. */
+  .sg-galeria { max-width: 678px; margin-top: 30px; }
+  .sg-fila { display: flex; gap: 22px; align-items: flex-start; }
+  .sg-fila + .sg-fila { margin-top: 22px; }
+  .sg-fila--sola { width: 63%; margin-left: auto; }   /* 427 de 678 */
+  .sg-foto {
+    position: relative; margin: 0; min-width: 0; max-width: 430px;
+    border-radius: var(--radius); overflow: hidden;
+    background: var(--ice);
+    box-shadow: 0 10px 30px -14px rgba(31,35,79,.35);
+  }
+  .sg-foto img {
+    display: block; width: 100%; height: auto;
+    transition: transform .8s cubic-bezier(.22,1,.36,1);
+  }
+  .sg-foto:hover img { transform: scale(1.04); }
+  .sg-foto figcaption {
+    position: absolute; left: 0; right: 0; bottom: 0;
+    padding: 26px 18px 13px;
+    background: linear-gradient(to top, rgba(21,25,54,.82), transparent);
+    color: #fff;
+    font-family: 'Inter', sans-serif; font-size: 12.5px; font-weight: 500;
+    letter-spacing: .01em;
+  }
+  /* flex-grow = ancho/alto real de cada archivo */
+  .sg-foto--espera      { flex: 1.4160 1 0px; }  /* 1130x798 */
+  .sg-foto--unidad      { flex: 0.7491 1 0px; }  /* 412x550  */
+  .sg-foto--consultorio { flex: 1 1 auto; max-width: 100%; }  /* 735x444, sola en su fila */
+
+  @media (max-width:760px){
+    .sg-galeria { margin-top: 22px; }
+    .sg-fila { flex-direction: column; gap: 14px; }
+    .sg-fila + .sg-fila { margin-top: 14px; }
+    .sg-fila--sola { width: 100%; margin-left: 0; }
+    .sg-foto { flex: 0 0 auto; width: 100%; max-width: 100%; }
+    .sg-foto--vertical { max-width: 74%; align-self: flex-end; }
+    .sg-foto figcaption { font-size: 12px; padding: 22px 15px 11px; }
+  }
+
   @media (max-width:1024px){
     .footer-grid.footer-grid--5 { grid-template-columns: 1fr 1fr; }
     .landing-cards{ grid-template-columns:1fr 1fr !important; }
@@ -234,6 +294,40 @@
       </div>
       <div class="reveal sede-map">
         <iframe loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Mapa sede El Poblado, Medellín" src="https://maps.google.com/maps?q=Oral%20Tech%20medellin&t=m&z=16&output=embed&iwloc=near"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Galería de la sede ────────────────────────────────────────
+     El cliente pidió las fotos que su web actual muestra en la
+     página de UBICACIÓN, en collage. Aquí van las TRES de Medellín,
+     recortadas una a una del collage original.
+──────────────────────────────────────────────────────────────── -->
+<section class="section sg-seccion">
+  <div class="section-inner">
+    <div class="clinic-header reveal">
+      <div>
+        <div class="overline">Nuestro espacio</div>
+        <h2 style="font-family:'Inter',sans-serif;font-weight:200;font-size:clamp(1.45rem,2.45vw,1.95rem);letter-spacing:-0.03em;line-height:1.05;color:var(--black);">Así es nuestra <span class="b">sede de Medellín</span></h2>
+      </div>
+    </div>
+    <div class="sg-galeria reveal">
+      <div class="sg-fila">
+        <figure class="sg-foto sg-foto--espera">
+          <img src="img/sede-medellin-recepcion.webp" alt="Sala de espera de OralTech en El Poblado, Medellín: sofá azul y el logo sobre la pared de listones de madera" loading="lazy" width="1130" height="798">
+          <figcaption>Sala de espera</figcaption>
+        </figure>
+        <figure class="sg-foto sg-foto--unidad sg-foto--vertical">
+          <img src="img/sede-medellin-unidad.webp" alt="Unidad odontológica de OralTech en la sede de Medellín, con la lámpara de trabajo y la bandeja de instrumental" loading="lazy" width="412" height="550">
+          <figcaption>Unidad odontológica</figcaption>
+        </figure>
+      </div>
+      <div class="sg-fila sg-fila--sola">
+        <figure class="sg-foto sg-foto--consultorio">
+          <img src="img/sede-medellin-consultorio.webp" alt="Consultorio de OralTech en Medellín, con unidad odontológica azul y mueble de madera" loading="lazy" width="735" height="444">
+          <figcaption>Consultorio</figcaption>
+        </figure>
       </div>
     </div>
   </div>
