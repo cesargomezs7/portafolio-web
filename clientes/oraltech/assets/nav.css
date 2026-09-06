@@ -28,7 +28,8 @@
   position: absolute;
   top: calc(100% + 12px);
   left: 50%;
-  transform: translateX(-50%) translateY(8px);
+  transform-origin: 50% 0;
+  transform: translateX(-50%) translateY(-4px) scale(.98);
   background: var(--white, #fff);
   border: 1px solid var(--border, #DBE0E8);
   border-radius: 16px;
@@ -39,10 +40,10 @@
   margin: 0;
   opacity: 0;
   visibility: hidden;
-  transition: opacity .22s ease, transform .22s ease;
+  transition: opacity .22s cubic-bezier(.22,1,.36,1), transform .22s cubic-bezier(.22,1,.36,1), visibility 0s .22s;
   z-index: 1200;
 }
-.nav-dd:hover .nav-sub { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); }
+.nav-dd:hover .nav-sub { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0) scale(1); transition: opacity .22s cubic-bezier(.22,1,.36,1), transform .22s cubic-bezier(.22,1,.36,1); }
 .nav-sub li { margin: 0; }
 .nav-sub a::after { display: none; }
 .nav-sub li::before { display: none; }
@@ -184,5 +185,30 @@
   70%  { box-shadow: 0 0 0 13px rgba(31,35,79, 0), 0 6px 20px rgba(31,35,79, .12); }
   100% { box-shadow: 0 0 0 0 rgba(31,35,79, 0),    0 6px 18px rgba(31,35,79, .10); }
 }
-.nav-menu-btn { animation: ctaShine 2.6s ease-in-out infinite; }
+/* Tres pulsos y para: un bucle infinito en la cabecera compite con el
+   contenido durante toda la visita. */
+.nav-menu-btn { animation: ctaShine 2.6s ease-in-out 1.2s 3; }
 @media (prefers-reduced-motion: reduce) { .nav-menu-btn { animation: none; } }
+
+/* ── Menú móvil: los enlaces entran escalonados detrás del panel ──
+   Solo los <li>; el panel conserva su transform (nav.css:74). Sin JS
+   el menú nunca abre, así que el estado oculto no deja nada sin ver. */
+.mobile-menu li { opacity: 0; transform: translateX(14px); transition: none; }
+.mobile-menu.open li {
+  opacity: 1; transform: none;
+  transition: opacity .3s cubic-bezier(.22,1,.36,1), transform .3s cubic-bezier(.22,1,.36,1);
+}
+/* cascada corta: el último enlace está en su sitio a los 0,55 s */
+.mobile-menu.open li:nth-child(1)  { transition-delay: .04s; }
+.mobile-menu.open li:nth-child(2)  { transition-delay: .07s; }
+.mobile-menu.open li:nth-child(3)  { transition-delay: .10s; }
+.mobile-menu.open li:nth-child(4)  { transition-delay: .12s; }
+.mobile-menu.open li:nth-child(5)  { transition-delay: .14s; }
+.mobile-menu.open li:nth-child(6)  { transition-delay: .16s; }
+.mobile-menu.open li:nth-child(7)  { transition-delay: .18s; }
+.mobile-menu.open li:nth-child(8)  { transition-delay: .20s; }
+.mobile-menu.open li:nth-child(9)  { transition-delay: .22s; }
+.mobile-menu.open li:nth-child(10) { transition-delay: .23s; }
+.mobile-menu.open li:nth-child(11) { transition-delay: .24s; }
+.mobile-menu.open li:nth-child(n+12) { transition-delay: .25s; }
+@media (prefers-reduced-motion: reduce) { .mobile-menu li { opacity: 1; transform: none; } }

@@ -84,10 +84,11 @@ body {
 }
 .nav-links a::after {
   content: ''; position: absolute; left: 0; bottom: 0;
-  height: 1px; width: 0; background: var(--black);
-  transition: width 0.3s var(--transition);
+  height: 1px; width: 100%; background: var(--black);
+  transform: scaleX(0); transform-origin: left center;
+  transition: transform 0.3s var(--transition);   /* scaleX, no width: sin relayout */
 }
-.nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+.nav-links a:hover::after, .nav-links a.active::after { transform: scaleX(1); }
 
 .nav-right { display: flex; align-items: center; gap: 16px; }
 .nav-location { font-size: 13px; color: var(--gray); display: flex; align-items: center; gap: 6px; }
@@ -500,9 +501,11 @@ footer { padding: 64px 5% 32px; background: var(--black); color: var(--white); }
 body.has-banner { padding-top: 36px; }
 body.has-banner .navbar { top: 36px; }
 
-/* ─── REVEAL ─────────────────────────────────────────────── */
-.reveal { opacity: 0; transform: translateY(20px); transition: all 0.8s var(--transition); }
-.reveal.visible { opacity: 1; transform: translateY(0); }
+/* ─── REVEAL (6-sep-2026: la anima assets/animations.js v2) ──
+   El estado oculto SOLO existe cuando el <head> puso html.js-anim
+   (hay JS). Sin JS, sin GSAP o con reduced-motion todo se ve. Nada
+   de transition aquí: GSAP es el único motor de estos nodos. */
+html.js-anim .reveal:not(.is-in) { opacity: 0; }
 
 /* ─── CTA BIG SECTION ─────────────────────────────────────── */
 .cta-section { background: var(--black); color: var(--white); padding: 140px 5%; text-align: center; }
@@ -548,10 +551,8 @@ body.has-banner .navbar { top: 36px; }
 
 /* ─── ANIMACIONES (GSAP + CSS micro-interacciones) ────────── */
 
-/* Reveal: estado inicial oculto (GSAP lo controla) */
-.reveal { opacity: 0; transform: translateY(20px); will-change: transform, opacity; }
-/* fallback si JS está deshabilitado */
-.no-js .reveal { opacity: 1; transform: none; }
+/* Reveal: ver la regla html.js-anim .reveal de arriba. Sin will-change:
+   creaba una capa GPU por cada .reveal desde la carga (29 en la portada). */
 
 /* Cards hover lift más suave.
    14-ago: .equipo-card y .testimonio salen del grupo — en el index ganaba la
@@ -602,12 +603,22 @@ body.has-banner .navbar { top: 36px; }
 .nav-logo { transition: transform 0.3s var(--transition); }
 .nav-logo:hover { transform: scale(1.02); }
 
-/* WhatsApp flotante: pulse muy sutil */
-@keyframes wa-pulse {
-  0%, 100% { box-shadow: 0 8px 24px rgba(34, 197, 94, 0.35); }
-  50% { box-shadow: 0 8px 28px rgba(34, 197, 94, 0.55), 0 0 0 12px rgba(34, 197, 94, 0.08); }
+/* WhatsApp flotante: anillo que respira. Es el ÚNICO bucle infinito
+   del sitio. Va en un pseudo-elemento con transform+opacity (capa
+   compuesta), no en box-shadow (repintaba 62 px cada frame). La regla
+   anterior [class*="wa-float"] alcanzaba también a la etiqueta
+   .wa-float-label y le ponía la sombra verde. */
+@keyframes wa-anillo {
+  0%   { transform: scale(1);    opacity: .45; }
+  70%  { transform: scale(1.55); opacity: 0; }
+  100% { transform: scale(1.55); opacity: 0; }
 }
-.wa-float, [class*="wa-float"], a[href*="wa.me"][class*="float"] { animation: wa-pulse 3s ease-in-out infinite; }
+.wa-float::before {
+  content: ''; position: absolute; inset: 0; border-radius: 50%;
+  background: #25D366; z-index: -1; pointer-events: none;
+  animation: wa-anillo 2.8s cubic-bezier(.22,1,.36,1) infinite;
+}
+.wa-float[aria-expanded="true"]::before { animation-play-state: paused; opacity: 0; }
 
 /* Respeta usuarios con reducción de movimiento */
 @media (prefers-reduced-motion: reduce) {

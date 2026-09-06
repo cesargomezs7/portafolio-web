@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>document.documentElement.classList.add('js-anim');setTimeout(function(){if(!window.__prAnimOk)document.documentElement.classList.remove('js-anim')},3500)</script><!-- compuerta de animación: la quita animations.js si no hay GSAP -->
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -16,10 +17,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/styles.css?v=20260814a">
-<link rel="stylesheet" href="assets/nav.css?v=20260814a">
-<link rel="stylesheet" href="assets/wa-widget.css?v=20260814a">
-<link rel="stylesheet" href="assets/oraltech.css?v=20260905a">
+<link rel="stylesheet" href="assets/styles.css?v=20260906a">
+<link rel="stylesheet" href="assets/nav.css?v=20260906a">
+<link rel="stylesheet" href="assets/wa-widget.css?v=20260906a">
+<link rel="stylesheet" href="assets/oraltech.css?v=20260906a">
 
 <!-- SEO: ficha de negocio local, una por sede. Sin openingHoursSpecification: el
      horario aún no está confirmado por el cliente y no se inventa.
@@ -1092,9 +1093,10 @@ body.has-banner .scroll-progress { top: 36px; }
 </a>
 
 <!-- ANIMACIONES GSAP + módulos Pronto (animations.js de Ivory: intacto) -->
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
-<script src="assets/animations.js?v=20260814a" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/SplitText.min.js" defer></script>
+<script src="assets/animations.js?v=20260906a" defer></script>
 <script src="assets/wa-widget.js?v=1" defer></script>
 <script src="assets/nav.js?v=1" defer></script>
 <script src="assets/oraltech.js?v=20260905a" defer></script>

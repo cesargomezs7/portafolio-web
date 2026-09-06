@@ -447,29 +447,8 @@
 .hv-sonido[aria-pressed="true"] .ico-mudo  { display: none; }
 .hv-sonido[aria-pressed="true"] .ico-suena { display: block; }
 
-/* Chips de calificación, flotando sobre las esquinas del marco */
-.hv-chip {
-  position: absolute; z-index: 4;
-  display: inline-flex; align-items: baseline; gap: 6px;
-  padding: 11px 18px;
-  border-radius: 999px;
-  background: #fff;
-  box-shadow: 0 10px 30px -8px rgba(31,35,79,.28), 0 0 0 1px rgba(31,35,79,.06);
-  font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 700;
-  color: var(--black); letter-spacing: -.02em;
-  animation: chipFlota 6s ease-in-out infinite;
-}
-.hv-chip .chip-sub { font-size: 12px; font-weight: 400; color: var(--gray); letter-spacing: 0; }
-.hv-chip .chip-estrella {
-  font-size: 15px;
-  background: linear-gradient(150deg, #F7D774 0%, #E0A32E 55%, #B8801C 100%);
-  -webkit-background-clip: text; background-clip: text; color: transparent;
-  text-shadow: 0 1px 0 rgba(224,163,46,.18);
-}
-.hv-chip-1 { top: -18px; left: 4%; animation-delay: -1.2s; }
-.hv-chip-2 { bottom: 64px; right: 3%; animation-delay: -3.6s; }
-@keyframes chipFlota { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
-@media (prefers-reduced-motion: reduce) { .hv-chip { animation: none; } }
+/* (6-sep-2026) Los chips flotantes .hv-chip se retiraron del HTML el
+   5-sep; su CSS y su bucle chipFlota eran código muerto y se borran. */
 
 .hv-cta { margin-top: 26px; }
 
@@ -901,37 +880,10 @@ figure.reveal img { height: auto; }
   background-size: 17px !important;
 }
 
-/* ── Botón "Agendar por WhatsApp": que se note ── */
-.hero-cta, .btn-wa {
-  position: relative;
-  overflow: hidden;
-  animation: ctaLatido 3.4s ease-in-out infinite;
-}
-@keyframes ctaLatido {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(31,35,79,.34), 0 10px 26px -12px rgba(31,35,79,.5); }
-  55%      { box-shadow: 0 0 0 16px rgba(31,35,79,0), 0 14px 30px -12px rgba(31,35,79,.55); }
-}
-/* Destello que cruza el botón cada tanto */
-.hero-cta::after, .btn-wa::after {
-  content: '';
-  position: absolute; top: 0; bottom: 0; left: -60%;
-  width: 45%;
-  background: linear-gradient(100deg, transparent, rgba(255,255,255,.30), transparent);
-  transform: skewX(-18deg);
-  animation: ctaDestello 3.4s ease-in-out infinite;
-  pointer-events: none;
-}
-@keyframes ctaDestello {
-  0%, 62% { left: -60%; }
-  92%, 100% { left: 130%; }
-}
-.hero-cta:hover, .btn-wa:hover { transform: translateY(-2px) scale(1.015); }
-.hero-cta svg, .btn-wa svg { transition: transform .25s var(--t); }
-.hero-cta:hover svg, .btn-wa:hover svg { transform: translateX(4px); }
-@media (prefers-reduced-motion: reduce) {
-  .hero-cta, .btn-wa { animation: none; }
-  .hero-cta::after, .btn-wa::after { display: none; }
-}
+/* (6-sep-2026) .hero-cta y .btn-wa no existen en ninguna página desde
+   que se quitó el botón bajo el video; sus bucles ctaLatido/ctaDestello
+   eran código muerto y se borran. El movimiento de los botones vive
+   ahora en el bloque 18. */
 
 /* ═══════════════════════════════════════════════════════════════
    BLOQUE 5 · CARRUSEL A TRES POR FILA, CON CONTROLES
@@ -1844,4 +1796,160 @@ body .tf-grid { max-width: 960px; gap: 24px; }
 @media (max-width: 767px) {
   body .sede-meta-label { font-size: 12px; }
   body .blog-card .cat, body .blog-card-cat { font-size: 12px; }
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   BLOQUE 18 · MOVIMIENTO (6-sep-2026)
+   ──────────────────────────────────────────────────────────────────
+   Compañero de assets/animations.js v2. Todo es transform/opacity
+   sobre nodos que ya existen; el layout final no cambia ni un píxel.
+   Las reglas que empiezan por html.js-anim solo existen cuando el
+   <head> confirmó que hay JS: sin JS nada de esto se aplica y todo
+   se ve desde el primer paint.
+   Tokens: 4 duraciones, 3 curvas, 1 distancia. Los mismos números
+   viven en animations.js (T y E).
+   ══════════════════════════════════════════════════════════════════ */
+:root {
+  --t-press: 120ms;
+  --t-ui: 220ms;
+  --t-reveal: 700ms;
+  --t-cine: 1000ms;
+  --e-out: cubic-bezier(.22,1,.36,1);
+  --e-cine: cubic-bezier(.16,1,.3,1);
+  --e-inout: cubic-bezier(.77,0,.175,1);
+}
+a, button { -webkit-tap-highlight-color: transparent; }
+[data-counter] { font-variant-numeric: tabular-nums; }
+
+/* ── 1 · Hero de video (portada): el marco se asienta, después llegan
+      el botón de sonido y las cifras de la franja azul. CSS puro con
+      fill both: arranca en el primer paint sobre el póster, sin
+      esperar a GSAP ni al video. La opacidad parte de .5, no de 0,
+      para que el póster siga contando como LCP. ── */
+@keyframes prHvEntra { from { opacity: .5; transform: scale(.975); } to { opacity: 1; transform: none; } }
+@keyframes prSube    { from { opacity: 0;  transform: translateY(10px); } to { opacity: 1; transform: none; } }
+@keyframes prLinea   { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+html.js-anim .hv-wrap    { animation: prHvEntra 800ms var(--e-out) both; }
+html.js-anim .hv-sonido  { animation: prSube 450ms var(--e-out) 380ms both; }
+html.js-anim .trust-item { animation: prSube 450ms var(--e-out) 480ms both; }
+html.js-anim .trust-item:nth-child(3) { animation-delay: 560ms; }
+html.js-anim .trust-item:nth-child(5) { animation-delay: 640ms; }
+
+/* ── 2 · Hero compacto (interiores): antetítulo → titular → párrafo.
+      El h1 lleva 250 ms de espera: si animations.js llega antes, lo
+      hace por líneas (SplitText) y anula esta animación; si no, este
+      fundido termina el trabajo. ── */
+html.js-anim .hero-compact :is(.hero-tag, .hero-breadcrumb) { animation: prSube 500ms var(--e-out) 60ms both; }
+html.js-anim .hero-compact :is(.hero-tag, .hero-breadcrumb)::before { transform-origin: left center; animation: prLinea 700ms var(--e-out) 160ms both; }
+html.js-anim .hero-compact h1 { animation: prSube 600ms var(--e-out) 250ms both; }
+html.js-anim .hero-compact :is(p, .lead) { animation: prSube 500ms var(--e-out) 220ms both; }
+
+/* ── 3 · Antetítulos: la rayita se traza al entrar (24 px en
+      .section-tag/.hero-tag; la línea larga de .caso-grupo-tit). El
+      marcador .pr-oculto/.pr-hijo lo pone y quita animations.js. ── */
+:is(.section-tag, .hero-tag, .hero-breadcrumb)::before,
+.caso-grupo .caso-grupo-tit::after {
+  transform-origin: left center;
+  transition: transform 700ms var(--e-out) 120ms;
+}
+html.js-anim :is(.pr-oculto, .pr-hijo):is(.section-tag, .hero-tag, .hero-breadcrumb)::before,
+html.js-anim .pr-oculto :is(.section-tag, .hero-tag)::before,
+html.js-anim .pr-oculto .caso-grupo-tit::after { transform: scaleX(0); }
+
+/* ── 4 · Fotos que cierran el encuadre: la imagen entra un 6 % más
+      grande dentro de su marco recortado y se asienta en 1 s. Solo
+      transform dentro de overflow:hidden: capa compuesta, cero reflow.
+      Sin clip-path (WebKit sigue pintándolo en el hilo principal). ── */
+.tf-card, .caso, .caso-foto, .gal-foto, .sg-foto, .equipo-card-photo, .blog-card-img, .clinic-photo-main, .pacientes-foto { overflow: hidden; }
+:is(.tf-card, .caso, .caso-foto, .gal-foto, .sg-foto, .equipo-card-photo, .blog-card-img, .clinic-photo-main, .pacientes-foto, .reveal[style*="overflow:hidden"]) > img {
+  transition: transform var(--t-cine) var(--e-cine);
+}
+html.js-anim .pr-oculto :is(.caso-foto, .gal-foto, .sg-foto, .equipo-card-photo, .blog-card-img, .clinic-photo-main) > img,
+html.js-anim .pr-oculto:is(.tf-card, .caso, .pacientes-foto, [style*="overflow:hidden"]) > img { transform: scale(1.06); }
+
+/* ── 5 · Iconos de servicio: en escritorio el hover ya los mueve y les
+      da brillo; en celular nadie pasa el cursor, así que el icono
+      saluda UNA vez al entrar la tarjeta (y brilla una vez). La clase
+      .saludado la pone el JS 1,7 s después para que no se repita. ── */
+@keyframes prSaludo {
+  0%   { transform: translate(-50%,-50%) scale(1)    rotate(0); }
+  40%  { transform: translate(-50%,-54%) scale(1.07) rotate(-2deg); }
+  70%  { transform: translate(-50%,-51.5%) scale(1.04) rotate(1deg); }
+  100% { transform: translate(-50%,-50%) scale(1)    rotate(0); }
+}
+@keyframes prDestello {
+  0%, 100% { filter: brightness(0) invert(1); }
+  45%      { filter: brightness(0) invert(1) drop-shadow(0 0 22px rgba(190,214,255,.9)) drop-shadow(0 0 8px rgba(255,255,255,1)); }
+}
+body .service-card.is-in:not(.saludado) .ico {
+  animation: prSaludo .9s cubic-bezier(.34,1.25,.5,1) .25s 1, prDestello 1.1s ease-in-out .3s 1;
+}
+
+/* ── 6 · Comparadores: el tirador se desliza dos veces al aparecer
+      para enseñar que se puede arrastrar (en celular no hay cursor
+      que lo avise). Se apaga en cuanto el usuario lo usa (.usado). ── */
+@keyframes prNudge {
+  0%, 100% { transform: translate(-50%, -50%); }
+  25%      { transform: translate(calc(-50% + 7px), -50%); }
+  75%      { transform: translate(calc(-50% - 7px), -50%); }
+}
+html.js-anim .ba.is-in:not(.usado) .ba-tirador { animation: prNudge 1.6s ease-in-out .5s 2; }
+
+/* ── 7 · FAQ: el + gira en 220 ms y la respuesta llega con un fundido
+      corto. El acordeón (max-height) no se toca. ── */
+.faq-toggle { transition: transform var(--t-ui) var(--e-out); }
+.faq-answer p { opacity: 0; transform: translateY(6px); transition: opacity 300ms var(--e-out), transform 300ms var(--e-out); }
+.faq-item.open .faq-answer p { opacity: 1; transform: none; transition-delay: 80ms; }
+.faq-question:active { opacity: .72; transition-duration: var(--t-press); }
+
+/* ── 8 · Bloque oscuro de cierre: el brillo radial respira muy lento
+      (solo opacity en un pseudo-elemento). ── */
+@keyframes prRespira { 0%, 100% { opacity: .55; } 50% { opacity: 1; } }
+.cta-final::before { animation: prRespira 9s ease-in-out infinite; }
+
+/* ── 9 · Respuesta al toque: lo que se pulsa se hunde en 120 ms. En
+      celular es lo que se percibe como "premium" sin ver ningún hover.
+      !important para ganarle a los hover que levantan (-2/-4 px). ── */
+:is(.btn-pill, .cta-final-btn, .sede-wa, .sede-cta-btn, .hv-sonido, .nav-menu-btn, .mm-cta, .services-view-more,
+    .sede-link-card, .gal-tab, .op-nav, .booking-fields button, .contacto-form button, .wa-sede, .wa-float,
+    .sedes-pills a, .pacientes-cta, .review-cta-btn, .team-book, .idioma-op, .service-card, .catalog-card,
+    .blog-card, .sede-card, .tipo-card, .diferencia-card, .testimonio):active {
+  transform: scale(.975) !important;
+  transition-duration: var(--t-press) !important;
+}
+.gal-tab, .op-nav, .idioma-op, .faq-question, .services-view-more, .sede-link-card, .pacientes-cta, .sedes-pills a {
+  transition-property: transform, color, background-color, border-color, box-shadow, opacity;
+  transition-duration: var(--t-ui);
+  transition-timing-function: var(--e-out);
+}
+.wa-float { transition: transform var(--t-ui) var(--e-out); }
+
+/* ── 10 · Hover solo donde hay cursor: en pantallas táctiles el estado
+      :hover se queda pegado tras el toque (Safari iOS). ── */
+@media (hover: none) {
+  :is(.catalog-card, .blog-card, .sede-card, .tipo-card, .testimonio, .equipo-card, .diferencia-card,
+      .sede-link-card, .sedes-pills a, .servicio-item, .team-book, .sede-wa, .sede-cta-btn, .cta-final-btn,
+      .btn-pill, .review-cta-btn, .hv-sonido, .op-nav, .nav-logo):hover { transform: none; }
+  :is(.gal-foto, .sg-foto, .caso-foto, .service-card.with-photo, .equipo-card):hover img { transform: none; }
+  .hv-wrap:hover .hv-marco { transform: none; }
+}
+
+/* ── 11 · Panel de WhatsApp: crece desde la burbuja y las dos sedes
+      entran una tras otra. oraltech.js solo alterna .open. ── */
+.wa-panel { transform-origin: 100% 100%; transition-timing-function: var(--e-out); }
+.wa-panel .wa-sede { opacity: 0; transform: translateY(6px); transition: opacity 250ms var(--e-out), transform 250ms var(--e-out), background var(--t-ui) var(--e-out); }
+.wa-panel.open .wa-sede { opacity: 1; transform: none; transition-delay: 60ms; }
+.wa-panel.open .wa-sede + .wa-sede { transition-delay: 110ms; }
+.wa-panel.open .wa-sede:hover { transform: translateX(2px); transition-delay: 0s; }
+
+/* ── 12 · Reduced motion: nada se mueve y nada queda oculto. ── */
+@media (prefers-reduced-motion: reduce) {
+  html.js-anim .reveal, .pr-oculto, .pr-hijo, .pr-titulo,
+  html.js-anim .hv-wrap, html.js-anim .hv-sonido, html.js-anim .trust-item,
+  html.js-anim .hero-compact :is(.hero-tag, .hero-breadcrumb, h1, p, .lead) {
+    opacity: 1 !important; transform: none !important; animation: none !important;
+  }
+  html.js-anim .pr-oculto img, .ba-tirador, .service-card .ico { animation: none !important; transform: revert-layer; }
+  .cta-final::before, .wa-float::before { animation: none !important; }
+  .mobile-menu li { opacity: 1; transform: none; }
 }
