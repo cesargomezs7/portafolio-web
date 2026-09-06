@@ -1774,3 +1774,21 @@ body .sede-ciudad  { font-size: 11.5px; }
 @media (max-width: 767px) {
   body .tipo-card .precio-label, body .section .precio-label { font-size: 12px; }
 }
+
+/* ══════════════════════════════════════════════════════════════════
+   BLOQUE 17 · VIDEOTESTIMONIOS AL MISMO TAMAÑO QUE LAS FOTOS
+   ──────────────────────────────────────────────────────────────────
+   Medido: las tarjetas de video salían a 240x427 y las de foto que van
+   justo debajo a 269x459. O sea, los videos eran los MÁS PEQUEÑOS del
+   bloque, cuando son el contenido más valioso que tienen (seis
+   pacientes extranjeros hablando a cámara). Se igualan y se suben las
+   dos escalas. El JS del anillo mide offsetWidth en cada vuelta, así
+   que se entera solo del cambio: no hay que tocarlo.
+   ══════════════════════════════════════════════════════════════════ */
+body .vt-anillo { --vt-ancho: 960px; --vt-hueco: 24px; }
+body .tf-grid { max-width: 960px; gap: 24px; }
+
+@media (max-width: 1023px) {
+  body .vt-anillo { --vt-ancho: 92vw; --vt-hueco: 16px; }
+  body .tf-grid { max-width: 92vw; gap: 16px; }
+}
