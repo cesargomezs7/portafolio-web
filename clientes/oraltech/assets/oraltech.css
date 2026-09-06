@@ -1052,10 +1052,38 @@ body .service-card.con-icono:hover .ico { transform: translate(-50%, -50%); }
 /* Brillo: un halo blanco que crece y se apaga, como si la pieza
    reflejara la luz. Va en el filtro, después del invert, para que
    no se coma el color. */
+/* El brillo de la primera versión se quedaba corto: 6 px de halo al 35%
+   apenas se notaba sobre el azul marino. Ahora es un halo doble —uno
+   ancho y frío, otro corto y blanco— que además LATE mientras el cursor
+   siga encima, en vez de dispararse una vez y apagarse. */
 @keyframes ico-brillo {
-  0%   { filter: brightness(0) invert(1) drop-shadow(0 0 0 rgba(255,255,255,0)); }
-  40%  { filter: brightness(0) invert(1) drop-shadow(0 0 14px rgba(255,255,255,.85)); }
-  100% { filter: brightness(0) invert(1) drop-shadow(0 0 6px rgba(255,255,255,.35)); }
+  0% {
+    filter: brightness(0) invert(1)
+            drop-shadow(0 0 0 rgba(255,255,255,0));
+  }
+  35% {
+    filter: brightness(0) invert(1)
+            drop-shadow(0 0 26px rgba(190,214,255,.95))
+            drop-shadow(0 0 9px rgba(255,255,255,1));
+  }
+  100% {
+    filter: brightness(0) invert(1)
+            drop-shadow(0 0 18px rgba(190,214,255,.75))
+            drop-shadow(0 0 6px rgba(255,255,255,.9));
+  }
+}
+/* Latido suave, en bucle, mientras el cursor esté encima. */
+@keyframes ico-latido {
+  0%, 100% {
+    filter: brightness(0) invert(1)
+            drop-shadow(0 0 18px rgba(190,214,255,.75))
+            drop-shadow(0 0 6px rgba(255,255,255,.9));
+  }
+  50% {
+    filter: brightness(0) invert(1)
+            drop-shadow(0 0 30px rgba(190,214,255,1))
+            drop-shadow(0 0 11px rgba(255,255,255,1));
+  }
 }
 /* Movimiento: sube un poco, crece y se balancea una vez. */
 @keyframes ico-vaiven {
@@ -1066,8 +1094,10 @@ body .service-card.con-icono:hover .ico { transform: translate(-50%, -50%); }
 }
 body .service-card:hover .ico,
 body .service-card:focus-within .ico {
+  opacity: 1;
   animation: ico-vaiven .85s cubic-bezier(.34,1.25,.5,1) forwards,
-             ico-brillo 1.1s ease-out forwards;
+             ico-brillo 1s ease-out forwards,
+             ico-latido 2.4s ease-in-out 1s infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1579,7 +1609,12 @@ body .clinic-since a:hover { color: var(--black); }
    se comía la que topa las fotos cuadradas más abajo, que es (0,3,2).
    Como `max-width: 100%` ya es el comportamiento por defecto aquí, se
    quita y deja de estorbar. */
-body .section figure:not(.caso-foto):not(.gal-foto) > img { max-height: 360px; width: auto; }
+/* ⚠ .tf-card TAMBIÉN es un <figure>, así que esta regla le caía encima:
+   con `width: auto` la foto del testimonio se dimensionaba por el alto
+   y dejaba 34 px de blanco a la derecha dentro de su tarjeta. */
+body .section figure:not(.caso-foto):not(.gal-foto):not(.tf-card) > img {
+  max-height: 360px; width: auto;
+}
 body .banda-apertura img,
 body .hero-banda img { max-height: 220px; object-fit: cover; }
 
