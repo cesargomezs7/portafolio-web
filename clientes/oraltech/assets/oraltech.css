@@ -1953,3 +1953,76 @@ html.js-anim .ba.is-in:not(.usado) .ba-tirador { animation: prNudge 1.6s ease-in
   .cta-final::before, .wa-float::before { animation: none !important; }
   .mobile-menu li { opacity: 1; transform: none; }
 }
+
+/* ══════════════════════════════════════════════════════════════════
+   BLOQUE 17 · EL HUECO BLANCO A LA DERECHA DE LAS FOTOS
+   ──────────────────────────────────────────────────────────────────
+   Cuando topé las fotos de contenido a 430 px, topé la IMAGEN pero no
+   su COLUMNA: la columna seguía midiendo 552 y quedaban 122 px de
+   blanco a la derecha. Medido en las seis páginas de servicio.
+   Lo correcto es al revés: se topa la CAJA y la foto la llena entera,
+   conservando su proporción real. Así no hay hueco, ni recorte, ni
+   estirado (implantes recortaba el 19% con object-fit:cover y limpieza
+   salía estirada con object-fit:fill).
+   ══════════════════════════════════════════════════════════════════ */
+/* `:has(img)` con descendiente, no con hijo directo: la foto cuelga de
+   tres estructuras distintas según la página (div > img, figure > img,
+   div > figure > img) y con `> img` se escapaban dos. `fit-content`
+   hace que la caja se encoja HASTA la foto: hueco cero por definición. */
+body .landing-split > *:has(img) {
+  width: fit-content;
+  max-width: 430px;
+}
+body .landing-split img,
+body .landing-split figure > img,
+body .section .landing-split img {
+  width: 100%;
+  height: auto;
+  max-width: 430px;
+  max-height: none !important;   /* la regla de los 360px achataba las cuadradas */
+  display: block;
+  object-fit: contain;
+}
+/* Reserva para navegadores sin :has() — sin ella volvería el hueco,
+   pero nunca se rompe nada. */
+@supports not selector(:has(img)) {
+  body .landing-split img { max-width: 430px; }
+}
+
+/* ── Antes / después de ortodoncia ─────────────────────────────────
+   Dos fotos del mismo paciente, lado a lado y del MISMO tamaño. Las
+   dos son cuadradas de origen (532 y 800), así que van en 1:1 sin
+   recorte: la comparación solo vale si nadie ha tocado el encuadre. */
+body .ad-par {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+  max-width: 760px;
+  margin-top: 26px;
+}
+body .ad-foto {
+  margin: 0;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--ice);
+  box-shadow: var(--shadow-md);
+}
+body .ad-foto img {
+  width: 100%; height: auto; display: block;
+  aspect-ratio: 1 / 1; object-fit: cover;   /* las dos son 1:1: no recorta nada */
+}
+body .ad-foto figcaption {
+  padding: 12px 16px 14px;
+  background: #fff;
+}
+body .ad-rotulo {
+  font-family: 'Inter', sans-serif;
+  font-weight: 700; font-size: 11px;
+  letter-spacing: .2em; text-transform: uppercase;
+}
+body .ad-antes   { color: var(--gray); }
+body .ad-despues { color: var(--black); }
+@media (max-width: 620px) {
+  body .ad-par { grid-template-columns: 1fr; gap: 16px; }
+  body .ad-rotulo { font-size: 12px; }
+}
