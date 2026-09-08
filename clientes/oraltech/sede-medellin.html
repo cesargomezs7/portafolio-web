@@ -201,7 +201,7 @@
   .sg-galeria { max-width: 678px; margin-top: 30px; }
   .sg-fila { display: flex; gap: 22px; align-items: flex-start; }
   .sg-fila + .sg-fila { margin-top: 22px; }
-  .sg-fila--sola { width: 63%; margin-left: auto; }   /* 427 de 678 */
+
   .sg-foto {
     position: relative; margin: 0; min-width: 0; max-width: 430px;
     border-radius: var(--radius); overflow: hidden;
@@ -224,7 +224,13 @@
   /* flex-grow = ancho/alto real de cada archivo */
   .sg-foto--espera      { flex: 1.4160 1 0px; }  /* 1130x798 */
   .sg-foto--unidad      { flex: 0.7491 1 0px; }  /* 412x550  */
-  .sg-foto--consultorio { flex: 1 1 auto; max-width: 100%; }  /* 735x444, sola en su fila */
+  /* La 4ª foto de la sede —la entrada— faltaba: estaba en su collage
+     pero nunca se recortó. Ahora la fila de abajo lleva las dos, cada
+     una creciendo según SU proporción real (ancho/alto), así que
+     ninguna se recorta ni se estira. */
+  .sg-fila--baja { margin-left: auto; width: 88%; }
+  .sg-foto--entrada     { flex: 0.8423 1 0px; }  /* 470x558 */
+  .sg-foto--consultorio { flex: 1.6554 1 0px; }  /* 735x444 */
 
   @media (max-width:760px){
     .sg-galeria { margin-top: 22px; }
@@ -324,7 +330,11 @@
           <figcaption>Unidad odontológica</figcaption>
         </figure>
       </div>
-      <div class="sg-fila sg-fila--sola">
+      <div class="sg-fila sg-fila--baja">
+        <figure class="sg-foto sg-foto--entrada sg-foto--vertical">
+          <img src="img/sede-medellin-entrada.webp" alt="Entrada de OralTech en El Poblado, Medellín: puerta de cristal con el logo de la clínica y el tapete de bienvenida" loading="lazy" width="470" height="558">
+          <figcaption>Entrada</figcaption>
+        </figure>
         <figure class="sg-foto sg-foto--consultorio">
           <img src="img/sede-medellin-consultorio.webp" alt="Consultorio de OralTech en Medellín, con unidad odontológica azul y mueble de madera" loading="lazy" width="735" height="444">
           <figcaption>Consultorio</figcaption>

@@ -47,6 +47,16 @@
   ul{ margin:0 0 4px 18px; } li{ font-size:15px; margin-bottom:6px; }
   .foot{ border-top:1px solid var(--border); margin-top:8px; padding-top:20px; font-size:12px; color:var(--soft); text-align:center; }
   @media print{ body{ background:#fff; padding:0; } .toolbar{ display:none; } .doc{ box-shadow:none; border-radius:0; max-width:100%; padding:32px; } .step{ break-inside:avoid; } .copy-btn{ display:none; } }
+
+  /* El botón de copiar medía 30px de alto: con el dedo no se acierta. */
+  @media (max-width: 767px){
+    .copy-btn{ min-height:44px; padding-left:18px; padding-right:18px; }
+  }
+  /* La plantilla lleva la URL de reseñas, que es UNA sola palabra de 50
+     caracteres: en un celular estrecho no cabe y empujaba toda la página
+     (medido: 410px de contenido en 158 de caja). Se deja que se parta. */
+  .tmpl, .tmpl-wrap{ overflow-wrap:anywhere; word-break:break-word; min-width:0; }
+  .step, .doc{ min-width:0; }
 </style>
 </head>
 <body>
@@ -83,13 +93,13 @@
     <div class="step">
       <div class="step-num">PASO 3</div>
       <h2>Pega el código QR de reseñas</h2>
-      <p>Imprime el afiche que te entregamos y pégalo donde el paciente lo vea al terminar:</p>
+      <p>Te entregamos <strong>un afiche por sede</strong>, cada uno con su propio QR. Imprime el de cada sede y pégalo donde el paciente lo vea al terminar:</p>
       <ul>
         <li>En la recepción, al pagar o agendar la próxima cita.</li>
         <li>En la sala de espera, frente a las sillas.</li>
         <li>En la tarjeta de la próxima cita.</li>
       </ul>
-      <p class="nota">El QR pasa por el filtro: solo las experiencias 5★ llegan a Google; las demás te llegan en privado a ti.</p>
+      <p class="nota">El QR de cada afiche ya sabe de qué sede viene, así que al paciente no le preguntamos dónde lo atendieron: va directo a la ficha de Google de esa sede. Y pasa por el filtro: solo las experiencias 5★ llegan a Google; las demás te llegan en privado a ti.</p>
     </div>
 
     <div class="step">
@@ -111,7 +121,12 @@
   // ===== PERSONALIZACIÓN POR CLIENTE (editar SOLO estas 2 líneas) =====
   const CONFIG = {
     clinica: "OralTech",                                   // 1) nombre de la clínica
-    reviewUrl: "https://__DOMINIO__/reviews.html"  // 2) su página de reseñas (en su dominio real)
+    /* ⚠ Esto NO es un marcador pendiente como los hreflang de las páginas:
+       es el enlace que OralTech copia y le manda a sus pacientes. Con
+       "__DOMINIO__" les llegaba un enlace muerto. Apunta a la URL viva.
+       El día que la web pase a su dominio, hay que cambiarlo aquí Y
+       regenerar los dos QR de los afiches. */
+    reviewUrl: "https://prontoweb.co/clientes/oraltech/reviews.html"
   };
   document.getElementById('titulo').textContent = "Activa tu sistema · " + CONFIG.clinica;
   document.getElementById('t-ausencia').textContent =

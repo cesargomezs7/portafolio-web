@@ -1564,7 +1564,14 @@ body .clinic-since a:hover { color: var(--black); }
 /* ⚠ .tf-card TAMBIÉN es un <figure>, así que esta regla le caía encima:
    con `width: auto` la foto del testimonio se dimensionaba por el alto
    y dejaba 34 px de blanco a la derecha dentro de su tarjeta. */
-body .section figure:not(.caso-foto):not(.gal-foto):not(.tf-card) > img {
+/* ⚠ Esta regla iba con exclusiones (:not(.caso-foto):not(.gal-foto)...) y
+   ya mordió tres veces donde no debía: .tf-card, y ahora .ad-foto, que
+   también son <figure> (medido: la foto del antes/después salía a 360 en
+   una caja de 369 y dejaba una raya de 9 px a la derecha).
+   Se invierte: en vez de excluir a mano cada figura nueva, se aplica SOLO
+   donde de verdad hace falta, que son las fotos sueltas de sección. */
+body .section > .section-inner > figure > img,
+body .section > figure > img {
   max-height: 360px; width: auto;
 }
 body .banda-apertura img,
@@ -2009,6 +2016,7 @@ body .ad-foto {
 }
 body .ad-foto img {
   width: 100%; height: auto; display: block;
+  max-width: none; max-height: none;
   aspect-ratio: 1 / 1; object-fit: cover;   /* las dos son 1:1: no recorta nada */
 }
 body .ad-foto figcaption {
@@ -2026,3 +2034,13 @@ body .ad-despues { color: var(--black); }
   body .ad-par { grid-template-columns: 1fr; gap: 16px; }
   body .ad-rotulo { font-size: 12px; }
 }
+
+/* ── La cuarta foto de cada sede ───────────────────────────────────
+   Su web publica CUATRO fotos por sede. Las cuatro están en la página de
+   cada sede, que es donde se enseña la clínica en detalle.
+   En el mosaico de la PORTADA se quedan tres a propósito: se probó con
+   cuatro y la composición asimétrica se descuadra —la columna derecha
+   crece tanto que la foto grande deja de mandar y la primera secundaria
+   se sale por arriba (comprobado en pantalla)—. Tres es lo que hace que
+   se lea como composición y no como rejilla. */
+

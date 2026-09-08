@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<title>OralTech Cúcuta · Tarjeta de próxima cita</title>
+<!-- TARJETA DE PRÓXIMA CITA · sede de Cúcuta
+     La guía de activación dice "pega el QR también en la tarjeta de la
+     próxima cita", pero esa tarjeta no existía como entregable. Esta es.
+     · 85x55 mm, el tamaño de tarjeta de visita de toda la vida, para que
+       entre en la billetera y no se tire.
+     · 10 por hoja A4, en 2 columnas x 5 filas, para no desperdiciar papel.
+     · El QR es el mismo de esta sede: lleva a reviews.html?sede=cucuta,
+       o sea que al paciente no se le pregunta dónde lo atendieron.
+     ⚠ El QR apunta a prontoweb.co. Si la web pasa al dominio de OralTech,
+       hay que regenerarlo o deja de funcionar. -->
+<link rel="icon" href="favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{ --navy:#1F234F; --accent:#52589C; --ice:#EAEFF5; --gray:#6B7186; --border:#DBE0E8; }
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  body{ font-family:'Inter',sans-serif; background:var(--ice); color:var(--navy);
+        padding:24px; -webkit-font-smoothing:antialiased; }
+  .barra{ text-align:center; margin-bottom:18px; }
+  .barra button{ background:var(--navy); color:#fff; border:none; font-family:inherit;
+    font-weight:500; font-size:14px; padding:11px 22px; border-radius:999px; cursor:pointer; }
+  .barra p{ font-size:13px; color:var(--gray); margin-top:10px; }
+
+  .hoja{ width:210mm; min-height:297mm; margin:0 auto; background:#fff;
+    box-shadow:0 20px 60px rgba(31,35,79,.16); border-radius:12px;
+    padding:10mm; display:grid; grid-template-columns:repeat(2, 85mm);
+    grid-auto-rows:55mm; gap:4mm; justify-content:center; align-content:start; }
+
+  .tarjeta{ border:1px dashed var(--border); border-radius:3mm; padding:5mm 5.5mm;
+    display:grid; grid-template-columns:1fr auto; gap:4mm; align-items:center; }
+  .tarjeta .izq{ min-width:0; }
+  .tarjeta .logo{ width:26mm; height:auto; display:block; margin-bottom:1.5mm; }
+  .tarjeta .sede{ font-size:6.5pt; font-weight:600; letter-spacing:.12em;
+    text-transform:uppercase; color:var(--accent); margin-bottom:3mm; }
+  .tarjeta .rot{ font-size:6.5pt; font-weight:600; letter-spacing:.1em;
+    text-transform:uppercase; color:var(--gray); margin-bottom:1mm; }
+  .linea{ border-bottom:1px solid var(--border); height:5mm; margin-bottom:2.5mm; }
+  .tarjeta .pie{ font-size:6.5pt; color:var(--gray); line-height:1.35; }
+  .tarjeta .pie strong{ color:var(--navy); font-weight:600; }
+
+  .der{ text-align:center; }
+  .der img{ width:25mm; height:25mm; display:block; }
+  .der span{ display:block; font-size:5.5pt; color:var(--gray); margin-top:1mm;
+    line-height:1.25; max-width:25mm; }
+  /* Son documentos A4: 794 px de ancho. En un celular se salen de la
+     pantalla, así que se encogen con `zoom` —que recalcula la caja, cosa
+     que transform:scale no hace— y solo en pantalla. Los valores salen de
+     dividir el ancho útil entre 794, no de tantear: cada tramo se calcula por su ancho MÍNIMO (a 320 quedan 300 útiles,
+     300/794 = 0,377, de ahí 0,36); calcularlo por el máximo dejaba fuera
+     el extremo estrecho, medido fallando en 375 y 390. Al imprimir manda @page y sale
+     a tamaño real. */
+  @media screen and (max-width: 360px){ body{padding:10px} .hoja{ zoom:0.36; } }
+  @media screen and (min-width:361px) and (max-width: 480px){ body{padding:10px} .hoja{ zoom:0.42; } }
+  @media screen and (min-width:481px) and (max-width: 640px){ body{padding:12px} .hoja{ zoom:0.57; } }
+  @media screen and (min-width:641px) and (max-width: 860px){ body{padding:14px} .hoja{ zoom:0.77; } }
+  @media print{
+    @page{ size:A4; margin:0; }
+    body{ background:#fff; padding:0; }
+    .barra{ display:none; }
+    .hoja{ box-shadow:none; border-radius:0; margin:0; }
+  }
+</style>
+</head>
+<body>
+  <div class="barra">
+    <button onclick="window.print()">📄 Guardar como PDF</button>
+    <p>10 tarjetas por hoja A4 · sede de Cúcuta · recorta por la línea punteada</p>
+  </div>
+  <div class="hoja">
+    <div class="tarjeta">
+      <div class="izq">
+        <img class="logo" src="img/logo-oraltech-navy.png" width="1600" height="401" alt="OralTech">
+        <div class="sede">Cúcuta · Quinta Oriental</div>
+        <div class="rot">Tu próxima cita</div>
+        <div class="linea"></div>
+        <div class="pie"><strong>Cl. 2 #9 Este-156, Local 1</strong><br>WhatsApp 322 413 0747</div>
+      </div>
+      <div class="der">
+        <img src="img/qr-resenas-cucuta.png" width="784" height="784" alt="QR para dejar tu reseña">
+        <span>¿Te gustó? Cuéntalo aquí</span>
+      </div>
+    </div>
+    <div class="tarjeta">
+      <div class="izq">
+        <img class="logo" src="img/logo-oraltech-navy.png" width="1600" height="401" alt="OralTech">
+        <div class="sede">Cúcuta · Quinta Oriental</div>
+        <div class="rot">Tu próxima cita</div>
+        <div class="linea"></div>
+        <div class="pie"><strong>Cl. 2 #9 Este-156, Local 1</strong><br>WhatsApp 322 413 0747</div>
+      </div>
+      <div class="der">
+        <img src="img/qr-resenas-cucuta.png" width="784" height="784" alt="QR para dejar tu reseña">
+        <span>¿Te gustó? Cuéntalo aquí</span>
+      </div>
+    </div>
+    <div class="tarjeta">
+      <div class="izq">
+        <img class="logo" src="img/logo-oraltech-navy.png" width="1600" height="401" alt="OralTech">
+        <div class="sede">Cúcuta · Quinta Oriental</div>
+        <div class="rot">Tu próxima cita</div>
+        <div class="linea"></div>
+        <div class="pie"><strong>Cl. 2 #9 Este-156, Local 1</strong><br>WhatsApp 322 413 0747</div>
+      </div>
+      <div class="der">
+        <img src="img/qr-resenas-cucuta.png" width="784" height="784" alt="QR para dejar tu reseña">
+        <span>¿Te gustó? Cuéntalo aquí</span>
+      </div>
+    </div>
+    <div class="tarjeta">
+      <div class="izq">
+        <img class="logo" src="img/logo-oraltech-navy.png" width="1600" height="401" alt="OralTech">
+        <div class="sede">Cúcuta · Quinta Oriental</div>
+        <div class="rot">Tu próxima cita</div>
+        <div class="linea"></div>
+        <div class="pie"><strong>Cl. 2 #9 Este-156, Local 1</strong><br>WhatsApp 322 413 0747</div>
+      </div>
+      <div class="der">
+        <img src="img/qr-resenas-cucuta.png" width="784" height="784" alt="QR para dejar tu reseña">
+        <span>¿Te gustó? Cuéntalo aquí</span>
+      </div>
+    </div>
+    <div class="tarjeta">
+      <div class="izq">
+        <img class="logo" src="img/logo-oraltech-navy.png" width="1600" height="401" alt="OralTech">
+        <div class="sede">Cúcuta · Quinta Oriental</div>
+        <div class="rot">Tu próxima cita</div>
+        <div class="linea"></div>
+        <div class="pie"><strong>Cl. 2 #9 Este-156, Local 1</strong><br>WhatsApp 322 413 0747</div>
+      </div>
+      <div class="der">
+        <img src="img/qr-resenas-cucuta.png" width="784" height="784" alt="QR para dejar tu reseña">
+        <span>¿Te gustó? Cuéntalo aquí</span>
+      </div>
+    </div>
+    <div class="tarjeta">
+      <div class="izq">
+        <img class="logo" src="img/logo-oraltech-navy.png" width="1600" height="401" alt="OralTech">
+        <div class="sede">Cúcuta · Quinta Oriental</div>
+        <div class="rot">Tu próxima cita</div>
+        <div class="linea"></div>
+        <div class="pie"><strong>Cl. 2 #9 Este-156, Local 1</strong><br>WhatsApp 322 413 0747</div>
+      </div>
+      <div class="der">
+        <img src="img/qr-resenas-cucuta.png" width="784" height="784" alt="QR para dejar tu reseña">
+        <span>¿Te gustó? Cuéntalo aquí</span>
+      </div>
+    </div>
+    <div class="tarjeta">
+      <div class="izq">
+        <img class="logo" src="img/logo-oraltech-navy.png" width="1600" height="401" alt="OralTech">
+        <div class="sede">Cúcuta · Quinta Oriental</div>
+        <div class="rot">Tu próxima cita</div>
+        <div class="linea"></div>
+        <div class="pie"><strong>Cl. 2 #9 Este-156, Local 1</strong><br>WhatsApp 322 413 0747</div>
+      </div>
+      <div class="der">
+        <img src="img/qr-resenas-cucuta.png" width="784" height="784" alt="QR para dejar tu reseña">
+        <span>¿Te gustó? Cuéntalo aquí</span>
+      </div>
+    </div>
+    <div class="tarjeta">
+      <div class="izq">
+        <img class="logo" src="img/logo-oraltech-navy.png" width="1600" height="401" alt="OralTech">
+        <div class="sede">Cúcuta · Quinta Oriental</div>
+        <div class="rot">Tu próxima cita</div>
+        <div class="linea"></div>
+        <div class="pie"><strong>Cl. 2 #9 Este-156, Local 1</strong><br>WhatsApp 322 413 0747</div>
+      </div>
+      <div class="der">
+        <img src="img/qr-resenas-cucuta.png" width="784" height="784" alt="QR para dejar tu reseña">
+        <span>¿Te gustó? Cuéntalo aquí</span>
+      </div>
+    </div>
+    <div class="tarjeta">
+      <div class="izq">
+        <img class="logo" src="img/logo-oraltech-navy.png" width="1600" height="401" alt="OralTech">
+        <div class="sede">Cúcuta · Quinta Oriental</div>
+        <div class="rot">Tu próxima cita</div>
+        <div class="linea"></div>
+        <div class="pie"><strong>Cl. 2 #9 Este-156, Local 1</strong><br>WhatsApp 322 413 0747</div>
+      </div>
+      <div class="der">
+        <img src="img/qr-resenas-cucuta.png" width="784" height="784" alt="QR para dejar tu reseña">
+        <span>¿Te gustó? Cuéntalo aquí</span>
+      </div>
+    </div>
+    <div class="tarjeta">
+      <div class="izq">
+        <img class="logo" src="img/logo-oraltech-navy.png" width="1600" height="401" alt="OralTech">
+        <div class="sede">Cúcuta · Quinta Oriental</div>
+        <div class="rot">Tu próxima cita</div>
+        <div class="linea"></div>
+        <div class="pie"><strong>Cl. 2 #9 Este-156, Local 1</strong><br>WhatsApp 322 413 0747</div>
+      </div>
+      <div class="der">
+        <img src="img/qr-resenas-cucuta.png" width="784" height="784" alt="QR para dejar tu reseña">
+        <span>¿Te gustó? Cuéntalo aquí</span>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -243,6 +243,39 @@
       panel.classList.toggle('open');
       burbuja.setAttribute('aria-expanded', panel.classList.contains('open') ? 'true' : 'false');
     });
+
+    /* OralTech tiene DOS sedes, pero los botones neutros —"Agendar" del
+       menú, "Escribir por WhatsApp" del bloque final, el del pie— llevaban
+       todos al número de Cúcuta sin decirlo. Medido: 5 a 7 enlaces a Cúcuta
+       por 1 a 3 a Medellín en cada página. Un paciente de Medellín pulsaba
+       "Agendar" y acababa escribiéndole a la otra ciudad, y de paso la web
+       daba a entender que Cúcuta es la principal, cosa que el cliente no ha
+       dicho.
+       Ahora esos botones abren el panel de las dos sedes, igual que la
+       burbuja. Los que SÍ nombran su sede (el del pie con el número, los de
+       las páginas de sede, los del propio panel) se dejan en paz: ahí el
+       paciente ya sabe a dónde va. Si este script no carga, el enlace sigue
+       funcionando como antes: no se rompe nada. */
+    /* Delegación en document, NO un listener por enlace: el botón
+       "Agendar" del menú lo construye nav.js DESPUÉS de que este script
+       corra, así que engancharlo uno a uno no lo alcanzaba (comprobado:
+       no pasaba nada al pulsarlo). Así vale también para lo que se cree
+       más tarde. */
+    document.addEventListener('click', function (e) {
+      var a = e.target.closest && e.target.closest('a[href*="wa.me"]');
+      if (!a || a === burbuja) return;
+      if (a.closest('.wa-panel')) return;                            // los del propio panel
+      if (a.closest('.sede-card, .sede-meta, .sedes-grid')) return;  // fichas de sede
+      var txt = (a.textContent || '').trim();
+      if (/[Cc]úcuta|[Mm]edell|322\s?413|301\s?618/.test(txt)) return;  // ya nombra su sede
+      e.preventDefault();
+      /* stopPropagation: justo debajo hay un listener que cierra el panel
+         cuando el clic cae fuera de él. Sin esto, el mismo clic lo abría
+         y lo cerraba. */
+      e.stopPropagation();
+      panel.classList.add('open');
+      burbuja.setAttribute('aria-expanded', 'true');
+    }, true);
     document.addEventListener('click', function (e) {
       if (!panel.contains(e.target) && !burbuja.contains(e.target)) {
         panel.classList.remove('open');

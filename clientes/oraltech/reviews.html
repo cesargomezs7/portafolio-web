@@ -276,6 +276,14 @@
     body { min-height: calc(100vh / var(--z, 1)); }
   }
 }
+
+  /* El paciente abre esto desde el celular, en la sala de espera. Nada de
+     letra por debajo de 12px ni botones que no se acierten con el dedo. */
+  @media (max-width: 767px){
+    .overline, .footer-note{ font-size:12px; }
+    .sede-btn{ min-height:56px; }
+    button, .btn, input, textarea{ min-height:44px; }
+  }
 </style>
 </head>
 <body>
@@ -392,6 +400,33 @@
      que se le pregunta antes de sacarlo del sitio. */
   function mostrarSelectorSede() {
     var paso = document.getElementById('step-rate');
+
+    /* Si el afiche ya sabe de qué sede viene (?sede=cucuta), no tiene
+       sentido preguntárselo al paciente: el QR está pegado en la pared de
+       esa sede. Se le manda directo a la ficha de Google que le toca.
+       Un paso menos entre las 5 estrellas y la reseña publicada. */
+    var pedida = null;
+    try {
+      pedida = new URLSearchParams(location.search).get('sede');
+    } catch (e) {}
+    if (pedida) {
+      var s = CONFIG.sedes.filter(function (x) { return x.id === pedida; })[0];
+      if (s) {
+        track('review_5_' + s.id);
+        paso.innerHTML =
+          '<h1>¡Gracias! Nos alegra mucho.</h1>' +
+          '<p class="sub">Te llevamos a Google para que dejes tu reseña.</p>' +
+          '<div class="sede-grid">' +
+            '<a class="sede-btn" href="' + s.reviewUrl + '" target="_blank" rel="noopener">' +
+              '<strong>Escribir mi reseña</strong><span>' + s.nombre + ' · ' + s.detalle + '</span>' +
+            '</a>' +
+          '</div>';
+        /* Se abre solo, pero el botón queda por si el navegador lo bloquea. */
+        try { window.open(s.reviewUrl, '_blank'); } catch (e) {}
+        return;
+      }
+    }
+
     var botones = CONFIG.sedes.map(function (s) {
       return '<a class="sede-btn" href="' + s.reviewUrl + '" target="_blank" rel="noopener" data-sede="' + s.id + '">' +
                '<strong>' + s.nombre + '</strong><span>' + s.detalle + '</span>' +
