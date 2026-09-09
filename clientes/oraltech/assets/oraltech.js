@@ -137,7 +137,12 @@
        vertical que horizontal, se suelta el gesto y la página se
        desplaza como siempre. Solo se toma el control cuando la
        intención es claramente horizontal. */
-    var x0 = 0, y0 = 0, decidido = false, arrastrando = false;
+    /* ⚠ Aquí hay que llevar la cuenta de si el botón está PULSADO.
+       La primera versión no lo hacía y bastaba con pasar el ratón por
+       encima para que la raya saliera disparada: `pointermove` se dispara
+       igual sin pulsar nada, y el código lo tomaba por un arrastre.
+       `pulsado` solo se enciende en pointerdown y se apaga al soltar. */
+    var pulsado = false, x0 = 0, y0 = 0, decidido = false, arrastrando = false;
 
     var valorEn = function (clientX) {
       var caja = ba.getBoundingClientRect();
@@ -154,10 +159,12 @@
     };
 
     ba.addEventListener('pointerdown', function (e) {
-      if (e.pointerType === 'mouse' && e.button !== 0) return;
+      if (e.pointerType === 'mouse' && e.button !== 0) return;   // solo botón izquierdo
+      pulsado = true;
       x0 = e.clientX; y0 = e.clientY;
       decidido = false; arrastrando = false;
-      /* Con ratón o lápiz se agarra ya: no hay scroll que proteger. */
+      /* Con ratón o lápiz se agarra ya: no hay scroll de página que
+         proteger, y quien pulsa sobre el comparador quiere moverlo. */
       if (e.pointerType !== 'touch') {
         decidido = true; arrastrando = true;
         try { ba.setPointerCapture(e.pointerId); } catch (err) {}
@@ -166,30 +173,29 @@
     });
 
     ba.addEventListener('pointermove', function (e) {
+      if (!pulsado) return;              // sin pulsar no pasa nada
       if (!decidido) {
+        /* Solo en táctil: hay que decidir si el gesto es para mover la
+           raya o para desplazar la página. */
         var dx = Math.abs(e.clientX - x0), dy = Math.abs(e.clientY - y0);
-        if (dx < 6 && dy < 6) return;          // todavía no se sabe
+        if (dx < 6 && dy < 6) return;
         decidido = true;
-        arrastrando = dx > dy;                  // horizontal = nuestro
+        arrastrando = dx > dy;
         if (arrastrando) { try { ba.setPointerCapture(e.pointerId); } catch (err) {} }
       }
       if (!arrastrando) return;
-      e.preventDefault();                       // que no arrastre la página
+      if (e.cancelable) e.preventDefault();
       aplicar(e.clientX);
     });
 
     var soltar = function (e) {
       if (arrastrando) { try { ba.releasePointerCapture(e.pointerId); } catch (err) {} }
-      decidido = false; arrastrando = false;
+      pulsado = false; decidido = false; arrastrando = false;
     };
     ba.addEventListener('pointerup', soltar);
     ba.addEventListener('pointercancel', soltar);
-
-    /* Un toque seco, sin arrastre, lleva la raya a donde se tocó. */
-    ba.addEventListener('click', function (e) {
-      if (e.target === rango) return;           // el input ya lo hace solo
-      aplicar(e.clientX);
-    });
+    /* Si se suelta el botón fuera del comparador, el gesto también termina. */
+    window.addEventListener('pointerup', function () { pulsado = false; decidido = false; arrastrando = false; });
   });
 
   /* ── 3 · Carrusel de videotestimonios ────────────────────
