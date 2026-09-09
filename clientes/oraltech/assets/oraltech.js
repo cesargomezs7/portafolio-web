@@ -121,6 +121,75 @@
     var pintar = function () { ba.style.setProperty('--pos', rango.value + '%'); };
     rango.addEventListener('input', pintar);
     pintar();
+
+    /* ARRASTRE CON EL DEDO
+       Hasta aquí el comparador dependía SOLO del <input type=range>
+       nativo. En el Safari del iPhone eso no basta: el contenedor lleva
+       `touch-action: pan-y` para no romper el scroll de la página, y con
+       eso Safari se queda el gesto y el arrastre horizontal nunca llega
+       al control. Resultado: la raya se quedaba clavada en la mitad.
+
+       Se maneja el gesto a mano con Pointer Events, que se comportan
+       igual en Safari, Chrome y Firefox. El input se queda: es el que
+       da el manejo con teclado y el que leen los lectores de pantalla.
+
+       Ojo con no romper el scroll: si el primer movimiento es más
+       vertical que horizontal, se suelta el gesto y la página se
+       desplaza como siempre. Solo se toma el control cuando la
+       intención es claramente horizontal. */
+    var x0 = 0, y0 = 0, decidido = false, arrastrando = false;
+
+    var valorEn = function (clientX) {
+      var caja = ba.getBoundingClientRect();
+      if (!caja.width) return null;
+      var pct = ((clientX - caja.left) / caja.width) * 100;
+      return Math.max(0, Math.min(100, pct));
+    };
+
+    var aplicar = function (clientX) {
+      var v = valorEn(clientX);
+      if (v === null) return;
+      rango.value = v;
+      pintar();
+    };
+
+    ba.addEventListener('pointerdown', function (e) {
+      if (e.pointerType === 'mouse' && e.button !== 0) return;
+      x0 = e.clientX; y0 = e.clientY;
+      decidido = false; arrastrando = false;
+      /* Con ratón o lápiz se agarra ya: no hay scroll que proteger. */
+      if (e.pointerType !== 'touch') {
+        decidido = true; arrastrando = true;
+        try { ba.setPointerCapture(e.pointerId); } catch (err) {}
+        aplicar(e.clientX);
+      }
+    });
+
+    ba.addEventListener('pointermove', function (e) {
+      if (!decidido) {
+        var dx = Math.abs(e.clientX - x0), dy = Math.abs(e.clientY - y0);
+        if (dx < 6 && dy < 6) return;          // todavía no se sabe
+        decidido = true;
+        arrastrando = dx > dy;                  // horizontal = nuestro
+        if (arrastrando) { try { ba.setPointerCapture(e.pointerId); } catch (err) {} }
+      }
+      if (!arrastrando) return;
+      e.preventDefault();                       // que no arrastre la página
+      aplicar(e.clientX);
+    });
+
+    var soltar = function (e) {
+      if (arrastrando) { try { ba.releasePointerCapture(e.pointerId); } catch (err) {} }
+      decidido = false; arrastrando = false;
+    };
+    ba.addEventListener('pointerup', soltar);
+    ba.addEventListener('pointercancel', soltar);
+
+    /* Un toque seco, sin arrastre, lleva la raya a donde se tocó. */
+    ba.addEventListener('click', function (e) {
+      if (e.target === rango) return;           // el input ya lo hace solo
+      aplicar(e.clientX);
+    });
   });
 
   /* ── 3 · Carrusel de videotestimonios ────────────────────
