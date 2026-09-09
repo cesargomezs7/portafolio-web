@@ -2074,3 +2074,45 @@ body .ad-despues { color: var(--black); }
     object-fit: contain;
   }
 }
+
+/* ══════════════════════════════════════════════════════════════════
+   BLOQUE 18 · VIDEO EN PANTALLA COMPLETA
+   ──────────────────────────────────────────────────────────────────
+   Los seis videotestimonios están grabados con celular y son
+   VERTICALES (480x848 y 720x1280). En la tarjeta pequeña
+   `object-fit: cover` es lo correcto: la llena sin dejar bordes.
+   Pero en pantalla completa ese mismo `cover` estira el video vertical
+   hasta llenar una pantalla horizontal y le recorta la cabeza y el
+   cuerpo: se ve el centro ampliado, que es justo lo contrario de lo
+   que quiere alguien que le dio a pantalla completa.
+   Ahí manda `contain`: el video se ve ENTERO, con franjas negras a los
+   lados, que es como se ve un video vertical en una pantalla ancha.
+   Van los tres prefijos porque cada navegador nombra distinto este
+   estado y Safari sigue usando el suyo.
+   ══════════════════════════════════════════════════════════════════ */
+/* ⚠ CADA prefijo va en SU PROPIA regla, nunca en una lista separada por
+   comas. Si un navegador no entiende UNO de los selectores de la lista,
+   descarta la regla ENTERA: la primera versión juntaba :fullscreen con
+   :-webkit-full-screen y :-moz-full-screen, y Chromium las tiraba las tres
+   por culpa de la de Firefox. Medido: seguía recortando el 184%. */
+video:fullscreen {
+  object-fit: contain !important;
+  width: 100% !important; height: 100% !important; background: #000;
+}
+video:-webkit-full-screen {
+  object-fit: contain !important;
+  width: 100% !important; height: 100% !important; background: #000;
+}
+video:-moz-full-screen {
+  object-fit: contain !important;
+  width: 100% !important; height: 100% !important; background: #000;
+}
+
+/* Y por si el que entra en pantalla completa es la tarjeta y no el
+   <video> directamente. También separadas. */
+.vt-card:fullscreen video, .hv-pantalla:fullscreen video {
+  object-fit: contain !important; position: static; inset: auto;
+}
+.vt-card:-webkit-full-screen video, .hv-pantalla:-webkit-full-screen video {
+  object-fit: contain !important; position: static; inset: auto;
+}

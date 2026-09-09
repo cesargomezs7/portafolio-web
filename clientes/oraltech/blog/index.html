@@ -37,9 +37,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/styles.css?v=20260906a">
-<link rel="stylesheet" href="../assets/nav.css?v=20260909d">
-<link rel="stylesheet" href="../assets/wa-widget.css?v=20260909d">
-<link rel="stylesheet" href="../assets/oraltech.css?v=20260909d">
+<link rel="stylesheet" href="../assets/nav.css?v=20260909e">
+<link rel="stylesheet" href="../assets/wa-widget.css?v=20260909e">
+<link rel="stylesheet" href="../assets/oraltech.css?v=20260909e">
 
 <style>
   /* ── Burbuja WhatsApp del master (id waFloat): misma geometría de .wsp-float de Ivory.
@@ -64,10 +64,11 @@
      marco pasa a 1/1: las tres entran completas y sin recorte. */
   .blog-card-img { aspect-ratio: 1 / 1; }
   .blog-card-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  /* Las dos tarjetas sin publicar van con la foto a plena fidelidad: probado
-     con filter+opacity y las fotos clínicas se volvían grises y parecían rotas.
-     Lo que las distingue es que no llevan el enlace "Leer artículo" y sí la
-     etiqueta "Próximamente". */
+  /* Las dos tarjetas de "Próximamente" se quitaron el 9-sep. Un blog NO hay
+     que mantenerlo al día —un artículo bueno sigue trayendo gente años
+     después—, pero una promesa sin cumplir a la vista sí resta: lleva meses
+     diciendo de la clínica lo contrario de lo que queremos que diga. Queda
+     el artículo real, que es el que trabaja. */
 </style>
 </head>
 <body>
@@ -106,30 +107,6 @@
           </span>
         </div>
       </a>
-
-      <div class="blog-card reveal">
-        <div class="blog-card-img" style="background:none;">
-          <img src="../img/blanqueamiento-dental-medellin-cucuta.webp" width="1233" height="1233" alt="Antes y después de un blanqueamiento dental en OralTech: arriba los dientes con el tono amarillento inicial, abajo los mismos dientes ya blancos" loading="lazy" decoding="async">
-        </div>
-        <div class="blog-card-content">
-          <div class="cat">Estética</div>
-          <h3>Blanqueamiento dental: lo que sí funciona y lo que no</h3>
-          <p>Mitos y verdades sobre el blanqueamiento. Diferencias entre el LED profesional, los kits de farmacia y el carbón activado.</p>
-          <span class="pending">Próximamente</span>
-        </div>
-      </div>
-
-      <div class="blog-card reveal">
-        <div class="blog-card-img" style="background:none;">
-          <img src="../img/limpieza-dental-medellin-cucuta.webp" width="1233" height="1233" alt="Caso de OralTech: arriba, dientes con sarro y manchas en el borde de la encía; abajo, los mismos dientes después de la limpieza dental." loading="lazy" decoding="async">
-        </div>
-        <div class="blog-card-content">
-          <div class="cat">Prevención</div>
-          <h3>5 señales de que necesitas limpieza dental urgente</h3>
-          <p>Sangrado al cepillarte, mal aliento persistente, sensibilidad… Cuándo es momento de visitar al odontólogo antes de un problema mayor.</p>
-          <span class="pending">Próximamente</span>
-        </div>
-      </div>
     </div>
 
     <div class="reveal" style="margin-top:80px;text-align:center;padding:48px;background:var(--ice-soft);border-radius:24px;">
@@ -221,10 +198,10 @@
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/SplitText.min.js" defer></script>
-<script src="../assets/animations.js?v=20260909d" defer></script>
-<script src="../assets/wa-widget.js?v=20260909d" defer></script>
-<script src="../assets/nav.js?v=20260909d" defer></script>
-<script src="../assets/oraltech.js?v=20260909d" defer></script>
+<script src="../assets/animations.js?v=20260909e" defer></script>
+<script src="../assets/wa-widget.js?v=20260909e" defer></script>
+<script src="../assets/nav.js?v=20260909e" defer></script>
+<script src="../assets/oraltech.js?v=20260909e" defer></script>
 
 <script>
   /* nav.js inyecta rutas relativas a la RAÍZ del sitio; esta página vive en /blog/,
