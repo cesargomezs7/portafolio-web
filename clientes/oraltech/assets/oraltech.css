@@ -1241,9 +1241,23 @@ body .gal-mosaico-espejo > .gal-foto:nth-child(3) { grid-column: 2; grid-row: 1 
      112 px (medido a 390). */
   body .gal-mosaico,
   body .gal-mosaico-espejo { grid-template-columns: 1fr; gap: 14px; max-width: 100%; }
+  /* ⚠ Y hay que repetir CADA pseudo-selector, no basta con `> .gal-foto`.
+     Las reglas de escritorio son `... > .gal-foto:first-child`, que suma
+     una clase más (0,3,1) y le gana a `... > .gal-foto` (0,2,1) aunque
+     esta esté dentro de la media query: las media queries NO añaden
+     especificidad. Sin esto, en el celular la primera foto conservaba su
+     `grid-row: 1 / span 2` y las otras dos se le MONTABAN ENCIMA. */
   body .gal-mosaico > .gal-foto,
-  body .gal-mosaico-espejo > .gal-foto {
-    grid-row: auto; grid-column: 1; width: 100%; margin: 0; justify-self: stretch;
+  body .gal-mosaico > .gal-foto:first-child,
+  body .gal-mosaico > .gal-foto:nth-child(2),
+  body .gal-mosaico > .gal-foto:nth-child(3),
+  body .gal-mosaico > .gal-foto:nth-child(4),
+  body .gal-mosaico-espejo > .gal-foto,
+  body .gal-mosaico-espejo > .gal-foto:first-child,
+  body .gal-mosaico-espejo > .gal-foto:nth-child(2),
+  body .gal-mosaico-espejo > .gal-foto:nth-child(3) {
+    grid-row: auto; grid-column: 1; width: 100%;
+    margin: 0; justify-self: stretch; align-self: auto;
   }
 }
 
@@ -2046,3 +2060,17 @@ body .ad-despues { color: var(--black); }
    se sale por arriba (comprobado en pantalla)—. Tres es lo que hace que
    se lea como composición y no como rejilla. */
 
+
+/* ── La banda de apertura, en celular ─────────────────────────────
+   `oraltech-ortodoncias-scaled.webp` es 1600x351: una banda muy alargada.
+   En celular el marco la dejaba casi cuadrada y `object-fit: cover` le
+   recortaba el 55% (medido a 390). Se le respeta su proporción: se ve
+   entera, más baja, que es como está pensada. */
+@media (max-width: 760px) {
+  body .banda-apertura img,
+  body section[style*="padding:0 5%"] img {
+    aspect-ratio: auto;
+    height: auto;
+    object-fit: contain;
+  }
+}

@@ -52,6 +52,46 @@
       });
     }
 
+    /* CONTROLES AL ACERCARSE
+       El video no puede ser solo un adorno que gira: quien quiera pararlo,
+       retroceder o ver por dónde va tiene que poder. Se le ponen los
+       controles NATIVOS del navegador (play/pausa, barra de progreso,
+       volumen, pantalla completa, y el ±10 s donde el sistema lo trae) en
+       cuanto el cursor entra o el dedo toca, y se quitan al salir para que
+       en reposo se vea limpio.
+       Se usan los nativos a propósito: son los que la gente ya sabe usar,
+       funcionan con teclado y con lector de pantalla, y no hay que
+       mantenerlos. */
+    var marco = v.closest('.hv-pantalla') || v.parentElement;
+    var temporizador = null;
+
+    var mostrar = function () {
+      clearTimeout(temporizador);
+      v.controls = true;
+    };
+    var ocultar = function (retraso) {
+      clearTimeout(temporizador);
+      temporizador = setTimeout(function () {
+        // Si está pausado se dejan puestos: si no, no habría cómo reanudar.
+        if (!v.paused) v.controls = false;
+      }, retraso || 0);
+    };
+
+    if (marco) {
+      marco.addEventListener('mouseenter', mostrar);
+      marco.addEventListener('mouseleave', function () { ocultar(0); });
+      /* En celular no hay cursor: aparecen al tocar y se van solos a los
+         3,5 s, que es lo que hace cualquier reproductor. */
+      marco.addEventListener('touchstart', function () {
+        mostrar();
+        ocultar(3500);
+      }, { passive: true });
+    }
+    /* Con el teclado también: si alguien llega al video tabulando, los ve. */
+    v.addEventListener('focus', mostrar);
+    v.addEventListener('blur', function () { ocultar(0); });
+    v.addEventListener('pause', mostrar);
+
     var btn = document.getElementById('heroSonido');
     if (!btn) return;
     btn.addEventListener('click', function () {
