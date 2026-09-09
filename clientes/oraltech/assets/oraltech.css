@@ -2005,7 +2005,9 @@ body .ad-par {
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 22px;
   max-width: 760px;
-  margin-top: 26px;
+  /* Centradas: el bloque mide 760 dentro de un contenedor de 1178 y,
+     pegado a la izquierda, dejaba 418 px muertos a la derecha. */
+  margin: 26px auto 0;
 }
 body .ad-foto {
   margin: 0;
