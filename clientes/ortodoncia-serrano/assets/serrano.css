@@ -541,15 +541,232 @@ h3 { font-size: 1.06rem; font-weight: 600; line-height: 1.3; }
   .cta-row { gap: 12px; }
 }
 
-/* ── 15 · Movimiento ───────────────────────────────────────── */
-.rise { opacity: 0; transform: translateY(16px); }
-.is-in { opacity: 1; transform: none; transition: opacity .6s var(--t), transform .6s var(--t); }
+/* ═══════════════════════════════════════════════════════════════
+   15 · MOVIMIENTO
+   Todo en CSS. Cero librerías: GSAP + ScrollTrigger costarían ~50 KB
+   sobre una landing que pesa 240 KB entera, y estas páginas viven de
+   cargar rápido porque Google encarece el clic si no.
 
-/* Sin JS o con reduced-motion, todo se ve. Nada depende de la animación. */
-.no-js .rise { opacity: 1; transform: none; }
+   Cuatro duraciones (140 · 260 · 620 · 900 ms) y dos curvas.
+   Reglas duras:
+     · sin JavaScript, TODO se ve (.no-js)
+     · con prefers-reduced-motion, TODO se ve y nada se mueve
+     · nada anima `all`: leer una opacidad en mitad de una
+       `transition: all` devuelve 0 y rompe cualquier medición
+     · nada reserva menos altura de la que ocupa → CLS 0
+   ═══════════════════════════════════════════════════════════════ */
+
+:root {
+  --sal: cubic-bezier(.22, 1, .36, 1);   /* salida suave, entra decidido */
+  --ent: cubic-bezier(.4, 0, .2, 1);
+}
+
+/* ── Entrada por scroll ───────────────────────────────────────
+   El elemento nace desplazado; al entrar en pantalla se coloca.
+   Se anima SOLO opacity y transform: las dos van en el compositor,
+   así que no repintan ni provocan saltos de maquetación. */
+.rise {
+  opacity: 0;
+  transform: translateY(18px);
+}
+.is-in {
+  opacity: 1;
+  transform: none;
+  transition: opacity .62s var(--sal), transform .62s var(--sal);
+}
+
+/* Cascada entre hermanos: cada uno entra 70 ms después del anterior.
+   Se aplica a las rejillas que tienen varios hijos iguales. */
+.stagger > * {
+  opacity: 0;
+  transform: translateY(14px);
+}
+.is-in.stagger > * {
+  opacity: 1;
+  transform: none;
+  transition: opacity .55s var(--sal), transform .55s var(--sal);
+}
+.is-in.stagger > *:nth-child(1) { transition-delay: .04s }
+.is-in.stagger > *:nth-child(2) { transition-delay: .11s }
+.is-in.stagger > *:nth-child(3) { transition-delay: .18s }
+.is-in.stagger > *:nth-child(4) { transition-delay: .25s }
+.is-in.stagger > *:nth-child(5) { transition-delay: .32s }
+.is-in.stagger > *:nth-child(6) { transition-delay: .39s }
+.is-in.stagger > *:nth-child(7) { transition-delay: .46s }
+.is-in.stagger > *:nth-child(8) { transition-delay: .53s }
+.is-in.stagger > *:nth-child(9) { transition-delay: .60s }
+.is-in.stagger > *:nth-child(10){ transition-delay: .67s }
+
+/* ── El hero entra solo al cargar, sin esperar al scroll ──────
+   Sube por partes: antetítulo → titular → párrafo → foto → botón.
+   La foto además cierra el encuadre un 4 %: da sensación de cámara
+   que se asienta, sin mover un solo píxel de la maquetación
+   (el `scale` no afecta al flujo). */
+.hero-in .hero-copy > *,
+.hero-in .hero-cta > * {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: subir .9s var(--sal) forwards;
+}
+.hero-in .hero-copy > *:nth-child(1) { animation-delay: .06s }
+.hero-in .hero-copy > *:nth-child(2) { animation-delay: .16s }
+.hero-in .hero-copy > *:nth-child(3) { animation-delay: .28s }
+.hero-in .hero-cta  > *:nth-child(1) { animation-delay: .52s }
+.hero-in .hero-cta  > *:nth-child(2) { animation-delay: .62s }
+
+.hero-in .hero-art {
+  opacity: 0;
+  animation: asentar 1.1s var(--sal) .34s forwards;
+}
+
+@keyframes subir {
+  to { opacity: 1; transform: none }
+}
+@keyframes asentar {
+  from { opacity: 0; transform: scale(1.04) }
+  to   { opacity: 1; transform: none }
+}
+
+/* ── La rayita del antetítulo se traza ───────────────────────── */
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.eyebrow::before {
+  content: '';
+  width: 26px;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .62s var(--sal) .1s;
+}
+.is-in .eyebrow::before,
+.hero-in .eyebrow::before { transform: scaleX(1) }
+
+/* ── El botón invita ──────────────────────────────────────────
+   Un brillo lo recorre CADA 6 s, TRES veces, y para. Un botón que
+   late para siempre cansa, y en salud se lee como presión. */
+.btn--wa {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+.btn--wa::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(105deg,
+              transparent 35%,
+              rgba(255,255,255,.42) 50%,
+              transparent 65%);
+  transform: translateX(-120%);
+}
+.btn--wa.brilla::after {
+  animation: brillo 6s var(--ent) 3;
+}
+@keyframes brillo {
+  0%   { transform: translateX(-120%) }
+  18%  { transform: translateX(120%) }
+  100% { transform: translateX(120%) }
+}
+
+/* respuesta al toque: se hunde. 140 ms, que es lo que se percibe
+   como "respondió" sin que parezca lento. */
+.btn { transition: background .18s var(--ent), transform .14s var(--ent); }
+.btn:active { transform: scale(.975) }
+
+/* ── La burbuja respira ───────────────────────────────────────
+   El anillo va en un pseudo-elemento, NO en box-shadow: animar
+   box-shadow repinta en cada fotograma. */
+.wa-float::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2px solid var(--wa);
+  animation: anillo 2.8s var(--ent) infinite;
+  pointer-events: none;
+}
+@keyframes anillo {
+  0%   { transform: scale(1);    opacity: .7 }
+  70%  { transform: scale(1.55); opacity: 0 }
+  100% { transform: scale(1.55); opacity: 0 }
+}
+
+/* la etiqueta que asoma junto a la burbuja a los pocos segundos */
+.wa-float-label {
+  position: absolute;
+  right: calc(100% + 12px);
+  top: 50%;
+  white-space: nowrap;
+  padding: 10px 15px;
+  border-radius: var(--r-pill);
+  background: var(--bg-alt);
+  color: var(--ink);
+  border: 1px solid var(--line);
+  box-shadow: 0 8px 26px rgba(0,0,0,.28);
+  font-size: 13.5px;
+  font-weight: 600;
+  /* nunca puede salirse: a 320 px quedan 230 px entre la burbuja y el borde */
+  max-width: calc(100vw - 110px);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  opacity: 0;
+  transform: translateY(-50%) translateX(8px);
+  transition: opacity .34s var(--sal), transform .34s var(--sal);
+  pointer-events: none;
+}
+.wa-float.con-label .wa-float-label,
+.wa-float:hover .wa-float-label {
+  opacity: 1;
+  transform: translateY(-50%) translateX(0);
+}
+
+/* ── Las fotos cierran el encuadre al entrar ─────────────────── */
+.doc-photo, .banda-foto { overflow: hidden; border-radius: var(--r-lg) }
+.doc-photo img, .banda-foto img { transform: scale(1.05); transition: transform 1.1s var(--sal) }
+.is-in .doc-photo img, .is-in .banda-foto img { transform: none }
+
+/* ── El acordeón ──────────────────────────────────────────────── */
+.faq-ico { transition: transform .26s var(--ent), border-color .26s var(--ent) }
+.faq-q:hover .faq-ico { border-color: var(--accent) }
+.faq-item[open] .faq-a { animation: desplegar .3s var(--sal) }
+@keyframes desplegar {
+  from { opacity: 0; transform: translateY(-6px) }
+  to   { opacity: 1; transform: none }
+}
+
+/* ── Las cifras de la franja ─────────────────────────────────── */
+.strip-num { transition: transform .5s var(--sal) }
+.is-in .strip-item:hover .strip-num { transform: translateY(-2px) }
+
+/* ── Red de seguridad ─────────────────────────────────────────
+   Sin JavaScript no hay clase .is-in ni .hero-in: si algo de esto
+   dependiera de la animación, la página quedaría en blanco. */
+.no-js .rise,
+.no-js .stagger > * { opacity: 1; transform: none }
+.no-js .eyebrow::before { transform: scaleX(1) }
+/* Sin JS nunca llega .is-in: si no se devuelve la escala, las fotos se
+   quedan un 5 % más grandes y recortadas PARA SIEMPRE. */
+.no-js .doc-photo img,
+.no-js .banda-foto img { transform: none }
 
 @media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
-  .rise, .is-in { opacity: 1 !important; transform: none !important; transition: none !important; }
-  .btn, .wa-float { transition: none; }
+  html { scroll-behavior: auto }
+  .rise, .is-in,
+  .stagger > *, .is-in.stagger > *,
+  .hero-in .hero-copy > *, .hero-in .hero-cta > *, .hero-in .hero-art {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+    animation: none !important;
+  }
+  .eyebrow::before { transform: scaleX(1) !important; transition: none !important }
+  .doc-photo img, .banda-foto img { transform: none !important; transition: none !important }
+  .btn, .wa-float, .faq-ico { transition: none !important }
+  .btn--wa::after, .wa-float::before { animation: none !important; opacity: 0 !important }
+  .faq-item[open] .faq-a { animation: none !important }
 }
