@@ -20,7 +20,6 @@
 (function () {
   'use strict';
 
-  var raiz = document.documentElement;
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   /* ── 0 · Elementos que entran ─────────────────────────────────
@@ -40,7 +39,6 @@
 
   function mostrarTodo() {
     for (var i = 0; i < bloques.length; i++) bloques[i].classList.add('is-in');
-    raiz.classList.add('hero-listo');
   }
 
   /* Con reduced-motion o sin IntersectionObserver: todo visible, sin mover nada. */

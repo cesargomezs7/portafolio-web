@@ -468,6 +468,15 @@ h3 { font-size: 1.06rem; font-weight: 600; line-height: 1.3; }
 .foot p + p { margin-top: 9px; }
 .foot a { color: var(--ink-soft); }
 
+/* La burbuja es `fixed` 60×60 y por debajo de 1100 px se sienta encima del
+   último párrafo del pie, que es el AVISO DE TRATAMIENTO DE DATOS (Ley 1581).
+   Medido en WebKit —el motor del iPhone, por donde entra la pauta— con el
+   scroll al fondo: 60×33,9 a 390 px, 47,3×34,1 a 768 y dos párrafos a 1024.
+   Se resuelve dando aire al pie, no moviendo la burbuja: el CTA no se toca. */
+@media (max-width: 1099px) {
+  .foot { padding-bottom: 116px; }
+}
+
 /* ── 12 · Burbuja de WhatsApp ──────────────────────────────── */
 .wa-float {
   position: fixed;
@@ -506,8 +515,15 @@ h3 { font-size: 1.06rem; font-weight: 600; line-height: 1.3; }
   /* la foto sangra hasta el borde derecho de la ventana */
   .t-navy .hero-art { margin-right: calc((100vw - var(--cw)) / -2); }
   .strip-grid { grid-template-columns: repeat(4, 1fr); }
-  .doc-grid { grid-template-columns: .82fr 1.18fr; gap: 48px; }
-  .steps { grid-template-columns: repeat(4, 1fr); }
+  /* align-items:center, no start. La fila mide siempre lo que el elemento más
+     alto; `start` no crea el sobrante, lo aparca ENTERO en un extremo (medido:
+     arriba 0 / abajo 161,98 a 1440, y 183,70 a 820, el mayor de la página).
+     Centrado, ese mismo sobrante se reparte a partes iguales y deja de leerse
+     como un agujero. Es lo que ya hace .banda 100 líneas más abajo con un
+     sobrante aún mayor (204,87) que nadie percibe.
+     Va aquí y no en la regla base: por debajo de 820 es una sola columna. */
+  .doc-grid { grid-template-columns: .82fr 1.18fr; gap: 48px; align-items: center; }
+  .steps { grid-template-columns: repeat(2, 1fr); }   /* 2×2 hasta 1100: a 4 col. el texto cae a 14-20 caracteres por línea */
   .close-data { grid-template-columns: repeat(3, 1fr); gap: 26px; }
   .banda { grid-template-columns: .78fr 1.22fr; gap: 44px; }
   .banda--invertida { grid-template-columns: 1.22fr .78fr; }
@@ -517,6 +533,7 @@ h3 { font-size: 1.06rem; font-weight: 600; line-height: 1.3; }
 
 @media (min-width: 1100px) {
   .hero-copy { max-width: 44ch; }
+  .steps { grid-template-columns: repeat(4, 1fr); }
 }
 
 /* ── 14 · Celular: suelos duros ────────────────────────────── */
