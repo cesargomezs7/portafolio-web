@@ -2116,3 +2116,126 @@ video:-moz-full-screen {
 .vt-card:-webkit-full-screen video, .hv-pantalla:-webkit-full-screen video {
   object-fit: contain !important; position: static; inset: auto;
 }
+
+/* ══════════════════════════════════════════════════════════════════
+   BLOQUE 19 · LOS SEIS SERVICIOS, DE UN VISTAZO EN CELULAR
+   ──────────────────────────────────────────────────────────────────
+   El <style> de la página fuerza UNA columna por debajo de 768 px, así
+   que cada tarjeta ocupaba casi la pantalla entera y había que bajar
+   seis veces para verlos todos. En su web actual los seis caben a la
+   vez, en dos columnas, y eso es mejor: el paciente ve de un golpe
+   todo lo que hacen sin tener que desplazarse.
+   Va con prefijo `body` porque ese <style> se carga DESPUÉS de esta
+   hoja: `.services-grid` es (0,1,0) y `body .services-grid` (0,1,1).
+   ══════════════════════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+  body .services-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    margin-top: 26px;
+  }
+  /* styles.css apila el "Ver más" DEBAJO del título en celular y esa fila
+     suelta costaba 59 px medidos: con la rejilla ya compacta, era lo único
+     que impedía ver el título y los seis servicios sin desplazarse.
+     Vuelve al lado del título, igual que en escritorio. */
+  body .services-header {
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 18px;
+  }
+  body .services-view-more { padding: 9px 15px; font-size: 13px; }
+  /* Más alta que ancha: en 2 columnas la tarjeta mide unos 175 px y la
+     proporción de escritorio (4/2.85) la dejaría tan baja que el icono
+     y las dos líneas de texto no cabrían. */
+  body .service-card {
+    aspect-ratio: 1 / 1.22;
+    padding: 12px;
+  }
+  body .service-card.con-icono .ico,
+  body .service-card .ico { width: 58%; top: 37%; }
+  body .service-card-title { font-size: 14px; line-height: 1.25; }
+  body .service-card-price { font-size: 12px; line-height: 1.35; }
+  /* La flecha de la esquina estorba a este tamaño y no aporta nada:
+     la tarjeta entera ya es el enlace. */
+  body .service-card-arrow { display: none; }
+}
+/* Entre 480 y 768 la tarjeta crecía tanto que los seis dejaban de caber
+   (medido: 990 px de bloque en una pantalla de 900). Se topa el ancho. */
+@media (min-width: 481px) and (max-width: 768px) {
+  body .services-grid { max-width: 520px; margin-left: auto; margin-right: auto; }
+  body .service-card { aspect-ratio: 1 / 1.15; }
+}
+
+/* En pantallas muy estrechas se encoge la letra y el aire, NO se estira la
+   tarjeta: alargarla era lo contrario de lo que se busca (en una pantalla de
+   320x568 el bloque medía 562 px, la pantalla entera, y había que bajar
+   igual). Con 1/1.18 baja a ~500 px y los seis entran con el título arriba. */
+@media (max-width: 360px) {
+  body .services-grid { gap: 9px; }
+  body .service-card { aspect-ratio: 1 / 1.18; padding: 10px; }
+  /* el peso hay que igualarlo: la regla general es `.con-icono .ico` (0,3,0)
+     y una media query NO añade especificidad. */
+  body .service-card.con-icono .ico,
+  body .service-card .ico { width: 54%; top: 36%; }
+  body .service-card-title { font-size: 13px; }
+  body .service-card-price { font-size: 12px; }
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   BLOQUE 20 · LO QUE SE TOCA Y LO QUE SE LEE, EN CELULAR
+   Hallazgos de la suite `oraltech-maquetacion.js` al pasarla a 6 anchos.
+   ══════════════════════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+  /* 1 · El número de WhatsApp es el clic más valioso de toda la web y era
+     un enlace de texto de 20 px de alto: por debajo de los 44 px que pide
+     Apple y de los 48 dp de Google. Cada uno va SOLO dentro de su <p>, así
+     que ensancharlo hacia arriba y abajo no pisa ningún otro enlace.
+     Medido: 20 → 44 px, sin mover nada de sitio (una caja en línea no
+     empuja a sus vecinas con el relleno vertical). */
+  body .contacto-info-block p > a,
+  body .sede-meta p > a {
+    display: inline-block;
+    padding: 12px 0;
+  }
+  /* 2 · La × para cerrar el menú medía 18x30. Se agranda la zona sin tocar
+     el aspa: el relleno crece hacia dentro desde su esquina. */
+  body .mm-close {
+    top: 12px; right: 14px;
+    width: 46px; height: 46px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  /* 3 · Los rótulos de sección ("Lo que hacemos", "Nuestras sedes") habían
+     bajado a 10,5 px con la compactación. En escritorio se leen; en un
+     teléfono, en mayúsculas y con 0,19em de separación, no.
+     Ya había un suelo de 12 px puesto para (max-width:767px), pero era
+     `body .overline` (0,2,0) y una regla POSTERIOR, `body .section
+     .section-tag, body .overline`, lo mataba sin que se notara. Aquí se
+     repite CADA selector con su peso real: (0,3,0) contra (0,3,0), y esta
+     hoja va después. Comprobado con CSS.getMatchedStylesForNode. */
+  body .overline,
+  body .section-tag,
+  body .sede-meta-label,
+  body .hero-tag,
+  body .precio-label,
+  body .section .overline,
+  body .section .section-tag,
+  body .faq .overline,
+  body .cta-final .overline { font-size: 12px; }
+  /* El <style> de cada página va DESPUÉS de esta hoja, así que a igual peso
+     gana él: `.hero-compact .hero-tag` (0,2,0) le ganaba a `body .hero-tag`
+     (0,2,0). Con `body` delante pasa a (0,3,0) y esta sí manda. */
+  body .hero-compact .hero-tag { font-size: 12px; }
+  /* styles.css marca esta con !important dentro de su media query; la única
+     forma de subirla es con otro !important. */
+  body .stats-grid [data-counter] + div { font-size: 12px !important; }
+  /* La miga de pan medía 51x19: se le da alto de dedo sin moverla de sitio. */
+  body .hero-breadcrumb a { display: inline-block; padding: 11px 0; }
+}
+
+/* El nombre del paciente va superpuesto sobre el póster del vídeo. A 320 px
+   la tarjeta se queda en 55 px de ancho útil y "Marcelo" mide 58 a 14 px:
+   se cortaba por 3 px. A 13 px cabe (54) y sigue siendo legible. */
+@media (max-width: 360px) {
+  body .vt-card .vt-lugar { font-size: 13px; }
+}
