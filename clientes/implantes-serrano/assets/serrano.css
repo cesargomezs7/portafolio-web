@@ -1,0 +1,555 @@
+/* ═══════════════════════════════════════════════════════════════
+   Dr. Stefano Serrano · landings de campaña
+   Una sola hoja para las dos landings. La piel se elige con una
+   clase en <html>:  .t-navy (implantes)  ·  .t-light (ortodoncia)
+
+   Paleta: manual de identidad de Carolina Lozano, pág. 8.
+     #1E2344 azul oscuro (principal) · #DDDADA gris · #7D88B7 azul claro
+   Regla del manual respetada: #7D88B7 NUNCA en texto de cuerpo
+   (3,45:1 sobre blanco, por debajo de AA). Solo bordes, iconos y
+   texto grande.
+
+   Suelo de accesibilidad de estas landings:
+     · ningún texto por debajo de 12px en celular
+     · ninguna zona tocable por debajo de 44px
+     · sin scroll horizontal en ningún ancho
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── 1 · Tokens de marca ───────────────────────────────────── */
+:root {
+  --navy-deep: #070C20;
+  --navy-hero: #0B1330;
+  --navy:      #1E2344;
+  --navy-soft: #121B43;
+  --blue:      #7D88B7;
+  --gray:      #DDDADA;
+  --white:     #FFFFFF;
+
+  --wa:        #25D366;
+
+  --r-sm: 10px;  --r: 16px;  --r-lg: 22px;  --r-pill: 999px;
+  --cw: min(92vw, 1180px);
+  --t: cubic-bezier(.4, 0, .2, 1);
+
+  --f: 'Figtree', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Piel OSCURA — landing de implantes */
+.t-navy {
+  --bg:        #0B1330;
+  --bg-alt:    #1E2344;
+  --bg-card:   rgba(255, 255, 255, .055);
+  --ink:       #FFFFFF;
+  --ink-soft:  #C3C8DC;
+  --ink-mute:  #99A0BE;
+  --line:      rgba(255, 255, 255, .14);
+  --line-soft: rgba(255, 255, 255, .08);
+  --cta-bg:    #FFFFFF;
+  --cta-ink:   #1E2344;
+  --cta-bg-h:  #DDDADA;
+  --accent:    #8B96C2;   /* +luminoso que el #7D88B7 del manual: AA sobre los DOS fondos */
+}
+
+/* Piel CLARA — landing de ortodoncia */
+.t-light {
+  --bg:        #F7F8FA;
+  --bg-alt:    #FFFFFF;
+  --bg-card:   #FFFFFF;
+  --ink:       #1E2344;
+  --ink-soft:  #454B68;
+  --ink-mute:  #5B6180;
+  --line:      rgba(30, 35, 68, .14);
+  --line-soft: rgba(30, 35, 68, .07);
+  --cta-bg:    #1E2344;
+  --cta-ink:   #FFFFFF;
+  --cta-bg-h:  #2C3358;
+  --accent:    #4A5590;
+}
+
+/* ── 2 · Base ──────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  font-family: var(--f);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--ink);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+img, picture, svg { max-width: 100%; display: block; }
+h1, h2, h3, p, ul { margin: 0; }
+ul { padding: 0; list-style: none; }
+a { color: inherit; }
+
+.wrap { width: var(--cw); margin-inline: auto; }
+
+/* Bloque de sección */
+.sec { padding: clamp(56px, 8vw, 104px) 0; }
+.sec--alt { background: var(--bg-alt); }
+
+/* Antetítulo — el tracking abierto es rasgo de marca (slogan del manual) */
+.eyebrow {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .34em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 14px;
+}
+.t-light .eyebrow { color: var(--accent); }
+
+h1 {
+  font-size: clamp(2.05rem, 5.6vw, 3.9rem);
+  line-height: 1.06;
+  font-weight: 700;
+  letter-spacing: -.022em;
+}
+h1 .soft { font-weight: 300; color: var(--ink-soft); }
+
+h2 {
+  font-size: clamp(1.6rem, 3.4vw, 2.5rem);
+  line-height: 1.14;
+  font-weight: 700;
+  letter-spacing: -.018em;
+  margin-bottom: 16px;
+}
+
+h3 { font-size: 1.06rem; font-weight: 600; line-height: 1.3; }
+
+.lead {
+  font-size: clamp(1rem, 1.5vw, 1.14rem);
+  color: var(--ink-soft);
+  max-width: 58ch;
+}
+
+/* ── 3 · Botones ───────────────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 54px;
+  padding: 15px 30px;
+  border: 0;
+  border-radius: var(--r-pill);
+  background: var(--cta-bg);
+  color: var(--cta-ink);
+  font-family: var(--f);
+  font-size: 16px;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background .18s var(--t), transform .12s var(--t);
+}
+.btn:hover { background: var(--cta-bg-h); }
+.btn:active { transform: scale(.975); }
+.btn svg { width: 20px; height: 20px; flex: none; }
+
+.btn--wa { background: var(--wa); color: #053720; }
+.btn--wa:hover { background: #1FBE5B; }
+
+.btn--ghost {
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid var(--line);
+}
+.btn--ghost:hover { background: var(--bg-card); }
+
+.btn--block { display: flex; width: 100%; }
+
+/* Fila de CTA que se repite al cierre de cada bloque */
+.cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+  margin-top: 30px;
+}
+.cta-note { font-size: 14px; color: var(--ink-mute); }
+
+/* ── 4 · Barra superior (marca + CTA, SIN navegación) ──────── */
+.bar {
+  position: relative;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 0;
+}
+.bar-brand { display: flex; align-items: center; gap: 12px; min-height: 44px; min-width: 0; }
+.bar-mark { width: 40px; height: 40px; flex: none; color: var(--ink); }
+.t-navy .bar-mark { color: var(--gray); }
+.bar-name {
+  min-width: 0;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: .01em;
+  line-height: 1.15;
+}
+.bar-desc {
+  display: block;
+  font-size: 10.5px;
+  white-space: nowrap;
+  font-weight: 500;
+  letter-spacing: .19em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+}
+.bar .btn { flex: none; min-height: 44px; padding: 11px 20px; font-size: 14.5px; }
+
+/* ── 5 · Hero ──────────────────────────────────────────────── */
+.hero { position: relative; background: var(--bg); overflow: hidden; }
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-areas: "copy" "art" "cta";   /* en celular la foto va ENTRE el titular y el botón */
+  gap: 22px;
+  padding: clamp(24px, 4vw, 44px) 0 clamp(40px, 6vw, 72px);
+}
+.hero-copy { grid-area: copy; }
+.hero-art  { grid-area: art; }
+.hero-cta  { grid-area: cta; }
+.hero-copy { max-width: 40ch; }
+.hero h1 { margin-bottom: 18px; }
+.hero .lead { margin-bottom: 4px; }
+
+/* La foto del hero: <picture> con <source media>, nunca cambiada por JS
+   (en OralTech ese fallo hizo que el recurso se descargara dos veces). */
+.hero-art { position: relative; }
+.hero-art img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--r-lg);
+}
+
+/* Piel oscura: la foto NO es una tarjeta, es fondo. Se funde con la
+   sección por los cuatro lados con una máscara de degradado, porque su
+   borde real (#090F29 a #121D45, medido) no coincide con --bg y si no
+   se funde se ve la costura del rectángulo. */
+.t-navy .hero-art img {
+  border-radius: 0;
+  -webkit-mask-image:
+    linear-gradient(to right,  transparent 0, #000 14%, #000 100%),
+    linear-gradient(to bottom, transparent 0, #000 10%, #000 88%, transparent 100%);
+  -webkit-mask-composite: source-in;
+          mask-image:
+    linear-gradient(to right,  transparent 0, #000 14%, #000 100%),
+    linear-gradient(to bottom, transparent 0, #000 10%, #000 88%, transparent 100%);
+          mask-composite: intersect;
+}
+
+/* Hero con retrato vertical del doctor (piel clara). Sin tope, una foto 3:4
+   en la columna del hero empuja el CTA fuera de la primera pantalla. */
+.hero-art--retrato img {
+  width: 100%;
+  object-fit: cover;
+  object-position: 46% 20%;   /* la cara, no el techo ni la pared */
+  aspect-ratio: 16 / 11;      /* en celular: ventana baja, el archivo sigue siendo vertical */
+  max-height: 34vh;
+}
+
+/* Ancla de confianza bajo el titular */
+.hero-trust {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 22px;
+  margin-top: 22px;
+  font-size: 14px;
+  color: var(--ink-soft);
+}
+.hero-trust b { color: var(--ink); font-weight: 700; }
+.hero-trust-item { display: flex; align-items: center; gap: 7px; }
+.star { width: 15px; height: 15px; color: #F5B301; flex: none; }
+.t-light .star { color: #A86F00; }   /* 4,00:1 — el #C98A00 daba 2,78 */
+
+/* ── 6 · Franja de datos ───────────────────────────────────── */
+.strip {
+  border-top: 1px solid var(--line-soft);
+  border-bottom: 1px solid var(--line-soft);
+  background: var(--bg-card);
+}
+.strip-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  background: var(--line-soft);
+}
+.strip-item { background: var(--bg); padding: 22px 18px; }
+.t-light .strip-item { background: var(--bg-alt); }
+.strip-num { font-size: 1.5rem; font-weight: 700; line-height: 1.1; }
+.strip-lab {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  margin-top: 5px;
+}
+
+/* ── 7 · Bloque del doctor ─────────────────────────────────── */
+.doc-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+  align-items: start;
+}
+.doc-photo img { width: 100%; height: auto; border-radius: var(--r-lg); }
+.doc-list { display: grid; gap: 14px; margin-top: 26px; }
+.doc-item {
+  display: flex;
+  gap: 13px;
+  align-items: flex-start;
+  font-size: 15.5px;
+  color: var(--ink-soft);
+}
+.doc-item svg { width: 19px; height: 19px; flex: none; margin-top: 3px; color: var(--accent); }
+.doc-item b { color: var(--ink); font-weight: 600; }
+
+/* Sello verificable */
+.seal {
+  margin-top: 26px;
+  padding: 16px 18px;
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  background: var(--bg-card);
+  font-size: 13.5px;
+  color: var(--ink-soft);
+  line-height: 1.5;
+}
+.seal b { color: var(--ink); }
+
+/* ── 8 · Proceso ───────────────────────────────────────────── */
+.steps { display: grid; grid-template-columns: 1fr; gap: 18px; margin-top: 34px; }
+.step {
+  padding: 24px 22px;
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  background: var(--bg-card);
+}
+.step-n {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .16em;
+  color: var(--accent);
+  margin-bottom: 10px;
+}
+.step h3 { margin-bottom: 8px; }
+.step p { font-size: 15px; color: var(--ink-soft); }
+
+/* ── 9 · Objeciones (acordeón) ─────────────────────────────── */
+.faq { margin-top: 32px; border-top: 1px solid var(--line-soft); }
+.faq-item { border-bottom: 1px solid var(--line-soft); }
+.faq-q {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  width: 100%;
+  min-height: 60px;
+  padding: 18px 2px;
+  border: 0;
+  background: none;
+  color: var(--ink);
+  font-family: var(--f);
+  font-size: 16.5px;
+  font-weight: 600;
+  line-height: 1.35;
+  text-align: left;
+  cursor: pointer;
+}
+.faq-ico {
+  position: relative;
+  width: 22px;
+  height: 22px;
+  flex: none;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  transition: transform .22s var(--t);
+}
+.faq-ico::before, .faq-ico::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  background: var(--ink);
+  transform: translate(-50%, -50%);
+}
+.faq-ico::before { width: 9px; height: 1.5px; }
+.faq-ico::after  { width: 1.5px; height: 9px; transition: opacity .22s var(--t); }
+.faq-item[open] .faq-ico { transform: rotate(180deg); }
+.faq-item[open] .faq-ico::after { opacity: 0; }
+.faq-a {
+  padding: 0 44px 22px 2px;
+  font-size: 15.5px;
+  color: var(--ink-soft);
+  line-height: 1.65;
+}
+.faq-a p + p { margin-top: 12px; }
+.faq-item summary { list-style: none; }
+.faq-item summary::-webkit-details-marker { display: none; }
+
+/* ── 9 bis · Banda de la valoración (la SEGUNDA foto del doctor) ── */
+.banda {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 26px;
+  align-items: center;
+}
+.banda-foto img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--r-lg);
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  object-position: 50% 30%;
+}
+
+/* ── 10 · Cierre ───────────────────────────────────────────── */
+.close-card {
+  padding: clamp(30px, 5vw, 52px);
+  border-radius: var(--r-lg);
+  border: 1px solid var(--line);
+  background: var(--bg-card);
+}
+.close-data {
+  display: grid;
+  gap: 20px;
+  margin-top: 30px;
+  padding-top: 26px;
+  border-top: 1px solid var(--line-soft);
+}
+.close-data dt {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  margin-bottom: 5px;
+}
+.close-data dd { margin: 0; font-size: 15.5px; color: var(--ink); }
+
+/* El número de WhatsApp es el clic más valioso de la página y como enlace
+   de texto medía 19 px de alto. El relleno vertical de una caja en línea
+   NO empuja a sus vecinas, así que sube a 44 px sin mover nada de sitio.
+   (Mismo fallo y misma cura que en OralTech, bitácora §9.1.) */
+.close-data dd a {
+  display: inline-block;
+  padding: 12px 0;
+  font-weight: 600;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+.map {
+  margin-top: 30px;
+  border-radius: var(--r);
+  overflow: hidden;
+  border: 1px solid var(--line);
+  aspect-ratio: 16 / 9;
+}
+.map iframe { width: 100%; height: 100%; border: 0; display: block; }
+
+/* ── 11 · Pie ──────────────────────────────────────────────── */
+.foot {
+  padding: 34px 0 44px;
+  border-top: 1px solid var(--line-soft);
+  font-size: 13.5px;
+  color: var(--ink-mute);
+}
+.foot p + p { margin-top: 9px; }
+.foot a { color: var(--ink-soft); }
+
+/* ── 12 · Burbuja de WhatsApp ──────────────────────────────── */
+.wa-float {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: var(--wa);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, .3);
+  text-decoration: none;
+  transition: transform .18s var(--t);
+}
+.wa-float:hover { transform: scale(1.06); }
+.wa-float:active { transform: scale(.95); }
+.wa-float svg { width: 32px; height: 32px; color: #fff; }
+
+/* ── 13 · Escritorio ───────────────────────────────────────── */
+@media (min-width: 820px) {
+  .hero-grid {
+    grid-template-columns: 1fr 1.06fr;
+    grid-template-areas: "copy art" "cta art";
+    grid-template-rows: auto auto;
+    align-content: center;      /* el texto y el botón van juntos, sin hueco muerto */
+    gap: 26px 40px;
+  }
+  .hero-copy { align-self: end; }
+  .hero-cta  { align-self: start; }
+  .hero-art  { align-self: center; }
+  /* en monitor la foto SÍ es vertical de verdad */
+  .hero-art--retrato img { aspect-ratio: 4 / 5; max-height: 66vh; object-position: 46% 18%; }
+  /* la foto sangra hasta el borde derecho de la ventana */
+  .t-navy .hero-art { margin-right: calc((100vw - var(--cw)) / -2); }
+  .strip-grid { grid-template-columns: repeat(4, 1fr); }
+  .doc-grid { grid-template-columns: .82fr 1.18fr; gap: 48px; }
+  .steps { grid-template-columns: repeat(4, 1fr); }
+  .close-data { grid-template-columns: repeat(3, 1fr); gap: 26px; }
+  .banda { grid-template-columns: .78fr 1.22fr; gap: 44px; }
+  .banda--invertida { grid-template-columns: 1.22fr .78fr; }
+  .banda--invertida .banda-foto { order: 2; }
+  .wa-float { right: 26px; bottom: 26px; }
+}
+
+@media (min-width: 1100px) {
+  .hero-copy { max-width: 44ch; }
+}
+
+/* ── 14 · Celular: suelos duros ────────────────────────────── */
+@media (max-width: 819px) {
+  /* Suelo de 12px. Se declara con el mismo peso o más que la regla
+     que baja el tamaño, porque las media queries NO dan especificidad. */
+  body .bar-desc,
+  body .eyebrow,
+  body .strip-lab,
+  body .close-data dt { font-size: 12px; }
+
+  body .bar-desc { display: none; }
+  body .hero-trust { font-size: 13.5px; }
+  body .foot { font-size: 13px; }
+
+  /* Zonas tocables */
+  body .btn { min-height: 50px; }
+  body .bar .btn { min-height: 44px; }
+  body .faq-q { min-height: 56px; }
+
+  .cta-row .btn { width: 100%; }
+  .cta-row { gap: 12px; }
+}
+
+/* ── 15 · Movimiento ───────────────────────────────────────── */
+.rise { opacity: 0; transform: translateY(16px); }
+.is-in { opacity: 1; transform: none; transition: opacity .6s var(--t), transform .6s var(--t); }
+
+/* Sin JS o con reduced-motion, todo se ve. Nada depende de la animación. */
+.no-js .rise { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .rise, .is-in { opacity: 1 !important; transform: none !important; transition: none !important; }
+  .btn, .wa-float { transition: none; }
+}
