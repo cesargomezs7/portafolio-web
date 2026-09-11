@@ -210,7 +210,7 @@ h3 { font-size: 1.06rem; font-weight: 600; line-height: 1.3; }
 .hero-grid {
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-areas: "copy" "art" "cta";   /* en celular la foto va ENTRE el titular y el botón */
+  grid-template-areas: "copy" "art" "cta";   /* en celular la foto va ENTRE el titular y el botón (el retrato no: §14) */
   gap: 22px;
   padding: clamp(24px, 4vw, 44px) 0 clamp(40px, 6vw, 72px);
 }
@@ -221,8 +221,9 @@ h3 { font-size: 1.06rem; font-weight: 600; line-height: 1.3; }
 .hero h1 { margin-bottom: 18px; }
 .hero .lead { margin-bottom: 4px; }
 
-/* La foto del hero: <picture> con <source media>, nunca cambiada por JS
-   (en OralTech ese fallo hizo que el recurso se descargara dos veces). */
+/* La foto del hero, nunca cambiada por JS: <picture> con <source media> en
+   implantes, <img srcset> en ortodoncia (en OralTech cambiarla por JS hizo que
+   el recurso se descargara dos veces). */
 .hero-art { position: relative; }
 .hero-art img {
   width: 100%;
@@ -246,14 +247,22 @@ h3 { font-size: 1.06rem; font-weight: 600; line-height: 1.3; }
           mask-composite: intersect;
 }
 
-/* Hero con retrato vertical del doctor (piel clara). Sin tope, una foto 3:4
-   en la columna del hero empuja el CTA fuera de la primera pantalla. */
+/* Hero con retrato vertical del doctor (piel clara).
+   La foto va SIEMPRE ENTERA: nada de object-fit:cover ni aspect-ratio forzado.
+   Hasta el 11-sep recortaban del 37 % al 94 % de la foto según la pantalla, y
+   César pidió que nunca se corte. Lo que se escala es el ANCHO, con la
+   proporción real del archivo (1000×1333), hasta que la altura toca un tope:
+   así no se deforma ni se corta con ningún ancho ni alto de ventana.
+   En celular y tableta el tope es el alto de la ventana menos 80 px (a 768×1024
+   llena el ancho del contenido y cabe en una pantalla), y la foto va DEBAJO del
+   botón (.hero-grid--retrato en §14): entera y encima del botón, lo sacaba de la
+   primera pantalla. Si cambian estos números, hay que actualizar el atributo
+   sizes del retrato en ortodoncia-serrano/index.html. */
 .hero-art--retrato img {
-  width: 100%;
-  object-fit: cover;
-  object-position: 46% 20%;   /* la cara, no el techo ni la pared */
-  aspect-ratio: 16 / 11;      /* en celular: ventana baja, el archivo sigue siendo vertical */
-  max-height: 34vh;
+  width: min(100%, calc((100vh - 80px) * 1000 / 1333));
+  height: auto;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* Ancla de confianza bajo el titular */
@@ -302,7 +311,18 @@ h3 { font-size: 1.06rem; font-weight: 600; line-height: 1.3; }
   gap: 32px;
   align-items: start;
 }
-.doc-photo img { width: 100%; height: auto; border-radius: var(--r-lg); }
+/* Entera y además dentro de la pantalla: con el celular en horizontal o en una
+   ventana baja, a todo el ancho medía hasta el 218 % del alto visible y nunca se
+   veía entera. Tope de alto del 96 %, con la proporción real del archivo (svh
+   donde existe, para no contar la barra de Safari). */
+.doc-photo img {
+  width: min(100%, calc(96vh * 1000 / 1333));
+  width: min(100%, calc(96svh * 1000 / 1333));
+  height: auto;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: var(--r-lg);
+}
 .doc-list { display: grid; gap: 14px; margin-top: 26px; }
 .doc-item {
   display: flex;
@@ -404,13 +424,13 @@ h3 { font-size: 1.06rem; font-weight: 600; line-height: 1.3; }
   gap: 26px;
   align-items: center;
 }
-.banda-foto img {
-  width: 100%;
+.banda-foto img {            /* igual que .doc-photo img: entera, sin cover, con tope de alto */
+  width: min(100%, calc(96vh * 1000 / 1333));
+  width: min(100%, calc(96svh * 1000 / 1333));
   height: auto;
+  margin-left: auto;
+  margin-right: auto;
   border-radius: var(--r-lg);
-  aspect-ratio: 3 / 4;
-  object-fit: cover;
-  object-position: 50% 30%;
 }
 
 /* ── 10 · Cierre ───────────────────────────────────────────── */
@@ -510,10 +530,18 @@ h3 { font-size: 1.06rem; font-weight: 600; line-height: 1.3; }
   .hero-copy { align-self: end; }
   .hero-cta  { align-self: start; }
   .hero-art  { align-self: center; }
-  /* en monitor la foto SÍ es vertical de verdad */
-  .hero-art--retrato img { aspect-ratio: 4 / 5; max-height: 66vh; object-position: 46% 18%; }
+  /* en monitor: entera y pegada al borde derecho del contenido, como el botón de
+     la barra. Tope de alto: el 66 % de la ventana, o lo que deja libre la franja
+     de datos (100vh - 300px) si es más. Así, en ventanas altas (1920×1080) llena
+     su columna y no queda un hueco entre el texto y la foto. Entre 820 y ~1000 px
+     de ancho manda el ancho de la columna. Si cambian estos números, actualizar
+     el sizes del retrato en ortodoncia-serrano/index.html. */
+  .hero-art--retrato img { width: min(100%, calc(max(66vh, 100vh - 300px) * 1000 / 1333)); margin-right: 0; }
   /* la foto sangra hasta el borde derecho de la ventana */
   .t-navy .hero-art { margin-right: calc((100vw - var(--cw)) / -2); }
+  /* y al entrar (asentar: scale 1.04) crece hacia la izquierda: el borde que
+     sangra queda fijo y no se recorta contra la ventana mientras entra */
+  .t-navy .hero-art { transform-origin: 100% 50%; }
   .strip-grid { grid-template-columns: repeat(4, 1fr); }
   /* align-items:center, no start. La fila mide siempre lo que el elemento más
      alto; `start` no crea el sobrante, lo aparca ENTERO en un extremo (medido:
@@ -556,6 +584,17 @@ h3 { font-size: 1.06rem; font-weight: 600; line-height: 1.3; }
 
   .cta-row .btn { width: 100%; }
   .cta-row { gap: 12px; }
+
+  /* Hero con retrato: botón → foto → sello del edificio. La foto va entera (§5).
+     Entre el titular y el botón, sacaba el botón de la primera pantalla; y con el
+     sello encima de la foto, la cara del doctor quedaba fuera (a 375×667 se veía
+     el 6 %). .hero-cta se disuelve (display: contents) para que el botón y el
+     sello ocupen filas distintas de la rejilla; sus hijos siguen siendo los mismos
+     y la cascada de entrada (nth-child) no cambia. */
+  .hero-grid--retrato { grid-template-areas: "copy" "cta" "art" "trust"; }
+  .hero-grid--retrato .hero-cta { display: contents; }
+  .hero-grid--retrato .cta-row { grid-area: cta; margin-top: 8px; }
+  .hero-grid--retrato .hero-trust { grid-area: trust; margin-top: 0; }
 }
 
 /* ═══════════════════════════════════════════════════════════════
@@ -742,10 +781,14 @@ h3 { font-size: 1.06rem; font-weight: 600; line-height: 1.3; }
   transform: translateY(-50%) translateX(0);
 }
 
-/* ── Las fotos cierran el encuadre al entrar ─────────────────── */
-.doc-photo, .banda-foto { overflow: hidden; border-radius: var(--r-lg) }
-.doc-photo img, .banda-foto img { transform: scale(1.05); transition: transform 1.1s var(--sal) }
-.is-in .doc-photo img, .is-in .banda-foto img { transform: none }
+/* ── Las fotos se asientan al entrar ─────────────────────────────
+   Crecen del 96,5 % a su tamaño, SIN overflow:hidden. Hasta el 11-sep entraban
+   a scale(1.05) dentro de una caja que recortaba, y durante 1,1 s se perdían
+   los bordes. Ahora la foto se ve entera en todo momento.
+   La escala inicial solo existe si serrano.js marcó el bloque con .rise: si el
+   script no llega (bloqueado, error de red), la foto se queda a su tamaño. */
+.rise .doc-photo img, .rise .banda-foto img { transition: transform 1.1s var(--sal) }
+.rise:not(.is-in) .doc-photo img, .rise:not(.is-in) .banda-foto img { transform: scale(.965) }
 
 /* ── El acordeón ──────────────────────────────────────────────── */
 .faq-ico { transition: transform .26s var(--ent), border-color .26s var(--ent) }
@@ -766,10 +809,8 @@ h3 { font-size: 1.06rem; font-weight: 600; line-height: 1.3; }
 .no-js .rise,
 .no-js .stagger > * { opacity: 1; transform: none }
 .no-js .eyebrow::before { transform: scaleX(1) }
-/* Sin JS nunca llega .is-in: si no se devuelve la escala, las fotos se
-   quedan un 5 % más grandes y recortadas PARA SIEMPRE. */
-.no-js .doc-photo img,
-.no-js .banda-foto img { transform: none }
+/* Las fotos no necesitan rescate sin JS: su escala de entrada depende de .rise,
+   que solo pone serrano.js (ver «Las fotos se asientan al entrar»). */
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto }
